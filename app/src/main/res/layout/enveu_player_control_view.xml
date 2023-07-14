@@ -1,0 +1,314 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:animateLayoutChanges="true"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/series_detail_all_episode_txt_colors_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/series_detail_all_episode_txt_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/playerImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:src="@drawable/placeholder_potrait"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/tv_internet_connection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/ep_common_margin_horizontal"
+        android:layout_marginVertical="@dimen/ep_common_margin_vertical"
+        android:padding="@dimen/ep_common_padding"
+        android:text="@string/no_internet_connection"
+        android:textColor="@color/series_detail_all_episode_txt_color"
+        app:tint="@color/series_detail_all_episode_txt_color"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_ep_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ep_common_margin_vertical"
+        android:layout_marginStart="12dp"
+        android:contentDescription="@string/ep_cd_back"
+        android:padding="@dimen/ep_common_padding"
+        app:tint="@color/series_detail_all_episode_txt_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_ep_nav_back" />
+
+    <TextView
+        android:id="@+id/tv_tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/ep_common_margin_horizontal"
+        android:layout_marginVertical="@dimen/ep_common_margin_vertical"
+        android:padding="@dimen/ep_common_padding"
+        android:text=""
+        android:textColor="@color/series_detail_all_episode_txt_color"
+        app:tint="@color/series_detail_all_episode_txt_color"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/iv_ep_rewind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/ep_cd_rewind"
+        app:tint="@color/series_detail_all_episode_txt_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iv_ep_play_pause"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_ep_rewind" />
+
+    <ImageView
+        android:id="@+id/iv_ep_play_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/ep_cd_play"
+        android:padding="@dimen/ep_common_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_ep_pause" />
+
+    <ImageView
+        android:id="@+id/iv_ep_fast_fwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/ep_cd_fast_fwd"
+        app:tint="@color/series_detail_all_episode_txt_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toEndOf="@id/iv_ep_play_pause"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_ep_fast_forward" />
+
+    <TextView
+        android:id="@+id/tv_ep_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="14dp"
+        android:layout_marginVertical="@dimen/ep_common_margin_vertical"
+        android:padding="@dimen/ep_common_padding"
+        android:text="@string/ep_default_time"
+        android:textColor="@color/series_detail_all_episode_txt_color"
+        app:tint="@color/series_detail_all_episode_txt_color"
+        app:layout_constraintBottom_toBottomOf="@id/iv_ep_setting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_ep_setting" />
+    <TextView
+        android:id="@+id/tv_ep_live_tag"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ep_common_margin_vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:contentDescription="@string/ep_live_tag"
+        android:layout_marginVertical="@dimen/ep_common_margin_vertical"
+        android:padding="@dimen/ep_live_tag_padding"
+        android:text="@string/ep_live_tag"
+        android:layout_marginHorizontal="14dp"
+        android:textColor="@color/series_detail_all_episode_txt_color"
+        android:background="@color/series_detail_all_episode_txt_color"
+        app:layout_constraintBottom_toBottomOf="@id/iv_ep_setting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_ep_setting"
+        />
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:id="@+id/ep_time_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:progressTint="@color/tph_border_color"
+        android:progressBackgroundTint="@color/series_detail_all_episode_txt_color"
+        android:thumbTint="@color/tph_border_color"
+        app:layout_constraintBottom_toBottomOf="@id/iv_ep_setting"
+        app:layout_constraintEnd_toStartOf="@id/tv_ep_duration"
+        app:layout_constraintStart_toEndOf="@id/tv_ep_position"
+        app:layout_constraintTop_toTopOf="@id/iv_ep_setting" />
+
+    <TextView
+        android:id="@+id/tv_ep_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/ep_common_padding"
+        android:text="@string/ep_default_time"
+        android:textColor="@color/series_detail_all_episode_txt_color"
+        android:layout_marginHorizontal="@dimen/ep_common_margin_horizontal"
+        android:layout_marginVertical="@dimen/ep_common_margin_vertical"
+        app:layout_constraintBottom_toBottomOf="@id/iv_ep_fullscreen"
+        app:layout_constraintEnd_toStartOf="@id/iv_ep_setting"
+        app:layout_constraintTop_toTopOf="@id/iv_ep_setting" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_quality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/iv_ep_setting"
+        app:layout_constraintEnd_toEndOf="@+id/iv_ep_setting"
+        app:layout_constraintStart_toStartOf="@+id/iv_ep_setting"
+        />
+    <ImageView
+        android:id="@+id/iv_ep_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/ep_cd_settings"
+        android:layout_marginHorizontal="14dp"
+        android:layout_marginVertical="@dimen/ep_common_margin_vertical"
+        android:padding="@dimen/ep_common_padding"
+        app:tint="@color/series_detail_all_episode_txt_color"
+        app:layout_constraintBottom_toBottomOf="@id/barrier_episode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_ep_settings" />
+    <ImageView
+        android:id="@+id/iv_ep_fullscreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/ep_common_margin_horizontal"
+        android:layout_marginVertical="@dimen/ep_common_margin_vertical"
+        android:contentDescription="@string/ep_cd_fullscreen"
+        android:padding="@dimen/ep_common_padding"
+        app:tint="@color/series_detail_all_episode_txt_color"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/barrier_episode"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@null" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_previous_episode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/ep_common_margin_vertical"
+        android:contentDescription="@string/ep_cd_prev_episode"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:padding="@dimen/ep_common_padding"
+        android:text="@string/ep_prev_episode"
+        android:textColor="@color/series_detail_all_episode_txt_color"
+        android:textSize="@dimen/ep_text_size_prev_episode"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:drawableStartCompat="@drawable/ic_ep_previous"
+        app:drawableTint="@color/series_detail_all_episode_txt_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_center"
+        app:layout_constraintHorizontal_bias="0.20"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:background="#090909"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_more_episodes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/ep_common_margin_vertical"
+        android:contentDescription="@string/ep_cd_more_episodes"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:padding="@dimen/ep_common_padding"
+        android:text="@string/ep_more_episodes"
+        android:textColor="@color/series_detail_all_episode_txt_color"
+        android:textSize="@dimen/ep_text_size_more_episodes"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:drawableTint="@color/series_detail_all_episode_txt_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_center"
+        app:layout_constraintStart_toEndOf="@id/guideline_center"
+        tools:background="#090909"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_next_episode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/ep_common_margin_vertical"
+        android:contentDescription="@string/ep_cd_next_episode"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:padding="@dimen/ep_common_padding"
+        android:text="@string/ep_next_episode"
+        android:textColor="@color/series_detail_all_episode_txt_color"
+        android:textSize="@dimen/ep_text_size_next_episode"
+        android:clickable="true"
+        android:focusable="true"
+        app:drawableEndCompat="@drawable/ic_ep_next"
+        app:drawableTint="@color/series_detail_all_episode_txt_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.80"
+        app:layout_constraintStart_toEndOf="@id/guideline_center"
+        tools:background="#090909"
+        tools:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/pb_ep_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/series_detail_all_episode_txt_color"
+        android:indeterminateTintMode="src_atop"
+        android:progressTint="@color/series_detail_all_episode_txt_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.mediarouter.app.MediaRouteButton
+        android:id="@+id/mrb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ep_common_margin_vertical"
+        android:layout_marginEnd="@dimen/ep_common_margin_horizontal"
+        app:layout_constraintEnd_toStartOf="@id/iv_ep_setting"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginEnd="@dimen/ep_common_margin_horizontal"
+        app:layout_goneMarginTop="@dimen/ep_common_margin_vertical" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_episode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="tv_previous_episode,tv_more_episodes,tv_next_episode" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

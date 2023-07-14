@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="more_with_login">
+        <item>จัดการโปรไฟล์</item>
+        <item>ดูประวัติ</item>
+        <item>การตั้งค่า</item>
+        <item>เกี่ยวกับเรา</item>
+        <item>นโยบายความเป็นส่วนตัว</item>
+        <item>กฏการใช้งาน</item>
+        <item>คำถามที่พบบ่อย</item>
+        <item>ออกจากระบบ</item>
+
+    </string-array>
+    <string-array name="more_with_login_fb">
+        <item>ข้อมูลของฉัน</item>
+        <item>รายการโปรดของฉัน</item>
+        <item>ประวัติการรับชม</item>
+        <item>ดาวน์โหลด</item>
+        <item>แลกคูปอง</item>
+        <item>ตั้งค่า</item>
+        <item>ข้อกำหนดและเงื่อนไข</item>
+        <item>ตั้งค่า</item>
+        <item>ออกจากระบบ</item>
+    </string-array>
+
+    <string-array name="more_with_verify">
+        <item>จัดการบัญชี</item>
+        <item>รายการโปรดของฉัน</item>
+        <item>ประวัติการรับชม</item>
+        <item>ดาวน์โหลด</item>
+        <item>ติดต่อเรา</item>
+        <item>คำถามที่ถามบ่อย</item>
+        <item>เกี่ยวกับ VIPA</item>
+        <item>ข้อเสนอแนะ</item>
+        <item>แอปพลิเคชันอื่น ๆ</item>
+        <item>ตั้งค่า</item>
+        <item>ออกจากระบบ</item>
+    </string-array>
+
+    <string-array name="more_options">
+        <item>Gaming</item>
+        <item>My List</item>
+        <item>Account</item>
+        <item>Settings</item>
+        <item>Buy Now</item>
+        <item>Manage Subscription</item>
+        <item>Order History</item>
+        <item>Privacy policy</item>
+        <item>T &amp; C</item>
+    </string-array>
+
+
+    <string-array name="more_kids_mode_login">
+        <item>ออกจากคิดส์โหมด</item>
+        <item>ติดต่อเรา</item>
+        <item>คำถามที่พบบ่อย</item>
+        <item>เกี่ยวกับเรา</item>
+        <item>ข้อเสนอแนะ</item>
+        <item>แอปพลิเคชันอื่น ๆ</item>
+        <item>ข้อกำหนดและเงื่อนไข</item>
+        <item>นโยบายความเป็นส่วนตัว</item>
+    </string-array>
+    <string-array name="more_kids_mode_login_watchlist_condition">
+        <item>ออกจากคิดส์โหมด</item>
+        <item>รายการโปรดของฉัน</item>
+        <item>ประวัติการรับชม</item>
+        <item>ดาวน์โหลดของฉัน</item>
+        <item>ติดต่อเรา</item>
+        <item>คำถามที่พบบ่อย</item>
+        <item>เกี่ยวกับเรา</item>
+        <item>ข้อเสนอแนะ</item>
+        <item>แอปพลิเคชันอื่น ๆ</item>
+        <item>ข้อกำหนดและเงื่อนไข</item>
+        <item>นโยบายความเป็นส่วนตัว</item>
+
+    </string-array>
+    <string-array name="more_kids_mode_logout">
+        <item>ออกจากคิดส์โหมด</item>
+        <item>ติดต่อเรา</item>
+        <item>คำถามที่พบบ่อย</item>
+        <item>เกี่ยวกับเรา</item>
+        <item>ข้อเสนอแนะ</item>
+        <item>แอปพลิเคชันอื่น ๆ</item>
+        <item>ข้อกำหนดและเงื่อนไข</item>
+        <item>นโยบายความเป็นส่วนตัว</item>
+    </string-array>
+
+
+
+
+    <string-array name="gender_array">
+        <item>เพศ</item>
+        <item>ชาย</item>
+        <item>หญิง</item>
+        <item>อื่น ๆ</item>
+
+    </string-array>
+
+    <string-array name="download_quality">
+        <item>Auto</item>
+        <item>SD</item>
+        <item>HD</item>
+        <item>Ful HD</item>
+    </string-array>
+
+
+    <array name="cast_expanded_controller_default_control_buttons">
+        <item>@id/cast_button_type_mute_toggle</item>
+        <item>@id/cast_button_type_rewind_30_seconds</item>
+        <item>@id/cast_button_type_forward_30_seconds</item>
+        <item>@id/cast_button_type_closed_caption</item>
+    </array>
+
+    <string-array name="more_with_login_subscription">
+        <item>จัดการโปรไฟล์</item>
+        <item>ดูประวัติ</item>
+        <item>การตั้งค่า</item>
+        <item>เกี่ยวกับเรา</item>
+        <item>นโยบายความเป็นส่วนตัว</item>
+        <item>กฏการใช้งาน</item>
+        <item>คำถามที่พบบ่อย</item>
+        <item>ออกจากระบบ</item>
+
+    </string-array>
+
+
+</resources>

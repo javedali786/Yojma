@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.text.TextUtils"/>
+        <variable
+            name="stringData"
+            type="com.breadgangtvnetwork.utils.stringsJson.converter.StringsHelper" />
+        <import type="android.graphics.Color"/>
+        <variable
+            name="colorsData"
+            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
+
+
+            <FrameLayout
+                android:id="@+id/frame_layout_root"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/app_bg_color"
+                android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.app_bg_color) ? @color/app_bg_color : Color.parseColor(colorsData.instance().data.config.app_bg_color), default=@color/app_bg_color}"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <com.breadgangtvnetwork.utils.CustomProgressBar
+                    android:id="@+id/progress_bar"
+                    style="@style/Widget.AppCompat.ProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="false"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/no_connection_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <include
+                        android:id="@+id/connection"
+                        layout="@layout/no_connection" />
+                </LinearLayout>
+
+                <ScrollView
+                    android:id="@+id/otpLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/signUp_15dp_margin"
+                        tools:context=".activities.usermanagment.ui.EnterOTPActivity">
+
+                        <TextView
+                            android:id="@+id/logo"
+                            style="@style/TextView_Bold_20"
+                            android:layout_marginTop="75dp"
+                            android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.otp_enter_otp) ? @color/otp_enter_otp : Color.parseColor(colorsData.instance().data.config.otp_enter_otp), default=@color/otp_enter_otp}"
+                            android:text="@{TextUtils.isEmpty(stringData.instance().data.config.otp_enter_otp) ? @string/otp_enter_otp : stringData.instance().data.config.otp_enter_otp , default=@string/otp_enter_otp}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="ContentDescription" />
+
+                        <TextView
+                            android:id="@+id/enter_the_code"
+                            style="@style/TextView_Medium"
+                            android:layout_marginTop="@dimen/signUp_20dp_margin"
+                            android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.otp_digit_code_send) ? @color/otp_digit_code_send : Color.parseColor(colorsData.instance().data.config.otp_digit_code_send), default=@color/otp_digit_code_send}"
+                            android:text="@{TextUtils.isEmpty(stringData.instance().data.config.otp_digit_code_send) ? @string/otp_digit_code_send : stringData.instance().data.config.otp_digit_code_send , default=@string/otp_digit_code_send}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/logo" />
+
+                        <TextView
+                            android:id="@+id/phone_no"
+                            style="@style/TextView_Medium"
+                            android:paddingVertical="@dimen/signUp_10dp_margin"
+                            android:text="@string/alex_gmail_com"
+                            android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.otp_email_phone) ? @color/otp_email_phone : Color.parseColor(colorsData.instance().data.config.otp_email_phone), default=@color/otp_email_phone}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/enter_the_code" />
+
+                        <TextView
+                            android:id="@+id/txtOtp"
+                            style="@style/TextView_Medium"
+                            android:paddingBottom="@dimen/signUp_20dp_margin"
+                            android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.otp_code_valid) ? @color/otp_code_valid : Color.parseColor(colorsData.instance().data.config.otp_code_valid), default=@color/otp_code_valid}"
+                            android:text="@{TextUtils.isEmpty(stringData.instance().data.config.otp_code_valid) ? @string/otp_code_valid : stringData.instance().data.config.otp_code_valid , default=@string/otp_code_valid}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/phone_no" />
+
+                        <com.breadgangtvnetwork.view.PinView
+                            android:id="@+id/pinViewOtp"
+                            style="@style/PinWidget.PinView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:cursorVisible="true"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:fontFamily="@font/inter_medium"
+                            android:inputType="number"
+                            android:itemBackground="@drawable/otp_rounded_corner"
+                            android:padding="@dimen/_5sdp"
+                            android:textSize="@dimen/signUp_22sp_text_size"
+                            app:cursorColor="@color/series_detail_all_episode_txt_color"
+                            app:cursorWidth="2dp"
+                            android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.otp_digits) ? @color/otp_digits : Color.parseColor(colorsData.instance().data.config.otp_digits), default=@color/otp_digits}"
+                            app:hideLineWhenFilled="false"
+                            app:itemCount="6"
+                            app:itemHeight="@dimen/_35sdp"
+                            app:itemRadius="@dimen/_4sdp"
+                            app:itemSpacing="@dimen/_10sdp"
+                            app:itemWidth="@dimen/_35sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtOtp"
+                            app:lineColor="@color/try_again_btn_txt_color"
+                            app:lineWidth="@dimen/signUp_1dp_margin"
+                            app:viewType="rectangle" />
+
+
+                        <Button
+                            android:id="@+id/continue_btn"
+                            style="@style/buttonStyle"
+                            android:layout_marginTop="@dimen/sign_up_margin32dp"
+                            android:enabled="false"
+                            android:text="@{TextUtils.isEmpty(stringData.instance().data.config.otp_continue) ? @string/otp_continue : stringData.instance().data.config.otp_continue , default=@string/otp_continue}"
+                            android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.main_btn_txt_color) ? @color/main_btn_txt_color : Color.parseColor(colorsData.instance().data.config.main_btn_txt_color), default=@color/main_btn_txt_color}"
+                            android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.main_btn_selected_bg_color) ? @color/main_btn_selected_bg_color : Color.parseColor(colorsData.instance().data.config.main_btn_selected_bg_color), default=@color/main_btn_selected_bg_color}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.445"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/pinViewOtp" />
+
+
+                        <TextView
+                            android:id="@+id/resend_otp"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/signUp_40dp_margin"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginVertical="@dimen/signUp_20dp_margin"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/inter_medium"
+                            android:gravity="center"
+                            android:paddingVertical="@dimen/signUp_10dp_margin"
+                            android:text="@{stringData.instance().data.config.otp_resend_otp, default=@string/otp_resend_otp}"
+                            android:textColor="@color/series_detail_now_playing_title_color"
+                            android:textSize="@dimen/signUp_16sp_text_size"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/continue_btn">
+
+                        </TextView>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom|center"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/TextView_Medium_16"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:text="@string/if_otp_not_recieved" />
+
+            <TextView
+                android:id="@+id/contact_us"
+                style="@style/TextView_semi_mediam_16"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="3dp"
+                android:layout_marginBottom="30dp"
+                android:layout_toRightOf="@+id/textView2"
+                android:text="@string/enter_otp_contact_us" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

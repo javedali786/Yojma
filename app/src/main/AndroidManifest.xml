@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.breadgangtvnetwork">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:name=".OttApplication"
+        android:allowBackup="false"
+        android:fullBackupContent="@xml/backup_descriptor"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:resizeableActivity="false"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/MyMaterialTheme"
+        android:usesCleartextTraffic="true"
+        tools:replace="allowBackup">
+
+        <activity
+            android:name=".CountryListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyListActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.jwplayer.PlayerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:resizeableActivity="true"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.purchase.ui.PurchaseActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.listing.ui.MoreForYouActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+<!--        <activity-->
+<!--            android:name=".activities.live.FragmentLiveTv"-->
+<!--            android:exported="false"-->
+<!--            android:screenOrientation="portrait" />-->
+
+        <activity
+            android:name=".activities.Novelties.ui.NoveltiesActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.profile.ui.AccountSettingActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.profile.ui.ManageSubscriptionAccount"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.profile.ui.OrderHistoryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.usermanagment.ui.ActivityForgotPassword"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.usermanagment.ui.ActivityLogin"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.profile.CountryListActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.usermanagment.ui.ActivitySignUp"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.onBoarding.ui.PersonalizePreferenceOnBoarding"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.onBoarding.ui.PersonalizeTypePreferenceOnBoarding"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.onBoarding.ui.ChoosePrefrenceActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.usermanagment.ui.EnterOTPActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.usermanagment.ui.ActivitySelectSubscriptionPlan"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.usermanagment.ui.ChangePasswordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.contentsSweepstakkes.ui.ContestsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.News.NewsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.detail.ui.DetailsNew"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.detail.ui.AgenciesDetails"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.detail.ui.SpeciesDetails"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+<!--        <activity-->
+<!--            android:name=".activities.detail.ui.Detail"-->
+<!--            android:exported="false"-->
+<!--            android:screenOrientation="portrait" />-->
+<!--        <activity-->
+<!--            android:name=".activities.detail.ui.ExpeditionDetail"-->
+<!--            android:exported="false"-->
+<!--            android:screenOrientation="portrait" />-->
+        <activity
+            android:name=".activities.event.EventsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.detail.ui.BrandDetail"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GenreActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.search.ui.FilterIconActivity" />
+        <activity
+            android:name=".activities.manageAccounts.ManageAccount"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".OnBoardingTab"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignUpWelcomeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.profile.ui.AvatarImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignUpThirdPage"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.contentPreference.UI.ContentPreference"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".OnBoarding"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.downloads.DownloadedEpisodesActivity" />
+        <activity android:name=".activities.settings.downloadsettings.changequality.ui.ChangeDownloadQuality" />
+        <activity android:name=".activities.settings.downloadsettings.DownloadSettings" />
+        <activity
+            android:name=".utils.helpers.downloads.DownloadedVideoActivity"
+            android:label="@string/title_activity_downloaded_video"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".activities.downloads.MyDownloads"
+            android:screenOrientation="locked"
+            android:theme="@style/MyMaterialTheme" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
+
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="@string/fb_login_protocol_scheme"
+                    tools:ignore="ManifestResource" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+            android:enabled="true" />
+
+        <activity
+            android:name=".activities.splash.ui.ActivitySplash"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="locked"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <data
+                    android:host="open"
+                    android:scheme="iberalia" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="@string/fcm_host_link"
+                    android:scheme="https" />
+                <data
+                    android:host="@string/fcm_host_link"
+                    android:scheme="https" />
+            </intent-filter>
+
+        </activity>
+
+        <meta-data
+            android:name="io.branch.sdk.BranchKey"
+            android:value="@string/branch_key" />
+        <meta-data
+            android:name="io.branch.sdk.BranchKey.test"
+            android:value="@string/branch_key_test" />
+        <meta-data
+            android:name="io.branch.sdk.TestMode"
+            android:value="false" />
+
+        <activity
+            android:name="com.aemerse.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+        <activity
+            android:name=".activities.profile.ui.ProfileActivityNew"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.homeactivity.ui.HomeActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".activities.onBoarding.ui.HomeSliderActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".activities.search.ui.ActivitySearch"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".activities.detail.ui.DetailActivity"
+            android:configChanges="locale|screenSize|smallestScreenSize|screenLayout|orientation"
+            android:resizeableActivity="true"
+            android:screenOrientation="locked"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".activities.live.LiveActivity"
+            android:configChanges="locale|screenSize|smallestScreenSize|screenLayout|orientation"
+            android:resizeableActivity="true"
+            android:screenOrientation="locked"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".activities.detail.ui.EpisodeActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:screenOrientation="locked"
+            android:theme="@style/MyMaterialTheme" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" /> <!-- Branch install referrer tracking -->
+        <activity
+            android:name=".activities.watchList.ui.WatchListActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".activities.notification.ui.NotificationActivity" />
+        <activity
+            android:name=".activities.listing.ui.GridActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".LoginActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".SignUpActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.termsandconditions.ui.TermAndCondition"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.privacypolicy.ui.WebViewActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.series.ui.SeriesDetailActivity"
+            android:configChanges="locale|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensor" />
+        <activity
+            android:name=".activities.search.ui.ActivityResults"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="locked"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.listing.ui.MyListActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop" />
+
+        <receiver
+            android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.analytics.CampaignTrackingService"
+            android:enabled="true" />
+
+        <activity
+            android:name=".cms.HelpActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.videoquality.ui.ChangeLanguageActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.settings.ActivitySettings"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.listing.listui.ListActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop" />
+
+        <service
+            android:name=".OttMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/splash_logo" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/series_detail_all_episode_txt_color" />
+        <meta-data
+            android:name="brightcove_account_id"
+            android:value="@string/brightcove_account_id" />
+        <meta-data
+            android:name="brightcove_policy_key"
+            android:value="@string/brightcove_policy_key" />
+        <meta-data
+            android:name="ovp_api_key"
+            android:value="@string/ovp_api_key" />
+        <meta-data
+            android:name="api_key_mobile"
+            android:value="@string/api_key_mobile" />
+        <meta-data
+            android:name="api_key_tab"
+            android:value="@string/api_key_tab" />
+        <meta-data
+            android:name="firebase_performance_logcat_enabled"
+            android:value="true" />
+
+        <activity
+            android:name=".activities.videoquality.ui.VideoQualityActivity"
+            android:screenOrientation="locked" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+            android:value="true" />
+<!--        <meta-data-->
+<!--            android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"-->
+<!--            android:value="com.brightcove.cast.DefaultOptionsProvider" />-->
+<!--        <meta-data-->
+<!--            android:name="com.brightcove.cast.DefaultOptionsProvider.EXPANDED_CONTROLLER_ACTIVITY_CLASS_NAME"-->
+<!--            android:value="com.brightcove.cast.DefaultExpandedControllerActivity" />-->
+<!--        <meta-data-->
+<!--            android:name="com.brightcove.cast.DefaultOptionsProvider.NOTIFICATION_TARGET_ACTIVITY_CLASS_NAME"-->
+<!--            android:value="com.brightcove.cast.DefaultExpandedControllerActivity" />-->
+
+
+        <meta-data
+            android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
+            android:value="com.terramedia.iberalia.jwplayer.cast.CastOptionsProvider" />
+
+
+<!--        <activity-->
+<!--            android:name=".jwplayer.cast.ExpandedControlsActivity"-->
+<!--            android:exported="true"-->
+<!--            android:launchMode="singleInstance"-->
+<!--            android:parentActivityName=".activities.onBoarding.ui.HomeSliderActivity"-->
+<!--            android:screenOrientation="portrait">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--            </intent-filter>-->
+<!--            <meta-data-->
+<!--                android:name="android.support.PARENT_ACTIVITY"-->
+<!--                android:value=".activities.onBoarding.ui.HomeSliderActivity" />-->
+<!--        </activity>-->
+
+        <receiver
+            android:name="com.enveu.player.receiver.ConnectivityReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".activities.profile.order_history.ui.OrderHistoryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.usermanagment.ui.PaymentDetailPage"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+    </application>
+
+</manifest>

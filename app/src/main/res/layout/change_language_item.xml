@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/NontonSize15"
+        android:paddingTop="@dimen/NontonSize15"
+        android:id="@+id/parent_layout">
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ankur"
+            android:fontFamily="?attr/font_normal"
+            android:textSize="@dimen/download_qaulity"
+            android:paddingLeft="@dimen/NontonSize10"
+            android:paddingRight="@dimen/NontonSize10"
+            android:textColor="?attr/change_language_text"
+            android:layout_gravity="center" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/right_icon"
+            android:layout_width="@dimen/signUp_24dp_margin"
+            android:layout_height="@dimen/signUp_24dp_margin"
+            android:background="?attr/tick_icon_language"
+            app:civ_border_width="3dp"
+            app:civ_border_color="#FF000000"
+            android:paddingRight="@dimen/NontonSize_10"
+           android:layout_marginRight="@dimen/NontonSize_10"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+</layout>

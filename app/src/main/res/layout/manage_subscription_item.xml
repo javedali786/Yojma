@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:padding="@dimen/signUp_8dp_margin">
+
+        <TextView
+            android:id="@+id/premium_id"
+            style="@style/TextView_Bold_large_22"
+            android:layout_marginTop="@dimen/bell_icon_width_20dp"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/signUp_8dp_margin"
+            android:layout_marginEnd="@dimen/signUp_8dp_margin"
+            android:gravity="center"
+            android:maxLines="2"
+            android:paddingLeft="@dimen/_5sdp"
+            android:text="@string/premium_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/payment_id"
+            style="@style/TextView_Medium_20"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/signUp_8dp_margin"
+            android:layout_marginEnd="@dimen/signUp_8dp_margin"
+            android:layout_marginTop="@dimen/signUp_8dp_margin"
+            android:lineSpacingExtra="0.01dp"
+            android:text="@string/euro_74_99_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/premium_id" />
+
+        <TextView
+            android:id="@+id/annually_id"
+            style="@style/TextView_Bold_Gray"
+            android:layout_marginTop="@dimen/signUp_8dp_margin"
+            android:text="@string/annually_title"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/signUp_8dp_margin"
+            android:layout_marginEnd="@dimen/signUp_8dp_margin"
+            android:layout_width="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/payment_id" />
+
+        <LinearLayout
+            android:id="@+id/lay_id"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/signUp_8dp_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/annually_id"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/cb_purchase"
+                style="@style/TextView_Bold_12dp"
+                android:text="@string/date_of_purchase_02_jul_2021_text"
+                />
+
+            <TextView
+                android:id="@+id/cb_purchase_date"
+                style="@style/TextView_Bold_12dp"
+                android:text=""
+                />
+
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/contant_id"
+            style="@style/TextView_medium_red"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/signUp_8dp_margin"
+            android:layout_marginEnd="@dimen/signUp_8dp_margin"
+            android:text="@string/all_iberalia_originals_or_exclusive_contents_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lay_id" />
+
+        <TextView
+            android:id="@+id/status_id"
+            style="@style/TextView_Medium3"
+            android:layout_marginTop="@dimen/signUp_8dp_margin"
+            android:layout_marginStart="@dimen/sign_up_padding_10dp"
+            android:text="@string/status_title"
+            app:layout_constraintStart_toStartOf="@+id/contant_id"
+            app:layout_constraintTop_toBottomOf="@+id/contant_id" />
+
+        <TextView
+            android:id="@+id/payment_mode_id"
+            style="@style/TextView_Medium3"
+            android:layout_marginTop="@dimen/signUp_8dp_margin"
+            android:text="@string/payment_mode_title"
+            app:layout_constraintStart_toStartOf="@+id/status_id"
+            app:layout_constraintTop_toBottomOf="@+id/status_id" />
+
+        <TextView
+            android:id="@+id/auto_renewal"
+            style="@style/TextView_Medium3"
+            android:layout_marginTop="@dimen/signUp_8dp_margin"
+            android:text="@string/auto_renewal_text"
+            app:layout_constraintStart_toStartOf="@+id/payment_mode_id"
+            app:layout_constraintTop_toBottomOf="@+id/payment_mode_id" />
+
+        <TextView
+            android:id="@+id/active_id"
+            style="@style/TextView_Medium"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/sign_up_padding_10dp"
+            android:text="@string/active_text"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="@+id/contant_id"
+            app:layout_constraintTop_toBottomOf="@+id/contant_id" />
+
+        <TextView
+            android:id="@+id/apple_id"
+            style="@style/TextView_Medium"
+            android:layout_marginTop="@dimen/signUp_8dp_margin"
+            android:text="@string/apple_text"
+            app:layout_constraintEnd_toEndOf="@+id/active_id"
+            app:layout_constraintTop_toBottomOf="@+id/active_id" />
+
+        <TextView
+            android:id="@+id/yes_id"
+            style="@style/TextView_Medium"
+            android:layout_marginTop="@dimen/signUp_8dp_margin"
+            android:text="@string/yes_text"
+            app:layout_constraintEnd_toEndOf="@+id/apple_id"
+            app:layout_constraintStart_toStartOf="@+id/apple_id"
+            app:layout_constraintTop_toBottomOf="@+id/apple_id" />
+
+        <TextView
+            android:id="@+id/cancel_subscription_id"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/cancel_subscription_button"
+            android:textColor="@color/series_detail_all_episode_txt_color"
+            android:textSize="14dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/signUp_8dp_margin"
+            android:layout_marginEnd="@dimen/signUp_8dp_margin"
+            android:layout_marginTop="@dimen/signUp_15dp_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/auto_renewal"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

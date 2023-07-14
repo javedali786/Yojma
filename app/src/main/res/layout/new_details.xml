@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/above_shado"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <include
+            android:id="@+id/connection"
+            layout="@layout/no_connection"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        </include>
+
+
+        <com.breadgangtvnetwork.utils.CustomProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:elevation="@dimen/sign_up_padding_10dp"
+            android:theme="@style/progressTheme"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/bgImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/info_item_scroller"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/above_shado"
+            android:fillViewport="false"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/above_shado"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/toolbar"
+                    layout="@layout/toolbar"
+                    android:elevation="@dimen/sign_up_padding_10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/detail_title_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_50sdp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/sign_up_padding_10dp"
+                        android:layout_marginStart="@dimen/sign_up_padding_10dp"
+                        android:layout_marginBottom="@dimen/sign_up_padding_5dp"
+                        android:layout_marginTop="@dimen/signUp_150dp_margin"
+                        android:orientation="vertical">
+                        <TextView
+                            style="@style/TextView_Bold_large_22"
+                            android:id="@+id/title"
+                            android:padding="5dp"
+                            android:textAllCaps="false"
+                            android:text="">
+                        </TextView>
+                        <TextView
+                            style="@style/TextView_Bold"
+                            android:id="@+id/title1"
+                            android:padding="5dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_below="@id/title"
+                            android:text="">
+                        </TextView>
+
+                        <TextView
+                            style="@style/TextView_Bold"
+                            android:id="@+id/title2"
+                            android:padding="5dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_below="@id/title1"
+                            android:text="">
+                        </TextView>
+
+                        <TextView
+                            style="@style/TextView_Bold"
+                            android:id="@+id/title3"
+                            android:padding="5dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_below="@id/title2"
+                            android:text="">
+                        </TextView>
+                        <TextView
+                            style="@style/TextView_Bold"
+                            android:id="@+id/title4"
+                            android:padding="5dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_below="@id/title3"
+                            android:text="">
+                        </TextView>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

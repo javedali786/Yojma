@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.text.TextUtils"/>
+        <import type="android.graphics.Color"/>
+
+        <variable
+            name="stringData"
+            type="com.breadgangtvnetwork.utils.stringsJson.converter.StringsHelper" />
+
+        <variable
+            name="colorsData"
+            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+
+        <import type="com.breadgangtvnetwork.enums.DownloadStatus" />
+    </data>
+
+
+    <LinearLayout
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/season_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/header_season"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/_70sdp"
+                android:fontFamily="?attr/font_medium"
+                android:gravity="center"
+                android:paddingTop="@dimen/_26sdp"
+                android:paddingBottom="@dimen/_70sdp"
+                android:textColor="@color/series_detail_episode_unselected_btn_txt_color"
+                android:textSize="@dimen/detail_coming_soon_text_size" />
+
+            <LinearLayout
+                android:id="@+id/header_season"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp"
+                >
+
+                <TextView
+                    android:id="@+id/season_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="@dimen/_7sdp"
+                    android:text=""
+                    android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.series_detail_all_episode_txt_color) ? @color/series_detail_all_episode_txt_color : Color.parseColor(colorsData.instance().data.config.series_detail_all_episode_txt_color), default=@color/series_detail_all_episode_txt_color}"
+                    android:textSize="@dimen/detail_header_season" />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/coming_soon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/header_season"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/_70sdp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:paddingTop="@dimen/_26sdp"
+                android:paddingBottom="@dimen/_70sdp"
+                android:text="@string/coming_soon"
+                android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.detail_coming_soon_text_color) ? @color/detail_coming_soon_text_color : Color.parseColor(colorsData.instance().data.config.detail_coming_soon_text_color), default=@color/detail_coming_soon_text_color}"
+                android:textSize="@dimen/detail_coming_soon_text_size"
+                android:visibility="gone" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/series_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/header_season"
+                android:layout_marginTop="5dp"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never" />
+
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/series_recycler_view"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:theme="@style/progressTheme"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/seasonMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/series_recycler_view"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/NontonSize15"
+                android:background="@drawable/rounded_button"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_7sdp"
+                    android:fontFamily="?attr/font_bold"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:text="@string/load_more_episodes"
+                    android:textColor="@color/series_detail_now_playing_title_color"
+                    android:textSize="@dimen/detail_loadmore"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/seriesShimmerRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/recycleview_margin_top"
+            android:visibility="gone" />
+
+
+    </LinearLayout>
+
+
+</layout>

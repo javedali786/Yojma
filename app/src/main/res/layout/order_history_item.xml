@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="stringData"
+            type="com.breadgangtvnetwork.utils.stringsJson.converter.StringsHelper" />
+
+        <import type="android.graphics.Color" />
+
+        <variable
+            name="colorsData"
+            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/llLayout"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:padding="@dimen/sign_up_16dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        style="@style/TextView_Bold"
+                        android:text="@string/monthly"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.order_history_description_txt_color) ? @color/order_history_description_txt_color : Color.parseColor(colorsData.instance().data.config.order_history_description_txt_color), default=@color/order_history_description_txt_color}"
+                        android:maxLines="1" />
+
+                    <TextView
+                        android:id="@+id/activeExpired"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/toolbar_ios_width_10dp"
+                        android:padding="3dp"
+                        android:background="@drawable/badge_background"
+                        android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.order_history_active_btn_bg_color) ? @color/order_history_active_btn_bg_color : Color.parseColor(colorsData.instance().data.config.order_history_active_btn_bg_color), default=@color/order_history_active_btn_bg_color}"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.order_history_active_plan_btn_text_color) ? @color/order_history_active_plan_btn_text_color : Color.parseColor(colorsData.instance().data.config.order_history_active_plan_btn_text_color), default=@color/order_history_active_plan_btn_text_color}"
+                        android:textSize="@dimen/signUp_10dp_margin"
+                        android:textAllCaps="true"
+                        tools:text="@string/active_text" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/order_validity_id"
+                        style="@style/TextView_Medium3"
+                        android:layout_marginTop="@dimen/sign_up_padding_10dp"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textView"
+                        android:text="@string/validity" />
+
+                    <TextView
+                        android:id="@+id/duration"
+                        style="@style/TextView_Medium_payments"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/button_2dp"
+                        android:singleLine="true"
+                        tools:text="@string/plan_date" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/order_payment_mode_id"
+                        style="@style/TextView_Medium3"
+                        android:layout_marginTop="@dimen/sign_up_padding_10dp"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.order_history_title_color) ? @color/order_history_title_color : Color.parseColor(colorsData.instance().data.config.order_history_title_color), default=@color/order_history_title_color}"
+                        android:text="@{TextUtils.isEmpty(stringData.instance().data.config.order_history_payment_mode) ? @string/order_history_payment_mode : stringData.instance().data.config.order_history_payment_mode , default=@string/order_history_payment_mode}" />
+
+                    <TextView
+                        android:id="@+id/paymentMode"
+                        style="@style/TextView_Medium"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.order_history_description_txt_color) ? @color/order_history_description_txt_color : Color.parseColor(colorsData.instance().data.config.order_history_description_txt_color), default=@color/order_history_description_txt_color}"
+                        android:text="@string/apple_text" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/order_id"
+                        style="@style/TextView_Medium3"
+                        android:layout_marginTop="@dimen/sign_up_padding_10dp"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.order_history_title_color) ? @color/order_history_title_color : Color.parseColor(colorsData.instance().data.config.order_history_title_color), default=@color/order_history_title_color}"
+                        android:text="@{TextUtils.isEmpty(stringData.instance().data.config.order_history_order_Id) ? @string/order_history_order_Id : stringData.instance().data.config.order_history_order_Id , default=@string/order_history_order_Id}" />
+
+                    <TextView
+                        android:id="@+id/transactionId"
+                        style="@style/TextView_Medium"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.order_history_description_txt_color) ? @color/order_history_description_txt_color : Color.parseColor(colorsData.instance().data.config.order_history_description_txt_color), default=@color/order_history_description_txt_color}"
+                        tools:text="XEMhn16599579631XEMhn16599579631" />
+
+
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/packageName"
+                        style="@style/TextView_Bold"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.order_history_description_txt_color) ? @color/order_history_description_txt_color : Color.parseColor(colorsData.instance().data.config.order_history_description_txt_color), default=@color/order_history_description_txt_color}"
+                        android:layout_marginStart="@dimen/bell_icon_width_20dp"
+                        android:text="@string/euro_74_99_text" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/order_date_id"
+                        style="@style/TextView_Medium3"
+                        android:layout_marginTop="@dimen/sign_up_padding_10dp"
+                        android:text="@string/subscription_date" />
+
+                    <TextView
+                        android:id="@+id/order_dateEnd_id"
+                        style="@style/TextView_Medium"
+                        android:layout_marginTop="@dimen/button_2dp"
+                        android:text="02 jun 2021 " />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/order_payment_status_id"
+                        style="@style/TextView_Medium3"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.order_history_title_color) ? @color/order_history_title_color : Color.parseColor(colorsData.instance().data.config.order_history_title_color), default=@color/order_history_title_color}"
+                        android:layout_marginTop="@dimen/sign_up_padding_10dp"
+                        android:text="@{TextUtils.isEmpty(stringData.instance().data.config.order_history_payment_status) ? @string/order_history_payment_status : stringData.instance().data.config.order_history_payment_status , default=@string/order_history_payment_status}" />
+
+                    <TextView
+                        android:id="@+id/paymentStatus"
+                        style="@style/TextView_Medium"
+                        android:layout_marginTop="@dimen/button_2dp"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.order_history_description_txt_color) ? @color/order_history_description_txt_color : Color.parseColor(colorsData.instance().data.config.order_history_description_txt_color), default=@color/order_history_description_txt_color}"
+                        android:text="Completed" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/order_transaction_type_id"
+                        style="@style/TextView_Medium3"
+                        android:layout_marginTop="@dimen/sign_up_padding_10dp"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.order_history_title_color) ? @color/order_history_title_color : Color.parseColor(colorsData.instance().data.config.order_history_title_color), default=@color/order_history_title_color}"
+                        android:text="@{TextUtils.isEmpty(stringData.instance().data.config.order_history_transaction_type) ? @string/order_history_transaction_type : stringData.instance().data.config.order_history_transaction_type , default=@string/order_history_transaction_type}" />
+
+                    <TextView
+                        android:id="@+id/order_Purchase_id"
+                        style="@style/TextView_Medium"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.order_history_description_txt_color) ? @color/order_history_description_txt_color : Color.parseColor(colorsData.instance().data.config.order_history_description_txt_color), default=@color/order_history_description_txt_color}"
+                        android:text="Purchase" />
+
+
+                </LinearLayout>
+
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/expireOn"
+            android:paddingLeft="@dimen/sign_up_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextView_Bold"
+            android:textColor="@color/back_icon_color"
+            android:textSize="@dimen/signUp_16sp_text_size"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/sign_up_padding_10dp"
+            android:layout_marginRight="@dimen/_10sdp"
+            tools:text="Expiring on  02 july 2022" />
+
+        <TextView
+            android:id="@+id/st"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/signUp_10dp_margin"
+            android:visibility="gone"
+            android:textColor="@color/unselected_indicator_color"
+            android:textSize="@dimen/signUp_14sp_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/paymentMode" />
+
+
+
+    </LinearLayout>
+
+
+</layout>

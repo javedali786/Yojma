@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/bgColor">
+
+        <TextView
+            android:id="@+id/tv_download_options"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="?attr/font_bold"
+            android:paddingTop="20dp"
+            android:text="@string/download_option"
+            android:textColor="?attr/change_language_text"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/available_space"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/available_space"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="?attr/font_normal"
+            android:text="@string/available_size"
+            android:textColor="?attr/change_language_text"
+            app:layout_constraintBottom_toTopOf="@id/recycler_view"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_download_options" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@id/checkbox_make_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/available_space" />
+
+        <CheckBox
+            android:id="@+id/checkbox_make_default"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="?attr/font_normal"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/make_quality_default"
+            android:textColor="?attr/change_language_text"
+            app:layout_constraintBottom_toTopOf="@id/btn_start_download"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view" />
+
+        <Button
+            android:id="@+id/btn_start_download"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/app_bg_color"
+            android:fontFamily="?attr/font_medium"
+            android:text="@string/start_download"
+            android:textColor="@color/series_detail_now_playing_title_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkbox_make_default" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="10dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="10dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

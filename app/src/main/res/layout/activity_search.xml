@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.text.TextUtils" />
+        <variable
+            name="stringData"
+            type="com.breadgangtvnetwork.utils.stringsJson.converter.StringsHelper" />
+        <import type="android.graphics.Color" />
+        <variable
+            name="colorsData"
+            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/frame_main_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/try_again_btn_txt_color"
+        android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.app_bg_color) ? @color/app_bg_color : Color.parseColor(colorsData.instance().data.config.app_bg_color), default=@color/app_bg_color}">
+
+        <com.breadgangtvnetwork.utils.CustomProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/search_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/toolbar"
+                    layout="@layout/search_toolbar" />
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/no_result"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="@dimen/NontonSize13"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:layout_marginEnd="@dimen/toolbarSearchRight"
+                            android:layout_marginBottom="@dimen/_12sdp"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="@{TextUtils.isEmpty(stringData.instance().data.config.no_result) ? @string/no_result : stringData.instance().data.config.no_result , default=@string/no_result}"
+                            android:textAllCaps="false"
+                            android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.search_no_result_found_txt_color) ? @color/search_no_result_found_txt_color : Color.parseColor(colorsData.instance().data.config.search_no_result_found_txt_color), default=@color/search_no_result_found_txt_color}"
+                            android:textSize="@dimen/signUp_20sp_text_size"
+                            android:visibility="visible" />
+
+
+                        <LinearLayout
+                            android:id="@+id/rootView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/popularSearchGroup"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tvPopularSearch"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/NontonSize13"
+                                    android:layout_marginBottom="@dimen/NontonSize4"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="@{TextUtils.isEmpty(stringData.instance().data.config.popular_search) ? @string/popular_search : stringData.instance().data.config.popular_search , default=@string/popular_search}"
+                                    android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.search_popular_searches_txt_color) ? @color/search_popular_searches_txt_color : Color.parseColor(colorsData.instance().data.config.search_popular_searches_txt_color), default=@color/search_popular_searches_txt_color}"
+                                    android:textSize="@dimen/search_popularSearchSize" />
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/popularSearchRecycler"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:nestedScrollingEnabled="false"
+                                    android:overScrollMode="never"
+                                    tools:itemCount="3"
+                                    tools:listitem="@layout/common_search_adapter">
+
+                                </androidx.recyclerview.widget.RecyclerView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llRecentSearchLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/NontonSize8"
+                                android:nestedScrollingEnabled="false"
+                                android:orientation="vertical"
+                                android:overScrollMode="never"
+                                android:visibility="visible">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="visible">
+
+                                    <TextView
+                                        android:id="@+id/recent_search"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/NontonSize13"
+                                        android:fontFamily="@font/inter_bold"
+                                        android:gravity="start"
+                                        android:text="@{TextUtils.isEmpty(stringData.instance().data.config.recent_searches) ? @string/recent_searches : stringData.instance().data.config.recent_searches , default=@string/recent_searches}"
+                                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.search_recent_searches_txt_color) ? @color/search_recent_searches_txt_color : Color.parseColor(colorsData.instance().data.config.search_recent_searches_txt_color), default=@color/search_recent_searches_txt_color}"
+                                        android:textSize="@dimen/search_popularSearchSize" />
+
+                                    <FrameLayout
+                                        android:id="@+id/delete_keywords"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/_15sdp"
+                                            android:background="@drawable/detects_icon"
+                                            android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.search_recent_delete_icon_color) ? @color/search_recent_delete_icon_color : Color.parseColor(colorsData.instance().data.config.search_recent_delete_icon_color), default=@color/search_recent_delete_icon_color}" />
+                                    </FrameLayout>
+                                </RelativeLayout>
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/recentSearchRecycler"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:nestedScrollingEnabled="false"
+                                    android:overScrollMode="never"
+                                    tools:itemCount="3"
+                                    tools:listitem="@layout/keyword_item" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llSearchResultLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/searchResultRecycler"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:overScrollMode="never" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/no_connection_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="50dp"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/connection"
+                    layout="@layout/no_connection" />
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+</layout>

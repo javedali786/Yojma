@@ -1,0 +1,35 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url 'https://mvn.jwplayer.com/content/repositories/releases/'
+        }
+    }
+}
+enableFeaturePreview("VERSION_CATALOGS")
+// adding moengage catalog
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+    versionCatalogs {
+        create("moengage") {
+            from("com.moengage:android-dependency-catalog:2.7.7")
+        }
+    }
+}
+rootProject.name = "Breadgangtvnetwork - Android"
+include ':app'
+//include ':enveuandroidsdk'
+//include ':enveuandroidclient'
+//project(":enveuandroidclient").projectDir = file("../enveuandroidclient")
+// project(":enveuandroidsdk").projectDir = file("../enveuandroidsdk")

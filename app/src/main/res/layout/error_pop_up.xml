@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/curve_background_error"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_centerInParent="true">
+            <TextView
+                android:id="@+id/tv_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="?attr/font_bold"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/series_detail_now_playing_title_color"
+                android:textSize="@dimen/TextSize14" />
+
+            <View
+                android:id="@+id/seperator"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/series_detail_now_playing_title_color" />
+            <TextView
+                android:id="@+id/tvOk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:gravity="center"
+                android:text="@string/ok"
+                android:fontFamily="?attr/font_medium"
+                android:singleLine="true"
+                android:textColor="@color/signup_terms_and_condition_text_color"
+                android:textSize="@dimen/TextSize16"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>
+

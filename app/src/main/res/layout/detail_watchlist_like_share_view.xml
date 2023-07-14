@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="stringData"
+            type="com.breadgangtvnetwork.utils.stringsJson.converter.StringsHelper" />
+
+        <variable
+            name="downloadStatus"
+            type="com.breadgangtvnetwork.enums.DownloadStatus" />
+
+        <variable
+            name="isDownloadable"
+            type="Boolean" />
+
+        <variable
+            name="isKidsMode"
+            type="Boolean" />
+
+        <import type="android.text.TextUtils"/>
+        <import type="android.graphics.Color"/>
+        <variable
+            name="colorsData"
+            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+
+        <import type="com.breadgangtvnetwork.enums.DownloadStatus" />
+    </data>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:id="@+id/watchList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginEnd="40dp"
+                android:orientation="vertical">
+
+                <com.breadgangtvnetwork.utils.CustomProgressBar
+                    android:id="@+id/w_progress_bar"
+                    style="@style/Widget.AppCompat.ProgressBar"
+                    android:layout_width="@dimen/watch_ListWidth"
+                    android:layout_height="@dimen/watch_ListHeight"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/NontonSize8"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/addIcon"
+                    android:layout_width="@dimen/top_logo_34dp"
+                    android:layout_height="@dimen/icon_size_22dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/watchlist"
+                    android:background="@drawable/ic_list"
+                    android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.series_detail_my_list_unselected_color) ? @color/series_detail_my_list_unselected_color : Color.parseColor(colorsData.instance().data.config.series_detail_my_list_unselected_color), default=@color/series_detail_my_list_unselected_color}" />
+
+                <TextView
+                    android:id="@+id/tvWatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/signUp_5dp_margin"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@{TextUtils.isEmpty(stringData.instance().data.config.detail_page_my_list) ? @string/detail_page_my_list : stringData.instance().data.config.detail_page_my_list , default=@string/detail_page_my_list}"
+                    android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.series_detail_my_list_unselected_color) ? @color/series_detail_my_list_unselected_color : Color.parseColor(colorsData.instance().data.config.series_detail_my_list_unselected_color), default=@color/series_detail_my_list_unselected_color}"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shareWith"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginEnd="40dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/share_img"
+                    android:layout_width="@dimen/top_size_29dp"
+                    android:layout_height="@dimen/top_size_28dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_share_icon"
+                    android:contentDescription="@string/detail_page_share"
+                    android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.series_detail_share_unselected_color) ? @color/series_detail_share_unselected_color : Color.parseColor(colorsData.instance().data.config.series_detail_share_unselected_color), default=@color/series_detail_share_unselected_color}" />
+
+                <TextView
+                    android:id="@+id/share_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@{TextUtils.isEmpty(stringData.instance().data.config.detail_page_share) ? @string/detail_page_share : stringData.instance().data.config.detail_page_share , default=@string/detail_page_share}"
+                    android:layout_margin="@dimen/signUp_5dp_margin"
+                    android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.series_detail_share_unselected_color) ? @color/series_detail_share_unselected_color : Color.parseColor(colorsData.instance().data.config.series_detail_share_unselected_color), default=@color/series_detail_share_unselected_color}"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical">
+
+                <com.breadgangtvnetwork.utils.CustomProgressBar
+                    android:id="@+id/l_progress_bar"
+                    style="@style/Widget.AppCompat.ProgressBar"
+                    android:layout_width="@dimen/watchListWidth"
+                    android:layout_height="@dimen/watchListHeight"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/NontonSize8"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/likeIcon"
+                    android:layout_width="@dimen/signUp_24dp_margin"
+                    android:layout_height="@dimen/signUp_25dp_margin"
+                    android:layout_gravity="center|center_horizontal"
+                    android:contentDescription="@string/detail_page_like"
+                    android:background="@drawable/ic_like_icon"
+                    android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.series_detail_like_unselected_color) ? @color/series_detail_like_unselected_color : Color.parseColor(colorsData.instance().data.config.series_detail_like_unselected_color), default=@color/series_detail_like_unselected_color}" />
+
+                <TextView
+                    android:id="@+id/tvLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@{TextUtils.isEmpty(stringData.instance().data.config.detail_page_like) ? @string/detail_page_like : stringData.instance().data.config.detail_page_like , default=@string/detail_page_like}"
+                    android:layout_margin="@dimen/signUp_5dp_margin"
+                    android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.series_detail_like_unselected_color) ? @color/series_detail_like_unselected_color : Color.parseColor(colorsData.instance().data.config.series_detail_like_unselected_color), default=@color/series_detail_like_unselected_color}"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+
+
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/download"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginEnd="20dp"-->
+<!--                android:orientation="vertical"-->
+<!--                android:visibility="gone"-->
+<!--                tools:visibility="visible">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/download_video"-->
+<!--                    android:layout_width="@dimen/watchListWidth"-->
+<!--                    android:layout_height="@dimen/watchListHeight"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_margin="@dimen/NontonSize8"-->
+<!--                    android:contentDescription="@string/download"-->
+<!--                    android:visibility='@{downloadStatus==DownloadStatus.START ? View.VISIBLE : View.GONE, default="gone"}'-->
+<!--                    tools:visibility="visible" />-->
+
+<!--                <com.terramedia.iberalia.utils.DownloadProgressBar-->
+<!--                    android:id="@+id/video_downloading"-->
+<!--                    android:layout_width="22dp"-->
+<!--                    android:layout_height="22dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_margin="@dimen/NontonSize8"-->
+<!--                    android:visibility='@{downloadStatus==DownloadStatus.DOWNLOADING ? View.VISIBLE : View.GONE, default="gone"}'-->
+<!--                    app:background_progressbar_color="@android:color/darker_gray"-->
+<!--                    app:progressbar_color="@color/app_bg_color" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/video_downloaded"-->
+<!--                    android:layout_width="@dimen/watchListWidth"-->
+<!--                    android:layout_height="@dimen/watchListHeight"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_margin="@dimen/NontonSize8"-->
+<!--                    android:contentDescription="@string/download"-->
+<!--                    android:visibility='@{downloadStatus==DownloadStatus.DOWNLOADED ? View.VISIBLE : View.GONE, default="gone"}'-->
+<!--                   />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/pause_download"-->
+<!--                    android:layout_width="@dimen/watchListWidth"-->
+<!--                    android:layout_height="@dimen/watchListHeight"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_margin="@dimen/NontonSize8"-->
+<!--                    android:contentDescription="@string/pause_download"-->
+<!--                    android:visibility='@{downloadStatus==DownloadStatus.PAUSE ? View.VISIBLE : View.GONE, default="gone"}'-->
+<!--                    app:srcCompat="?attr/pause_download" />-->
+
+<!--                <ProgressBar-->
+<!--                    android:id="@+id/loading_download"-->
+<!--                    android:layout_width="@dimen/watch_ListWidth"-->
+<!--                    android:layout_height="@dimen/watch_ListWidth"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_margin="@dimen/NontonSize5"-->
+<!--                    android:visibility='@{downloadStatus==DownloadStatus.REQUESTED ? View.VISIBLE : View.GONE, default="gone"}' />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/download_text"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:fontFamily="?attr/font_medium"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/download"-->
+<!--                    android:textColor="?attr/watchlist_icon_text"-->
+<!--                    android:textSize="@dimen/signUp_14sp_text_size" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/show_comments"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginEnd="20dp"-->
+<!--                android:orientation="vertical"-->
+<!--                android:visibility="gone">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="@dimen/watchListWidth"-->
+<!--                    android:layout_height="@dimen/watchListHeight"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_margin="@dimen/NontonSize8"-->
+<!--                    android:contentDescription="@string/comments"-->
+<!--                    app:srcCompat="@drawable/chat_icon" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:fontFamily="?attr/font_medium"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/comments"-->
+<!--                    android:textColor="@color/series_detail_now_playing_title_color"-->
+<!--                    android:textSize="@dimen/signUp_14sp_text_size" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/ll_trailer"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginEnd="20dp"-->
+<!--                android:orientation="vertical"-->
+<!--                android:visibility="visible"-->
+<!--                tools:visibility="visible">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_trailer"-->
+<!--                    android:layout_width="@dimen/watchListWidth"-->
+<!--                    android:layout_height="@dimen/watchListHeight"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_margin="@dimen/NontonSize8"-->
+<!--                    android:contentDescription="@string/trailer"-->
+<!--                    app:srcCompat="@drawable/ic_group_148" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_trailer"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:fontFamily="?attr/font_medium"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/trailer"-->
+<!--                    android:textColor="@color/series_detail_now_playing_title_color"-->
+<!--                    android:textSize="@dimen/signUp_14sp_text_size" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/ll_chat"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginEnd="20dp"-->
+<!--                android:orientation="vertical"-->
+<!--                android:visibility="visible"-->
+<!--                tools:visibility="visible">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_chat"-->
+<!--                    android:layout_width="@dimen/watchListWidth"-->
+<!--                    android:layout_height="@dimen/watchListHeight"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_margin="@dimen/NontonSize8"-->
+<!--                    android:contentDescription="@string/trailer"-->
+<!--                    app:srcCompat="?attr/live_chat_icon" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_chat"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:fontFamily="?attr/font_medium"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/live_chat"-->
+<!--                    android:textColor="@color/series_detail_now_playing_title_color"-->
+<!--                    android:textSize="@dimen/signUp_14sp_text_size" />-->
+<!--            </LinearLayout>-->
+        </LinearLayout>
+    </HorizontalScrollView>
+</layout>

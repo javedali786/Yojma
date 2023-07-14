@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="stringData"
+            type="com.breadgangtvnetwork.utils.stringsJson.converter.StringsHelper" />
+
+        <import type="android.graphics.Color" />
+
+        <variable
+            name="colorsData"
+            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/toolbar_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_toolbar_height_60dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/rl_parent"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/search_toolbar_height_60dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/back_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/NontonSize10"
+                        android:layout_marginRight="@dimen/NontonSize10"
+                        android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.back_icon_color) ? @color/back_icon_color : Color.parseColor(colorsData.instance().data.config.back_icon_color), default=@color/back_icon_color}"
+                        android:visibility="gone"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/search_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_34sdp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_1sdp"
+                    android:layout_marginBottom="@dimen/NontonSize10"
+                    android:layout_toStartOf="@+id/clear_text"
+                    android:layout_toEndOf="@+id/back_button"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/signUp_5dp_margin"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/search_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.toolbar_search_icon_color) ? @color/toolbar_search_icon_color : Color.parseColor(colorsData.instance().data.config.toolbar_search_icon_color), default=@color/toolbar_search_icon_color}"
+                            android:layout_marginStart="@dimen/signUp_5dp_margin"
+                            android:background="@drawable/search" />
+
+                        <!--android:transitionName="imageMain"-->
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/search_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:background="@color/login_fgt_pwd_btn_bg_color"
+                        android:cursorVisible="true"
+                        android:fontFamily="@font/inter_medium"
+                        android:hint="@string/search_hint"
+                        android:imeOptions="actionDone"
+                        android:inputType="textNoSuggestions"
+                        android:singleLine="true"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.search_keyword_text_color) ? @color/search_keyword_text_color : Color.parseColor(colorsData.instance().data.config.search_keyword_text_color), default=@color/search_keyword_text_color}"
+                        android:textColorHint="@{TextUtils.isEmpty(colorsData.instance().data.config.search_keyword_hint_color) ? @color/search_keyword_hint_color : Color.parseColor(colorsData.instance().data.config.search_keyword_hint_color), default=@color/search_keyword_hint_color}"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textSize="@dimen/search_headingToolbar"
+                        android:visibility="gone" />
+
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/search_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center_vertical"
+                        android:iconifiedByDefault="true"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:theme="@style/AppSearchView"
+                        android:windowSoftInputMode="stateHidden"
+                        app:layout_scrollFlags="scroll|enterAlways"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                        app:queryBackground="@null"
+                        app:queryHint="@{TextUtils.isEmpty(stringData.instance().data.config.search_hint) ? @string/search_hint : stringData.instance().data.config.search_hint , default=@string/search_hint}"
+                        app:searchHintIcon="@null"
+                        app:searchIcon="@null" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/clear_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/sign_up_padding_10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/you_can_tick"
+                        android:layout_width="@dimen/search_icon_16dp"
+                        android:layout_height="@dimen/search_icon_16dp"
+                        android:layout_marginEnd="@dimen/NontonSize10"
+                        android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.search_keyword_cut_icon_color) ? @color/search_keyword_cut_icon_color : Color.parseColor(colorsData.instance().data.config.search_keyword_cut_icon_color), default=@color/search_keyword_cut_icon_color}"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/signUp_5dp_margin"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@{TextUtils.isEmpty(stringData.instance().data.config.cancel_search) ? @string/cancel_search : stringData.instance().data.config.cancel_search , default=@string/cancel_search}"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.skip_text_color) ? @color/skip_text_color : Color.parseColor(colorsData.instance().data.config.skip_text_color), default=@color/skip_text_color}"
+                        android:textSize="@dimen/search_cancel" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="@dimen/_5sdp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+        <!-- footer-->
+        <View
+            android:id="@+id/search_toolbar_sperator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shadow" />
+    </FrameLayout>
+</layout>

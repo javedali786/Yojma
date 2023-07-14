@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.breadgangtvnetwork.utils.CustomProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/episode_screen_background"
+                android:orientation="vertical">
+
+
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_top"
+                    android:paddingBottom="@dimen/_2sdp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:descendantFocusability="blocksDescendants"
+                        android:orientation="vertical">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/placeholder_landscape"
+                                android:contentDescription="TODO"
+                                android:foreground="@drawable/trending_gradient_shape"
+                                android:scaleType="fitXY" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/series_shadow"
+                                android:layout_height="@dimen/_100sdp">
+
+                            </LinearLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/player_layout"
+                                android:layout_alignParentBottom="true"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/NontonSize6"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+
+
+
+                                <TextView
+                                    android:id="@+id/tv_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/purchaseLeftMargin"
+                                    android:layout_marginRight="@dimen/purchaseRigntMargin"
+                                    android:layout_marginBottom="@dimen/NontonSize4"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="Title"
+                                    android:textColor="@color/series_detail_now_playing_title_color"
+                                    android:textSize="@dimen/font_medium_large"
+                                    app:layout_constraintBottom_toTopOf="@+id/tv_description"
+                                    app:layout_constraintLeft_toLeftOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tv_description"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/purchaseLeftMargin"
+                                    android:layout_marginRight="@dimen/purchaseRigntMargin"
+                                    android:layout_marginBottom="@dimen/NontonSize6"
+                                    android:ellipsize="end"
+                                    android:maxLines="2"
+                                    android:text="Description"
+                                    android:textColor="@color/series_detail_now_playing_title_color"
+                                    android:textSize="@dimen/buyVideo"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        </RelativeLayout>
+
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/NontonSize20"
+                                    android:ellipsize="end"
+                                    android:maxLines="2"
+                                    android:text="@string/purhcase_options"
+                                    android:textColor="@color/series_detail_now_playing_title_color"
+                                    android:textSize="@dimen/purchaseOption" />
+
+                                <androidx.recyclerview.widget.RecyclerView
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/NontonSize5"
+                                    android:layout_marginTop="@dimen/NontonSize10"
+                                    android:layout_marginRight="@dimen/NontonSize5"
+                                    android:clipToPadding="false"
+                                    android:overScrollMode="never"
+                                    android:paddingBottom="10dp" />
+
+
+                                <LinearLayout
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/NontonSize45"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="@dimen/NontonSize25"
+                                    android:layout_marginTop="@dimen/NontonSize15"
+                                    android:layout_marginRight="@dimen/NontonSize25"
+                                    android:gravity="center">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawablePadding="@dimen/NontonSize10"
+                                        android:text="@string/more_buy_now"
+                                        android:textColor="@color/series_detail_now_playing_title_color"
+                                        android:textSize="@dimen/TextSize12"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+
+                                android:visibility="gone"
+                                android:layout_width="match_parent"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:text="No offer available in your region!"
+                                    android:textColor="@color/series_detail_now_playing_title_color"
+                                    android:layout_marginTop="@dimen/NontonSize35"
+                                    android:textSize="@dimen/NontonSize15"
+                                    android:layout_height="wrap_content">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+
+
+                        </RelativeLayout>
+
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:gravity="center"
+                            android:visibility="invisible"
+                            android:layout_marginLeft="@dimen/NontonSize25"
+                            android:layout_marginTop="@dimen/NontonSize10"
+                            android:layout_marginRight="@dimen/NontonSize25"
+                            android:orientation="horizontal">
+
+
+                            <Button
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:foreground="?attr/selectableItemBackgroundBorderless"
+                                android:text="@string/more_buy_now"
+                                android:textAllCaps="false"
+                                android:textColor="@color/series_detail_now_playing_title_color"
+                                android:textSize="@dimen/_14sdp" />
+
+
+                        </LinearLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/llNote"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="@dimen/NontonSize5"
+                            android:layout_marginTop="@dimen/NontonSize20"
+                            android:gravity="left"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/note1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/NontonSize10"
+                                android:textSize="@dimen/buyVideo" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/llUnsubscribe"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="@dimen/NontonSize10"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginLeft="@dimen/NontonSize3"
+                                android:layout_marginRight="@dimen/NontonSize8"
+                                android:gravity="left"
+                                android:text="@string/please_unsubcribe_to_continue"
+                                android:textSize="@dimen/buyVideo" />
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="@dimen/NontonSize10"
+                            android:layout_marginBottom="@dimen/NontonSize10"
+                            android:gravity="center"
+                            android:visibility="invisible"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/issue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/series_detail_now_playing_title_color"
+                                android:text="@string/issuepage"
+                                android:textSize="@dimen/font_large"
+
+                                />
+
+                            <TextView
+                                android:id="@+id/contactus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:layout_toRightOf="@+id/issue"
+                                android:text="@string/Contact_us"
+                                android:textColor="@color/series_detail_episode_unselected_btn_txt_color"
+                                android:textSize="@dimen/font_large" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/bg_img"
+                android:layout_width="match_parent"
+                android:scaleType="fitXY"
+                android:layout_height="match_parent">
+
+            </ImageView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent">
+
+                </ImageView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/back_layout"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:gravity="center_vertical"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:layout_marginLeft="@dimen/_15sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/toolbar_back_arrow"
+                            android:contentDescription="TODO" />
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_width="194dp"
+                        android:layout_height="56dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="80dp"
+                        android:contentDescription="TODO" />
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center|center_vertical"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+                    <TextView
+                        android:gravity="center"
+                        android:fontFamily="@font/inter_medium"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textSize="@dimen/NontonSize13"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:text="Access to premium content is just a click away.\n Select the package bexst suited for you:"
+                        android:textColor="@color/series_detail_now_playing_title_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </TextView>
+                </LinearLayout>
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_top"
+                    android:layout_marginBottom="@dimen/_85sdp"
+                    android:paddingBottom="@dimen/_2sdp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:descendantFocusability="blocksDescendants"
+                        android:orientation="vertical">
+
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:id="@+id/offerLayout"
+                                android:layout_width="match_parent"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/NontonSize20"
+                                    android:ellipsize="end"
+                                    android:visibility="invisible"
+                                    android:maxLines="2"
+                                    android:text="@string/purhcase_options"
+                                    android:textColor="@color/series_detail_now_playing_title_color"
+                                    android:textSize="@dimen/purchaseOption" />
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rv_purchase"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/NontonSize10"
+                                    android:clipToPadding="false"
+                                    android:overScrollMode="never"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                    tools:listitem="@layout/list_row_purchase"
+                                    tools:itemCount="3"
+                                    android:paddingBottom="10dp" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/noOfferLayout"
+                                android:visibility="gone"
+                                android:layout_width="match_parent"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:text="No offer available in your region!"
+                                    android:textColor="@color/series_detail_now_playing_title_color"
+                                    android:layout_marginTop="@dimen/NontonSize35"
+                                    android:textSize="@dimen/NontonSize15"
+                                    android:layout_height="wrap_content">
+
+                                </TextView>
+
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bottomLay"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical"
+                android:layout_height="@dimen/_85sdp">
+
+                <LinearLayout
+                    android:id="@+id/btn_buy"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/NontonSize45"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="@dimen/NontonSize25"
+                    android:layout_marginRight="@dimen/NontonSize25"
+                    android:background="@drawable/signup_btn_gredient"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/txt_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/NontonSize10"
+                        android:text="Pay Now"
+                        android:textSize="16dp"
+                        android:textColor="@color/try_again_btn_txt_color"
+                        android:fontFamily="@font/inter_bold"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_height="match_parent">
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string-array name="more_with_login" tools:ignore="InconsistentArrays">
+        <item>Mi Perfil</item>
+        <item>Cambiar Contraseña</item>
+        <item>Gestionar Suscripción</item>
+        <item>Historial de Suscripción</item>
+        <item>Cerrar Sesión</item>
+    </string-array>
+
+    <string-array name="more_with_login_fb" tools:ignore="InconsistentArrays">
+        <item>Mi Perfil</item>
+        <item>Cambiar Contraseña</item>
+        <item>Gestionar Suscripción</item>
+        <item>Historial de Suscripción</item>
+        <item>Cerrar Sesión</item>
+    </string-array>
+
+    <string-array name="more_with_verify" tools:ignore="InconsistentArrays">
+        <item>Mi Perfil</item>
+        <item>Cambiar Contraseña</item>
+        <item>Gestionar Suscripción</item>
+        <item>Historial de Suscripción</item>
+        <item>Cerrar Sesión</item>
+    </string-array>
+
+    <string-array name="more_options">
+        <item>Gaming</item>
+        <item>My List</item>
+        <item>Account</item>
+        <item>Settings</item>
+        <item>Buy Now</item>
+        <item>Manage Subscription</item>
+        <item>Order History</item>
+        <item>Privacy policy</item>
+        <item>T &amp; C</item>
+    </string-array>
+
+
+    <string-array name="more_kids_mode_login" tools:ignore="InconsistentArrays">
+        <item>Mi Perfil</item>
+        <item>Cambiar Contraseña</item>
+        <item>Gestionar Suscripción</item>
+        <item>Historial de Suscripción</item>
+        <item>Cerrar Sesión</item>
+    </string-array>
+    <string-array name="more_kids_mode_login_watchlist_condition" tools:ignore="InconsistentArrays">
+        <item>Mi Perfil</item>
+        <item>Cambiar Contraseña</item>
+        <item>Gestionar Suscripción</item>
+        <item>Historial de Suscripción</item>
+        <item>Cerrar Sesión</item>
+    </string-array>
+    <string-array name="more_kids_mode_logout" tools:ignore="InconsistentArrays">
+        <item>Mi Perfil</item>
+        <item>Cambiar Contraseña</item>
+        <item>Gestionar Suscripción</item>
+        <item>Historial de Suscripción</item>
+        <item>Cerrar Sesión</item>
+    </string-array>
+
+    <string-array name="download_quality">
+        <item>Auto</item>
+        <item>SD</item>
+        <item>HD</item>
+        <item>Ful HD</item>
+
+    </string-array>
+
+
+    <string-array name="gender_array">
+        <item>Gender</item>
+        <item>MALE</item>
+        <item>FEMALE</item>
+        <item>OTHERS</item>
+
+    </string-array>
+    <array name="cast_expanded_controller_default_control_buttons">
+        <item>@id/cast_button_type_mute_toggle</item>
+        <item>@id/cast_button_type_rewind_30_seconds</item>
+        <item>@id/cast_button_type_forward_30_seconds</item>
+        <item>@id/cast_button_type_closed_caption</item>
+    </array>
+
+    <string-array name="more_with_login_subscription" tools:ignore="InconsistentArrays">
+        <item>Mi Perfil</item>
+        <item>Cambiar Contraseña</item>
+        <item>Compra ahora</item>
+        <item>Historial de Suscripción</item>
+        <item>Cerrar Sesión</item>
+    </string-array>
+
+
+</resources>

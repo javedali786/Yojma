@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:id="@+id/result_search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.breadgangtvnetwork.utils.CustomProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/root"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <include
+                    android:id="@+id/toolbar"
+                    layout="@layout/toolbar" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:id="@+id/tvHeader"
+                        android:layout_marginStart="@dimen/NontonSize12"
+                        android:text="-"
+                        android:visibility="gone"
+                        android:textColor="@color/series_detail_now_playing_title_color"
+                        android:fontFamily="@font/inter_medium"
+                        android:singleLine="true"
+                        android:textSize="@dimen/searching_tittle_text_size"
+                        android:textAllCaps="false"
+                        android:layout_height="wrap_content">
+                    </TextView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_marginTop="@dimen/NontonSize8"
+                        android:id="@+id/result_recycler"
+                        android:layout_below="@id/tvHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/no_connection_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/connection"
+                    layout="@layout/no_connection">
+
+                </include>
+
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>
