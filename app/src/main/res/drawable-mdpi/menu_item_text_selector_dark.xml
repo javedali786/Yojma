@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/series_detail_now_playing_title_color" android:state_checked="true" />
-    <item android:color="@color/unselected_indicator_color" android:state_checked="false" />
-</selector>
