@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="@color/signup_radio_btn_checked_color" />
+    <stroke
+        android:width="2dp"
+        android:color="@color/signup_radio_btn_unchecked_color" />
+</shape>

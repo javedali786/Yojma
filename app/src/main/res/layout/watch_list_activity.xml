@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.text.TextUtils"/>
+        <variable
+            name="stringData"
+            type="com.breadgangtvnetwork.utils.stringsJson.converter.StringsHelper" />
+        <import type="android.graphics.Color"/>
+        <variable
+            name="colorsData"
+            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/watch_history_main"
+       >
+        <LinearLayout
+            android:id="@+id/no_connection_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:visibility="gone">
+            <include
+                android:id="@+id/connection"
+                layout="@layout/no_connection"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/nodatafounmd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/no_data"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                android:contentDescription="TODO" />
+
+            <TextView
+                android:id="@+id/no_result_found_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/signUp_18sp_text_size"
+                android:text="@string/no_result_found"
+                android:fontFamily="?attr/font_normal"
+                android:textColor="@color/series_detail_hd_border_color" />
+
+            <TextView
+                android:id="@+id/retry_load_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@drawable/rounded_button"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="?attr/font_normal"
+                android:paddingStart="@dimen/_35sdp"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingEnd="@dimen/_35sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:text="@string/retry"
+                android:textColor="@color/series_detail_now_playing_title_color"
+                android:textSize="@dimen/signUp_20sp_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/toolbar_watchlist"
+                layout="@layout/toolbar" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/watchListRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center"
+                    android:nestedScrollingEnabled="false"
+                    android:numColumns="auto_fit"
+                    android:overScrollMode="never"
+                    android:stretchMode="columnWidth" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.breadgangtvnetwork.utils.CustomProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,131 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="@color/app_bg_color"
+        card_view:cardCornerRadius="@dimen/_2sdp"
+        card_view:cardElevation="1dp"
+        card_view:cardMaxElevation="1dp"
+        card_view:cardPreventCornerOverlap="false"
+        card_view:cardUseCompatPadding="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:gravity="center_horizontal"
+                android:text="@string/waiting_for_wifi"
+                android:textSize="15sp"
+                android:fontFamily="?attr/font_medium"
+                android:textColor="?attr/title_color"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:focusableInTouchMode="true"
+                />
+
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:text="@string/download_will_begin"
+                android:textSize="13sp"
+                android:fontFamily="?attr/font_normal"
+                android:textColor="?attr/title_color"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:focusableInTouchMode="true"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/download_over_wifi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/download_over_wifi"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    android:fontFamily="?attr/font_bold"
+                    android:textColor="?attr/title_color"
+                    android:focusableInTouchMode="true"
+                    />
+
+                <Switch
+                    android:id="@+id/switch_download"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:theme="@style/SwitchTheme" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/change_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:text="@string/you_can_change"
+                    android:textSize="12sp"
+                    android:fontFamily="?attr/font_normal"
+                    android:textColor="?attr/title_color"
+                    android:focusableInTouchMode="true"
+                    />
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_start_download"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/app_bg_color"
+                    android:text="@string/ok"
+                    android:textColor="@color/series_detail_now_playing_title_color"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</layout>

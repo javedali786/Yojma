@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.text.TextUtils"/>
+        <import type="android.graphics.Color"/>
+        <variable
+            name="colorsData"
+            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+        <variable
+            name="playlistItem"
+            type="com.breadgangtvnetwork.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
+
+        <variable
+            name="progress"
+            type="Integer" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.breadgangtvnetwork.utils.thirdparty.RippleView
+                android:id="@+id/rippleView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent">
+                        <androidx.cardview.widget.CardView
+                            style="@style/Custom.Widget.CardView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/NontonSize2">
+
+                            <com.breadgangtvnetwork.utils.CustomProgressBar
+                                android:id="@+id/progress_bar"
+                                style="@style/Widget.AppCompat.ProgressBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:visibility="gone" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/ll_parent1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintDimensionRatio="3:2"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <ImageView
+                                        android:id="@+id/itemImage"
+                                        errorImage="@{@drawable/placeholder_potrait}"
+                                        imageUrl="@{playlistItem.posterURL}"
+                                        placeholder="@{@drawable/placeholder_potrait}"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:contentDescription="TODO"
+                                        android:scaleType="fitXY"
+                                        android:src="@drawable/placeholder_potrait" />
+                                </LinearLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llContinueProgress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <SeekBar
+                                    android:id="@+id/progressBar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_gravity="bottom"
+                                    android:background="@color/toolbar_bg_color"
+                                    android:elevation="10dp"
+                                    android:minHeight="0dp"
+                                    android:paddingStart="0dp"
+                                    android:paddingEnd="0dp"
+                                    android:paddingBottom="0dp"
+                                    android:progress="@{progress}"
+                                    android:progressDrawable="@drawable/progress_background"
+                                    android:thumb="@color/tph_hint_txt_color"
+                                    android:thumbTint="@android:color/transparent"
+                                    tools:targetApi="lollipop" />
+                            </LinearLayout>
+
+                            <FrameLayout
+                                android:id="@+id/flNew"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:layout_width="@dimen/vip_badge_width"
+                                    android:layout_height="@dimen/vip_badge_height"
+                                    android:src="@{playlistItem.newSeriesImageDrawable, default=@drawable/series_icon_120}"
+                                    tools:ignore="ContentDescription" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:id="@+id/flNewMovie"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:layout_width="@dimen/vip_badge_width"
+                                    android:layout_height="@dimen/vip_badge_height"
+                                    android:src="@{playlistItem.newMoviesDrawable, default=@drawable/new_movie_120}"
+                                    tools:ignore="ContentDescription" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:id="@+id/flExclusive"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginStart="-2dp"
+                                android:layout_marginTop="-2dp"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:layout_width="@dimen/vip_badge_width"
+                                    android:layout_height="@dimen/vip_badge_height"
+                                    android:layout_gravity="center"
+                                    android:src="@{playlistItem.vipImageDrawable}"
+                                    tools:ignore="ContentDescription" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:id="@+id/flEpisode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_gravity="end"
+                                android:layout_marginTop="-1dp"
+                                android:layout_marginEnd="-2dp"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:src="@{playlistItem.episodeImageDrawable, default=@drawable/episode_icon_120}"
+                                    tools:ignore="ContentDescription" />
+                            </FrameLayout>
+
+                            <ImageView
+                                android:id="@+id/ivContinuePlay"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:contentDescription="continue_watching_play_icon"
+                                android:visibility="gone"/>
+                        </androidx.cardview.widget.CardView>
+
+                    </FrameLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/titleLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvTitle"
+                                android:visibility="gone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/try_again_btn_txt_color"
+                                android:ellipsize="end"
+                                android:fontFamily="?attr/font_normal"
+                                android:gravity="left"
+                                android:maxLines="1"
+                                android:paddingLeft="@dimen/_3sdp"
+                                android:paddingTop="5dp"
+                                android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.asset_title_text_color) ? @color/asset_title_text_color : Color.parseColor(colorsData.instance().data.config.asset_title_text_color), default=@color/asset_title_text_color}"
+                                android:textSize="@dimen/_11sdp" />
+
+                            <TextView
+                                android:id="@+id/tvDescription"
+                                android:visibility="gone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/try_again_btn_txt_color"
+                                android:ellipsize="end"
+                                android:fontFamily="?attr/font_normal"
+                                android:gravity="left"
+                                android:maxLines="1"
+                                android:paddingLeft="@dimen/_3sdp"
+                                android:paddingBottom="@dimen/_2sdp"
+                                android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.asset_description_text_color) ? @color/asset_description_text_color : Color.parseColor(colorsData.instance().data.config.asset_description_text_color), default=@color/asset_description_text_color}"
+                                android:textSize="@dimen/_9sdp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </com.breadgangtvnetwork.utils.thirdparty.RippleView>
+
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

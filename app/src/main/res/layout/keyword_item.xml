@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.text.TextUtils"/>
+        <variable
+            name="stringData"
+            type="com.breadgangtvnetwork.utils.stringsJson.converter.StringsHelper" />
+        <import type="android.graphics.Color"/>
+        <variable
+            name="colorsData"
+            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+        <variable
+            name="rowItem"
+            type="com.breadgangtvnetwork.beanModel.KeywordList" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/NontonSize15"
+        android:paddingTop="@dimen/_3sdp">
+
+
+        <TextView
+            android:id="@+id/keyword_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@{rowItem.keywords}"
+            android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.search_recent_item_title_color) ? @color/search_recent_item_title_color : Color.parseColor(colorsData.instance().data.config.search_recent_item_title_color), default=@color/search_recent_item_title_color}"
+            android:textSize="@dimen/keyword_item_text_14sp" />
+
+
+        <View
+            android:id="@+id/recent_sep"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:background="@color/transparent" />
+
+    </LinearLayout>
+</layout>

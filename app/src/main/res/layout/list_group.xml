@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/try_again_btn_txt_color"
+    android:paddingTop="@dimen/signUp_8dp_margin">
+
+    <FrameLayout
+        android:id="@+id/main_list_grp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/signUp_24dp_margin"
+        android:paddingVertical="@dimen/signUp_12dp_margin">
+
+        <TextView
+            android:id="@+id/lblListHeader"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/series_detail_now_playing_title_color"
+            android:textSize="@dimen/onboarding_textSize17"
+            tools:text="Text data" />
+
+        <ImageView
+            android:id="@+id/plus_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            tools:ignore="ContentDescription" />
+
+    </FrameLayout>
+
+</FrameLayout>

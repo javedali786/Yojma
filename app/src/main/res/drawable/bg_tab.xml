@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+
+        <shape android:shape="rectangle">
+            <stroke android:color="@color/series_detail_now_playing_title_color" android:width="2dp"/>
+            <solid android:color="@color/try_again_btn_txt_color" />
+        </shape>
+
+    </item>
+</layer-list>

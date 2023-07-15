@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.text.TextUtils"/>
+        <import type="android.graphics.Color"/>
+        <variable
+            name="colorsData"
+            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/sf_shimmer1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/NontonSize12"
+            android:background="?attr/shimmer_backgroundColor"
+            android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.app_bg_color) ? @color/app_bg_color : Color.parseColor(colorsData.instance().data.config.app_bg_color), default=@color/app_bg_color}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/NontonSize8"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+
+                <View
+                    android:layout_width="@dimen/NontonSize120"
+                    android:layout_height="@dimen/NontonSize13"
+                    android:layout_marginTop="@dimen/NontonSize8"
+                    android:layout_marginRight="@dimen/NontonSize50"
+                    android:background="?attr/shimmer_animation_dark" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="@dimen/NontonSize10"
+                    android:orientation="horizontal"
+                    android:weightSum="15">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/shimmer_animation_dark" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/NontonSize8"
+                        android:layout_marginRight="@dimen/NontonSize8"
+                        android:layout_weight="13"
+                        android:background="?attr/shimmer_animation_dark" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/shimmer_animation_dark" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/NontonSize8"
+                    android:layout_marginTop="@dimen/NontonSize10"
+                    android:layout_marginRight="@dimen/NontonSize50"
+                    android:background="?attr/shimmer_animation_dark" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/NontonSize10"
+                    android:layout_marginTop="@dimen/NontonSize10"
+                    android:layout_marginBottom="@dimen/NontonSize8"
+                    android:background="?attr/shimmer_animation_dark" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="@dimen/NontonSize10"
+                    android:orientation="horizontal"
+                    android:weightSum="15">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/shimmer_animation_dark" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/NontonSize8"
+                        android:layout_marginRight="@dimen/NontonSize8"
+                        android:layout_weight="13"
+                        android:background="?attr/shimmer_animation_dark" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/shimmer_animation_dark" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/NontonSize8"
+                    android:layout_marginTop="@dimen/NontonSize10"
+                    android:layout_marginRight="@dimen/NontonSize50"
+                    android:background="?attr/shimmer_animation_dark" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/NontonSize10"
+                    android:layout_marginTop="@dimen/NontonSize10"
+                    android:layout_marginBottom="@dimen/NontonSize8"
+                    android:background="?attr/shimmer_animation_dark" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="@dimen/NontonSize10"
+                    android:orientation="horizontal"
+                    android:weightSum="15">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/shimmer_animation_dark" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/NontonSize8"
+                        android:layout_marginRight="@dimen/NontonSize8"
+                        android:layout_weight="13"
+                        android:background="?attr/shimmer_animation_dark" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/shimmer_animation_dark" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/NontonSize8"
+                    android:layout_marginTop="@dimen/NontonSize10"
+                    android:layout_marginRight="@dimen/NontonSize50"
+                    android:background="?attr/shimmer_animation_dark" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/NontonSize10"
+                    android:layout_marginTop="@dimen/NontonSize10"
+                    android:layout_marginBottom="@dimen/NontonSize8"
+                    android:background="?attr/shimmer_animation_dark" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="@dimen/NontonSize10"
+                    android:orientation="horizontal"
+                    android:weightSum="15">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/shimmer_animation_dark" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/NontonSize8"
+                        android:layout_marginRight="@dimen/NontonSize8"
+                        android:layout_weight="13"
+                        android:background="?attr/shimmer_animation_dark" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/shimmer_animation_dark" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/NontonSize8"
+                    android:layout_marginTop="@dimen/NontonSize10"
+                    android:layout_marginRight="@dimen/NontonSize50"
+                    android:background="?attr/shimmer_animation_dark" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/NontonSize10"
+                    android:layout_marginTop="@dimen/NontonSize10"
+                    android:layout_marginBottom="@dimen/NontonSize8"
+                    android:background="?attr/shimmer_animation_dark" />
+
+            </LinearLayout>
+
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </LinearLayout>
+
+
+</layout>
+
+
+
+
+
+
+
+
+

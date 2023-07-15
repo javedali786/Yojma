@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="more_with_login">
+        <item>Change Password</item>
+        <item>My Profile</item>
+        <item>My Watch History</item>
+        <item>Settings</item>
+        <item>Logout</item>
+    </string-array>
+
+    <string-array name="more_with_login_fb">
+        <item>आपकी जानकारी</item>
+        <item>आपकी वॉचलिस्‍ट</item>
+        <item>देखे हुए वीडियो</item>
+        <item>सदस्यता और योजनाएँ</item>
+        <item>सेटिंग्स</item>
+        <item>नियम और शर्तें</item>
+        <item>गोपनीयता नीति</item>
+        <item>लॉग आउट</item>
+        <item>लॉग आउट</item>
+    </string-array>
+
+    <string-array name="more_with_verify">
+        <item>Manage Account</item>
+        <item>My Favorite</item>
+        <item>My Watch History</item>
+        <item>My Downloads</item>
+        <item>Contact Us</item>
+        <item>Frequently Ask Questions</item>
+        <item>About Doxzilla</item>
+        <item>Feedback</item>
+        <item>Other Applications</item>
+        <item>Settings</item>
+        <item>Logout</item>
+    </string-array>
+
+    <string-array name="more_options">
+        <item>Gaming</item>
+        <item>My List</item>
+        <item>Account</item>
+        <item>Settings</item>
+        <item>Buy Now</item>
+        <item>Manage Subscription</item>
+        <item>Order History</item>
+        <item>Privacy policy</item>
+        <item>T &amp; C</item>
+    </string-array>
+
+
+    <string-array name="gender_array">
+        <item>Gender</item>
+        <item>MALE</item>
+        <item>FEMALE</item>
+        <item>OTHERS</item>
+
+    </string-array>
+
+    <string-array name="download_quality">
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+        <item>Data Saver</item>
+        <item>Always ask</item>
+    </string-array>
+    <array name="cast_expanded_controller_default_control_buttons">
+        <item>@id/cast_button_type_mute_toggle</item>
+        <item>@id/cast_button_type_rewind_30_seconds</item>
+        <item>@id/cast_button_type_forward_30_seconds</item>
+        <item>@id/cast_button_type_closed_caption</item>
+    </array>
+
+    <string-array name="more_with_login_subscription">
+        <item>Change Password</item>
+        <item>My Profile</item>
+        <item>My Watch History</item>
+        <item>Settings</item>
+        <item>Logout</item>
+    </string-array>
+
+
+</resources>

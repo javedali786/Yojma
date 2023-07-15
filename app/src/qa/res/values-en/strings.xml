@@ -1,0 +1,104 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!--QA ID-->
+    <string name="app_name">QA Bread Gang TV</string>
+
+    <string name="facebook_app_id">771996797164803</string>
+    <string name="fb_login_protocol_scheme">fb1129311964557209</string>
+    <string name="branch_key">key_live_cdJ7zkyRJg31rm79E5t5QkleDAmzOaM7</string>
+    <string name="branch_key_test">key_test_gpJ7BfyMRb11xoZ01dyIsjhbwCfwJgWb</string>
+    <string name="playstore_base_24">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjMj0QYR08ay2Vh6qmNjHBNgU7DzX1Wsc6dDvk0bFfG9vOkzkEQMMeyPMi/TrvG3WdqTaTK6nmY5Gyfe25ya28CWTkiD/HDflaPR82FdUk6eYXnSnv4fALdhUL3Zb9lhNocaJJCDfrm47VDRpKIJS0Mpr2nXt3o0967zdM2UkikRWybJURcgRm/qWo9PgGRexSYRfAwtUFAiA1mgAowANQrks1mbuPGt0WFz1UiCeQVHhpyPGvJFGT4GViyuMKQwPLZBGKgrXiFtdK+660axSKRdD0Q4djt9ucdTVClW8ADthVuVCqCozXFW5sEjBlv70TP5mgj7CRdEECteJnH4WFQIDAQAB</string>
+    <string name="playstore_subscription_monthly">com.nonton.testing.monthly </string>
+    <string name="playstore_subscription_weekly">com.nonton.testing.weekly </string>
+    <string name="by_email">By Email</string>
+    <string name="by_line">By Line</string>
+
+    <string name="update_has_downloaded">An update has just been downloaded.</string>
+    <string name="restart">RESTART APP</string>
+
+    <string name="user_already_exists">User already has an account with this email or credential</string>
+    <string name="password_cannot_be_blank">Password cannot be blank</string>
+    <string name="please_provide_valid_name">Please provide a valid name</string>
+    <string name="server_error">Something went wrong at our end. Please try again.</string>
+    <string name="either_user_email_not_found">Either user or email not found.</string>
+    <string name="user_inactive_kindly_contact_administrator">User is Inactive, kindly contact the administrator.</string>
+    <string name="fb_id_cannot_be_null_or_empty">Fb id cannot be null or empty.</string>
+
+    <string name="email_id_cannot_be_blank">Email id cannot be blank</string>
+    <string name="invalid_email_id">Invalid email id</string>
+    <string name="user_does_not_exists">User with this email id does not exist</string>
+    <string name="user_deactivated">This user has been deactivated. Please contact support​</string>
+    <string name="user_can_not_login">User cannot login with this method​</string>
+    <string name="username_password_doest_match">Username or Password doesn\'t match​​</string>
+    ​
+    <string name="username_must_be_loggedin">User must be logged in​​</string>
+    <string name="user_not_found">User not found</string>
+    <string name="payment_error">There was an error processing your request, please try after some time. If additional support is required, please contact us at</string>
+    <string name="live_tag">Live</string>
+    <string name="skip_intro">Skip Intro</string>
+    <string name="settings_streaming_settings">Streaming Settings</string>
+    <string name="auto">Auto</string>
+    <string name="low">SD</string>
+    <string name="medium">HD</string>
+    <string name="high">Full HD</string>
+    <string name="enter_coupon_code">Enter a coupon code</string>
+    <string name="coupon_code">Coupon Code</string>
+
+    <string name="description_auto">ปรับความคมชัดตามความเร็วอินเทอร์เน็ต</string>
+    <string name="description_sd">ความคมชัดปกติ</string>
+    <string name="description_hd">ความคมชัดสูง</string>
+    <string name="description_full_hd">ความคมชัดสูงสุด</string>
+
+    <string name="waiting_for_wifi">waiting for wifi</string>
+    <string name="download_will_begin">Your download will begin once you are come on WiFi. Or you can change the setting below:</string>
+    <string name="download_over_wifi">Download over WiFi</string>
+    <string name="you_can_change">*You can change this from settings</string>
+
+    <string name="Downloading">Downloading</string>
+    <string name="Paused">Paused</string>
+    <string name="set_as_profilepic">Set Profile Pic</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="ep_cd_back">Back button</string>
+    <string name="ep_cd_settings">Open player settings</string>
+    <string name="ep_cd_next_episode">Next episode button</string>
+    <string name="ep_cd_prev_episode">Previous episode button</string>
+    <string name="ep_cd_more_episodes">More episodes button</string>
+    <string name="ep_cd_play">Play button</string>
+    <string name="ep_cd_pause">Pause button</string>
+    <string name="ep_cd_rewind">Rewind button</string>
+    <string name="ep_cd_fast_fwd">Fast forward button</string>
+    <string name="ep_cd_fullscreen">Fullscreen button</string>
+    <string name="ep_cd_exit_fullscreen">Exit fullscreen button</string>
+
+    <string name="ep_next_episode">Next Episode</string>
+    <string name="ep_prev_episode">Previous Episode</string>
+    <string name="ep_more_episodes">More Episodes</string>
+    <string name="ep_default_time">00:00</string>
+    <string name="ep_live_tag">Live</string>
+
+    <string name="ep_video_auto">Auto</string>
+    <string name="ep_video_auto_desc">Default video quality</string>
+    <string name="ep_video_low">Low</string>
+    <string name="ep_video_low_desc">Low data usage</string>
+    <string name="ep_video_medium">Medium</string>
+    <string name="ep_video_medium_desc">Moderate data usage</string>
+    <string name="ep_video_high">High</string>
+    <string name="ep_video_high_desc">High data usage</string>
+    <string name="ep_video_4k">4k</string>
+    <string name="ep_video_4k_desc">Best video quality</string>
+
+    <string name="ep_dialog_settings_title">Settings</string>
+    <string name="ep_settings_video">Video Settings</string>
+    <string name="ep_settings_audio">Audio Settings</string>
+    <string name="ep_settings_subtitle">Subtitle Settings</string>
+    <string name="ep_dialog_settings_cancel">Cancel</string>
+    <string name="type_video">Video</string>
+    <string name="type_audio">Audio</string>
+    <string name="type_subtitle">Subtitle</string>
+    <string name="no_internet_connection">It seen Like there is a\n problem with your\n internet connection.please\n check your\n connection and try again.</string>
+    <string name="ep_media_route_menu_title">Play on…</string>
+    <string name="cast_receiver_app_id">13012E0E</string>
+    <string name="ep_cast_message">Playing on %1$s</string>
+
+
+</resources>

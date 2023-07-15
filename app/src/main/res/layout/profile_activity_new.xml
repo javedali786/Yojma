@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.text.TextUtils"/>
+        <variable
+            name="stringData"
+            type="com.breadgangtvnetwork.utils.stringsJson.converter.StringsHelper" />
+        <import type="android.graphics.Color"/>
+        <variable
+            name="colorsData"
+            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/profile_main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/connection"
+                layout="@layout/no_connection"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/update_profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/app_bg_color"
+                android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.app_bg_color) ? @color/app_bg_color : Color.parseColor(colorsData.instance().data.config.app_bg_color), default=@color/app_bg_color}"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <include
+                            android:id="@+id/toolbar"
+                            layout="@layout/toolbar" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="50dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/titleLayout"
+                                    android:layout_width="110dp"
+                                    android:layout_height="110dp"
+                                    android:background="@drawable/circle"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/profile_text"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/more_profile_text_132"
+                                        android:fontFamily="@font/inter_bold"
+                                        android:gravity="center"
+                                        android:text=""
+                                        android:textAllCaps="true"
+                                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.profile_short_name_text_color) ? @color/profile_short_name_text_color : Color.parseColor(colorsData.instance().data.config.profile_short_name_text_color), default=@color/profile_short_name_text_color}"
+                                        android:textSize="@dimen/onboarding_textSize40"
+                                        android:visibility="gone" />
+
+                                    <ImageView
+                                        android:id="@+id/ivProfilePic"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/ic_avtar_bg"
+                                        android:visibility="visible" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/username_tv"
+                                    style="@style/TextView_Medium"
+                                    android:layout_width="wrap_content"
+                                    android:layout_marginStart="@dimen/_20sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_20sdp"
+                                    android:fontFamily="@font/inter_semibold"
+                                    android:gravity="center"
+                                    android:text=""
+                                    android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.profile_long_name_text_color) ? @color/profile_long_name_text_color : Color.parseColor(colorsData.instance().data.config.profile_long_name_text_color), default=@color/profile_long_name_text_color}"
+                                    android:textAllCaps="false"
+                                    android:textSize="@dimen/signUp_26sp_text_size"
+                                    android:visibility="visible" />
+
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/NontonSize10"
+                            android:orientation="vertical"
+                            android:padding="@dimen/rootPadding">
+
+                            <EditText
+                                android:id="@+id/user_name"
+                                style="@style/EditTextStyle"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/sign_up_padding_10dp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:autofillHints=""
+                                android:textColorHint="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_hint_txt_color) ? @color/tph_hint_txt_color : Color.parseColor(colorsData.instance().data.config.tph_hint_txt_color), default=@color/tph_hint_txt_color}"
+                                android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_txt_color) ? @color/tph_txt_color : Color.parseColor(colorsData.instance().data.config.tph_txt_color), default=@color/tph_txt_color}"
+                                android:hint="@{TextUtils.isEmpty(stringData.instance().data.config.profile_enter_name) ? @string/profile_enter_name : stringData.instance().data.config.profile_enter_name , default=@string/profile_enter_name}"
+                                android:inputType="textPersonName"
+                                android:maxLength="50"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <EditText
+                                android:id="@+id/user_e_mail"
+                                style="@style/EditTextStyle"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:autofillHints=""
+                                android:textColorHint="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_hint_txt_color) ? @color/tph_hint_txt_color : Color.parseColor(colorsData.instance().data.config.tph_hint_txt_color), default=@color/tph_hint_txt_color}"
+                                android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_txt_color) ? @color/tph_txt_color : Color.parseColor(colorsData.instance().data.config.tph_txt_color), default=@color/tph_txt_color}"
+                                android:hint="@{TextUtils.isEmpty(stringData.instance().data.config.profile_email_address) ? @string/profile_email_address : stringData.instance().data.config.profile_email_address , default=@string/profile_email_address}"
+                                android:inputType="textPersonName"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/user_name" />
+
+                          <!--  <TextView
+                                android:id="@+id/verify_e_mail"
+                                style="@style/verifyEmail"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:visibility="gone"
+                                android:autofillHints=""
+                                android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.email_verify_text_color) ? @color/email_verify_text_color : Color.parseColor(colorsData.instance().data.config.email_verify_text_color), default=@color/email_verify_text_color}"
+                                android:text="@{TextUtils.isEmpty(stringData.instance().data.config.email_verify_title) ? @string/email_verify_title : stringData.instance().data.config.email_verify_title , default=@string/email_verify_title}"
+                                android:inputType="textPersonName"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintLeft_toRightOf="@+id/user_e_mail"
+                                app:layout_constraintTop_toBottomOf="@+id/user_name" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:visibility="gone"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                app:layout_constraintLeft_toRightOf="@+id/user_e_mail"
+                                app:layout_constraintTop_toBottomOf="@+id/user_name"
+                                >
+
+                                <TextView
+                                    android:id="@+id/verified"
+                                    android:layout_marginEnd="@dimen/_15sdp"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:visibility="gone"
+                                    android:background="@drawable/verified_ic"
+                                    />
+
+                            </LinearLayout>-->
+
+                            <EditText
+                                android:id="@+id/user_mobile"
+                                style="@style/EditTextStyle"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:autofillHints=""
+                                android:textColorHint="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_hint_txt_color) ? @color/tph_hint_txt_color : Color.parseColor(colorsData.instance().data.config.tph_hint_txt_color), default=@color/tph_hint_txt_color}"
+                                android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_txt_color) ? @color/tph_txt_color : Color.parseColor(colorsData.instance().data.config.tph_txt_color), default=@color/tph_txt_color}"
+                                android:hint="@{TextUtils.isEmpty(stringData.instance().data.config.profile_mobile_number) ? @string/profile_mobile_number : stringData.instance().data.config.profile_mobile_number , default=@string/profile_mobile_number}"
+                                android:inputType="phone"
+                                android:maxLength="9"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/user_e_mail" />
+
+                            <TextView
+                                android:id="@+id/dOB"
+                                style="@style/EditTextStyle"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:autofillHints=""
+                                android:drawableLeft="@drawable/ic_dob_icon"
+                                android:drawablePadding="@dimen/_5sdp"
+                                android:textColorHint="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_hint_txt_color) ? @color/tph_hint_txt_color : Color.parseColor(colorsData.instance().data.config.tph_hint_txt_color), default=@color/tph_hint_txt_color}"
+                                android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_txt_color) ? @color/tph_txt_color : Color.parseColor(colorsData.instance().data.config.tph_txt_color), default=@color/tph_txt_color}"
+                                android:hint="@{TextUtils.isEmpty(stringData.instance().data.config.profile_dob) ? @string/profile_dob : stringData.instance().data.config.profile_dob , default=@string/profile_dob}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.644"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/user_mobile" />
+
+                            <TextView
+                                android:id="@+id/country_id"
+                                style="@style/EditTextStyle"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:autofillHints=""
+                                android:textColorHint="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_hint_txt_color) ? @color/tph_hint_txt_color : Color.parseColor(colorsData.instance().data.config.tph_hint_txt_color), default=@color/tph_hint_txt_color}"
+                                android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_txt_color) ? @color/tph_txt_color : Color.parseColor(colorsData.instance().data.config.tph_txt_color), default=@color/tph_txt_color}"
+                                android:hint="@{TextUtils.isEmpty(stringData.instance().data.config.profile_country) ? @string/profile_country : stringData.instance().data.config.profile_country , default=@string/profile_country}"
+                                android:paddingEnd="@dimen/_20sdp"
+                                android:singleLine="true"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/dOB"/>
+
+                            <EditText
+                                android:id="@+id/city_id"
+                                style="@style/EditTextStyle"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:autofillHints=""
+                                android:textColorHint="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_hint_txt_color) ? @color/tph_hint_txt_color : Color.parseColor(colorsData.instance().data.config.tph_hint_txt_color), default=@color/tph_hint_txt_color}"
+                                android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_txt_color) ? @color/tph_txt_color : Color.parseColor(colorsData.instance().data.config.tph_txt_color), default=@color/tph_txt_color}"
+                                android:hint="@{TextUtils.isEmpty(stringData.instance().data.config.profile_city) ? @string/profile_city : stringData.instance().data.config.profile_city , default=@string/profile_city}"
+                                android:inputType="textPersonName"
+                                android:maxLength="20"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/country_id" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/NontonSize20">
+
+                            <LinearLayout
+                                android:id="@+id/llLogin"
+                                style="@style/buttonStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_12sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:background="@drawable/roundedcornerforbtn"
+                                android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.main_btn_selected_bg_color) ? @color/main_btn_selected_bg_color : Color.parseColor(colorsData.instance().data.config.main_btn_selected_bg_color), default=@color/main_btn_selected_bg_color}"
+                                android:gravity="center"
+                                android:padding="@dimen/_8sdp">
+
+                                <TextView
+                                    android:id="@+id/login_btn_txt"
+                                    style="@style/TextView_Bold"
+                                    android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.main_btn_txt_color) ? @color/main_btn_txt_color : Color.parseColor(colorsData.instance().data.config.main_btn_txt_color), default=@color/main_btn_txt_color}"
+                                    android:text="@{TextUtils.isEmpty(stringData.instance().data.config.profile_update_btn) ? @string/profile_update_btn : stringData.instance().data.config.profile_update_btn , default=@string/profile_update_btn}" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvDeleteAccount"
+                                style="@style/TextView_Medium"
+                                android:layout_marginTop="@dimen/signUp_8dp_margin"
+                                android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.profile_delete_account_text_color) ? @color/profile_delete_account_text_color : Color.parseColor(colorsData.instance().data.config.profile_delete_account_text_color), default=@color/profile_delete_account_text_color}"
+                                android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.main_btn_selected_bg_color) ? @color/main_btn_selected_bg_color : Color.parseColor(colorsData.instance().data.config.main_btn_selected_bg_color), default=@color/main_btn_selected_bg_color}"
+                                android:layout_marginBottom="@dimen/sign_up_padding_5dp"
+                                android:text="@{TextUtils.isEmpty(stringData.instance().data.config.profile_dlt_btn) ? @string/profile_dlt_btn : stringData.instance().data.config.profile_dlt_btn , default=@string/profile_dlt_btn}"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <com.breadgangtvnetwork.utils.CustomProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="gone" />
+    </RelativeLayout>
+</layout>

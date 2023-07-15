@@ -1,0 +1,401 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">15sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">30sp</dimen>
+
+
+    <!-- DIMENS !-->
+
+
+    <!-- SIGN UP !-->
+
+    <dimen name="rootPadding">20dp</dimen>
+    <dimen name="llSignUpdrawable">5dp</dimen>
+
+    <!-- SIGN UP TEXT SIZE!-->
+
+    <dimen name="fullnameTextSize">15sp</dimen>
+
+
+    <!--SKIP LAYOUT !-->
+    <dimen name="rootMargin">20dp</dimen>
+    <dimen name="cameraPadding">5dp</dimen>
+    <dimen name="cameraIconHeight">40dp</dimen>
+    <dimen name="profileLayoutWidth">140dp</dimen>
+    <dimen name="profileLayoutHeight">140dp</dimen>
+    <dimen name="profilePicWidth">120dp</dimen>
+    <dimen name="profilePicHeight">120dp</dimen>
+    <dimen name="DobPaddingTop">10dp</dimen>
+    <dimen name="DobPaddingBottom">10dp</dimen>
+
+    <dimen name="cameraPaddingProfile">12dp</dimen>
+    <!-- ios size 15-->
+    <dimen name="moreItemTextSize">14sp</dimen>
+
+    <dimen name="NontonSize1">1dp</dimen>
+    <dimen name="NontonSize2">2dp</dimen>
+    <dimen name="NontonSize3">3dp</dimen>
+    <dimen name="NontonSize4">4dp</dimen>
+    <dimen name="NontonSize5">5dp</dimen>
+    <dimen name="NontonSize6">6dp</dimen>
+    <dimen name="NontonSize8">8dp</dimen>
+    <dimen name="NontonSize10">10dp</dimen>
+    <dimen name="NontonSize12">12dp</dimen>
+    <dimen name="NontonSize13">13dp</dimen>
+    <dimen name="NontonSize14">14dp</dimen>
+    <dimen name="NontonSize15">15dp</dimen>
+    <dimen name="NontonSize18">18dp</dimen>
+    <dimen name="NontonSize20">20dp</dimen>
+    <dimen name="NontonSize25">25dp</dimen>
+    <dimen name="NontonSize30">30sp</dimen>
+    <dimen name="NontonSize_30">30dp</dimen>
+    <dimen name="NontonSize28">28dp</dimen>
+    <dimen name="settings_icon_width_size">24dp</dimen>
+    <dimen name="settings_icon_height_size">24dp</dimen>
+    <dimen name="camera_icon_width">45dp</dimen>
+    <dimen name="camera_icon_height">45dp</dimen>
+    <dimen name="mobile_icon_width">25dp</dimen>
+    <dimen name="profile_icon_size">20dp</dimen>
+    <dimen name="spinner_lang_icon_size">24dp</dimen>
+    <dimen name="meta_video_lay_margin_top_15">15dp</dimen>
+    <dimen name="meta_video_lay_margin_top_20">20dp</dimen>
+    <dimen name="meta_video_title_text_size">22sp</dimen>
+    <dimen name="meta_data_10dp_margin">10dp</dimen>
+    <dimen name="meta_data_8dp_margin">8dp</dimen>
+    <dimen name="meta_data_text_size_16sp">16sp</dimen>
+    <dimen name="meta_data_img_7dp">7dp</dimen>
+    <dimen name="meta_data_img_5dp">5dp</dimen>
+    <dimen name="meta_data_12dp_margin">12dp</dimen>
+    <dimen name="NontonSize35">35dp</dimen>
+    <dimen name="NontonSize40">40dp</dimen>
+
+    <!--<dimen name="NontonSize45">45dp</dimen>
+    <dimen name="NontonSize50">50dp</dimen>
+    <dimen name="NontonSize55">55dp</dimen>
+    <dimen name="NontonSize60">60dp</dimen>
+    <dimen name="NontonSize67">67dp</dimen>
+    <dimen name="NontonSize85">85dp</dimen>
+    <dimen name="NontonSize80">80dp</dimen>
+    <dimen name="NontonSize90">90dp</dimen>
+    <dimen name="NontonSize84">84dp</dimen>
+    <dimen name="NontonSize150">150dp</dimen>
+    <dimen name="NontonSize180">180dp</dimen>
+    <dimen name="NontonSize120">120dp</dimen>
+    <dimen name="NontonSize200">200dp</dimen>
+    <dimen name="NontonSize100">100dp</dimen>
+    <dimen name="NontonSize105">105dp</dimen>
+    <dimen name="NontonSize110">110dp</dimen>
+    <dimen name="NontonSize165">165dp</dimen>
+    <dimen name="NontonSize95">95dp</dimen>
+    <dimen name="NontonSize93">93dp</dimen>
+    <dimen name="NontonSize168">168dp</dimen>
+    <dimen name="NontonSize177">177dp</dimen>
+    <dimen name="NontonSize186">186dp</dimen>-->
+
+    <dimen name="NontonSize45">45dp</dimen>
+    <dimen name="NontonSize50">50dp</dimen>
+    <dimen name="NontonSize55">55dp</dimen>
+    <dimen name="NontonSize60">60dp</dimen>
+    <dimen name="NontonSize67">67dp</dimen>
+    <dimen name="NontonSize85">85dp</dimen>
+    <dimen name="NontonSize80">80dp</dimen>
+    <dimen name="NontonSize90">90dp</dimen>
+    <dimen name="NontonSize84">84dp</dimen>
+    <dimen name="NontonSize150">150dp</dimen>
+    <dimen name="NontonSize180">180dp</dimen>
+    <dimen name="NontonSize190">190dp</dimen>
+    <dimen name="NontonSize120">120dp</dimen>
+    <dimen name="NontonSize200">200dp</dimen>
+    <dimen name="NontonSize100">100dp</dimen>
+    <dimen name="NontonSize105">105dp</dimen>
+    <dimen name="NontonSize110">110dp</dimen>
+    <dimen name="NontonSize160">160dp</dimen>
+    <dimen name="NontonSize165">165dp</dimen>
+    <dimen name="NontonSize95">95dp</dimen>
+    <dimen name="NontonSize126">126dp</dimen>
+    <dimen name="NontonSize123">123dp</dimen>
+    <dimen name="NontonSize224">224dp</dimen>
+    <dimen name="NontonSize93">93dp</dimen>
+    <dimen name="NontonSize112">112dp</dimen>
+    <dimen name="NontonSize63">63dp</dimen>
+    <dimen name="NontonSize66">66dp</dimen>
+    <dimen name="NontonSize118">118dp</dimen>
+    <dimen name="NontonSize168">168dp</dimen>
+    <dimen name="NontonSize177">177dp</dimen>
+    <dimen name="NontonSize186">186dp</dimen>
+    <dimen name="NontonSize240">240dp</dimen>
+    <dimen name="NontonSize133">133dp</dimen>
+    <dimen name="NontonSize236">180dp</dimen>
+    <dimen name="login_doxzilla_logo">375dp</dimen>
+    <dimen name="login_doxzilla_logo_height">90dp</dimen>
+    <dimen name="login_sign_in_btn_width">300dp</dimen>
+    <dimen name="login_sign_in_btn_height">40dp</dimen>
+    <dimen name="email_icon_size_width">24dp</dimen>
+    <dimen name="email_icon_size_height">22dp</dimen>
+    <dimen name="password_icon_size_width">24dp</dimen>
+    <dimen name="password_icon_size_height">22dp</dimen>
+
+
+    <dimen name="TextSize10">10sp</dimen>
+    <dimen name="TextSize12">12sp</dimen>
+    <dimen name="item_dueartion">14sp</dimen>
+    <dimen name="item_nowplaying">14sp</dimen>
+    <dimen name="TextSize13">13sp</dimen>
+    <dimen name="TextSize14">14sp</dimen>
+    <dimen name="TextSize15">15sp</dimen>
+    <dimen name="detail_loadmore">17sp</dimen>
+    <dimen name="TextSize16">16sp</dimen>
+
+    <dimen name="circle_carousal_height">360dp</dimen>
+    <dimen name="circle_carousal_width">360dp</dimen>
+    <dimen name="circle_card_radius">180dp</dimen>
+
+<!--    <dimen name="portrait_image_width">200dp</dimen>-->
+<!--    <dimen name="portrait_image_height">350dp</dimen>-->
+    <integer name="portrait_image_width">180</integer>
+    <integer name="portrait_image_height">320</integer>
+
+    <dimen name="potarit_large_item_height">230dp</dimen>
+    <dimen name="potarit_large_item_width">138dp</dimen>
+
+    <integer name="landscape_image_height">194</integer>
+    <integer name="landscape_image_width">346</integer>
+
+    <dimen name="circle_image_width">150dp</dimen>
+    <dimen name="circle_image_height">150dp</dimen>
+
+    <dimen name="square_image_width">200dp</dimen>
+    <dimen name="square_image_height">200dp</dimen>
+
+    <dimen name="carousel_image_width">360dp</dimen>
+    <dimen name="carousel_image_height">210dp</dimen>
+
+    <dimen name="splash_logo_width">140dp</dimen>
+    <dimen name="splash_logo_height">26dp</dimen>
+
+    <dimen name="toolbar_logo_width">100dp</dimen>
+    <dimen name="toolbar_logo_height">19dp</dimen>
+
+    <dimen name="list_lds_width">142dp</dimen>
+    <dimen name="list_lds_height">80dp</dimen>
+
+
+    <dimen name="list_pr_width">74dp</dimen>
+    <dimen name="list_pr_height">130dp</dimen>
+
+    <dimen name="list_sqr_width">100dp</dimen>
+    <dimen name="list_sqr_height">100dp</dimen>
+
+    <dimen name="logo_top_margin">12dp</dimen>
+
+    <dimen name="more_uper_profile_frame">150dp</dimen>
+    <dimen name="more_img_top">98dp</dimen>
+    <dimen name="more_img_size">98dp</dimen>
+    <dimen name="new_more_img_size">80dp</dimen>
+    <dimen name="more_img_txt_size">45sp</dimen>
+    <dimen name="new_more_img_txt_size">35sp</dimen>
+    <dimen name="more_login_btn_width">115sp</dimen>
+    <dimen name="more_login_btn_height">35sp</dimen>
+
+    <dimen name="watch_ListWidth">27dp</dimen>
+    <dimen name="watch_ListHeight">27dp</dimen>
+    <dimen name="watchListWidth">22dp</dimen>
+    <dimen name="watchListHeight">22dp</dimen>
+
+    <dimen name="detail_rail_episode_title">15sp</dimen>
+    <dimen name="detail_rail_episode_duration">14sp</dimen>
+    <dimen name="detail_rail_episode_desc">11sp</dimen>
+    <dimen name="detail_title">15sp</dimen>
+    <dimen name="detail_duration">14sp</dimen>
+    <dimen name="detail_desc">11sp</dimen>
+    <dimen name="search_header_title">15sp</dimen>
+    <dimen name="search_title">15sp</dimen>
+    <dimen name="search_desc">11sp</dimen>
+    <dimen name="more_fragment_item_title">15sp</dimen>
+
+    <dimen name="splash_logo_icon_height">180dp</dimen>
+    <dimen name="splash_logo_icon_width">51dp</dimen>
+
+    <dimen name="toolbar_logo_icon_height">30dp</dimen>
+    <dimen name="toolbar_logo_icon_width">75dp</dimen>
+
+    <dimen name="episode_width">144dp</dimen>
+    <dimen name="episode_height">81dp</dimen>
+
+    <dimen name="splash_height">80dp</dimen>
+    <dimen name="splash_width">200dp</dimen>
+    <dimen name="vip_badge_width">50dp</dimen>
+    <dimen name="vip_badge_height">38dp</dimen>
+    <dimen name="episode_badge_width">35dp</dimen>
+    <dimen name="episode_badge_height">22dp</dimen>
+
+
+    <dimen name="movie_crew_ll_margin_top">4dp</dimen>
+    <dimen name="list_des_margin_top">1dp</dimen>
+    <dimen name="list_genre_margin_top">1dp</dimen>
+
+    <dimen name="login_tv_cancel">16dp</dimen>
+    <dimen name="login_username">16sp</dimen>
+    <dimen name="login_error_email">14sp</dimen>
+    <dimen name="login_password">16sp</dimen>
+    <dimen name="login_error_password">14sp</dimen>
+    <dimen name="login_sign_in">14sp</dimen>
+    <dimen name="login_or">16sp</dimen>
+    <dimen name="login_fb_btn">14sp</dimen>
+    <dimen name="login_or1">14sp</dimen>
+    <dimen name="login_google_btn">14sp</dimen>
+    <dimen name="login_forget_password">12sp</dimen>
+    <dimen name="login_line">19sp</dimen>
+    <dimen name="login_dont_have_acc">12sp</dimen>
+    <dimen name="login_signup">12sp</dimen>
+    <dimen name="onboarding_textSize283">283dp</dimen>
+    <dimen name="onboarding_textSize315">315dp</dimen>
+
+    <dimen name="registration_tv_cancel">16dp</dimen>
+    <dimen name="registration_et_name">16dp</dimen>
+    <dimen name="registration_error_name">14dp</dimen>
+    <dimen name="registration_et_email">16dp</dimen>
+    <dimen name="registration_error_email">14dp</dimen>
+    <dimen name="registration_et_password">16dp</dimen>
+    <dimen name="registration_error_password">14dp</dimen>
+    <dimen name="registration_confirm_et_password">16dp</dimen>
+    <dimen name="registration_confirm_error_password">14dp</dimen>
+    <dimen name="registration_tv_agree">14dp</dimen>
+    <dimen name="registration_terms">14dp</dimen>
+    <dimen name="registration_tv_and">14dp</dimen>
+    <dimen name="registration_privacy_policy">14dp</dimen>
+    <dimen name="registration_privacy_other">14dp</dimen>
+    <dimen name="registration_term_text">14dp</dimen>
+    <dimen name="registration_fb_btn">14sp</dimen>
+    <dimen name="registration_already_have_acc">14sp</dimen>
+    <dimen name="registration_signin">16sp</dimen>
+    <dimen name="registration_third_mobile">16sp</dimen>
+    <dimen name="registration_third_error_mobile">14sp</dimen>
+    <dimen name="registration_third_error_gender">14sp</dimen>
+    <dimen name="registration_third_dob">16sp</dimen>
+    <dimen name="registration_third_error_dob">14sp</dimen>
+    <dimen name="registration_third_address">16sp</dimen>
+    <dimen name="registration_third_error_address">14sp</dimen>
+    <dimen name="registration_third_finish">18sp</dimen>
+    <dimen name="forget_password_new_pass">16sp</dimen>
+    <dimen name="forget_password_recover">16sp</dimen>
+    <dimen name="forget_password_sendmail">14sp</dimen>
+    <dimen name="force_fblogin_recemail">16sp</dimen>
+    <dimen name="change_password_newpass">16sp</dimen>
+    <dimen name="change_password_cfmpass">16sp</dimen>
+    <dimen name="change_pwd_logo_width">84dp</dimen>
+    <dimen name="change_pwd_logo_height">65dp</dimen>
+    <dimen name="change_password_btn">14sp</dimen>
+    <dimen name="search_recentsearch">17sp</dimen>
+    <dimen name="search_title_item">16sp</dimen>
+    <dimen name="search_cancel">16sp</dimen>
+    <dimen name="nav_more_fragment_item_title">14sp</dimen>
+    <dimen name="nav_moreItemTextSize">16sp</dimen>
+    <dimen name="profile_et_name">16sp</dimen>
+    <dimen name="profile_error_name">14sp</dimen>
+    <dimen name="profile_et_email">16sp</dimen>
+    <dimen name="profile_error_email">14sp</dimen>
+    <dimen name="profile_et_mob">16sp</dimen>
+    <dimen name="profile_error_mob">14sp</dimen>
+    <dimen name="profile_error_gender">14sp</dimen>
+    <dimen name="profile_et_dob">16sp</dimen>
+    <dimen name="profile_error_dob">14sp</dimen>
+    <dimen name="profile_et_address">16sp</dimen>
+    <dimen name="profile_error_address">14sp</dimen>
+    <dimen name="profile_save_btn">18sp</dimen>
+    <dimen name="profile_update_pref">18sp</dimen>
+    <dimen name="setting_content_pref">17sp</dimen>
+    <dimen name="update_pref">18sp</dimen>
+    <dimen name="item_content_pref">16sp</dimen>
+    <dimen name="kid_mode_pin">16sp</dimen>
+    <dimen name="guest_moreItemTextSize">16sp</dimen>
+    <dimen name="onborading_skip">22dp</dimen>
+
+    <dimen name="onboarding_textSize17">17sp</dimen>
+    <dimen name="onboarding_textSize18">18dp</dimen>
+    <dimen name="onboarding_textSize16">16dp</dimen>
+    <dimen name="onboarding_textSize20">20sp</dimen>
+    <dimen name="onboarding_textSize25">22sp</dimen>
+    <dimen name="onboarding_textSize26">26sp</dimen>
+    <dimen name="onboarding_textSize43">43dp</dimen>
+    <dimen name="onboarding_textSize39">39dp</dimen>
+    <dimen name="onboarding_textSize48">48dp</dimen>
+
+    <dimen name="onboarding_textSize27">27dp</dimen>
+    <dimen name="onboarding_textSize375">375dp</dimen>
+    <dimen name="onboarding_btn_width">300dp</dimen>
+    <dimen name="onboarding_textSize71">71dp</dimen>
+    <dimen name="onboarding_textsize31">31dp</dimen>
+    <dimen name="onboarding_textSize40">40sp</dimen>
+    <dimen name="onboarding_textSize491">491dp</dimen>
+    <dimen name="onboarding_textSize244">244dp</dimen>
+    <dimen name="onboarding_five_title">133dp</dimen>
+
+    <dimen name="signUp_14sp_text_size">14sp</dimen>
+    <dimen name="signUp_16sp_text_size">16sp</dimen>
+    <dimen name="signUp_18sp_text_size">18sp</dimen>
+    <dimen name="signUp_20sp_text_size">20sp</dimen>
+    <dimen name="signUp_28sp_text_size">28sp</dimen>
+    <dimen name="signUp_0.5dp_margin">0.5dp</dimen>
+    <dimen name="signUp_1dp_margin">1dp</dimen>
+    <dimen name="signUp_4dp_margin">4dp</dimen>
+    <dimen name="signUp_5dp_margin">5dp</dimen>
+    <dimen name="signUp_7dp_margin">7dp</dimen>
+    <dimen name="signUp_8dp_margin">8dp</dimen>
+    <dimen name="signUp_10dp_margin">10dp</dimen>
+    <dimen name="signUp_15dp_margin">15dp</dimen>
+    <dimen name="signUp_18dp_margin">18dp</dimen>
+    <dimen name="signUp_20dp_margin">20dp</dimen>
+    <dimen name="signUp_24dp_margin">24dp</dimen>
+    <dimen name="signUp_25dp_margin">25dp</dimen>
+    <dimen name="signUp_30dp_margin">30dp</dimen>
+    <dimen name="signUp_40dp_margin">40dp</dimen>
+    <dimen name="signUp_45dp_margin">45dp</dimen>
+    <dimen name="signUp_50dp_margin">50dp</dimen>
+    <dimen name="signUp_55dp_margin">55dp</dimen>
+    <dimen name="signUp_90dp_margin">90dp</dimen>
+    <dimen name="signUp_125dp_margin">125dp</dimen>
+    <dimen name="signUp_140dp_margin">140dp</dimen>
+    <dimen name="signUp_150dp_margin">150dp</dimen>
+    <dimen name="signUp_300dp_margin">300dp</dimen>
+    <dimen name="more_profile_text_132">132dp</dimen>
+    <dimen name="more_profile_text_137">137dp</dimen>
+    <dimen name="more_profile_margin">81dp</dimen>
+    <dimen name="more_profile_text">24sp</dimen>
+    <dimen name="manage_account_icon_width">20dp</dimen>
+    <dimen name="manage_account_icon_height">20dp</dimen>
+    <dimen name="watch_history_icon_width">20dp</dimen>
+    <dimen name="watch_history_icon_height">20dp</dimen>
+    <dimen name="settings_icon_width">20dp</dimen>
+    <dimen name="Settings_icon_height">20dp</dimen>
+    <dimen name="about_us_icon_width">20dp</dimen>
+    <dimen name="about_us_icon_height">20dp</dimen>
+    <dimen name="privacy_icon_width">20dp</dimen>
+    <dimen name="privacy_icon_height">20dp</dimen>
+    <dimen name="terms_icon_width">20dp</dimen>
+    <dimen name="terms_icon_height">20dp</dimen>
+    <dimen name="faq_icon_width">20dp</dimen>
+    <dimen name="faq_icon_height">20dp</dimen>
+    <dimen name="logout_icon_width">20dp</dimen>
+    <dimen name="logout_icon_height">20dp</dimen>
+    <dimen name="change_pwd_lock_width">18dp</dimen>
+    <dimen name="change_pwd_lock_hieght">20dp</dimen>
+    <dimen name="error_msg_change_pwd">15dp</dimen>
+
+    <dimen name="icon_size_24dp">24dp</dimen>
+    <dimen name="ep_common_margin_horizontal">8dp</dimen>
+    <dimen name="ep_common_margin_vertical">8dp</dimen>
+
+    <dimen name="ep_setting_margin_horizontal">20dp</dimen>
+    <dimen name="ep_setting_margin_vertical">20dp</dimen>
+
+    <dimen name="ep_setting_video_track_label">16sp</dimen>
+    <dimen name="ep_setting_video_track_desc">14sp</dimen>
+
+    <dimen name="ep_common_padding">8dp</dimen>
+    <dimen name="ep_live_tag_padding">4dp</dimen>
+
+    <dimen name="ep_text_size_prev_episode">16sp</dimen>
+    <dimen name="ep_text_size_next_episode">16sp</dimen>
+    <dimen name="ep_text_size_more_episodes">16sp</dimen>
+</resources>

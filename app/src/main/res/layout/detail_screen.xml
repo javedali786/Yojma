@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.text.TextUtils"/>
+        <import type="android.graphics.Color"/>
+
+        <variable
+            name="expandabletext"
+            type="String" />
+
+        <variable
+            name="casttext"
+            type="String" />
+
+
+        <variable
+            name="crewtext"
+            type="String" />
+
+        <variable
+            name="duration"
+            type="String" />
+
+        <variable
+            name="responseApi"
+            type="com.breadgangtvnetwork.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
+
+        <variable
+            name="stringData"
+            type="com.breadgangtvnetwork.utils.stringsJson.converter.StringsHelper" />
+        <variable
+            name="colorsData"
+            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+    </data>
+
+
+    <ScrollView
+        android:id="@+id/rootScrolling"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_bg_color"
+        android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.app_bg_color) ? @color/app_bg_color : Color.parseColor(colorsData.instance().data.config.app_bg_color), default=@color/app_bg_color}">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/detail_main_frame">
+
+            <ImageView
+                android:id="@+id/transparent_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/player_frame"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintDimensionRatio="H,16:9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/playerImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@id/player_frame"
+                    app:layout_constraintEnd_toEndOf="@id/player_frame"
+                    app:layout_constraintStart_toStartOf="@id/player_frame"
+                    app:layout_constraintTop_toTopOf="@id/player_frame" />
+
+                <View
+                    android:id="@+id/transaparent_view"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:background="@drawable/series_shadow"
+                    app:layout_constraintBottom_toBottomOf="@id/playerImage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <com.breadgangtvnetwork.utils.CustomProgressBar
+                    android:id="@+id/pBar"
+                    style="@style/Widget.AppCompat.ProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/player_frame"
+                    app:layout_constraintEnd_toEndOf="@id/player_frame"
+                    app:layout_constraintStart_toStartOf="@id/player_frame"
+                    app:layout_constraintTop_toTopOf="@id/player_frame"
+                    tools:visibility="visible" />
+
+                <LinearLayout
+                    android:id="@+id/back_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="@dimen/NontonSize20"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/back_button_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_baseline_arrow_back_ios_24"
+                        android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.back_icon_color) ? @color/back_icon_color : Color.parseColor(colorsData.instance().data.config.back_icon_color), default=@color/back_icon_color}"
+                        android:padding="10dp" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/rootScroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/player_frame">
+
+                    <LinearLayout
+                        android:id="@+id/detailSection"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:descendantFocusability="blocksDescendants"
+                        android:orientation="vertical">
+
+                        <include
+                            android:id="@+id/meta_details"
+                            layout="@layout/layout_video_meta"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:casttext="@{casttext}"
+                            app:crewtext="@{crewtext}"
+                            app:expandabletext="@{expandabletext}"
+                            app:responseApi="@{responseApi.description.trim()}" />
+
+                        <FrameLayout
+                            android:id="@+id/fragment_user_interaction"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:visibility="visible" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="@dimen/signUp_15dp_margin"
+                            android:layout_marginEnd="@dimen/signUp_15dp_margin"
+                            android:visibility="gone"
+                            android:background="@color/unselected_indicator_color"
+                            android:layout_height="1dp"/>
+
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabLayout"
+                            style="@style/TabLayoutStyle"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginTop="10dp"
+                            android:minHeight="?actionBarSize"
+                            android:visibility="gone" />
+
+                        <com.breadgangtvnetwork.utils.helpers.WrappingViewPager
+                            android:id="@+id/viewPager"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="?android:attr/actionBarSize"
+                            android:visibility="visible" />
+                    </LinearLayout>
+                </FrameLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+            <com.breadgangtvnetwork.utils.CustomProgressBar
+                android:id="@+id/progress_bar"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/series_shimmer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <include
+                    android:id="@+id/mShimmer"
+                    layout="@layout/shimmer_layout_detail" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/no_connection_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/connection"
+                    layout="@layout/no_connection">
+
+                </include>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
