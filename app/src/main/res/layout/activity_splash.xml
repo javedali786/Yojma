@@ -11,7 +11,7 @@
 
         <variable
             name="colorsData"
-            type="com.tv.uscreen.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

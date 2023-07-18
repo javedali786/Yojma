@@ -6,20 +6,20 @@
 
         <variable
             name="assetItem"
-            type="com.tv.uscreen.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
+            type="com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
 
         <import type="android.view.View" />
 
         <variable
             name="adapter"
-            type="com.tv.uscreen.utils.helpers.carousel.adapter.SliderAdapter" />
+            type="com.tv.uscreen.yojmatv.utils.helpers.carousel.adapter.SliderAdapter" />
 
         <variable
             name="position"
             type="Integer" />
     </data>
 
-    <com.tv.uscreen.utils.thirdparty.RippleView
+    <com.tv.uscreen.yojmatv.utils.thirdparty.RippleView
         android:id="@+id/rippleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -119,5 +119,5 @@
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.tv.uscreen.utils.thirdparty.RippleView>
+    </com.tv.uscreen.yojmatv.utils.thirdparty.RippleView>
 </layout>

@@ -8,10 +8,10 @@
         <import type="android.graphics.Color"/>
         <variable
             name="colorsData"
-            type="com.tv.uscreen.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper" />
         <variable
             name="playlistItem"
-            type="com.tv.uscreen.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
+            type="com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
 
         <variable
             name="progress"
@@ -31,7 +31,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.tv.uscreen.utils.thirdparty.RippleView
+            <com.tv.uscreen.yojmatv.utils.thirdparty.RippleView
                 android:id="@+id/rippleView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -52,7 +52,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginRight="@dimen/NontonSize2">
 
-                            <com.tv.uscreen.utils.CustomProgressBar
+                            <com.tv.uscreen.yojmatv.utils.CustomProgressBar
                                 android:id="@+id/progress_bar"
                                 style="@style/Widget.AppCompat.ProgressBar"
                                 android:layout_width="wrap_content"
@@ -232,7 +232,7 @@
                     </RelativeLayout>
                 </LinearLayout>
 
-            </com.tv.uscreen.utils.thirdparty.RippleView>
+            </com.tv.uscreen.yojmatv.utils.thirdparty.RippleView>
 
         </LinearLayout>
 

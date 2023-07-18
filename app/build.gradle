@@ -28,7 +28,7 @@ sonarqube
 android {
     compileSdkVersion 33
     defaultConfig {
-        applicationId "com.tv.uscreen"
+        applicationId "com.tv.uscreen.yojmatv"
         minSdkVersion 26
         targetSdkVersion 33
         multiDexEnabled true

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="@dimen/_5sdp">
 
-    <com.tv.uscreen.utils.helpers.shimmer.ShimmerRecyclerView
+    <com.tv.uscreen.yojmatv.utils.helpers.shimmer.ShimmerRecyclerView
         android:id="@+id/recycler_view_list1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

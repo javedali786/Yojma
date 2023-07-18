@@ -4,11 +4,11 @@
     <data>
         <variable
             name="stringData"
-            type="com.tv.uscreen.utils.stringsJson.converter.StringsHelper" />
+            type="com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper" />
 
         <variable
             name="downloadStatus"
-            type="com.tv.uscreen.enums.DownloadStatus" />
+            type="com.tv.uscreen.yojmatv.enums.DownloadStatus" />
 
         <variable
             name="isDownloadable"
@@ -22,9 +22,9 @@
         <import type="android.graphics.Color"/>
         <variable
             name="colorsData"
-            type="com.tv.uscreen.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper" />
 
-        <import type="com.tv.uscreen.enums.DownloadStatus" />
+        <import type="com.tv.uscreen.yojmatv.enums.DownloadStatus" />
     </data>
 
     <HorizontalScrollView
@@ -49,7 +49,7 @@
                 android:layout_marginEnd="40dp"
                 android:orientation="vertical">
 
-                <com.tv.uscreen.utils.CustomProgressBar
+                <com.tv.uscreen.yojmatv.utils.CustomProgressBar
                     android:id="@+id/w_progress_bar"
                     style="@style/Widget.AppCompat.ProgressBar"
                     android:layout_width="@dimen/watch_ListWidth"
@@ -120,7 +120,7 @@
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical">
 
-                <com.tv.uscreen.utils.CustomProgressBar
+                <com.tv.uscreen.yojmatv.utils.CustomProgressBar
                     android:id="@+id/l_progress_bar"
                     style="@style/Widget.AppCompat.ProgressBar"
                     android:layout_width="@dimen/watchListWidth"

@@ -18,7 +18,7 @@
 
             android:orientation="vertical">
 
-            <com.tv.uscreen.utils.helpers.carousel.Slider
+            <com.tv.uscreen.yojmatv.utils.helpers.carousel.Slider
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/slider"

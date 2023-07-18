@@ -20,7 +20,7 @@
 
         <variable
             name="playlistItem"
-            type="com.tv.uscreen.beanModelV3.playListModelV2.VideosItem" />
+            type="com.tv.uscreen.yojmatv.beanModelV3.playListModelV2.VideosItem" />
 
 
     </data>

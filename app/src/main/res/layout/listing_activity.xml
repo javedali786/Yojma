@@ -6,7 +6,7 @@
         <import type="android.graphics.Color"/>
         <variable
             name="colorsData"
-            type="com.tv.uscreen.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper" />
     </data>
 
     <FrameLayout
@@ -16,7 +16,7 @@
         android:background="@color/try_again_btn_txt_color"
         android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.toolbar_bg_color) ? @color/toolbar_bg_color : Color.parseColor(colorsData.instance().data.config.toolbar_bg_color), default=@color/toolbar_bg_color}">
 
-        <com.tv.uscreen.utils.CustomProgressBar
+        <com.tv.uscreen.yojmatv.utils.CustomProgressBar
             android:id="@+id/progress_bar"
             style="@style/Widget.AppCompat.ProgressBar"
             android:layout_width="wrap_content"

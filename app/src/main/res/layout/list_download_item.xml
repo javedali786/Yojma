@@ -9,15 +9,15 @@
 
         <variable
             name="downloadedVideo"
-            type="com.tv.uscreen.utils.helpers.downloads.room.DownloadedVideo" />
+            type="com.tv.uscreen.yojmatv.utils.helpers.downloads.room.DownloadedVideo" />
 
         <variable
             name="downloadStatus"
-            type="com.tv.uscreen.enums.DownloadStatus" />
+            type="com.tv.uscreen.yojmatv.enums.DownloadStatus" />
 
         <import type="android.view.View" />
 
-        <import type="com.tv.uscreen.enums.DownloadStatus" />
+        <import type="com.tv.uscreen.yojmatv.enums.DownloadStatus" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,7 +111,7 @@
             app:layout_constraintStart_toEndOf="@id/tvTitle"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.tv.uscreen.utils.DownloadProgressBar
+            <com.tv.uscreen.yojmatv.utils.DownloadProgressBar
                 android:id="@+id/video_downloading"
                 android:layout_width="22dp"
                 android:layout_height="22dp"

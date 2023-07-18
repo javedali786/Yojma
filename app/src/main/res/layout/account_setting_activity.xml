@@ -9,13 +9,13 @@
 
         <variable
             name="stringData"
-            type="com.tv.uscreen.utils.stringsJson.converter.StringsHelper" />
+            type="com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper" />
 
         <import type="android.graphics.Color" />
 
         <variable
             name="colorsData"
-            type="com.tv.uscreen.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -136,7 +136,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
 
-            <com.tv.uscreen.utils.CustomProgressBar
+            <com.tv.uscreen.yojmatv.utils.CustomProgressBar
                 android:id="@+id/progress_bar"
                 style="@style/Widget.AppCompat.ProgressBar"
                 android:layout_width="wrap_content"

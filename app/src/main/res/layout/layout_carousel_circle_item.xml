@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.tv.uscreen.utils.thirdparty.RippleView
+    <com.tv.uscreen.yojmatv.utils.thirdparty.RippleView
         android:id="@+id/rippleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,5 +106,5 @@
             </RelativeLayout>
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.tv.uscreen.utils.thirdparty.RippleView>
+    </com.tv.uscreen.yojmatv.utils.thirdparty.RippleView>
 </layout>
