@@ -62,7 +62,6 @@ class AccountSettingActivity : BaseBindingActivity<AccountSettingActivityBinding
 
     private fun setToolbar() {
         binding!!.toolbar.logoMain2.visibility = View.GONE
-        binding!!.toolbar.rlToolBar.visibility = View.GONE
         binding!!.toolbar.backLayout.visibility = View.VISIBLE
         binding!!.toolbar.titleMid.visibility = View.VISIBLE
         val account = stringsHelper.stringParse(

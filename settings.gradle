@@ -27,7 +27,7 @@ dependencyResolutionManagement {
         }
     }
 }
-rootProject.name = "Breadgangtvnetwork - Android"
+rootProject.name = "Yojma TV - Android"
 include ':app'
 //include ':enveuandroidsdk'
 //include ':enveuandroidclient'
