@@ -18,7 +18,7 @@
             android:background="@color/transparent"
             android:visibility="gone" />
 
-        <com.tv.utils.CustomProgressBar
+        <com.tv.uscreen.utils.CustomProgressBar
             android:id="@+id/progress_bar"
             android:layout_centerInParent="true"
             style="@style/Widget.AppCompat.ProgressBar"

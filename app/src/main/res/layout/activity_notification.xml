@@ -7,14 +7,14 @@
         <import type="android.text.TextUtils"/>
         <variable
             name="stringData"
-            type="com.tv.utils.stringsJson.converter.StringsHelper" />
+            type="com.tv.uscreen.utils.stringsJson.converter.StringsHelper" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".activities.notification.ui.NotificationActivity">
+        tools:context=".uscreen.activities.notification.ui.NotificationActivity">
 
         <include
             android:id="@+id/toolbar"
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.tv.utils.CustomProgressBar
+        <com.tv.uscreen.utils.CustomProgressBar
             android:id="@+id/progress_bar"
             style="@style/Widget.AppCompat.ProgressBar"
             android:layout_width="wrap_content"

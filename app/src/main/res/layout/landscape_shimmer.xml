@@ -9,7 +9,7 @@
         <import type="android.graphics.Color" />
         <variable
             name="colorsData"
-            type="com.tv.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.uscreen.utils.colorsJson.converter.ColorsHelper" />
     </data>
 
     <LinearLayout

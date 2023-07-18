@@ -8,7 +8,7 @@
         android:id="@+id/main_layout_download"
         android:layout_height="match_parent"
         android:background="?attr/bgColor"
-        tools:context=".activities.settings.downloadsettings.DownloadSettings">
+        tools:context=".uscreen.activities.settings.downloadsettings.DownloadSettings">
         <include
             android:id="@+id/toolbar_download"
             layout="@layout/toolbar"

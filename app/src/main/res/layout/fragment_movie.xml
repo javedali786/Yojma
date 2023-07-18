@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.tv.utils.CustomProgressBar
+            <com.tv.uscreen.utils.CustomProgressBar
                 android:id="@+id/progress_bar"
                 style="@style/Widget.AppCompat.ProgressBar"
                 android:layout_width="wrap_content"
@@ -21,7 +21,7 @@
                 android:clickable="false"
                 android:visibility="gone" />
 
-            <com.tv.utils.helpers.CustomSwipeToRefresh xmlns:android="http://schemas.android.com/apk/res/android"
+            <com.tv.uscreen.utils.helpers.CustomSwipeToRefresh xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/swipeContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -35,7 +35,7 @@
                     android:nestedScrollingEnabled="false"
                     android:scrollbars="none"
                     tools:targetApi="lollipop" />
-            </com.tv.utils.helpers.CustomSwipeToRefresh>
+            </com.tv.uscreen.utils.helpers.CustomSwipeToRefresh>
 
             <LinearLayout
                 android:id="@+id/transparent_layout"

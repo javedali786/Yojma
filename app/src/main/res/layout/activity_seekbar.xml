@@ -26,7 +26,7 @@
 
     </FrameLayout>
 
-    <com.tv.utils.helpers.previewseekbar.PreviewSeekBar
+    <com.tv.uscreen.utils.helpers.previewseekbar.PreviewSeekBar
         android:id="@+id/previewSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

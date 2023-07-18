@@ -6,16 +6,16 @@
     <data>
         <variable
             name="playlistItem"
-            type="com.tv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
+            type="com.tv.uscreen.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
 
 
         <variable
             name="downloadedVideo"
-            type="com.tv.utils.helpers.downloads.room.DownloadedVideo" />
+            type="com.tv.uscreen.utils.helpers.downloads.room.DownloadedVideo" />
 
         <variable
             name="downloadStatus"
-            type="com.tv.enums.DownloadStatus" />
+            type="com.tv.uscreen.enums.DownloadStatus" />
 
         <variable
             name="isDownloadable"
@@ -25,10 +25,10 @@
         <import type="android.graphics.Color"/>
         <variable
             name="colorsData"
-            type="com.tv.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.uscreen.utils.colorsJson.converter.ColorsHelper" />
 
         <import type="android.view.View" />
-        <import type="com.tv.enums.DownloadStatus" />
+        <import type="com.tv.uscreen.enums.DownloadStatus" />
     </data>
 
     <LinearLayout
@@ -220,7 +220,7 @@
                     android:visibility='@{downloadStatus==DownloadStatus.START ? View.VISIBLE : View.GONE, default="gone"}'
                     app:srcCompat="?attr/download_image" />
 
-                <com.tv.utils.DownloadProgressBar
+                <com.tv.uscreen.utils.DownloadProgressBar
                     android:id="@+id/video_downloading"
                     android:layout_width="22dp"
                     android:layout_height="22dp"

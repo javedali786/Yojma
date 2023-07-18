@@ -9,7 +9,7 @@
 
         <variable
             name="stringData"
-            type="com.tv.utils.stringsJson.converter.StringsHelper" />
+            type="com.tv.uscreen.utils.stringsJson.converter.StringsHelper" />
 
         <variable
             name="expandabletext"
@@ -33,7 +33,7 @@
 
         <variable
             name="colorsData"
-            type="com.tv.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.uscreen.utils.colorsJson.converter.ColorsHelper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -326,7 +326,7 @@
             app:layout_constraintStart_toEndOf="@+id/produced"
             app:layout_constraintTop_toBottomOf="@+id/sponsered" />
 
-        <com.tv.utils.helpers.ExpandableCardLayout
+        <com.tv.uscreen.utils.helpers.ExpandableCardLayout
             android:id="@+id/expandable_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -389,7 +389,7 @@
                         android:textSize="@dimen/detail_crew_text" />
                 </LinearLayout>
             </LinearLayout>
-        </com.tv.utils.helpers.ExpandableCardLayout>
+        </com.tv.uscreen.utils.helpers.ExpandableCardLayout>
 
         <LinearLayout
             android:id="@+id/less_button"

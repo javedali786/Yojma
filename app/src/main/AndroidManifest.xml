@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.tv">
+    package="com.tv.uscreen">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,7 +14,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
-        android:name="com.tv.OttApplication"
+        android:name="com.tv.uscreen.OttApplication"
         android:allowBackup="false"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
@@ -42,11 +42,11 @@
             android:screenOrientation="sensorLandscape"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.tv.activities.purchase.ui.PurchaseActivity"
+            android:name="com.tv.uscreen.activities.purchase.ui.PurchaseActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.tv.activities.listing.ui.MoreForYouActivity"
+            android:name="com.tv.uscreen.activities.listing.ui.MoreForYouActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 <!--        <activity-->
@@ -55,16 +55,16 @@
 <!--            android:screenOrientation="portrait" />-->
 
         <activity
-            android:name="com.tv.activities.Novelties.ui.NoveltiesActivity"
+            android:name="com.tv.uscreen.activities.Novelties.ui.NoveltiesActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.tv.activities.profile.ui.AccountSettingActivity"
+            android:name="com.tv.uscreen.activities.profile.ui.AccountSettingActivity"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.tv.activities.profile.ui.ManageSubscriptionAccount"
+            android:name="com.tv.uscreen.activities.profile.ui.ManageSubscriptionAccount"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -72,20 +72,20 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.tv.activities.usermanagment.ui.ActivityForgotPassword"
+            android:name="com.tv.uscreen.activities.usermanagment.ui.ActivityForgotPassword"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.tv.activities.usermanagment.ui.ActivityLogin"
+            android:name="com.tv.uscreen.activities.usermanagment.ui.ActivityLogin"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.tv.activities.profile.CountryListActivity"
+            android:name="com.tv.uscreen.activities.profile.CountryListActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.tv.activities.usermanagment.ui.ActivitySignUp"
+            android:name="com.tv.uscreen.activities.usermanagment.ui.ActivitySignUp"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
@@ -102,15 +102,15 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.tv.activities.usermanagment.ui.EnterOTPActivity"
+            android:name="com.tv.uscreen.activities.usermanagment.ui.EnterOTPActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.tv.activities.usermanagment.ui.ActivitySelectSubscriptionPlan"
+            android:name="com.tv.uscreen.activities.usermanagment.ui.ActivitySelectSubscriptionPlan"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.tv.activities.usermanagment.ui.ChangePasswordActivity"
+            android:name="com.tv.uscreen.activities.usermanagment.ui.ChangePasswordActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -122,7 +122,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.tv.activities.detail.ui.DetailsNew"
+            android:name="com.tv.uscreen.activities.detail.ui.DetailsNew"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -155,7 +155,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activities.search.ui.FilterIconActivity" />
         <activity
-            android:name="com.tv.activities.manageAccounts.ManageAccount"
+            android:name="com.tv.uscreen.activities.manageAccounts.ManageAccount"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -180,15 +180,15 @@
             android:name=".OnBoarding"
             android:screenOrientation="portrait" />
         <activity android:name=".activities.downloads.DownloadedEpisodesActivity" />
-        <activity android:name="com.tv.activities.settings.downloadsettings.changequality.ui.ChangeDownloadQuality" />
-        <activity android:name="com.tv.activities.settings.downloadsettings.DownloadSettings" />
+        <activity android:name="com.tv.uscreen.activities.settings.downloadsettings.changequality.ui.ChangeDownloadQuality" />
+        <activity android:name="com.tv.uscreen.activities.settings.downloadsettings.DownloadSettings" />
         <activity
-            android:name="com.tv.utils.helpers.downloads.DownloadedVideoActivity"
+            android:name="com.tv.uscreen.utils.helpers.downloads.DownloadedVideoActivity"
             android:label="@string/title_activity_downloaded_video"
             android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme" />
         <activity
-            android:name="com.tv.activities.downloads.MyDownloads"
+            android:name="com.tv.uscreen.activities.downloads.MyDownloads"
             android:screenOrientation="locked"
             android:theme="@style/MyMaterialTheme" />
 
@@ -232,7 +232,7 @@
             android:enabled="true" />
 
         <activity
-            android:name="com.tv.activities.splash.ui.ActivitySplash"
+            android:name="com.tv.uscreen.activities.splash.ui.ActivitySplash"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="locked"
@@ -282,13 +282,13 @@
             android:name="com.aemerse.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
-            android:name="com.tv.activities.profile.ui.ProfileActivityNew"
+            android:name="com.tv.uscreen.activities.profile.ui.ProfileActivityNew"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.tv.activities.homeactivity.ui.HomeActivity"
+            android:name="com.tv.uscreen.activities.homeactivity.ui.HomeActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:exported="false"
             android:screenOrientation="portrait"
@@ -300,25 +300,25 @@
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name="com.tv.activities.search.ui.ActivitySearch"
+            android:name="com.tv.uscreen.activities.search.ui.ActivitySearch"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name="com.tv.activities.detail.ui.DetailActivity"
+            android:name="com.tv.uscreen.activities.detail.ui.DetailActivity"
             android:configChanges="locale|screenSize|smallestScreenSize|screenLayout|orientation"
             android:resizeableActivity="true"
             android:screenOrientation="locked"
             android:supportsPictureInPicture="true"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name="com.tv.activities.live.LiveActivity"
+            android:name="com.tv.uscreen.activities.live.LiveActivity"
             android:configChanges="locale|screenSize|smallestScreenSize|screenLayout|orientation"
             android:resizeableActivity="true"
             android:screenOrientation="locked"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.tv.activities.detail.ui.EpisodeActivity"
+            android:name="com.tv.uscreen.activities.detail.ui.EpisodeActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:screenOrientation="locked"
             android:theme="@style/MyMaterialTheme" />
@@ -327,11 +327,11 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" /> <!-- Branch install referrer tracking -->
         <activity
-            android:name="com.tv.activities.watchList.ui.WatchListActivity"
+            android:name="com.tv.uscreen.activities.watchList.ui.WatchListActivity"
             android:launchMode="singleTop" />
-        <activity android:name="com.tv.activities.notification.ui.NotificationActivity" />
+        <activity android:name="com.tv.uscreen.activities.notification.ui.NotificationActivity" />
         <activity
-            android:name="com.tv.activities.listing.ui.GridActivity"
+            android:name="com.tv.uscreen.activities.listing.ui.GridActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop" />
         <activity
@@ -343,23 +343,23 @@
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.tv.activities.termsandconditions.ui.TermAndCondition"
+            android:name="com.tv.uscreen.activities.termsandconditions.ui.TermAndCondition"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.tv.activities.privacypolicy.ui.WebViewActivity"
+            android:name="com.tv.uscreen.activities.privacypolicy.ui.WebViewActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.tv.activities.series.ui.SeriesDetailActivity"
+            android:name="com.tv.uscreen.activities.series.ui.SeriesDetailActivity"
             android:configChanges="locale|orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="sensor" />
         <activity
-            android:name="com.tv.activities.search.ui.ActivityResults"
+            android:name="com.tv.uscreen.activities.search.ui.ActivityResults"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="locked"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.tv.activities.listing.ui.MyListActivity"
+            android:name="com.tv.uscreen.activities.listing.ui.MyListActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop" />
 
@@ -377,22 +377,22 @@
             android:enabled="true" />
 
         <activity
-            android:name="com.tv.cms.HelpActivity"
+            android:name="com.tv.uscreen.cms.HelpActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.tv.activities.videoquality.ui.ChangeLanguageActivity"
+            android:name="com.tv.uscreen.activities.videoquality.ui.ChangeLanguageActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.tv.activities.settings.ActivitySettings"
+            android:name="com.tv.uscreen.activities.settings.ActivitySettings"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.tv.activities.listing.listui.ListActivity"
+            android:name="com.tv.uscreen.activities.listing.listui.ListActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop" />
 
         <service
-            android:name="com.tv.OttMessagingService"
+            android:name="com.tv.uscreen.OttMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -425,7 +425,7 @@
             android:value="true" />
 
         <activity
-            android:name="com.tv.activities.videoquality.ui.VideoQualityActivity"
+            android:name="com.tv.uscreen.activities.videoquality.ui.VideoQualityActivity"
             android:screenOrientation="locked" />
 
         <uses-library
@@ -475,12 +475,12 @@
         </receiver>
 
         <activity
-            android:name="com.tv.activities.profile.order_history.ui.OrderHistoryActivity"
+            android:name="com.tv.uscreen.activities.profile.order_history.ui.OrderHistoryActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.tv.activities.usermanagment.ui.PaymentDetailPage"
+            android:name="com.tv.uscreen.activities.usermanagment.ui.PaymentDetailPage"
             android:exported="false"
             android:screenOrientation="portrait" />
 
