@@ -1,4 +1,4 @@
-package com.breadgangtvnetwork;
+package com.tv;
 
 
 public class BuildConstants {

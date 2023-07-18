@@ -6,20 +6,20 @@
 
         <variable
             name="assetItem"
-            type="com.breadgangtvnetwork.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
+            type="com.tv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
 
         <import type="android.view.View" />
 
         <variable
             name="adapter"
-            type="com.breadgangtvnetwork.utils.helpers.carousel.adapter.SliderAdapter" />
+            type="com.tv.utils.helpers.carousel.adapter.SliderAdapter" />
 
         <variable
             name="position"
             type="Integer" />
     </data>
 
-    <com.breadgangtvnetwork.utils.thirdparty.RippleView
+    <com.tv.utils.thirdparty.RippleView
         android:id="@+id/rippleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -119,5 +119,5 @@
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.breadgangtvnetwork.utils.thirdparty.RippleView>
+    </com.tv.utils.thirdparty.RippleView>
 </layout>

@@ -18,7 +18,7 @@
 
             android:orientation="vertical">
 
-            <com.breadgangtvnetwork.utils.helpers.carousel.Slider
+            <com.tv.utils.helpers.carousel.Slider
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/slider"

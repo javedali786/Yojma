@@ -1,9 +1,9 @@
-package com.breadgangtvnetwork;
+package com.tv;
 
-import com.breadgangtvnetwork.utils.MediaTypeConstants;
-import com.breadgangtvnetwork.utils.commonMethods.AppCommonMethod;
-import com.breadgangtvnetwork.utils.config.bean.AvatarImages;
-import com.breadgangtvnetwork.utils.config.bean.dmsResponse.ConfigBean;
+import com.tv.utils.MediaTypeConstants;
+import com.tv.utils.commonMethods.AppCommonMethod;
+import com.tv.utils.config.bean.AvatarImages;
+import com.tv.utils.config.bean.dmsResponse.ConfigBean;
 
 import java.util.ArrayList;
 import java.util.List;

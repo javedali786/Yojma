@@ -8,7 +8,7 @@
         <import type="android.graphics.Color"/>
         <variable
             name="colorsData"
-            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.utils.colorsJson.converter.ColorsHelper" />
     </data>
 
     <LinearLayout

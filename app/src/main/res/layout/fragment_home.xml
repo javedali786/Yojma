@@ -8,7 +8,7 @@
         <import type="android.graphics.Color"/>
         <variable
             name="colorsData"
-            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.utils.colorsJson.converter.ColorsHelper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
         android:background="@color/app_bg_color"
         android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.app_bg_color) ? @color/app_bg_color : Color.parseColor(colorsData.instance().data.config.app_bg_color), default=@color/app_bg_color}">
 
-        <com.breadgangtvnetwork.utils.CustomProgressBar
+        <com.tv.utils.CustomProgressBar
             android:id="@+id/progress_bar"
             style="@style/Widget.AppCompat.ProgressBar"
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             tools:ignore="MissingConstraints">
 
-            <com.breadgangtvnetwork.utils.helpers.CustomSwipeToRefresh
+            <com.tv.utils.helpers.CustomSwipeToRefresh
                 android:id="@+id/swipe_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -51,7 +51,7 @@
                     android:overScrollMode="never"
                     android:scrollbars="none" />
 
-            </com.breadgangtvnetwork.utils.helpers.CustomSwipeToRefresh>
+            </com.tv.utils.helpers.CustomSwipeToRefresh>
 
         </RelativeLayout>
 

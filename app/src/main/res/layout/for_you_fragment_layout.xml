@@ -6,11 +6,11 @@
         <import type="android.graphics.Color"/>
         <variable
             name="stringData"
-            type="com.breadgangtvnetwork.utils.stringsJson.converter.StringsHelper" />
+            type="com.tv.utils.stringsJson.converter.StringsHelper" />
 
         <variable
             name="colorsData"
-            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.utils.colorsJson.converter.ColorsHelper" />
 
     </data>
 

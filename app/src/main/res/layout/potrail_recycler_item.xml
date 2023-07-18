@@ -13,7 +13,7 @@
             android:id="@+id/titleHeading"
             layout="@layout/heading_rails" />
 
-        <com.breadgangtvnetwork.utils.helpers.shimmer.ShimmerRecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.tv.utils.helpers.shimmer.ShimmerRecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/recycler_view_list2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

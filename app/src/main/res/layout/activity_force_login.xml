@@ -7,7 +7,7 @@
         android:background="?attr/bgColor"
         android:layout_height="match_parent">
 
-        <com.breadgangtvnetwork.utils.CustomProgressBar
+        <com.tv.utils.CustomProgressBar
             android:id="@+id/progress_bar"
             style="@style/Widget.AppCompat.ProgressBar"
             android:layout_width="wrap_content"

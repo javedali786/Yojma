@@ -7,10 +7,10 @@
 
         <variable
             name="playlistItem"
-            type="com.breadgangtvnetwork.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
+            type="com.tv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
     </data>
 
-    <com.breadgangtvnetwork.utils.thirdparty.RippleView
+    <com.tv.utils.thirdparty.RippleView
         android:id="@+id/rippleView"
         rv_centered="true"
         android:layout_width="wrap_content"
@@ -193,6 +193,6 @@
             </LinearLayout>
         </LinearLayout>
 
-    </com.breadgangtvnetwork.utils.thirdparty.RippleView>
+    </com.tv.utils.thirdparty.RippleView>
 
 </layout>

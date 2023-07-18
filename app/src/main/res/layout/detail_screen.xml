@@ -26,14 +26,14 @@
 
         <variable
             name="responseApi"
-            type="com.breadgangtvnetwork.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
+            type="com.tv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
 
         <variable
             name="stringData"
-            type="com.breadgangtvnetwork.utils.stringsJson.converter.StringsHelper" />
+            type="com.tv.utils.stringsJson.converter.StringsHelper" />
         <variable
             name="colorsData"
-            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.utils.colorsJson.converter.ColorsHelper" />
     </data>
 
 
@@ -88,7 +88,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <com.breadgangtvnetwork.utils.CustomProgressBar
+                <com.tv.utils.CustomProgressBar
                     android:id="@+id/pBar"
                     style="@style/Widget.AppCompat.ProgressBar"
                     android:layout_width="wrap_content"
@@ -172,7 +172,7 @@
                             android:minHeight="?actionBarSize"
                             android:visibility="gone" />
 
-                        <com.breadgangtvnetwork.utils.helpers.WrappingViewPager
+                        <com.tv.utils.helpers.WrappingViewPager
                             android:id="@+id/viewPager"
                             android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
@@ -187,7 +187,7 @@
 
 
 
-            <com.breadgangtvnetwork.utils.CustomProgressBar
+            <com.tv.utils.CustomProgressBar
                 android:id="@+id/progress_bar"
                 style="@style/Widget.AppCompat.ProgressBar"
                 android:layout_width="wrap_content"

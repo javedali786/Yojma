@@ -8,11 +8,11 @@
         <import type="android.graphics.Color"/>
         <variable
             name="colorsData"
-            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.utils.colorsJson.converter.ColorsHelper" />
 
         <variable
             name="playlistItem"
-            type="com.breadgangtvnetwork.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
+            type="com.tv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean" />
 
         <variable
             name="progress"
@@ -32,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.breadgangtvnetwork.utils.thirdparty.RippleView
+            <com.tv.utils.thirdparty.RippleView
                 android:id="@+id/rippleView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -53,7 +53,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginRight="@dimen/NontonSize2">
 
-                            <com.breadgangtvnetwork.utils.CustomProgressBar
+                            <com.tv.utils.CustomProgressBar
                                 android:id="@+id/progress_bar"
                                 style="@style/Widget.AppCompat.ProgressBar"
                                 android:layout_width="wrap_content"
@@ -235,7 +235,7 @@
                     </RelativeLayout>
                 </LinearLayout>
 
-            </com.breadgangtvnetwork.utils.thirdparty.RippleView>
+            </com.tv.utils.thirdparty.RippleView>
 
         </LinearLayout>
 

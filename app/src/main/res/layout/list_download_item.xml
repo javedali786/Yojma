@@ -9,15 +9,15 @@
 
         <variable
             name="downloadedVideo"
-            type="com.breadgangtvnetwork.utils.helpers.downloads.room.DownloadedVideo" />
+            type="com.tv.utils.helpers.downloads.room.DownloadedVideo" />
 
         <variable
             name="downloadStatus"
-            type="com.breadgangtvnetwork.enums.DownloadStatus" />
+            type="com.tv.enums.DownloadStatus" />
 
         <import type="android.view.View" />
 
-        <import type="com.breadgangtvnetwork.enums.DownloadStatus" />
+        <import type="com.tv.enums.DownloadStatus" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,7 +111,7 @@
             app:layout_constraintStart_toEndOf="@id/tvTitle"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.breadgangtvnetwork.utils.DownloadProgressBar
+            <com.tv.utils.DownloadProgressBar
                 android:id="@+id/video_downloading"
                 android:layout_width="22dp"
                 android:layout_height="22dp"

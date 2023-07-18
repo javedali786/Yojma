@@ -11,7 +11,7 @@
 
         <variable
             name="colorsData"
-            type="com.breadgangtvnetwork.utils.colorsJson.converter.ColorsHelper" />
+            type="com.tv.utils.colorsJson.converter.ColorsHelper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:background="@color/app_bg_color"
         android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.app_bg_color) ? @color/app_bg_color : Color.parseColor(colorsData.instance().data.config.app_bg_color), default=@color/app_bg_color}"
-        tools:context="com.breadgangtvnetwork.me.Doxzilla.activities.splash.ui.https://app.iberaliago.com/">
+        tools:context="com.tv.me.Doxzilla.activities.splash.ui.https://app.iberaliago.com/">
 
         <ImageView
             android:id="@+id/videoView"
