@@ -1,8 +1,8 @@
 package com.tv.uscreen.yojmatv;
 
 
-
 import com.tv.uscreen.yojmatv.utils.MediaTypeConstants;
+import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod;
 import com.tv.uscreen.yojmatv.utils.config.bean.AvatarImages;
 import com.tv.uscreen.yojmatv.utils.config.bean.dmsResponse.ConfigBean;
 
@@ -139,28 +139,23 @@ public class SDKConfig {
 
 
     public String getFirstTabId() {
-       // return AppCommonMethod.getHomeTabId(configBean, "HOME");
-        return null;
+        return AppCommonMethod.getHomeTabId(configBean, "HOME");
     }
 
     public String getSecondTabId() {
-        return null;
-        //return AppCommonMethod.getHomeTabId(configBean, "PROGRAM");
+        return AppCommonMethod.getHomeTabId(configBean, "PROGRAM");
     }
 
     public String getThirdTabId() {
-        return null;
-       // return AppCommonMethod.getHomeTabId(configBean, "PODCAST");
+        return AppCommonMethod.getHomeTabId(configBean, "PODCAST");
     }
 
     public String getFourthTabId() {
-        return null;
-        //return AppCommonMethod.getHomeTabId(configBean, "LIVE");
+        return AppCommonMethod.getHomeTabId(configBean, "LIVE");
     }
 
     public String getMovieDetailId() {
-        return null;
-        //return AppCommonMethod.getHomeTabId(configBean, "MOVIE DETAIL");
+        return AppCommonMethod.getHomeTabId(configBean, "MOVIE DETAIL");
     }
 
     public String getShowDetailId() {

@@ -114,17 +114,6 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
                 return@OnItemSelectedListener true
             }
 
-          /*  R.id.navigation_reel -> {
-                if (active !is ReelsFragment) {
-                    if (reelsFragment == null) {
-                        reelsFragment = ReelsFragment()
-                        fragmentManager!!.beginTransaction().add(R.id.content_frame, reelsFragment as ReelsFragment, "1")
-                            .hide(reelsFragment as ReelsFragment).commit()
-                    }
-                    switchToReelsFragment()
-                }
-                return@OnItemSelectedListener true
-            }*/
 
             R.id.navigation_podcast -> {
                 if (active !is PodcastFragment) {

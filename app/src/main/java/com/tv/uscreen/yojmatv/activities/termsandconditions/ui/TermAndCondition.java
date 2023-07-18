@@ -1,5 +1,8 @@
 package com.tv.uscreen.yojmatv.activities.termsandconditions.ui;
 
+
+
+
 import static com.tv.uscreen.yojmatv.BuildConstants.TERM_AND_CONDITION;
 
 import android.os.Bundle;
