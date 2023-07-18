@@ -123,8 +123,10 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
         binding?.confirmPasswordEye?.isChecked = false
         binding?.toolbar?.backLayout?.visibility = View.GONE
         binding?.toolbar?.titleSkip?.visibility = View.GONE
-        binding?.toolbar?.backLayout?.visibility = View.VISIBLE
+        binding?.toolbar?.backLayout?.visibility = View.GONE
         binding?.toolbar?.logoMain2?.visibility = View.VISIBLE
+        binding?.toolbar?.searchIcon?.visibility = View.GONE
+
         binding?.toolbar?.backLayout?.setOnClickListener {
             onBackPressed()
         }
