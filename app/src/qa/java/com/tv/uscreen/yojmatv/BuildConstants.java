@@ -1,4 +1,4 @@
-package com.tv;
+package com.tv.uscreen.yojmatv;
 
 
 public class BuildConstants {

@@ -1,9 +1,10 @@
-package com.tv;
+package com.tv.uscreen.yojmatv;
 
-import com.tv.utils.MediaTypeConstants;
-import com.tv.utils.commonMethods.AppCommonMethod;
-import com.tv.utils.config.bean.AvatarImages;
-import com.tv.utils.config.bean.dmsResponse.ConfigBean;
+
+import com.tv.uscreen.yojmatv.utils.MediaTypeConstants;
+import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod;
+import com.tv.uscreen.yojmatv.utils.config.bean.AvatarImages;
+import com.tv.uscreen.yojmatv.utils.config.bean.dmsResponse.ConfigBean;
 
 import java.util.ArrayList;
 import java.util.List;
