@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -33,10 +34,8 @@ import com.google.gson.Gson
 import com.moengage.core.analytics.MoEAnalyticsHelper
 import com.moengage.core.model.AppStatus
 import com.tv.uscreen.yojmatv.BuildConfig
-
 import com.tv.uscreen.yojmatv.OttApplication
 import com.tv.uscreen.yojmatv.R
-
 import com.tv.uscreen.yojmatv.SDKConfig
 import com.tv.uscreen.yojmatv.activities.homeactivity.ui.HomeActivity
 import com.tv.uscreen.yojmatv.activities.purchase.in_app_billing.BillingProcessor
@@ -51,7 +50,6 @@ import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.DialogInterface
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.VersionUpdateCallBack
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.VersionValidator
 import com.tv.uscreen.yojmatv.databinding.ActivitySplashBinding
-
 import com.tv.uscreen.yojmatv.dependencies.providers.DTGPrefrencesProvider
 import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogFragment
 import com.tv.uscreen.yojmatv.networking.errormodel.ApiErrorModel
@@ -73,6 +71,7 @@ import org.json.JSONObject
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import javax.inject.Inject
+
 
 class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialogFragment.AlertDialogListener, InAppProcessListener {
     private val TAG = this.javaClass.simpleName
@@ -98,7 +97,9 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
 
     var downloadHelper: DownloadHelper? = null
     private val requestPermissionLauncher: ActivityResultLauncher<String> =
-        registerForActivityResult<String, Boolean>(ActivityResultContracts.RequestPermission(), ActivityResultCallback<Boolean> { isGranted: Boolean? -> })
+        registerForActivityResult<String, Boolean>(
+            ActivityResultContracts.RequestPermission(),
+            ActivityResultCallback<Boolean> { isGranted: Boolean? -> })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,7 +107,7 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         if (NetworkConnectivity.isOnline(this)) {
             initView()
             binding!!.noConnectionLayout.visibility = View.GONE
-        }else{
+        } else {
             binding!!.noConnectionLayout.visibility = View.VISIBLE
         }
     }
@@ -143,7 +144,11 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
 
     @RequiresApi(api = 33)
     private fun requestPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
         } else {
             requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
@@ -167,7 +172,10 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
                         var deepLink: Uri? = null
                         if (pendingDynamicLinkData != null) {
                             deepLink = pendingDynamicLinkData.link
-                            Log.e("deepLink", "in2" + pendingDynamicLinkData.link + " " + deepLink?.query)
+                            Log.e(
+                                "deepLink",
+                                "in2" + pendingDynamicLinkData.link + " " + deepLink?.query
+                            )
                             if (deepLink != null) {
                                 val uri = Uri.parse(deepLink.toString())
                                 var id: String? = null
@@ -180,11 +188,20 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
                                 }
                                 try {
                                     if (mediaType != null) {
-                                        if (!mediaType.equals("", ignoreCase = true) && !id.equals("", ignoreCase = true)) {
+                                        if (!mediaType.equals(
+                                                "",
+                                                ignoreCase = true
+                                            ) && !id.equals("", ignoreCase = true)
+                                        ) {
                                             KsPreferenceKeys.getInstance().appPrefJumpTo = mediaType
                                             KsPreferenceKeys.getInstance().appPrefBranchIo = true
-                                            KsPreferenceKeys.getInstance().appPrefJumpBackId = id!!.toInt()
-                                            deepLinkObject = AppCommonMethod.createDynamicLinkObject(id, mediaType)
+                                            KsPreferenceKeys.getInstance().appPrefJumpBackId =
+                                                id!!.toInt()
+                                            deepLinkObject =
+                                                AppCommonMethod.createDynamicLinkObject(
+                                                    id,
+                                                    mediaType
+                                                )
                                             redirections(deepLinkObject)
                                         }
                                     } else {
@@ -286,18 +303,28 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         })
     }
 
-    private fun startClapAnimation(jsonObject: JSONObject?, updateType: String?, isTablet: Boolean) {
+    private fun startClapAnimation(
+        jsonObject: JSONObject?,
+        updateType: String?,
+        isTablet: Boolean
+    ) {
         val preference: KsPreferenceKeys
         val isUserVerified: String
         var isLoggedIn = false
         preference = KsPreferenceKeys.getInstance()
-        if (preference.getAppPrefLoginStatus().equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
+        if (preference.getAppPrefLoginStatus()
+                .equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)
+        ) {
             isLoggedIn = true
         }
         isUserVerified = preference.isVerified
         Logger.d("branchRedirectors onAnimationEnd1")
         if (jsonObject != null) {
-            if (updateType != null && updateType.equals(ForceUpdateHandler.RECOMMENDED, ignoreCase = true)) {
+            if (updateType != null && updateType.equals(
+                    ForceUpdateHandler.RECOMMENDED,
+                    ignoreCase = true
+                )
+            ) {
                 branchRedirections(jsonObject)
             } else {
                 val updateValue = getForceUpdateValue(jsonObject, 1)
@@ -306,22 +333,32 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
                 }
             }
         } else {
-            if (updateType != null && updateType.equals(ForceUpdateHandler.RECOMMENDED, ignoreCase = true)) {
+            if (updateType != null && updateType.equals(
+                    ForceUpdateHandler.RECOMMENDED,
+                    ignoreCase = true
+                )
+            ) {
                 Logger.d("branchRedirectors -->>config")
                 // homeRedirection();
                 Handler().postDelayed({
                     Logger.d("branchRedirectors -->>non")
                     //This logic is for now will update later
                     if (isLoggedIn) {
-                        if(isUserVerified.equals("true", ignoreCase = true)) {
-                            ActivityLauncher.getInstance().homeActivity(this@ActivitySplash, HomeActivity::class.java)
-                        } else{
-                            ActivityLauncher.getInstance().homeActivity(this@ActivitySplash, HomeActivity::class.java)
-                           // ActivityLauncher.getInstance().goToEnterOTP(this@ActivitySplash, EnterOTPActivity::class.java,"splashScreen")
+                        if (isUserVerified.equals("true", ignoreCase = true)) {
+                            ActivityLauncher.getInstance()
+                                .homeActivity(this@ActivitySplash, HomeActivity::class.java)
+                        } else {
+                            ActivityLauncher.getInstance()
+                                .homeActivity(this@ActivitySplash, HomeActivity::class.java)
+                            // ActivityLauncher.getInstance().goToEnterOTP(this@ActivitySplash, EnterOTPActivity::class.java,"splashScreen")
                         }
                     } else {
-                        ActivityLauncher.getInstance().goToLoginFromSplash(this@ActivitySplash, ActivityLogin::class.java,true)
-                     // ActivityLauncher.getInstance().homeActivity(this@ActivitySplash, HomeActivity::class.java)
+                        ActivityLauncher.getInstance().goToLoginFromSplash(
+                            this@ActivitySplash,
+                            ActivityLogin::class.java,
+                            true
+                        )
+                        // ActivityLauncher.getInstance().homeActivity(this@ActivitySplash, HomeActivity::class.java)
 
 
                     }
@@ -335,17 +372,24 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
                     Handler().postDelayed({
                         Logger.d("branchRedirectors -->>non")
                         if (isLoggedIn) {
-                            if(isUserVerified.equals("true", ignoreCase = true)) {
-                                ActivityLauncher.getInstance().homeActivity(this@ActivitySplash, HomeActivity::class.java)
-                            } else{
-                                ActivityLauncher.getInstance().homeActivity(this@ActivitySplash, HomeActivity::class.java)
-                               // ActivityLauncher.getInstance().goToEnterOTP(this@ActivitySplash, EnterOTPActivity::class.java,"splashScreen")
+                            if (isUserVerified.equals("true", ignoreCase = true)) {
+                                ActivityLauncher.getInstance()
+                                    .homeActivity(this@ActivitySplash, HomeActivity::class.java)
+                            } else {
+                                ActivityLauncher.getInstance()
+                                    .homeActivity(this@ActivitySplash, HomeActivity::class.java)
+                                // ActivityLauncher.getInstance().goToEnterOTP(this@ActivitySplash, EnterOTPActivity::class.java,"splashScreen")
                             }
                         } else {
-                            ActivityLauncher.getInstance().goToLoginFromSplash(this@ActivitySplash, ActivityLogin::class.java,true)
-                         //   ActivityLauncher.getInstance().homeActivity(this@ActivitySplash, HomeActivity::class.java)
+                            ActivityLauncher.getInstance().goToLoginFromSplash(
+                                this@ActivitySplash,
+                                ActivityLogin::class.java,
+                                true
+                            )
+                            //   ActivityLauncher.getInstance().homeActivity(this@ActivitySplash, HomeActivity::class.java)
 
-                        } }, 1)
+                        }
+                    }, 1)
                 }
             }
         }
@@ -383,31 +427,87 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         }
     }
 
-    /*
-    private void loadAnimations() {
-        Uri video = null;
-        boolean isTablet = getResources().getBoolean(R.bool.isTablet);
-        if (isTablet) {
-            video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.splashtablet);
+
+    private fun loadAnimations() {
+        var video: Uri? = null
+        val isTablet = resources.getBoolean(R.bool.isTablet)
+        video = if (isTablet) {
+            Uri.parse("android.resource://$packageName" + "/" + R.raw.splashscreenmobile)
         } else {
-            video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.splashscreenmobile);
+            Uri.parse("android.resource://$packageName" + "/" + R.raw.splashscreenmobile)
         }
-        binding.videoView.setVideoURI(video);
-        binding.videoView.requestFocus();
-        binding.videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            public void onCompletion(MediaPlayer mp) {
-                callNextForRedirection();
-                getDynamicLink();
-
-            }
-        });
-
-        binding.videoView.setOnErrorListener((mp, what, extra) -> {
-            return false;
-        });
-        binding.videoView.start();
+        binding!!.videoView.setVideoURI(video)
+        binding!!.videoView.requestFocus()
+        binding!!.videoView.setOnCompletionListener(MediaPlayer.OnCompletionListener {
+            callNextForRedirection()
+            getDynamicLink()
+        })
+        binding!!.videoView.setOnErrorListener { mp, what, extra -> false }
+        binding!!.videoView.start()
     }
-*/
+
+
+    private fun getDynamicLink() {
+        FirebaseDynamicLinks.getInstance()
+            .getDynamicLink(intent)
+            .addOnSuccessListener(
+                this
+            ) { pendingDynamicLinkData ->
+                try {
+                    var deepLink: Uri? = null
+                    if (pendingDynamicLinkData != null) {
+                        deepLink = pendingDynamicLinkData.link
+                        Log.e(
+                            "deepLink",
+                            "in2" + pendingDynamicLinkData.link + " " + deepLink!!.query
+                        )
+                        if (deepLink != null) {
+                            val uri = Uri.parse(deepLink.toString())
+                            var id: String? = null
+                            var mediaType: String? = null
+                            try {
+                                id = uri.getQueryParameter("id")
+                                mediaType = uri.getQueryParameter(MEDIA_TYPE)
+                            } catch (e: java.lang.Exception) {
+                                Logger.w(e)
+                            }
+                            try {
+                                if (mediaType != null) {
+                                    if (!mediaType.equals("", ignoreCase = true) && !id.equals(
+                                            "",
+                                            ignoreCase = true
+                                        )
+                                    ) {
+                                        KsPreferenceKeys.getInstance().appPrefJumpTo = mediaType
+                                        KsPreferenceKeys.getInstance().appPrefBranchIo = true
+                                        KsPreferenceKeys.getInstance().appPrefJumpBackId =
+                                            id!!.toInt()
+                                        deepLinkObject =
+                                            AppCommonMethod.createDynamicLinkObject(id, mediaType)
+                                        redirections(deepLinkObject)
+                                    }
+                                } else {
+                                    redirectToHome()
+                                }
+                            } catch (e: java.lang.Exception) {
+                                redirectToHome()
+                            }
+                        }
+                    } else {
+                        onNewIntent(intent)
+                    }
+                } catch (e: java.lang.Exception) {
+                    redirectToHome()
+                    Logger.e("Catch", e.toString())
+                }
+            }
+            .addOnFailureListener(this) { e ->
+                redirectToHome()
+                Logger.w(e)
+                Log.w(TAG, "getDynamicLink:onFailure", e)
+            }
+    }
+
     private fun callNextForRedirection() {
         if (viaIntent) {
             val notiVAlues: String = KsPreferenceKeys.getInstance().getNotificationPayload(notificationAssetId.toString() + "")
@@ -507,6 +607,8 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
     private fun connectionObserver() {
         if (NetworkConnectivity.isOnline(this)) {
             connectionValidation(true)
+            loadAnimations()
+
         } else {
             connectionValidation(false)
         }
