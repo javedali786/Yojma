@@ -1,7 +1,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!--QA ID-->
-    <string name="app_name">QA Bread Gang TV</string>
+    <string name="app_name">Yojma TV</string>
 
     <string name="facebook_app_id">771996797164803</string>
     <string name="fb_login_protocol_scheme">fb1129311964557209</string>
