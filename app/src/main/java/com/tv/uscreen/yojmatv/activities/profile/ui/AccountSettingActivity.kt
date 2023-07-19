@@ -62,6 +62,7 @@ class AccountSettingActivity : BaseBindingActivity<AccountSettingActivityBinding
 
     private fun setToolbar() {
         binding!!.toolbar.logoMain2.visibility = View.GONE
+        binding!!.toolbar.searchIcon.visibility = View.GONE
         binding!!.toolbar.backLayout.visibility = View.VISIBLE
         binding!!.toolbar.titleMid.visibility = View.VISIBLE
         val account = stringsHelper.stringParse(
@@ -213,7 +214,7 @@ class AccountSettingActivity : BaseBindingActivity<AccountSettingActivityBinding
             hitApiLogout(this, token)
             AppCommonMethod.screenViewedTrack(applicationContext, AppConstants.LOGOUT, "AccountSettingActivity")
             clearCredientials(mPreference)
-            ActivityLauncher.getInstance().loginActivity(this, ActivityLogin::class.java)
+            ActivityLauncher.getInstance().loginActivityFromLogout(this, ActivityLogin::class.java)
         }
     }
 

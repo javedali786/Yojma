@@ -128,8 +128,13 @@ public final class ActivityLauncher {
             source.startActivity(intent);
             source.finish();
         }
+    }
 
 
+    public void loginActivityFromLogout(Activity source, Class<ActivityLogin> destination) {
+            Intent intent = new Intent(source, destination);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            TaskStackBuilder.create(source).addNextIntentWithParentStack(intent).startActivities();
     }
 
     public void homeActivityWithParams(Activity source, Class<HomeActivity> destination,int postion) {
