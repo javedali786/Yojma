@@ -345,7 +345,7 @@ public interface AppConstants {
     String Gaming = "GAMING";
     String Reel = "REEL";
     String Documentaries = "DOCUMENTARIES";
-    String SEARCH_RESULT= "Search results";
+    String SEARCH_RESULT= "Search result";
 
 
 

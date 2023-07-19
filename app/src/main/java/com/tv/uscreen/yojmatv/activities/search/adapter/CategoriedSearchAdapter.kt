@@ -29,12 +29,10 @@ class CategoriedSearchAdapter(private val context: Context, private val list: Li
     private val stringsHelper by lazy { StringsHelper }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val binding: RowSearchCategoryBinding
-        binding = DataBindingUtil.inflate(
+        val binding: RowSearchCategoryBinding = DataBindingUtil.inflate(
             LayoutInflater.from(context),
             R.layout.row_search_category, parent, false
         )
-        //ThemeHandler.getInstance().applySearchCategory(parent.getContext(),binding);
         Logger.d("ViewType :$viewType")
         return VideoTypeViewHolder(binding)
     }
@@ -67,7 +65,7 @@ class CategoriedSearchAdapter(private val context: Context, private val list: Li
             }
         }
         videoTypeViewHolder.binding.tvTitle.text = header + " - " + totalCount + " " + searchResults
-        if (list?.get(pos)?.totalCount!! < 0) {
+        if (list?.get(pos)?.totalCount!! < 20) {
             videoTypeViewHolder.binding.showAllSearch.visibility = View.GONE
         }
         val finalHeader = header
