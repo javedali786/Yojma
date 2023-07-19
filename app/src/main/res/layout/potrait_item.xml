@@ -31,8 +31,6 @@
                 android:layout_width="wrap_content"
                 card_view:cardCornerRadius="8dp"
                 card_view:cardPreventCornerOverlap="false"
-                android:background="@color/try_again_btn_txt_color"
-                app:cardBackgroundColor="@color/try_again_btn_txt_color"
                 android:layout_marginRight="@dimen/NontonSize8"
                 android:layout_height="wrap_content">
 

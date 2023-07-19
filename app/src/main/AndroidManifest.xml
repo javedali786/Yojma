@@ -22,18 +22,13 @@
         android:largeHeap="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:resizeableActivity="false"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme"
         android:usesCleartextTraffic="true"
         tools:replace="allowBackup">
 
-        <activity
-            android:name=".CountryListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MyListActivity"
-            android:exported="false" />
+
+
         <activity
             android:name="com.example.jwplayer.PlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -67,10 +62,7 @@
             android:name="com.tv.uscreen.yojmatv.activities.profile.ui.ManageSubscriptionAccount"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.profile.ui.OrderHistoryActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityForgotPassword"
             android:exported="false"
@@ -89,18 +81,7 @@
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.onBoarding.ui.PersonalizePreferenceOnBoarding"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.onBoarding.ui.PersonalizeTypePreferenceOnBoarding"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.onBoarding.ui.ChoosePrefrenceActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.tv.uscreen.yojmatv.activities.usermanagment.ui.EnterOTPActivity"
             android:exported="false"
@@ -113,73 +94,18 @@
             android:name="com.tv.uscreen.yojmatv.activities.usermanagment.ui.ChangePasswordActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.contentsSweepstakkes.ui.ContestsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.News.NewsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.tv.uscreen.yojmatv.activities.detail.ui.DetailsNew"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.detail.ui.AgenciesDetails"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.detail.ui.SpeciesDetails"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-<!--        <activity-->
-<!--            android:name=".activities.detail.ui.Detail"-->
-<!--            android:exported="false"-->
-<!--            android:screenOrientation="portrait" />-->
-<!--        <activity-->
-<!--            android:name=".activities.detail.ui.ExpeditionDetail"-->
-<!--            android:exported="false"-->
-<!--            android:screenOrientation="portrait" />-->
-        <activity
-            android:name=".activities.event.EventsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.detail.ui.BrandDetail"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".GenreActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity android:name=".activities.search.ui.FilterIconActivity" />
+
         <activity
             android:name="com.tv.uscreen.yojmatv.activities.manageAccounts.ManageAccount"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".OnBoardingTab"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".SignUpWelcomeActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.profile.ui.AvatarImageActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".SignUpThirdPage"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".activities.contentPreference.UI.ContentPreference"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".OnBoarding"
-            android:screenOrientation="portrait" />
-        <activity android:name=".activities.downloads.DownloadedEpisodesActivity" />
+
+
         <activity android:name="com.tv.uscreen.yojmatv.activities.settings.downloadsettings.changequality.ui.ChangeDownloadQuality" />
         <activity android:name="com.tv.uscreen.yojmatv.activities.settings.downloadsettings.DownloadSettings" />
         <activity
@@ -235,8 +161,7 @@
             android:name="com.tv.uscreen.yojmatv.activities.splash.ui.ActivitySplash"
             android:exported="true"
             android:launchMode="singleTop"
-            android:screenOrientation="locked"
-            android:theme="@style/SplashTheme">
+            android:screenOrientation="locked">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -278,9 +203,7 @@
             android:name="io.branch.sdk.TestMode"
             android:value="false" />
 
-        <activity
-            android:name="com.aemerse.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat" />
+
         <activity
             android:name="com.tv.uscreen.yojmatv.activities.profile.ui.ProfileActivityNew"
             android:exported="false"
@@ -293,12 +216,7 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
-        <activity
-            android:name=".activities.onBoarding.ui.HomeSliderActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme" />
+
         <activity
             android:name="com.tv.uscreen.yojmatv.activities.search.ui.ActivitySearch"
             android:configChanges="orientation|screenSize"
@@ -334,14 +252,7 @@
             android:name="com.tv.uscreen.yojmatv.activities.listing.ui.GridActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop" />
-        <activity
-            android:name=".LoginActivity"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".SignUpActivity"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name="com.tv.uscreen.yojmatv.activities.termsandconditions.ui.TermAndCondition"
             android:launchMode="singleTop" />
@@ -362,19 +273,6 @@
             android:name="com.tv.uscreen.yojmatv.activities.listing.ui.MyListActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop" />
-
-        <receiver
-            android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name="com.google.android.gms.analytics.CampaignTrackingService"
-            android:enabled="true" />
 
         <activity
             android:name="com.tv.uscreen.yojmatv.cms.HelpActivity"
