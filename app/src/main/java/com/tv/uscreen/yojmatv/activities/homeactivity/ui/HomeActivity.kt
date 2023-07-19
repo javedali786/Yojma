@@ -19,15 +19,11 @@ import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.tv.uscreen.yojmatv.R
-
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
 import com.tv.uscreen.yojmatv.databinding.ActivityMainBinding
-
-import com.tv.uscreen.yojmatv.fragments.gaming.ui.GamingFragment
 import com.tv.uscreen.yojmatv.fragments.home.ui.HomeFragment
 import com.tv.uscreen.yojmatv.fragments.more.ui.MoreFragment
 import com.tv.uscreen.yojmatv.fragments.movies.ui.MovieFragment
-import com.tv.uscreen.yojmatv.fragments.shows.ui.PodcastFragment
 import com.tv.uscreen.yojmatv.utils.Logger
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.AppColors
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
@@ -115,17 +111,6 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
             }
 
 
-            R.id.navigation_podcast -> {
-                if (active !is PodcastFragment) {
-                    if (podcastFragment == null) {
-                        podcastFragment = PodcastFragment()
-                        fragmentManager!!.beginTransaction().add(R.id.content_frame, podcastFragment as PodcastFragment, "1")
-                            .hide(podcastFragment as PodcastFragment).commit()
-                    }
-                    switchToPodCastFragment()
-                }
-                return@OnItemSelectedListener true
-            }
 
             R.id.navigation_movie -> {
                 if (active !is MovieFragment) {
@@ -135,19 +120,6 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
                             .hide(movieFragment as MovieFragment).commit()
                     }
                     switchToMovieFragment()
-                }
-                return@OnItemSelectedListener true
-            }
-
-
-            R.id.navigation_gaming -> {
-                if (active !is GamingFragment) {
-                    if (gamingFragment == null) {
-                        gamingFragment = GamingFragment()
-                        fragmentManager!!.beginTransaction().add(R.id.content_frame, gamingFragment as GamingFragment, "3")
-                            .hide(gamingFragment as GamingFragment).commit()
-                    }
-                    switchToGamingFragment()
                 }
                 return@OnItemSelectedListener true
             }
@@ -223,9 +195,6 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
         binding!!.toolbar.backLayout.visibility = View.GONE
 
         bottomNavigationTextFromJson(navigation, R.id.navigation_home, stringsHelper.instance()?.data?.config?.home_tabbar.toString(), R.string.home_tabbar)
-        //bottomNavigationTextFromJson(navigation, R.id.navigation_reel, stringsHelper.instance()?.data?.config?.reel_tabbar.toString(), R.string.reel_tabbar)
-        bottomNavigationTextFromJson(navigation, R.id.navigation_gaming, stringsHelper.instance()?.data?.config?.gaming_tabbar.toString(), R.string.gaming_tabbar)
-        bottomNavigationTextFromJson(navigation, R.id.navigation_podcast, stringsHelper.instance()?.data?.config?.podcast_tabbar.toString(), R.string.podcast_tabbar)
         bottomNavigationTextFromJson(navigation, R.id.navigation_movie, stringsHelper.instance()?.data?.config?.movie_tabbar.toString(), R.string.movie_tabbar)
         bottomNavigationTextFromJson(navigation, R.id.navigation_more, stringsHelper.instance()?.data?.config?.more_tabbar.toString(), R.string.more_tabbar)
 

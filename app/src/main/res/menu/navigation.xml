@@ -6,25 +6,12 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home_tabbar" />
 
-   <!-- <item
-        android:id="@+id/navigation_reel"
-        android:icon="@drawable/ic_reels"
-        android:title="@string/reel_tabbar" />-->
-
-    <item
-        android:id="@+id/navigation_podcast"
-        android:icon="@drawable/ic_podcast"
-        android:title="@string/podcast_tabbar" />
-
     <item
         android:id="@+id/navigation_movie"
         android:icon="@drawable/ic_movie"
         android:title="@string/movie_tabbar" />
 
-    <item
-        android:id="@+id/navigation_gaming"
-        android:icon="@drawable/ic_gaming"
-        android:title="@string/gaming_tabbar" />
+
     <item
         android:id="@+id/navigation_more"
         android:icon="@drawable/ic_more"

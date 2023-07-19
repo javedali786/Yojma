@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.fragments.more.ui
 
+
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -10,25 +11,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.tv.uscreen.yojmatv.R
-
-
 import com.tv.uscreen.yojmatv.activities.homeactivity.ui.HomeActivity
 import com.tv.uscreen.yojmatv.activities.homeactivity.viewmodel.HomeViewModel
 import com.tv.uscreen.yojmatv.activities.listing.ui.MyListActivity
-import com.tv.uscreen.yojmatv.activities.profile.order_history.ui.OrderHistoryActivity
 import com.tv.uscreen.yojmatv.activities.profile.ui.AccountSettingActivity
-import com.tv.uscreen.yojmatv.activities.profile.ui.ManageSubscriptionAccount
 import com.tv.uscreen.yojmatv.activities.purchase.plans_layer.GetPlansLayer
 import com.tv.uscreen.yojmatv.activities.settings.ActivitySettings
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
-import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivitySelectSubscriptionPlan
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingFragment
 import com.tv.uscreen.yojmatv.beanModel.AppUserModel
 import com.tv.uscreen.yojmatv.beanModel.userProfile.UserProfileResponse
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.MoreItemClickListener
 import com.tv.uscreen.yojmatv.cms.HelpActivity
 import com.tv.uscreen.yojmatv.databinding.FragmentMoreBinding
-
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment
 import com.tv.uscreen.yojmatv.fragments.more.adapter.MoreListAdapter
 import com.tv.uscreen.yojmatv.utils.Logger
@@ -118,18 +113,18 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
             stringsHelper.instance()?.data?.config?.more_settings.toString(),
             getString(R.string.more_settings)
         )
-        val buyNow = stringsHelper.stringParse(
+       /* val buyNow = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_buy_now.toString(),
             getString(R.string.more_buy_now)
-        )
-        val manageSubscription = stringsHelper.stringParse(
+        )*/
+       /* val manageSubscription = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_manage_subscription.toString(),
             getString(R.string.more_manage_subscription)
-        )
-        val orderHistory = stringsHelper.stringParse(
+        )*/
+       /* val orderHistory = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_order_history.toString(),
             getString(R.string.more_order_history)
-        )
+        )*/
         val privacyPolicy = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_privacy_policy.toString(),
             getString(R.string.more_privacy_policy)
@@ -138,7 +133,7 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
             stringsHelper.instance()?.data?.config?.more_term_condition.toString(),
             getString(R.string.more_term_condition)
         )
-        val label3 = arrayOf(myList, account, settings, buyNow, orderHistory, privacyPolicy, termsCondition)
+        val label3 = arrayOf(myList, account, settings, privacyPolicy, termsCondition)
         val mListLogOut: List<String> = ArrayList(listOf(*label3))
         val mListWithSub: List<String> = ArrayList(listOf(*label3))
         mListLogin = ArrayList()
@@ -283,7 +278,8 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
             }
         } else if (caption == getString(R.string.more_settings)) {
             ActivityLauncher.getInstance().goToSetting(requireActivity(), ActivitySettings::class.java)
-        } else if (caption == getString(R.string.more_buy_now)) {
+        }
+       /*else if (caption == getString(R.string.more_buy_now)) {
             if (loginStatus) {
                 if (hasEntitlement) {
                     ActivityLauncher.getInstance().manageAccount(requireActivity(), ManageSubscriptionAccount::class.java)
@@ -293,19 +289,22 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
             } else {
                 ActivityLauncher.getInstance().loginActivity(requireActivity(), ActivityLogin::class.java)
             }
-        } else if (caption == getString(R.string.manage_account)) {
+        } */
+       /*else if (caption == getString(R.string.manage_account)) {
             if (loginStatus) {
                 ActivityLauncher.getInstance().goToPlanScreen(requireActivity(), ActivitySelectSubscriptionPlan::class.java, "moreFragment")
             } else {
                 ActivityLauncher.getInstance().loginActivity(requireActivity(), ActivityLogin::class.java)
             }
-        } else if (caption == getString(R.string.more_order_history)) {
+        }*/
+       /*else if (caption == getString(R.string.more_order_history)) {
             if (loginStatus) {
                 ActivityLauncher.getInstance().orderHistroy(requireActivity(), OrderHistoryActivity::class.java)
             } else {
                 ActivityLauncher.getInstance().loginActivity(requireActivity(), ActivityLogin::class.java)
             }
-        } else if (caption == getString(R.string.privacy_policy)) {
+        }*/
+       else if (caption == getString(R.string.privacy_policy)) {
             requireActivity().startActivity(Intent(requireActivity(), HelpActivity::class.java).putExtra("type", "2"))
         } else if (caption == getString(R.string.more_term_condition)) {
             requireActivity().startActivity(Intent(requireActivity(), HelpActivity::class.java).putExtra("type", "1"))

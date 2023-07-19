@@ -1,5 +1,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Bread Gang TV</string>
+    <string name="app_name">Yojma TV</string>
     <string name="retry">Try Again</string>
     <string name="no_connection">No internet connection found.</string>
     <string name="check_connection_text">Check your connection.</string>
