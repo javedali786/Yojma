@@ -852,33 +852,39 @@ public class APIServiceLayer {
         MutableLiveData<List<RailCommonData>> responsePopular = new MutableLiveData<>();
         try {
 
+
             ApiInterface endpoint = RequestConfig.getClientSearch().create(ApiInterface.class);
             String videoContentTypes = AppConstants.VIDEO;
 
-            String videoTypes1 = MediaTypeConstants.getInstance().getMovie();
-            String videoTypes2 = AppConstants.Reel;
-            String videoTypes3 = AppConstants.Gaming;
-            String mediaType = videoTypes1 + "," + videoTypes2 + "," +videoTypes3;
+
+         /*   String videoTypes1 = MediaTypeConstants.getInstance().getSeries();
+            String videoTypes2 = MediaTypeConstants.getInstance().getEpisode();
+            String seriesVideoType = videoTypes1 + "," + videoTypes2;*/
+
+            String videoTypes1 = AppConstants.SERIES;
+            String videoTypes2 = AppConstants.Episode;
+            String seriesVideoType = videoTypes1 + "," + videoTypes2;
 
 
-            Observable<ResponseSearch> commonSearchCall = null;
-            Observable<ResponseSearch> podCastCall = null;
+            Observable<ResponseSearch> documentries = null;
+            Observable<ResponseSearch> seriesCall = null;
 
-            commonSearchCall = endpoint.getSearch(keyword,
-                            videoContentTypes, size, page, languageCode,mediaType)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(Schedulers.io());
-
-            podCastCall = endpoint.getSearchByFilters(keyword,
-                            videoContentTypes, size, page, languageCode,AppConstants.Podcast, allFilters,
+            documentries = endpoint.getSearchByFilters(keyword,
+                            videoContentTypes, size, page, languageCode,AppConstants.Movie, allFilters,
                             filterSortSavedListKeyForApi)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io());
 
+            seriesCall = endpoint.getSearchByFilters(keyword,
+                            videoContentTypes, size, page, languageCode,seriesVideoType, allFilters,
+                            filterSortSavedListKeyForApi)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io());
 
-            Observable<List<ResponseSearch>> combined = Observable.zip(commonSearchCall,podCastCall, (commonSearchResponse,podcastResponse) -> {
+            Observable<List<ResponseSearch>> combined = Observable.zip(documentries,seriesCall, (documentriesResponse,seriesResponse) -> {
                 List<ResponseSearch> combinedList = new ArrayList<>();
-                combinedList.add(commonSearchResponse);
+                combinedList.add(documentriesResponse);
+                combinedList.add(seriesResponse);
                 return combinedList;
             }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
             combined.subscribe(new Observer<List<ResponseSearch>>() {
@@ -952,21 +958,19 @@ public class APIServiceLayer {
         responsePopular = new MutableLiveData<>();
         {
             languageCode = LanguageLayer.getCurrentLanguageCode();
-            String videoTypes1 = MediaTypeConstants.getInstance().getMovie();
-            String videoTypes2 = AppConstants.Reel;
-            String videoTypes3 = AppConstants.Gaming;
-            String mediaType = videoTypes1 + "," + videoTypes2 + "," +videoTypes3;
-
+            String videoTypes1 = AppConstants.SERIES;
+            String videoTypes2 = AppConstants.Episode;
+            String seriesVideoType = videoTypes1 + "," + videoTypes2;
 
 
             try {
                 // keyword= URLEncoder.encode(keyword, "UTF-8");
                 ApiInterface backendApi = RequestConfig.getClientSearch().create(ApiInterface.class);
                 if (type.equalsIgnoreCase(AppConstants.VIDEO)) {
-                    if (header.equalsIgnoreCase(AppConstants.SEARCH_RESULT)) {
-                        call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,mediaType);
-                    } else if (header.equalsIgnoreCase(AppConstants.Podcast)){
-                        call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,AppConstants.Podcast);
+                    if (header.equalsIgnoreCase(AppConstants.Movie)) {
+                        call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,AppConstants.Movie);
+                    } else if (header.equalsIgnoreCase(AppConstants.series)){
+                        call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,seriesVideoType);
                     }
                 }
 
@@ -988,11 +992,6 @@ public class APIServiceLayer {
                                         Log.d("ENVUE", "onResponse: " + json);
                                         for (com.tv.uscreen.yojmatv.beanModelV3.searchV2.ItemsItem videoItem : itemsItem) {
                                             EnveuVideoItemBean enveuVideoItemBean = new EnveuVideoItemBean(videoItem);
-                                            /*if (videoItem.getContentType().equalsIgnoreCase(AppConstants.CUSTOM)) {
-                                                enveuVideoItemBean.setPosterURL(ImageLayer.getInstance().getCustomPosterImageUrl(videoItem));
-                                            } else if (videoItem.getContentType().equalsIgnoreCase(AppConstants.VIDEO)) {
-                                                enveuVideoItemBean.setPosterURL(ImageLayer.getInstance().getPosterImageUrl1(videoItem));
-                                            }*/
                                             if (type.equalsIgnoreCase(MediaTypeConstants.getInstance().getSeries()) && videoItem.getSeasons() != null)
                                                 enveuVideoItemBean.setSeasonCount(videoItem.getSeasons().size());
 

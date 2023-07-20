@@ -71,7 +71,7 @@ class MyListActivity : BaseBindingActivity<FragmentMyListBinding?>(), ItemClickL
 
     private fun setToolbar() {
         binding!!.toolbar.logoMain2.visibility = View.GONE
-        binding!!.toolbar.titleMid.visibility = View.GONE
+        binding!!.toolbar.titleMid.visibility = View.VISIBLE
         binding!!.toolbar.backLayout.visibility = View.VISIBLE
         val myList = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.my_list.toString(),

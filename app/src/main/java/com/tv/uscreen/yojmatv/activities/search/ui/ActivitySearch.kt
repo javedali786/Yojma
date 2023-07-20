@@ -208,7 +208,7 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
         binding!!.rootView.visibility = View.GONE
         binding!!.noResult.visibility = View.GONE
         binding!!.llSearchResultLayout.visibility = View.VISIBLE
-        railInjectionHelper!!.getSearch(searchKeyword, 10, 0, applyFilter, requestModel).observe(this@ActivitySearch) { data: List<RailCommonData> ->
+        railInjectionHelper!!.getSearch(searchKeyword, 4, 0, applyFilter, requestModel).observe(this@ActivitySearch) { data: List<RailCommonData> ->
             searchResult = true
             if (data.isNotEmpty()) {
                 try {
@@ -236,16 +236,10 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
                                         if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(MediaTypeConstants.getInstance().movie, ignoreCase = true)) {
                                             temp.layoutType = 0
                                         }
-                                        if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(MediaTypeConstants.getInstance().series, ignoreCase = true) ||
-                                            data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(MediaTypeConstants.getInstance().episode, ignoreCase = true)
+                                        if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(AppConstants.Movie, ignoreCase = true) ||
+                                            data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(AppConstants.episode, ignoreCase = true)
                                         ) {
                                             temp.layoutType = 1
-                                        }
-                                    } else {
-                                        if (data[i].enveuVideoItemBeans[0].assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
-                                            if (data[i].enveuVideoItemBeans[0].customContent.customType.equals(MediaTypeConstants.getInstance().expedition, ignoreCase = true)) {
-                                                temp.layoutType = 2
-                                            }
                                         }
                                     }
                                     temp.searchKey = searchKeyword

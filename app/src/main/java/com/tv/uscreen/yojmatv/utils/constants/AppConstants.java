@@ -236,6 +236,7 @@ public interface AppConstants {
     String novilites="novilites";
     String events="events";
     String series="series";
+    String episode="EPISODE";
     String INTENT_FROM = "intentFrom";
     String VIDEO = "VIDEO";
     String CUSTOM = "CUSTOM";

@@ -55,17 +55,30 @@ class CategoriedSearchAdapter(private val context: Context, private val list: Li
         videoTypeViewHolder.binding.showAll.text = seeAll
         videoTypeViewHolder.binding.recyclerView.adapter = itemListDataAdapter1
         var header = ""
-        when (getItemViewType(pos)) {
+        /*when (getItemViewType(pos)) {
             0 -> {
                 val search = stringsHelper.stringParse(
                     stringsHelper.instance()?.data?.config?.search_result.toString(),
-                    context.getString(R.string.search_result)
-                )
-                header = search
+                    context.getString(R.string.movie))
+                header = context.getString(R.string.movie)
+                break
             }
+
+            1 -> {
+                header = context.getString(R.string.series)
+            }
+
+
+        }*/
+
+        when (getItemViewType(pos)) {
+            0 -> header = context.getString(R.string.documentries)
+            1 -> header = context.getString(R.string.series)
         }
-        videoTypeViewHolder.binding.tvTitle.text = header + " - " + totalCount + " " + searchResults
-        if (list?.get(pos)?.totalCount!! < 20) {
+       // videoTypeViewHolder.binding.tvTitle.text = header + " - " + totalCount + " " + searchResults
+        videoTypeViewHolder.binding.tvTitle.text = header
+
+        if (list?.get(pos)?.totalCount!! < 4) {
             videoTypeViewHolder.binding.showAllSearch.visibility = View.GONE
         }
         val finalHeader = header
