@@ -79,7 +79,6 @@ public class LandscapeListingAdapter extends RecyclerView.Adapter<LandscapeListi
         LandscapeListingItemBinding binding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 R.layout.landscape_listing_item, parent, false);
-        //ThemeHandler.getInstance().applyheadingLandscapeBig(parent.getContext(),binding);
         binding.setColorsData(ColorsHelper.INSTANCE);
         return new SingleItemRowHolder(binding);
     }

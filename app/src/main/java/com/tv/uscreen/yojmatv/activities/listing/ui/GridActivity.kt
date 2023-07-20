@@ -379,16 +379,13 @@ class GridActivity : BaseBindingActivity<ListingActivityBinding?>(), ItemClickLi
             binding!!.progressBar.visibility = View.GONE
             mIsLoading = true
             if (playlistRailData != null) {
-                if (baseCategory!!.referenceName != null && (baseCategory!!.referenceName.equals(
-                        AppConstants.ContentType.CONTINUE_WATCHING.name,
-                        ignoreCase = true
-                    ) || baseCategory!!.referenceName.equals("special_playlist", ignoreCase = true))
-                ) {
-                    if (commonPosterLandscapeAdapter == null) {
+                if (baseCategory!!.referenceName != null && (baseCategory!!.referenceName.equals(AppConstants.ContentType.CONTINUE_WATCHING.name, ignoreCase = true) || baseCategory!!.referenceName.equals("special_playlist", ignoreCase = true))) {
+                    if (commonLandscapeAdapter == null) {
                         RecyclerAnimator(this).animate(binding!!.listRecyclerview)
-                        commonPosterLandscapeAdapter = CommonPosterLandscapeAdapter(this, playlistRailData.enveuVideoItemBeans, ArrayList(), "VIDEO", ArrayList(), baseCategory, this)
-                        binding!!.listRecyclerview.adapter = commonPosterLandscapeAdapter
-                    }
+                        commonLandscapeAdapter = LandscapeListingAdapter(this, playlistRailData.enveuVideoItemBeans, ArrayList(), "VIDEO", this, baseCategory, tabletSize)
+                        binding!!.listRecyclerview.adapter = commonLandscapeAdapter
+                    } else commonLandscapeAdapter!!.notifydata(playlistRailData.enveuVideoItemBeans)
+                    mIsLoading = playlistRailData.maxContent != commonLandscapeAdapter!!.itemCount
                 } else {
                     if (baseCategory!!.contentImageType.equals(ImageType.CIR.name, ignoreCase = true)) {
                         if (commonCircleAdapter == null) {
@@ -419,12 +416,6 @@ class GridActivity : BaseBindingActivity<ListingActivityBinding?>(), ItemClickLi
                         } else commonPotraitTwoAdapter!!.notifydata(playlistRailData.enveuVideoItemBeans)
                         mIsLoading = playlistRailData.maxContent != commonPotraitTwoAdapter!!.itemCount
                     } else if (baseCategory!!.contentImageType.equals(ImageType.LDS.name, ignoreCase = true)) {
-                        if (commonPosterLandscapeAdapter == null) {
-                            RecyclerAnimator(this).animate(binding!!.listRecyclerview)
-                            commonPosterLandscapeAdapter = CommonPosterLandscapeAdapter(this, playlistRailData.enveuVideoItemBeans, ArrayList(), "VIDEO", ArrayList(), baseCategory, this)
-                            binding!!.listRecyclerview.adapter = commonPosterLandscapeAdapter
-                        } else commonPosterLandscapeAdapter!!.notifydata(playlistRailData.enveuVideoItemBeans)
-                        mIsLoading = playlistRailData.maxContent != commonPosterLandscapeAdapter!!.itemCount
                         if (commonLandscapeAdapter == null) {
                             RecyclerAnimator(this).animate(binding!!.listRecyclerview)
                             commonLandscapeAdapter = LandscapeListingAdapter(this, playlistRailData.enveuVideoItemBeans, ArrayList(), "VIDEO", this, baseCategory, tabletSize)
@@ -439,16 +430,6 @@ class GridActivity : BaseBindingActivity<ListingActivityBinding?>(), ItemClickLi
                         } else commonPosterPotraitAdapter!!.notifydata(playlistRailData.enveuVideoItemBeans)
                         mIsLoading = playlistRailData.maxContent != commonPosterPotraitAdapter!!.itemCount
                     }
-                    //                    else if (baseCategory.getContentImageType().equalsIgnoreCase(ImageType.PR1.name())) {
-//                        if (commonPotraitAdapter == null) {
-//                            new RecyclerAnimator(this).animate(getBinding().listRecyclerview);
-//                            commonPotraitAdapter = new CommonPotraitAdapter(this, playlistRailData.getEnveuVideoItemBeans(), "VIDEO", new ArrayList<>(), 0, this, baseCategory, playlistRailData);
-//                            getBinding().listRecyclerview.setAdapter(commonPotraitAdapter);
-//                        } else
-//                            commonPotraitAdapter.notifydata(playlistRailData.getEnveuVideoItemBeans());
-//
-//                        mIsLoading = playlistRailData.getMaxContent() != commonPotraitAdapter.getItemCount();
-//                    }
                     binding!!.listRecyclerview.scrollToPosition(mScrollY)
                 }
             }

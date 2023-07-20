@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "660992640207",
-    "project_id": "breadgangtvnetwork-qa",
-    "storage_bucket": "breadgangtvnetwork-qa.appspot.com"
+    "project_number": "558644247495",
+    "project_id": "yojma-tv-dev",
+    "storage_bucket": "yojma-tv-dev.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:660992640207:android:2870a3bd9a609b722aa3ba",
+        "mobilesdk_app_id": "1:558644247495:android:24213c3676ee8d6b87f7e2",
         "android_client_info": {
-          "package_name": "com.breadgangtvnetwork.qa"
+          "package_name": "tv.uscreen.yojmatv.qa"
         }
       },
       "oauth_client": [
         {
-          "client_id": "660992640207-kiq1amhfisuhgjgiq628schpa7vk55up.apps.googleusercontent.com",
+          "client_id": "558644247495-ven8tkd8sg0v044tvai2snb9misqtl60.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCLWKZ-BYamWpAf2LDjH4dukHzJ0NpqySM"
+          "current_key": "AIzaSyDxYmjBP7DTTSRxiTNs6gdrtW89OH2EAuM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "660992640207-kiq1amhfisuhgjgiq628schpa7vk55up.apps.googleusercontent.com",
+              "client_id": "558644247495-ven8tkd8sg0v044tvai2snb9misqtl60.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -543,7 +543,7 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         super.onResume()
         try {
             val isTablet: Boolean = this@ActivitySplash.resources.getBoolean(R.bool.isTablet)
-            binding?.buildNumber?.visibility = View.GONE
+            binding?.buildNumber?.visibility = View.VISIBLE
             if (!isTablet) binding?.buildNumber?.text = resources.getString(R.string.app_name) + "  V " + BuildConfig.VERSION_NAME
         } catch (ignored: Exception) {
         }
@@ -607,8 +607,6 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
     private fun connectionObserver() {
         if (NetworkConnectivity.isOnline(this)) {
             connectionValidation(true)
-            loadAnimations()
-
         } else {
             connectionValidation(false)
         }
@@ -617,7 +615,7 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
     private fun connectionValidation(aBoolean: Boolean) {
         if (aBoolean) {
             binding?.connection?.noConnectionLayout?.visibility = View.GONE
-            // loadAnimations();
+            loadAnimations()
             callNextForRedirection()
             dynamicLink
         } else {

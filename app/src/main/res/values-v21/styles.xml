@@ -106,7 +106,7 @@
     </style>
 
     <style name="Custom.Widget.CardView" parent="CardView">
-        <item name="cardBackgroundColor">@color/try_again_btn_txt_color</item>
+        <item name="cardBackgroundColor">@color/app_bg_color</item>
         <item name="android:background">@color/transparent</item>
         <item name="cardElevation">0dp</item>
         <item name="cardMaxElevation">0dp</item>
@@ -116,7 +116,7 @@
     </style>
 
     <style name="Custom.Widget.CardView1" parent="CardView">
-        <item name="cardBackgroundColor">?attr/watchlist_background</item>
+        <item name="cardBackgroundColor">@color/app_bg_color</item>
         <item name="cardElevation">0dp</item>
         <item name="cardMaxElevation">0dp</item>
         <item name="cardCornerRadius">@dimen/card_corner_4dp</item>

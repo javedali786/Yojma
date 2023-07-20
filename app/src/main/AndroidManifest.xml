@@ -44,10 +44,6 @@
             android:name="com.tv.uscreen.yojmatv.activities.listing.ui.MoreForYouActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-<!--        <activity-->
-<!--            android:name=".activities.live.FragmentLiveTv"-->
-<!--            android:exported="false"-->
-<!--            android:screenOrientation="portrait" />-->
 
         <activity
             android:name="com.tv.uscreen.yojmatv.activities.Novelties.ui.NoveltiesActivity"
@@ -161,7 +157,8 @@
             android:name="com.tv.uscreen.yojmatv.activities.splash.ui.ActivitySplash"
             android:exported="true"
             android:launchMode="singleTop"
-            android:screenOrientation="locked">
+            android:screenOrientation="locked"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
