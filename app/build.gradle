@@ -70,7 +70,7 @@ android {
             dimension 'default'
             versionCode 1
             versionName "1.0"
-            applicationId "com.breadgangtvnetwork"
+            applicationId "com.tv.uscreen.yojmatv"
             buildConfigField "String", "MOENGAGE_APP_ID", "\"RKRIA1W5XU7NWCY5X9935YBF\""
         }
     }

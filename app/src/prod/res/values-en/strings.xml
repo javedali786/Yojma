@@ -1,7 +1,7 @@
 <resources>
 
     <!--Production ID-->
-    <string name="app_name">Bread Gang TV</string>
+    <string name="app_name">Yojma TV</string>
     <string name="facebook_app_id">771996797164803</string>
     <string name="fb_login_protocol_scheme">fb3991362660937190</string>
     <string name="branch_key">key_live_cdJ7zkyRJg31rm79E5t5QkleDAmzOaM7</string>

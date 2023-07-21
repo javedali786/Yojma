@@ -35,7 +35,6 @@ class HelpActivity : BaseBindingActivity<ActivityHelpBinding?>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // ThemeHandler.getInstance().applyHelpActivity(this, getBinding());
         type = intent.getStringExtra("type")
         if (type.equals("1", ignoreCase = true)) {
             ToolBarHandler.getInstance().setHelpAction(binding, this@HelpActivity.resources.getString(R.string.terms_and_conditions), this)
@@ -72,9 +71,11 @@ class HelpActivity : BaseBindingActivity<ActivityHelpBinding?>() {
 
         //  getBinding().webView.setBackgroundColor(getResources().getColor(R.color.theme_background_dark));
         val url: String = if (type.equals("1", ignoreCase = true)) {
-            SDKConfig.getInstance().termCondition_URL
+          //  SDKConfig.getInstance().termCondition_URL
+            "https://www.yojma.tv/pages/tyc"
         } else if (type.equals("2", ignoreCase = true)) {
-            SDKConfig.getInstance().privay_Policy_URL
+          //  SDKConfig.getInstance().privay_Policy_URL
+            "https://www.yojma.tv/pages/privacidad"
         } else if (type.equals("3", ignoreCase = true)) {
             SDKConfig.getInstance().contacT_URL
         } else if (type.equals("4", ignoreCase = true)) {

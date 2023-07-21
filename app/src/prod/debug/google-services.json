@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "544087762908",
-    "project_id": "breadgangtvnetwork-prod",
-    "storage_bucket": "breadgangtvnetwork-prod.appspot.com"
+    "project_number": "458328131335",
+    "project_id": "yojma-tv-c5b21",
+    "storage_bucket": "yojma-tv-c5b21.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:544087762908:android:fefbd05ee9e98e42b6d119",
+        "mobilesdk_app_id": "1:458328131335:android:4ebffc1b7effe2829867a2",
         "android_client_info": {
-          "package_name": "com.breadgangtvnetwork"
+          "package_name": "com.tv.uscreen.yojmatv"
         }
       },
       "oauth_client": [
         {
-          "client_id": "544087762908-j6m2j53f2fs7limtb02qea0a2qt8nb04.apps.googleusercontent.com",
+          "client_id": "458328131335-u6e1abj2a181dgje2el9u1ccubrv61cs.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBIEe93ZSubP9CkFiq5QrkeP7NjVRNueaI"
+          "current_key": "AIzaSyAgJwpm9hA_T9w9iCNAnxSioqCs4b_UEdg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "544087762908-j6m2j53f2fs7limtb02qea0a2qt8nb04.apps.googleusercontent.com",
+              "client_id": "458328131335-u6e1abj2a181dgje2el9u1ccubrv61cs.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "458328131335-8thk3pkrsfltlm8ude0jo6cfaiofbk2f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smartboxtv.nunchee.ios.yojma"
+              }
             }
           ]
         }
