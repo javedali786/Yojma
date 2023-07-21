@@ -128,6 +128,7 @@
                     style="@style/EditTextStyle"
                     android:layout_marginTop="@dimen/sign_up_padding_25dp"
                     android:autofillHints=""
+                    android:visibility="gone"
                     android:drawableLeft="@drawable/ic_dob_icon"
                     android:drawablePadding="@dimen/_5sdp"
                     android:textColorHint="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_hint_txt_color) ? @color/tph_hint_txt_color : Color.parseColor(colorsData.instance().data.config.tph_hint_txt_color), default=@color/tph_hint_txt_color}"
@@ -201,10 +202,11 @@
                     android:layout_width="@dimen/choose_pref_16dp"
                     android:layout_height="@dimen/choose_pref_16dp"
                     android:layout_marginStart="@dimen/signUp_26dp"
+                    android:padding="@dimen/signUp_8dp_margin"
+                    android:background="@drawable/checkbox_selector"
                     android:button="@android:color/transparent"
                     android:buttonTint="@color/series_detail_now_playing_title_color"
                     android:checked="false"
-                    android:padding="@dimen/signUp_8dp_margin"
                     android:textColor="@color/series_detail_now_playing_title_color"
                     android:textSize="@dimen/sign_up_et_text_size"
                     app:layout_constraintBottom_toBottomOf="@+id/termstext"
@@ -226,6 +228,7 @@
 
                 <TextView
                     android:id="@+id/orSign_up"
+                    android:visibility="gone"
                     style="@style/TextView_Medium"
                     android:layout_marginTop="@dimen/sign_up_margin32dp"
                     android:text="@{TextUtils.isEmpty(stringData.instance().data.config.signup_or_signup_with) ? @string/signup_or_signup_with : stringData.instance().data.config.signup_or_signup_with , default=@string/signup_or_signup_with}"
@@ -237,6 +240,7 @@
                 <View
                     android:id="@+id/view3"
                     android:layout_width="0dp"
+                    android:visibility="gone"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="5dp"
@@ -251,6 +255,7 @@
                     android:id="@+id/view5"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
+                    android:visibility="gone"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="32dp"
                     android:background="@color/series_detail_now_playing_title_color"
@@ -262,6 +267,7 @@
 
                 <View
                     android:id="@+id/socailview"
+                    android:visibility="gone"
                     android:layout_width="@dimen/sign_up_116dp"
                     android:layout_height="@dimen/sign_up_73dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -288,6 +294,7 @@
                     android:id="@+id/facebook_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:src="@drawable/ic_facebook"
                     app:layout_constraintBottom_toBottomOf="@+id/socailview"
                     app:layout_constraintStart_toStartOf="@+id/socailview"
@@ -296,6 +303,7 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/apple_img"
                     android:layout_width="wrap_content"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_apply"
                     app:layout_constraintBottom_toBottomOf="@+id/socailview"

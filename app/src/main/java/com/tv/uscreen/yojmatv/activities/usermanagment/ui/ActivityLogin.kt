@@ -93,7 +93,6 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //ThemeHandler.getInstance().applyActivityLogin(this, binding)
 
         binding?.stringData = stringsHelper
         binding?.colorsData = colorsHelper

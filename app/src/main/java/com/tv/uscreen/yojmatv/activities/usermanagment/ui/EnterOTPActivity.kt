@@ -56,7 +56,6 @@ class EnterOTPActivity : BaseBindingActivity<ActivityEnterOtpBinding?>(), Common
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fromWhich = intent.getStringExtra("fromWhich")
-        //ThemeHandler.getInstance().applyThemeEnterOTP(this, binding);
         parseColor()
         setupToolbar()
         setClick()
@@ -401,6 +400,10 @@ class EnterOTPActivity : BaseBindingActivity<ActivityEnterOtpBinding?>(), Common
 
     override fun onActionBtnClicked() {
      if (isOtpVerified)
-         ActivityLauncher.getInstance().homeScreen(this, HomeActivity::class.java)
+         ActivityLauncher.getInstance().goToPlanScreen(
+             this@EnterOTPActivity,
+             ActivitySelectSubscriptionPlan::class.java,
+             "OTP"
+         )
     }
 }

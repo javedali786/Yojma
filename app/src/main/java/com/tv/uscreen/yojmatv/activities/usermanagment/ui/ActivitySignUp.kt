@@ -24,8 +24,7 @@ import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.gson.Gson
-import com.moe.pushlibrary.MoEHelper
-import com.moengage.core.Properties
+import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.activities.homeactivity.ui.HomeActivity
 import com.tv.uscreen.yojmatv.activities.purchase.plans_layer.GetPlansLayer
 import com.tv.uscreen.yojmatv.activities.usermanagment.viewmodel.RegistrationLoginViewModel
@@ -33,11 +32,9 @@ import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
 import com.tv.uscreen.yojmatv.beanModel.responseModels.LoginResponse.Data
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.AppleSignInListener
 import com.tv.uscreen.yojmatv.databinding.ActivitySignupBinding
-
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment
 import com.tv.uscreen.yojmatv.utils.BindingUtils.FontUtil
 import com.tv.uscreen.yojmatv.utils.Logger
-import com.tv.uscreen.yojmatv.utils.TrackerUtil.MoEUserTracker.setUserProperties
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.AppColors
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
@@ -51,11 +48,9 @@ import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 import org.json.JSONException
 import org.json.JSONObject
-import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import com.tv.uscreen.yojmatv.R
 
 class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDialogFragment.EditDialogListener,
     AppleSignInListener {
@@ -438,7 +433,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
             mLastClickTime = SystemClock.elapsedRealtime()
             hideSoftKeyboard(binding?.signUp)
             if (CheckInternetConnection.isOnline(this@ActivitySignUp)) {
-                if(validateEmptyEmail() && validateEmail() && validateEmptyDob() && validateEmptyPassword() && validateEmptyConfirmPassword() && confirmPasswordCheck(binding?.password?.text.toString(),binding?.confPassword?.text.toString())){
+                if(validateEmptyEmail() && validateEmail() && validateEmptyPassword() && validateEmptyConfirmPassword() && confirmPasswordCheck(binding?.password?.text.toString(),binding?.confPassword?.text.toString())){
                     hitSignUpApi()
                 }
 
@@ -486,12 +481,13 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
                       val signUpData: Data = it.responseModel.data
                       val stringJson = gson.toJson(signUpData)
                       saveUserDetails(stringJson, true)
-                      try {
+                     /* try {
                           setUserProperties(this,signUpData.id,signUpData.name,signUpData.email,signUpData.phoneNumber,signUpData.dateOfBirth)
                       } catch (e: NullPointerException ) {
                         Logger.w(e)
-                      }
-                      val properties = Properties()
+                      }*/
+
+                     /* val properties = Properties()
                       properties.addAttribute(AppConstants.REGISTER, AppConstants.REGISTER)
                       MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
                       val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
@@ -499,7 +495,8 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
                       System.out.println(dateFormat.format(date))
                       properties.addAttribute(AppConstants.REGISTER_DATE, date)
                       MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.REGISTER_DATE, properties)
-                      AppCommonMethod.screenViewedTrack(applicationContext, AppConstants.SIGN_UP_SUCCESS, "ActivitySignUp")
+                      AppCommonMethod.screenViewedTrack(applicationContext, AppConstants.SIGN_UP_SUCCESS, "ActivitySignUp")*/
+
                       clearEditView()
                   }else if(it.responseModel.responseCode==4901){
                       commonDialog(it.debugMessage.toString(),"",stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_continue.toString(), getString(R.string.popup_continue)))

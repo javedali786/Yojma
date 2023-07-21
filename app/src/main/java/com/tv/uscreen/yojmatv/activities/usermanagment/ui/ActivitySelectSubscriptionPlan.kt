@@ -105,7 +105,14 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
             binding?.bottomLay!!.visibility = View.VISIBLE
             binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
             binding?.toolbar!!.backLayout.visibility = View.GONE
-        } else{
+        }  else if (fromSingUp!!.equals("OTP",ignoreCase = true) ){
+            binding?.toolbar!!.titleSkip.text = resources.getText(R.string.only_register)
+            binding?.mainPaymentLayout!!.visibility = View.VISIBLE
+            binding?.bottomLay!!.visibility = View.VISIBLE
+            binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
+            binding?.toolbar!!.backLayout.visibility = View.GONE
+        }
+        else{
             binding?.mainPaymentLayout!!.visibility = View.VISIBLE
             binding?.bottomLay!!.visibility = View.VISIBLE
             binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
