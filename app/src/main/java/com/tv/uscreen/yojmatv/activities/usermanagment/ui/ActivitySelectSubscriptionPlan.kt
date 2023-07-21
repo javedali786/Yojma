@@ -53,7 +53,6 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
     private val stringsHelper by lazy { StringsHelper }
     private val imageArray: ArrayList<PlanSubscriptionModel> = ArrayList()
     lateinit var bp : BillingProcessor
-    private var fromSingUp: String? = ""
     private var from: String? = ""
     private var signUp: String? = ""
     private var isUserVerified: String? = ""
@@ -75,8 +74,7 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
         binding?.toolbar?.colorsData = colorsHelper
         binding?.toolbar?.stringData = stringHelper
         val intent = intent
-        fromSingUp = intent.getStringExtra("fromWhich")
-        from = intent.getStringExtra("from")
+        from = intent.getStringExtra("intentFrom")
         initBilling()
         //ThemeHandler.getInstance().applySelectPlan(this,binding)
         setClicks()
@@ -88,25 +86,25 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
         isUserVerified = preference?.isVerified
         binding?.toolbar!!.logoMain2.visibility=View.VISIBLE
         binding?.toolbar!!.llSearchIcon.visibility=View.GONE
-        if(fromSingUp!!.equals("moreFragment",ignoreCase = true)) {
+        if(from!!.equals("moreFragment",ignoreCase = true)) {
             binding?.toolbar!!.titleMid.text=resources.getString(R.string.manage_account)
             binding?.toolbar?.logoMain2?.visibility = View.GONE
             binding?.mainPaymentLayout!!.visibility = View.GONE
             binding?.bottomLay!!.visibility = View.GONE
             binding?.mainManageSubscriptionLayout!!.visibility = View.VISIBLE
-        }else if(fromSingUp!!.equals("Login",ignoreCase = true)){
+        }else if(from!!.equals("Login",ignoreCase = true)){
             binding?.mainPaymentLayout!!.visibility = View.VISIBLE
             binding?.bottomLay!!.visibility = View.VISIBLE
             binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
             binding?.toolbar!!.backLayout.visibility = View.GONE
-        } else if (fromSingUp!!.equals("SignUp",ignoreCase = true) ){
+        } else if (from!!.equals("SignUp",ignoreCase = true) ){
             // binding?.toolbar!!.titleSkip.text = resources.getText(R.string.only_register)
             binding?.mainPaymentLayout!!.visibility = View.VISIBLE
             binding?.bottomLay!!.visibility = View.VISIBLE
             binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
             binding?.toolbar!!.backLayout.visibility = View.GONE
-        }  else if (fromSingUp!!.equals("OTP",ignoreCase = true) ){
-            binding?.toolbar!!.titleSkip.text = resources.getText(R.string.only_register)
+        }  else if (from!!.equals("OTP",ignoreCase = true) ){
+            binding?.toolbar!!.titleSkip.visibility = View.VISIBLE
             binding?.mainPaymentLayout!!.visibility = View.VISIBLE
             binding?.bottomLay!!.visibility = View.VISIBLE
             binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
@@ -136,6 +134,14 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
             ActivityLauncher.getInstance().goToEnterOTP(this@ActivitySelectSubscriptionPlan, EnterOTPActivity::class.java)
         }*/
 
+        binding?.toolbar?.titleSkip?.setOnClickListener{
+            if (from!!.equals("SignUp",ignoreCase = true)) {
+                ActivityLauncher.getInstance().homeActivity(this,HomeActivity::class.java)
+            }else{
+                ActivityLauncher.getInstance().homeActivity(this,HomeActivity::class.java)
+            }
+        }
+
         binding?.restoreLay?.setOnClickListener {
             restoreSubscription()
         }
@@ -158,15 +164,15 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
                                 status: Boolean
                             ) {
                                 if (status) {
-                                    orderID = response.getData().getOrderId()
+                                    orderID = response.data.orderId
 
-                                    val properties = Properties()
+                                  /*  val properties = Properties()
                                     properties.addAttribute(AppConstants.CURRENCY, response.data.orderCurrency)
                                     properties.addAttribute(AppConstants.PRICE, response.data.orderAmount)
                                     properties.addAttribute(AppConstants.SUBSCRIPTION_TITTLE, subscriptionTittle)
                                     properties.addAttribute(AppConstants.PAYMENT_METHOD, AppConstants.GOOGLE)
                                     MoEHelper.getInstance(applicationContext).trackEvent(
-                                        AppConstants.USER_SUBSCRIPTION, properties)
+                                        AppConstants.USER_SUBSCRIPTION, properties)*/
 
                                     KsPreferenceKeys.getInstance().paymentorderid = orderID
                                     Log.w("orderIdOf", orderID.toString())
@@ -253,18 +259,17 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
 
     override fun onActionBtnClicked() {
         if (isPurchased) {
-            if (fromSingUp!!.equals("SignUp",ignoreCase = true)) {
+            if (from!!.equals("SignUp",ignoreCase = true)) {
                 ActivityLauncher.getInstance().goToEnterOTP(this,
-                    EnterOTPActivity::class.java,fromSingUp)
+                    EnterOTPActivity::class.java,from)
             }else{
-                if (fromSingUp!!.equals("Login", ignoreCase = true)) {
+                if (from!!.equals("Login", ignoreCase = true)) {
                     if (isUserVerified.equals("true", ignoreCase = true)) {
                         ActivityLauncher.getInstance().homeScreen(this, HomeActivity::class.java)
                     }else{
                         ActivityLauncher.getInstance().goToEnterOTP(this,
-                            EnterOTPActivity::class.java,fromSingUp)
+                            EnterOTPActivity::class.java,from)
                     }
-
                 }else {
                     ActivityLauncher.getInstance().homeScreen(this, HomeActivity::class.java)
                 }
@@ -438,7 +443,7 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
         Log.w("onListOfSKUFetched", purchases!!.size.toString() + "")
         runOnUiThread {
             binding?.progressBar?.visibility=View.GONE
-            if(fromSingUp!!.equals("settings",ignoreCase = true)){
+            if(from!!.equals("settings",ignoreCase = true)){
                 purchaseFinalList= AppCommonMethod.createManagePurchaseList(purchaseModel, purchases,
                     purchaseFinalList as java.util.ArrayList<PurchaseModel?>,bp
                 ) as List<PurchaseModel>
@@ -448,7 +453,7 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
                 ) as List<PurchaseModel>
             }
 
-            if(fromSingUp!!.equals("settings",ignoreCase = true)){
+            if(from!!.equals("settings",ignoreCase = true)){
                 binding?.mainPaymentLayout!!.visibility=View.GONE;
                 binding?.bottomLay!!.visibility = View.GONE
                 binding?.mainManageSubscriptionLayout!!.visibility=View.VISIBLE;
@@ -482,7 +487,7 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
             override fun getPlans(plans: ResponseMembershipAndPlan?, apiStatus: Boolean) {
                 purchaseModel = AppCommonMethod.fetchRecSubscriptionModel(plans!!, subSkuList as java.util.ArrayList<String>, productSkuList as java.util.ArrayList<String>)
                 if (purchaseModel != null && purchaseModel!!.isNotEmpty()) {
-                    if(fromSingUp!!.equals("settings",ignoreCase = true)) {
+                    if(from!!.equals("settings",ignoreCase = true)) {
                         callManageSubscriptionAdapter(purchaseModel!!,plans);
                     }else{
                         bp.getAllSkuDetails(
@@ -552,11 +557,7 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
     }
 
     override fun onBackPressed() {
-        if (fromSingUp!!.equals("Login", ignoreCase = true) || fromSingUp!!.equals(
-                "Signup",
-                ignoreCase = true
-            )
-        ) {
+        if (from!!.equals("Login", ignoreCase = true) || from!!.equals("Signup", ignoreCase = true)) {
 
         }else{
             super.onBackPressed()

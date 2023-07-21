@@ -370,15 +370,10 @@ public final class ActivityLauncher {
 
     public void goToPlanScreen(Activity source, Class<ActivitySelectSubscriptionPlan> destination, String screenName){
         Intent intent = new Intent(source, destination);
-        intent.putExtra("fromWhich",screenName);
+        intent.putExtra("intentFrom",screenName);
         source.startActivity(intent);
     }
 
-//    public void goToPlanScreenFrmSetting(Activity source, Class<ActivitySelectSubscriptionPlan> destination, boolean isFrom,String screenName){
-//        Intent intent = new Intent(source, destination);
-//        intent.putExtra("fromWhich",isFrom);
-//        source.startActivity(intent);
-//    }
     public void changePassword(Activity activity, Class<ChangePasswordActivity> destination){
         activity.startActivity(new Intent(activity, destination));
     }
