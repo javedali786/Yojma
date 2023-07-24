@@ -869,7 +869,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             ActivityLauncher.getInstance().goToEnterOTP(this, EnterOTPActivity::class.java, "DetailPage")
         }
         if (isUserNotEntitle) {
-            ActivityLauncher.getInstance().goToDetailPlanScreen(this, PaymentDetailPage::class.java, false, resEntitle)
+            ActivityLauncher.getInstance().goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)
         }
     }
 

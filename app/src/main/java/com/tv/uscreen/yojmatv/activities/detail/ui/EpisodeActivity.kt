@@ -247,7 +247,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
                             if (responseEntitle.data.entitled) {
                                 if (isUserVerified.equals("true", ignoreCase = true)) {
                                     if (null != responseEntitle.data.externalRefId && !responseEntitle.data.externalRefId.equals("", ignoreCase = true)) {
-                                        AppCommonMethod.callMoEngageUserTypeSubscription(applicationContext, AppConstants.PAID_USER)
+                                       // AppCommonMethod.callMoEngageUserTypeSubscription(applicationContext, AppConstants.PAID_USER)
                                         playbackUrl = SDKConfig.getInstance().playbacK_URL + responseEntitle.data.externalRefId + ".m3u8"
                                         startPlayer(playbackUrl, KsPreferenceKeys.getInstance().bingeWatchEnable, false)
                                     }
@@ -264,7 +264,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
                                     )
                                 }
                             } else {
-                                AppCommonMethod.callMoEngageUserTypeSubscription(applicationContext, AppConstants.FREE_USER)
+                               // AppCommonMethod.callMoEngageUserTypeSubscription(applicationContext, AppConstants.FREE_USER)
                                 isUserNotEntitle = true
                                 commonDialog(
                                     "",
@@ -1195,7 +1195,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
             ActivityLauncher.getInstance().goToEnterOTP(this, EnterOTPActivity::class.java, "DetailPage")
         }
         if (isUserNotEntitle) {
-            ActivityLauncher.getInstance().goToDetailPlanScreen(this, PaymentDetailPage::class.java, false, resEntitle)
+            ActivityLauncher.getInstance().goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)
         }
     }
 

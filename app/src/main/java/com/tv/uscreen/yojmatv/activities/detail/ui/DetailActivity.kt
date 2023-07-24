@@ -447,10 +447,10 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         }
         binding!!.metaDetails.playButton.setOnClickListener {
             if (isLoggedIn) {
-                if (!videoDetails!!.isPremium) {
+                if (videoDetails!!.isPremium) {
                     if (isUserVerified.equals("true", ignoreCase = true)) {
                         if (null != videoDetails!!.externalRefId && !videoDetails!!.externalRefId.equals("", ignoreCase = true)) {
-                            AppCommonMethod.callMoEngageUserTypeSubscription(applicationContext, AppConstants.PAID_USER)
+                            //AppCommonMethod.callMoEngageUserTypeSubscription(applicationContext, AppConstants.PAID_USER)
                             playbackUrl = SDKConfig.getInstance().playbacK_URL + videoDetails!!.externalRefId + ".m3u8"
                             startPlayer(playbackUrl, false)
                         }
@@ -960,7 +960,7 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         if (isUserNotVerify) {
             ActivityLauncher.getInstance().goToEnterOTP(this, EnterOTPActivity::class.java, "DetailPage")
         } else if (isUserNotEntitle) {
-            ActivityLauncher.getInstance().goToDetailPlanScreen(this, PaymentDetailPage::class.java, false, resEntitle)
+            ActivityLauncher.getInstance().goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)
         }
     }
 

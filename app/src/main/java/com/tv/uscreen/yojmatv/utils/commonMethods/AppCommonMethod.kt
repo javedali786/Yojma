@@ -2122,7 +2122,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                     ActivityLauncher.getInstance().goToEnterOTP(context as Activity?, EnterOTPActivity::class.java, "DetailPage")
                 } else if (isUserNotEntitle) {
                     dialog.dismiss()
-                    ActivityLauncher.getInstance().goToDetailPlanScreen(context as Activity?, PaymentDetailPage::class.java, false, resEntitle)
+                    ActivityLauncher.getInstance().goToDetailPlanScreen(context as Activity?, PaymentDetailPage::class.java, true, resEntitle)
                     // ActivityLauncher.getInstance().goToPlanScreen((Activity)context, ActivitySelectSubscriptionPlan.class,"Navigation");
                 } else {
                     dialog.dismiss()

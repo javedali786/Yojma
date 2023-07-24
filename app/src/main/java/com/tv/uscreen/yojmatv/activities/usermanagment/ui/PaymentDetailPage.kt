@@ -69,8 +69,12 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
         from = intent.getStringExtra("from")
         response = bundle!!.getSerializable("responseEntitle") as ResponseEntitle
 
+        if(fromTo == true){
+            binding?.toolbar!!.backLayout.visibility=View.GONE
+        }else{
+            binding?.toolbar!!.backLayout.visibility=View.GONE
 
-
+        }
         initBilling()
         //ThemeHandler.getInstance().applySelectPlan(this,binding)
         setClicks()
@@ -78,6 +82,7 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
         if(from!=null && from!!.equals("settings",ignoreCase = true)) {
             binding?.toolbar!!.titleMid.text=resources.getString(R.string.manage_account)
             binding?.toolbar!!.titleSkip.visibility= View.GONE
+            binding?.toolbar!!.llSearchIcon.visibility= View.GONE
             binding?.mainPaymentLayout!!.visibility = View.GONE
             binding?.mainManageSubscriptionLayout!!.visibility = View.VISIBLE
         }else{
@@ -85,6 +90,7 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
             binding?.mainPaymentLayout!!.visibility = View.VISIBLE
             binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
             binding?.toolbar!!.titleSkip.visibility=View.GONE
+            binding?.toolbar!!.llSearchIcon.visibility= View.GONE
         }
     }
 
