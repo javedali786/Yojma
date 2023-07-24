@@ -251,10 +251,15 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
 
 
     private fun commonDialog(title: String, description: String, actionBtn: String) {
-        var fm: FragmentManager = this.supportFragmentManager
-        var commonDialogFragment = CommonDialogFragment.newInstance(title, description, actionBtn)
-        commonDialogFragment.setEditDialogCallBack(this)
-        commonDialogFragment.show(fm, AppConstants.MESSAGE)
+        try {
+            var fm: FragmentManager = this.supportFragmentManager
+            var commonDialogFragment = CommonDialogFragment.newInstance(title, description, actionBtn)
+            commonDialogFragment.setEditDialogCallBack(this)
+            commonDialogFragment.show(fm, AppConstants.MESSAGE)
+        }catch (e :Exception){
+            e.printStackTrace()
+        }
+
     }
 
     override fun onActionBtnClicked() {

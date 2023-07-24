@@ -147,7 +147,6 @@ class ActivitySettings : BaseBindingActivity<SettingsActivityBinding?>(), View.O
             if (currentLanguage.equals("English", ignoreCase = true)) {
                 binding!!.languageText.text = currentLanguage
             } else {
-                // getBinding().languageText.setText(getString(R.string.language_thai));
             }
         }
         val qualityName = preference.qualityName
@@ -156,11 +155,9 @@ class ActivitySettings : BaseBindingActivity<SettingsActivityBinding?>(), View.O
 
     private fun setQualityText(qualityName: String) {
         if (qualityName.isEmpty()) {
-            // getBinding().qualityText.setText(getString(R.string.auto));
             binding!!.qualityText.text = getString(R.string.ep_video_auto)
         } else {
             if (qualityName.equals("Auto", ignoreCase = true)) {
-                // getBinding().qualityText.setText(getString(R.string.auto));
                 binding!!.qualityText.text = getString(R.string.ep_video_auto)
             } else if (qualityName.equals("SD", ignoreCase = true)) {
                 binding!!.qualityText.text = getString(R.string.low)

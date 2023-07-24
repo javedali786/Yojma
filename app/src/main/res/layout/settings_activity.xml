@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:paddingStart="@dimen/sign_up_padding_5dp"
                 android:paddingTop="@dimen/sign_up_padding_5dp"
                 android:paddingEnd="@dimen/sign_up_padding_5dp"
