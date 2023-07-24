@@ -53,7 +53,7 @@
                     style="@style/TextView_Medium"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:paddingStart="@dimen/choose_pref_10dp"
+                    android:paddingStart="@dimen/NontonSize_10"
                     android:paddingLeft="@dimen/NontonSize_10"
                     android:paddingRight="@dimen/NontonSize_10"
                     android:text="@{TextUtils.isEmpty(stringData.instance().data.config.settings_change_lang) ? @string/settings_change_lang : stringData.instance().data.config.settings_change_lang , default=@string/settings_change_lang}"
@@ -89,7 +89,7 @@
                 android:layout_marginTop="@dimen/_4sdp"
                 android:background="@color/item_label_divider_color"
                 android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.item_label_divider_color) ? @color/item_label_divider_color : Color.parseColor(colorsData.instance().data.config.item_label_divider_color), default=@color/item_label_divider_color}"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <LinearLayout
                 android:id="@+id/video_quality"
@@ -98,14 +98,6 @@
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:orientation="horizontal"
                 android:padding="@dimen/sign_up_padding_5dp">
-
-                <ImageView
-                    android:id="@+id/video_icon"
-                    android:layout_width="@dimen/settings_icon_width_size"
-                    android:layout_height="@dimen/settings_icon_height_size"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerInParent="true" />
-
                 <TextView
                     android:id="@+id/streaming_txt"
                     style="@style/TextView_Medium"
