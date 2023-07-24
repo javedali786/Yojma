@@ -40,8 +40,6 @@
     <style name="TextInputLayout.HintText">
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/try_again_btn_txt_color</item>
-
-
     </style>
 
 

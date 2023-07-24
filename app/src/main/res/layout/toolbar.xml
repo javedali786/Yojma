@@ -22,7 +22,7 @@
             android:id="@+id/rl_toolBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/app_bg_color"
+            android:background="@{TextUtils.isEmpty(colorsData.instance().data.config.toolbar_bg_color) ? @color/toolbar_bg_color : Color.parseColor(colorsData.instance().data.config.toolbar_bg_color), default=@color/toolbar_bg_color}"
             android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.toolbar_bg_color) ? @color/toolbar_bg_color : Color.parseColor(colorsData.instance().data.config.toolbar_bg_color), default=@color/toolbar_bg_color}">
 
             <LinearLayout

@@ -78,6 +78,7 @@ class EnterOTPActivity : BaseBindingActivity<ActivityEnterOtpBinding?>(), Common
         binding?.toolbar?.backLayout?.visibility = View.VISIBLE
         binding?.toolbar?.titleMid?.visibility = View.VISIBLE
         binding?.toolbar?.logoMain2?.visibility = View.VISIBLE
+        binding?.toolbar?.llSearchIcon?.visibility = View.GONE
         if(fromWhich!!.equals("DetailPage",ignoreCase = true)) {
             binding?.toolbar?.backLayout?.visibility=View.VISIBLE
         }else{
