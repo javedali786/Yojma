@@ -26,19 +26,10 @@ public class SDKConfig {
         return (sdkConfigInstance);
     }
 
-    /*qa keys*/
-   //https://i8ms0qd7f5.execute-api.ap-south-1.amazonaws.com/qa/screen?
-   // https://experience-manager-fe-api.beta.enveu.com/app/api/v1/config/getConfig?version=1
 
-
-   /* public static final String CONFIG_BASE_URL = " https://experience-manager-fe-api.beta.enveu.com/app/api/v1/config/";
-    public static final String API_KEY_MOB = "jyeubkiluqkpsmsiszzfazpcqidydarzoblqcmxh";
-    public static final String API_KEY_TAB = "kumnqiowcgouixukvlnufaptcjzmhulhtyqbbflr";*/
-
-    //Brad gang qa
     public static final String CONFIG_BASE_URL = "https://experience-manager-fe-api.beta.enveu.com/app/api/v1/config/";
-    public static final String API_KEY_MOB = "mtdzvedsmyupuyouvflpqrnnbcgurfdrrbiylgqk";
-    public static final String API_KEY_TAB = "vduzoqvtzmbdhqxqewxolsnlgqlkkjnprxhvuaeq";
+    public static final String API_KEY_MOB = "vssatqjctyrqghzopdulzkleguurqqxzyvxsodqj";
+    public static final String API_KEY_TAB = "fkzmmfinyqdwecanpzkvbrmclntmklthnmiarzfr";
     public static final int CONFIG_VERSION = 1;
     public static String ApplicationStatus = "disconnected";
     public static final String WEBP_QUALITY = "filters:format(webp):quality(60)/";
