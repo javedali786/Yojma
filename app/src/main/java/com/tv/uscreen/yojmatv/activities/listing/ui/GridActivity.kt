@@ -379,13 +379,16 @@ class GridActivity : BaseBindingActivity<ListingActivityBinding?>(), ItemClickLi
             binding!!.progressBar.visibility = View.GONE
             mIsLoading = true
             if (playlistRailData != null) {
-                if (baseCategory!!.referenceName != null && (baseCategory!!.referenceName.equals(AppConstants.ContentType.CONTINUE_WATCHING.name, ignoreCase = true) || baseCategory!!.referenceName.equals("special_playlist", ignoreCase = true))) {
-                    if (commonLandscapeAdapter == null) {
+                if (baseCategory!!.referenceName != null && (baseCategory!!.referenceName.equals(
+                        AppConstants.ContentType.CONTINUE_WATCHING.name,
+                        ignoreCase = true
+                    ) || baseCategory!!.referenceName.equals("special_playlist", ignoreCase = true))
+                ) {
+                    if (commonPosterLandscapeAdapter == null) {
                         RecyclerAnimator(this).animate(binding!!.listRecyclerview)
-                        commonLandscapeAdapter = LandscapeListingAdapter(this, playlistRailData.enveuVideoItemBeans, ArrayList(), "VIDEO", this, baseCategory, tabletSize)
-                        binding!!.listRecyclerview.adapter = commonLandscapeAdapter
-                    } else commonLandscapeAdapter!!.notifydata(playlistRailData.enveuVideoItemBeans)
-                    mIsLoading = playlistRailData.maxContent != commonLandscapeAdapter!!.itemCount
+                        commonPosterLandscapeAdapter = CommonPosterLandscapeAdapter(this, playlistRailData.enveuVideoItemBeans, ArrayList(), "VIDEO", ArrayList(), baseCategory, this)
+                        binding!!.listRecyclerview.adapter = commonPosterLandscapeAdapter
+                    }
                 } else {
                     if (baseCategory!!.contentImageType.equals(ImageType.CIR.name, ignoreCase = true)) {
                         if (commonCircleAdapter == null) {

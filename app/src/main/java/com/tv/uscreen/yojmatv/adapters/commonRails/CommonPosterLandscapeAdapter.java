@@ -65,8 +65,12 @@ public class  CommonPosterLandscapeAdapter extends RecyclerView.Adapter<CommonPo
         DisplayMetrics displaymetrics = new DisplayMetrics();
         (context).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         //if you need two fix imageview in width
+      /*  itemWidth = (displaymetrics.widthPixels - 80) / num;
+        itemHeight = (int) ((itemWidth * 2) / 10);*/
+
+
         itemWidth = (displaymetrics.widthPixels - 80) / num;
-        itemHeight = (int) ((itemWidth * 2) / 10);
+        itemHeight = (int) (itemWidth * 2) / 3;
     }
 
     public void notifydata(List<EnveuVideoItemBean> i) {

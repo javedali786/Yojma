@@ -26,8 +26,8 @@
             style="@style/Custom.Widget.CardView"
             android:layout_width="wrap_content"
             app:cardCornerRadius="8dp"
-            app:cardBackgroundColor="@color/try_again_btn_txt_color"
             android:layout_height="wrap_content">
+
             <com.tv.uscreen.yojmatv.utils.CustomProgressBar
                 android:id="@+id/progress_bar"
                 style="@style/Widget.AppCompat.ProgressBar"
@@ -40,6 +40,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/NontonSize95">
 
+                <androidx.cardview.widget.CardView
+                    style="@style/Custom.Widget.CardView"
+                    android:layout_width="@dimen/NontonSize180"
+                    android:layout_height="@dimen/NontonSize120"
+                    app:cardCornerRadius="8dp">
                 <ImageView
                     android:id="@+id/itemImage"
                     android:layout_width="@dimen/NontonSize180"
@@ -47,6 +52,9 @@
                     android:contentDescription="TODO"
                     android:scaleType="fitXY"
                     android:src="@drawable/placeholder_landscape" />
+
+                </androidx.cardview.widget.CardView>
+
 
                 <LinearLayout
                     android:id="@+id/llContinueProgress"
@@ -208,7 +216,6 @@
             </FrameLayout>
 
 
-
             <ImageView
                 android:id="@+id/ivContinuePlay"
                 android:layout_width="wrap_content"
@@ -217,10 +224,7 @@
                 android:contentDescription="continue_watching_play_icon"
                 android:visibility="gone" />
 
-
         </androidx.cardview.widget.CardView>
-
-
 
     </LinearLayout>
 

@@ -1,19 +1,18 @@
 package com.tv.uscreen.yojmatv.activities.settings
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.CompoundButton
 import com.tv.uscreen.yojmatv.BuildConfig
-
-
+import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.activities.settings.downloadsettings.DownloadSettings
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.activities.videoquality.ui.ChangeLanguageActivity
 import com.tv.uscreen.yojmatv.activities.videoquality.ui.VideoQualityActivity
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
-import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.databinding.SettingsActivityBinding
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
@@ -30,7 +29,6 @@ class ActivitySettings : BaseBindingActivity<SettingsActivityBinding?>(), View.O
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //ThemeHandler.getInstance().applysttingsPage(this, getBinding());
         binding!!.stringData = stringsHelper
         binding!!.colorsData = colorsHelper
         binding!!.toolbar.colorsData = colorsHelper

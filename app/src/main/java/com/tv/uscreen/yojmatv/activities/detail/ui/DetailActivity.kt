@@ -447,7 +447,7 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         }
         binding!!.metaDetails.playButton.setOnClickListener {
             if (isLoggedIn) {
-                if (videoDetails!!.isPremium) {
+                if (!videoDetails!!.isPremium) {
                     if (isUserVerified.equals("true", ignoreCase = true)) {
                         if (null != videoDetails!!.externalRefId && !videoDetails!!.externalRefId.equals("", ignoreCase = true)) {
                             //AppCommonMethod.callMoEngageUserTypeSubscription(applicationContext, AppConstants.PAID_USER)

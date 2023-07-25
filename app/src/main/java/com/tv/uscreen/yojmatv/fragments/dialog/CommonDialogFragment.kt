@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.fragments.dialog
 
+
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,11 +13,8 @@ import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.tv.uscreen.yojmatv.R
-
-
 import com.tv.uscreen.yojmatv.baseModels.BaseActivity
 import com.tv.uscreen.yojmatv.databinding.CustomPopupBinding
-
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.AppColors
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants

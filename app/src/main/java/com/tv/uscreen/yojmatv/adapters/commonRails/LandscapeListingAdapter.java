@@ -62,6 +62,7 @@ public class LandscapeListingAdapter extends RecyclerView.Adapter<LandscapeListi
         }
         DisplayMetrics displaymetrics = new DisplayMetrics();
         (context).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+
         //if you need three fix imageview in width
         itemWidth = (displaymetrics.widthPixels - 80) / num;
         itemHeight = (itemWidth * 9) / 16;

@@ -33,7 +33,6 @@ class VideoQualityActivity : BaseBindingActivity<VideoQualityActivityBinding?>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //       ThemeHandler.getInstance().applyVideoQualityPage(this,getBinding());
         binding?.connection?.colorsData = colorsHelper
         binding?.connection?.stringData = stringsHelper
         binding!!.colorsData = colorsHelper

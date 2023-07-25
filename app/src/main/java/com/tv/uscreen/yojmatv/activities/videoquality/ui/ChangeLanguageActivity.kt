@@ -46,7 +46,6 @@ class ChangeLanguageActivity : BaseBindingActivity<VideoQualityActivityBinding?>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         preference = KsPreferenceKeys.getInstance()
-        //ThemeHandler.getInstance().applyChangelanguge(this,getBinding());
         binding?.connection?.colorsData = colorsHelper
         binding?.connection?.stringData = stringsHelper
         binding!!.colorsData = colorsHelper

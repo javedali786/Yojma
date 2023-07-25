@@ -43,7 +43,6 @@ public class ChangeLanguageAdapter extends RecyclerView.Adapter<ChangeLanguageAd
         VideoQualityItemBinding itemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(viewGroup.getContext()),
                 R.layout.video_quality_item, viewGroup, false);
-     //   ThemeHandler.getInstance().applyChangeLangeAdapter(viewGroup.getContext(),itemBinding);
         itemBinding.setColorsData(ColorsHelper.INSTANCE);
         itemBinding.setStringData(StringsHelper.INSTANCE);
         return new SingleItemRowHolder(itemBinding);
@@ -54,6 +53,8 @@ public class ChangeLanguageAdapter extends RecyclerView.Adapter<ChangeLanguageAd
     public void onBindViewHolder(@NonNull final SingleItemRowHolder viewHolder, @SuppressLint("RecyclerView") final int position) {
 
         if (pos == position) {
+
+
             viewHolder.notificationItemBinding.parentLayout.setBackgroundResource(R.drawable.setting_shadow);
         } else {
             viewHolder.notificationItemBinding.parentLayout.setBackgroundResource(0);
