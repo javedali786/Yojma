@@ -215,7 +215,6 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
                     val properties = Properties()
                     properties.addAttribute(AppConstants.SEARCH_TEXT, searchKeyword)
                     MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
-                    AppCommonMethod.searchEventTrack(applicationContext, searchKeyword)
                     binding!!.noResult.visibility = View.GONE
                     binding!!.rootView.visibility = View.GONE
                     binding!!.toolbar.filter.visibility = View.GONE
@@ -398,7 +397,6 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
     }
 
     override fun onEnveuItemClicked(itemValue: EnveuVideoItemBean) {
-        Log.d("javed", "onRowItemClicked: $itemValue")
         val isPremium: Boolean = itemValue.isPremium
         var isHosted = false
         var externalUrl: String? = ""
@@ -435,10 +433,6 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
                     externalUrl = itemValue.liveContent.externalUrl
                 }
             }
-        } else {
-            if (itemValue.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
-                customContentType = itemValue.customContent.customType
-            }
         }
         AppCommonMethod.launchDetailScreenFromSearch(
             this,
@@ -459,7 +453,6 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
     }
 
     override fun onShowAllItemClicked(itemValue: RailCommonData, header: String) {
-        AppCommonMethod.MoEngageSeeAllEventTrack(applicationContext, "ActivitySearch", "", header, AppConstants.GALLERY_SELECT)
         var customContentType: String? = ""
         var videoType: String? = ""
         val assetType = itemValue.assetType
@@ -479,7 +472,6 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
     override fun onShowAllProgramClicked(itemValue: RailCommonData) {
         if (itemValue != null && itemValue.status) {
             applyFilter = java.lang.Boolean.parseBoolean(KsPreferenceKeys.getInstance().filterApply)
-            //  ActivityLauncher.getInstance().resultActivityBundle(ActivitySearch.this, ActivityResults.class, AppConstants.SEARCH_TYPE_PROGRAM, itemValue.getSearchKey(), itemValue.getTotalCount(),applyFilter);
         }
     }
 

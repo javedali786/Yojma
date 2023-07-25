@@ -122,22 +122,6 @@ public class SliderAdapter extends PagerAdapter {
                                 btTitle.setText(R.string.watch_trailer);
                             }
                         }
-                    } else if (videos.get(position).getAssetType().equalsIgnoreCase(AppConstants.CUSTOM)) {
-                        if (videos.get(position).getCustomContent().getCustomType() != null) {
-                            if (videos.get(position).getCustomContent().getCustomType().equalsIgnoreCase(AppConstants.News)) {
-                                btTitle.setText(R.string.explore_more_title);
-                            } else if (videos.get(position).getCustomContent().getCustomType().equalsIgnoreCase(AppConstants.contest)) {
-                                btTitle.setText(R.string.explore_more_title);
-                            } else if (videos.get(position).getCustomContent().getCustomType().equalsIgnoreCase(AppConstants.Event)) {
-                                btTitle.setText(R.string.explore_more_title);
-                            } else if (videos.get(position).getCustomContent().getCustomType().equalsIgnoreCase(AppConstants.OFFER)) {
-                                btTitle.setText(R.string.see_offer_title);
-                            } else if (videos.get(position).getCustomContent().getCustomType().equalsIgnoreCase(AppConstants.Expedition)) {
-                                btTitle.setText(R.string.explore_more_title);
-                            }
-                        }
-                    } else if (videos.get(position).getAssetType().equalsIgnoreCase(AppConstants.LIVE)) {
-                        btTitle.setText(R.string.watcho_now_title);
                     }
                 break;
             default:

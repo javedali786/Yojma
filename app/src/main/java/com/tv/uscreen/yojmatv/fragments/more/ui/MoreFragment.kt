@@ -34,7 +34,6 @@ import com.tv.uscreen.yojmatv.utils.ObjectHelper
 import com.tv.uscreen.yojmatv.utils.TrackerUtil.MoEUserTracker.setUserProperties
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.AppColors
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
-import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.CheckInternetConnection
 import com.tv.uscreen.yojmatv.utils.helpers.StringUtils
@@ -334,7 +333,6 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
     override fun onActionBtnClicked() {
         if (CheckInternetConnection.isOnline(requireActivity())) {
             logoutCall()
-            AppCommonMethod.screenViewedTrack(requireActivity(), AppConstants.LOGOUT, "AccountSettingActivity")
             clearCredientials(mPreference)
             ActivityLauncher.getInstance().homeActivity(requireActivity(), HomeActivity::class.java)
         }

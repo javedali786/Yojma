@@ -275,10 +275,8 @@ class UserInteractionFragment : BaseBindingFragment<DetailWatchlistLikeShareView
         binding!!.addIcon.visibility = View.GONE
         val id = seriesDetailBean!!.id.toString()
         if (watchListCounter == 0) {
-            AppCommonMethod.MoEngageShareEventTrack(context, seriesDetailBean!!.assetType, id, seriesDetailBean!!.title, AppConstants.VIDEO, AppConstants.ADD_TO_WATCHLIST)
             hitApiAddWatchList(from)
         } else {
-            AppCommonMethod.MoEngageShareEventTrack(context, seriesDetailBean!!.assetType, id, seriesDetailBean!!.title, AppConstants.VIDEO, AppConstants.REMOVE_WATCHLIST)
             hitApiRemoveList()
         }
     }
@@ -466,7 +464,6 @@ class UserInteractionFragment : BaseBindingFragment<DetailWatchlistLikeShareView
             assetType = MediaTypeConstants.getInstance().live
         }
         val ids: String = seriesDetailBean!!.id.toString()
-        AppCommonMethod.MoEngageShareEventTrack(context, assetType, ids, seriesDetailBean!!.title, AppConstants.VIDEO, AppConstants.SHARE_CONTENT)
         if (disallowClick()) {
             return
         }

@@ -144,10 +144,6 @@ class CategoriedSearchAdapter(private val context: Context, private val list: Li
                     externalUrl = itemValue.liveContent.externalUrl
                 }
             }
-        } else {
-            if (itemValue.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
-                customContentType = itemValue.customContent.customType
-            }
         }
         launchDetailScreenFromSearch(
             context,

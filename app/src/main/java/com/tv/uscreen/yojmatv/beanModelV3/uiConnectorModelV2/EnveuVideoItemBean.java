@@ -369,11 +369,6 @@ public class EnveuVideoItemBean implements Serializable {
                 }
             }
 
-            if (details.getContentType().equalsIgnoreCase(AppConstants.CUSTOM)) {
-                if (details.getCustomContent() != null) {
-                    this.customContent = details.getCustomContent();
-                }
-            }
             if (isIntentFromExpedition) {
                 this.posterURL = ImageLayer.getInstance().getExpeditionImageUrl(details,"img1");
 
@@ -469,13 +464,6 @@ public class EnveuVideoItemBean implements Serializable {
     public
     EnveuVideoItemBean(Item details, String imageType, String imageIdentifier,boolean isIntentFromForYou) {
         try {
-            Gson gson = new Gson();
-            Logger.d("RailCommonData---->>" + details.getContentType());
-            if (details.getContentType().equalsIgnoreCase(AppConstants.CUSTOM)) {
-                if (details.getCustomContent() != null) {
-                    this.customContent = details.getCustomContent();
-                }
-            }
             if (details.getContentType().equalsIgnoreCase(AppConstants.VIDEO)) {
                 if (details.getVideo() != null) {
                     this.videoDetails = details.getVideo();
@@ -494,7 +482,6 @@ public class EnveuVideoItemBean implements Serializable {
             } else {
                 this.posterURL = ImageLayer.getInstance().getEpisodePosterImageUrl(details,imageIdentifier);
             }
-            Log.w("getPlaylistVideo->",this.posterURL);
             this.season = "";
             this.id = details.getId();
             this.sku = details.getSku() == null ? "" : details.getSku();
@@ -576,11 +563,6 @@ public class EnveuVideoItemBean implements Serializable {
             this.premium = details.getData().getPremium();
             this.keywords=details.getData().getKeywords() == null ? new ArrayList<>() : details.getData().getKeywords();
 
-            if (details.getData().getContentType().equalsIgnoreCase(AppConstants.CUSTOM)) {
-                if (details.getData().getCustomContent() != null) {
-                    this.customContent = details.getData().getCustomContent();
-                }
-            }
             if (details.getData().getContentType().equalsIgnoreCase(AppConstants.VIDEO)) {
                 if (details.getData().getVideo() != null) {
                     this.videoDetails = details.getData().getVideo();
@@ -608,20 +590,6 @@ public class EnveuVideoItemBean implements Serializable {
             Object customedata = details.getData().getCustomData();
             Logger.e("customedata",customedata.toString());
             LinkedTreeMap<Object, Object> t1 = (LinkedTreeMap) customedata;
-            if (details.getData().getContentType().equalsIgnoreCase(AppConstants.CUSTOM)) {
-                if (t.containsKey(CustomeFields.description_two)) {
-                    String description_two = t.get((CustomeFields.description_two)).toString();
-                    this.description_two = description_two;
-                }
-                if (t.containsKey(CustomeFields.description_three)) {
-                    String description_three = t.get((CustomeFields.description_three)).toString();
-                    this.description_three = description_three;
-                }
-                if (t.containsKey(CustomeFields.display_date)) {
-                    String description_three = t.get((CustomeFields.display_date)).toString();
-                    this.display_date = description_three;
-                }
-            }
 
             if (t1.containsKey(CustomeFields.Producer)){
                 String producer = t1.get((CustomeFields.Producer)).toString();
@@ -678,12 +646,6 @@ public class EnveuVideoItemBean implements Serializable {
     public EnveuVideoItemBean(VideosItem details, int contentOrder, String imageType,String imageIdentifier, boolean type,boolean isIntentRelatedContent) {
             try {
                 this.isSelected = false;
-                Logger.d("RailCommonData---->>" + details.getContentType());
-                if (details.getContentType().equalsIgnoreCase(AppConstants.CUSTOM)) {
-                    if (details.getCustomContent() != null) {
-                        this.customContent = details.getCustomContent();
-                    }
-                }
                 if (details.getContentType().equalsIgnoreCase(AppConstants.VIDEO)) {
                     if (details.getVideo() != null) {
                         this.videoDetails = details.getVideo();
@@ -811,28 +773,12 @@ public class EnveuVideoItemBean implements Serializable {
                         this.setVideoDetails(videoDetails);
                     }
                 }
-
-                if (details.getContentType().equalsIgnoreCase(AppConstants.CUSTOM)) {
-                      if (details.getCustomContent() !=null) {
-                          this.customContent = details.getCustomContent();
-                          this.setCustomContent(customContent);
-                      }
-                   }
-
-                this.posterURL = ImageLayer.getInstance().getPosterImageUrl(details);
-
-               /* if (details.getImages()!=null && details.getImages().getPoster()!=null && details.getImages().getPoster().getSources()!=null
-                        && details.getImages().getPoster().getSources().size()>0){
-                     details.getImages().getPoster().getSources().get(0).getSrc();
-                }*/
-                    // this.posterURL = details.getImages()== null ? "" : details.getImages().getPoster().getSources().toString();
-                    //  this.price = details.getPrice() == null ? "" : details.getPrice();
+                    this.posterURL = ImageLayer.getInstance().getPosterImageUrl(details);
                     this.assetGenres = details.getGenres() == null ? new ArrayList<>() : details.getGenres();
                     this.season = "";
                     this.id = details.getId();
                     this.sku = details.getSku() == null ? "" : details.getSku();
                     this.isNew = false;
-                    //  this.tvod = details.getTvod() == null ? "" : details.getTvod();
                     this.episodeNo = details.getEpisodeNumber() == null ? "" : details.getEpisodeNumber();
                     this.assetType = details.getContentType() == null ? "" : details.getContentType();
                     this.brightcoveVideoId = details.getBrightcoveContentId() == null ? "" : details.getBrightcoveContentId();
@@ -852,11 +798,9 @@ public class EnveuVideoItemBean implements Serializable {
                     Object customeFiled = details.getCustomFields();
                     LinkedTreeMap<Object, Object> t = (LinkedTreeMap) customeFiled;
 
-                    //meditype tyep - 1 --->>> series ----isnew-true----new series ---episode- new episode --- movie-new movie
-                    //
+
                     this.longDescription = details.getLongDescription() == null ? "" : details.getLongDescription().toString().trim();
 
-                    //series realated data
                     if (details.getSeasons() != null) {
                         ArrayList arrayList = (ArrayList) details.getSeasons();
                         this.seasonCount = arrayList.size();
@@ -874,7 +818,6 @@ public class EnveuVideoItemBean implements Serializable {
 
         try {
 
-            //  this.svod = details.getSvod() == null ? "" : details.getSvod();
             this.title = details.getTitle() == null ? "" : details.getTitle();
             this.description = details.getDescription() == null ? "" : details.getDescription().trim();
             this.assetGenres = details.getGenres() == null ? new ArrayList<>() : details.getGenres();
@@ -896,12 +839,6 @@ public class EnveuVideoItemBean implements Serializable {
             }
             this.premium = details.getPremium();
 
-               /* if (details.getImages()!=null && details.getImages().getPoster()!=null && details.getImages().getPoster().getSources()!=null
-                        && details.getImages().getPoster().getSources().size()>0){
-                     details.getImages().getPoster().getSources().get(0).getSrc();
-                }*/
-            // this.posterURL = details.getImages()== null ? "" : details.getImages().getPoster().getSources().toString();
-            //  this.price = details.getPrice() == null ? "" : details.getPrice();
             this.assetGenres = details.getGenres() == null ? new ArrayList<>() : details.getGenres();
             this.season = "";
             this.id = details.getId();
@@ -915,13 +852,6 @@ public class EnveuVideoItemBean implements Serializable {
             this.contentOrder = contentOrder;
             if (imageType != null) {
                 this.imageType = imageType;
-            }
-
-
-            if (details.getContentType().equalsIgnoreCase(AppConstants.CUSTOM)) {
-                if (details.getCustomContent() != null) {
-                    this.customContent = details.getCustomContent();
-                }
             }
 
             if (details.getContentType().equalsIgnoreCase(AppConstants.VIDEO)) {

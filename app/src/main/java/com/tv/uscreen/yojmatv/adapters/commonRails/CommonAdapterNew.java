@@ -1,7 +1,6 @@
 package com.tv.uscreen.yojmatv.adapters.commonRails;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
-import static com.tv.uscreen.yojmatv.OttApplication.getContext;
 import static com.tv.uscreen.yojmatv.utils.constants.AppConstants.ADS_BANNER;
 import static com.tv.uscreen.yojmatv.utils.constants.AppConstants.ADS_MREC;
 import static com.tv.uscreen.yojmatv.utils.constants.AppConstants.CAROUSEL_CIR_CIRCLE;
@@ -51,27 +50,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.moe.pushlibrary.MoEHelper;
 import com.moengage.core.Properties;
-
-
 import com.tv.uscreen.yojmatv.R;
 import com.tv.uscreen.yojmatv.SDKConfig;
 import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData;
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.CommonRailtItemClickListner;
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.MoreClickListner;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
 import com.tv.uscreen.yojmatv.databinding.CircleRecyclerItemBinding;
 import com.tv.uscreen.yojmatv.databinding.DfpBannerLayoutBinding;
 import com.tv.uscreen.yojmatv.databinding.GridCircleRecyclerItemBinding;
@@ -98,6 +81,21 @@ import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys;
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper;
 
 import java.util.List;
+
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
 
 public class CommonAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -471,7 +469,6 @@ public class CommonAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHold
                         if (item.getScreenWidget().getName()!=null) {
                             railName  = (String) item.getScreenWidget().getName();
                         }
-                        AppCommonMethod.MoEngageSeeAllEventTrack(getContext(),"HomeSliderActivity",item.getScreenWidget().getContentID(),railName,AppConstants.GALLERY_SELECT);
                         if (isMultilingualTitleEnable) {
                             String currentLang = KsPreferenceKeys.getInstance().getAppLanguage();
                             JsonObject jsonObject = new Gson().toJsonTree(item.getScreenWidget().getMultilingualTitle()).getAsJsonObject();

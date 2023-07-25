@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.activities.search.ui
 
+
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
@@ -9,11 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.moe.pushlibrary.MoEHelper
-import com.moengage.core.Properties
 import com.tv.uscreen.yojmatv.R
-
-
 import com.tv.uscreen.yojmatv.activities.detail.ui.DetailActivity
 import com.tv.uscreen.yojmatv.activities.search.adapter.CommonSearchAdapter.CommonSearchListener
 import com.tv.uscreen.yojmatv.activities.search.adapter.RowSearchAdapter
@@ -63,16 +60,12 @@ class ActivityResults : BaseBindingActivity<ActivityResultBinding?>(), CommonSea
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //ThemeHandler.getInstance().applySearchResult(getApplicationContext(),getBinding());
         binding?.toolbar?.colorsData = colorsHelper
         binding?.toolbar?.colorsData = colorsHelper
         binding?.connection?.colorsData = colorsHelper
         binding?.connection?.stringData = stringsHelper
         bundleValue
         modelCall()
-        val properties = Properties()
-        properties.addAttribute(AppConstants.SEARCH_SEE_ALL, AppConstants.SEARCH_SEE_ALL)
-        MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
     }
 
     private fun modelCall() {
@@ -236,7 +229,6 @@ class ActivityResults : BaseBindingActivity<ActivityResultBinding?>(), CommonSea
             mLastClickTime = SystemClock.elapsedRealtime()
             ActivityLauncher.getInstance().seriesDetailScreen(this@ActivityResults, SeriesDetailActivity::class.java, itemValue.id)
         } else if (itemValue.type.equals(AppConstants.CUSTOM, ignoreCase = true)) {
-            Logger.e("ActivityResults", "Season click")
             if (SystemClock.elapsedRealtime() - mLastClickTime < 1200) {
                 return
             }
@@ -252,7 +244,6 @@ class ActivityResults : BaseBindingActivity<ActivityResultBinding?>(), CommonSea
     }
 
     override fun onRowItemClicked(itemValue: EnveuVideoItemBean, position: Int) {
-        Log.d("javed", "onRowItemClicked: $itemValue")
         var trailerReferenceId: String? = ""
         var isParentContentNull = false
         var isHosted = false
@@ -288,10 +279,6 @@ class ActivityResults : BaseBindingActivity<ActivityResultBinding?>(), CommonSea
                 if (itemValue.liveContent.externalUrl != null) {
                     externalUrl = itemValue.liveContent.externalUrl
                 }
-            }
-        } else {
-            if (itemValue.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
-                customContentType = itemValue.customContent.customType
             }
         }
         AppCommonMethod.launchDetailScreenFromSearch(

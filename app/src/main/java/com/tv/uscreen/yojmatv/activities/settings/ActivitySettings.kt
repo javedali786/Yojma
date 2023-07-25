@@ -9,7 +9,6 @@ import android.widget.CompoundButton
 import com.tv.uscreen.yojmatv.BuildConfig
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.activities.settings.downloadsettings.DownloadSettings
-import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.activities.videoquality.ui.ChangeLanguageActivity
 import com.tv.uscreen.yojmatv.activities.videoquality.ui.VideoQualityActivity
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
@@ -71,16 +70,7 @@ class ActivitySettings : BaseBindingActivity<SettingsActivityBinding?>(), View.O
             val intent = Intent(this@ActivitySettings, VideoQualityActivity::class.java)
             startActivity(intent)
         }
-        binding!!.contentPerferencesLayout.setOnClickListener {
-            if (KsPreferenceKeys.getInstance().appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
-//                Intent intent = new Intent(ActivitySettings.this, ChoosePrefrenceActivity.class);
-//                intent.putExtra(AppConstants.INTENT_FROM_SETTING, true);
-//                startActivity(intent);
-            } else {
-                val intent = Intent(this@ActivitySettings, ActivityLogin::class.java)
-                startActivity(intent)
-            }
-        }
+
         binding!!.switchTheme.setOnCheckedChangeListener { _: CompoundButton?, _: Boolean ->
             if (binding!!.switchTheme.isChecked) {
                 KsPreferenceKeys.getInstance().currentTheme = AppConstants.DARK_THEME

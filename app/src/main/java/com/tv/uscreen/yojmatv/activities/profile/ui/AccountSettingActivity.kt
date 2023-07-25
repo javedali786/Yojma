@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.activities.profile.ui
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.tv.uscreen.yojmatv.R
-
-
 import com.tv.uscreen.yojmatv.activities.homeactivity.ui.HomeActivity
 import com.tv.uscreen.yojmatv.activities.purchase.plans_layer.GetPlansLayer
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
@@ -23,7 +22,6 @@ import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment.Companion.ne
 import com.tv.uscreen.yojmatv.fragments.more.adapter.AccountListAdapter
 import com.tv.uscreen.yojmatv.utils.Logger
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
-import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.CheckInternetConnection
 import com.tv.uscreen.yojmatv.utils.helpers.StringUtils
@@ -212,7 +210,6 @@ class AccountSettingActivity : BaseBindingActivity<AccountSettingActivityBinding
     override fun onActionBtnClicked() {
         if (CheckInternetConnection.isOnline(this)) {
             hitApiLogout(this, token)
-            AppCommonMethod.screenViewedTrack(applicationContext, AppConstants.LOGOUT, "AccountSettingActivity")
             clearCredientials(mPreference)
             ActivityLauncher.getInstance().loginActivityFromLogout(this, ActivityLogin::class.java)
         }

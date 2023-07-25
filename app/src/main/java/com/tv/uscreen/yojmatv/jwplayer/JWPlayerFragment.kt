@@ -1,6 +1,8 @@
 package com.example.jwplayer
 
 //import com.enveu.player.utils.TrackOptions
+
+
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
@@ -39,17 +41,13 @@ import com.jwplayer.pub.api.media.playlists.PlaylistItem
 import com.jwplayer.pub.view.JWPlayerView
 import com.tv.uscreen.yojmatv.BuildConfig
 import com.tv.uscreen.yojmatv.R
-
-
 import com.tv.uscreen.yojmatv.SDKConfig
 import com.tv.uscreen.yojmatv.activities.detail.viewModel.DetailViewModel
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.databinding.FragmentJWPlayerBinding
-
 import com.tv.uscreen.yojmatv.fragments.dialog.DialogPlayer
 import com.tv.uscreen.yojmatv.utils.Logger
-import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
@@ -178,11 +176,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         }
 
         override fun onBackClicked()  {
-            id?.let {
-                AppCommonMethod.MoEngageEventTrack(context, screenName,
-                    it.toString(),tittle,contentType,
-                    AppConstants.CONTENT_PAUSE,contentPlayed,contentDuration)
-            }
             super.onBackClicked()
             if (activity != null) {
                 activity?.finish()
@@ -417,11 +410,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     }
 
     override fun onReady(p0: ReadyEvent?) {
-        id?.let {
-            AppCommonMethod.MoEngageEventTrack(context, screenName,
-                it.toString(),tittle,contentType,
-                AppConstants.CONTENT_PLAY,contentPlayed,contentDuration)
-        }
+
     }
 
     override fun onMeta(p0: MetaEvent?) {
@@ -480,11 +469,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
 
     override fun onComplete(p0: CompleteEvent?) {
-        id?.let {
-            AppCommonMethod.MoEngageEventTrack(context, screenName,
-                it.toString(),tittle,contentType,
-                AppConstants.CONTENT_COMPLETED,contentPlayed,contentDuration)
-        }
             onVideoComplete()
         handler!!.removeCallbacksAndMessages(runnable)
 //        mPlayer.seek(0.0)
@@ -605,11 +589,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
     override fun onPause() {
        // mPlayer.pause()
-        id?.let {
-            AppCommonMethod.MoEngageEventTrack(context, screenName,
-                it.toString(),tittle,contentType,
-                AppConstants.CONTENT_PAUSE,contentPlayed,contentDuration)
-        }
         super.onPause()
         pause()
     }

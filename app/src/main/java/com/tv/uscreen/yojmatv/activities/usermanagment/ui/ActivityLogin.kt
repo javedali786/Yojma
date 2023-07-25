@@ -342,8 +342,6 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
                 try {
                     if (it.responseCode === 2000) {
                         val gson = Gson()
-                        AppCommonMethod.screenViewedTrack(applicationContext, AppConstants.SIGN_IN_SUCCESS, "ActivityLogin")
-
                         val loginData: Data = it.data
                         modelLogin = it.data
                         val stringJson = gson.toJson(loginData)

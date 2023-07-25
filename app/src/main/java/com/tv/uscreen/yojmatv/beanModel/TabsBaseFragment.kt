@@ -356,7 +356,6 @@ open class TabsBaseFragment<T : HomeBaseViewModel?> : BaseBindingFragment<Fragme
                 return
             }
             val finalName = checkNull(data.screenWidget, multilingualTitle)
-            // String continueWatchingTitle = OttApplication.getInstance().getResources().getString(R.string.continueWatchingTitle);
             if (data.screenWidget.name != null && data.screenWidget.referenceName != null && (data.screenWidget.referenceName.equals(
                     AppConstants.ContentType.CONTINUE_WATCHING.name,
                     ignoreCase = true
@@ -430,7 +429,7 @@ open class TabsBaseFragment<T : HomeBaseViewModel?> : BaseBindingFragment<Fragme
             if (multilingualTitle.equals("", ignoreCase = true)) {
                 if (ObjectHelper.isSame(screenWidget!!.referenceName, AppConstants.ContentType.MY_WATCHLIST.name)) {
                     name = getString(R.string.my_watchlist)
-                } else if (screenWidget != null && screenWidget.name != null) {
+                } else if (screenWidget.name != null) {
                     name = screenWidget.name.toString()
                 }
             } else {

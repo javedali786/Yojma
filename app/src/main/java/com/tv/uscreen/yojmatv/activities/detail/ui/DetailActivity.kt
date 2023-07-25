@@ -471,7 +471,6 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
                             if (responseEntitle.data.entitled) {
                                 if (isUserVerified.equals("true", ignoreCase = true)) {
                                     if (null != responseEntitle.data.externalRefId && !responseEntitle.data.externalRefId.equals("", ignoreCase = true)) {
-                                        AppCommonMethod.callMoEngageUserTypeSubscription(applicationContext, AppConstants.PAID_USER)
                                         playbackUrl = SDKConfig.getInstance().playbacK_URL + responseEntitle.data.externalRefId + ".m3u8"
                                         startPlayer(playbackUrl, false)
                                     }
@@ -486,7 +485,6 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
                                     )
                                 }
                             } else {
-                                AppCommonMethod.callMoEngageUserTypeSubscription(applicationContext, AppConstants.FREE_USER)
                                 isUserNotEntitle = true
                                 commonDialog(
                                     "",
