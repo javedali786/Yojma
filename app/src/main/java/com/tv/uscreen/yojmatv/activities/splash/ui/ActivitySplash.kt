@@ -33,7 +33,6 @@ import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.google.gson.Gson
 import com.moengage.core.analytics.MoEAnalyticsHelper
 import com.moengage.core.model.AppStatus
-import com.tv.uscreen.yojmatv.BuildConfig
 import com.tv.uscreen.yojmatv.OttApplication
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.SDKConfig
@@ -541,12 +540,12 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
 
     protected override fun onResume() {
         super.onResume()
-        try {
+       /* try {
             val isTablet: Boolean = this@ActivitySplash.resources.getBoolean(R.bool.isTablet)
             binding?.buildNumber?.visibility = View.VISIBLE
             if (!isTablet) binding?.buildNumber?.text = resources.getString(R.string.app_name) + "  V " + BuildConfig.VERSION_NAME
         } catch (ignored: Exception) {
-        }
+        }*/
     }
 
     protected override fun onStart() {

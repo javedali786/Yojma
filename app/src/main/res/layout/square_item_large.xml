@@ -33,7 +33,6 @@
                     style="@style/Custom.Widget.CardView"
                     android:layout_width="wrap_content"
                     app:cardCornerRadius="0dp"
-                    app:cardBackgroundColor="@color/try_again_btn_txt_color"
                     android:layout_height="wrap_content">
 
                     <RelativeLayout
@@ -42,11 +41,11 @@
 
                         <ImageView
                             android:id="@+id/itemImage"
-                            errorImage="@{@drawable/placeholder_square}"
-                            placeholder="@{@drawable/placeholder_square}"
+                            errorImage="@{@drawable/ic_placeholder_square}"
+                            placeholder="@{@drawable/ic_placeholder_square}"
                             android:layout_width="@dimen/_113sdp"
                             android:layout_height="@dimen/_113sdp"
-                            android:background="@drawable/placeholder_square"
+                            android:background="@drawable/ic_placeholder_square"
                             android:contentDescription="TODO"
                             android:scaleType="fitXY" />
 

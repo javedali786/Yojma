@@ -62,6 +62,8 @@ class MoreForYouActivity : BaseBindingActivity<MoreForyouActivityBinding?>(), Fo
         binding!!.toolbarGrid.backLayout.setOnClickListener { onBackPressed() }
         binding!!.toolbarGrid.titleSkip.visibility = View.GONE
         binding!!.toolbarGrid.titleMid.visibility = View.VISIBLE
+        binding!!.toolbarGrid.logoMain2.visibility = View.GONE
+
         val relatedVideos = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.detail_page_related_videos.toString(),
             getString(R.string.detail_page_related_videos)

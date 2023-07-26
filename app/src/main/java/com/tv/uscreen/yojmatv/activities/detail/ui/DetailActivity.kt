@@ -111,7 +111,6 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // ThemeHandler.getInstance().applyDetailPage(this,getBinding());
         parseColor()
         window.setBackgroundDrawableResource(R.color.buy_now_pay_now_btn_text_color)
         preference
@@ -136,8 +135,6 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
             if (extras != null) {
                 extras = extras.getBundle(AppConstants.BUNDLE_ASSET_BUNDLE)
                 assetId = extras!!.getInt(AppConstants.BUNDLE_ASSET_ID)
-                // brightCoveVideoId = Objects.requireNonNull(extras).getLong(AppConstants.BUNDLE_VIDEO_ID_BRIGHTCOVE);
-                //  downloadHelper = new DownloadHelper(this, this, AppConstants.ContentType.VIDEO.name(),parentalRating);
             }
         } else {
             throw IllegalArgumentException("Activity cannot find extras Search_Show_All")
@@ -450,7 +447,6 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
                 if (!videoDetails!!.isPremium) {
                     if (isUserVerified.equals("true", ignoreCase = true)) {
                         if (null != videoDetails!!.externalRefId && !videoDetails!!.externalRefId.equals("", ignoreCase = true)) {
-                            //AppCommonMethod.callMoEngageUserTypeSubscription(applicationContext, AppConstants.PAID_USER)
                             playbackUrl = SDKConfig.getInstance().playbacK_URL + videoDetails!!.externalRefId + ".m3u8"
                             startPlayer(playbackUrl, false)
                         }
@@ -516,19 +512,7 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
     }
 
     private fun startPlayer(playback_url: String?, isTrailer: Boolean) {
-        ActivityLauncher.getInstance().launchPlayerActitivity(
-            this@DetailActivity,
-            PlayerActivity::class.java,
-            playback_url,
-            false,
-            null,
-            videoDetails!!.id,
-            videoDetails!!.title,
-            videoDetails!!.assetType,
-            isTrailer,
-            false,
-            videoDetails!!.posterURL,
-            AppConstants.DETAILACTIVITY
+        ActivityLauncher.getInstance().launchPlayerActitivity(this@DetailActivity, PlayerActivity::class.java, playback_url, false, null, videoDetails!!.id, videoDetails!!.title, videoDetails!!.assetType, isTrailer, false, videoDetails!!.posterURL, AppConstants.DETAILACTIVITY
         )
     }
 

@@ -36,20 +36,21 @@
                 card_view:cardPreventCornerOverlap="false">
 
 
-            <RelativeLayout
+                <RelativeLayout
                     android:layout_width="@dimen/NontonSize120"
-                    android:layout_height="@dimen/NontonSize180">
+                    android:layout_height="@dimen/potarit_large_item_height"
+                    >
 
-                <ImageView
-                    android:id="@+id/itemImage"
-                    errorImage="@{@drawable/placeholder_potrait}"
-                    imageUrl="@{playlistItem.posterURL}"
-                    placeholder="@{@drawable/placeholder_potrait}"
-                    android:layout_width="@dimen/NontonSize120"
-                    android:layout_height="@dimen/NontonSize180"
-                    android:contentDescription="TODO"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/placeholder_potrait" />
+                    <ImageView
+                        android:id="@+id/itemImage"
+                        errorImage="@{@drawable/placeholder_potrait}"
+                        imageUrl="@{playlistItem.posterURL}"
+                        placeholder="@{@drawable/placeholder_potrait}"
+                        android:layout_width="@dimen/NontonSize120"
+                        android:layout_height="@dimen/potarit_large_item_height"
+                        android:contentDescription="TODO"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/placeholder_potrait" />
 
                     <FrameLayout
                         android:id="@+id/flNew"

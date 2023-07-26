@@ -67,7 +67,6 @@
             android:text="@string/meta_detail_title"
             android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.series_detail_tittle_txt_color) ? @color/series_detail_tittle_txt_color : Color.parseColor(colorsData.instance().data.config.series_detail_tittle_txt_color), default=@color/series_detail_tittle_txt_color}"
             android:textSize="@dimen/font_xxxlarge"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

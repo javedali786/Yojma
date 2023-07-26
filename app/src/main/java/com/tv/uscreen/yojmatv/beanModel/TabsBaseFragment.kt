@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.beanModel
 
+
 import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
@@ -16,8 +17,6 @@ import com.enveu.client.enums.Layouts
 import com.enveu.client.enums.ListingLayoutType
 import com.enveu.client.enums.PDFTarget
 import com.tv.uscreen.yojmatv.R
-
-
 import com.tv.uscreen.yojmatv.SDKConfig
 import com.tv.uscreen.yojmatv.activities.homeactivity.TabIdInterface
 import com.tv.uscreen.yojmatv.activities.listing.listui.ListActivity
@@ -35,12 +34,8 @@ import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.CommonApiCallBack
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.CommonRailtItemClickListner
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.MoreClickListner
 import com.tv.uscreen.yojmatv.databinding.FragmentHomeBinding
-
-import com.tv.uscreen.yojmatv.fragments.gaming.viewModel.GamingFragmentViewModel
 import com.tv.uscreen.yojmatv.fragments.home.viewModel.HomeFragmentViewModel
 import com.tv.uscreen.yojmatv.fragments.movies.viewModel.MovieFragmentViewModel
-import com.tv.uscreen.yojmatv.fragments.news.viewModel.ReelsFragmentViewModel
-import com.tv.uscreen.yojmatv.fragments.shows.viewModel.PodcastFragmentViewModel
 import com.tv.uscreen.yojmatv.utils.Logger
 import com.tv.uscreen.yojmatv.utils.ObjectHelper
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
@@ -82,8 +77,6 @@ open class TabsBaseFragment<T : HomeBaseViewModel?> : BaseBindingFragment<Fragme
 
     private fun modelCall() {
         mActivity = activity
-        //        tabsBaseBackgroundHideCallBack = (TabsBaseBackgroundHideCallBack) mActivity;
-//        tabsBaseBackgroundHideCallBack.tabBackgroundHide(true);
         callShimmer()
         if (activity != null) {
             preference = KsPreferenceKeys.getInstance()
@@ -94,25 +87,17 @@ open class TabsBaseFragment<T : HomeBaseViewModel?> : BaseBindingFragment<Fragme
 
     private fun setTabId() {
         try {
-            if (configResponse != null && configResponse.data != null && configResponse.data.appConfig != null && configResponse.data.appConfig.navScreens != null) {
+            if (configResponse.data != null && configResponse.data.appConfig != null && configResponse.data.appConfig.navScreens != null) {
                 if (viewModel is HomeFragmentViewModel) {
                     tabId = SDKConfig.getInstance().firstTabId
-                } else if (viewModel is PodcastFragmentViewModel) {
-                    tabId = SDKConfig.getInstance().secondTabId
                 } else if (viewModel is MovieFragmentViewModel) {
-                    tabId = SDKConfig.getInstance().thirdTabId
-                } else if (viewModel is GamingFragmentViewModel) {
-                    tabId = SDKConfig.getInstance().fourthTabId
+                    tabId = SDKConfig.getInstance().secondTabId
                 }
             } else {
                 tabId = if (viewModel is HomeFragmentViewModel) {
                     AppConstants.HOME_ENVEU
-                } else if (viewModel is ReelsFragmentViewModel) {
+                }  else if (viewModel is MovieFragmentViewModel) {
                     AppConstants.ORIGINAL_ENVEU
-                } else if (viewModel is PodcastFragmentViewModel) {
-                    AppConstants.PREMIUM_ENVEU
-                } else if (viewModel is MovieFragmentViewModel) {
-                    AppConstants.SINETRON_ENVEU
                 } else {
                     AppConstants.HOME_ENVEU
                 }
@@ -120,12 +105,8 @@ open class TabsBaseFragment<T : HomeBaseViewModel?> : BaseBindingFragment<Fragme
         } catch (ex: Exception) {
             tabId = if (viewModel is HomeFragmentViewModel) {
                 AppConstants.HOME_ENVEU
-            } else if (viewModel is ReelsFragmentViewModel) {
+            }  else if (viewModel is MovieFragmentViewModel) {
                 AppConstants.ORIGINAL_ENVEU
-            } else if (viewModel is PodcastFragmentViewModel) {
-                AppConstants.PREMIUM_ENVEU
-            } else if (viewModel is MovieFragmentViewModel) {
-                AppConstants.SINETRON_ENVEU
             } else {
                 AppConstants.HOME_ENVEU
             }

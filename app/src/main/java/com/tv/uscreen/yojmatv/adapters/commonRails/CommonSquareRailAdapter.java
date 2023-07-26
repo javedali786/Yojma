@@ -54,7 +54,6 @@ public class CommonSquareRailAdapter extends RecyclerView.Adapter<RecyclerView.V
                 SquareItemBinding binding = DataBindingUtil.inflate(
                         LayoutInflater.from(parent.getContext()),
                         R.layout.square_item, parent, false);
-                //ThemeHandler.getInstance().applyheadingSqaureRailItem(parent.getContext(),binding);
                 binding.setColorsData(ColorsHelper.INSTANCE);
                 return new NormalHolder(binding);
             }
@@ -76,7 +75,6 @@ public class CommonSquareRailAdapter extends RecyclerView.Adapter<RecyclerView.V
                 SquareItemBinding binding = DataBindingUtil.inflate(
                         LayoutInflater.from(parent.getContext()),
                         R.layout.square_item, parent, false);
-                //ThemeHandler.getInstance().applyheadingSqaureRailItem(parent.getContext(),binding);
                 binding.setColorsData(ColorsHelper.INSTANCE);
                 return new NormalHolder(binding);
             }
@@ -84,7 +82,6 @@ public class CommonSquareRailAdapter extends RecyclerView.Adapter<RecyclerView.V
             SquareItemBinding binding = DataBindingUtil.inflate(
                     LayoutInflater.from(parent.getContext()),
                     R.layout.square_item, parent, false);
-            //ThemeHandler.getInstance().applyheadingSqaureRailItem(parent.getContext(),binding);
             binding.setColorsData(ColorsHelper.INSTANCE);
             return new NormalHolder(binding);
         }
@@ -129,7 +126,6 @@ public class CommonSquareRailAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
 
         try {
-            AppCommonMethod.handleTitleDesc(itemBinding.titleLayout,itemBinding.tvTitle,itemBinding.tvDescription,baseCategory);
             itemBinding.tvTitle.setText(videos.get(i).getTitle());
             itemBinding.tvDescription.setText(videos.get(i).getDescription());
         }catch (Exception ignored){
@@ -158,7 +154,6 @@ public class CommonSquareRailAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
 
         try {
-            AppCommonMethod.handleTitleDesc(itemBinding.titleLayout,itemBinding.tvTitle,itemBinding.tvDescription,baseCategory);
             itemBinding.tvTitle.setText(videos.get(i).getTitle());
             itemBinding.tvDescription.setText(videos.get(i).getDescription());
         }catch (Exception ignored){
@@ -187,7 +182,6 @@ public class CommonSquareRailAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
 
         try {
-            AppCommonMethod.handleTitleDesc(itemBinding.titleLayout,itemBinding.tvTitle,itemBinding.tvDescription,baseCategory);
             itemBinding.tvTitle.setText(videos.get(i).getTitle());
             itemBinding.tvDescription.setText(videos.get(i).getDescription());
         }catch (Exception ignored){

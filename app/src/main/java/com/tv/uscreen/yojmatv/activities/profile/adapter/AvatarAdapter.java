@@ -57,8 +57,8 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.SingleItem
     public void onBindViewHolder(@NonNull final SingleItemRowHolder viewHolder, @SuppressLint("RecyclerView") final int position) {
 
         Glide.with(activity).load(arrayList.get(position).getUrl())
-                .placeholder(R.drawable.placeholder_square)
-                .error(R.drawable.placeholder_square)
+                .placeholder(R.drawable.ic_placeholder_square)
+                .error(R.drawable.ic_placeholder_square)
                 .into(viewHolder.genreItemBinding.itemImage);
 
         viewHolder.genreItemBinding.itemImage.setOnClickListener(new View.OnClickListener() {

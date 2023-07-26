@@ -3,6 +3,7 @@ package com.tv.uscreen.yojmatv.fragments.foryou.ui
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,24 +12,39 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
-import com.tv.uscreen.yojmatv.databinding.PotraitItemLargeBinding
+import com.tv.uscreen.yojmatv.databinding.MorePotraitItemLargeBinding
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.helpers.ImageHelper
 
-class ForYouAdapter(private val context: Activity, private val videoItemBeans: MutableList<EnveuVideoItemBean>, private val id: Int, private var currentAssetId: Int, private val listner: EpisodeItemClick) : RecyclerView.Adapter<ForYouAdapter.SeasonViewHolder>() {
-    private val itemWidth = 0
-    private val itemHeight = 0
+class MoreForYouAdapter(private val context: Activity, private val videoItemBeans: MutableList<EnveuVideoItemBean>, private val id: Int, private var currentAssetId: Int, private val listner: EpisodeItemClick) : RecyclerView.Adapter<MoreForYouAdapter.SeasonViewHolder>() {
+    private var itemWidth = 0
+    private var itemHeight = 0
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): SeasonViewHolder {
-        val itemBinding: PotraitItemLargeBinding = DataBindingUtil.inflate(
+        val itemBinding: MorePotraitItemLargeBinding = DataBindingUtil.inflate(
             LayoutInflater.from(viewGroup.context),
-            R.layout.potrait_item_large, viewGroup, false
+            R.layout.more_potrait_item_large, viewGroup, false
+
+
 
         )
         return SeasonViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: SeasonViewHolder, @SuppressLint("RecyclerView") position: Int) {
+        var num : Int = 3
+        val tabletSize = context.resources.getBoolean(R.bool.isTablet)
+        if (tabletSize) {
+            num = if (context.resources.configuration.orientation == 2) 5 else 4
+        }
+        val displaymetrics = DisplayMetrics()
+        context.windowManager.defaultDisplay.getMetrics(displaymetrics)
+        //if you need three fix imageview in width
+        //if you need three fix imageview in width
+        itemWidth = displaymetrics.widthPixels / num
+        itemHeight = itemWidth * 3 / 2
+
+
         holder.itemBinding.playlistItem = videoItemBeans[position]
 
         try {
@@ -73,5 +89,5 @@ class ForYouAdapter(private val context: Activity, private val videoItemBeans: M
         fun onItemClick(assetId: EnveuVideoItemBean?, isPremium: Boolean, position: Int)
     }
 
-    inner class SeasonViewHolder internal constructor(val itemBinding: PotraitItemLargeBinding) : RecyclerView.ViewHolder(itemBinding.root)
+    inner class SeasonViewHolder internal constructor(val itemBinding: MorePotraitItemLargeBinding) : RecyclerView.ViewHolder(itemBinding.root)
 }

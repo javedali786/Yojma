@@ -164,7 +164,7 @@ class GridActivity : BaseBindingActivity<ListingActivityBinding?>(), ItemClickLi
         binding!!.toolbarGrid.backLayout.setOnClickListener { finish() }
         binding!!.toolbarGrid.titleMid.visibility = View.VISIBLE
         binding!!.toolbarGrid.logoMain2.visibility = View.GONE
-        binding!!.toolbarGrid.llSearchIcon.visibility = View.VISIBLE
+        binding!!.toolbarGrid.llSearchIcon.visibility = View.GONE
         if (isContinueWatchingEnable) {
             val loginStatus = preference!!.appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)
             if (loginStatus) {

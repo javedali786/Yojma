@@ -30,7 +30,7 @@ public class ImageHelper {
     }
 
     public void loadImageTo(ImageView imageView, String imageUrl) {
-        requestOptions.placeholder(R.drawable.placeholder_square);
+        requestOptions.placeholder(R.drawable.ic_placeholder_square);
         Glide.with(mGlideObj.getContext()).setDefaultRequestOptions(requestOptions).
                 load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.6f).into(imageView);
     }
@@ -55,7 +55,7 @@ public class ImageHelper {
 
 
     public void loadListSQRImage(ImageView imageView, String imageUrl) {
-        requestOptions.placeholder(R.drawable.placeholder_square);
+        requestOptions.placeholder(R.drawable.ic_placeholder_square);
         Glide.with(mGlideObj.getContext()).setDefaultRequestOptions(requestOptions).
                 load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.6f).into(imageView);
     }

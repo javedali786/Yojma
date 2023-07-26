@@ -76,11 +76,11 @@
                                     app:layout_constraintTop_toTopOf="parent">
                                     <ImageView
                                         android:id="@+id/itemImage"
-                                        errorImage="@{@drawable/placeholder_square}"
-                                        placeholder="@{@drawable/placeholder_square}"
+                                        errorImage="@{@drawable/ic_placeholder_square}"
+                                        placeholder="@{@drawable/ic_placeholder_square}"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:background="@drawable/placeholder_square"
+                                        android:background="@drawable/ic_placeholder_square"
                                         android:contentDescription="TODO"
                                         android:scaleType="fitXY" />
                                 </LinearLayout>

@@ -82,20 +82,6 @@ import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper;
 
 import java.util.List;
 
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
 
 public class CommonAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

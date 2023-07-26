@@ -255,7 +255,8 @@ public interface AppConstants {
     String PROD_LICENSE_KEY = "Gk8hWhpetk6hSe1kA2KyaiIbLtvEcGWrv4WFiArHpdk9c4MDR9VPMrUCCvs=";
 */
     String UAT_LICENSE_KEY = "dQU071to+hwjttPkhKGRLyX8g4fqezTr7jOi6Tqsr01bj+43";
-    String PROD_LICENSE_KEY = "iu8f/9fwMvsCo5H0LUB9iuF3XEbRwna9r3Geb4zo6WbOkvka";
+    String PROD_LICENSE_KEY = "emo9NLiNMOlsFfEOb33tG5Xz6dEu0rO0CKICdewTPRiiAC1n";
+    String QA_LICENSE_KEY = "C1sJKzeiVH2jvWyNf6Mdi6tKaVOGzdCffVTGSIclagHZyDHz";
     String APPLE = "APPLE_IAP";
     String GOOGLE_IAP = "GOOGLE_IAP";
     String TWO_C_TWO_P = "TWO_C_TWO_P";

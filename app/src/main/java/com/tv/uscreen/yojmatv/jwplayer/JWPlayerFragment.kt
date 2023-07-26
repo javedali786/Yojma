@@ -343,7 +343,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         if (BuildConfig.FLAVOR.equals("qa", ignoreCase = true)) {
             LicenseUtil().setLicenseKey(
                 requireContext(),
-                "J8XACWBabTdNbXFzoysyFyv0ZxqmcZfGASfWxi6PMYp19mWkbSgTbkGf65s="
+                AppConstants.QA_LICENSE_KEY
             )
         }else{
             LicenseUtil().setLicenseKey(
