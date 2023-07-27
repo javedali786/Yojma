@@ -17,7 +17,7 @@
             android:id="@+id/lblListHeader"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium"
+            android:fontFamily="@font/sfuitext_medium"
             android:textColor="@color/series_detail_now_playing_title_color"
             android:textSize="@dimen/onboarding_textSize17"
             tools:text="Text data" />

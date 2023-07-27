@@ -344,7 +344,7 @@
                     android:layout_marginStart="@dimen/signUp_10dp_margin"
                     android:layout_marginTop="@dimen/sign_up_padding_25dp"
                     android:layout_marginEnd="@dimen/sign_up_margin32dp"
-                    android:fontFamily="@font/inter_regular"
+                    android:fontFamily="@font/sfuitext_regular"
                     android:text=""
                     android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.signup_i_accept_the_text_color) ? @color/signup_i_accept_the_text_color : Color.parseColor(colorsData.instance().data.config.signup_i_accept_the_text_color), default=@color/signup_i_accept_the_text_color}"
                     app:layout_constraintEnd_toEndOf="parent"

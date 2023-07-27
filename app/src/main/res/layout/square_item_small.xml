@@ -32,7 +32,7 @@
                 <androidx.cardview.widget.CardView
                     style="@style/Custom.Widget.CardView"
                     android:layout_width="wrap_content"
-                    app:cardCornerRadius="0dp"
+                    app:cardCornerRadius="8dp"
                     android:layout_height="wrap_content">
 
                     <RelativeLayout

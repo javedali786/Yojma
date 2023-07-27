@@ -82,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/sfuitext_medium"
                         android:gravity="end"
                         android:maxLines="1"
                         android:text="@{TextUtils.isEmpty(stringData.instance().data.config.related_data_see_all) ? @string/related_data_see_all : stringData.instance().data.config.related_data_see_all , default=@string/related_data_see_all}"

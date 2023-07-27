@@ -87,7 +87,7 @@
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="60dp"
                     android:background="@drawable/series_shadow"
                     app:layout_constraintBottom_toBottomOf="@id/sliderImage"
                     app:layout_constraintEnd_toEndOf="parent"

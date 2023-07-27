@@ -40,7 +40,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/NontonSize18"
                 android:layout_toRightOf="@+id/more_list_icon"
-                android:fontFamily="@font/inter_medium"
+                android:fontFamily="@font/sfuitext_medium"
                 android:gravity="center_vertical"
                 android:text=""
                 android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.item_label_text_color) ? @color/item_label_text_color : Color.parseColor(colorsData.instance().data.config.item_label_text_color), default=@color/item_label_text_color}"

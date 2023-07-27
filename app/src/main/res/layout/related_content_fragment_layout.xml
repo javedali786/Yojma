@@ -82,10 +82,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/sfuitext_medium"
                         android:gravity="end"
                         android:maxLines="1"
-                        android:text="@{TextUtils.isEmpty(stringData.instance().data.config.related_data_see_all) ? @string/related_data_see_all : stringData.instance().data.config.related_data_see_all , default=@string/related_data_see_all}"
+                        android:text="@{TextUtils.isEmpty(stringData.instance().data.config.more_title_btn) ? @string/more_title_btn : stringData.instance().data.config.more_title_btn , default=@string/more_title_btn}"
                         android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.rail_more_text_color) ? @color/rail_more_text_color : Color.parseColor(colorsData.instance().data.config.rail_more_text_color), default=@color/rail_more_text_color}"
                         android:textSize="@dimen/signUp_14sp_text_size" />
                 </LinearLayout>

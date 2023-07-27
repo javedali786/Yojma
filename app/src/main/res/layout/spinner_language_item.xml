@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/NontonSize10"
         android:gravity="center"
-        android:fontFamily="@font/inter_medium"
+        android:fontFamily="@font/sfuitext_medium"
         android:text=""
         android:textColor="@color/series_detail_now_playing_title_color"
         android:textSize="@dimen/signUp_14sp_text_size" />

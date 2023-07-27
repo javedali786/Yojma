@@ -94,7 +94,7 @@
                         android:layout_marginEnd="@dimen/_15sdp"
                         android:background="@color/login_fgt_pwd_btn_bg_color"
                         android:cursorVisible="true"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/sfuitext_medium"
                         android:hint="@string/search_hint"
                         android:imeOptions="actionDone"
                         android:inputType="textNoSuggestions"
@@ -150,7 +150,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/signUp_5dp_margin"
-                        android:fontFamily="@font/inter_bold"
+                        android:fontFamily="@font/sfuitext_bold"
                         android:text="@{TextUtils.isEmpty(stringData.instance().data.config.cancel_search) ? @string/cancel_search : stringData.instance().data.config.cancel_search , default=@string/cancel_search}"
                         android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.skip_text_color) ? @color/skip_text_color : Color.parseColor(colorsData.instance().data.config.skip_text_color), default=@color/skip_text_color}"
                         android:textSize="@dimen/search_cancel" />

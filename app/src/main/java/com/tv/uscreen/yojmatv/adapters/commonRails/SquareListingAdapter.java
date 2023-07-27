@@ -81,7 +81,6 @@ public class SquareListingAdapter extends RecyclerView.Adapter<SquareListingAdap
                     if (itemsList.get(i).getPosterURL() != null && !itemsList.get(i).getPosterURL().equalsIgnoreCase("")) {
                         ImageHelper.getInstance(holder.squareItemBinding.itemImage.getContext()).loadImageTo(holder.squareItemBinding.itemImage, AppCommonMethod.getListSQRImage(itemsList.get(i).getPosterURL(), holder.squareItemBinding.itemImage.getContext()));
                     }
-                    //Glide.with(mContext).load(itemsList.get(i).getPosterURL()).into(holder.squareItemBinding.itemImage);
                 } else if (contentType.equalsIgnoreCase(AppConstants.SERIES)) {
                     Glide.with(holder.squareItemBinding.itemImage.getContext()).load(AppCommonMethod.getImageUrl(AppConstants.SERIES, "SQUARE") + itemsList.get(i).getPosterURL()).into(holder.squareItemBinding.itemImage);
                     holder.squareItemBinding.itemImage.setOnClickListener(view -> {

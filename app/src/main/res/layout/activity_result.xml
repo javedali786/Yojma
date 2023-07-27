@@ -40,7 +40,7 @@
                         android:text="-"
                         android:visibility="gone"
                         android:textColor="@color/series_detail_now_playing_title_color"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/sfuitext_medium"
                         android:singleLine="true"
                         android:textSize="@dimen/searching_tittle_text_size"
                         android:textAllCaps="false"

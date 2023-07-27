@@ -19,7 +19,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@color/try_again_btn_txt_color"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -27,7 +26,6 @@
             style="@style/Custom.Widget.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardBackgroundColor="@color/try_again_btn_txt_color"
             card_view:cardCornerRadius="8dp">
 
             <RelativeLayout
@@ -168,7 +166,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:background="@color/try_again_btn_txt_color"
                     android:gravity="left"
                     android:maxLines="1"
                     android:visibility="visible"
@@ -185,7 +182,6 @@
                     android:ellipsize="end"
                     android:gravity="left"
                     android:maxLines="1"
-                    android:background="@color/try_again_btn_txt_color"
                     android:visibility="visible"
                     android:fontFamily="?attr/font_normal"
                     android:paddingLeft="@dimen/_3sdp"

@@ -178,7 +178,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="top|left"
                         android:ellipsize="end"
-                        android:fontFamily="@font/inter_bold"
+                        android:fontFamily="@font/sfuitext_bold"
                         android:maxLines="1"
                         android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.series_detail_tittle_txt_color) ? @color/series_detail_tittle_txt_color : Color.parseColor(colorsData.instance().data.config.series_detail_tittle_txt_color), default=@color/series_detail_tittle_txt_color}"
                         android:textSize="@dimen/font_medium_small" />
@@ -192,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rail_top_margin"
                     android:ellipsize="end"
-                    android:fontFamily="@font/inter_medium"
+                    android:fontFamily="@font/sfuitext_medium"
                     android:text="duration"
                     android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.series_detail_episode_duration_text_color) ? @color/series_detail_episode_duration_text_color : Color.parseColor(colorsData.instance().data.config.series_detail_episode_duration_text_color), default=@color/series_detail_episode_duration_text_color}"
                     android:textSize="@dimen/TextSize12"

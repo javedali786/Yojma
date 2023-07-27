@@ -13,14 +13,14 @@ public final class FontUtil {
     }
 
     public static Typeface getNormal(Context context) {
-        return ResourcesCompat.getFont(context, R.font.inter_medium);
+        return ResourcesCompat.getFont(context, R.font.sfuitext_medium);
     }
 
     public static Typeface getMedium(Context context) {
-        return ResourcesCompat.getFont(context, R.font.inter_medium);
+        return ResourcesCompat.getFont(context, R.font.sfuitext_medium);
     }
 
     public static Typeface getBold(Context context) {
-        return ResourcesCompat.getFont(context, R.font.inter_medium);
+        return ResourcesCompat.getFont(context, R.font.sfuitext_medium);
     }
 }

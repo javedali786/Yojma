@@ -384,7 +384,7 @@
                         />
                     <TextView
                         android:gravity="center"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/sfuitext_medium"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:textSize="@dimen/NontonSize13"
                         android:layout_marginBottom="@dimen/_15sdp"
@@ -493,7 +493,7 @@
                         android:text="Pay Now"
                         android:textSize="16dp"
                         android:textColor="@color/try_again_btn_txt_color"
-                        android:fontFamily="@font/inter_bold"
+                        android:fontFamily="@font/sfuitext_bold"
                         android:textStyle="bold" />
                 </LinearLayout>
 

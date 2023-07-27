@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/card_image_rail"
-            app:cardBackgroundColor="@color/try_again_btn_txt_color"
+            app:cardBackgroundColor="@color/app_bg_color"
             app:cardCornerRadius="5dp"
             app:cardElevation="0dp"
             app:layout_constraintDimensionRatio="W,9:16"
@@ -89,7 +89,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_gravity="bottom"
                 android:background="@drawable/above_shado"
                 android:gravity="bottom"

@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/NontonSize30"
                     android:layout_gravity="left"
-                    android:fontFamily="@font/inter_medium"
+                    android:fontFamily="@font/sfuitext_medium"
                     android:text="@string/my_profile"
                     android:textColor="?attr/change_language_text_color"
                     android:textSize="@dimen/manage_account_profile" />
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/NontonSize30"
                 android:layout_gravity="left"
-                android:fontFamily="@font/inter_medium"
+                android:fontFamily="@font/sfuitext_medium"
                 android:text="@string/change_password"
                 android:textColor="?attr/change_language_text_color"
                 android:textSize="@dimen/manage_account_profile" />

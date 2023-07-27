@@ -154,7 +154,7 @@
         <TextView
             android:id="@+id/cancel_subscription_id"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium"
+            android:fontFamily="@font/sfuitext_medium"
             android:text="@string/cancel_subscription_button"
             android:textColor="@color/series_detail_all_episode_txt_color"
             android:textSize="14dp"

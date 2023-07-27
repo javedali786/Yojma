@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:maxLines="2"
                     android:ellipsize="end"
-                    android:fontFamily="@font/inter_bold"
+                    android:fontFamily="@font/sfuitext_bold"
                     android:layout_toRightOf="@+id/cb_purchase"
                     android:text="ANNUAL"
                     android:textColor="@color/series_detail_now_playing_title_color"
@@ -63,7 +63,7 @@
                     android:layout_marginLeft="41dp"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:fontFamily="@font/inter_regular"
+                    android:fontFamily="@font/sfuitext_regular"
                     android:text="iberalia GO! with Lewis Lundy: Intro to Schutzhund: Tracking"
                     android:textColor="@color/series_detail_now_playing_title_color"
                     android:textSize="@dimen/NontonSize12" />

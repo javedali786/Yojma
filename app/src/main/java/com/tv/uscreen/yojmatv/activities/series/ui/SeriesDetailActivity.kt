@@ -116,9 +116,8 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // ThemeHandler.getInstance().applySeriesDetail(getApplicationContext(), getBinding());
         parserColor()
-        window.setBackgroundDrawableResource(R.color.buy_now_pay_now_btn_text_color)
+        window.setBackgroundDrawableResource(R.color.app_bg_color)
         shimmerCounter = 0
         preference = KsPreferenceKeys.getInstance()
         if (preference?.appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
@@ -358,7 +357,8 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             relatedContentArgs.putString("contentType", AppConstants.VIDEO)
             /*  relatedContentArgs.putString("preferenceData",preferenceData);
             Log.d("tag", "preferenceData-2: " + preferenceData);
-*/relatedContentFragment!!.arguments = relatedContentArgs
+           */
+            relatedContentFragment!!.arguments = relatedContentArgs
             seasonTabFragment!!.resetAdapter()
             relatedContentFragment!!.resetAdapter()
             supportFragmentManager.beginTransaction().detach(seasonTabFragment!!).commit()

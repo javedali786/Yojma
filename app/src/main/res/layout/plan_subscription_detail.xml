@@ -24,7 +24,7 @@
                 android:layout_marginLeft="@dimen/signUp_8dp_margin"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:ellipsize="end"
-                android:fontFamily="@font/inter_bold"
+                android:fontFamily="@font/sfuitext_bold"
                 android:text=""
                 android:textColor="@color/series_detail_now_playing_title_color"
                 android:textSize="16dp" />
@@ -41,7 +41,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_toLeftOf="@+id/plan_amount_text"
                 android:ellipsize="end"
-                android:fontFamily="@font/inter_regular"
+                android:fontFamily="@font/sfuitext_regular"
                 android:text=""
                 android:textColor="@color/series_detail_now_playing_title_color"
                 android:textSize="12dp" />
@@ -55,7 +55,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:fontFamily="@font/inter_regular"
+                android:fontFamily="@font/sfuitext_regular"
                 android:gravity="center"
                 android:text=""
                 android:textColor="@color/series_detail_now_playing_title_color"

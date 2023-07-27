@@ -86,7 +86,7 @@
                                 android:layout_marginEnd="@dimen/_15sdp"
                                 android:background="@null"
                                 android:cursorVisible="true"
-                                android:fontFamily="@font/inter_medium"
+                                android:fontFamily="@font/sfuitext_medium"
                                 android:hint="@string/search_hint"
                                 android:imeOptions="actionDone"
                                 android:inputType="textNoSuggestions"
@@ -140,7 +140,7 @@
                                 android:id="@+id/cancel"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/inter_medium"
+                                android:fontFamily="@font/sfuitext_medium"
                                 android:text="@string/cancel"
                                 android:textColor="?attr/cancel_text_color"
                                 android:textSize="@dimen/search_cancel" />
