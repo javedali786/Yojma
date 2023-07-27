@@ -4,7 +4,9 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tv.uscreen.yojmatv.OttApplication
 import com.tv.uscreen.yojmatv.utils.helpers.SharedPrefHelper
+import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.stringsJson.model.StringsData
+import java.io.InputStream
 import java.nio.charset.StandardCharsets
 
 object StringsHelper {
@@ -12,7 +14,13 @@ object StringsHelper {
     fun loadDataFromJson(): StringsData? {
         var users: StringsData? = null
         val json: String = try {
-            val `is` = OttApplication.getContext().assets.open("StringsData.json")
+            var `is`:InputStream? = null
+            `is` = if (KsPreferenceKeys.getInstance().appLanguage == "English") {
+                OttApplication.getContext().assets.open("SpanishStringsData.json")
+            } else {
+                OttApplication.getContext().assets.open("StringsData.json")
+            }
+
             val size = `is`.available()
             val buffer = ByteArray(size)
             `is`.read(buffer)

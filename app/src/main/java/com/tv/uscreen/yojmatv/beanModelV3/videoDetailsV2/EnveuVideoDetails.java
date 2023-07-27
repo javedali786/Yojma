@@ -41,6 +41,10 @@ public class EnveuVideoDetails {
     @SerializedName("description")
     @Expose
     private String description;
+
+    @SerializedName("longDescription")
+    @Expose
+    private String longDescription;
     @SerializedName("duration")
     @Expose
     private int duration;
@@ -53,9 +57,6 @@ public class EnveuVideoDetails {
     @SerializedName("images")
     @Expose
     private Images images;
-    @SerializedName("longDescription")
-    @Expose
-    private Object longDescription;
     @SerializedName("title")
     @Expose
     private String title;
@@ -267,11 +268,11 @@ public class EnveuVideoDetails {
         this.images = images;
     }
 
-    public Object getLongDescription() {
+    public String getLongDescription() {
         return longDescription;
     }
 
-    public void setLongDescription(Object longDescription) {
+    public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
     }
 

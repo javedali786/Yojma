@@ -49,6 +49,16 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
     private var hasEntitlement = false
     private var token = ""
     private var userState = ""
+    private var gaming= ""
+    private var myList= ""
+    private var account= ""
+    private var settings= ""
+    private var buyNow= ""
+    private var orderHistory= ""
+    private var termsCondition= ""
+    private var manageSubscription= ""
+    private var privacyPolicy= ""
+
     private val stringsHelper by lazy { StringsHelper }
     private val colorsHelper by lazy { ColorsHelper }
     public override fun inflateBindingLayout(inflater: LayoutInflater): FragmentMoreBinding {
@@ -99,39 +109,39 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
 
     private fun modelCall(hasEntitlement: Boolean) {
         binding!!.progressBar.visibility = View.GONE
-        val gaming = stringsHelper.stringParse(
+        gaming = stringsHelper.stringParse(
         stringsHelper.instance()?.data?.config?.more_gaming.toString(),
         getString(R.string.more_gaming)
         )
-        val myList = stringsHelper.stringParse(
+         myList = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.my_list.toString(),
             getString(R.string.my_list)
         )
-        val account = stringsHelper.stringParse(
+         account = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_account.toString(),
             getString(R.string.more_account)
         )
-        val settings = stringsHelper.stringParse(
+         settings = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_settings.toString(),
             getString(R.string.more_settings)
         )
-        val buyNow = stringsHelper.stringParse(
+         buyNow = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_buy_now.toString(),
             getString(R.string.more_buy_now)
         )
-        val manageSubscription = stringsHelper.stringParse(
+         manageSubscription = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_manage_subscription.toString(),
             getString(R.string.more_manage_subscription)
         )
-        val orderHistory = stringsHelper.stringParse(
+         orderHistory = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_order_history.toString(),
             getString(R.string.more_order_history)
         )
-        val privacyPolicy = stringsHelper.stringParse(
+         privacyPolicy = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_privacy_policy.toString(),
             getString(R.string.more_privacy_policy)
         )
-        val termsCondition = stringsHelper.stringParse(
+         termsCondition = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_term_condition.toString(),
             getString(R.string.more_term_condition)
         )
@@ -266,22 +276,22 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
 
     override fun onClick(caption: String) {
         val loginStatus = KsPreferenceKeys.getInstance().appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)
-       if (caption == getString(R.string.my_list)) {
+       if (caption == myList) {
             if (loginStatus) {
                 ActivityLauncher.getInstance().gotoList(requireActivity(), MyListActivity::class.java)
             } else {
                 ActivityLauncher.getInstance().loginActivity(requireActivity(), ActivityLogin::class.java)
             }
-        } else if (caption == getString(R.string.more_account)) {
+        } else if (caption == account) {
             if (loginStatus) {
                 ActivityLauncher.getInstance().goToAccountSetting(requireActivity(), AccountSettingActivity::class.java)
             } else {
                 ActivityLauncher.getInstance().loginActivity(requireActivity(), ActivityLogin::class.java)
             }
-        } else if (caption == getString(R.string.more_settings)) {
+        } else if (caption == settings) {
             ActivityLauncher.getInstance().goToSetting(requireActivity(), ActivitySettings::class.java)
         }
-       else if (caption == getString(R.string.more_buy_now)) {
+       else if (caption == buyNow) {
             if (loginStatus) {
                 if (hasEntitlement) {
                     ActivityLauncher.getInstance().manageAccount(requireActivity(), ManageSubscriptionAccount::class.java)
@@ -292,23 +302,23 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
                 ActivityLauncher.getInstance().loginActivity(requireActivity(), ActivityLogin::class.java)
             }
         }
-       else if (caption == getString(R.string.manage_account)) {
+       else if (caption ==manageSubscription) {
             if (loginStatus) {
                 ActivityLauncher.getInstance().goToPlanScreen(requireActivity(), ActivitySelectSubscriptionPlan::class.java, "moreFragment")
             } else {
                 ActivityLauncher.getInstance().loginActivity(requireActivity(), ActivityLogin::class.java)
             }
         }
-       else if (caption == getString(R.string.more_order_history)) {
+       else if (caption == orderHistory) {
             if (loginStatus) {
                 ActivityLauncher.getInstance().orderHistroy(requireActivity(), OrderHistoryActivity::class.java)
             } else {
                 ActivityLauncher.getInstance().loginActivity(requireActivity(), ActivityLogin::class.java)
             }
         }
-       else if (caption == getString(R.string.privacy_policy)) {
+       else if (caption == privacyPolicy) {
             requireActivity().startActivity(Intent(requireActivity(), HelpActivity::class.java).putExtra("type", "2"))
-        } else if (caption == getString(R.string.more_term_condition)) {
+        } else if (caption == termsCondition) {
             requireActivity().startActivity(Intent(requireActivity(), HelpActivity::class.java).putExtra("type", "1"))
         }
     }

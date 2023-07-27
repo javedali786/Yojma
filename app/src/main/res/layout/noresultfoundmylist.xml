@@ -16,13 +16,14 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent"
-        android:background="@color/try_again_btn_txt_color"
+        android:background="@color/app_bg_color"
         android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.app_bg_color) ? @color/app_bg_color : Color.parseColor(colorsData.instance().data.config.app_bg_color), default=@color/app_bg_color}">
 
 
     <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
+
         <LinearLayout
             android:id="@+id/nodatafounmd"
             android:layout_width="match_parent"

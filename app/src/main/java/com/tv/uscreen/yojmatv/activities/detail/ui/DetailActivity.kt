@@ -71,6 +71,7 @@ import com.tv.uscreen.yojmatv.utils.helpers.ImageHelper
 import com.tv.uscreen.yojmatv.utils.helpers.RailInjectionHelper
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
+import com.tv.uscreen.yojmatv.utils.htmlParseToString
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 
 class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogFragment.AlertDialogListener, NetworkChangeReceiver.ConnectivityReceiverListener, OnAudioFocusChangeListener,
@@ -112,7 +113,7 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parseColor()
-        window.setBackgroundDrawableResource(R.color.buy_now_pay_now_btn_text_color)
+        window.setBackgroundDrawableResource(R.color.app_bg_color)
         preference
         val orientation = this.resources.configuration.orientation
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -230,8 +231,7 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         args.putString("contentType", AppConstants.VIDEO)
         args.putInt(AppConstants.ID, id)
 
-        /* args.putString("preferenceData",preferenceData);
-            Log.d("tag", "preferenceData-2: " + preferenceData);*/relatedContentFragment!!.arguments = args
+        relatedContentFragment!!.arguments = args
         binding!!.tabLayout.setSelectedTabIndicatorGravity(TabLayout.INDICATOR_GRAVITY_TOP)
         episodeTabAdapter = EpisodeTabAdapter(supportFragmentManager)
         episodeTabAdapter!!.addFragment(
@@ -662,8 +662,9 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
             } else {
                 binding!!.metaDetails.tvTitle.visibility = View.GONE
             }
-            if (videoItemBean.description != null) {
-                binding!!.metaDetails.descriptionText.text = videoItemBean.description
+            if (videoItemBean.longDescription != null) {
+                binding!!.metaDetails.descriptionText.htmlParseToString(videoItemBean.longDescription)
+               // binding!!.metaDetails.descriptionText.text = videoItemBean.longDescription
             } else {
                 binding!!.metaDetails.descriptionText.visibility = View.GONE
             }

@@ -34,11 +34,11 @@
                 android:visibility="visible">
 
                 <ImageView
-                   android:layout_width="wrap_content"
+                    android:layout_width="wrap_content"
                     android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.back_icon_color) ? @color/back_icon_color : Color.parseColor(colorsData.instance().data.config.back_icon_color), default=@color/back_icon_color}"
                     android:background="@drawable/ic_baseline_arrow_back_ios_24"
                     android:layout_height="wrap_content"
-                  android:contentDescription="TODO" />
+                    android:contentDescription="TODO" />
 
 
             </LinearLayout>

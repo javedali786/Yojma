@@ -20,8 +20,8 @@
     <string name="signup_signin"><u>Iniciar Sesión</u></string>
     <string name="otp_enter_otp">Introduce el OTP</string>
     <string name="otp_digit_code_send">Entra el código de 6 dígitos que hemos enviado a</string>
-    <string name="otp_code_valid">Código OTP valido para 04:59min</string>
-    <string name="otp_resend_otp"> Reenviar OTP</string>
+    <string name="otp_code_valid">Código OTP valido para</string>
+    <string name="otp_resend_otp">Reenviar OTP</string>
     <string name="login_signup"><u>Crear Cuenta</u></string>
     <string name="login_email_text">correo</string>
     <string name="login_pwd">contraseña</string>
@@ -32,12 +32,14 @@
     <string name="forgot_continue">Continuar</string>
     <string name="subscribe">Suscripción</string>
     <string name="sorry_your_password_doesn_t_match_please_check_your_password_again">Lo sentimos, tus contraseñas no coinciden, ¿puedes verificarlas?</string>
-    <string name="toolbar_skip_text">Saltar</string>
+    <string name="skip">Saltar</string>
+    <string name="noti_title">Notifications</string>
+    <string name="notification_setting">Notificaciones Configuración</string>
     <string name="only_register">Solo Registro</string>
     <string name="buy_in_case_query">Si tienes cualquier duda, envíanos un correo a info@iberaliago.net</string>
     <string name="buy_select_subscription">POR FAVOR SELECCIONA TU\n SUSCRIPCIÓN</string>
     <string name="plan_description">Te hemos enviado un correo, por favor entra en tu bandeja de entrada y confirma tu cuenta para poder Iniciar Sesión en Iberalia GO!</string>
-    <string name="plan_pay_btn">Reproducir ahora</string>
+    <string name="buy_pay_now">Reproducir ahora</string>
     <string name="preferences_title_hunting_types">Modalidades De Caza</string>
     <string name="preferences_title_hunting">Especies De Caza</string>
     <string name="hunting_types">Modalidades De Caza</string>
@@ -100,7 +102,7 @@
     <string name="novelties">Novelties</string>
     <string name="news">Noticias</string>
     <string name="events">Eventos</string>
-    <string name="more_account">account</string>
+    <string name="more_account">Cuenta</string>
     <string name="more_settings">Ajustes</string>
     <string name="streaming_settings_title">Ajustes de Visualización</string>
     <string name="title_change_language">Cambiar Idioma</string>
@@ -115,14 +117,14 @@
     <string name="meta_detail_subtitle">Pigeons · Fixed Stand · Spain</string>
     <string name="meta_duration">30:25 min</string>
     <string name="detail_page_play">Reproducir</string>
-    <string name="detail_page_trailer">Watch Trailer</string>
+    <string name="detail_page_trailer">Ver el trailer</string>
     <string name="meta_detail_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
     <string name="detail_page_sponsored_by">Patrocinado por :</string>
     <string name="meta_sponsered_description">Merkel · Leica · Hornady</string>
     <string name="detail_page_produced_by">Producido por :</string>
     <string name="meta_produced_description">Alex Moraras</string>
     <string name="account_title">Cuenta</string>
-    <string name="more_manage_subscription">Manage Subscription</string>
+    <string name="more_manage_subscription">Administrar suscripción</string>
     <string name="premium_title">Premium</string>
     <string name="euro_74_99_text">Euros 74,99€</string>
     <string name="annually_title">ANUAL</string>
@@ -131,7 +133,7 @@
     <string name="status_title">Status</string>
     <string name="payment_mode_title">Metodo de Pago</string>
     <string name="auto_renewal_text">Renovación Automática</string>
-    <string name="no_internet_connection">No internet connection found.\nCheck your connection.</string>
+    <string name="no_internet_connection">No se encontró conexión a Internet.\n Comprueba tu conexión.</string>
     <string name="active_text">Activo</string>
     <string name="join">¡Apúntate!</string>
     <string name="participate">Participar</string>
@@ -169,7 +171,7 @@
     <string name="account_title_text">Cuenta</string>
     <string name="user_name_profile">Nombre usuario</string>
     <string name="my_profile">Mi Perfil</string>
-    <string name="edit_profile">Edit profile</string>
+    <string name="edit_profile">Editar perfil</string>
     <string name="more_gaming">Gaming</string>
     <string name="change_password">Cambiar Contraseña</string>
     <string name="player">Player</string>
@@ -288,7 +290,7 @@
     <string name="type_subtitle">Subtitle</string>
     <string name="search_hint">Busqueda</string>
     <string name="cancel">Cancelar</string>
-
+    <string name="cancel_search">Cancelar</string>
     <string name="ep_media_route_menu_title">Play on…</string>
     <string name="cast_receiver_app_id">13012E0E</string>
     <string name="ep_cast_message">Playing on %1$s</string>
@@ -337,9 +339,11 @@
     <string name="one_month">1 Mensual</string>
     <string name="one_year">1 Anual</string>
     <string name="monthly">Mensual</string>
-
-
-
+    <string name="account_logout">Cerrar sesión</string>
+    <string name="signup_term_condition">Acepto los Términos y Condiciones y la Política de Privacidad</string>
+    <string name="popup_error">Error</string>
+    <string name="popup_mobile_number_digit">El número de móvil debe tener 9 dígitos</string>
+    <string name="my_list">Mi Lista</string>
 
 
 

@@ -264,9 +264,8 @@ class MyListActivity : BaseBindingActivity<FragmentMyListBinding?>(), ItemClickL
         binding!!.toolbar.root.visibility = View.GONE
         binding!!.noResultLayout.visibility = View.VISIBLE
         binding!!.noResultFound.toolbar.backLayout.visibility = View.VISIBLE
-        binding!!.noResultFound.toolbar.backLayout.visibility = View.VISIBLE
         binding!!.noResultFound.toolbar.logoMain2.visibility = View.GONE
-        binding!!.noResultFound.toolbar.rlToolBar.visibility = View.GONE
+        binding!!.noResultFound.toolbar.searchIcon.visibility = View.GONE
         binding!!.noResultFound.toolbar.titleMid.setText(R.string.mu_list_title)
         binding!!.noResultFound.toolbar.titleMid.setBackgroundResource(0)
         binding!!.noResultFound.toolbar.backLayout.setOnClickListener { onBackPressed() }

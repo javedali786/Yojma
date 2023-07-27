@@ -24,11 +24,23 @@ import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper.imageViewD
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.helpers.DrawableHelperAboutUs
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
+import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 
 class MoreListAdapter(private val mContext: Activity, private val itemsList: List<String>, call: MoreItemClickListener, islogin: Boolean) : RecyclerView.Adapter<MoreListAdapter.ViewHolder>() {
     val itemClickListener: MoreItemClickListener
     private val islogin: Boolean
     private var mLastClickTime: Long = 0
+    private val stringsHelper by lazy { StringsHelper }
+    private val colorsHelper by lazy { ColorsHelper }
+    private var gaming= ""
+    private var myList= ""
+    private var account= ""
+    private var settings= ""
+    private var buyNow= ""
+    private var orderHistory= ""
+    private var termsCondition= ""
+    private var manageSubscription= ""
+    private var privacyPolicy= ""
 
     init {
         val layoutInflater = LayoutInflater.from(mContext)
@@ -39,6 +51,41 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         val moreItemBinding = DataBindingUtil.inflate<MoreItemBinding>(LayoutInflater.from(viewGroup.context), R.layout.more_item, viewGroup, false)
         moreItemBinding.colorsData = ColorsHelper
+        stringsHelper.instance()?.data?.config?.more_gaming.toString()
+
+        mContext.getString(R.string.more_gaming)
+        myList = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.my_list.toString(),
+            mContext.getString(R.string.my_list)
+        )
+        account = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.more_account.toString(),
+            mContext.getString(R.string.more_account)
+        )
+        settings = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.more_settings.toString(),
+            mContext.getString(R.string.more_settings)
+        )
+        buyNow = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.more_buy_now.toString(),
+            mContext.getString(R.string.more_buy_now)
+        )
+        manageSubscription = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.more_manage_subscription.toString(),
+            mContext.getString(R.string.more_manage_subscription)
+        )
+        orderHistory = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.more_order_history.toString(),
+            mContext.getString(R.string.more_order_history)
+        )
+        privacyPolicy = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.more_privacy_policy.toString(),
+            mContext.getString(R.string.more_privacy_policy)
+        )
+        termsCondition = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.more_term_condition.toString(),
+           mContext.getString(R.string.more_term_condition)
+        )
         return ViewHolder(moreItemBinding)
     }
 
@@ -97,22 +144,22 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
                     return@setOnClickListener
                 }
                 mLastClickTime = SystemClock.elapsedRealtime()
-                if (itemsList[layoutPosition].equals(mContext.resources.getString(R.string.my_list), ignoreCase = true)) {
-                    itemClickListener.onClick(mContext.resources.getString(R.string.my_list))
-                } else if (itemsList[layoutPosition].equals(mContext.resources.getString(R.string.more_account), ignoreCase = true)) {
-                    itemClickListener.onClick(mContext.resources.getString(R.string.more_account))
-                } else if (itemsList[layoutPosition].equals(mContext.resources.getString(R.string.more_settings), ignoreCase = true)) {
-                    itemClickListener.onClick(mContext.resources.getString(R.string.more_settings))
-                } else if (itemsList[layoutPosition].equals(mContext.resources.getString(R.string.more_buy_now), ignoreCase = true)) {
-                    itemClickListener.onClick(mContext.resources.getString(R.string.more_buy_now))
-                } else if (itemsList[layoutPosition].equals(mContext.resources.getString(R.string.manage_subscription), ignoreCase = true)) {
-                    itemClickListener.onClick(mContext.resources.getString(R.string.manage_subscription))
-                } else if (itemsList[layoutPosition].equals(mContext.resources.getString(R.string.more_order_history), ignoreCase = true)) {
-                    itemClickListener.onClick(mContext.resources.getString(R.string.more_order_history))
-                } else if (itemsList[layoutPosition].equals(mContext.resources.getString(R.string.privacy_policy), ignoreCase = true)) {
-                    itemClickListener.onClick(mContext.resources.getString(R.string.privacy_policy))
-                } else if (itemsList[layoutPosition].equals(mContext.resources.getString(R.string.more_term_condition), ignoreCase = true)) {
-                    itemClickListener.onClick(mContext.resources.getString(R.string.more_term_condition))
+                if (itemsList[layoutPosition] == myList) {
+                    itemClickListener.onClick(myList)
+                } else if (itemsList[layoutPosition] == account) {
+                    itemClickListener.onClick(account)
+                } else if (itemsList[layoutPosition] == settings) {
+                    itemClickListener.onClick(settings)
+                } else if (itemsList[layoutPosition]== buyNow) {
+                    itemClickListener.onClick(buyNow)
+                } else if (itemsList[layoutPosition] == manageSubscription) {
+                    itemClickListener.onClick(manageSubscription)
+                } else if (itemsList[layoutPosition] == orderHistory) {
+                    itemClickListener.onClick(orderHistory)
+                } else if (itemsList[layoutPosition]==privacyPolicy) {
+                    itemClickListener.onClick(privacyPolicy)
+                } else if (itemsList[layoutPosition] ==termsCondition) {
+                    itemClickListener.onClick(termsCondition)
                 }
             }
         }

@@ -53,8 +53,6 @@ public class ChangeLanguageAdapter extends RecyclerView.Adapter<ChangeLanguageAd
     public void onBindViewHolder(@NonNull final SingleItemRowHolder viewHolder, @SuppressLint("RecyclerView") final int position) {
 
         if (pos == position) {
-
-
             viewHolder.notificationItemBinding.parentLayout.setBackgroundResource(R.drawable.setting_shadow);
         } else {
             viewHolder.notificationItemBinding.parentLayout.setBackgroundResource(0);

@@ -23,10 +23,10 @@ public class LanguageLayer {
     public static String getCurrentLanguageCode() {
         String languageCode="";
         Logger.d("languageValues: " + SDKConfig.getInstance().getSpanishLangCode());
-        if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("English")){
-            languageCode= SDKConfig.getInstance().getEnglishCode();
+        if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("spanish")){
+            languageCode= SDKConfig.getInstance().getSpanishLangCode();
         }else {
-            languageCode= "es-ES";
+            languageCode= SDKConfig.getInstance().getEnglishCode();
         }
         return languageCode;
     }

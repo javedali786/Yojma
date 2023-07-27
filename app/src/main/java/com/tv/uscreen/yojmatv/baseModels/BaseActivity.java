@@ -412,36 +412,19 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
                 KsPreferenceKeys.getInstance().setAppPrefLanguagePos(0);
                 AppCommonMethod.updateLanguage("en", this);
             } else {
-                if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("spanish") || KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("हिंदी")) {
+                if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("spanish")) {
                     AppCommonMethod.updateLanguage("en", this);
                 } else if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("English")) {
                     AppCommonMethod.updateLanguage("en", this);
                 }
             }
 
-            //Logger.e("currentLanguage", "" + currentLanguage);
 
         } catch (Exception e) {
 
         }
     }
 
-//    protected void galleryIntent(boolean gallery, boolean camera, ActivityResultLauncher<CropImageContractOptions> getCroppedImage) {
-//        CropImageOptions cropImageOptions = new CropImageOptions();
-//        cropImageOptions.guidelines = CropImageView.Guidelines.ON;
-//        cropImageOptions.activityTitle = "Crop";
-//        cropImageOptions.cropShape = CropImageView.CropShape.RECTANGLE;
-//        cropImageOptions.cropMenuCropButtonTitle = "Done";
-//        cropImageOptions.outputRequestHeight = 400;
-//        cropImageOptions.outputRequestWidth = 400;
-//        cropImageOptions.aspectRatioX = 1;
-//        cropImageOptions.aspectRatioY = 1;
-//        cropImageOptions.fixAspectRatio = true;
-//        cropImageOptions.autoZoomEnabled = true;
-//        cropImageOptions.imageSourceIncludeGallery = gallery;
-//        cropImageOptions.imageSourceIncludeCamera = camera;
-//        getCroppedImage.launch(new CropImageContractOptions(null, cropImageOptions));
-//    }
 
     protected boolean checkPermissionGranted(@NonNull String permission) {
         int result = ContextCompat.checkSelfPermission(this, permission);
@@ -540,7 +523,8 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
         BaseClient client = new BaseClient(BaseGateway.ENVEU,
                 SDKConfig.getInstance().getBASE_URL(),
                 SDKConfig.getInstance().getOVP_BASE_URL(),
-                "https://user-participation-qa.enveu.tv/",
+                "",
+                BuildConfig.VERSION_NAME,
                 DEVICE_TYPE, API_KEY,
                 BasePlatform.android.name(), isTablet,
                 AppCommonMethod.getDeviceId(getContentResolver()),SDKConfig.getInstance().getSUBSCRIPTION_BASE_URL());

@@ -66,6 +66,7 @@ import com.tv.uscreen.yojmatv.utils.helpers.ImageHelper
 import com.tv.uscreen.yojmatv.utils.helpers.RailInjectionHelper
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
+import com.tv.uscreen.yojmatv.utils.htmlParseToString
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 
 class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>(), AlertDialogFragment.AlertDialogListener, FirstEpisodeItem, CommonDialogFragment.EditDialogListener {
@@ -690,7 +691,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                 binding!!.metaDetails.tvTitle.visibility = View.GONE
             }
             if (seriesResponse.description != null) {
-                binding!!.metaDetails.descriptionText.text = seriesResponse.description
+                binding!!.metaDetails.descriptionText.htmlParseToString(seriesResponse.description)
             } else {
                 binding!!.metaDetails.descriptionText.visibility = View.GONE
             }

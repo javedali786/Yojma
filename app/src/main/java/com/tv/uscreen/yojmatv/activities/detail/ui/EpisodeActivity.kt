@@ -86,6 +86,7 @@ import com.tv.uscreen.yojmatv.utils.helpers.StringUtils
 import com.tv.uscreen.yojmatv.utils.helpers.downloads.DownloadHelper
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
+import com.tv.uscreen.yojmatv.utils.htmlParseToString
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 
 class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialogFragment.AlertDialogListener, NetworkChangeReceiver.ConnectivityReceiverListener, OnAudioFocusChangeListener,
@@ -880,7 +881,6 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
             binding!!.metaDetails.descriptionText.visibility = View.GONE
         }
         binding!!.responseApi = responseDetailPlayer
-        //        setExpandable();
         if (isLogin.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) addToWatchHistory()
     }
 
@@ -895,7 +895,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
                 binding!!.metaDetails.tvTitle.visibility = View.GONE
             }
             if (videoItemBean.description != null) {
-                binding!!.metaDetails.descriptionText.text = videoItemBean.description
+                binding!!.metaDetails.descriptionText.htmlParseToString(videoItemBean.longDescription)
             } else {
                 binding!!.metaDetails.descriptionText.visibility = View.GONE
             }

@@ -556,6 +556,7 @@ public class EnveuVideoItemBean implements Serializable {
         try {
             this.title = details.getData().getTitle() == null ? "" : details.getData().getTitle();
             this.description = details.getData().getDescription() == null ? "" : details.getData().getDescription().trim();
+            this.longDescription = details.getData().getLongDescription() == null ? "" : details.getData().getLongDescription().trim();
             this.externalRefId = details.getData().getExternalRefId() == null ? "" : details.getData().getExternalRefId().trim();
             this.assetGenres = details.getData().getGenres() == null ? new ArrayList<>() : details.getData().getGenres();
             this.assetCast = details.getData().getCast() == null ? new ArrayList<>() : details.getData().getCast();
