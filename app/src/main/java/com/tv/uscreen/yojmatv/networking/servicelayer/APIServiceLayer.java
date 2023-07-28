@@ -79,7 +79,7 @@ public class APIServiceLayer {
 
     public LiveData<List<BaseCategory>> getCategories(String screenId) {
         MutableLiveData<List<BaseCategory>> liveData = new MutableLiveData<>();
-        BaseCategoryServices.Companion.getInstance().categoryService(screenId, new EnveuCallBacks() {
+        BaseCategoryServices.Companion.getInstance().categoryService("",screenId, new EnveuCallBacks() {
             @Override
             public void success(boolean status, List<BaseCategory> categoryList) {
                 if (status) {
