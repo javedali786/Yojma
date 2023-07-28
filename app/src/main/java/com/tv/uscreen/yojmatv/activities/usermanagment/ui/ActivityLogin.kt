@@ -102,11 +102,11 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
         binding?.connection?.stringData = stringsHelper
         parseColor()
         binding?.signIn?.paintFlags = binding!!.signIn.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-        val bundle = intent.extras
+       /* val bundle = intent.extras
         fromSplash = intent.getBooleanExtra("fromSplash",false)
         if (fromSplash!!){
             binding?.toolbar!!.backLayout.visibility = View.GONE
-        }
+        }*/
         setClicks()
         connectionObserver()
         viewModel = ViewModelProvider(this@ActivityLogin).get(
@@ -120,9 +120,8 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
         FacebookSdk.fullyInitialize();
         binding?.fbButton?.setReadPermissions(permissionNeeds);
         binding?.confirmPasswordEye?.isChecked = false
-        binding?.toolbar?.backLayout?.visibility = View.GONE
+        binding?.toolbar?.backLayout?.visibility = View.VISIBLE
         binding?.toolbar?.titleSkip?.visibility = View.GONE
-        binding?.toolbar?.backLayout?.visibility = View.GONE
         binding?.toolbar?.logoMain2?.visibility = View.VISIBLE
         binding?.toolbar?.searchIcon?.visibility = View.GONE
 

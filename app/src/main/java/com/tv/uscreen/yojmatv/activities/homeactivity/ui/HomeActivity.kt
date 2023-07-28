@@ -192,7 +192,7 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
         binding!!.toolbar.rlToolBar.setBackgroundColor(ContextCompat.getColor(this, R.color.buy_now_pay_now_btn_text_color))
         binding!!.toolbar.homeIconKids.visibility = View.GONE
         binding!!.toolbar.homeIcon.visibility = View.GONE
-        binding!!.toolbar.backLayout.visibility = View.VISIBLE
+        binding!!.toolbar.backLayout.visibility = View.GONE
 
         bottomNavigationTextFromJson(navigation, R.id.navigation_home, stringsHelper.instance()?.data?.config?.home_tabbar.toString(), R.string.home_tabbar)
         bottomNavigationTextFromJson(navigation, R.id.navigation_movie, stringsHelper.instance()?.data?.config?.movie_tabbar.toString(), R.string.movie_tabbar)

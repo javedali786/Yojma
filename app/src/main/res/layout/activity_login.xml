@@ -126,7 +126,7 @@
                 <Button
                     android:id="@+id/forget_password"
                     style="@style/buttonStyle_two"
-                    android:background="@color/transparent"
+                    android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.main_btn_selected_bg_color) ? @color/main_btn_selected_bg_color : Color.parseColor(colorsData.instance().data.config.main_btn_selected_bg_color), default=@color/main_btn_selected_bg_color}"
                     android:text="@{TextUtils.isEmpty(stringData.instance().data.config.login_forgot_pwd) ? @string/login_forgot_pwd : stringData.instance().data.config.login_forgot_pwd , default=@string/login_forgot_pwd}"
                     android:layout_marginTop="15dp"
                     android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.login_fgt_pwd_btn_txt_color) ? @color/login_fgt_pwd_btn_txt_color : Color.parseColor(colorsData.instance().data.config.login_fgt_pwd_btn_txt_color), default=@color/login_fgt_pwd_btn_txt_color}"

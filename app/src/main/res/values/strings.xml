@@ -149,10 +149,13 @@
     <string name="series">Series</string>
     <string name="article">Article</string>
     <string name="movie">Movie</string>
+    <string name="search_movies">Movies</string>
     <string name="please_login_watchlist">Login to add to watchlist</string>
     <string name="please_login_like">Login to like</string>
     <string name="please_login_play">Login to play</string>
     <string name="VIDEO">VIDEO</string>
+    <string name="search_documentaries">Documentaries</string>
+
     <!--Banner_Test-->
 
 
@@ -766,7 +769,7 @@ the purchase option :</string>
     <string name="marketPlace">MarketPlace</string>
     <string name="event">Event</string>
     <string name="contest">Contest</string>
-    <string name="documentries">Documentries</string>
+    <string name="documentaries">Documentaries</string>
     <string name="go">+GO!</string>
     <string name="detail_page_no_data_available">No data available</string>
 

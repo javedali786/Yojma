@@ -235,11 +235,13 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
                                         if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(MediaTypeConstants.getInstance().movie, ignoreCase = true)) {
                                             temp.layoutType = 0
                                         }
-                                        if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(AppConstants.Movie, ignoreCase = true) ||
-                                            data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(AppConstants.episode, ignoreCase = true)
-                                        ) {
+                                        if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(MediaTypeConstants.getInstance().episode, ignoreCase = true)) {
                                             temp.layoutType = 1
                                         }
+                                        if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(AppConstants.DOCUMENTARY, ignoreCase = true)) {
+                                            temp.layoutType = 2
+                                        }
+
                                     }
                                     temp.searchKey = searchKeyword
                                     temp.totalCount = railCommonData.pageTotal

@@ -38,6 +38,10 @@ public interface AppConstants {
     String Trailer = "TRAILER";
     String Series = "SERIES";
     String Movie = "MOVIE";
+    String Movies = "MOVIES";
+    String DOCUMENTARY = "DOCUMENTARY";
+    String Documentaries = "DOCUMENTARIES";
+
     String Video = "VIDEO";
     String API_PARAM_NAME = "name";
     String API_PARAM_EMAIL = "email";
@@ -237,6 +241,8 @@ public interface AppConstants {
     String events="events";
     String series="series";
     String episode="EPISODE";
+    String episodes="EPISODES";
+
     String INTENT_FROM = "intentFrom";
     String VIDEO = "VIDEO";
     String CUSTOM = "CUSTOM";
@@ -346,7 +352,6 @@ public interface AppConstants {
     String Podcast = "PODCAST";
     String Gaming = "GAMING";
     String Reel = "REEL";
-    String Documentaries = "DOCUMENTARIES";
     String SEARCH_RESULT= "Search result";
 
 

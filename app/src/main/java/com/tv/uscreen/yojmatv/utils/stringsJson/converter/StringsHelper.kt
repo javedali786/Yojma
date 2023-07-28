@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.utils.stringsJson.converter
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tv.uscreen.yojmatv.OttApplication
@@ -15,10 +16,11 @@ object StringsHelper {
         var users: StringsData? = null
         val json: String = try {
             var `is`:InputStream? = null
+            Log.d("loadDataFromJson", "loadDataFromJson: " + KsPreferenceKeys.getInstance().appLanguage)
             `is` = if (KsPreferenceKeys.getInstance().appLanguage == "English") {
-                OttApplication.getContext().assets.open("SpanishStringsData.json")
-            } else {
                 OttApplication.getContext().assets.open("StringsData.json")
+            } else {
+                OttApplication.getContext().assets.open("SpanishStringsData.json")
             }
 
             val size = `is`.available()

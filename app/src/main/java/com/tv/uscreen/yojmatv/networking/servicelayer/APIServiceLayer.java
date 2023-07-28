@@ -795,35 +795,34 @@ public class APIServiceLayer {
             ApiInterface endpoint = RequestConfig.getClientSearch().create(ApiInterface.class);
             String videoContentTypes = AppConstants.VIDEO;
 
-
-         /*   String videoTypes1 = MediaTypeConstants.getInstance().getSeries();
-            String videoTypes2 = MediaTypeConstants.getInstance().getEpisode();
-            String seriesVideoType = videoTypes1 + "," + videoTypes2;*/
-
-            String videoTypes1 = AppConstants.SERIES;
-            String videoTypes2 = AppConstants.Episode;
-            String seriesVideoType = videoTypes1 + "," + videoTypes2;
+            Observable<ResponseSearch> movies = null;
+            Observable<ResponseSearch> episode = null;
+            Observable<ResponseSearch> documentaries = null;
 
 
-            Observable<ResponseSearch> documentries = null;
-            Observable<ResponseSearch> seriesCall = null;
-
-            documentries = endpoint.getSearchByFilters(keyword,
-                            videoContentTypes, size, page, languageCode,AppConstants.Movie, allFilters,
+            movies = endpoint.getSearchByFilters(keyword,
+                            videoContentTypes, size, page, languageCode,MediaTypeConstants.getInstance().getMovie(), allFilters,
                             filterSortSavedListKeyForApi)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io());
 
-            seriesCall = endpoint.getSearchByFilters(keyword,
-                            videoContentTypes, size, page, languageCode,seriesVideoType, allFilters,
+            episode = endpoint.getSearchByFilters(keyword,
+                            videoContentTypes, size, page, languageCode,MediaTypeConstants.getInstance().getEpisode(), allFilters,
                             filterSortSavedListKeyForApi)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io());
 
-            Observable<List<ResponseSearch>> combined = Observable.zip(documentries,seriesCall, (documentriesResponse,seriesResponse) -> {
+            documentaries = endpoint.getSearchByFilters(keyword,
+                            videoContentTypes, size, page, languageCode,AppConstants.DOCUMENTARY, allFilters,
+                            filterSortSavedListKeyForApi)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io());
+
+            Observable<List<ResponseSearch>> combined = Observable.zip(movies,episode,documentaries, (moviess,episodes,documentariess) -> {
                 List<ResponseSearch> combinedList = new ArrayList<>();
-                combinedList.add(documentriesResponse);
-                combinedList.add(seriesResponse);
+                combinedList.add(moviess);
+                combinedList.add(episodes);
+                combinedList.add(documentariess);
                 return combinedList;
             }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
             combined.subscribe(new Observer<List<ResponseSearch>>() {
@@ -850,7 +849,6 @@ public class APIServiceLayer {
                                     EnveuVideoItemBean enveuVideoItemBean = new EnveuVideoItemBean(videoItem);
                                     Gson gson = new Gson();
                                     String tmp = gson.toJson(enveuVideoItemBean);
-                                    Log.d("Javed", "onNext: " + tmp);
                                     enveuVideoItemBeans.add(enveuVideoItemBean);
                                 }
                                 railCommonData.setEnveuVideoItemBeans(enveuVideoItemBeans);
@@ -896,20 +894,17 @@ public class APIServiceLayer {
 
         responsePopular = new MutableLiveData<>();
         {
-            languageCode = LanguageLayer.getCurrentLanguageCode();
-            String videoTypes1 = AppConstants.SERIES;
-            String videoTypes2 = AppConstants.Episode;
-            String seriesVideoType = videoTypes1 + "," + videoTypes2;
-
 
             try {
                 // keyword= URLEncoder.encode(keyword, "UTF-8");
                 ApiInterface backendApi = RequestConfig.getClientSearch().create(ApiInterface.class);
                 if (type.equalsIgnoreCase(AppConstants.VIDEO)) {
-                    if (header.equalsIgnoreCase(AppConstants.Movie)) {
-                        call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,AppConstants.Movie);
-                    } else if (header.equalsIgnoreCase(AppConstants.series)){
-                        call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,seriesVideoType);
+                    if (header.equalsIgnoreCase(AppConstants.Movies)) {
+                        call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,MediaTypeConstants.getInstance().getMovie());
+                    } else if (header.equalsIgnoreCase(AppConstants.episodes)){
+                        call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,MediaTypeConstants.getInstance().getEpisode());
+                    }  else if (header.equalsIgnoreCase(AppConstants.Documentaries)){
+                        call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,AppConstants.DOCUMENTARY);
                     }
                 }
 

@@ -280,13 +280,13 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
             if (loginStatus) {
                 ActivityLauncher.getInstance().gotoList(requireActivity(), MyListActivity::class.java)
             } else {
-                ActivityLauncher.getInstance().loginActivity(requireActivity(), ActivityLogin::class.java)
+                ActivityLauncher.getInstance().goToLogin(requireActivity(), ActivityLogin::class.java)
             }
         } else if (caption == account) {
             if (loginStatus) {
                 ActivityLauncher.getInstance().goToAccountSetting(requireActivity(), AccountSettingActivity::class.java)
             } else {
-                ActivityLauncher.getInstance().loginActivity(requireActivity(), ActivityLogin::class.java)
+                ActivityLauncher.getInstance().goToLogin(requireActivity(), ActivityLogin::class.java)
             }
         } else if (caption == settings) {
             ActivityLauncher.getInstance().goToSetting(requireActivity(), ActivitySettings::class.java)
@@ -299,21 +299,21 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
                     ActivityLauncher.getInstance().goToPlanScreen(requireActivity(), ActivitySelectSubscriptionPlan::class.java, "")
                 }
             } else {
-                ActivityLauncher.getInstance().loginActivity(requireActivity(), ActivityLogin::class.java)
+                ActivityLauncher.getInstance().goToLogin(requireActivity(), ActivityLogin::class.java)
             }
         }
        else if (caption ==manageSubscription) {
             if (loginStatus) {
                 ActivityLauncher.getInstance().goToPlanScreen(requireActivity(), ActivitySelectSubscriptionPlan::class.java, "moreFragment")
             } else {
-                ActivityLauncher.getInstance().loginActivity(requireActivity(), ActivityLogin::class.java)
+                ActivityLauncher.getInstance().goToLogin(requireActivity(), ActivityLogin::class.java)
             }
         }
        else if (caption == orderHistory) {
             if (loginStatus) {
                 ActivityLauncher.getInstance().orderHistroy(requireActivity(), OrderHistoryActivity::class.java)
             } else {
-                ActivityLauncher.getInstance().loginActivity(requireActivity(), ActivityLogin::class.java)
+                ActivityLauncher.getInstance().goToLogin(requireActivity(), ActivityLogin::class.java)
             }
         }
        else if (caption == privacyPolicy) {

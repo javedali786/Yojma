@@ -67,8 +67,6 @@
                             android:paddingBottom="@dimen/_2sdp"
                             android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.asset_description_text_color) ? @color/asset_description_text_color : Color.parseColor(colorsData.instance().data.config.asset_description_text_color), default=@color/asset_description_text_color}"
                             android:textSize="@dimen/_9sdp" />
-
-
                     </LinearLayout>
 
                 </RelativeLayout>

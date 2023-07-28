@@ -419,7 +419,7 @@
                 android:fontFamily="?attr/font_normal"
                 android:paddingBottom="14dp"
                 android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.settings_version_txt_color) ? @color/settings_version_txt_color : Color.parseColor(colorsData.instance().data.config.settings_version_txt_color), default=@color/settings_version_txt_color}"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="14sp"
                 tools:text="v1.0" />
         </RelativeLayout>
     </LinearLayout>

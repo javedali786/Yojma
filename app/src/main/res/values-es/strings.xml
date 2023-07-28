@@ -79,7 +79,7 @@
     <string name="types">MODALIDADES</string>
     <string name="home">Home</string>
     <string name="live">Directos</string>
-    <string name="documentries">Documentales</string>
+    <string name="documentaries">Documentales</string>
     <string name="series">Series</string>
     <string name="contest">Contest</string>
     <string name="event">Event</string>
@@ -344,7 +344,8 @@
     <string name="popup_error">Error</string>
     <string name="popup_mobile_number_digit">El número de móvil debe tener 9 dígitos</string>
     <string name="my_list">Mi Lista</string>
-
+    <string name="search_movies">Movies</string>
+    <string name="search_documentaries">Documentales</string>
 
 
 </resources>

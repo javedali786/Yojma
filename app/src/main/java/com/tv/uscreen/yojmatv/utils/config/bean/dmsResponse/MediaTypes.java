@@ -55,8 +55,8 @@ public class MediaTypes{
 	@SerializedName("reel")
 	private String reel;
 
-	@SerializedName("documentaries")
-	private String documentaries;
+	@SerializedName("documentary")
+	private String documentary;
 
 
 	public String getPodcast() {
@@ -71,8 +71,8 @@ public class MediaTypes{
 		return reel;
 	}
 
-	public String getDocumentaries() {
-		return documentaries;
+	public String getDocumentary() {
+		return documentary;
 	}
 
 	public String getTrailer(){

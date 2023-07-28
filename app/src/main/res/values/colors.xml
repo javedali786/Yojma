@@ -103,7 +103,8 @@
     <color name="item_label_icon_color">#FFFFFF</color>
     <color name="settings_label_value_text_color">#f48700</color>
     <color name="setting_arrow_icon_color">#FFFFFF</color>
-    <color name="settings_version_txt_color">#FFFFFF</color>
+    <color name="settings_version_txt_color">#707070</color>
+    <color name="ep_control_overlay">#98000000</color>
     <color name="popup_tittle_txt_color">#FFFFFF</color>
     <color name="popup_subtitle_txt_color">#FFFFFF</color>
     <color name="popup_continue_btn_selected_bg_color">#f48700</color>

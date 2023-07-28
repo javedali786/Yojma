@@ -126,6 +126,7 @@ public class CommonSquareRailAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
 
         try {
+            AppCommonMethod.handleTitleDesc(itemBinding.titleLayout,itemBinding.tvTitle,itemBinding.tvDescription,baseCategory);
             itemBinding.tvTitle.setText(videos.get(i).getTitle());
             itemBinding.tvDescription.setText(videos.get(i).getDescription());
         }catch (Exception ignored){
@@ -154,6 +155,7 @@ public class CommonSquareRailAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
 
         try {
+            AppCommonMethod.handleTitleDesc(itemBinding.titleLayout,itemBinding.tvTitle,itemBinding.tvDescription,baseCategory);
             itemBinding.tvTitle.setText(videos.get(i).getTitle());
             itemBinding.tvDescription.setText(videos.get(i).getDescription());
         }catch (Exception ignored){
@@ -182,6 +184,7 @@ public class CommonSquareRailAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
 
         try {
+            AppCommonMethod.handleTitleDesc(itemBinding.titleLayout,itemBinding.tvTitle,itemBinding.tvDescription,baseCategory);
             itemBinding.tvTitle.setText(videos.get(i).getTitle());
             itemBinding.tvDescription.setText(videos.get(i).getDescription());
         }catch (Exception ignored){

@@ -15,13 +15,11 @@ public class MediaTypeConstants {
     String Podcast = "PODCAST";
     String Gaming = "GAMING";
     String Reel = "REEL";
-    String Documentaries = "DOCUMENTARIES";
+    String Documentaries = "DOCUMENTARY";
     ConfigBean configBean;
     public static String VIDEO="VIDEO";
 
- /*   public String getMovie() {
-        return configBean == null ? "" : configBean.getData().getAppConfig().getMediaTypes().getMovie();
-    }*/
+
 
     public String getMovie() {
         return configBean == null ? "" : configBean.getData().getAppConfig().getMediaTypes().getMovie();
@@ -88,7 +86,7 @@ public class MediaTypeConstants {
     }
 
     public String getDocumentaries() {
-        return configBean == null ? "" : configBean.getData().getAppConfig().getMediaTypes().getDocumentaries();
+        return configBean == null ? "" : configBean.getData().getAppConfig().getMediaTypes().getDocumentary();
     }
 
     public String getReel() {

@@ -8,6 +8,8 @@
     <string name="checkout">Checkout</string>
     <string name="email">Enter Email ID</string>
     <string name="password">Enter Your Password</string>
+    <string name="search_movies">Movies</string>
+    <string name="search_documentaries">Documentaries</string>
     <string name="by_line">By Line</string>
     <string name="guest_user">Guest User</string>
     <string name="guest_user1">Guest User</string>

@@ -117,17 +117,9 @@ public final class ActivityLauncher {
 
 
     public void loginActivity(Activity source, Class<ActivityLogin> destination) {
-        if (source instanceof HomeActivity){
             Intent intent = new Intent(source, destination);
             intent.putExtra("loginFrom","home");
             source.startActivity(intent);
-            source.finish();
-        }else {
-            Intent intent = new Intent(source, destination);
-            intent.putExtra("loginFrom","");
-            source.startActivity(intent);
-            source.finish();
-        }
     }
 
 
@@ -186,7 +178,6 @@ public final class ActivityLauncher {
 
     public void homeScreen(Activity source, Class<HomeActivity> destination) {
         Intent intent = new Intent(source, destination);
-        //intent.putExtra( AppConstants.KIDS_MODE,kidsMode);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         TaskStackBuilder.create(source).addNextIntentWithParentStack(intent).startActivities();
     }

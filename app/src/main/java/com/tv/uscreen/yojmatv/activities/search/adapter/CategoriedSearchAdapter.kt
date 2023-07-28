@@ -55,28 +55,24 @@ class CategoriedSearchAdapter(private val context: Context, private val list: Li
         videoTypeViewHolder.binding.showAll.text = seeAll
         videoTypeViewHolder.binding.recyclerView.adapter = itemListDataAdapter1
         var header = ""
-        /*when (getItemViewType(pos)) {
+        when (getItemViewType(pos)) {
             0 -> {
-                val search = stringsHelper.stringParse(
-                    stringsHelper.instance()?.data?.config?.search_result.toString(),
-                    context.getString(R.string.movie))
-                header = context.getString(R.string.movie)
-                break
+                val movies = stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.search_movies.toString(), context.getString(R.string.search_movies))
+                header = movies
             }
 
             1 -> {
-                header = context.getString(R.string.series)
+                val episodes = stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.detail_page_episodes.toString(), context.getString(R.string.detail_page_episodes))
+                header = episodes
             }
 
-
-        }*/
-
-        when (getItemViewType(pos)) {
-            0 -> header = context.getString(R.string.documentries)
-            1 -> header = context.getString(R.string.series)
+            2 -> {
+                val documentries = stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.search_documentaries.toString(), context.getString(R.string.search_documentaries))
+                header = documentries
+            }
         }
-       // videoTypeViewHolder.binding.tvTitle.text = header + " - " + totalCount + " " + searchResults
-        videoTypeViewHolder.binding.tvTitle.text = header
+
+        videoTypeViewHolder.binding.tvTitle.text = header + " - " + totalCount + " " + searchResults
 
         if (list?.get(pos)?.totalCount!! < 4) {
             videoTypeViewHolder.binding.showAllSearch.visibility = View.GONE

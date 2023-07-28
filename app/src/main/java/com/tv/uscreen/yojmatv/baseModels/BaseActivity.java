@@ -408,17 +408,18 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
     public void updateLanguage(String currentLanguage) {
         try {
             if (currentLanguage.equalsIgnoreCase("")) {
-                KsPreferenceKeys.getInstance().setAppLanguage("English");
+                KsPreferenceKeys.getInstance().setAppLanguage("spanish");
                 KsPreferenceKeys.getInstance().setAppPrefLanguagePos(0);
-                AppCommonMethod.updateLanguage("en", this);
+                AppCommonMethod.updateLanguage("es", this);
             } else {
                 if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("spanish")) {
-                    AppCommonMethod.updateLanguage("en", this);
+                    AppCommonMethod.updateLanguage("es", this);
                 } else if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("English")) {
                     AppCommonMethod.updateLanguage("en", this);
                 }
             }
 
+            //Logger.e("currentLanguage", "" + currentLanguage);
 
         } catch (Exception e) {
 

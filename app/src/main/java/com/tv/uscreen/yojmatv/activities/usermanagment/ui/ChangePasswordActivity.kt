@@ -394,10 +394,9 @@ class ChangePasswordActivity : BaseBindingActivity<ChangePasswordNewBinding?>(),
         }
     }
     private fun noConnectionLayout() {
-
         binding?.changePasswordLayout?.visibility = View.GONE
         binding?.connection?.noConnectionLayout?.visibility = View.VISIBLE
-        binding?.connection?.retryTxt?.setOnClickListener { view -> connectionObserver() }
+        binding?.connection?.retryTxt?.setOnClickListener { connectionObserver() }
     }
 
 

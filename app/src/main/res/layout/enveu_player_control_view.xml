@@ -10,7 +10,7 @@
         android:id="@+id/series_detail_all_episode_txt_colors_background"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/series_detail_all_episode_txt_color"
+        android:background="@color/ep_control_overlay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

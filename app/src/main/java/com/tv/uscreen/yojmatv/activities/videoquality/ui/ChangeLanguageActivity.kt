@@ -26,6 +26,7 @@ import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.NetworkConnectivity
+import com.tv.uscreen.yojmatv.utils.helpers.SharedPrefHelper
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
@@ -65,7 +66,7 @@ class ChangeLanguageActivity : BaseBindingActivity<VideoQualityActivityBinding?>
     private fun setToolBar() {
         binding!!.toolbar.logoMain2.visibility = View.GONE
         binding!!.toolbar.backLayout.visibility = View.VISIBLE
-        binding!!.toolbar.rlToolBar.visibility = View.GONE
+        binding!!.toolbar.searchIcon.visibility = View.GONE
         binding!!.toolbar.titleMid.visibility = View.VISIBLE
         val changeLangTile = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.lang_change_lang.toString(),
@@ -171,6 +172,7 @@ class ChangeLanguageActivity : BaseBindingActivity<VideoQualityActivityBinding?>
         } else if (preference!!.appLanguage.equals(getString(R.string.language_english_title), ignoreCase = true)) {
             AppCommonMethod.updateLanguage("en", this@ChangeLanguageActivity)
         }
-        ActivityLauncher.getInstance().homeActivity(this, HomeActivity::class.java)
+        SharedPrefHelper.getInstance().setStringJson(StringsHelper.loadDataFromJson())
+        ActivityLauncher.getInstance().homeScreen(this, HomeActivity::class.java)
     }
 }

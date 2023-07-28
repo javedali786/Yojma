@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="android.text.TextUtils"/>
+        <variable
+            name="stringData"
+            type="com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper" />
         <import type="android.graphics.Color"/>
         <variable
             name="colorsData"
