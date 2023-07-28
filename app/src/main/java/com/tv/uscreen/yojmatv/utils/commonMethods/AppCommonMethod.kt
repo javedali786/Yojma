@@ -886,7 +886,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                     if (isUserVerified.equals("true", ignoreCase = true)) {
                         if (!StringUtils.isNullOrEmpty(externalRefId)) {
                             playback_url = SDKConfig.getInstance().playbacK_URL + (externalRefId) + (".m3u8")
-                            startPlayer(context, playback_url, false, id, isIntentFromLive, tittle, assetType, posterUrl)
+                            startPlayer(context, playback_url, false, id, isIntentFromLive, tittle, assetType, posterUrl,externalRefId)
                         }
                     } else {
                         isUserNotVerify = true
@@ -910,7 +910,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                     if (isUserVerified.equals("true", ignoreCase = true)) {
                                         if (null != responseEntitle.getData().getExternalRefId()) {
                                             playback_url1 = SDKConfig.getInstance().getPLAYBACK_URL()+(responseEntitle.getData().getExternalRefId())+(".m3u8")
-                                            startPlayer(context, playback_url1, false, id, isIntentFromLive, tittle, assetType, posterUrl)
+                                            startPlayer(context, playback_url1, false, id, isIntentFromLive, tittle, assetType, posterUrl,responseEntitle.getData().getExternalRefId())
                                         }
                                     } else {
                                         isUserNotVerify = true
@@ -982,7 +982,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             var trailer_url = ""
             trailer_url = SDKConfig.getInstance().playbacK_URL +(externalRefId)+(".m3u8")
             if (checkLoggedInAndUserVerifyCondition(AppConstants.USER_VERIFY)) {
-                startPlayer(context, trailer_url, true, id, false, tittle, assetType, posterUrl)
+                startPlayer(context, trailer_url, true, id, false, tittle, assetType, posterUrl,externalRefId)
             } else {
                 isUserNotVerify = true
                 createShowDialog(
@@ -997,14 +997,14 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             }
         }
 
-        private fun startPlayer(context: Context, playback_url: String?, isTrailer: Boolean, id: Int, isIntentFromLive: Boolean, tittle: String?, assetType: String, posterUrl: String) {
+        private fun startPlayer(context: Context, playback_url: String?, isTrailer: Boolean, id: Int, isIntentFromLive: Boolean, tittle: String?, assetType: String, posterUrl: String,externalRefId: String) {
             if (null != playback_url && !playback_url.isEmpty()) {
                 if (isIntentFromLive) {
                     ActivityLauncher.getInstance()
-                        .launchPlayerActitivity(context as Activity, PlayerActivity::class.java, playback_url, false, null, id, tittle, assetType, isTrailer, true, posterUrl, AppConstants.home)
+                        .launchPlayerActitivity(context as Activity, PlayerActivity::class.java, playback_url, false, null, id, tittle, assetType, isTrailer, true, posterUrl, AppConstants.home,externalRefId)
                 } else {
                     ActivityLauncher.getInstance()
-                        .launchPlayerActitivity(context as Activity, PlayerActivity::class.java, playback_url, false, null, id, tittle, assetType, isTrailer, false, posterUrl, AppConstants.home)
+                        .launchPlayerActitivity(context as Activity, PlayerActivity::class.java, playback_url, false, null, id, tittle, assetType, isTrailer, false, posterUrl, AppConstants.home,externalRefId)
                 }
             } else {
                 createShowDialog("", context.getString(R.string.something_went_wrong), context.getString(R.string.countinue), context)
@@ -1128,7 +1128,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                         } else {
                             playback_url = externalUrl
                         }
-                        startPlayer(context, playback_url, false, id, isIntentFromLive, tittle, assetType, "")
+                        startPlayer(context, playback_url, false, id, isIntentFromLive, tittle, assetType, "",externalRefId)
                     } else {
                         isUserNotVerify = true
                         createShowDialog(
@@ -1158,7 +1158,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                                 playback_url1 = responseEntitle.getData().getExternalUrl()
                                             }
                                         }
-                                        startPlayer(context, playback_url1, false, id, isIntentFromLive, tittle, assetType, "")
+                                        startPlayer(context, playback_url1, false, id, isIntentFromLive, tittle, assetType, "",responseEntitle.getData().getExternalRefId())
                                     } else {
                                         isUserNotVerify = true
                                         createShowDialog(

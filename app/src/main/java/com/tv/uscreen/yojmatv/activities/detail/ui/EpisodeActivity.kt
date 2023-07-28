@@ -130,6 +130,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
     private var isUserNotEntitle = false
     private var playbackUrl: String? = null
     private var trailerUrl: String? = null
+    private var trailerExternalRefId: String? = null
     private var currentEpisodeId = 0
     private var relatedContentFragment: RelatedContentFragment? = null
     private val preferenceData = ""
@@ -208,7 +209,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
         binding!!.metaDetails.watchTrailer.setOnClickListener {
             if (isLoggedIn) {
                 if (isUserVerified.equals("true", ignoreCase = true)) {
-                    startPlayer(trailerUrl, bingeWatchEnable = false, isTrailer = true)
+                    startPlayer(trailerUrl, bingeWatchEnable = false, isTrailer = true,trailerExternalRefId?:"")
                 } else {
                     isUserNotVerify = true
                     commonDialog(
@@ -228,7 +229,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
                     if (isUserVerified.equals("true", ignoreCase = true)) {
                         if (null != videoDetails!!.externalRefId && !videoDetails!!.externalRefId.equals("", ignoreCase = true)) {
                             playbackUrl = SDKConfig.getInstance().playbacK_URL + videoDetails!!.externalRefId + ".m3u8"
-                            startPlayer(playbackUrl, KsPreferenceKeys.getInstance().bingeWatchEnable, false)
+                            startPlayer(playbackUrl, KsPreferenceKeys.getInstance().bingeWatchEnable, false,videoDetails!!.externalRefId)
                         }
                     } else {
                         isUserNotVerify = true
@@ -248,7 +249,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
                                 if (isUserVerified.equals("true", ignoreCase = true)) {
                                     if (null != responseEntitle.data.externalRefId && !responseEntitle.data.externalRefId.equals("", ignoreCase = true)) {
                                         playbackUrl = SDKConfig.getInstance().playbacK_URL + responseEntitle.data.externalRefId + ".m3u8"
-                                        startPlayer(playbackUrl, KsPreferenceKeys.getInstance().bingeWatchEnable, false)
+                                        startPlayer(playbackUrl, KsPreferenceKeys.getInstance().bingeWatchEnable, false,responseEntitle.data.externalRefId)
                                     }
                                 } else {
                                     isUserNotVerify = true
@@ -292,7 +293,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
         }
     }
 
-    private fun startPlayer(playback_url: String?, bingeWatchEnable: Boolean, isTrailer: Boolean) {
+    private fun startPlayer(playback_url: String?, bingeWatchEnable: Boolean, isTrailer: Boolean,externalRefId:String) {
         ActivityLauncher.getInstance().launchPlayerActitivity(
             this@EpisodeActivity,
             PlayerActivity::class.java,
@@ -305,7 +306,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
             isTrailer,
             false,
             videoDetails!!.posterURL,
-            AppConstants.EPISODEACTIVITY
+            AppConstants.EPISODEACTIVITY,externalRefId
         )
     }
 
@@ -689,6 +690,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
                             )
                         ) {
                             binding!!.metaDetails.watchTrailer.visibility = View.VISIBLE
+                            trailerExternalRefId=enveuCommonResponse.enveuVideoItemBeans[0].externalRefId
                             trailerUrl = SDKConfig.getInstance().playbacK_URL + enveuCommonResponse.enveuVideoItemBeans[0].externalRefId + ".m3u8"
                         }
                     }

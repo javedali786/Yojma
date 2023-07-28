@@ -134,7 +134,7 @@ public final class ActivityLauncher {
         intent.putExtra(AppConstants.HOME_TAG,postion);
         source.startActivity(intent);
     }
-    public void launchPlayerActitivity(Activity source, Class<PlayerActivity> destination, String playbackurl, boolean IsBingeWatchEnable, List<EnveuVideoItemBean> seasonEpisodesList, int currentEpisodeId,String tittle,String contentType,Boolean isTrailer,Boolean isLive, String posterUrl,String screenName) {
+    public void launchPlayerActitivity(Activity source, Class<PlayerActivity> destination, String playbackurl, boolean IsBingeWatchEnable, List<EnveuVideoItemBean> seasonEpisodesList, int currentEpisodeId,String tittle,String contentType,Boolean isTrailer,Boolean isLive, String posterUrl,String screenName,String externalRefId) {
         Intent intent = new Intent(source, destination);
         intent.putExtra("activity", String.valueOf(source));
         intent.putExtra("playBackUrl",playbackurl);
@@ -147,6 +147,7 @@ public final class ActivityLauncher {
         intent.putExtra("isLive",isLive);
         intent.putExtra("posterUrl",posterUrl);
         intent.putExtra("screenName",screenName);
+        intent.putExtra("externalRefId",externalRefId);
         source.startActivity(intent);
     }
 

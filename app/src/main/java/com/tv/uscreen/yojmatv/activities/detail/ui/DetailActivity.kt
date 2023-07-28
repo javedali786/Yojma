@@ -74,7 +74,9 @@ import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.htmlParseToString
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 
-class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogFragment.AlertDialogListener, NetworkChangeReceiver.ConnectivityReceiverListener, OnAudioFocusChangeListener,
+class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
+    AlertDialogFragment.AlertDialogListener, NetworkChangeReceiver.ConnectivityReceiverListener,
+    OnAudioFocusChangeListener,
     CommonRailtItemClickListner, MoreClickListner, CommonDialogFragment.EditDialogListener {
     private var isLoggedOut = false
     private var audioManager: AudioManager? = null
@@ -100,6 +102,7 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
     private var playbackUrl: String? = null
     private var relatedContentFragment: RelatedContentFragment? = null
     private var trailerUrl: String? = null
+    private var trailerExternalRefId: String? = null
     private var registrationLoginViewModel: RegistrationLoginViewModel? = null
     private val preferenceData = ""
     private val speciesList: List<String> = ArrayList()
@@ -121,7 +124,11 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         } else {
             setupLandscapeView()
         }
-        if (preference?.appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
+        if (preference?.appPrefLoginStatus.equals(
+                AppConstants.UserStatus.Login.toString(),
+                ignoreCase = true
+            )
+        ) {
             isLoggedIn = true
         }
         isUserVerified = preference?.isVerified
@@ -140,9 +147,9 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         } else {
             throw IllegalArgumentException("Activity cannot find extras Search_Show_All")
         }
-       /* if (isLoggedIn) {
-            hitUserProfileApi()
-        }*/
+        /* if (isLoggedIn) {
+             hitUserProfileApi()
+         }*/
         callBinding()
     }
 
@@ -157,20 +164,21 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
 
     private fun hitUserProfileApi() {
         registrationLoginViewModel = ViewModelProvider(this)[RegistrationLoginViewModel::class.java]
-        registrationLoginViewModel!!.hitUserProfile(this@DetailActivity, token).observe(this@DetailActivity) { userProfileResponse ->
-            dismissLoading(binding!!.progressBar)
-            if (userProfileResponse != null) {
-                if (userProfileResponse.data != null) {
-                }
-                if (userProfileResponse.status) {
-                } else {
-                    if (userProfileResponse.responseCode == 4302) {
-                        clearCredientials(preference)
-                        isLoggedIn = false
+        registrationLoginViewModel!!.hitUserProfile(this@DetailActivity, token)
+            .observe(this@DetailActivity) { userProfileResponse ->
+                dismissLoading(binding!!.progressBar)
+                if (userProfileResponse != null) {
+                    if (userProfileResponse.data != null) {
+                    }
+                    if (userProfileResponse.status) {
+                    } else {
+                        if (userProfileResponse.responseCode == 4302) {
+                            clearCredientials(preference)
+                            isLoggedIn = false
+                        }
                     }
                 }
             }
-        }
     }
 
     private fun connectionObserver() {
@@ -212,7 +220,8 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
 
     private fun playPlayerWhenShimmer() {
         binding!!.pBar.visibility = View.GONE
-        viewModel!!.getBookMarkByVideoId(token, videoDetails!!.id).observe(this) { binding!!.backButton.visibility = View.VISIBLE }
+        viewModel!!.getBookMarkByVideoId(token, videoDetails!!.id)
+            .observe(this) { binding!!.backButton.visibility = View.VISIBLE }
         playerFragment()
     }
 
@@ -236,26 +245,47 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         episodeTabAdapter = EpisodeTabAdapter(supportFragmentManager)
         episodeTabAdapter!!.addFragment(
             relatedContentFragment,
-            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.detail_page_related_videos.toString(), getString(R.string.detail_page_related_videos))
+            stringsHelper.stringParse(
+                stringsHelper.instance()?.data?.config?.detail_page_related_videos.toString(),
+                getString(R.string.detail_page_related_videos)
+            )
         )
         binding!!.viewPager.adapter = episodeTabAdapter
         binding!!.viewPager.offscreenPageLimit = 2
         binding!!.tabLayout.setupWithViewPager(binding!!.viewPager)
 
-        binding?.metaDetails?.watchTrailer?.background = strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
-        binding?.tabLayout?.getTabAt(0)?.view?.background = strokeBgDrawable(AppColors.detailPageTabUnselectedBorderColor(), AppColors.detailPageTabUnselectedBorderColor(), 0f)
+        binding?.metaDetails?.watchTrailer?.background =
+            strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
+        binding?.tabLayout?.getTabAt(0)?.view?.background = strokeBgDrawable(
+            AppColors.detailPageTabUnselectedBorderColor(),
+            AppColors.detailPageTabUnselectedBorderColor(),
+            0f
+        )
         if (episodeTabAdapter!!.count > 1) {
-            binding?.tabLayout?.getTabAt(1)?.view?.background = strokeBgDrawable(AppColors.detailPageTabSelectedBorderColor(), AppColors.detailPageTabUnselectedBorderColor(), 0f)
+            binding?.tabLayout?.getTabAt(1)?.view?.background = strokeBgDrawable(
+                AppColors.detailPageTabSelectedBorderColor(),
+                AppColors.detailPageTabUnselectedBorderColor(),
+                0f
+            )
         }
-        binding?.tabLayout?.addOnTabSelectedListener(object : BaseOnTabSelectedListener<TabLayout.Tab> {
+        binding?.tabLayout?.addOnTabSelectedListener(object :
+            BaseOnTabSelectedListener<TabLayout.Tab> {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 showLoading(binding!!.progressBar, true)
-                tab?.view?.background = strokeBgDrawable(AppColors.detailPageTabUnselectedBorderColor(), AppColors.detailPageTabUnselectedBorderColor(), 0f)
+                tab?.view?.background = strokeBgDrawable(
+                    AppColors.detailPageTabUnselectedBorderColor(),
+                    AppColors.detailPageTabUnselectedBorderColor(),
+                    0f
+                )
                 Handler().postDelayed({ dismissLoading(binding!!.progressBar) }, 1500)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-                tab?.view?.background = strokeBgDrawable(AppColors.detailPageTabSelectedBorderColor(), AppColors.detailPageTabUnselectedBorderColor(), 0f)
+                tab?.view?.background = strokeBgDrawable(
+                    AppColors.detailPageTabSelectedBorderColor(),
+                    AppColors.detailPageTabUnselectedBorderColor(),
+                    0f
+                )
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {}
@@ -263,9 +293,18 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
 
 
         binding!!.viewPager.addOnPageChangeListener(object : OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
+
             override fun onPageSelected(position: Int) {
-                binding!!.viewPager.measure(binding!!.viewPager.measuredWidth, binding!!.viewPager.measuredHeight)
+                binding!!.viewPager.measure(
+                    binding!!.viewPager.measuredWidth,
+                    binding!!.viewPager.measuredHeight
+                )
             }
 
             override fun onPageScrollStateChanged(state: Int) {}
@@ -303,7 +342,11 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
             refreshDetailPage()
         }
         if (!isLoggedIn) {
-            if (preference!!.appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
+            if (preference!!.appPrefLoginStatus.equals(
+                    AppConstants.UserStatus.Login.toString(),
+                    ignoreCase = true
+                )
+            ) {
                 isLoggedIn = true
                 AppCommonMethod.isPurchase = false
                 isHitPlayerApi = false
@@ -365,7 +408,8 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
             val extras = intent.extras
             if (extras != null) {
                 //extras = extras.getBundle("assestIdBundle");
-                assetId = intent.extras!!.getBundle(AppConstants.BUNDLE_ASSET_BUNDLE)!!.getInt(AppConstants.BUNDLE_ASSET_ID)
+                assetId = intent.extras!!.getBundle(AppConstants.BUNDLE_ASSET_BUNDLE)!!
+                    .getInt(AppConstants.BUNDLE_ASSET_ID)
                 Logger.d("newintentCalled", assetId.toString() + "")
                 refreshDetailPage()
             }
@@ -429,90 +473,150 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         binding!!.metaDetails.watchTrailer.setOnClickListener {
             if (isLoggedIn) {
                 if (isUserVerified.equals("true", ignoreCase = true)) {
-                    startPlayer(trailerUrl, true)
+                    startPlayer(trailerUrl, true, trailerExternalRefId ?: "")
                 } else {
                     isUserNotVerify = true
                     commonDialog(
                         "",
-                        stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(), getString(R.string.popup_user_not_verify)),
-                        stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_verify.toString(), getString(R.string.popup_verify))
+                        stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
+                            getString(R.string.popup_user_not_verify)
+                        ),
+                        stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_verify.toString(),
+                            getString(R.string.popup_verify)
+                        )
                     )
                 }
             } else {
-                ActivityLauncher.getInstance().loginActivity(this@DetailActivity, ActivityLogin::class.java)
+                ActivityLauncher.getInstance()
+                    .loginActivity(this@DetailActivity, ActivityLogin::class.java)
             }
         }
         binding!!.metaDetails.playButton.setOnClickListener {
             if (isLoggedIn) {
                 if (!videoDetails!!.isPremium) {
                     if (isUserVerified.equals("true", ignoreCase = true)) {
-                        if (null != videoDetails!!.externalRefId && !videoDetails!!.externalRefId.equals("", ignoreCase = true)) {
-                            playbackUrl = SDKConfig.getInstance().playbacK_URL + videoDetails!!.externalRefId + ".m3u8"
-                            startPlayer(playbackUrl, false)
+                        if (null != videoDetails!!.externalRefId && !videoDetails!!.externalRefId.equals(
+                                "",
+                                ignoreCase = true
+                            )
+                        ) {
+                            playbackUrl =
+                                SDKConfig.getInstance().playbacK_URL + videoDetails!!.externalRefId + ".m3u8"
+                            startPlayer(playbackUrl, false, videoDetails!!.externalRefId)
                         }
                     } else {
                         isUserNotVerify = true
                         commonDialog(
                             "",
-                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(), getString(R.string.popup_user_not_verify)),
-                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_verify.toString(), getString(R.string.popup_verify))
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
+                                getString(R.string.popup_user_not_verify)
+                            ),
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_verify.toString(),
+                                getString(R.string.popup_verify)
+                            )
                         )
                     }
                 } else {
                     binding!!.progressBar.visibility = View.VISIBLE
-                    viewModel!!.hitApiEntitlement(token, videoDetails!!.sku).observe(this@DetailActivity) { responseEntitle ->
-                        binding!!.progressBar.visibility = View.GONE
-                        if (responseEntitle != null && responseEntitle.data != null) {
-                            resEntitle = responseEntitle
-                            if (responseEntitle.data.entitled) {
-                                if (isUserVerified.equals("true", ignoreCase = true)) {
-                                    if (null != responseEntitle.data.externalRefId && !responseEntitle.data.externalRefId.equals("", ignoreCase = true)) {
-                                        playbackUrl = SDKConfig.getInstance().playbacK_URL + responseEntitle.data.externalRefId + ".m3u8"
-                                        startPlayer(playbackUrl, false)
+                    viewModel!!.hitApiEntitlement(token, videoDetails!!.sku)
+                        .observe(this@DetailActivity) { responseEntitle ->
+                            binding!!.progressBar.visibility = View.GONE
+                            if (responseEntitle != null && responseEntitle.data != null) {
+                                resEntitle = responseEntitle
+                                if (responseEntitle.data.entitled) {
+                                    if (isUserVerified.equals("true", ignoreCase = true)) {
+                                        if (null != responseEntitle.data.externalRefId && !responseEntitle.data.externalRefId.equals(
+                                                "",
+                                                ignoreCase = true
+                                            )
+                                        ) {
+                                            playbackUrl =
+                                                SDKConfig.getInstance().playbacK_URL + responseEntitle.data.externalRefId + ".m3u8"
+                                            startPlayer(
+                                                playbackUrl,
+                                                false,
+                                                responseEntitle.data.externalRefId
+                                            )
+                                        }
+                                    } else {
+                                        isUserNotVerify = true
+                                        commonDialog(
+                                            "",
+                                            stringsHelper.stringParse(
+                                                stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
+                                                getString(R.string.popup_user_not_verify)
+                                            ),
+                                            stringsHelper.stringParse(
+                                                stringsHelper.instance()?.data?.config?.popup_verify.toString(),
+                                                getString(R.string.popup_verify)
+                                            )
+                                        )
                                     }
                                 } else {
-                                    isUserNotVerify = true
+                                    isUserNotEntitle = true
                                     commonDialog(
                                         "",
                                         stringsHelper.stringParse(
-                                            stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
-                                            getString(R.string.popup_user_not_verify)
-                                        ), stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_verify.toString(), getString(R.string.popup_verify))
+                                            stringsHelper.instance()?.data?.config?.popup_select_plan.toString(),
+                                            getString(R.string.popup_select_plan)
+                                        ),
+                                        stringsHelper.stringParse(
+                                            stringsHelper.instance()?.data?.config?.popup_purchase.toString(),
+                                            getString(R.string.popup_purchase)
+                                        )
                                     )
                                 }
                             } else {
-                                isUserNotEntitle = true
-                                commonDialog(
-                                    "",
-                                    stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_select_plan.toString(), getString(R.string.popup_select_plan)),
-                                    stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_purchase.toString(), getString(R.string.popup_purchase))
-                                )
-                            }
-                        } else {
-                            if (responseEntitle!!.responseCode != null && responseEntitle.responseCode == 4302) {
-                                clearCredientials(preference)
-                                ActivityLauncher.getInstance().loginActivity(this@DetailActivity, ActivityLogin::class.java)
-                            } else {
-                                commonDialog(
-                                    stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
-                                    stringsHelper.stringParse(
-                                        stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
-                                        getString(R.string.popup_something_went_wrong)
-                                    ),
-                                    stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_continue.toString(), getString(R.string.popup_continue))
-                                )
+                                if (responseEntitle!!.responseCode != null && responseEntitle.responseCode == 4302) {
+                                    clearCredientials(preference)
+                                    ActivityLauncher.getInstance().loginActivity(
+                                        this@DetailActivity,
+                                        ActivityLogin::class.java
+                                    )
+                                } else {
+                                    commonDialog(
+                                        stringsHelper.stringParse(
+                                            stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                            getString(R.string.popup_error)
+                                        ),
+                                        stringsHelper.stringParse(
+                                            stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                            getString(R.string.popup_something_went_wrong)
+                                        ),
+                                        stringsHelper.stringParse(
+                                            stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                            getString(R.string.popup_continue)
+                                        )
+                                    )
+                                }
                             }
                         }
-                    }
                 }
             } else {
-                ActivityLauncher.getInstance().loginActivity(this@DetailActivity, ActivityLogin::class.java)
+                ActivityLauncher.getInstance()
+                    .loginActivity(this@DetailActivity, ActivityLogin::class.java)
             }
         }
     }
 
-    private fun startPlayer(playback_url: String?, isTrailer: Boolean) {
-        ActivityLauncher.getInstance().launchPlayerActitivity(this@DetailActivity, PlayerActivity::class.java, playback_url, false, null, videoDetails!!.id, videoDetails!!.title, videoDetails!!.assetType, isTrailer, false, videoDetails!!.posterURL, AppConstants.DETAILACTIVITY
+    private fun startPlayer(playback_url: String?, isTrailer: Boolean, externalRefId: String) {
+        ActivityLauncher.getInstance().launchPlayerActitivity(
+            this@DetailActivity,
+            PlayerActivity::class.java,
+            playback_url,
+            false,
+            null,
+            videoDetails!!.id,
+            videoDetails!!.title,
+            videoDetails!!.assetType,
+            isTrailer,
+            false,
+            videoDetails!!.posterURL,
+            AppConstants.DETAILACTIVITY,externalRefId
         )
     }
 
@@ -521,32 +625,53 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         get() {
             isHitPlayerApi = true
             railInjectionHelper = ViewModelProvider(this)[RailInjectionHelper::class.java]
-            railInjectionHelper!!.getAssetDetailsV2(assetId.toString(), this@DetailActivity).observe(this@DetailActivity) { assetResponse: ResponseModel<*>? ->
-                if (assetResponse != null) {
-                    val gson = Gson()
-                    val json = gson.toJson(assetResponse.baseCategory)
-                    if (assetResponse.status.equals(APIStatus.START.name, ignoreCase = true)) {
-                    } else if (assetResponse.status.equals(APIStatus.SUCCESS.name, ignoreCase = true)) {
-                        parseAssetDetails(assetResponse)
-                    } else if (assetResponse.status.equals(APIStatus.ERROR.name, ignoreCase = true)) {
-                        if (assetResponse.errorModel != null && assetResponse.errorModel.errorCode != 0) {
+            railInjectionHelper!!.getAssetDetailsV2(assetId.toString(), this@DetailActivity)
+                .observe(this@DetailActivity) { assetResponse: ResponseModel<*>? ->
+                    if (assetResponse != null) {
+                        val gson = Gson()
+                        val json = gson.toJson(assetResponse.baseCategory)
+                        if (assetResponse.status.equals(APIStatus.START.name, ignoreCase = true)) {
+                        } else if (assetResponse.status.equals(
+                                APIStatus.SUCCESS.name,
+                                ignoreCase = true
+                            )
+                        ) {
+                            parseAssetDetails(assetResponse)
+                        } else if (assetResponse.status.equals(
+                                APIStatus.ERROR.name,
+                                ignoreCase = true
+                            )
+                        ) {
+                            if (assetResponse.errorModel != null && assetResponse.errorModel.errorCode != 0) {
+                                showDialog(
+                                    stringsHelper.stringParse(
+                                        stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                        getString(R.string.popup_error)
+                                    ),
+                                    stringsHelper.stringParse(
+                                        stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                        getString(R.string.popup_something_went_wrong)
+                                    )
+                                )
+                            }
+                        } else if (assetResponse.status.equals(
+                                APIStatus.FAILURE.name,
+                                ignoreCase = true
+                            )
+                        ) {
                             showDialog(
-                                stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
                                 stringsHelper.stringParse(
-                                    stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong)
+                                    stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                    getString(R.string.popup_error)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                    getString(R.string.popup_something_went_wrong)
                                 )
                             )
                         }
-                    } else if (assetResponse.status.equals(APIStatus.FAILURE.name, ignoreCase = true)) {
-                        showDialog(
-                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
-                            stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong)
-                            )
-                        )
                     }
                 }
-            }
         }
     var isAdShowingToUser = true
     private fun parseAssetDetails(assetResponse: ResponseModel<*>) {
@@ -561,7 +686,13 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
             if (videoDetails?.trailerReferenceId != null) {
                 videoDetails?.trailerReferenceId?.let { getTrailer(it) }
             }
-            ImageHelper.getInstance(this@DetailActivity).loadListImage(binding!!.playerImage, AppCommonMethod.getListLDSImage(videoDetails?.posterURL.toString(), this@DetailActivity))
+            ImageHelper.getInstance(this@DetailActivity).loadListImage(
+                binding!!.playerImage,
+                AppCommonMethod.getListLDSImage(
+                    videoDetails?.posterURL.toString(),
+                    this@DetailActivity
+                )
+            )
             // ImageHelper.getInstance(DetailActivity.this).loadListImage(getBinding().playerImage, videoDetails?.getPosterURL());
             setUserInteractionFragment(assetId)
             Logger.w("videoType", videoType)
@@ -572,44 +703,71 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
     }
 
     private fun getTrailer(trailerReferenceId: String) {
-        railInjectionHelper!!.getAssetDetailsV2(trailerReferenceId, this@DetailActivity).observe(this@DetailActivity) { assetResponse: ResponseModel<*>? ->
-            if (assetResponse != null) {
-                val gson = Gson()
-                val json = gson.toJson(assetResponse.baseCategory)
-                if (assetResponse.status.equals(APIStatus.START.name, ignoreCase = true)) {
-                    Log.d(DETAIL_ACTIVITY, "getAssetDetails")
-                } else if (assetResponse.status.equals(APIStatus.SUCCESS.name, ignoreCase = true)) {
-                    val enveuCommonResponse = assetResponse.baseCategory as RailCommonData
-                    if (enveuCommonResponse != null && enveuCommonResponse.enveuVideoItemBeans.size > 0) {
-                        // videoDetails = enveuCommonResponse.getEnveuVideoItemBeans().get(0);
-                        if (!enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals("", ignoreCase = true) && !enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals(
-                                null,
-                                ignoreCase = true
-                            )
-                        ) {
-                            binding!!.metaDetails.watchTrailer.visibility = View.VISIBLE
-                            trailerUrl = SDKConfig.getInstance().playbacK_URL + enveuCommonResponse.enveuVideoItemBeans[0].externalRefId + ".m3u8"
+        railInjectionHelper!!.getAssetDetailsV2(trailerReferenceId, this@DetailActivity)
+            .observe(this@DetailActivity) { assetResponse: ResponseModel<*>? ->
+                if (assetResponse != null) {
+                    val gson = Gson()
+                    val json = gson.toJson(assetResponse.baseCategory)
+                    if (assetResponse.status.equals(APIStatus.START.name, ignoreCase = true)) {
+                        Log.d(DETAIL_ACTIVITY, "getAssetDetails")
+                    } else if (assetResponse.status.equals(
+                            APIStatus.SUCCESS.name,
+                            ignoreCase = true
+                        )
+                    ) {
+                        val enveuCommonResponse = assetResponse.baseCategory as RailCommonData
+                        if (enveuCommonResponse != null && enveuCommonResponse.enveuVideoItemBeans.size > 0) {
+                            // videoDetails = enveuCommonResponse.getEnveuVideoItemBeans().get(0);
+                            if (!enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals(
+                                    "",
+                                    ignoreCase = true
+                                ) && !enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals(
+                                    null,
+                                    ignoreCase = true
+                                )
+                            ) {
+                                binding!!.metaDetails.watchTrailer.visibility = View.VISIBLE
+                                trailerExternalRefId =
+                                    enveuCommonResponse.enveuVideoItemBeans[0].externalRefId
+                                trailerUrl =
+                                    SDKConfig.getInstance().playbacK_URL + enveuCommonResponse.enveuVideoItemBeans[0].externalRefId + ".m3u8"
+                            }
                         }
-                    }
-                } else if (assetResponse.status.equals(APIStatus.ERROR.name, ignoreCase = true)) {
-                    if (assetResponse.errorModel != null && assetResponse.errorModel.errorCode != 0) {
+                    } else if (assetResponse.status.equals(
+                            APIStatus.ERROR.name,
+                            ignoreCase = true
+                        )
+                    ) {
+                        if (assetResponse.errorModel != null && assetResponse.errorModel.errorCode != 0) {
+                            showDialog(
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                    getString(R.string.popup_error)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                    getString(R.string.popup_something_went_wrong)
+                                )
+                            )
+                        }
+                    } else if (assetResponse.status.equals(
+                            APIStatus.FAILURE.name,
+                            ignoreCase = true
+                        )
+                    ) {
                         showDialog(
-                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
                             stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong)
+                                stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                getString(R.string.popup_error)
+                            ),
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                getString(R.string.popup_something_went_wrong)
                             )
                         )
                     }
-                } else if (assetResponse.status.equals(APIStatus.FAILURE.name, ignoreCase = true)) {
-                    showDialog(
-                        stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
-                        stringsHelper.stringParse(
-                            stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong)
-                        )
-                    )
                 }
             }
-        }
     }
 
     private fun setUserInteractionFragment(id: Int) {
@@ -625,7 +783,11 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
     }
 
     private fun setUI(responseDetailPlayer: EnveuVideoItemBean?) {
-        if (responseDetailPlayer!!.assetCast.size > 0 && !responseDetailPlayer.assetCast[0].equals("", ignoreCase = true)) {
+        if (responseDetailPlayer!!.assetCast.size > 0 && !responseDetailPlayer.assetCast[0].equals(
+                "",
+                ignoreCase = true
+            )
+        ) {
             var stringBuilder = StringBuilder()
             for (i in responseDetailPlayer.assetCast.indices) {
                 stringBuilder = if (i == responseDetailPlayer.assetCast.size - 1) {
@@ -636,7 +798,11 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         } else {
             binding!!.metaDetails.llCastView.visibility = View.GONE
         }
-        if (responseDetailPlayer.assetGenres.size > 0 && !responseDetailPlayer.assetGenres[0].equals("", ignoreCase = true)) {
+        if (responseDetailPlayer.assetGenres.size > 0 && !responseDetailPlayer.assetGenres[0].equals(
+                "",
+                ignoreCase = true
+            )
+        ) {
             var stringBuilder = StringBuilder()
             for (i in responseDetailPlayer.assetGenres.indices) {
                 stringBuilder = if (i == responseDetailPlayer.assetGenres.size - 1) {
@@ -648,7 +814,8 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
             binding!!.metaDetails.llCrewView.visibility = View.GONE
         }
         setDetails(responseDetailPlayer)
-        binding?.metaDetails?.durationLl?.background = strokeBgDrawable(AppColors.detailPageHDBgColor(), AppColors.detailPageHDBrColor(), 10f)
+        binding?.metaDetails?.durationLl?.background =
+            strokeBgDrawable(AppColors.detailPageHDBgColor(), AppColors.detailPageHDBrColor(), 10f)
     }
 
     private fun setCustomFields(videoItemBean: EnveuVideoItemBean?, duration: String?) {
@@ -656,7 +823,8 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         try {
             val properties = Properties()
             properties.addAttribute(AppConstants.CONTENT_DETAIL_TITTLE, videoItemBean!!.title)
-            MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
+            MoEHelper.getInstance(applicationContext)
+                .trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
             if (videoItemBean.title != null) {
                 binding!!.metaDetails.tvTitle.text = videoItemBean.title
             } else {
@@ -664,7 +832,7 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
             }
             if (videoItemBean.longDescription != null) {
                 binding!!.metaDetails.descriptionText.htmlParseToString(videoItemBean.longDescription)
-               // binding!!.metaDetails.descriptionText.text = videoItemBean.longDescription
+                // binding!!.metaDetails.descriptionText.text = videoItemBean.longDescription
             } else {
                 binding!!.metaDetails.descriptionText.visibility = View.GONE
             }
@@ -755,7 +923,10 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         val fm = supportFragmentManager
         val alertDialog = AlertDialogSingleButtonFragment.newInstance(
             title, message,
-            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_ok.toString(), getString(R.string.popup_ok))
+            stringsHelper.stringParse(
+                stringsHelper.instance()?.data?.config?.popup_ok.toString(),
+                getString(R.string.popup_ok)
+            )
         )
         alertDialog.isCancelable = false
         alertDialog.setAlertDialogCallBack(this)
@@ -764,8 +935,12 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
 
     private fun setDetails(responseDetailPlayer: EnveuVideoItemBean?) {
         if (responseDetailPlayer!!.assetType != null && responseDetailPlayer.duration > 0) {
-            val durationInMinutes = (AppCommonMethod.stringForTime(responseDetailPlayer.duration) + " "
-                    + stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_minutes.toString(), getString(R.string.popup_minutes)))
+            val durationInMinutes =
+                (AppCommonMethod.stringForTime(responseDetailPlayer.duration) + " "
+                        + stringsHelper.stringParse(
+                    stringsHelper.instance()?.data?.config?.popup_minutes.toString(),
+                    getString(R.string.popup_minutes)
+                ))
             setCustomFields(responseDetailPlayer, durationInMinutes)
         } else {
             setCustomFields(responseDetailPlayer, "")
@@ -886,9 +1061,24 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         binding!!.playerFrame.layoutParams = params
         val set = ConstraintSet()
         set.clone(binding!!.llParent)
-        set.connect(R.id.player_frame, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
-        set.connect(R.id.player_frame, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START)
-        set.connect(R.id.player_frame, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+        set.connect(
+            R.id.player_frame,
+            ConstraintSet.END,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.END
+        )
+        set.connect(
+            R.id.player_frame,
+            ConstraintSet.START,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.START
+        )
+        set.connect(
+            R.id.player_frame,
+            ConstraintSet.TOP,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.TOP
+        )
         set.setDimensionRatio(R.id.player_frame, "H,16:9")
         set.applyTo(binding!!.llParent)
         binding!!.rootScroll.visibility = View.VISIBLE
@@ -903,8 +1093,16 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
     }
 
     override fun railItemClick(item: RailCommonData, position: Int) {
-        if (item.screenWidget.type != null && Layouts.HRO.name.equals(item.screenWidget.layout, ignoreCase = true)) {
-            Toast.makeText(this@DetailActivity, item.screenWidget.landingPageType, Toast.LENGTH_LONG).show()
+        if (item.screenWidget.type != null && Layouts.HRO.name.equals(
+                item.screenWidget.layout,
+                ignoreCase = true
+            )
+        ) {
+            Toast.makeText(
+                this@DetailActivity,
+                item.screenWidget.landingPageType,
+                Toast.LENGTH_LONG
+            ).show()
         } else {
             if (AppCommonMethod.getCheckBCID(item.enveuVideoItemBeans[position].brightcoveVideoId)) {
                 val getVideoId = item.enveuVideoItemBeans[position].brightcoveVideoId.toLong()
@@ -919,9 +1117,25 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
         if (data.screenWidget != null && data.screenWidget.contentID != null) {
             val playListId = data.screenWidget.contentID
             if (data.screenWidget.name != null) {
-                ActivityLauncher.getInstance().listActivity(this@DetailActivity, ListActivity::class.java, playListId, data.screenWidget.name.toString(), 0, 0, data.screenWidget)
+                ActivityLauncher.getInstance().listActivity(
+                    this@DetailActivity,
+                    ListActivity::class.java,
+                    playListId,
+                    data.screenWidget.name.toString(),
+                    0,
+                    0,
+                    data.screenWidget
+                )
             } else {
-                ActivityLauncher.getInstance().listActivity(this@DetailActivity, ListActivity::class.java, playListId, "", 0, 0, data.screenWidget)
+                ActivityLauncher.getInstance().listActivity(
+                    this@DetailActivity,
+                    ListActivity::class.java,
+                    playListId,
+                    "",
+                    0,
+                    0,
+                    data.screenWidget
+                )
             }
         }
     }
@@ -941,9 +1155,11 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(), AlertDialogF
 
     override fun onActionBtnClicked() {
         if (isUserNotVerify) {
-            ActivityLauncher.getInstance().goToEnterOTP(this, EnterOTPActivity::class.java, "DetailPage")
+            ActivityLauncher.getInstance()
+                .goToEnterOTP(this, EnterOTPActivity::class.java, "DetailPage")
         } else if (isUserNotEntitle) {
-            ActivityLauncher.getInstance().goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)
+            ActivityLauncher.getInstance()
+                .goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)
         }
     }
 
