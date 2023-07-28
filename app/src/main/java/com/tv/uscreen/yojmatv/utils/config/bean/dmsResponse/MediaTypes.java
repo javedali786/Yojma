@@ -7,7 +7,7 @@ public class MediaTypes{
 	@SerializedName("trailer")
 	private String trailer;
 
-	@SerializedName("movies")
+	@SerializedName("movie")
 	private String movie;
 
 	@SerializedName("series")

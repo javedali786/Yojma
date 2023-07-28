@@ -107,11 +107,10 @@ class CategoriedSearchAdapter(private val context: Context, private val list: Li
 
     override fun onRowItemClicked(itemValue: EnveuVideoItemBean, position: Int) {
         Log.d("javed", "onRowItemClicked: $itemValue")
-        val isPremium: Boolean
         var isParentContentNull = false
         var isHosted = false
         var externalUrl: String? = ""
-        isPremium = itemValue.isPremium
+        val isPremium: Boolean = itemValue.isPremium
         var trailerReferenceId: String? = ""
         if (itemValue.trailerReferenceId != null) {
             trailerReferenceId = itemValue.trailerReferenceId
@@ -143,6 +142,10 @@ class CategoriedSearchAdapter(private val context: Context, private val list: Li
                 if (itemValue.liveContent.externalUrl != null) {
                     externalUrl = itemValue.liveContent.externalUrl
                 }
+            }
+        } else {
+            if (itemValue.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
+                customContentType = itemValue.customContent.customType
             }
         }
         launchDetailScreenFromSearch(

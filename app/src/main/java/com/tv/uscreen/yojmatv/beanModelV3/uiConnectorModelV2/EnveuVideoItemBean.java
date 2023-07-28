@@ -651,6 +651,12 @@ public class EnveuVideoItemBean implements Serializable {
                     if (details.getVideo() != null) {
                         this.videoDetails = details.getVideo();
                     }
+                } else {
+                    if (details.getContentType().equalsIgnoreCase(AppConstants.CUSTOM)) {
+                        if (details.getCustomContent() != null) {
+                            this.customType = details.getCustomContent().getCustomType();
+                        }
+                    }
                 }
 
                 if (details.getExternalRefId()!=null && !details.getExternalRefId().equalsIgnoreCase("")){
@@ -1413,6 +1419,7 @@ public class EnveuVideoItemBean implements Serializable {
                         ",video = '" + videoDetails + '\'' +
                         ",video = '" + videoDetailsEpisodes + '\'' +
                         ",customContent = '" + customContent + '\'' +
+                        ",customType = '" + customType + '\'' +
                         ",parentContent = '" + parentContent + '\'' +
                         ",parentContent2 = '" + parentContent2 + '\'' +
                         ",liveContent = '" + liveContent + '\'' +
@@ -1421,6 +1428,13 @@ public class EnveuVideoItemBean implements Serializable {
     }
 
 
+    public String getCustomType() {
+        return customType;
+    }
+
+    public void setCustomType(String customType) {
+        this.customType = customType;
+    }
 
     public Drawable getVipImageDrawable() {
         OttApplication application = OttApplication.getInstance();

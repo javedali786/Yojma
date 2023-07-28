@@ -476,8 +476,6 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             binding!!.metaDetails.playButton.visibility = View.VISIBLE
         } else {
             binding!!.metaDetails.playButton.visibility = View.INVISIBLE
-            //  isItemValueEmpty = true;
-            //  commonDialog(getResources().getString(R.string.error), getResources().getString(R.string.something_went_wrong), getResources().getString(R.string.continue));
         }
     }
 
@@ -576,7 +574,6 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             binding!!.transparentLayout.visibility = View.GONE
         }
 
-        //Creating Adapter to fill data in Dialog
         mRecyclerView.layoutManager = LinearLayoutManager(this@SeriesDetailActivity)
         mRecyclerView.adapter = listAdapter
         alertDialog = builder.create()
@@ -665,7 +662,6 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
     }
 
     private fun setUiComponents(seriesResponse: EnveuVideoItemBean?) {
-        //  stopShimmer();
         Log.d("getFirstItem", "seriesResponse: $seriesResponse")
         if (seriesResponse != null) {
             val properties = Properties()
@@ -675,12 +671,10 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                 getTrailer(seriesResponse.trailerReferenceId)
             }
             setUserInteractionFragment(seriesId)
-            // setCustomFields(itemValue, 0, getResources().getString(R.string.episode));
             binding!!.playlistItem = seriesResponse
             posterUrl = seriesResponse.posterURL
             ImageHelper.getInstance(this).loadListImage(binding!!.sliderImage, AppCommonMethod.getListLDSImage(seriesResponse.posterURL, this))
-            //  ImageHelper.getInstance(SeriesDetailActivity.this).loadListImage(getBinding().sliderImage, AppCommonMethod.getListLDSImage(seriesResponse.getPosterURL(), SeriesDetailActivity.this));
-            if (ObjectHelper.isEmpty(seriesResponse.description)) {
+            if (ObjectHelper.isEmpty(seriesResponse.longDescription)) {
                 binding!!.metaDetails.descriptionText.visibility = View.GONE
             }
             binding!!.responseApi = seriesResponse.description.trim { it <= ' ' }
@@ -690,8 +684,8 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             } else {
                 binding!!.metaDetails.tvTitle.visibility = View.GONE
             }
-            if (seriesResponse.description != null) {
-                binding!!.metaDetails.descriptionText.htmlParseToString(seriesResponse.description)
+            if (seriesResponse.longDescription != null) {
+                binding!!.metaDetails.descriptionText.htmlParseToString(seriesResponse.longDescription)
             } else {
                 binding!!.metaDetails.descriptionText.visibility = View.GONE
             }
@@ -722,18 +716,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                 binding!!.metaDetails.sponseredDescription.visibility = View.GONE
                 binding!!.metaDetails.sponsered.visibility = View.GONE
             }
-            /* String duration1 = "";
-            if (seriesResponse.getVideoDetails().getDuration()!=null) {
-                duration1 = String.valueOf(seriesResponse.getVideoDetails().getDuration());
-            }
-            String properDuration = "";
-            if (!StringUtils.isNullOrEmpty(duration1)) {
-                properDuration = AppCommonMethod.convertToMinutes(Long.parseLong((duration1)))+" "+getResources().getString(R.string.minutes);
-                setTextOrHide(getBinding().metaDetails.duration, properDuration);
-            } else {
-                getBinding().metaDetails.duration.setVisibility(View.GONE);
-            }
-*/
+
         }
     }
 

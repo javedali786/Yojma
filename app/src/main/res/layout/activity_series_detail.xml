@@ -46,8 +46,9 @@
             android:id="@+id/ll_parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/try_again_btn_txt_color">
-            <LinearLayout
+            android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.app_bg_color) ? @color/app_bg_color : Color.parseColor(colorsData.instance().data.config.app_bg_color), default=@color/app_bg_color}">
+
+        <LinearLayout
                 android:id="@+id/flBackIconImage"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

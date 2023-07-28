@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.enveu.client.baseCollection.baseCategoryModel.BaseCategory
 import com.enveu.client.enums.LandingPageType
-import com.enveu.client.enums.Layouts
 import com.enveu.client.enums.ListingLayoutType
 import com.enveu.client.enums.PDFTarget
 import com.tv.uscreen.yojmatv.R
@@ -282,16 +281,8 @@ open class TabsBaseFragment<T : HomeBaseViewModel?> : BaseBindingFragment<Fragme
     }
 
     override fun railItemClick(railCommonData: RailCommonData, position: Int) {
-        try {
-            trackFcmEvent(railCommonData.enveuVideoItemBeans[position].title, railCommonData.enveuVideoItemBeans[position].assetType, activity, position)
-        } catch (e: Exception) {
-            Logger.w(e)
-        }
-        if (railCommonData.screenWidget.type != null && Layouts.HRO.name.equals(railCommonData.screenWidget.layout, ignoreCase = true)) {
-            heroClickRedirection(railCommonData)
-        } else {
-            redirectionLogic(requireContext(), railCommonData, position)
-        }
+        redirectionLogic(requireContext(), railCommonData, position)
+
     }
 
     private fun heroClickRedirection(railCommonData: RailCommonData) {

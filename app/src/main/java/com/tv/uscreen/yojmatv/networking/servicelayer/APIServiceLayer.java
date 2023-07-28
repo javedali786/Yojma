@@ -138,67 +138,6 @@ public class APIServiceLayer {
                 });
 
 
-       /* MutableLiveData < EnveuCommonResponse > enveuCommonResponseMutableLiveData = new MutableLiveData<>();
-
-        if (endpoint!=null) {
-           boolean isKidsMode  = KsPreferenceKeys.getInstance().getKidsMode();
-           if (isKidsMode){
-               String parentalRating = AppCommonMethod.getParentalRating();
-               endpoint.getPlaylistDetailsByIdWithPG(playListId, languageCode, pageNumber, pageSize,parentalRating).enqueue(new Callback<EnveuCommonResponse>() {
-                   @Override
-                   public void onResponse(Call<EnveuCommonResponse> call, Response<EnveuCommonResponse> response) {
-                       if (response.isSuccessful()) {
-                           if (response.body() != null && response.body().getData() != null && response.body().getData().getItems().size()>0) {
-                               if (response.body().getResponseCode() == 2000){
-                                   enveuCommonResponseMutableLiveData.postValue(response.body());
-                               }
-                               else {
-                                   enveuCommonResponseMutableLiveData.postValue(null);
-                               }
-                           }
-                           else {
-                               enveuCommonResponseMutableLiveData.postValue(null);
-                           }
-                       } else {
-                           enveuCommonResponseMutableLiveData.postValue(null);
-                       }
-                   }
-
-                   @Override
-                   public void onFailure(Call<EnveuCommonResponse> call, Throwable t) {
-                       enveuCommonResponseMutableLiveData.postValue(null);
-                   }
-               });
-           }else {
-               endpoint.getPlaylistDetailsById(playListId, languageCode, pageNumber, pageSize).enqueue(new Callback<EnveuCommonResponse>() {
-                   @Override
-                   public void onResponse(Call<EnveuCommonResponse> call, Response<EnveuCommonResponse> response) {
-                       if (response.isSuccessful()) {
-                           if (response.body() != null && response.body().getData() != null && response.body().getData().getItems().size()>0) {
-                               if (response.body().getResponseCode() == 2000){
-                                   enveuCommonResponseMutableLiveData.postValue(response.body());
-                               }
-                               else {
-                                   enveuCommonResponseMutableLiveData.postValue(null);
-                               }
-                           }
-                           else {
-                               enveuCommonResponseMutableLiveData.postValue(null);
-
-                           }
-                       } else {
-                           enveuCommonResponseMutableLiveData.postValue(null);
-                       }
-                   }
-
-                   @Override
-                   public void onFailure(Call<EnveuCommonResponse> call, Throwable t) {
-                       enveuCommonResponseMutableLiveData.postValue(null);
-                   }
-               });
-           }
-        }
-        return enveuCommonResponseMutableLiveData;*/
         return enveuCommonResponseMutableLiveData;
     }
 

@@ -433,6 +433,10 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
                     externalUrl = itemValue.liveContent.externalUrl
                 }
             }
+        } else {
+            if (itemValue.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
+                customContentType = itemValue.customContent.customType
+            }
         }
         AppCommonMethod.launchDetailScreenFromSearch(
             this,

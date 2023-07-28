@@ -13,11 +13,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-
 import com.tv.uscreen.yojmatv.OttApplication
-
-import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.MoreItemClickListener
 import com.tv.uscreen.yojmatv.R
+import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.MoreItemClickListener
 import com.tv.uscreen.yojmatv.databinding.MoreItemBinding
 import com.tv.uscreen.yojmatv.utils.Logger
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
@@ -25,12 +23,17 @@ import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper.instance
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.helpers.DrawableHelperAboutUs
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
+import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 
 class AccountListAdapter(private val mContext: Activity, private val itemsList: List<String>, call: MoreItemClickListener, islogin: Boolean) : RecyclerView.Adapter<AccountListAdapter.ViewHolder>() {
     val itemClickListener: MoreItemClickListener
     private val islogin: Boolean
     private var mLastClickTime: Long = 0
     private val colorsHelper by lazy { ColorsHelper }
+    private val stringsHelper by lazy { StringsHelper }
+    private var editProfile= ""
+    private var changePassword = ""
+    private var logout= ""
 
     init {
         val layoutInflater = LayoutInflater.from(mContext)
@@ -42,6 +45,20 @@ class AccountListAdapter(private val mContext: Activity, private val itemsList: 
         val moreItemBinding = DataBindingUtil.inflate<MoreItemBinding>(LayoutInflater.from(viewGroup.context), R.layout.more_item, viewGroup, false)
         //        ThemeHandler.getInstance().applyMoreItemPage(viewGroup.getContext(),moreItemBinding);
         moreItemBinding.colorsData = colorsHelper
+
+        editProfile = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.account_edit_profile.toString(),
+            mContext.getString(R.string.account_edit_profile)
+        )
+        changePassword = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.account_change_password.toString(),
+            mContext.getString(R.string.account_change_password)
+        )
+        logout =stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.account_logout.toString(),
+            mContext.getString(R.string.account_logout)
+        )
+
         return ViewHolder(moreItemBinding)
     }
 
@@ -103,12 +120,12 @@ class AccountListAdapter(private val mContext: Activity, private val itemsList: 
                     return@setOnClickListener
                 }
                 mLastClickTime = SystemClock.elapsedRealtime()
-                if (itemsList[layoutPosition].equals(mContext.resources.getString(R.string.edit_profile), ignoreCase = true)) {
-                    itemClickListener.onClick(mContext.resources.getString(R.string.edit_profile))
-                } else if (itemsList[layoutPosition].equals(mContext.resources.getString(R.string.change_password), ignoreCase = true)) {
-                    itemClickListener.onClick(mContext.resources.getString(R.string.change_password))
-                } else if (itemsList[layoutPosition].equals(mContext.resources.getString(R.string.account_logout), ignoreCase = true)) {
-                    itemClickListener.onClick(mContext.resources.getString(R.string.account_logout))
+                if (itemsList[layoutPosition] == editProfile) {
+                    itemClickListener.onClick(editProfile)
+                } else if (itemsList[layoutPosition]==changePassword) {
+                    itemClickListener.onClick(changePassword)
+                } else if (itemsList[layoutPosition]==logout) {
+                    itemClickListener.onClick(logout)
                 }
             }
         }

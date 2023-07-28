@@ -42,7 +42,6 @@ import com.tv.uscreen.yojmatv.activities.purchase.in_app_billing.InAppProcessLis
 import com.tv.uscreen.yojmatv.activities.purchase.in_app_billing.RestoreSubscriptionCallback
 import com.tv.uscreen.yojmatv.activities.purchase.plans_layer.GetPlansLayer
 import com.tv.uscreen.yojmatv.activities.splash.dialog.ConfigFailDialog
-import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
 import com.tv.uscreen.yojmatv.callbacks.apicallback.ApiResponseModel
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.DialogInterface
@@ -342,25 +341,8 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
                 Handler().postDelayed({
                     Logger.d("branchRedirectors -->>non")
                     //This logic is for now will update later
-                    if (isLoggedIn) {
-                        if (isUserVerified.equals("true", ignoreCase = true)) {
                             ActivityLauncher.getInstance()
                                 .homeActivity(this@ActivitySplash, HomeActivity::class.java)
-                        } else {
-                            ActivityLauncher.getInstance()
-                                .homeActivity(this@ActivitySplash, HomeActivity::class.java)
-                            // ActivityLauncher.getInstance().goToEnterOTP(this@ActivitySplash, EnterOTPActivity::class.java,"splashScreen")
-                        }
-                    } else {
-                        ActivityLauncher.getInstance().goToLoginFromSplash(
-                            this@ActivitySplash,
-                            ActivityLogin::class.java,
-                            true
-                        )
-                        // ActivityLauncher.getInstance().homeActivity(this@ActivitySplash, HomeActivity::class.java)
-
-
-                    }
                     finish()
                 }, 1)
             } else {
@@ -370,24 +352,8 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
                     // homeRedirection();
                     Handler().postDelayed({
                         Logger.d("branchRedirectors -->>non")
-                        if (isLoggedIn) {
-                            if (isUserVerified.equals("true", ignoreCase = true)) {
                                 ActivityLauncher.getInstance()
                                     .homeActivity(this@ActivitySplash, HomeActivity::class.java)
-                            } else {
-                                ActivityLauncher.getInstance()
-                                    .homeActivity(this@ActivitySplash, HomeActivity::class.java)
-                                // ActivityLauncher.getInstance().goToEnterOTP(this@ActivitySplash, EnterOTPActivity::class.java,"splashScreen")
-                            }
-                        } else {
-                            ActivityLauncher.getInstance().goToLoginFromSplash(
-                                this@ActivitySplash,
-                                ActivityLogin::class.java,
-                                true
-                            )
-                            //   ActivityLauncher.getInstance().homeActivity(this@ActivitySplash, HomeActivity::class.java)
-
-                        }
                     }, 1)
                 }
             }

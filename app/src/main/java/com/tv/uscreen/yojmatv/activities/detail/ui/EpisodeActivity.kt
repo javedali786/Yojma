@@ -144,7 +144,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
         super.onCreate(savedInstanceState)
         // ThemeHandler.getInstance().applyepisodedetailPage(getApplicationContext(),getBinding());
         parseColor()
-        window.setBackgroundDrawableResource(R.color.buy_now_pay_now_btn_text_color)
+        window.setBackgroundDrawableResource(R.color.app_bg_color)
         window.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
@@ -894,7 +894,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
             } else {
                 binding!!.metaDetails.tvTitle.visibility = View.GONE
             }
-            if (videoItemBean.description != null) {
+            if (videoItemBean.longDescription != null) {
                 binding!!.metaDetails.descriptionText.htmlParseToString(videoItemBean.longDescription)
             } else {
                 binding!!.metaDetails.descriptionText.visibility = View.GONE

@@ -24,8 +24,9 @@ public class MediaTypeConstants {
     }*/
 
     public String getMovie() {
-        return configBean == null ? "" : Movie;
+        return configBean == null ? "" : configBean.getData().getAppConfig().getMediaTypes().getMovie();
     }
+
 
     public String getShow() {
         return configBean == null ? "" : configBean.getData().getAppConfig().getMediaTypes().getShow();

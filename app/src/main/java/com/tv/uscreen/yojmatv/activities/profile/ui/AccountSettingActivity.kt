@@ -39,6 +39,9 @@ class AccountSettingActivity : BaseBindingActivity<AccountSettingActivityBinding
     private var hasEntitlement = false
     private val stringsHelper by lazy { StringsHelper }
     private val colorsHelper by lazy { ColorsHelper }
+    private var editProfile= ""
+    private var changePassword = ""
+    private var logout= ""
     override fun inflateBindingLayout(inflater: LayoutInflater): AccountSettingActivityBinding {
         return AccountSettingActivityBinding.inflate(inflater)
     }
@@ -116,15 +119,15 @@ class AccountSettingActivity : BaseBindingActivity<AccountSettingActivityBinding
         binding!!.progressBar.visibility = View.GONE
 //        val label1 = this.resources.getStringArray(R.array.account_option)
 
-        val editProfile = stringsHelper.stringParse(
+         editProfile = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.account_edit_profile.toString(),
             getString(R.string.account_edit_profile)
         )
-         val changePassword = stringsHelper.stringParse(
+        changePassword = stringsHelper.stringParse(
              stringsHelper.instance()?.data?.config?.account_change_password.toString(),
              getString(R.string.account_change_password)
          )
-         val logout =stringsHelper.stringParse(
+         logout =stringsHelper.stringParse(
              stringsHelper.instance()?.data?.config?.account_logout.toString(),
              getString(R.string.account_logout)
          )
@@ -211,25 +214,25 @@ class AccountSettingActivity : BaseBindingActivity<AccountSettingActivityBinding
         if (CheckInternetConnection.isOnline(this)) {
             hitApiLogout(this, token)
             clearCredientials(mPreference)
-            ActivityLauncher.getInstance().loginActivityFromLogout(this, ActivityLogin::class.java)
+            ActivityLauncher.getInstance().homeScreen(this, HomeActivity::class.java)
         }
     }
 
     override fun onClick(caption: String) {
         val loginStatus = KsPreferenceKeys.getInstance().appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)
-        if (caption == getString(R.string.edit_profile)) {
+        if (caption == editProfile) {
             if (loginStatus) {
                 ActivityLauncher.getInstance().ProfileActivityNew(this, ProfileActivityNew::class.java)
             } else {
                 ActivityLauncher.getInstance().loginActivity(this, ActivityLogin::class.java)
             }
-        } else if (caption == getString(R.string.change_password)) {
+        } else if (caption == changePassword) {
             if (loginStatus) {
                 ActivityLauncher.getInstance().changePassword(this, ChangePasswordActivity::class.java)
             } else {
                 ActivityLauncher.getInstance().loginActivity(this, ActivityLogin::class.java)
             }
-        } else if (caption == getString(R.string.account_logout)) {
+        } else if (caption == logout) {
             commonDialog(
                 stringsHelper.stringParse(
                     stringsHelper.instance()?.data?.config?.popup_logout.toString(),

@@ -824,9 +824,9 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             }
             if (screenType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.VIDEO, ignoreCase = true)) {
                 if (videoType != null && !videoType.equals("", ignoreCase = true)) {
-                    if (videoType.equals(MediaTypeConstants.getInstance().series, ignoreCase = true)) {
-                        ActivityLauncher.getInstance().seriesDetailScreen(context as BaseActivity, SeriesDetailActivity::class.java, id)
-                    } else if (videoType.equals(MediaTypeConstants.getInstance().movie, ignoreCase = true)) {
+                    if (videoType.equals(MediaTypeConstants.getInstance().movie, ignoreCase = true)) {
+                        ActivityLauncher.getInstance().detailScreenBrightCove(context as BaseActivity, DetailActivity::class.java, id)
+                    } else if (screenType.uppercase(Locale.getDefault()) == MediaTypeConstants.getInstance().documentaries) {
                         ActivityLauncher.getInstance().detailScreenBrightCove(context as BaseActivity, DetailActivity::class.java, id)
                     } else if (videoType.equals(MediaTypeConstants.getInstance().episode, ignoreCase = true)) {
                         ActivityLauncher.getInstance().episodeScreenBrightcove(context as BaseActivity, EpisodeActivity::class.java, id)
@@ -842,18 +842,21 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 }
             } else if (screenType.equals(AppConstants.LIVE, ignoreCase = true)) {
                 liveRedirection(context, externalRefId, isPremium, skuId, id, tittle, screenType, true, isHosted, externalUrl)
-            }
+            } else if (screenType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
+                if (customContentType.equals(MediaTypeConstants.getInstance().series, ignoreCase = true)) {
+                    ActivityLauncher.getInstance().seriesDetailScreen(context as BaseActivity, SeriesDetailActivity::class.java, id)
+                }            }
         }
 
         private fun checkLoggedInAndUserVerifyCondition(loggedIn: String): Boolean {
             var isLoggedIn = false
             val preference: KsPreferenceKeys = KsPreferenceKeys.getInstance()
             if (loggedIn.equals(AppConstants.LOGGED_IN, ignoreCase = true)) {
-                if (preference.getAppPrefLoginStatus().equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
+                if (preference.appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
                     isLoggedIn = true
                 }
             } else if (loggedIn.equals(AppConstants.USER_VERIFY, ignoreCase = true)) {
-                isLoggedIn = java.lang.Boolean.parseBoolean(preference.isVerified())
+                isLoggedIn = java.lang.Boolean.parseBoolean(preference.isVerified)
             }
             return isLoggedIn
         }
@@ -900,7 +903,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 } else {
                     if (sku != null) {
                         EntitlementLayer.getInstance().hitApiEntitlement(token, sku).observe(context as LifecycleOwner, Observer<ResponseEntitle> { responseEntitle: ResponseEntitle? ->
-                            if (null != responseEntitle && null != responseEntitle.getData()) {
+                            if (responseEntitle?.getData() != null) {
                                 var playback_url1 = ""
                                 resEntitle = responseEntitle
                                 if (responseEntitle.getData().getEntitled()) {
@@ -926,7 +929,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                     createShowDialog("", context.getString(R.string.select_plan), context.getString(R.string.purchase_option), context)
                                 }
                             } else {
-                                if (responseEntitle?.getResponseCode() != null && responseEntitle.getResponseCode() == 4302) {
+                                if (responseEntitle?.responseCode != null && responseEntitle.getResponseCode() == 4302) {
                                     clearCredientials(preference, context)
                                     ActivityLauncher.getInstance().loginActivity(context as BaseActivity, ActivityLogin::class.java)
                                 } else {
@@ -944,25 +947,25 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         fun clearCredientials(preference: KsPreferenceKeys, context: Context) {
             try {
                 val json: String = KsPreferenceKeys.getInstance().getString("DMS_Response", "")
-                val isFacebook: String = preference.getAppPrefLoginType()
+                val isFacebook: String = preference.appPrefLoginType
                 if (isFacebook.equals(AppConstants.UserLoginType.FbLogin.toString(), ignoreCase = true)) {
                     LoginManager.getInstance().logOut()
                 }
-                val strCurrentTheme: String = KsPreferenceKeys.getInstance().getCurrentTheme()
-                val strCurrentLanguage: String = KsPreferenceKeys.getInstance().getAppLanguage()
-                val strSubscriptionURL: String = KsPreferenceKeys.getInstance().getSUBSCRIPTION_BASE_URL()
-                val strPaymentURL: String = KsPreferenceKeys.getInstance().getPAYMENT_BASE_URL()
-                val isBingeWatchEnable: Boolean = KsPreferenceKeys.getInstance().getBingeWatchEnable()
-                preference.setAppPrefRegisterStatus(AppConstants.UserStatus.Logout.toString())
+                val strCurrentTheme: String = KsPreferenceKeys.getInstance().currentTheme
+                val strCurrentLanguage: String = KsPreferenceKeys.getInstance().appLanguage
+                val strSubscriptionURL: String = KsPreferenceKeys.getInstance().subscriptioN_BASE_URL
+                val strPaymentURL: String = KsPreferenceKeys.getInstance().paymenT_BASE_URL
+                val isBingeWatchEnable: Boolean = KsPreferenceKeys.getInstance().bingeWatchEnable
+                preference.appPrefRegisterStatus = AppConstants.UserStatus.Logout.toString()
                 preference.clear()
                 KsPreferenceKeys.getInstance().setString("DMS_Response", json)
                 KsPreferenceKeys.getInstance().setfirstTimeUserForKidsPIn(false)
-                KsPreferenceKeys.getInstance().setSUBSCRIPTION_BASE_URL(strSubscriptionURL)
-                KsPreferenceKeys.getInstance().setPAYMENT_BASE_URL(strPaymentURL)
-                KsPreferenceKeys.getInstance().setCurrentTheme(strCurrentTheme)
-                KsPreferenceKeys.getInstance().setAppLanguage(strCurrentLanguage)
+                KsPreferenceKeys.getInstance().subscriptioN_BASE_URL = strSubscriptionURL
+                KsPreferenceKeys.getInstance().paymenT_BASE_URL = strPaymentURL
+                KsPreferenceKeys.getInstance().currentTheme = strCurrentTheme
+                KsPreferenceKeys.getInstance().appLanguage = strCurrentLanguage
                 updateLanguage(strCurrentLanguage, context as BaseActivity)
-                KsPreferenceKeys.getInstance().setBingeWatchEnable(isBingeWatchEnable)
+                KsPreferenceKeys.getInstance().bingeWatchEnable = isBingeWatchEnable
                 val preferenceProfileId = configResponse.data.appConfig.contentPreferences.both.id
                 if (StringUtils.isNullOrEmpty(preferenceProfileId)) {
                     KsPreferenceKeys.getInstance().preferenceProfileId = preferenceProfileId
@@ -977,7 +980,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         private fun verifyTrailerCondition(context: Context, externalRefId: String, id: Int, tittle: String?, assetType: String, posterUrl: String) {
             val stringsHelper = StringsHelper
             var trailer_url = ""
-            trailer_url = SDKConfig.getInstance().getPLAYBACK_URL()+(externalRefId)+(".m3u8")
+            trailer_url = SDKConfig.getInstance().playbacK_URL +(externalRefId)+(".m3u8")
             if (checkLoggedInAndUserVerifyCondition(AppConstants.USER_VERIFY)) {
                 startPlayer(context, trailer_url, true, id, false, tittle, assetType, posterUrl)
             } else {
@@ -1010,39 +1013,31 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
 
         fun redirectOnVideoDetailPages(context: Context, railCommonData: RailCommonData, position: Int, screenType: String, posterUrl: String) {
             Logger.e("MediaTYpeIs", screenType)
-            if (screenType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().getShow(), ignoreCase = true)) {
-                val externalRefId: String = railCommonData.getEnveuVideoItemBeans().get(position).getExternalRefId()
-                val isPremium: Boolean = railCommonData.getEnveuVideoItemBeans().get(position).isPremium()
-                val skuId: String = railCommonData.getEnveuVideoItemBeans().get(position).getSku()
-                showRedirection(
-                    context,
-                    externalRefId,
-                    isPremium,
-                    skuId,
-                    railCommonData.getEnveuVideoItemBeans().get(position).getId(),
-                    railCommonData.getEnveuVideoItemBeans().get(position).getTitle(),
-                    railCommonData.getEnveuVideoItemBeans().get(position).getAssetType(),
+            if (screenType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().show, ignoreCase = true)) {
+                val externalRefId: String = railCommonData.enveuVideoItemBeans[position].externalRefId
+                val isPremium: Boolean = railCommonData.enveuVideoItemBeans[position].isPremium
+                val skuId: String = railCommonData.enveuVideoItemBeans[position].sku
+                showRedirection(context, externalRefId, isPremium, skuId,
+                    railCommonData.enveuVideoItemBeans[position].id,
+                    railCommonData.enveuVideoItemBeans[position].title,
+                    railCommonData.enveuVideoItemBeans[position].assetType,
                     false,
                     posterUrl
                 )
-            } else if (screenType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().getEpisode(), ignoreCase = true)) {
-                ActivityLauncher.getInstance().episodeScreenBrightcove(context as BaseActivity, EpisodeActivity::class.java, railCommonData.getEnveuVideoItemBeans().get(position).getId())
-            } else if (screenType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().getSeries(), ignoreCase = true)) {
-                ActivityLauncher.getInstance().seriesDetailScreen(context as BaseActivity, SeriesDetailActivity::class.java, railCommonData.getEnveuVideoItemBeans().get(position).getId())
-            } else if (screenType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().getMovie(), ignoreCase = true)) {
-                ActivityLauncher.getInstance().detailScreenBrightCove(context as BaseActivity, DetailActivity::class.java, railCommonData.getEnveuVideoItemBeans().get(position).getId())
-            } else if (screenType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().getTrailer(), ignoreCase = true)) {
-                val externalRefId: String = railCommonData.getEnveuVideoItemBeans().get(position).getExternalRefId()
+            } else if (screenType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().episode, ignoreCase = true)) {
+                ActivityLauncher.getInstance().episodeScreenBrightcove(context as BaseActivity, EpisodeActivity::class.java, railCommonData.enveuVideoItemBeans[position].id)
+            } else if (screenType.uppercase(Locale.getDefault()) == MediaTypeConstants.getInstance().movie) {
+                ActivityLauncher.getInstance().detailScreenBrightCove(context as BaseActivity, DetailActivity::class.java, railCommonData.enveuVideoItemBeans[position].id)
+            } else if (screenType.uppercase(Locale.getDefault()) == MediaTypeConstants.getInstance().documentaries) {
+                ActivityLauncher.getInstance().detailScreenBrightCove(context as BaseActivity, DetailActivity::class.java, railCommonData.enveuVideoItemBeans[position].id)
+            } else if (screenType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().trailer, ignoreCase = true)) {
+                val externalRefId: String = railCommonData.enveuVideoItemBeans[position].externalRefId
                 if (checkLoggedInAndUserVerifyCondition(AppConstants.LOGGED_IN)) {
-                    if (!StringUtils.isNullOrEmpty(externalRefId)) {
-                        verifyTrailerCondition(
-                            context,
-                            externalRefId,
-                            railCommonData.getEnveuVideoItemBeans().get(position).getId(),
-                            railCommonData.getEnveuVideoItemBeans().get(position).getTitle(),
-                            railCommonData.getEnveuVideoItemBeans().get(position).getAssetType(),
-                            posterUrl
-                        )
+                    if (!StringUtils.isNullOrEmpty(externalRefId)) { verifyTrailerCondition(context,externalRefId,
+                            railCommonData.enveuVideoItemBeans[position].id,
+                            railCommonData.enveuVideoItemBeans[position].title,
+                            railCommonData.enveuVideoItemBeans[position].assetType,
+                            posterUrl)
                     } else {
                         createShowDialog("", context.getString(R.string.something_went_wrong), context.getString(R.string.countinue), context)
                     }
@@ -1054,52 +1049,46 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
 
         fun redirectOnDetailPages(context: Context, railCommonData: RailCommonData, position: Int, mediaType: String) {
             if (SystemClock.elapsedRealtime() - mLastClickTime < 2000) {
-                return
-            }
+                return }
             mLastClickTime = SystemClock.elapsedRealtime()
             try {
                 if (mediaType.equals(AppConstants.VIDEO, ignoreCase = true)) {
-                    redirectOnVideoDetailPages(
-                        context,
-                        railCommonData,
-                        position,
-                        railCommonData.enveuVideoItemBeans[position].videoDetails.videoType,
-                        railCommonData.enveuVideoItemBeans[position].posterURL
-                    )
+                    redirectOnVideoDetailPages(context, railCommonData, position,railCommonData.enveuVideoItemBeans[position].videoDetails.videoType, railCommonData.enveuVideoItemBeans[position].posterURL)
                 } else if (mediaType.equals(AppConstants.LIVE, ignoreCase = true)) {
                     redirectOnLivePages(context, railCommonData, position, mediaType)
+                }  else if (mediaType.equals(AppConstants.SERIES, ignoreCase = true)) {
+                    redirectOnSeriesPages(context, railCommonData, position, mediaType)
                 }
             } catch (e: Exception) {
                 Logger.w(e)
             }
         }
 
+         fun redirectOnSeriesPages(context: Context, railCommonData: RailCommonData, position: Int, screenType: String) {
+           if (screenType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().series, ignoreCase = true)) {
+                ActivityLauncher.getInstance().seriesDetailScreen(context as BaseActivity, SeriesDetailActivity::class.java, railCommonData.enveuVideoItemBeans[position].id)
+            }
+        }
+
+
         fun redirectOnLivePages(context: Context, railCommonData: RailCommonData, position: Int, screenType: String) {
             if (screenType.equals(AppConstants.LIVE, ignoreCase = true)) {
                 var isHosted = false
                 var externalUrl = ""
                 var externalRefId = ""
-                if (railCommonData.getEnveuVideoItemBeans().get(position).getExternalRefId() != null) {
-                    externalRefId = railCommonData.getEnveuVideoItemBeans().get(position).getExternalRefId()
+                if (railCommonData.enveuVideoItemBeans[position].externalRefId != null) {
+                    externalRefId = railCommonData.enveuVideoItemBeans[position].externalRefId
                 }
-                val isPremium: Boolean = railCommonData.getEnveuVideoItemBeans().get(position).isPremium()
-                val skuId: String = railCommonData.getEnveuVideoItemBeans().get(position).getSku()
-                if (java.lang.Boolean.TRUE == railCommonData.getEnveuVideoItemBeans().get(position).getLiveContent().isHosted) {
+                val isPremium: Boolean = railCommonData.enveuVideoItemBeans[position].isPremium
+                val skuId: String = railCommonData.enveuVideoItemBeans[position].sku
+                if (java.lang.Boolean.TRUE == railCommonData.enveuVideoItemBeans[position].liveContent.isHosted) {
                     isHosted = true
                 } else {
-                    if (railCommonData.getEnveuVideoItemBeans().get(position).getLiveContent().externalUrl != null) {
-                        externalUrl = railCommonData.getEnveuVideoItemBeans().get(position).getLiveContent().externalUrl!!
+                    if (railCommonData.enveuVideoItemBeans[position].getLiveContent().externalUrl != null) {
+                        externalUrl = railCommonData.enveuVideoItemBeans[position].liveContent.externalUrl!!
                     }
                 }
-                liveRedirection(
-                    context,
-                    externalRefId,
-                    isPremium,
-                    skuId,
-                    railCommonData.getEnveuVideoItemBeans().get(position).getId(),
-                    railCommonData.getEnveuVideoItemBeans().get(position).getTitle(),
-                    railCommonData.getEnveuVideoItemBeans().get(position).getAssetType(),
-                    true,
+                liveRedirection(context, externalRefId, isPremium, skuId, railCommonData.enveuVideoItemBeans[position].id, railCommonData.enveuVideoItemBeans[position].title, railCommonData.enveuVideoItemBeans[position].assetType, true,
                     isHosted,
                     externalUrl
                 )
@@ -1760,6 +1749,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 redirectOnDetailPages(context, railCommonData, position, AppConstants.VIDEO)
             } else if (railCommonData.enveuVideoItemBeans[position].assetType.equals(AppConstants.LIVE, ignoreCase = true)) {
                 redirectOnDetailPages(context, railCommonData, position, AppConstants.LIVE)
+            } else if (railCommonData.enveuVideoItemBeans[position].assetType.equals(AppConstants.CUSTOM)) {
+                redirectOnSeriesPages(context, railCommonData, position, AppConstants.SERIES)
             }
         }
 

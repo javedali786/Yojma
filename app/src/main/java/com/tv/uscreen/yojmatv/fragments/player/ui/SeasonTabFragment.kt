@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.fragments.player.ui
 
+
 import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
@@ -12,8 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.tv.uscreen.yojmatv.R
-
-
 import com.tv.uscreen.yojmatv.activities.detail.ui.EpisodeActivity
 import com.tv.uscreen.yojmatv.activities.series.adapter.SeasonAdapter
 import com.tv.uscreen.yojmatv.activities.series.ui.SeriesDetailActivity
@@ -23,7 +22,6 @@ import com.tv.uscreen.yojmatv.beanModel.selectedSeason.SelectedSeasonModel
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.FirstEpisodeItem
 import com.tv.uscreen.yojmatv.databinding.SeasonFragmentLayoutBinding
-
 import com.tv.uscreen.yojmatv.networking.apistatus.APIStatus
 import com.tv.uscreen.yojmatv.utils.Logger
 import com.tv.uscreen.yojmatv.utils.ObjectHelper
@@ -35,7 +33,6 @@ import com.tv.uscreen.yojmatv.utils.helpers.RecyclerAnimator
 import com.tv.uscreen.yojmatv.utils.helpers.SpacingItemDecoration
 import com.tv.uscreen.yojmatv.utils.helpers.StringUtils
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
-import java.util.Arrays
 
 class SeasonTabFragment : BaseBindingFragment<SeasonFragmentLayoutBinding?>(), SeasonAdapter.EpisodeItemClick, FirstEpisodeItem {
     private val stringsHelper by lazy { StringsHelper }
@@ -92,7 +89,7 @@ class SeasonTabFragment : BaseBindingFragment<SeasonFragmentLayoutBinding?>(), S
         Logger.d("seasonArray: $seasonArray")
         val seasonName = bundle.getString(AppConstants.BUNDLE_SEASON_NAME)
         if (ObjectHelper.isNotEmpty(seasonName)) {
-            seasonNameList.addAll(Arrays.asList(*seasonName!!.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()))
+            seasonNameList.addAll(listOf(*seasonName!!.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()))
         }
         Logger.d("season name: $seasonNameList")
         try {
