@@ -8,5 +8,7 @@ interface PlayerListener : VideoPlayerEvents.OnPlayListener,
     VideoPlayerEvents.OnReadyListener,
     VideoPlayerEvents.OnMetaListener,
     VideoPlayerEvents.OnTimeListener,
-    VideoPlayerEvents.OnCompleteListener{
+    VideoPlayerEvents.OnCompleteListener,
+    VideoPlayerEvents.OnCaptionsListListener,
+    VideoPlayerEvents.OnAudioTracksListener{
 }

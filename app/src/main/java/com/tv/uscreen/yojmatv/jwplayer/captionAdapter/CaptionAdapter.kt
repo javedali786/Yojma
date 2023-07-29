@@ -6,16 +6,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.enveu.player.model.TrackItem
+import com.jwplayer.pub.api.media.captions.Caption
 import com.tv.uscreen.yojmatv.R
 
 
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 
-class CustomAdapter(
-    private val mList: ArrayList<TrackItem>?,
+class CaptionAdapter(
+    private val mList: ArrayList<Caption>?,
     itemClick: ItemClick?,
     selectedTrack: String
-) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<CaptionAdapter.ViewHolder>() {
     var itemClick = itemClick
     var selectedTrack = selectedTrack
 
@@ -33,16 +34,12 @@ class CustomAdapter(
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.titleText.text = mList?.get(position)?.trackName
-        if (mList?.get(position)?.trackName.equals(
-                KsPreferenceKeys.getInstance().qualityName,
-                true
-            )
-        ) {
+        holder.titleText.text = mList?.get(position)?.label
+        if (mList?.get(position)?.label.equals(KsPreferenceKeys.getInstance().caption, true)) {
             holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected_blue)
             holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
-        } else if (mList?.get(position)?.trackName.equals(
-                KsPreferenceKeys.getInstance().qualityName,
+        } else if (mList?.get(position)?.label.equals(
+                KsPreferenceKeys.getInstance().caption,
                 true
             )
         ) {
@@ -53,13 +50,12 @@ class CustomAdapter(
         }
 
         holder.titleText.setOnClickListener {
-            mList?.get(position)?.id?.let { it1 ->
+            mList?.get(position)?.label?.let { it1 ->
                 itemClick?.itemClick(
-                    it1,
-                    mList.get(position).trackName
+                    position
                 )
             }
-            KsPreferenceKeys.getInstance().qualityName = mList?.get(position)?.trackName
+            KsPreferenceKeys.getInstance().caption = mList?.get(position)?.label
             holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected_blue)
             holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
         }
@@ -78,6 +74,6 @@ class CustomAdapter(
     }
 
     interface ItemClick {
-        fun itemClick(trackName: Int, userSelectedTrack: String)
+        fun itemClick(trackIndex: Int)
     }
 }
