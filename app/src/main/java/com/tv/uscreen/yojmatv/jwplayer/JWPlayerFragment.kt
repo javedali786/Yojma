@@ -48,6 +48,7 @@ import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.databinding.FragmentJWPlayerBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.DialogPlayer
 import com.tv.uscreen.yojmatv.utils.Logger
+import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
@@ -385,22 +386,22 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             .build()
         val playlist: MutableList<PlaylistItem> = ArrayList()
         playlist.add(playlistItem)
-        val config = PlayerConfig.Builder()
-            .playlistUrl("https://cdn.jwplayer.com/v2/media/$externalRefId")
-            /* .playlist(playlist)*/
-            .uiConfig(hideJwControlUiConfig)
-            .build()
-        mPlayer?.setup(config)
-        startBookmarking()
-        // setupCast()
-        tittle?.let { viewBinding.seriesDetailAllEpisodeTxtColors.setTittle(it) }
-        viewBinding.seriesDetailAllEpisodeTxtColors.addHideHandler()
+        if (!AppCommonMethod.configResponse.data.appConfig.jwPlayerDiliveryBaseUrl.isNullOrEmpty()) {
+            val config = PlayerConfig.Builder()
+                .playlistUrl("${AppCommonMethod.configResponse.data.appConfig.jwPlayerDiliveryBaseUrl}$externalRefId")
+                .uiConfig(hideJwControlUiConfig)
+                .build()
+            mPlayer?.setup(config)
+            startBookmarking()
+            tittle?.let { viewBinding.seriesDetailAllEpisodeTxtColors.setTittle(it) }
+            viewBinding.seriesDetailAllEpisodeTxtColors.addHideHandler()
 
-        addListener()
-        if (isBingeWatchEnable == true && currentPlayingIndex!! < seasonEpisodesList?.size!! - 1) {
-            viewBinding.seriesDetailAllEpisodeTxtColors.shouldShowNext(true)
-        } else {
-            viewBinding.seriesDetailAllEpisodeTxtColors.shouldShowNext(false)
+            addListener()
+            if (isBingeWatchEnable == true && currentPlayingIndex!! < seasonEpisodesList?.size!! - 1) {
+                viewBinding.seriesDetailAllEpisodeTxtColors.shouldShowNext(true)
+            } else {
+                viewBinding.seriesDetailAllEpisodeTxtColors.shouldShowNext(false)
+            }
         }
     }
 
@@ -590,7 +591,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                             if (isUserVerified.equals("true", ignoreCase = true)) {
                                 this.playbackUrl =
                                     SDKConfig.getInstance().playbacK_URL + it.data.externalRefId + ".m3u8"
-                                externalRefId=it.data.externalRefId
+                                externalRefId = it.data.externalRefId
                                 initializaPlayer()
                             } else {
                                 //activity?.finish()
