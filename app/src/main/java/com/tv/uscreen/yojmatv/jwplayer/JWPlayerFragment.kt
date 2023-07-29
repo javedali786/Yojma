@@ -8,6 +8,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,9 @@ import com.jwplayer.pub.api.PlayerState
 import com.jwplayer.pub.api.UiGroup
 import com.jwplayer.pub.api.configuration.PlayerConfig
 import com.jwplayer.pub.api.configuration.UiConfig
+import com.jwplayer.pub.api.events.AudioTracksEvent
 import com.jwplayer.pub.api.events.BufferEvent
+import com.jwplayer.pub.api.events.CaptionsListEvent
 import com.jwplayer.pub.api.events.CompleteEvent
 import com.jwplayer.pub.api.events.EventType
 import com.jwplayer.pub.api.events.IdleEvent
@@ -37,6 +40,8 @@ import com.jwplayer.pub.api.events.PlayEvent
 import com.jwplayer.pub.api.events.ReadyEvent
 import com.jwplayer.pub.api.events.TimeEvent
 import com.jwplayer.pub.api.license.LicenseUtil
+import com.jwplayer.pub.api.media.audio.AudioTrack
+import com.jwplayer.pub.api.media.captions.Caption
 import com.jwplayer.pub.api.media.playlists.PlaylistItem
 import com.jwplayer.pub.view.JWPlayerView
 import com.tv.uscreen.yojmatv.BuildConfig
@@ -48,7 +53,6 @@ import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.databinding.FragmentJWPlayerBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.DialogPlayer
 import com.tv.uscreen.yojmatv.utils.Logger
-import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
@@ -80,6 +84,8 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var RefId = ""
     private var sku = ""
     private var viewModel: DetailViewModel? = null
+    private var captionList: ArrayList<Caption>? = null
+    private var audioList: ArrayList<AudioTrack>? = null
 
     // protected override lateinit var enveuPlayerControlView: EnveuPlayerControlView
     private var controlClickListener: ControlClickListener? = null
@@ -198,22 +204,67 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
         override fun onSettingClicked() {
             super.onSettingClicked()
-            if (mPlayer?.qualityLevels != null) {
-                videoTracks = TrackOptions.createVideoTracks(activity!!, mPlayer?.qualityLevels!!)
-                Logger.d("ListSizeIs", videoTracks.toString())
-                viewBinding.seriesDetailAllEpisodeTxtColors.setVideoQualityAdapter(
-                    videoTracks,
-                    selectedVideoTrack
-                )
-            }
+            var settingList = ArrayList<String>()
+            if (!audioList.isNullOrEmpty() && audioList?.size!! > 1)
+                settingList.add(resources.getString(R.string.ep_settings_audio))
+            if (!captionList.isNullOrEmpty() && captionList?.size!! > 1)
+                settingList.add(resources.getString(R.string.ep_settings_subtitle))
+
+            videoTracks =
+                TrackOptions.createVideoTracks(activity!!, mPlayer?.qualityLevels!!)
+            if (!videoTracks.isNullOrEmpty())
+                settingList.add(resources.getString(R.string.ep_settings_video))
+            viewBinding.seriesDetailAllEpisodeTxtColors.setSettingAdapter(settingList)
+
         }
 
         override fun onVideoQualitySelected(trackName: Int, selectedTrack: String) {
             super.onVideoQualitySelected(trackName, selectedTrack)
+
             if (mPlayer != null)
                 mPlayer?.currentQuality = trackName
             selectedVideoTrack = selectedTrack
         }
+
+        override fun onSettingSelected(selectedSetting: String) {
+            super.onSettingSelected(selectedSetting)
+            when (selectedSetting) {
+                resources.getString(R.string.ep_settings_audio) -> {
+                    viewBinding.seriesDetailAllEpisodeTxtColors.setAudioAdapter(
+                        audioList,
+                        selectedVideoTrack
+                    )
+                }
+
+                resources.getString(R.string.ep_settings_subtitle) -> {
+                    viewBinding.seriesDetailAllEpisodeTxtColors.setCaptionAdapter(
+                        captionList,
+                        selectedVideoTrack
+                    )
+                }
+
+                resources.getString(R.string.ep_settings_video) -> {
+                    if (mPlayer?.qualityLevels != null) {
+                        viewBinding.seriesDetailAllEpisodeTxtColors.setVideoAdapter(
+                            videoTracks,
+                            selectedVideoTrack
+                        )
+                    }
+                }
+            }
+
+        }
+
+        override fun onCaptionSelected(trackIndex: Int) {
+            super.onCaptionSelected(trackIndex)
+            mPlayer?.currentCaptions = trackIndex
+        }
+
+        override fun onAudioSelected(trackIndex: Int) {
+            super.onAudioSelected(trackIndex)
+            mPlayer?.currentAudioTrack = trackIndex
+        }
+
 
         override fun onRewindClick() {
             super.onRewindClick()
@@ -314,6 +365,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         UIInitialization()
         setUpCast()
         initializaPlayer()
+        mPlayer?.isCaptionsRendering = true
 //        setupCast()
 //        viewBinding.seriesDetailAllEpisodeTxtColors.initCast()
 //        mCastContext = CastContext.getSharedInstance(requireActivity())
@@ -374,6 +426,9 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                 AppConstants.PROD_LICENSE_KEY
             )
         }
+        KsPreferenceKeys.getInstance().caption = ""
+        KsPreferenceKeys.getInstance().audioName = ""
+
 
         val hideJwControlUiConfig = UiConfig.Builder()
             .hide(UiGroup.CONTROLBAR)
@@ -386,9 +441,9 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             .build()
         val playlist: MutableList<PlaylistItem> = ArrayList()
         playlist.add(playlistItem)
-        if (!AppCommonMethod.configResponse.data.appConfig.jwPlayerDiliveryBaseUrl.isNullOrEmpty()) {
+        if (!SDKConfig.getInstance().jwPlayerDiliveryBaseUrl.isNullOrEmpty()) {
             val config = PlayerConfig.Builder()
-                .playlistUrl("${AppCommonMethod.configResponse.data.appConfig.jwPlayerDiliveryBaseUrl}$externalRefId")
+                .playlistUrl("${SDKConfig.getInstance().jwPlayerDiliveryBaseUrl}$externalRefId")
                 .uiConfig(hideJwControlUiConfig)
                 .build()
             mPlayer?.setup(config)
@@ -412,6 +467,8 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         mPlayer?.addListener(EventType.META, this)
         mPlayer?.addListener(EventType.READY, this)
         mPlayer?.addListener(EventType.BUFFER, this)
+        mPlayer?.addListener(EventType.CAPTIONS_LIST, this)
+        mPlayer?.addListener(EventType.AUDIO_TRACKS, this)
         mPlayer?.addListener(EventType.TIME, this)
         mPlayer?.addListener(EventType.COMPLETE, this)
         mPlayer?.play()
@@ -439,6 +496,20 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
     override fun onMeta(p0: MetaEvent?) {
 
+    }
+
+    override fun onCaptionsList(captionsListEvent: CaptionsListEvent?) {
+        if (captionsListEvent != null) {
+            captionList = ArrayList()
+            captionList?.addAll(captionsListEvent?.captions)
+        }
+    }
+
+    override fun onAudioTracks(audioTrackEvent: AudioTracksEvent?) {
+        if (audioTrackEvent != null) {
+            audioList = ArrayList()
+            audioList?.addAll(audioTrackEvent?.audioTracks)
+        }
     }
 
     override fun onTime(p0: TimeEvent?) {
@@ -561,6 +632,8 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         mPlayer?.removeListener(EventType.READY, this)
         mPlayer?.removeListener(EventType.META, this)
         mPlayer?.removeListener(EventType.READY, this)
+        mPlayer?.removeListener(EventType.CAPTIONS_LIST, this)
+        mPlayer?.removeListener(EventType.AUDIO_TRACKS, this)
         mPlayer?.removeListener(EventType.BUFFER, this)
         mPlayer?.removeListener(EventType.TIME, this)
     }

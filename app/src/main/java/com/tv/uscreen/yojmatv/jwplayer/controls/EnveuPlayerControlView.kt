@@ -17,8 +17,13 @@ import com.enveu.player.listener.ControlClickListener
 import com.enveu.player.model.TrackItem
 import com.enveu.player.utils.ClickHandler
 import com.enveu.player.utils.TimeUtils
+import com.example.jwplayer.VideoQualityAdapter.AudioAdapter
+import com.example.jwplayer.VideoQualityAdapter.CaptionAdapter
 import com.example.jwplayer.VideoQualityAdapter.CustomAdapter
+import com.example.jwplayer.VideoQualityAdapter.SettingAdapter
 import com.google.android.gms.cast.framework.CastButtonFactory
+import com.jwplayer.pub.api.media.audio.AudioTrack
+import com.jwplayer.pub.api.media.captions.Caption
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.databinding.EnveuPlayerControlViewBinding
 
@@ -41,15 +46,46 @@ class EnveuPlayerControlView : FrameLayout {
     private var mediaType: Boolean? = false
     private var visibilityHandler = Handler(Looper.getMainLooper())
 
-//    @EnveuPlayer.Companion.MediaType
+    //    @EnveuPlayer.Companion.MediaType
 //    private var mediaType: Int = EnveuPlayer.VOD
     private var visibilityRunnable = { updateControlVisibility(View.GONE) }
 
-    private val itemClick = object : CustomAdapter.ItemClick{
+    private val itemClick = object : CustomAdapter.ItemClick {
         override fun itemClick(trackName: Int, selectedTrackName: String) {
             if (controlClickListener != null) {
                 updateRecyclerViewVisibility()
-                controlClickListener?.onVideoQualitySelected(trackName,selectedTrackName)
+                controlClickListener?.onVideoQualitySelected(trackName, selectedTrackName)
+                addHideHandler()
+            }
+        }
+
+    }
+
+    private val settingitemClick = object : SettingAdapter.ItemClick {
+        override fun itemClick(trackName: String) {
+            if (controlClickListener != null) {
+                updateRecyclerViewVisibility()
+                controlClickListener?.onSettingSelected(trackName)
+                addHideHandler()
+            }
+        }
+
+    }
+    private val captionItemClick = object : CaptionAdapter.ItemClick {
+        override fun itemClick(trackIndex: Int) {
+            if (controlClickListener != null) {
+                updateRecyclerViewVisibility()
+                controlClickListener?.onCaptionSelected(trackIndex)
+                addHideHandler()
+            }
+        }
+
+    }
+    private val audioItemClick = object : AudioAdapter.ItemClick {
+        override fun itemClick(trackIndex: Int) {
+            if (controlClickListener != null) {
+                updateRecyclerViewVisibility()
+                controlClickListener?.onAudioSelected(trackIndex)
                 addHideHandler()
             }
         }
@@ -59,7 +95,7 @@ class EnveuPlayerControlView : FrameLayout {
     private fun updateRecyclerViewVisibility() {
         if (binding.rvQuality.visibility == View.VISIBLE) {
             binding.rvQuality.visibility = View.GONE
-        }else{
+        } else {
             binding.rvQuality.visibility = View.VISIBLE
         }
     }
@@ -85,7 +121,7 @@ class EnveuPlayerControlView : FrameLayout {
     fun attachListener(controlClickListener: ControlClickListener) {
         this.controlClickListener = controlClickListener
 
-        binding.root.setOnClickListener{
+        binding.root.setOnClickListener {
             if (ClickHandler.allowClick()) {
                 controlClickListener.onOutsideClicked(binding.root)
             }
@@ -111,7 +147,7 @@ class EnveuPlayerControlView : FrameLayout {
         binding.ivEpFullscreen.setOnClickListener {
             controlClickListener.onFullscreenClicked()
         }
-        binding.tvPreviousEpisode.setOnClickListener{
+        binding.tvPreviousEpisode.setOnClickListener {
             controlClickListener.onPreviousClicked()
         }
         binding.tvMoreEpisodes.setOnClickListener {
@@ -121,7 +157,7 @@ class EnveuPlayerControlView : FrameLayout {
             controlClickListener.onNextClicked()
         }
 
-        binding.epTimeBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
+        binding.epTimeBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 binding.epTimeBar.progress = progress
                 binding.tvEpPosition.text = TimeUtils.formatDuration(progress.toLong())
@@ -157,6 +193,7 @@ class EnveuPlayerControlView : FrameLayout {
         binding.epTimeBar.progress = progress.toLong().percent(videoDuration)
         binding.tvEpPosition.text = TimeUtils.formatDuration(progress.toLong())
     }
+
     fun updateSeekBar() {
         binding.epTimeBar.progress = 0
         binding.tvEpPosition.text = "00:00"
@@ -193,14 +230,15 @@ class EnveuPlayerControlView : FrameLayout {
         visibilityHandler.postDelayed(visibilityRunnable, controlTimeoutAt)
     }
 
-    fun toggleControlVisibility(orientation: Int,mediaType: Boolean) {
+    fun toggleControlVisibility(orientation: Int, mediaType: Boolean) {
         visibilityHandler.removeCallbacksAndMessages(null)
         this.mediaType = mediaType
-        val visibility = if (binding.seriesDetailAllEpisodeTxtColorsBackground.visibility == View.VISIBLE) {
-            View.GONE
-        } else {
-            View.VISIBLE
-        }
+        val visibility =
+            if (binding.seriesDetailAllEpisodeTxtColorsBackground.visibility == View.VISIBLE) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
         val isLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
         Logger.d("isLandscape: $isLandscape | orientation: $orientation")
         updateControlVisibility(visibility, isLandscape)
@@ -208,10 +246,10 @@ class EnveuPlayerControlView : FrameLayout {
     }
 
     private fun updateControlVisibility(visibility: Int, isLandscape: Boolean = false) {
-        if (mediaType != true){
-            controlsVisibilityForVod(visibility,isLandscape)
-        }else{
-            controlsVisibilityForLive(visibility,isLandscape)
+        if (mediaType != true) {
+            controlsVisibilityForVod(visibility, isLandscape)
+        } else {
+            controlsVisibilityForLive(visibility, isLandscape)
         }
     }
 
@@ -341,11 +379,38 @@ class EnveuPlayerControlView : FrameLayout {
         )
     }
 
-    fun setVideoQualityAdapter(videoTracks: ArrayList<TrackItem>?, selectedVideoTrack: String) {
-        if (videoTracks!=null) {
+    fun setSettingAdapter(videoTracks: ArrayList<String>?) {
+        if (videoTracks != null) {
             updateRecyclerViewVisibility()
             visibilityHandler.removeCallbacksAndMessages(null)
-            val adapter = CustomAdapter(videoTracks,itemClick,selectedVideoTrack)
+            val adapter = SettingAdapter(videoTracks, settingitemClick)
+            binding.rvQuality.adapter = adapter
+        }
+    }
+
+    fun setCaptionAdapter(videoTracks: ArrayList<Caption>?, selectedVideoTrack: String) {
+        if (videoTracks != null) {
+            updateRecyclerViewVisibility()
+            visibilityHandler.removeCallbacksAndMessages(null)
+            val adapter = CaptionAdapter(videoTracks, captionItemClick, selectedVideoTrack)
+            binding.rvQuality.adapter = adapter
+        }
+    }
+
+    fun setAudioAdapter(videoTracks: ArrayList<AudioTrack>?, selectedVideoTrack: String) {
+        if (videoTracks != null) {
+            updateRecyclerViewVisibility()
+            visibilityHandler.removeCallbacksAndMessages(null)
+            val adapter = AudioAdapter(videoTracks, audioItemClick, selectedVideoTrack)
+            binding.rvQuality.adapter = adapter
+        }
+    }
+
+    fun setVideoAdapter(videoTracks: ArrayList<TrackItem>?, selectedVideoTrack: String) {
+        if (videoTracks != null) {
+            updateRecyclerViewVisibility()
+            visibilityHandler.removeCallbacksAndMessages(null)
+            val adapter = CustomAdapter(videoTracks, itemClick, selectedVideoTrack)
             binding.rvQuality.adapter = adapter
         }
     }
@@ -364,7 +429,7 @@ class EnveuPlayerControlView : FrameLayout {
                 binding.playerImage,
                 AppCommonMethod.getListLDSImage(posterUrl, context)
             )
-        }else{
+        } else {
             binding.playerImage.visibility = View.GONE
         }
     }

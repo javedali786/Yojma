@@ -281,9 +281,9 @@
     <string name="ep_video_4k_desc">Best video quality</string>
 
     <string name="ep_dialog_settings_title">Settings</string>
-    <string name="ep_settings_video">Video Settings</string>
-    <string name="ep_settings_audio">Audio Settings</string>
-    <string name="ep_settings_subtitle">Subtitle Settings</string>
+    <string name="ep_settings_video">Video Quality</string>
+    <string name="ep_settings_audio">Multi Audio</string>
+    <string name="ep_settings_subtitle">Subtitles</string>
     <string name="ep_dialog_settings_cancel">Cancel</string>
     <string name="type_video">Video</string>
     <string name="type_audio">Audio</string>

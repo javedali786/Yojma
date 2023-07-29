@@ -54,6 +54,11 @@ public class SDKConfig {
         return configBean == null ? "" : configBean.getData().getAppConfig().getSearchBaseUrl();
     }
 
+
+    public String getJwPlayerDiliveryBaseUrl() {
+        return configBean == null ? "" : configBean.getData().getAppConfig().getJwPlayerDiliveryBaseUrl();
+    }
+
     public String getCLOUD_FRONT_BASE_URL() {
         return configBean == null ? "" : configBean.getData().getAppConfig().getCloudFrontBaseURL();
     }
