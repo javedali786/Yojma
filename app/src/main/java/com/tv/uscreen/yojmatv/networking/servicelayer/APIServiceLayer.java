@@ -813,7 +813,7 @@ public class APIServiceLayer {
                     .observeOn(Schedulers.io());
 
             documentaries = endpoint.getSearchByFilters(keyword,
-                            videoContentTypes, size, page, languageCode,AppConstants.DOCUMENTARY, allFilters,
+                            videoContentTypes, size, page, languageCode,MediaTypeConstants.getInstance().getDocumentaries(), allFilters,
                             filterSortSavedListKeyForApi)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io());
@@ -904,7 +904,7 @@ public class APIServiceLayer {
                     } else if (header.equalsIgnoreCase(AppConstants.episodes)){
                         call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,MediaTypeConstants.getInstance().getEpisode());
                     }  else if (header.equalsIgnoreCase(AppConstants.Documentaries)){
-                        call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,AppConstants.DOCUMENTARY);
+                        call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,MediaTypeConstants.getInstance().getDocumentaries());
                     }
                 }
 

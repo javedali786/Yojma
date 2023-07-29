@@ -85,6 +85,9 @@ public class DetailViewModel extends DetailBaseViewModel {
         return EntitlementLayer.getInstance().hitApiEntitlement(token, sku);
     }
 
+    public LiveData<Response> getGeoBlocking( String mediaContentId) {
+        return EntitlementLayer.getInstance().getGeoBlocking( mediaContentId);
+    }
 
     public LiveData<ResponseAllComments> hitApiAllComents(String size, int page, JsonObject data) {
         return detailRepository.hitApiAllComment(size, page, data);

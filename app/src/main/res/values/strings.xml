@@ -720,8 +720,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="something_went_wrong">Something went wrong</string>
     <string name="your_request_has_been_processed_correctly"> You request has been processed correctly and shortly we will get in touch with you</string>
     <string name="not_entitled">You are not entitled to view this content</string>
-    <string name="select_plan">Access to premium content is just a click away. Please select
-the purchase option :</string>
+    <string name="select_plan">Access to premium content is just a click away. Please select the purchase option :</string>
     <string name="purchase_option">Purchase</string>
     <string name="select_plan_player"> Access to premium content you need to purchase subscription</string>
     <string name="user_verify_player">You need to verify your account to watch content.</string>
@@ -940,4 +939,13 @@ the purchase option :</string>
     <string name="popup_continue_watching_for">Continue watching for</string>
     <string name="popup_change_pwd_incorrect_confirm_pwd">Incorrect confirm Password</string>
     <string name="search_see_all">See all</string>
+    <string name="geo_blocking_title">Apologies. Our service is not available in your country</string>
+
+    “geo_blocking_title”: “Apologies. Our service is not available in your country”
+
+
+
+
+
+
 </resources>

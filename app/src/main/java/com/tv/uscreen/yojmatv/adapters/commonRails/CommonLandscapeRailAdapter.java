@@ -59,7 +59,6 @@ public class CommonLandscapeRailAdapter extends RecyclerView.Adapter<RecyclerVie
                 LandscapeItemBinding binding = DataBindingUtil.inflate(
                         LayoutInflater.from(parent.getContext()),
                         R.layout.landscape_item, parent, false);
-                //ThemeHandler.getInstance().applyheadingLandscapeBig1(parent.getContext(),binding);
                 binding.setColorsData(ColorsHelper.INSTANCE);
                 return new NormalHolder(binding);
 
@@ -69,7 +68,6 @@ public class CommonLandscapeRailAdapter extends RecyclerView.Adapter<RecyclerVie
                 LandscapeItemSmallBinding binding = DataBindingUtil.inflate(
                         LayoutInflater.from(parent.getContext()),
                         R.layout.landscape_item_small, parent, false);
-                //ThemeHandler.getInstance().applyheadingCommonPosterRailAdapter(parent.getContext(),binding);
                 binding.setColorsData(ColorsHelper.INSTANCE);
                 return new SmallHolder(binding);
             }
@@ -82,7 +80,6 @@ public class CommonLandscapeRailAdapter extends RecyclerView.Adapter<RecyclerVie
                 LandscapeItemBinding binding = DataBindingUtil.inflate(
                         LayoutInflater.from(parent.getContext()),
                         R.layout.landscape_item, parent, false);
-               // ThemeHandler.getInstance().applyheadingLandscapeBig1(parent.getContext(),binding);
                 binding.setColorsData(ColorsHelper.INSTANCE);
                 return new NormalHolder(binding);
             }
@@ -90,7 +87,6 @@ public class CommonLandscapeRailAdapter extends RecyclerView.Adapter<RecyclerVie
             LandscapeItemBinding binding = DataBindingUtil.inflate(
                     LayoutInflater.from(parent.getContext()),
                     R.layout.landscape_item, parent, false);
-            //ThemeHandler.getInstance().applyheadingLandscapeBig1(parent.getContext(),binding);
             binding.setColorsData(ColorsHelper.INSTANCE);
             return new NormalHolder(binding);
         }

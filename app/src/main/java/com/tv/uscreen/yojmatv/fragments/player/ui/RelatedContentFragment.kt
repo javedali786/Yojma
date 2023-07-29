@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.fragments.player.ui
 
+
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -10,16 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tv.uscreen.yojmatv.R
-
-
-import com.tv.uscreen.yojmatv.activities.detail.ui.EpisodeActivity
 import com.tv.uscreen.yojmatv.activities.listing.ui.MoreForYouActivity
-import com.tv.uscreen.yojmatv.activities.series.ui.SeriesDetailActivity
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingFragment
 import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.databinding.RelatedContentFragmentLayoutBinding
-
 import com.tv.uscreen.yojmatv.fragments.foryou.ui.ForYouAdapter
 import com.tv.uscreen.yojmatv.fragments.foryou.ui.MoreItemClickListner
 import com.tv.uscreen.yojmatv.networking.apistatus.APIStatus
@@ -117,11 +113,7 @@ class RelatedContentFragment : BaseBindingFragment<RelatedContentFragmentLayoutB
     override fun onStop() {
         super.onStop()
         handler!!.removeCallbacks(runnable!!)
-    }//                                    allEpiosdes.addAll(enveuCommonResponse.getEnveuVideoItemBeans());
-
-    //                                    forYouAdapter.notifyDataSetChanged();
-    //   updateSeasonEpisodeNumber(-1, forYouAdapter.getCurrentEpisodeNumber());
-    //   ((SimpleItemAnimator) getBinding().seriesRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+    }
     private val forYouContent: Unit
         get() {
             railInjectionHelper!!.getRelatedContent(0, 20, contentType, id).observe(
@@ -160,11 +152,6 @@ class RelatedContentFragment : BaseBindingFragment<RelatedContentFragmentLayoutB
                                     //                                    forYouAdapter.notifyDataSetChanged();
                                 }
                                 hideProgressBar()
-                                if (context is EpisodeActivity) {
-                                    (context as EpisodeActivity).episodesList(allEpiosdes)
-                                } else if (context is SeriesDetailActivity) {
-                                    (context as SeriesDetailActivity).episodesList(allEpiosdes)
-                                }
                             }
                         }
                     } else if (response.status.equals(APIStatus.ERROR.name, ignoreCase = true)) {

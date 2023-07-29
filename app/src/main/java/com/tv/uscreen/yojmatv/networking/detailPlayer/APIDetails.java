@@ -1,6 +1,7 @@
 package com.tv.uscreen.yojmatv.networking.detailPlayer;
 
 import com.google.gson.JsonObject;
+import com.tv.uscreen.yojmatv.activities.detail.viewModel.Response;
 import com.tv.uscreen.yojmatv.activities.purchase.purchase_model.PurchaseResponseModel;
 import com.tv.uscreen.yojmatv.beanModel.AssetHistoryContinueWatching.ResponseAssetHistory;
 import com.tv.uscreen.yojmatv.beanModel.addComment.ResponseAddComment;
@@ -105,6 +106,9 @@ public interface APIDetails {
     @GET("v5/subscription/checkEntitlement")
     Call<ResponseEntitle> checkEntitlement(@Query("vodSKU") String sku);
 
+    @Headers("x-platform: android")
+    @GET("v1_0/mediaContent/geo/check?")
+    Call<Response> getGeoBlocking(@Query("mediaContentId") String mediaContentId);
 
     @Headers("x-platform: android")
     @POST("comment/listComments")

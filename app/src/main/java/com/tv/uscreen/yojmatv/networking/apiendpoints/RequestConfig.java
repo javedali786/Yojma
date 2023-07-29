@@ -440,6 +440,51 @@ public class RequestConfig {
         return retrofit;
     }
 
+
+    public static Retrofit getGeoBlocking() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(interceptor);
+
+        if(HttpProfiler.getInstance().needHttpProfiler()){
+            if (BuildConfig.DEBUG) {
+                httpClient.addInterceptor(HttpProfiler.getInstance().getOkHttpProfilerInterceptor());
+            }
+        }
+        httpClient.addInterceptor(chain -> {
+            Request original = chain.request();
+            // Request customization: add request headers
+            Request.Builder requestBuilder = original.newBuilder()
+                    .addHeader("Content-Type", " application/json")
+                    .addHeader("x-platform", " android")
+                    .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey());
+
+            Request request = requestBuilder.build();
+            return chain.proceed(request);
+        });
+
+        OkHttpClient client = httpClient.build();
+
+
+        if (SDKConfig.getInstance().getOVP_BASE_URL()!=null && !SDKConfig.getInstance().getOVP_BASE_URL().equalsIgnoreCase("")){
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(SDKConfig.getInstance().getOVP_BASE_URL())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
+                    .build();
+        }else {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(KsPreferenceKeys.getInstance().getOVPBASEURL())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
+                    .build();
+        }
+        return retrofit;
+    }
+
+
     public static Retrofit redeemCoupon(final String token) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
