@@ -6,18 +6,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.enveu.player.model.TrackItem
+import com.jwplayer.pub.api.media.audio.AudioTrack
 import com.tv.uscreen.yojmatv.R
 
 
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 
-class CustomAdapter(
-    private val mList: ArrayList<TrackItem>?,
-    itemClick: ItemClick?,
-    selectedTrack: String
-) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
-    var itemClick = itemClick
-    var selectedTrack = selectedTrack
+class AudioAdapter(private val mList: ArrayList<AudioTrack>?, itemClick: ItemClick?, selectedTrack: String) : RecyclerView.Adapter<AudioAdapter.ViewHolder>() {
+     var itemClick = itemClick
+     var selectedTrack = selectedTrack
 
 
     // create new views
@@ -33,33 +30,21 @@ class CustomAdapter(
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.titleText.text = mList?.get(position)?.trackName
-        if (mList?.get(position)?.trackName.equals(
-                KsPreferenceKeys.getInstance().qualityName,
-                true
-            )
-        ) {
+        holder.titleText.text = mList?.get(position)?.name
+        if (mList?.get(position)?.name.equals(KsPreferenceKeys.getInstance().audioName,true)) {
             holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected_blue)
             holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
-        } else if (mList?.get(position)?.trackName.equals(
-                KsPreferenceKeys.getInstance().qualityName,
-                true
-            )
-        ) {
+        }else if(mList?.get(position)?.name.equals(KsPreferenceKeys.getInstance().audioName,true)){
 
-        } else {
+            }
+        else{
             holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected)
             holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.buy_now_pay_now_btn_text_color));
         }
 
-        holder.titleText.setOnClickListener {
-            mList?.get(position)?.id?.let { it1 ->
-                itemClick?.itemClick(
-                    it1,
-                    mList.get(position).trackName
-                )
-            }
-            KsPreferenceKeys.getInstance().qualityName = mList?.get(position)?.trackName
+        holder.titleText.setOnClickListener{
+          itemClick?.itemClick(position)
+            KsPreferenceKeys.getInstance().audioName=mList?.get(position)?.name
             holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected_blue)
             holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
         }
@@ -78,6 +63,6 @@ class CustomAdapter(
     }
 
     interface ItemClick {
-        fun itemClick(trackName: Int, userSelectedTrack: String)
+        fun itemClick(trackName: Int)
     }
 }
