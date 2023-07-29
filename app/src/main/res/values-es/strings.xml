@@ -284,6 +284,7 @@
     <string name="ep_settings_video">Video Quality</string>
     <string name="ep_settings_audio">Multi Audio</string>
     <string name="ep_settings_subtitle">Subtitles</string>
+    <string name="skip_intro">Skip Intro</string>
     <string name="ep_dialog_settings_cancel">Cancel</string>
     <string name="type_video">Video</string>
     <string name="type_audio">Audio</string>
