@@ -22,7 +22,7 @@
         android:id="@+id/setting_main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/try_again_btn_txt_color"
+        android:background="@color/app_bg_color"
         android:orientation="vertical"
         android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.app_bg_color) ? @color/app_bg_color : Color.parseColor(colorsData.instance().data.config.app_bg_color), default=@color/app_bg_color}">
 
@@ -36,60 +36,6 @@
             android:orientation="vertical"
             android:paddingTop="@dimen/settings_margin_top"
             android:paddingBottom="@dimen/NontonSize_10">
-
-            <LinearLayout
-                android:id="@+id/parent_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/sign_up_padding_5dp"
-                android:paddingTop="@dimen/sign_up_padding_5dp"
-                android:paddingEnd="@dimen/sign_up_padding_5dp"
-                android:paddingBottom="@dimen/_10sdp">
-
-                <TextView
-                    android:id="@+id/title_text_change_language"
-                    style="@style/TextView_Medium"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:paddingStart="@dimen/NontonSize_10"
-                    android:paddingLeft="@dimen/NontonSize_10"
-                    android:paddingRight="@dimen/NontonSize_10"
-                    android:text="@{TextUtils.isEmpty(stringData.instance().data.config.settings_change_lang) ? @string/settings_change_lang : stringData.instance().data.config.settings_change_lang , default=@string/settings_change_lang}"
-                    android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.item_label_text_color) ? @color/item_label_text_color : Color.parseColor(colorsData.instance().data.config.item_label_text_color), default=@color/item_label_text_color}" />
-
-                <TextView
-                    android:id="@+id/language_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="34dp"
-                    android:fontFamily="@font/sfuitext_medium"
-                    android:paddingLeft="@dimen/NontonSize_10"
-                    android:paddingRight="@dimen/NontonSize_10"
-                    android:text="@string/spanish_change_language"
-                    android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.settings_label_value_text_color) ? @color/settings_label_value_text_color : Color.parseColor(colorsData.instance().data.config.settings_label_value_text_color), default=@color/settings_label_value_text_color}"
-                    android:textSize="14sp" />
-
-                <ImageView
-                    android:id="@+id/arrowImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/ic_next_icon"
-                    android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.setting_arrow_icon_color) ? @color/setting_arrow_icon_color : Color.parseColor(colorsData.instance().data.config.setting_arrow_icon_color), default=@color/setting_arrow_icon_color}" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view_line"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:background="@color/item_label_divider_color"
-                android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.item_label_divider_color) ? @color/item_label_divider_color : Color.parseColor(colorsData.instance().data.config.item_label_divider_color), default=@color/item_label_divider_color}"
-                android:visibility="visible" />
-
             <LinearLayout
                 android:id="@+id/video_quality"
                 android:layout_width="match_parent"
@@ -98,6 +44,15 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 android:padding="@dimen/sign_up_padding_5dp">
+
+                <ImageView
+                    android:id="@+id/video_icon"
+                    android:layout_width="@dimen/settings_icon_width_size"
+                    android:layout_height="@dimen/settings_icon_height_size"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/video_icon"
+                    android:layout_centerInParent="true" />
+
                 <TextView
                     android:id="@+id/streaming_txt"
                     style="@style/TextView_Medium"
@@ -132,6 +87,69 @@
                     android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.setting_arrow_icon_color) ? @color/setting_arrow_icon_color : Color.parseColor(colorsData.instance().data.config.setting_arrow_icon_color), default=@color/setting_arrow_icon_color}" />
 
 
+            </LinearLayout>
+
+
+
+            <View
+                android:id="@+id/view_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="@color/item_label_divider_color"
+                android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.item_label_divider_color) ? @color/item_label_divider_color : Color.parseColor(colorsData.instance().data.config.item_label_divider_color), default=@color/item_label_divider_color}"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/parent_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/sign_up_padding_5dp"
+                android:paddingTop="@dimen/sign_up_padding_5dp"
+                android:paddingEnd="@dimen/sign_up_padding_5dp"
+                android:paddingBottom="@dimen/_10sdp">
+
+                <ImageView
+                    android:id="@+id/lan_icon"
+                    android:layout_width="@dimen/settings_icon_width_size"
+                    android:layout_height="@dimen/settings_icon_height_size"
+                    android:background="@drawable/lang_icon"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true" />
+
+                <TextView
+                    android:id="@+id/title_text_change_language"
+                    style="@style/TextView_Medium"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:paddingStart="@dimen/NontonSize_10"
+                    android:paddingLeft="@dimen/NontonSize_10"
+                    android:paddingRight="@dimen/NontonSize_10"
+                    android:text="@{TextUtils.isEmpty(stringData.instance().data.config.settings_change_lang) ? @string/settings_change_lang : stringData.instance().data.config.settings_change_lang , default=@string/settings_change_lang}"
+                    android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.item_label_text_color) ? @color/item_label_text_color : Color.parseColor(colorsData.instance().data.config.item_label_text_color), default=@color/item_label_text_color}" />
+
+                <TextView
+                    android:id="@+id/language_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="34dp"
+                    android:fontFamily="@font/sfuitext_medium"
+                    android:paddingLeft="@dimen/NontonSize_10"
+                    android:paddingRight="@dimen/NontonSize_10"
+                    android:text="@string/spanish_change_language"
+                    android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.settings_label_value_text_color) ? @color/settings_label_value_text_color : Color.parseColor(colorsData.instance().data.config.settings_label_value_text_color), default=@color/settings_label_value_text_color}"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/arrowImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/ic_next_icon"
+                    android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.setting_arrow_icon_color) ? @color/setting_arrow_icon_color : Color.parseColor(colorsData.instance().data.config.setting_arrow_icon_color), default=@color/setting_arrow_icon_color}" />
             </LinearLayout>
 
             <View

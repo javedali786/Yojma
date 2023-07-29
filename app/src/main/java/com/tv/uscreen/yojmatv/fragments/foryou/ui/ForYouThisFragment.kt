@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.fragments.foryou.ui
 
+
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -11,17 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tv.uscreen.yojmatv.R
-
-
-import com.tv.uscreen.yojmatv.activities.detail.ui.EpisodeActivity
 import com.tv.uscreen.yojmatv.activities.listing.ui.MoreForYouActivity
-import com.tv.uscreen.yojmatv.activities.series.ui.SeriesDetailActivity
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingFragment
 import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData
 import com.tv.uscreen.yojmatv.beanModel.selectedSeason.SelectedSeasonModel
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.databinding.ForYouFragmentLayoutBinding
-
 import com.tv.uscreen.yojmatv.networking.apistatus.APIStatus
 import com.tv.uscreen.yojmatv.networking.responsehandler.ResponseModel
 import com.tv.uscreen.yojmatv.utils.Logger
@@ -181,11 +177,7 @@ class ForYouThisFragment : BaseBindingFragment<ForYouFragmentLayoutBinding?>(), 
 //                                    forYouAdapter.notifyDataSetChanged();
                                     }
                                     hideProgressBar()
-                                    if (context is EpisodeActivity) {
-                                        (context as EpisodeActivity).episodesList(allEpiosdes)
-                                    } else if (context is SeriesDetailActivity) {
-                                        (context as SeriesDetailActivity).episodesList(allEpiosdes)
-                                    }
+
                                 }
                             }
                         } else if (response.status.equals(APIStatus.ERROR.name, ignoreCase = true)) {

@@ -166,7 +166,7 @@
       "detail_page_no_data_available": "Datos no disponibles",
       "related_data_see_all": "Ver todo",
       "detail_page_now_playing": "Jugando ahora",
-      "search_hint": "Buscar",
+      "search_hint": "Busqueda",
       "search_result": "Resultado de búsqueda",
       "detail_page_all_episode": "Todo el episodio",
       "detail_page_season": "Estación",
@@ -181,6 +181,7 @@
       "popup_continue_watching_for": "Continúe observando",
       "popup_change_pwd_incorrect_confirm_pwd": "Seguir observando",
       "search_see_all": "Ver todo",
+      "geo_blocking_title": "Disculpas. Nuestro servicio no está disponible en su país",
       "search_results": "Resultados"
     }
   },

@@ -139,6 +139,7 @@ data class Config(
     val popup_incorrect_pwd_tittle: String,
     val popup_login_enter_pwd_tittle: String,
     val popup_profile_error: String,
+    val geo_blocking_title:String,
     val popup_something_went_wrong: String,
     val popup_change_pwd_enter_confirm_pwd: String,
     val popup_change_pwd_your_pwd_does_not_match: String,

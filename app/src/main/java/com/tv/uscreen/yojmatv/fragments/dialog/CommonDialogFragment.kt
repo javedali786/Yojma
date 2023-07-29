@@ -89,7 +89,7 @@ class CommonDialogFragment : DialogFragment() {
             if (message!!.isEmpty()) {
                 description?.visibility = View.GONE
             }
-            if (message.contains(resources.getString(R.string.select_plan))) {
+            if (message.contains(resources.getString(R.string.popup_select_plan))) {
                 cancel?.visibility = View.VISIBLE
             }
             if (message.contains(resources.getString(R.string.user_not_verify))) {

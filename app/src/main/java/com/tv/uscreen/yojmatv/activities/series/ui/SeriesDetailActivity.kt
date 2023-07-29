@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.activities.series.ui
 
+
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.res.Configuration
@@ -29,13 +30,10 @@ import com.google.gson.Gson
 import com.moe.pushlibrary.MoEHelper
 import com.moengage.core.Properties
 import com.tv.uscreen.yojmatv.R
-
-
 import com.tv.uscreen.yojmatv.SDKConfig
 import com.tv.uscreen.yojmatv.activities.detail.viewModel.DetailViewModel
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.EnterOTPActivity
-import com.tv.uscreen.yojmatv.activities.usermanagment.ui.PaymentDetailPage
 import com.tv.uscreen.yojmatv.activities.usermanagment.viewmodel.RegistrationLoginViewModel
 import com.tv.uscreen.yojmatv.adapters.player.EpisodeTabAdapter
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
@@ -45,7 +43,6 @@ import com.tv.uscreen.yojmatv.beanModel.selectedSeason.SelectedSeasonModel
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.FirstEpisodeItem
 import com.tv.uscreen.yojmatv.databinding.ActivitySeriesDetailBinding
-
 import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogSingleButtonFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment
@@ -80,6 +77,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
     private var seasonTabFragment: SeasonTabFragment? = null
     private var relatedContentFragment: RelatedContentFragment? = null
     private var alertDialog: AlertDialog? = null
+    private var isGeoBlocking = false
     private var episodeTabAdapter: EpisodeTabAdapter? = null
     private var newIntentCall = false
 
@@ -143,8 +141,10 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         setupUI(binding!!.llParent)
         seriesId = intent.getIntExtra("seriesId", 0)
         onSeriesCreate()
+
+
         if (isLoggedIn) {
-            hitUserProfileApi()
+         //   hitUserProfileApi()
         }
         setClicks()
         binding?.metaDetails?.durationLl?.background = ColorsHelper.strokeBgDrawable(
@@ -186,6 +186,38 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             hitUserProfileApi()
         }
     }
+
+
+    private fun checkGeoBlocking() {
+        viewModel!!.getGeoBlocking(currentEpisodeId.toString())
+            .observe(this@SeriesDetailActivity) { response ->
+                if (response != null && response.data != null) {
+                    if(response.data.isIsBlocked) {
+                        isGeoBlocking = true
+                    }
+                } else {
+                    if (response!!.responseCode != null && response.responseCode == 4302) {
+
+                    } else {
+                        commonDialog(
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                getString(R.string.popup_error)
+                            ),
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                getString(R.string.popup_something_went_wrong)
+                            ),
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                getString(R.string.popup_continue)
+                            )
+                        )
+                    }
+                }
+            }
+    }
+
 
     private fun callShimmer() {
         shimmerCounter = 1
@@ -747,6 +779,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         singleItem = itemValue
         if (itemValue != null) {
             // setUserInteractionFragment(seriesId);
+            checkGeoBlocking()
             isPremium = itemValue.isPremium
             currentEpisodeId = itemValue.id
             tittle = itemValue.title
@@ -860,108 +893,119 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         try {
             binding!!.metaDetails.playButton.setOnClickListener {
                 if (isLoggedIn) {
-                    if (!isPremium) {
-                        if (isUserVerified.equals("true", ignoreCase = true)) {
-                            if (null != refId && !refId.equals("", ignoreCase = true)) {
-                                playbackUrl = SDKConfig.getInstance().playbacK_URL + refId + ".m3u8"
-                                startPlayer(
-                                    playbackUrl,
-                                    KsPreferenceKeys.getInstance().bingeWatchEnable,
-                                    false,
-                                    refId
+                    if (isGeoBlocking) {
+                        commonDialog(
+                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.geo_blocking_title.toString(),
+                                getString(R.string.geo_blocking_title)),
+                            "",
+                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_ok.toString(),getString(R.string.ok)
+                            )
+                        )
+                    } else {
+                        if (!isPremium) {
+                            if (isUserVerified.equals("true", ignoreCase = true)) {
+                                if (null != refId && !refId.equals("", ignoreCase = true)) {
+                                    playbackUrl = SDKConfig.getInstance().playbacK_URL + refId + ".m3u8"
+                                    startPlayer(
+                                        playbackUrl,
+                                        KsPreferenceKeys.getInstance().bingeWatchEnable,
+                                        false,
+                                        refId
+                                    )
+                                }
+                            } else {
+                                isUserNotVerify = true
+                                commonDialog(
+                                    "",
+                                    stringsHelper.stringParse(
+                                        stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
+                                        getString(R.string.popup_user_not_verify)
+                                    ),
+                                    stringsHelper.stringParse(
+                                        stringsHelper.instance()?.data?.config?.popup_verify.toString(),
+                                        getString(R.string.popup_verify)
+                                    )
                                 )
                             }
                         } else {
-                            isUserNotVerify = true
-                            commonDialog(
-                                "",
-                                stringsHelper.stringParse(
-                                    stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
-                                    getString(R.string.popup_user_not_verify)
-                                ),
-                                stringsHelper.stringParse(
-                                    stringsHelper.instance()?.data?.config?.popup_verify.toString(),
-                                    getString(R.string.popup_verify)
-                                )
-                            )
-                        }
-                    } else {
-                        binding!!.progressBar.visibility = View.VISIBLE
-                        viewModel!!.hitApiEntitlement(token, sku)
-                            .observe(this@SeriesDetailActivity) { responseEntitle ->
-                                binding!!.progressBar.visibility = View.GONE
-                                if (responseEntitle != null && responseEntitle.data != null) {
-                                    resEntitle = responseEntitle
-                                    if (responseEntitle.data.entitled) {
-                                        if (isUserVerified.equals("true", ignoreCase = true)) {
-                                            if (null != responseEntitle.data.externalRefId && !responseEntitle.data.externalRefId.equals(
+                            binding!!.progressBar.visibility = View.VISIBLE
+                            viewModel!!.hitApiEntitlement(token, sku)
+                                .observe(this@SeriesDetailActivity) { responseEntitle ->
+                                    binding!!.progressBar.visibility = View.GONE
+                                    if (responseEntitle != null && responseEntitle.data != null) {
+                                        resEntitle = responseEntitle
+                                        if (responseEntitle.data.entitled) {
+                                            if (isUserVerified.equals("true", ignoreCase = true)) {
+                                                if (null != responseEntitle.data.externalRefId && !responseEntitle.data.externalRefId.equals(
+                                                        "",
+                                                        ignoreCase = true
+                                                    )
+                                                ) {
+                                                    playbackUrl =
+                                                        SDKConfig.getInstance().playbacK_URL + responseEntitle.data.externalRefId + ".m3u8"
+                                                    startPlayer(
+                                                        playbackUrl,
+                                                        KsPreferenceKeys.getInstance().bingeWatchEnable,
+                                                        false,
+                                                        responseEntitle.data.externalRefId
+                                                    )
+                                                }
+                                            } else {
+                                                isUserNotVerify = true
+                                                commonDialog(
                                                     "",
-                                                    ignoreCase = true
-                                                )
-                                            ) {
-                                                playbackUrl =
-                                                    SDKConfig.getInstance().playbacK_URL + responseEntitle.data.externalRefId + ".m3u8"
-                                                startPlayer(
-                                                    playbackUrl,
-                                                    KsPreferenceKeys.getInstance().bingeWatchEnable,
-                                                    false,
-                                                    responseEntitle.data.externalRefId
+                                                    stringsHelper.stringParse(
+                                                        stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
+                                                        getString(R.string.popup_user_not_verify)
+                                                    ),
+                                                    stringsHelper.stringParse(
+                                                        stringsHelper.instance()?.data?.config?.popup_verify.toString(),
+                                                        getString(R.string.popup_verify)
+                                                    )
                                                 )
                                             }
                                         } else {
-                                            isUserNotVerify = true
+                                            isUserNotEntitle = true
                                             commonDialog(
                                                 "",
                                                 stringsHelper.stringParse(
-                                                    stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
-                                                    getString(R.string.popup_user_not_verify)
+                                                    stringsHelper.instance()?.data?.config?.popup_select_plan.toString(),
+                                                    getString(R.string.popup_select_plan)
                                                 ),
                                                 stringsHelper.stringParse(
-                                                    stringsHelper.instance()?.data?.config?.popup_verify.toString(),
-                                                    getString(R.string.popup_verify)
+                                                    stringsHelper.instance()?.data?.config?.popup_purchase.toString(),
+                                                    getString(R.string.popup_purchase)
                                                 )
                                             )
                                         }
                                     } else {
-                                        isUserNotEntitle = true
-                                        commonDialog(
-                                            "",
-                                            stringsHelper.stringParse(
-                                                stringsHelper.instance()?.data?.config?.popup_select_plan.toString(),
-                                                getString(R.string.popup_select_plan)
-                                            ),
-                                            stringsHelper.stringParse(
-                                                stringsHelper.instance()?.data?.config?.popup_purchase.toString(),
-                                                getString(R.string.popup_purchase)
+                                        if (responseEntitle!!.responseCode != null && responseEntitle.responseCode == 4302) {
+                                            clearCredientials(preference)
+                                            ActivityLauncher.getInstance().loginActivity(
+                                                this@SeriesDetailActivity,
+                                                ActivityLogin::class.java
                                             )
-                                        )
-                                    }
-                                } else {
-                                    if (responseEntitle!!.responseCode != null && responseEntitle.responseCode == 4302) {
-                                        clearCredientials(preference)
-                                        ActivityLauncher.getInstance().loginActivity(
-                                            this@SeriesDetailActivity,
-                                            ActivityLogin::class.java
-                                        )
-                                    } else {
-                                        commonDialog(
-                                            stringsHelper.stringParse(
-                                                stringsHelper.instance()?.data?.config?.popup_error.toString(),
-                                                getString(R.string.popup_error)
-                                            ),
-                                            stringsHelper.stringParse(
-                                                stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
-                                                getString(R.string.popup_something_went_wrong)
-                                            ),
-                                            stringsHelper.stringParse(
-                                                stringsHelper.instance()?.data?.config?.popup_continue.toString(),
-                                                getString(R.string.popup_continue)
+                                        } else {
+                                            commonDialog(
+                                                stringsHelper.stringParse(
+                                                    stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                                    getString(R.string.popup_error)
+                                                ),
+                                                stringsHelper.stringParse(
+                                                    stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                                    getString(R.string.popup_something_went_wrong)
+                                                ),
+                                                stringsHelper.stringParse(
+                                                    stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                                    getString(R.string.popup_continue)
+                                                )
                                             )
-                                        )
+                                        }
                                     }
                                 }
-                            }
+                        }
                     }
+
                 } else {
                     ActivityLauncher.getInstance()
                         .loginActivity(this@SeriesDetailActivity, ActivityLogin::class.java)
@@ -1011,8 +1055,8 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                 .goToEnterOTP(this, EnterOTPActivity::class.java, "DetailPage")
         }
         if (isUserNotEntitle) {
-            ActivityLauncher.getInstance()
-                .goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)
+            /*ActivityLauncher.getInstance()
+                .goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)*/
         }
     }
 
