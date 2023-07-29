@@ -69,7 +69,9 @@ import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.htmlParseToString
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 
-class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>(), AlertDialogFragment.AlertDialogListener, FirstEpisodeItem, CommonDialogFragment.EditDialogListener {
+class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>(),
+    AlertDialogFragment.AlertDialogListener, FirstEpisodeItem,
+    CommonDialogFragment.EditDialogListener {
     private var seriesId = 0
     private var preference: KsPreferenceKeys? = null
     private var isLogin: String? = null
@@ -80,8 +82,10 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
     private var alertDialog: AlertDialog? = null
     private var episodeTabAdapter: EpisodeTabAdapter? = null
     private var newIntentCall = false
+
     @JvmField
     var isSeasonData = false
+
     @JvmField
     var isRailData = true
     private var userInteractionFragment: UserInteractionFragment? = null
@@ -102,6 +106,8 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
     private var assetType = ""
     private var sku = ""
     private var trailerUrl: String? = null
+    private var trailerExternalRefId: String? = null
+
     private val isItemValueEmpty = false
     private val videoType = ""
     private val contentType = ""
@@ -121,7 +127,11 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         window.setBackgroundDrawableResource(R.color.app_bg_color)
         shimmerCounter = 0
         preference = KsPreferenceKeys.getInstance()
-        if (preference?.appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
+        if (preference?.appPrefLoginStatus.equals(
+                AppConstants.UserStatus.Login.toString(),
+                ignoreCase = true
+            )
+        ) {
             isLoggedIn = true
         }
         tabId = if (SDKConfig.getInstance().seriesDetailId != null) {
@@ -137,7 +147,11 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             hitUserProfileApi()
         }
         setClicks()
-        binding?.metaDetails?.durationLl?.background = ColorsHelper.strokeBgDrawable(AppColors.detailPageHDBgColor(), AppColors.detailPageHDBrColor(), 10f)
+        binding?.metaDetails?.durationLl?.background = ColorsHelper.strokeBgDrawable(
+            AppColors.detailPageHDBgColor(),
+            AppColors.detailPageHDBrColor(),
+            10f
+        )
     }
 
     private fun parserColor() {
@@ -246,42 +260,67 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         private get() {
             modelCall()
             railInjectionHelper = ViewModelProvider(this)[RailInjectionHelper::class.java]
-            railInjectionHelper!!.getSeriesDetailsV2(seriesId.toString(), false).observe(this@SeriesDetailActivity) { response: ResponseModel<*>? ->
-                if (response != null) {
-                    if (response.status.equals(APIStatus.START.name, ignoreCase = true)) {
-                    } else if (response.status.equals(APIStatus.SUCCESS.name, ignoreCase = true)) {
-                        if (response.baseCategory != null) {
-                            val enveuCommonResponse = response.baseCategory as RailCommonData
-                            parseSeriesData(enveuCommonResponse)
-                            val gson = Gson()
-                            val json = gson.toJson(enveuCommonResponse)
-                            Log.d("javed", "getSeriesDetail1: $json")
-                        }
-                    } else if (response.status.equals(APIStatus.ERROR.name, ignoreCase = true)) {
-                        if (response.errorModel.errorCode != 0) {
-                            if (response.errorModel.errorCode == AppConstants.RESPONSE_CODE_LOGOUT) {
-                                if (isLogin.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
-                                    hitApiLogout()
-                                }
-                            } else {
-                                showDialog(
-                                    stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
-                                    stringsHelper.stringParse(
-                                        stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong)
-                                    )
-                                )
-                            }
-                        }
-                    } else if (response.status.equals(APIStatus.FAILURE.name, ignoreCase = true)) {
-                        showDialog(
-                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
-                            stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong)
+            railInjectionHelper!!.getSeriesDetailsV2(seriesId.toString(), false)
+                .observe(this@SeriesDetailActivity) { response: ResponseModel<*>? ->
+                    if (response != null) {
+                        if (response.status.equals(APIStatus.START.name, ignoreCase = true)) {
+                        } else if (response.status.equals(
+                                APIStatus.SUCCESS.name,
+                                ignoreCase = true
                             )
-                        )
+                        ) {
+                            if (response.baseCategory != null) {
+                                val enveuCommonResponse = response.baseCategory as RailCommonData
+                                parseSeriesData(enveuCommonResponse)
+                                val gson = Gson()
+                                val json = gson.toJson(enveuCommonResponse)
+                                Log.d("javed", "getSeriesDetail1: $json")
+                            }
+                        } else if (response.status.equals(
+                                APIStatus.ERROR.name,
+                                ignoreCase = true
+                            )
+                        ) {
+                            if (response.errorModel.errorCode != 0) {
+                                if (response.errorModel.errorCode == AppConstants.RESPONSE_CODE_LOGOUT) {
+                                    if (isLogin.equals(
+                                            AppConstants.UserStatus.Login.toString(),
+                                            ignoreCase = true
+                                        )
+                                    ) {
+                                        hitApiLogout()
+                                    }
+                                } else {
+                                    showDialog(
+                                        stringsHelper.stringParse(
+                                            stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                            getString(R.string.popup_error)
+                                        ),
+                                        stringsHelper.stringParse(
+                                            stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                            getString(R.string.popup_something_went_wrong)
+                                        )
+                                    )
+                                }
+                            }
+                        } else if (response.status.equals(
+                                APIStatus.FAILURE.name,
+                                ignoreCase = true
+                            )
+                        ) {
+                            showDialog(
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                    getString(R.string.popup_error)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                    getString(R.string.popup_something_went_wrong)
+                                )
+                            )
+                        }
                     }
                 }
-            }
             binding!!.flBackIconImage.setOnClickListener { onBackPressed() }
         }
 
@@ -306,13 +345,23 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                     && (enveuCommonResponse.enveuVideoItemBeans[0].responseCode
                             == AppConstants.RESPONSE_CODE_LOGOUT)
                 ) {
-                    if (isLogin.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
+                    if (isLogin.equals(
+                            AppConstants.UserStatus.Login.toString(),
+                            ignoreCase = true
+                        )
+                    ) {
                         hitApiLogout()
                     }
                 } else {
                     showDialog(
-                        stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
-                        stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong))
+                        stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                            getString(R.string.popup_error)
+                        ),
+                        stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                            getString(R.string.popup_something_went_wrong)
+                        )
                     )
                 }
             }
@@ -346,7 +395,10 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             args.putString(AppConstants.BUNDLE_TAB_ID, tabId)
             val bundleSeason = Bundle()
             bundleSeason.putInt(AppConstants.BUNDLE_ASSET_ID, seriesId)
-            bundleSeason.putParcelableArrayList(AppConstants.BUNDLE_SEASON_ARRAY, seriesDetailBean?.seasons as java.util.ArrayList<out Parcelable>?)
+            bundleSeason.putParcelableArrayList(
+                AppConstants.BUNDLE_SEASON_ARRAY,
+                seriesDetailBean?.seasons as java.util.ArrayList<out Parcelable>?
+            )
             bundleSeason.putString(AppConstants.BUNDLE_SEASON_NAME, seriesDetailBean!!.seasonName)
             bundleSeason.putInt(AppConstants.BUNDLE_SEASON_COUNT, seriesDetailBean!!.seasonCount)
             seasonTabFragment!!.arguments = bundleSeason
@@ -377,13 +429,19 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             args.putString(AppConstants.BUNDLE_TAB_ID, tabId)
             val bundleSeason = Bundle()
             bundleSeason.putInt(AppConstants.BUNDLE_ASSET_ID, seriesId)
-            bundleSeason.putParcelableArrayList(AppConstants.BUNDLE_SEASON_ARRAY, seriesDetailBean?.seasons as java.util.ArrayList<out Parcelable>?)
+            bundleSeason.putParcelableArrayList(
+                AppConstants.BUNDLE_SEASON_ARRAY,
+                seriesDetailBean?.seasons as java.util.ArrayList<out Parcelable>?
+            )
             bundleSeason.putString(AppConstants.BUNDLE_SEASON_NAME, seriesDetailBean!!.seasonName)
             bundleSeason.putInt(AppConstants.BUNDLE_SEASON_COUNT, seriesDetailBean!!.seasonCount)
             seasonTabFragment!!.arguments = bundleSeason
             episodeTabAdapter!!.addFragment(
                 seasonTabFragment,
-                stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.detail_page_episodes.toString(), getString(R.string.detail_page_episodes))
+                stringsHelper.stringParse(
+                    stringsHelper.instance()?.data?.config?.detail_page_episodes.toString(),
+                    getString(R.string.detail_page_episodes)
+                )
             )
             relatedContentFragment = RelatedContentFragment()
             val forYouArgs = Bundle()
@@ -395,7 +453,10 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             relatedContentFragment!!.arguments = forYouArgs
             episodeTabAdapter!!.addFragment(
                 relatedContentFragment,
-                stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.detail_page_related_videos.toString(), getString(R.string.detail_page_related_videos))
+                stringsHelper.stringParse(
+                    stringsHelper.instance()?.data?.config?.detail_page_related_videos.toString(),
+                    getString(R.string.detail_page_related_videos)
+                )
             )
             binding!!.viewPager.adapter = episodeTabAdapter
             binding!!.viewPager.offscreenPageLimit = 10
@@ -404,28 +465,55 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
 //        val borderClr = colorParser(colorsHelper.instance()?.data?.config?.series_detail_tab_unselected_border_color.toString(), R.color.series_detail_tab_unselected_border_color)
 //        val bgClr = colorParser(colorsHelper.instance()?.data?.config?.app_bg_color.toString(), R.color.app_bg_color)
 
-        binding?.metaDetails?.watchTrailer?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
-        binding?.tabLayout?.getTabAt(0)?.view?.background = ColorsHelper.strokeBgDrawable(AppColors.detailPageTabUnselectedBorderColor(), AppColors.detailPageTabUnselectedBorderColor(), 0f)
+        binding?.metaDetails?.watchTrailer?.background =
+            ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
+        binding?.tabLayout?.getTabAt(0)?.view?.background = ColorsHelper.strokeBgDrawable(
+            AppColors.detailPageTabUnselectedBorderColor(),
+            AppColors.detailPageTabUnselectedBorderColor(),
+            0f
+        )
         if (episodeTabAdapter!!.count > 1) {
-            binding?.tabLayout?.getTabAt(1)?.view?.background = ColorsHelper.strokeBgDrawable(AppColors.detailPageTabSelectedBorderColor(), AppColors.detailPageTabUnselectedBorderColor(), 0f)
+            binding?.tabLayout?.getTabAt(1)?.view?.background = ColorsHelper.strokeBgDrawable(
+                AppColors.detailPageTabSelectedBorderColor(),
+                AppColors.detailPageTabUnselectedBorderColor(),
+                0f
+            )
         }
-        binding!!.tabLayout.addOnTabSelectedListener(object : BaseOnTabSelectedListener<TabLayout.Tab> {
+        binding!!.tabLayout.addOnTabSelectedListener(object :
+            BaseOnTabSelectedListener<TabLayout.Tab> {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 showLoading(binding!!.progressBar, true)
-                tab?.view?.background = ColorsHelper.strokeBgDrawable(AppColors.detailPageTabUnselectedBorderColor(), AppColors.detailPageTabUnselectedBorderColor(), 0f)
+                tab?.view?.background = ColorsHelper.strokeBgDrawable(
+                    AppColors.detailPageTabUnselectedBorderColor(),
+                    AppColors.detailPageTabUnselectedBorderColor(),
+                    0f
+                )
                 Handler().postDelayed({ dismissLoading(binding!!.progressBar) }, 1500)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-                tab?.view?.background = ColorsHelper.strokeBgDrawable(AppColors.detailPageTabSelectedBorderColor(), AppColors.detailPageTabUnselectedBorderColor(), 0f)
+                tab?.view?.background = ColorsHelper.strokeBgDrawable(
+                    AppColors.detailPageTabSelectedBorderColor(),
+                    AppColors.detailPageTabUnselectedBorderColor(),
+                    0f
+                )
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
         binding!!.viewPager.addOnPageChangeListener(object : OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
+
             override fun onPageSelected(position: Int) {
-                binding!!.viewPager.measure(binding!!.viewPager.measuredWidth, binding!!.viewPager.measuredHeight)
+                binding!!.viewPager.measure(
+                    binding!!.viewPager.measuredWidth,
+                    binding!!.viewPager.measuredHeight
+                )
             }
 
             override fun onPageScrollStateChanged(state: Int) {}
@@ -511,7 +599,10 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         val alertDialog = AlertDialogSingleButtonFragment.newInstance(
             title,
             message,
-            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_ok.toString(), getString(R.string.popup_ok))
+            stringsHelper.stringParse(
+                stringsHelper.instance()?.data?.config?.popup_ok.toString(),
+                getString(R.string.popup_ok)
+            )
         )
         alertDialog.isCancelable = false
         alertDialog.setAlertDialogCallBack(this)
@@ -577,9 +668,15 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         mRecyclerView.layoutManager = LinearLayoutManager(this@SeriesDetailActivity)
         mRecyclerView.adapter = listAdapter
         alertDialog = builder.create()
-        alertDialog?.window!!.setBackgroundDrawable(ActivityCompat.getDrawable(this@SeriesDetailActivity, R.color.transparent))
+        alertDialog?.window!!.setBackgroundDrawable(
+            ActivityCompat.getDrawable(
+                this@SeriesDetailActivity,
+                R.color.transparent
+            )
+        )
         alertDialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        if (alertDialog?.window != null) alertDialog?.window!!.attributes.windowAnimations = R.style.SlidingDialogAnimation
+        if (alertDialog?.window != null) alertDialog?.window!!.attributes.windowAnimations =
+            R.style.SlidingDialogAnimation
         alertDialog?.show()
         val lWindowParams = WindowManager.LayoutParams()
         lWindowParams.copyFrom(alertDialog?.window!!.attributes)
@@ -588,9 +685,13 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         alertDialog?.window!!.attributes = lWindowParams
     }
 
-    internal inner class SeasonListAdapter(private val list: ArrayList<SelectedSeasonModel>, selectedPos: Int) : RecyclerView.Adapter<SeasonListAdapter.ViewHolder>() {
+    internal inner class SeasonListAdapter(
+        private val list: ArrayList<SelectedSeasonModel>,
+        selectedPos: Int
+    ) : RecyclerView.Adapter<SeasonListAdapter.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.all_season_listing, parent, false)
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.all_season_listing, parent, false)
             return ViewHolder(view)
         }
 
@@ -666,14 +767,18 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         if (seriesResponse != null) {
             val properties = Properties()
             properties.addAttribute(AppConstants.CONTENT_DETAIL_TITTLE, seriesResponse.title)
-            MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
+            MoEHelper.getInstance(applicationContext)
+                .trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
             if (seriesResponse.trailerReferenceId != null) {
                 getTrailer(seriesResponse.trailerReferenceId)
             }
             setUserInteractionFragment(seriesId)
             binding!!.playlistItem = seriesResponse
             posterUrl = seriesResponse.posterURL
-            ImageHelper.getInstance(this).loadListImage(binding!!.sliderImage, AppCommonMethod.getListLDSImage(seriesResponse.posterURL, this))
+            ImageHelper.getInstance(this).loadListImage(
+                binding!!.sliderImage,
+                AppCommonMethod.getListLDSImage(seriesResponse.posterURL, this)
+            )
             if (ObjectHelper.isEmpty(seriesResponse.longDescription)) {
                 binding!!.metaDetails.descriptionText.visibility = View.GONE
             }
@@ -727,17 +832,29 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         binding!!.metaDetails.watchTrailer.setOnClickListener {
             if (isLoggedIn) {
                 if (isUserVerified.equals("true", ignoreCase = true)) {
-                    startPlayer(trailerUrl, bingeWatchEnable = false, isTrailer = true)
+                    startPlayer(
+                        trailerUrl,
+                        bingeWatchEnable = false,
+                        isTrailer = true,
+                        trailerExternalRefId
+                    )
                 } else {
                     isUserNotVerify = true
                     commonDialog(
                         "",
-                        stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(), getString(R.string.popup_user_not_verify)),
-                        stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_verify.toString(), getString(R.string.popup_verify))
+                        stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
+                            getString(R.string.popup_user_not_verify)
+                        ),
+                        stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_verify.toString(),
+                            getString(R.string.popup_verify)
+                        )
                     )
                 }
             } else {
-                ActivityLauncher.getInstance().loginActivity(this@SeriesDetailActivity, ActivityLogin::class.java)
+                ActivityLauncher.getInstance()
+                    .loginActivity(this@SeriesDetailActivity, ActivityLogin::class.java)
             }
         }
         try {
@@ -747,69 +864,107 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                         if (isUserVerified.equals("true", ignoreCase = true)) {
                             if (null != refId && !refId.equals("", ignoreCase = true)) {
                                 playbackUrl = SDKConfig.getInstance().playbacK_URL + refId + ".m3u8"
-                                startPlayer(playbackUrl, KsPreferenceKeys.getInstance().bingeWatchEnable, false)
+                                startPlayer(
+                                    playbackUrl,
+                                    KsPreferenceKeys.getInstance().bingeWatchEnable,
+                                    false,
+                                    refId
+                                )
                             }
                         } else {
                             isUserNotVerify = true
                             commonDialog(
                                 "",
-                                stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(), getString(R.string.popup_user_not_verify)),
-                                stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_verify.toString(), getString(R.string.popup_verify))
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
+                                    getString(R.string.popup_user_not_verify)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_verify.toString(),
+                                    getString(R.string.popup_verify)
+                                )
                             )
                         }
                     } else {
                         binding!!.progressBar.visibility = View.VISIBLE
-                        viewModel!!.hitApiEntitlement(token, sku).observe(this@SeriesDetailActivity) { responseEntitle ->
-                            binding!!.progressBar.visibility = View.GONE
-                            if (responseEntitle != null && responseEntitle.data != null) {
-                                resEntitle = responseEntitle
-                                if (responseEntitle.data.entitled) {
-                                    if (isUserVerified.equals("true", ignoreCase = true)) {
-                                        if (null != responseEntitle.data.externalRefId && !responseEntitle.data.externalRefId.equals("", ignoreCase = true)) {
-                                            playbackUrl = SDKConfig.getInstance().playbacK_URL + responseEntitle.data.externalRefId + ".m3u8"
-                                            startPlayer(playbackUrl, KsPreferenceKeys.getInstance().bingeWatchEnable, false)
+                        viewModel!!.hitApiEntitlement(token, sku)
+                            .observe(this@SeriesDetailActivity) { responseEntitle ->
+                                binding!!.progressBar.visibility = View.GONE
+                                if (responseEntitle != null && responseEntitle.data != null) {
+                                    resEntitle = responseEntitle
+                                    if (responseEntitle.data.entitled) {
+                                        if (isUserVerified.equals("true", ignoreCase = true)) {
+                                            if (null != responseEntitle.data.externalRefId && !responseEntitle.data.externalRefId.equals(
+                                                    "",
+                                                    ignoreCase = true
+                                                )
+                                            ) {
+                                                playbackUrl =
+                                                    SDKConfig.getInstance().playbacK_URL + responseEntitle.data.externalRefId + ".m3u8"
+                                                startPlayer(
+                                                    playbackUrl,
+                                                    KsPreferenceKeys.getInstance().bingeWatchEnable,
+                                                    false,
+                                                    responseEntitle.data.externalRefId
+                                                )
+                                            }
+                                        } else {
+                                            isUserNotVerify = true
+                                            commonDialog(
+                                                "",
+                                                stringsHelper.stringParse(
+                                                    stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
+                                                    getString(R.string.popup_user_not_verify)
+                                                ),
+                                                stringsHelper.stringParse(
+                                                    stringsHelper.instance()?.data?.config?.popup_verify.toString(),
+                                                    getString(R.string.popup_verify)
+                                                )
+                                            )
                                         }
                                     } else {
-                                        isUserNotVerify = true
+                                        isUserNotEntitle = true
                                         commonDialog(
                                             "",
                                             stringsHelper.stringParse(
-                                                stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
-                                                getString(R.string.popup_user_not_verify)
+                                                stringsHelper.instance()?.data?.config?.popup_select_plan.toString(),
+                                                getString(R.string.popup_select_plan)
                                             ),
-                                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_verify.toString(), getString(R.string.popup_verify))
+                                            stringsHelper.stringParse(
+                                                stringsHelper.instance()?.data?.config?.popup_purchase.toString(),
+                                                getString(R.string.popup_purchase)
+                                            )
                                         )
                                     }
                                 } else {
-                                    isUserNotEntitle = true
-                                    commonDialog(
-                                        "",
-                                        stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_select_plan.toString(), getString(R.string.popup_select_plan)),
-                                        stringsHelper.stringParse(
-                                            stringsHelper.instance()?.data?.config?.popup_purchase.toString(), getString(R.string.popup_purchase)
+                                    if (responseEntitle!!.responseCode != null && responseEntitle.responseCode == 4302) {
+                                        clearCredientials(preference)
+                                        ActivityLauncher.getInstance().loginActivity(
+                                            this@SeriesDetailActivity,
+                                            ActivityLogin::class.java
                                         )
-                                    )
-                                }
-                            } else {
-                                if (responseEntitle!!.responseCode != null && responseEntitle.responseCode == 4302) {
-                                    clearCredientials(preference)
-                                    ActivityLauncher.getInstance().loginActivity(this@SeriesDetailActivity, ActivityLogin::class.java)
-                                } else {
-                                    commonDialog(
-                                        stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
-                                        stringsHelper.stringParse(
-                                            stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong)
-                                        ),
-                                        stringsHelper.stringParse(
-                                            stringsHelper.instance()?.data?.config?.popup_continue.toString(), getString(R.string.popup_continue)
+                                    } else {
+                                        commonDialog(
+                                            stringsHelper.stringParse(
+                                                stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                                getString(R.string.popup_error)
+                                            ),
+                                            stringsHelper.stringParse(
+                                                stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                                getString(R.string.popup_something_went_wrong)
+                                            ),
+                                            stringsHelper.stringParse(
+                                                stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                                getString(R.string.popup_continue)
+                                            )
                                         )
-                                    )
+                                    }
                                 }
                             }
-                        }
                     }
                 } else {
-                    ActivityLauncher.getInstance().loginActivity(this@SeriesDetailActivity, ActivityLogin::class.java)
+                    ActivityLauncher.getInstance()
+                        .loginActivity(this@SeriesDetailActivity, ActivityLogin::class.java)
                 }
             }
         } catch (e: Exception) {
@@ -817,7 +972,12 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         }
     }
 
-    private fun startPlayer(playback_url: String?, bingeWatchEnable: Boolean, isTrailer: Boolean) {
+    private fun startPlayer(
+        playback_url: String?,
+        bingeWatchEnable: Boolean,
+        isTrailer: Boolean,
+        externalRefId: String?
+    ) {
         Log.d("playback_url", "startPlayer: $playback_url")
         ActivityLauncher.getInstance().launchPlayerActitivity(
             this@SeriesDetailActivity,
@@ -831,7 +991,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             isTrailer,
             false,
             posterUrl,
-            AppConstants.SERIESDEATILACTIVITY
+            AppConstants.SERIESDEATILACTIVITY, externalRefId
         )
     }
 
@@ -847,52 +1007,80 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             onBackPressed();
         }*/
         if (isUserNotVerify) {
-            ActivityLauncher.getInstance().goToEnterOTP(this, EnterOTPActivity::class.java, "DetailPage")
+            ActivityLauncher.getInstance()
+                .goToEnterOTP(this, EnterOTPActivity::class.java, "DetailPage")
         }
         if (isUserNotEntitle) {
-            ActivityLauncher.getInstance().goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)
+            ActivityLauncher.getInstance()
+                .goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)
         }
     }
 
     private fun getTrailer(trailerReferenceId: String) {
         railInjectionHelper = ViewModelProvider(this)[RailInjectionHelper::class.java]
-        railInjectionHelper!!.getAssetDetailsV2(trailerReferenceId, this@SeriesDetailActivity).observe(this@SeriesDetailActivity) { assetResponse: ResponseModel<*>? ->
-            if (assetResponse != null) {
-                val gson = Gson()
-                val json = gson.toJson(assetResponse.baseCategory)
-                if (assetResponse.status.equals(APIStatus.START.name, ignoreCase = true)) {
-                } else if (assetResponse.status.equals(APIStatus.SUCCESS.name, ignoreCase = true)) {
-                    val enveuCommonResponse = assetResponse.baseCategory as RailCommonData
-                    if (enveuCommonResponse != null && enveuCommonResponse.enveuVideoItemBeans.size > 0) {
-                        // videoDetails = enveuCommonResponse.getEnveuVideoItemBeans().get(0);
-                        if (!enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals("", ignoreCase = true) && !enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals(
-                                null,
-                                ignoreCase = true
-                            )
-                        ) {
-                            binding!!.metaDetails.watchTrailer.visibility = View.VISIBLE
-                            trailerUrl = SDKConfig.getInstance().playbacK_URL + enveuCommonResponse.enveuVideoItemBeans[0].externalRefId + ".m3u8"
-                        }
-                    }
-                } else if (assetResponse.status.equals(APIStatus.ERROR.name, ignoreCase = true)) {
-                    if (assetResponse.errorModel != null && assetResponse.errorModel.errorCode != 0) {
-                        showDialog(
-                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
-                            stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong)
-                            )
+        railInjectionHelper!!.getAssetDetailsV2(trailerReferenceId, this@SeriesDetailActivity)
+            .observe(this@SeriesDetailActivity) { assetResponse: ResponseModel<*>? ->
+                if (assetResponse != null) {
+                    val gson = Gson()
+                    val json = gson.toJson(assetResponse.baseCategory)
+                    if (assetResponse.status.equals(APIStatus.START.name, ignoreCase = true)) {
+                    } else if (assetResponse.status.equals(
+                            APIStatus.SUCCESS.name,
+                            ignoreCase = true
                         )
+                    ) {
+                        val enveuCommonResponse = assetResponse.baseCategory as RailCommonData
+                        if (enveuCommonResponse != null && enveuCommonResponse.enveuVideoItemBeans.size > 0) {
+                            // videoDetails = enveuCommonResponse.getEnveuVideoItemBeans().get(0);
+                            if (!enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals(
+                                    "",
+                                    ignoreCase = true
+                                ) && !enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals(
+                                    null,
+                                    ignoreCase = true
+                                )
+                            ) {
+                                binding!!.metaDetails.watchTrailer.visibility = View.VISIBLE
+                                trailerExternalRefId =
+                                    enveuCommonResponse.enveuVideoItemBeans[0].externalRefId
+                                trailerUrl =
+                                    SDKConfig.getInstance().playbacK_URL + enveuCommonResponse.enveuVideoItemBeans[0].externalRefId + ".m3u8"
+                            }
+                        }
+                    } else if (assetResponse.status.equals(
+                            APIStatus.ERROR.name,
+                            ignoreCase = true
+                        )
+                    ) {
+                        if (assetResponse.errorModel != null && assetResponse.errorModel.errorCode != 0) {
+                            showDialog(
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                    getString(R.string.popup_error)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                    getString(R.string.popup_something_went_wrong)
+                                )
+                            )
+                        }
+                    } else if (assetResponse.status.equals(
+                            APIStatus.FAILURE.name,
+                            ignoreCase = true
+                        )
+                    ) {
+                        // showDialog(SeriesDetailActivity.this.getResources().getString(R.string.error), getResources().getString(R.string.something_went_wrong));
                     }
-                } else if (assetResponse.status.equals(APIStatus.FAILURE.name, ignoreCase = true)) {
-                    // showDialog(SeriesDetailActivity.this.getResources().getString(R.string.error), getResources().getString(R.string.something_went_wrong));
                 }
             }
-        }
     }
 
     private fun hitUserProfileApi() {
         registrationLoginViewModel = ViewModelProvider(this)[RegistrationLoginViewModel::class.java]
-        registrationLoginViewModel!!.hitUserProfile(this@SeriesDetailActivity, preference!!.appPrefAccessToken).observe(this@SeriesDetailActivity) { userProfileResponse ->
+        registrationLoginViewModel!!.hitUserProfile(
+            this@SeriesDetailActivity,
+            preference!!.appPrefAccessToken
+        ).observe(this@SeriesDetailActivity) { userProfileResponse ->
             dismissLoading(binding!!.progressBar)
             if (userProfileResponse != null) {
                 if (userProfileResponse.data != null) {

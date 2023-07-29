@@ -53,6 +53,9 @@ public class AppConfig{
 	@SerializedName("subscriptionBaseUrl")
 	private String subscriptionBaseUrl;
 
+
+	@SerializedName("jwPlayerDiliveryBaseUrl")
+	private String jwPlayerDiliveryBaseUrl;
 	@SerializedName("paymentBaseUrl")
 	private String paymentBaseUrl;
 
@@ -142,6 +145,9 @@ public class AppConfig{
 		this.avatarImages = avatarImages;
 	}
 
+	public String getJwPlayerDiliveryBaseUrl() {
+		return jwPlayerDiliveryBaseUrl;
+	}
 
 	public String getVastTagUrl(){
 		return vastTagUrl;

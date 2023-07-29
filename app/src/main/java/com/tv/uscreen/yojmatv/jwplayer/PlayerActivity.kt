@@ -28,6 +28,7 @@ class PlayerActivity : AppCompatActivity(), Serializable, JWPlayerFragment.OnPla
     private var token: String? = null
     private var tittle: String? = null
     private var posterUrl: String? = null
+    private var externalRefid: String? = null
     private var contentType: String? = null
     private var screenName: String? = null
     private var preference: KsPreferenceKeys? = null
@@ -56,6 +57,7 @@ class PlayerActivity : AppCompatActivity(), Serializable, JWPlayerFragment.OnPla
             posterUrl = bundle.getString("posterUrl")
             contentType = bundle.getString("contentType")
             screenName = bundle.getString("screenName")
+            externalRefid= bundle.getString("externalRefId")
             activity = bundle.getString("activity")
             if (activity?.contains("HomeSliderActivity") == true) {
                 screenName = "HomeSliderActivity"
@@ -86,6 +88,7 @@ class PlayerActivity : AppCompatActivity(), Serializable, JWPlayerFragment.OnPla
         screenName?.let { args.putString("screenName",it) }
         activity?.let { args.putString("activity",it) }
         episodeId?.let { args.putInt("episodeId", it) }
+        externalRefid?.let { args.putString("externalRefId", it)   }
         if (null != seasonEpisodesList) {
             args.putSerializable("episodeList", seasonEpisodesList as Serializable)
         }
