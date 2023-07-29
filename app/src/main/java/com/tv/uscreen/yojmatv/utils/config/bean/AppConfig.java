@@ -66,6 +66,17 @@ public class AppConfig {
     @Expose
     private Version version;
 
+    @SerializedName("jwPlayerDiliveryBaseUrl")
+    private String jwPlayerDiliveryBaseUrl;
+
+    public String getJwPlayerDiliveryBaseUrl() {
+        return jwPlayerDiliveryBaseUrl;
+    }
+
+    public void setJwPlayerDiliveryBaseUrl(String jwPlayerDiliveryBaseUrl) {
+        this.jwPlayerDiliveryBaseUrl = jwPlayerDiliveryBaseUrl;
+    }
+
     public ParentalControl getParentalControl() {
         return parentalControl;
     }

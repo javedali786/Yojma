@@ -48,7 +48,6 @@ import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.databinding.FragmentJWPlayerBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.DialogPlayer
 import com.tv.uscreen.yojmatv.utils.Logger
-import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
@@ -386,9 +385,9 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             .build()
         val playlist: MutableList<PlaylistItem> = ArrayList()
         playlist.add(playlistItem)
-        if (!AppCommonMethod.configResponse.data.appConfig.jwPlayerDiliveryBaseUrl.isNullOrEmpty()) {
+        if (!SDKConfig.getInstance().jwPlayerDiliveryBaseUrl.isNullOrEmpty()) {
             val config = PlayerConfig.Builder()
-                .playlistUrl("${AppCommonMethod.configResponse.data.appConfig.jwPlayerDiliveryBaseUrl}$externalRefId")
+                .playlistUrl("${SDKConfig.getInstance().jwPlayerDiliveryBaseUrl}$externalRefId")
                 .uiConfig(hideJwControlUiConfig)
                 .build()
             mPlayer?.setup(config)

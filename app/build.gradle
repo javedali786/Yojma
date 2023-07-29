@@ -181,8 +181,8 @@ dependencies {
 //    implementation project(':player')
 
    // implementation files('libs/enveuandroidclient-debug.aar')
-    implementation files('libs/enveuandroidsdk-debug.aar')
-   // implementation project(':enveuandroidsdk')
+   // implementation files('libs/enveuandroidsdk-debug.aar')
+    implementation project(':enveuandroidsdk')
     implementation project(':enveuandroidclient')
 
     //noinspection GradleDependency
