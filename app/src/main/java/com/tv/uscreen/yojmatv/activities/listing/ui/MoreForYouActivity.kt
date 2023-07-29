@@ -9,14 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.tv.uscreen.yojmatv.R
-
-import com.tv.uscreen.yojmatv.activities.detail.ui.EpisodeActivity
-import com.tv.uscreen.yojmatv.activities.series.ui.SeriesDetailActivity
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
 import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.databinding.MoreForyouActivityBinding
-
 import com.tv.uscreen.yojmatv.fragments.foryou.ui.ForYouAdapter
 import com.tv.uscreen.yojmatv.networking.apistatus.APIStatus
 import com.tv.uscreen.yojmatv.utils.Logger
@@ -57,6 +53,7 @@ class MoreForYouActivity : BaseBindingActivity<MoreForyouActivityBinding?>(), Fo
         binding!!.colorsData = ColorsHelper
         binding!!.toolbarGrid.colorsData = ColorsHelper
         binding!!.toolbarGrid.stringData = StringsHelper
+        binding!!.toolbarGrid.searchIcon.visibility = View.VISIBLE
         binding!!.toolbarGrid.backLayout.visibility = View.VISIBLE
       //  binding!!.toolbarGrid..setBackgroundColor(resources.getColor(R.color.buy_now_pay_now_btn_text_color))
         binding!!.toolbarGrid.backLayout.setOnClickListener { onBackPressed() }
@@ -119,11 +116,6 @@ class MoreForYouActivity : BaseBindingActivity<MoreForyouActivityBinding?>(), Fo
                                     forYouAdapter!!.notifyDataSetChanged()
                                 }
                                 hideProgressBar()
-                                if (context is EpisodeActivity) {
-                                    context.episodesList(allEpiosdes)
-                                } else if (context is SeriesDetailActivity) {
-                                    context.episodesList(allEpiosdes)
-                                }
                             }
                         }
                     } else if (response.status.equals(APIStatus.ERROR.name, ignoreCase = true)) {

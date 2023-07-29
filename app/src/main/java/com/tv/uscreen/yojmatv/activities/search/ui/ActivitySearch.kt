@@ -238,7 +238,7 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
                                         if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(MediaTypeConstants.getInstance().episode, ignoreCase = true)) {
                                             temp.layoutType = 1
                                         }
-                                        if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(AppConstants.DOCUMENTARY, ignoreCase = true)) {
+                                        if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(MediaTypeConstants.getInstance().documentaries, ignoreCase = true)) {
                                             temp.layoutType = 2
                                         }
 

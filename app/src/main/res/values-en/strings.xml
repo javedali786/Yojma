@@ -839,5 +839,7 @@ the purchase option : </string>
     <string name="popup_change_pwd_incorrect_confirm_pwd">Incorrect confirm Password</string>
     <string name="search_see_all">See all</string>
     <string name="gaming_tabbar">Gaming</string>
+    <string name="geo_blocking_title">Apologies. Our service is not available in your country</string>
+
 
 </resources>

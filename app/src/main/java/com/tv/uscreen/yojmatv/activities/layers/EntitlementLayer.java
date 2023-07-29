@@ -64,4 +64,39 @@ public class EntitlementLayer {
         return responseOutput;
     }
 
+
+
+    public LiveData<com.tv.uscreen.yojmatv.activities.detail.viewModel.Response> getGeoBlocking( String mediaContentId) {
+        MutableLiveData<com.tv.uscreen.yojmatv.activities.detail.viewModel.Response> responseOutput = new MutableLiveData<>();
+
+        APIDetails endpoint = RequestConfig.getGeoBlocking().create(APIDetails.class);
+        Call<com.tv.uscreen.yojmatv.activities.detail.viewModel.Response> call = endpoint.getGeoBlocking(mediaContentId);
+        call.enqueue(new Callback<com.tv.uscreen.yojmatv.activities.detail.viewModel.Response>() {
+            @Override
+            public void onResponse(@NonNull Call<com.tv.uscreen.yojmatv.activities.detail.viewModel.Response> call, @NonNull Response<com.tv.uscreen.yojmatv.activities.detail.viewModel.Response> response) {
+                if (response.code() == 200) {
+                    com.tv.uscreen.yojmatv.activities.detail.viewModel.Response response1 = new com.tv.uscreen.yojmatv.activities.detail.viewModel.Response();
+
+                    response1.setResponseCode(response.code());
+                    response1.setData(Objects.requireNonNull(response.body()).getData());
+                    Gson gson = new Gson();
+                    String json = gson.toJson(response.body().getData());
+                    Log.d("Javed", "onResponse: " +  json);
+                    responseOutput.postValue(response1);
+                } else {
+                    responseOutput.postValue(null);
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<com.tv.uscreen.yojmatv.activities.detail.viewModel.Response> call, @NonNull Throwable t) {
+                com.tv.uscreen.yojmatv.activities.detail.viewModel.Response response = new com.tv.uscreen.yojmatv.activities.detail.viewModel.Response();
+                response.setResponseCode(response.getResponseCode());
+                responseOutput.postValue(response);
+            }
+        });
+        return responseOutput;
+    }
+
+
+
 }

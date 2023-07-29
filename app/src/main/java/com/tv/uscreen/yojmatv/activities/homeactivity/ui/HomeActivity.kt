@@ -110,8 +110,6 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
                 return@OnItemSelectedListener true
             }
 
-
-
             R.id.navigation_movie -> {
                 if (active !is MovieFragment) {
                     if (movieFragment == null) {
