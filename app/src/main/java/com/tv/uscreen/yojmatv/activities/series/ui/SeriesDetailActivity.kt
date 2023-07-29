@@ -103,6 +103,8 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
     private var currentEpisodeId = 0
     private var tittle = ""
     private var posterUrl = ""
+    private var skipIntroStartTime = ""
+    private var skipIntroEndTime = ""
     private var assetType = ""
     private var sku = ""
     private var trailerUrl: String? = null
@@ -757,6 +759,8 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             if (itemValue.sku != null) {
                 sku = itemValue.sku
             }
+            skipIntroStartTime = itemValue.skipintro_startTime
+            skipIntroEndTime = itemValue.skipintro_endTime
             Log.d("getFirstItem", "getFirstItem2: $itemValue")
             //   setUiComponents(itemValue);
         }
@@ -991,7 +995,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             isTrailer,
             false,
             posterUrl,
-            AppConstants.SERIESDEATILACTIVITY, externalRefId, "", ""
+            AppConstants.SERIESDEATILACTIVITY, externalRefId, skipIntroStartTime, skipIntroEndTime
         )
     }
 
