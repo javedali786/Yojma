@@ -991,7 +991,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             isTrailer,
             false,
             posterUrl,
-            AppConstants.SERIESDEATILACTIVITY, externalRefId
+            AppConstants.SERIESDEATILACTIVITY, externalRefId, "", ""
         )
     }
 

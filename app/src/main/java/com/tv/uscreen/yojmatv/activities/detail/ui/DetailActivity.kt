@@ -616,7 +616,7 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
             isTrailer,
             false,
             videoDetails!!.posterURL,
-            AppConstants.DETAILACTIVITY,externalRefId
+            AppConstants.DETAILACTIVITY,externalRefId,videoDetails?.skipintro_startTime?:"",videoDetails?.skipintro_endTime?:""
         )
     }
 
