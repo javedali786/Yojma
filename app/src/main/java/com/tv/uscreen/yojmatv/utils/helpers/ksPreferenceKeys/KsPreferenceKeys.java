@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 public class KsPreferenceKeys extends SharedPrefHelper {
 
-    private static  KsPreferenceKeys mInstance ;
+    private static KsPreferenceKeys mInstance;
 
     private static final String CURRENT_THEME = "CurrentTheme";
     private static final String APP_LANGUAGE = "app_language";
@@ -44,14 +44,11 @@ public class KsPreferenceKeys extends SharedPrefHelper {
     public static final String EPISODES_NOT_AVAILABLE = "EPISODES_NOT_AVAILABLE";
 
 
-
-
-
     private static final String DOWNLOADED_ITEM_DELETED = "download_item_deleted";
 
-    public static KsPreferenceKeys getInstance(){
+    public static KsPreferenceKeys getInstance() {
 
-        if (mInstance == null){
+        if (mInstance == null) {
             mInstance = new KsPreferenceKeys(OttApplication.getInstance());
         }
         return mInstance;
@@ -120,12 +117,13 @@ public class KsPreferenceKeys extends SharedPrefHelper {
     public void setIsVerified(String hasSelectedId) {
         setString(IS_VERIFIED, hasSelectedId);
     }
+
     public void setAppPrefMobileNumber(String mobileNumber) {
         setString(AppConstants.MOBILE_NUMBER, mobileNumber);
     }
 
     public String getAppPrefMobileNumber() {
-        return getString(AppConstants.MOBILE_NUMBER,"");
+        return getString(AppConstants.MOBILE_NUMBER, "");
     }
 
 
@@ -208,6 +206,7 @@ public class KsPreferenceKeys extends SharedPrefHelper {
     public void setAppPrefJumpTo(String BaseUrl) {
         setString(AppConstants.APP_PREF_JUMP_TO, BaseUrl);
     }
+
     public boolean getDeleteAccountRequestStatus() {
         return getBoolean("DELETE_STATUS", false);
     }
@@ -234,12 +233,11 @@ public class KsPreferenceKeys extends SharedPrefHelper {
     }
 
     public void setPodId(String id, boolean reminderValue) {
-        setBoolean("video_Id"+id, reminderValue);
+        setBoolean("video_Id" + id, reminderValue);
     }
 
-    public boolean getPodId(String id)
-    {
-        return getBoolean("video_Id"+id,false);
+    public boolean getPodId(String id) {
+        return getBoolean("video_Id" + id, false);
     }
 
     public Boolean getBingeWatchEnable() {
@@ -255,7 +253,9 @@ public class KsPreferenceKeys extends SharedPrefHelper {
         return getInt("returnBackId", 0);
     }
 
-    public void setAppPrefJumpBackId(int BackId) { setInt("returnBackId", BackId); }
+    public void setAppPrefJumpBackId(int BackId) {
+        setInt("returnBackId", BackId);
+    }
 
     public void setReturnTo(String video) {
         mInstance.setString(AppConstants.APP_PREF_JUMP_TO, video);
@@ -289,7 +289,9 @@ public class KsPreferenceKeys extends SharedPrefHelper {
         return getInt(AppConstants.APP_PREF_ASSET_ID, 0);
     }
 
-    public void setAppPrefAssetId(int assetId) { setInt(AppConstants.APP_PREF_ASSET_ID, assetId); }
+    public void setAppPrefAssetId(int assetId) {
+        setInt(AppConstants.APP_PREF_ASSET_ID, assetId);
+    }
 
     public String getAppPrefVideoPosition() {
         return getString(AppConstants.APP_PREF_VIDEO_POSITION, "");
@@ -350,6 +352,7 @@ public class KsPreferenceKeys extends SharedPrefHelper {
     public String getPreferenceProfileId() {
         return getString(AppConstants.PREFERENCE_PROFILE_ID, "");
     }
+
     public void setPreferenceProfileId(String profileId) {
         setString(AppConstants.PREFERENCE_PROFILE_ID, profileId);
     }
@@ -382,7 +385,9 @@ public class KsPreferenceKeys extends SharedPrefHelper {
         return getInt(AppConstants.APP_PREF_SELECTED_SEASON_ID, -1);
     }
 
-    public void setAppPrefSelectodSeasonId(int seasonId) { setInt(AppConstants.APP_PREF_SELECTED_SEASON_ID, seasonId); }
+    public void setAppPrefSelectodSeasonId(int seasonId) {
+        setInt(AppConstants.APP_PREF_SELECTED_SEASON_ID, seasonId);
+    }
 
     public String getAppPrefUpdateType() {
         return getString("update_type", "");
@@ -433,11 +438,11 @@ public class KsPreferenceKeys extends SharedPrefHelper {
     }
 
     public void setNotificationPayload(String assetId, JSONObject payload) {
-        setString(assetId+NOTIFICATION_PAYLOAD, payload.toString());
+        setString(assetId + NOTIFICATION_PAYLOAD, payload.toString());
     }
 
     public String getNotificationPayload(String assetId) {
-        return getString(assetId+NOTIFICATION_PAYLOAD, "");
+        return getString(assetId + NOTIFICATION_PAYLOAD, "");
     }
 
     public int getQualityPosition() {
@@ -448,15 +453,33 @@ public class KsPreferenceKeys extends SharedPrefHelper {
         setInt("video_quality_position", qualityPosition);
     }
 
+    public String getCaption() {
+        return getString("caption_name", "");
+    }
+
+    public void setCaption(String qualityName) {
+        setString("caption_name", qualityName);
+    }
+
+
     public String getQualityName() {
         return getString("video_quality_name", "");
     }
 
     public void setQualityName(String qualityName) {
-       setString("video_quality_name", qualityName);
+        setString("video_quality_name", qualityName);
     }
 
-    public void setDownloadOverWifi(Integer value){
+
+    public String getAudioName() {
+        return getString("audio_name", "");
+    }
+
+    public void setAudioName(String qualityName) {
+        setString("audio_name", qualityName);
+    }
+
+    public void setDownloadOverWifi(Integer value) {
         setInt(SharedPrefesConstants.DOWNLOAD_OVER_WIFI, value);
     }
 
@@ -469,7 +492,7 @@ public class KsPreferenceKeys extends SharedPrefHelper {
     }
 
     public boolean getEntitlementStatus() {
-        return getBoolean(ENTITLEMENT_STATUS,false);
+        return getBoolean(ENTITLEMENT_STATUS, false);
     }
 
     public int getAutoDuration() {
@@ -502,7 +525,7 @@ public class KsPreferenceKeys extends SharedPrefHelper {
     }
 
     public int getFilterGenre() {
-        return mInstance.getInt(FILTER_SELECTED_GENRE, 1 );
+        return mInstance.getInt(FILTER_SELECTED_GENRE, 1);
     }
 
 

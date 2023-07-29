@@ -16,4 +16,7 @@ abstract class ControlClickListener {
     open fun onMoreClicked() {}
     open fun onNextClicked() {}
     open fun onVideoQualitySelected(trackName: Int, selectedTrack: String) {}
+    open fun onSettingSelected(selectedSetting: String) {}
+    open fun onCaptionSelected(trackIndex: Int) {}
+    open fun onAudioSelected(trackIndex: Int) {}
 }
