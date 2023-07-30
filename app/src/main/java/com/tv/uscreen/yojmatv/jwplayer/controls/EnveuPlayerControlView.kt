@@ -156,6 +156,9 @@ class EnveuPlayerControlView : FrameLayout {
         binding.tvNextEpisode.setOnClickListener {
             controlClickListener.onNextClicked()
         }
+        binding.skipIntro.setOnClickListener {
+            controlClickListener.onSkipIntroClicked()
+        }
 
         binding.epTimeBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -213,6 +216,10 @@ class EnveuPlayerControlView : FrameLayout {
             binding.ivEpPlayPause.setImageResource(iconResId)
             binding.ivEpPlayPause.tag = !isPlaying
         }
+    }
+
+    fun toggleSkipIntroVisibility(visibility: Int){
+        binding.skipIntro.visibility=visibility
     }
 
     fun updatePlayPauseIcon(isPlaying: Boolean) {

@@ -65,6 +65,9 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var externalRefId: String? = null
     private var tittle: String? = null
     private var screenName: String? = null
+    private var skipIntroStartTime: String = ""
+    private var skipIntroEndTime: String = ""
+
     private var contentPlayed: String? = null
     private var contentDuration: String? = null
     private var posterUrl: String? = null
@@ -265,6 +268,11 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             mPlayer?.currentAudioTrack = trackIndex
         }
 
+        override fun onSkipIntroClicked() {
+            super.onSkipIntroClicked()
+            if (!skipIntroEndTime.isNullOrEmpty())
+                seekPlayerTo(skipIntroEndTime.toDouble())
+        }
 
         override fun onRewindClick() {
             super.onRewindClick()
@@ -330,6 +338,12 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             posterUrl = bundle.getString("posterUrl")
             contentType = bundle.getString("contentType")
             screenName = bundle.getString("screenName")
+            bundle.getString("skipIntroStartTime")?.let {
+                skipIntroStartTime = it
+            }
+            bundle.getString("skipIntroEndTime")?.let {
+                skipIntroEndTime = it
+            }
             if (screenName == null) {
                 screenName = AppConstants.SCREEN_NAME
             }
@@ -521,6 +535,16 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                     seekPlayerTo(fwd10Ms)
                 }
             }
+        }
+        Log.w("SkipIntro", "${mPlayer?.position}---------${skipIntroStartTime.toDouble()}")
+
+        if (!skipIntroStartTime.isNullOrEmpty() && !skipIntroEndTime.isNullOrEmpty()) {
+            if (mPlayer?.position!! >= skipIntroStartTime.toDouble() && mPlayer?.position!! <= skipIntroEndTime.toDouble()) {
+                viewBinding.seriesDetailAllEpisodeTxtColors.toggleSkipIntroVisibility(View.VISIBLE)
+            } else {
+                viewBinding.seriesDetailAllEpisodeTxtColors.toggleSkipIntroVisibility(View.GONE)
+            }
+
         }
         contentDuration = mPlayer?.duration.toString()
         mPlayer?.duration?.let { viewBinding.seriesDetailAllEpisodeTxtColors.updateDuration(it) }

@@ -17,8 +17,8 @@
     <dimen name="font_medium">12sp</dimen>
 
 
-
-
+    <dimen name="skip_intro_margin_bottom">50dp</dimen>
+    <dimen name="skip_intro_padding">10dp</dimen>
 
     <dimen name="font_medium_small">15sp</dimen>
 
@@ -327,8 +327,8 @@
     <dimen name="indicator_padding_bottom">25dp</dimen>
     <dimen name="indicator_padding_bottom_landscape">120dp</dimen>
 
-<!--    <dimen name="portrait_image_width">200dp</dimen>-->
-<!--    <dimen name="portrait_image_height">350dp</dimen>-->
+    <!--    <dimen name="portrait_image_width">200dp</dimen>-->
+    <!--    <dimen name="portrait_image_height">350dp</dimen>-->
 
     <integer name="portrait_image_width">180</integer>
     <integer name="portrait_image_height">320</integer>
@@ -383,8 +383,6 @@
     <dimen name="tab_layout_single">150dp</dimen>
 
 
-
-
     <dimen name="more_uper_profile_frame">150dp</dimen>
     <dimen name="more_img_top">108dp</dimen>
     <dimen name="more_img_size">98dp</dimen>
@@ -432,15 +430,12 @@
     <dimen name="list_genre_margin_top">1dp</dimen>
 
 
-
-
-
     <declare-styleable name="CircularProgressBar">
-        <attr format="integer" name="progress"/>
-        <attr format="color" name="progressbar_color"/>
-        <attr format="color" name="background_progressbar_color"/>
-        <attr format="dimension" name="progressbar_width"/>
-        <attr format="dimension" name="background_progressbar_width"/>
+        <attr name="progress" format="integer" />
+        <attr name="progressbar_color" format="color" />
+        <attr name="background_progressbar_color" format="color" />
+        <attr name="progressbar_width" format="dimension" />
+        <attr name="background_progressbar_width" format="dimension" />
     </declare-styleable>
 
     <dimen name="pv_pin_view_item_size">30dp</dimen>
@@ -688,7 +683,7 @@
     <dimen name="settings_icon_width_size">24dp</dimen>
     <dimen name="settings_icon_height_size">24dp</dimen>
     <dimen name="settings_margin_top">16dp</dimen>
-     <dimen name="camera_icon_width">45dp</dimen>
+    <dimen name="camera_icon_width">45dp</dimen>
     <dimen name="camera_icon_height">45dp</dimen>
     <dimen name="mobile_icon_width">25dp</dimen>
     <dimen name="profile_icon_size">20dp</dimen>

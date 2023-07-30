@@ -31,6 +31,8 @@ public interface CustomeFields {
    // String trailerReferenceId = "trailer_reference_id";
     String trailerReferenceId = "trailer_ref";
     String Producer ="producer";
+    String SKIP_INTRO_START ="skipintro_startTime";
+    String SKIP_INTRO_END ="skipintro_endTime";
     String sponsors ="sponsors";
     String display_date ="display_date";
     String quality = "quality";

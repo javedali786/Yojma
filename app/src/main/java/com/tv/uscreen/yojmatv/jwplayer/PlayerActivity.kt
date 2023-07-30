@@ -18,12 +18,13 @@ import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import java.io.Serializable
 
-class PlayerActivity : AppCompatActivity(), Serializable, JWPlayerFragment.OnPlayerInteractionListener {
+class PlayerActivity : AppCompatActivity(), Serializable,
+    JWPlayerFragment.OnPlayerInteractionListener {
     private lateinit var binding: ActivityPlayerBinding
-    var  seasonEpisodesList : List<EnveuVideoItemBean>? = null
+    var seasonEpisodesList: List<EnveuVideoItemBean>? = null
     var myFragment: JWPlayerFragment? = null
-    private var playbackUrl : String? = null
-    private var episodeId : Int? = 0
+    private var playbackUrl: String? = null
+    private var episodeId: Int? = 0
     private var isLogin: String? = null
     private var token: String? = null
     private var tittle: String? = null
@@ -33,9 +34,9 @@ class PlayerActivity : AppCompatActivity(), Serializable, JWPlayerFragment.OnPla
     private var screenName: String? = null
     private var preference: KsPreferenceKeys? = null
     private var bookmarkingViewModel: BookmarkingViewModel? = null
-    private var isBingeWatchEnable : Boolean? = false
-    private var isTrailer : Boolean? = false
-    private var isLive : Boolean? = false
+    private var isBingeWatchEnable: Boolean? = false
+    private var isTrailer: Boolean? = false
+    private var isLive: Boolean? = false
     private var activity: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +58,7 @@ class PlayerActivity : AppCompatActivity(), Serializable, JWPlayerFragment.OnPla
             posterUrl = bundle.getString("posterUrl")
             contentType = bundle.getString("contentType")
             screenName = bundle.getString("screenName")
-            externalRefid= bundle.getString("externalRefId")
+            externalRefid = bundle.getString("externalRefId")
             activity = bundle.getString("activity")
             if (activity?.contains("HomeSliderActivity") == true) {
                 screenName = "HomeSliderActivity"
@@ -75,20 +76,22 @@ class PlayerActivity : AppCompatActivity(), Serializable, JWPlayerFragment.OnPla
         preference = KsPreferenceKeys.getInstance()
         isLogin = preference?.appPrefLoginStatus
         token = preference?.appPrefAccessToken
-        Logger.d("PlayerUrlToPlay",playbackUrl.toString())
+        Logger.d("PlayerUrlToPlay", playbackUrl.toString())
         setContentView(binding.root)
         fitPlayerToFullScreen()
         val args = Bundle()
         args.putString("playBackUrl", playbackUrl)
         isTrailer?.let { args.putBoolean("isTrailer", it) }
         isLive?.let { args.putBoolean("isLive", it) }
-        tittle?.let { args.putString("tittle",it) }
-        posterUrl?.let { args.putString("posterUrl",it) }
-        contentType?.let { args.putString("contentType",it) }
-        screenName?.let { args.putString("screenName",it) }
-        activity?.let { args.putString("activity",it) }
+        tittle?.let { args.putString("tittle", it) }
+        posterUrl?.let { args.putString("posterUrl", it) }
+        contentType?.let { args.putString("contentType", it) }
+        screenName?.let { args.putString("screenName", it) }
+        activity?.let { args.putString("activity", it) }
         episodeId?.let { args.putInt("episodeId", it) }
-        externalRefid?.let { args.putString("externalRefId", it)   }
+        externalRefid?.let { args.putString("externalRefId", it) }
+        bundle?.getString("skipIntroStartTime")?.let { args.putString("skipIntroStartTime", it) }
+        bundle?.getString("skipIntroEndTime")?.let { args.putString("skipIntroEndTime", it) }
         if (null != seasonEpisodesList) {
             args.putSerializable("episodeList", seasonEpisodesList as Serializable)
         }
@@ -101,6 +104,7 @@ class PlayerActivity : AppCompatActivity(), Serializable, JWPlayerFragment.OnPla
             .add(R.id.container_player, myFragment!!, "JWPlayerFragment")
             .commit()
     }
+
     private fun fitPlayerToFullScreen() {
         val params: ViewGroup.LayoutParams = binding.containerPlayer.getLayoutParams()
         params.width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -110,7 +114,7 @@ class PlayerActivity : AppCompatActivity(), Serializable, JWPlayerFragment.OnPla
 
     override fun onBookmarkCall(currentPosition: Double, assetId: Int) {
         var i: Int = currentPosition.toInt()
-            if (isLogin.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
+        if (isLogin.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
             bookmarkingViewModel?.bookmarkVideo(token, assetId, i)
         }
     }

@@ -86,7 +86,9 @@ import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.htmlParseToString
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 
-class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialogFragment.AlertDialogListener, NetworkChangeReceiver.ConnectivityReceiverListener, OnAudioFocusChangeListener,
+class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
+    AlertDialogFragment.AlertDialogListener, NetworkChangeReceiver.ConnectivityReceiverListener,
+    OnAudioFocusChangeListener,
     CommonRailtItemClickListner, MoreClickListner, CommonDialogFragment.EditDialogListener {
     private var viewModel: DetailViewModel? = null
     private var preference: KsPreferenceKeys? = null
@@ -156,7 +158,11 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
             "Other"
         }
         preference = KsPreferenceKeys.getInstance()
-        if (preference?.appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
+        if (preference?.appPrefLoginStatus.equals(
+                AppConstants.UserStatus.Login.toString(),
+                ignoreCase = true
+            )
+        ) {
             isLoggedIn = true
         }
         isUserVerified = preference?.isVerified
@@ -240,17 +246,29 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
         binding!!.metaDetails.watchTrailer.setOnClickListener {
             if (isLoggedIn) {
                 if (isUserVerified.equals("true", ignoreCase = true)) {
-                    startPlayer(trailerUrl, bingeWatchEnable = false, isTrailer = true,trailerExternalRefId?:"")
+                    startPlayer(
+                        trailerUrl,
+                        bingeWatchEnable = false,
+                        isTrailer = true,
+                        trailerExternalRefId ?: ""
+                    )
                 } else {
                     isUserNotVerify = true
                     commonDialog(
                         "",
-                        stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(), getString(R.string.popup_user_not_verify)),
-                        stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_verify.toString(), getString(R.string.popup_verify))
+                        stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
+                            getString(R.string.popup_user_not_verify)
+                        ),
+                        stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_verify.toString(),
+                            getString(R.string.popup_verify)
+                        )
                     )
                 }
             } else {
-                ActivityLauncher.getInstance().loginActivity(this@EpisodeActivity, ActivityLogin::class.java)
+                ActivityLauncher.getInstance()
+                    .loginActivity(this@EpisodeActivity, ActivityLogin::class.java)
             }
         }
         binding!!.metaDetails.playButton.setOnClickListener {
@@ -330,12 +348,18 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
                 }
 
             } else {
-                ActivityLauncher.getInstance().loginActivity(this@EpisodeActivity, ActivityLogin::class.java)
+                ActivityLauncher.getInstance()
+                    .loginActivity(this@EpisodeActivity, ActivityLogin::class.java)
             }
         }
     }
 
-    private fun startPlayer(playback_url: String?, bingeWatchEnable: Boolean, isTrailer: Boolean,externalRefId:String) {
+    private fun startPlayer(
+        playback_url: String?,
+        bingeWatchEnable: Boolean,
+        isTrailer: Boolean,
+        externalRefId: String
+    ) {
         ActivityLauncher.getInstance().launchPlayerActitivity(
             this@EpisodeActivity,
             PlayerActivity::class.java,
@@ -348,7 +372,10 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
             isTrailer,
             false,
             videoDetails!!.posterURL,
-            AppConstants.EPISODEACTIVITY,externalRefId
+            AppConstants.EPISODEACTIVITY,
+            externalRefId,
+            videoDetails?.skipintro_startTime ?: "",
+            videoDetails?.skipintro_endTime ?: ""
         )
     }
 
@@ -386,48 +413,92 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
             if (noEpisode) {
                 bundleSeason.putInt(AppConstants.BUNDLE_ASSET_ID, seriesId)
                 bundleSeason.putInt(AppConstants.BUNDLE_CURRENT_ASSET_ID, assetId)
-                bundleSeason.putParcelableArrayList(AppConstants.BUNDLE_SEASON_ARRAY, seriesDetailBean!!.seasons as java.util.ArrayList<out Parcelable>?)
-                bundleSeason.putString(AppConstants.BUNDLE_SEASON_NAME, seriesDetailBean!!.seasonName)
-                bundleSeason.putInt(AppConstants.BUNDLE_SEASON_COUNT, seriesDetailBean!!.seasonCount)
-                if (seriesDetailBean!!.seasonCount > 0) bundleSeason.putInt(AppConstants.BUNDLE_SELECTED_SEASON, seasonNumber.toInt())
+                bundleSeason.putParcelableArrayList(
+                    AppConstants.BUNDLE_SEASON_ARRAY,
+                    seriesDetailBean!!.seasons as java.util.ArrayList<out Parcelable>?
+                )
+                bundleSeason.putString(
+                    AppConstants.BUNDLE_SEASON_NAME,
+                    seriesDetailBean!!.seasonName
+                )
+                bundleSeason.putInt(
+                    AppConstants.BUNDLE_SEASON_COUNT,
+                    seriesDetailBean!!.seasonCount
+                )
+                if (seriesDetailBean!!.seasonCount > 0) bundleSeason.putInt(
+                    AppConstants.BUNDLE_SELECTED_SEASON,
+                    seasonNumber.toInt()
+                )
             } else {
                 bundleSeason.putInt(AppConstants.BUNDLE_ASSET_ID, -1)
             }
             seasonTabFragment!!.arguments = bundleSeason
             episodeTabAdapter!!.addFragment(
                 seasonTabFragment,
-                stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.detail_page_episodes.toString(), getString(R.string.detail_page_episodes))
+                stringsHelper.stringParse(
+                    stringsHelper.instance()?.data?.config?.detail_page_episodes.toString(),
+                    getString(R.string.detail_page_episodes)
+                )
             )
             episodeTabAdapter!!.addFragment(
                 relatedContentFragment,
-                stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.detail_page_related_videos.toString(), getString(R.string.detail_page_related_videos))
+                stringsHelper.stringParse(
+                    stringsHelper.instance()?.data?.config?.detail_page_related_videos.toString(),
+                    getString(R.string.detail_page_related_videos)
+                )
             )
             binding!!.viewPager.adapter = episodeTabAdapter
             binding!!.viewPager.offscreenPageLimit = 2
             binding!!.tabLayout.setupWithViewPager(binding!!.viewPager)
 
-            binding?.metaDetails?.watchTrailer?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
-            binding?.tabLayout?.getTabAt(0)?.view?.background = ColorsHelper.strokeBgDrawable(AppColors.detailPageTabUnselectedBorderColor(), AppColors.detailPageTabUnselectedBorderColor(), 0f)
+            binding?.metaDetails?.watchTrailer?.background =
+                ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
+            binding?.tabLayout?.getTabAt(0)?.view?.background = ColorsHelper.strokeBgDrawable(
+                AppColors.detailPageTabUnselectedBorderColor(),
+                AppColors.detailPageTabUnselectedBorderColor(),
+                0f
+            )
             if (episodeTabAdapter!!.count > 1) {
-                binding?.tabLayout?.getTabAt(1)?.view?.background = ColorsHelper.strokeBgDrawable(AppColors.detailPageTabSelectedBorderColor(), AppColors.detailPageTabUnselectedBorderColor(), 0f)
+                binding?.tabLayout?.getTabAt(1)?.view?.background = ColorsHelper.strokeBgDrawable(
+                    AppColors.detailPageTabSelectedBorderColor(),
+                    AppColors.detailPageTabUnselectedBorderColor(),
+                    0f
+                )
             }
             binding!!.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     showLoading(binding!!.progressBar, true)
-                    tab.view.background = ColorsHelper.strokeBgDrawable(AppColors.detailPageTabUnselectedBorderColor(), AppColors.detailPageTabUnselectedBorderColor(), 0f)
+                    tab.view.background = ColorsHelper.strokeBgDrawable(
+                        AppColors.detailPageTabUnselectedBorderColor(),
+                        AppColors.detailPageTabUnselectedBorderColor(),
+                        0f
+                    )
                     Handler().postDelayed({ dismissLoading(binding!!.progressBar) }, 1500)
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {
-                    tab.view.background = ColorsHelper.strokeBgDrawable(AppColors.detailPageTabSelectedBorderColor(), AppColors.detailPageTabUnselectedBorderColor(), 0f)
+                    tab.view.background = ColorsHelper.strokeBgDrawable(
+                        AppColors.detailPageTabSelectedBorderColor(),
+                        AppColors.detailPageTabUnselectedBorderColor(),
+                        0f
+                    )
                 }
 
                 override fun onTabReselected(tab: TabLayout.Tab) {}
             })
             binding!!.viewPager.addOnPageChangeListener(object : OnPageChangeListener {
-                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                }
+
                 override fun onPageSelected(position: Int) {
-                    binding!!.viewPager.measure(binding!!.viewPager.measuredWidth, binding!!.viewPager.measuredHeight)
+                    binding!!.viewPager.measure(
+                        binding!!.viewPager.measuredWidth,
+                        binding!!.viewPager.measuredHeight
+                    )
                 }
 
                 override fun onPageScrollStateChanged(state: Int) {}
@@ -438,10 +509,22 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
             if (noEpisode) {
                 bundleSeason.putInt(AppConstants.BUNDLE_ASSET_ID, seriesId)
                 bundleSeason.putInt(AppConstants.BUNDLE_CURRENT_ASSET_ID, assetId)
-                bundleSeason.putParcelableArrayList(AppConstants.BUNDLE_SEASON_ARRAY, seriesDetailBean!!.seasons as java.util.ArrayList<out Parcelable>?)
-                bundleSeason.putString(AppConstants.BUNDLE_SEASON_NAME, seriesDetailBean!!.seasonName)
-                bundleSeason.putInt(AppConstants.BUNDLE_SEASON_COUNT, seriesDetailBean!!.seasonCount)
-                if (seriesDetailBean!!.seasonCount > 0) bundleSeason.putInt(AppConstants.BUNDLE_SELECTED_SEASON, seasonNumber.toInt())
+                bundleSeason.putParcelableArrayList(
+                    AppConstants.BUNDLE_SEASON_ARRAY,
+                    seriesDetailBean!!.seasons as java.util.ArrayList<out Parcelable>?
+                )
+                bundleSeason.putString(
+                    AppConstants.BUNDLE_SEASON_NAME,
+                    seriesDetailBean!!.seasonName
+                )
+                bundleSeason.putInt(
+                    AppConstants.BUNDLE_SEASON_COUNT,
+                    seriesDetailBean!!.seasonCount
+                )
+                if (seriesDetailBean!!.seasonCount > 0) bundleSeason.putInt(
+                    AppConstants.BUNDLE_SELECTED_SEASON,
+                    seasonNumber.toInt()
+                )
             } else {
                 bundleSeason.putInt(AppConstants.BUNDLE_ASSET_ID, -1)
             }
@@ -587,7 +670,11 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
                 .setAcceptsDelayedFocusGain(true)
                 .setOnAudioFocusChangeListener { focusChange: Int -> }
                 .build()
-            audioManager!!.requestAudioFocus(this, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN)
+            audioManager!!.requestAudioFocus(
+                this,
+                AudioManager.STREAM_MUSIC,
+                AudioManager.AUDIOFOCUS_GAIN
+            )
         } else {
             audioManager!!.requestAudioFocus(
                 null, AudioManager.STREAM_VOICE_CALL,
@@ -618,7 +705,8 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
             isHitPlayerApi = false
             val extras = intent.extras
             if (extras != null) {
-                assetId = intent.extras!!.getBundle(AppConstants.BUNDLE_ASSET_BUNDLE)?.getInt(AppConstants.BUNDLE_ASSET_ID)!!
+                assetId = intent.extras!!.getBundle(AppConstants.BUNDLE_ASSET_BUNDLE)
+                    ?.getInt(AppConstants.BUNDLE_ASSET_ID)!!
                 AppCommonMethod.seasonId = -1
                 refreshDetailPage(assetId)
             }
@@ -651,7 +739,8 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
         preference!!.appPrefIsEpisode = true
         preference!!.appPrefJumpBackId = assetId
         preference!!.appPrefHasSelectedId = true
-        ActivityLauncher.getInstance().loginActivity(this@EpisodeActivity, ActivityLogin::class.java)
+        ActivityLauncher.getInstance()
+            .loginActivity(this@EpisodeActivity, ActivityLogin::class.java)
     }
 
     fun uiInitialisation() {
@@ -675,7 +764,11 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
         if (!isHitPlayerApi) {
             episodeDetails
         }
-        binding?.metaDetails?.durationLl?.background = ColorsHelper.strokeBgDrawable(AppColors.detailPageHDBgColor(), AppColors.detailPageHDBrColor(), 10f)
+        binding?.metaDetails?.durationLl?.background = ColorsHelper.strokeBgDrawable(
+            AppColors.detailPageHDBgColor(),
+            AppColors.detailPageHDBrColor(),
+            10f
+        )
     }
 
     private var isAdShowingToUser = true
@@ -690,11 +783,16 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
                 ) { response: ResponseModel<*>? ->
                     if (response != null) {
                         if (response.status.equals(APIStatus.START.name, ignoreCase = true)) {
-                        } else if (response.status.equals(APIStatus.SUCCESS.name, ignoreCase = true)) {
+                        } else if (response.status.equals(
+                                APIStatus.SUCCESS.name,
+                                ignoreCase = true
+                            )
+                        ) {
                             if (response.baseCategory != null) {
                                 val enveuCommonResponse = response.baseCategory as RailCommonData
                                 if (enveuCommonResponse.enveuVideoItemBeans.size > 0 && enveuCommonResponse.enveuVideoItemBeans[0] != null) {
-                                    keyword = enveuCommonResponse.enveuVideoItemBeans[0].display_tags
+                                    keyword =
+                                        enveuCommonResponse.enveuVideoItemBeans[0].display_tags
                                     videoDetails = enveuCommonResponse.enveuVideoItemBeans[0]
                                     id = enveuCommonResponse.enveuVideoItemBeans[0].id
                                     if (videoDetails?.trailerReferenceId != null) {
@@ -704,11 +802,19 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
                                     parseVideoDetails(videoDetails)
                                 }
                             }
-                        } else if (response.status.equals(APIStatus.ERROR.name, ignoreCase = true)) {
+                        } else if (response.status.equals(
+                                APIStatus.ERROR.name,
+                                ignoreCase = true
+                            )
+                        ) {
                             if (response.errorModel.errorCode != 0) {
                                 stopShimmer()
                             }
-                        } else if (response.status.equals(APIStatus.FAILURE.name, ignoreCase = true)) {
+                        } else if (response.status.equals(
+                                APIStatus.FAILURE.name,
+                                ignoreCase = true
+                            )
+                        ) {
                             stopShimmer()
                         }
                     }
@@ -717,34 +823,52 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
         }
 
     private fun getTrailer(trailerReferenceId: String) {
-        railInjectionHelper!!.getAssetDetailsV2(trailerReferenceId, this@EpisodeActivity).observe(this@EpisodeActivity) { assetResponse: ResponseModel<*>? ->
-            if (assetResponse != null) {
-                val gson = Gson()
-                val json = gson.toJson(assetResponse.baseCategory)
-                if (assetResponse.status.equals(APIStatus.START.name, ignoreCase = true)) {
-                } else if (assetResponse.status.equals(APIStatus.SUCCESS.name, ignoreCase = true)) {
-                    val enveuCommonResponse = assetResponse.baseCategory as RailCommonData
-                    if (enveuCommonResponse != null && enveuCommonResponse.enveuVideoItemBeans.size > 0) {
-                        // videoDetails = enveuCommonResponse.getEnveuVideoItemBeans().get(0);
-                        if (!enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals("", ignoreCase = true) && !enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals(
-                                null,
-                                ignoreCase = true
-                            )
-                        ) {
-                            binding!!.metaDetails.watchTrailer.visibility = View.VISIBLE
-                            trailerExternalRefId=enveuCommonResponse.enveuVideoItemBeans[0].externalRefId
-                            trailerUrl = SDKConfig.getInstance().playbacK_URL + enveuCommonResponse.enveuVideoItemBeans[0].externalRefId + ".m3u8"
+        railInjectionHelper!!.getAssetDetailsV2(trailerReferenceId, this@EpisodeActivity)
+            .observe(this@EpisodeActivity) { assetResponse: ResponseModel<*>? ->
+                if (assetResponse != null) {
+                    val gson = Gson()
+                    val json = gson.toJson(assetResponse.baseCategory)
+                    if (assetResponse.status.equals(APIStatus.START.name, ignoreCase = true)) {
+                    } else if (assetResponse.status.equals(
+                            APIStatus.SUCCESS.name,
+                            ignoreCase = true
+                        )
+                    ) {
+                        val enveuCommonResponse = assetResponse.baseCategory as RailCommonData
+                        if (enveuCommonResponse != null && enveuCommonResponse.enveuVideoItemBeans.size > 0) {
+                            // videoDetails = enveuCommonResponse.getEnveuVideoItemBeans().get(0);
+                            if (!enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals(
+                                    "",
+                                    ignoreCase = true
+                                ) && !enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals(
+                                    null,
+                                    ignoreCase = true
+                                )
+                            ) {
+                                binding!!.metaDetails.watchTrailer.visibility = View.VISIBLE
+                                trailerExternalRefId =
+                                    enveuCommonResponse.enveuVideoItemBeans[0].externalRefId
+                                trailerUrl =
+                                    SDKConfig.getInstance().playbacK_URL + enveuCommonResponse.enveuVideoItemBeans[0].externalRefId + ".m3u8"
+                            }
                         }
+                    } else if (assetResponse.status.equals(
+                            APIStatus.ERROR.name,
+                            ignoreCase = true
+                        )
+                    ) {
+                        if (assetResponse.errorModel != null && assetResponse.errorModel.errorCode != 0) {
+                            //   showDialog(EpisodeActivity.this.getResources().getString(R.string.error), getResources().getString(R.string.something_went_wrong));
+                        }
+                    } else if (assetResponse.status.equals(
+                            APIStatus.FAILURE.name,
+                            ignoreCase = true
+                        )
+                    ) {
+                        // showDialog(EpisodeActivity.this.getResources().getString(R.string.error), getResources().getString(R.string.something_went_wrong));
                     }
-                } else if (assetResponse.status.equals(APIStatus.ERROR.name, ignoreCase = true)) {
-                    if (assetResponse.errorModel != null && assetResponse.errorModel.errorCode != 0) {
-                        //   showDialog(EpisodeActivity.this.getResources().getString(R.string.error), getResources().getString(R.string.something_went_wrong));
-                    }
-                } else if (assetResponse.status.equals(APIStatus.FAILURE.name, ignoreCase = true)) {
-                    // showDialog(EpisodeActivity.this.getResources().getString(R.string.error), getResources().getString(R.string.something_went_wrong));
                 }
             }
-        }
     }
 
     private fun parseVideoDetails(videoDetails: EnveuVideoItemBean?) {
@@ -759,7 +883,10 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
             isPodcast = videoDetails.isPodcast
             KsPreferenceKeys.getInstance().setPodId(videoDetails.brightcoveVideoId, true)
         }
-        ImageHelper.getInstance(this).loadListImage(binding!!.playerImage, AppCommonMethod.getListLDSImage(videoDetails.posterURL, this))
+        ImageHelper.getInstance(this).loadListImage(
+            binding!!.playerImage,
+            AppCommonMethod.getListLDSImage(videoDetails.posterURL, this)
+        )
         // ImageHelper.getInstance(EpisodeActivity.this).loadListImage(getBinding().playerImage, videoDetails.getPosterURL());
         Logger.d("getBrightcoveVideoId " + videoDetails.brightcoveVideoId)
         if (fromBingWatch) {
@@ -798,7 +925,11 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
             }
         }
         if (!fromBingWatch) {
-            if (videoDetails.seasonNumber != null && !videoDetails.seasonNumber.equals("", ignoreCase = true)) {
+            if (videoDetails.seasonNumber != null && !videoDetails.seasonNumber.equals(
+                    "",
+                    ignoreCase = true
+                )
+            ) {
                 getSeriesDetail(seriesId, videoDetails.seasonNumber)
             } else {
                 getSeriesDetail(seriesId, "1")
@@ -862,7 +993,11 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
 
     private fun setUI(responseDetailPlayer: EnveuVideoItemBean?) {
         Log.d("Javed", "setUI: $responseDetailPlayer")
-        if (responseDetailPlayer!!.assetCast != null && !responseDetailPlayer.assetCast[0].equals("", ignoreCase = true)) {
+        if (responseDetailPlayer!!.assetCast != null && !responseDetailPlayer.assetCast[0].equals(
+                "",
+                ignoreCase = true
+            )
+        ) {
             var stringBuilder = StringBuilder()
             for (i in responseDetailPlayer.assetCast.indices) {
                 stringBuilder = if (i == responseDetailPlayer.assetCast.size - 1) {
@@ -873,7 +1008,11 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
         } else {
             binding!!.metaDetails.llCastView.visibility = View.GONE
         }
-        if (responseDetailPlayer.assetGenres != null && !responseDetailPlayer.assetGenres[0].equals("", ignoreCase = true)) {
+        if (responseDetailPlayer.assetGenres != null && !responseDetailPlayer.assetGenres[0].equals(
+                "",
+                ignoreCase = true
+            )
+        ) {
             var stringBuilder = StringBuilder()
             for (i in responseDetailPlayer.assetGenres.indices) {
                 stringBuilder = if (i == responseDetailPlayer.assetGenres.size - 1) {
@@ -902,7 +1041,10 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
         val alertDialog = AlertDialogSingleButtonFragment.newInstance(
             title,
             message,
-            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_ok.toString(), getString(R.string.popup_ok))
+            stringsHelper.stringParse(
+                stringsHelper.instance()?.data?.config?.popup_ok.toString(),
+                getString(R.string.popup_ok)
+            )
         )
         alertDialog.isCancelable = false
         alertDialog.setAlertDialogCallBack(this)
@@ -911,28 +1053,38 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
 
     private fun setDetails(responseDetailPlayer: EnveuVideoItemBean?) {
         if (responseDetailPlayer!!.assetType != null && responseDetailPlayer.duration > 0) {
-            val durationInMinutes = AppCommonMethod.stringForTime(responseDetailPlayer.duration) + " " + stringsHelper.stringParse(
-                stringsHelper.instance()?.data?.config?.popup_minutes.toString(),
-                getString(R.string.popup_minutes)
-            )
+            val durationInMinutes =
+                AppCommonMethod.stringForTime(responseDetailPlayer.duration) + " " + stringsHelper.stringParse(
+                    stringsHelper.instance()?.data?.config?.popup_minutes.toString(),
+                    getString(R.string.popup_minutes)
+                )
             setCustomFields(responseDetailPlayer, durationInMinutes)
         } else {
             setCustomFields(responseDetailPlayer, "")
             // showDialog("",getResources().getString(R.string.can_not_play_error));
             // ToastHandler.getInstance().show(EpisodeActivity.this, EpisodeActivity.this.getResources().getString(R.string.can_not_play_error));
         }
-        if (responseDetailPlayer.description != null && responseDetailPlayer.description.equals("", ignoreCase = true)) {
+        if (responseDetailPlayer.description != null && responseDetailPlayer.description.equals(
+                "",
+                ignoreCase = true
+            )
+        ) {
             binding!!.metaDetails.descriptionText.visibility = View.GONE
         }
         binding!!.responseApi = responseDetailPlayer
-        if (isLogin.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) addToWatchHistory()
+        if (isLogin.equals(
+                AppConstants.UserStatus.Login.toString(),
+                ignoreCase = true
+            )
+        ) addToWatchHistory()
     }
 
     private fun setCustomFields(videoItemBean: EnveuVideoItemBean?, duration: String) {
         try {
             val properties = Properties()
             properties.addAttribute(AppConstants.CONTENT_DETAIL_TITTLE, videoItemBean!!.title)
-            MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
+            MoEHelper.getInstance(applicationContext)
+                .trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
             if (videoItemBean.title != null) {
                 binding!!.metaDetails.tvTitle.text = videoItemBean.title
             } else {
@@ -992,7 +1144,11 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
                 binding!!.pBar.visibility = View.GONE
                 if (!AppCommonMethod.getCheckBCID(videoDetails!!.brightcoveVideoId)) {
                     isLogin = preference!!.appPrefLoginStatus
-                    if (isLogin.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
+                    if (isLogin.equals(
+                            AppConstants.UserStatus.Login.toString(),
+                            ignoreCase = true
+                        )
+                    ) {
                         if (!preference!!.entitlementStatus) {
                             GetPlansLayer.getInstance().getEntitlementStatus(
                                 preference, token
@@ -1001,7 +1157,11 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
                                 if (entitlementStatus && apiStatus) {
                                     isAdShowingToUser = false
                                 }
-                                if (videoDetails!!.brightcoveVideoId != null && !videoDetails!!.brightcoveVideoId.equals("", ignoreCase = true)) {
+                                if (videoDetails!!.brightcoveVideoId != null && !videoDetails!!.brightcoveVideoId.equals(
+                                        "",
+                                        ignoreCase = true
+                                    )
+                                ) {
                                     brightCoveVideoId = videoDetails!!.brightcoveVideoId.toLong()
                                 }
                                 playPlayerWhenShimmer()
@@ -1058,7 +1218,8 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
         super.onPause()
         if (receiver != null) {
             unregisterReceiver(receiver)
-            if (NetworkChangeReceiver.connectivityReceiverListener != null) NetworkChangeReceiver.connectivityReceiverListener = null
+            if (NetworkChangeReceiver.connectivityReceiverListener != null) NetworkChangeReceiver.connectivityReceiverListener =
+                null
         }
         releaseAudioFocusForMyApp(this@EpisodeActivity)
     }
@@ -1076,7 +1237,8 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
         if (isLoggedOut) logoutUser()
         if (isPlayerError) {
             binding!!.playerImage.visibility = View.VISIBLE
-            ImageHelper.getInstance(this@EpisodeActivity).loadListImage(binding!!.playerImage, videoDetails!!.posterURL)
+            ImageHelper.getInstance(this@EpisodeActivity)
+                .loadListImage(binding!!.playerImage, videoDetails!!.posterURL)
             isPlayerError = false
         } else {
             finish()
@@ -1126,9 +1288,24 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
         binding!!.playerFrame.layoutParams = params
         val set = ConstraintSet()
         set.clone(binding!!.llParent)
-        set.connect(R.id.player_frame, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
-        set.connect(R.id.player_frame, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START)
-        set.connect(R.id.player_frame, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+        set.connect(
+            R.id.player_frame,
+            ConstraintSet.END,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.END
+        )
+        set.connect(
+            R.id.player_frame,
+            ConstraintSet.START,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.START
+        )
+        set.connect(
+            R.id.player_frame,
+            ConstraintSet.TOP,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.TOP
+        )
         set.setDimensionRatio(R.id.player_frame, "H,16:9")
         set.applyTo(binding!!.llParent)
         binding!!.rootScroll.visibility = View.VISIBLE
@@ -1143,8 +1320,16 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
     }
 
     override fun railItemClick(item: RailCommonData, position: Int) {
-        if (item.screenWidget.type != null && Layouts.HRO.name.equals(item.screenWidget.layout, ignoreCase = true)) {
-            Toast.makeText(this@EpisodeActivity, item.screenWidget.landingPageType, Toast.LENGTH_LONG).show()
+        if (item.screenWidget.type != null && Layouts.HRO.name.equals(
+                item.screenWidget.layout,
+                ignoreCase = true
+            )
+        ) {
+            Toast.makeText(
+                this@EpisodeActivity,
+                item.screenWidget.landingPageType,
+                Toast.LENGTH_LONG
+            ).show()
         } else {
             if (AppCommonMethod.getCheckBCID(item.enveuVideoItemBeans[position].brightcoveVideoId)) {
                 val getVideoId = item.enveuVideoItemBeans[position].brightcoveVideoId.toLong()
@@ -1215,7 +1400,8 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
             ContextCompat.getDrawable(this@EpisodeActivity, R.color.transparent)
         )
         alertDialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        if (alertDialog?.window != null) alertDialog?.window!!.attributes.windowAnimations = R.style.SlidingDialogAnimation
+        if (alertDialog?.window != null) alertDialog?.window!!.attributes.windowAnimations =
+            R.style.SlidingDialogAnimation
         alertDialog?.show()
         val lWindowParams = WindowManager.LayoutParams()
         lWindowParams.copyFrom(alertDialog?.window!!.attributes)
@@ -1233,16 +1419,21 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
 
     override fun onActionBtnClicked() {
         if (isUserNotVerify) {
-            ActivityLauncher.getInstance().goToEnterOTP(this, EnterOTPActivity::class.java, "DetailPage")
+            ActivityLauncher.getInstance()
+                .goToEnterOTP(this, EnterOTPActivity::class.java, "DetailPage")
         }
         if (isUserNotEntitle) {
           //  ActivityLauncher.getInstance().goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)
         }
     }
 
-    internal inner class SeasonListAdapter(private val list: ArrayList<SelectedSeasonModel>, private val selectedPos: Int) : RecyclerView.Adapter<SeasonListAdapter.ViewHolder>() {
+    internal inner class SeasonListAdapter(
+        private val list: ArrayList<SelectedSeasonModel>,
+        private val selectedPos: Int
+    ) : RecyclerView.Adapter<SeasonListAdapter.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.all_season_listing, parent, false)
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.all_season_listing, parent, false)
             return ViewHolder(view)
         }
 
@@ -1294,7 +1485,10 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(), AlertDialo
     private var isPlayerError = false
     private fun hitUserProfileApi() {
         registrationLoginViewModel = ViewModelProvider(this)[RegistrationLoginViewModel::class.java]
-        registrationLoginViewModel!!.hitUserProfile(this@EpisodeActivity, preference!!.appPrefAccessToken).observe(this@EpisodeActivity) { userProfileResponse ->
+        registrationLoginViewModel!!.hitUserProfile(
+            this@EpisodeActivity,
+            preference!!.appPrefAccessToken
+        ).observe(this@EpisodeActivity) { userProfileResponse ->
             dismissLoading(binding!!.progressBar)
             if (userProfileResponse != null) {
                 if (userProfileResponse.data != null) {
