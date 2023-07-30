@@ -150,13 +150,15 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
                     itemClickListener.onClick(account)
                 } else if (itemsList[layoutPosition] == settings) {
                     itemClickListener.onClick(settings)
-                } else if (itemsList[layoutPosition]== buyNow) {
+
+                }/* else if (itemsList[layoutPosition]== buyNow) {
                     itemClickListener.onClick(buyNow)
                 } else if (itemsList[layoutPosition] == manageSubscription) {
                     itemClickListener.onClick(manageSubscription)
                 } else if (itemsList[layoutPosition] == orderHistory) {
                     itemClickListener.onClick(orderHistory)
-                } else if (itemsList[layoutPosition]==privacyPolicy) {
+                }*/
+                else if (itemsList[layoutPosition]==privacyPolicy) {
                     itemClickListener.onClick(privacyPolicy)
                 } else if (itemsList[layoutPosition] ==termsCondition) {
                     itemClickListener.onClick(termsCondition)

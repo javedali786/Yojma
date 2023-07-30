@@ -18,7 +18,7 @@
     <string name="check_connection">Check Connection</string>
     <string name="no_order_history">No order history found</string>
     <string name="search_result">Search result</string>
-    <string name="on_enveu">on Iberalia!</string>
+    <string name="on_enveu">on Yojma Tv!</string>
     <string name="full_name">Name</string>
     <string name="recent_search">"Recent Searches"</string>
     <string name="display_name">Enter your display Name</string>
@@ -255,9 +255,8 @@
     <string name="show_comment">Show Comment</string>
     <string name="error_branch_sharing_url">Unable to share currently. Please try again later.</string>
     <string name="branch_key">key_live_cdJ7zkyRJg31rm79E5t5QkleDAmzOaM7</string>
-    <string name="fcm_host_link" translatable="false">https://iberaliago.page.link</string>
+    <string name="fcm_host_link" translatable="false">https://yojmatv.page.link</string>
     <string name="branch_key_test">key_test_gpJ7BfyMRb11xoZ01dyIsjhbwCfwJgWb</string>
-
     <string name="VIDEO">VOD</string>
     <string name="tab_heading_episodes">EPISODES</string>
     <string name="tab_heading_other">RECOMMENDED CONTENT</string>
