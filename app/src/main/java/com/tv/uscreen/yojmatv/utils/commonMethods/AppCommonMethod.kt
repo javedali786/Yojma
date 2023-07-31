@@ -1936,8 +1936,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 val enveuVideoDetails: Data = response.body()!!.getData()
                 enveuVideoDetailsBean.setData(enveuVideoDetails)
                 val enveuVideoItemBean = EnveuVideoItemBean(enveuVideoDetailsBean.getData(), isIntentFromExpedition)
-                railCommonData.setEnveuVideoItemBeans(ArrayList<EnveuVideoItemBean>())
-                railCommonData.getEnveuVideoItemBeans().add(enveuVideoItemBean)
+                railCommonData.enveuVideoItemBeans = ArrayList<EnveuVideoItemBean>()
+                railCommonData.enveuVideoItemBeans.add(enveuVideoItemBean)
             } catch (ex: Exception) {
                 Logger.w(ex)
             }

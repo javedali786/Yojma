@@ -219,6 +219,7 @@
                             <TextView
                                 android:id="@+id/dOB"
                                 style="@style/EditTextStyle"
+                                android:visibility="gone"
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_marginTop="@dimen/_15sdp"
                                 android:layout_marginEnd="@dimen/_10sdp"
@@ -245,6 +246,7 @@
                                 android:hint="@{TextUtils.isEmpty(stringData.instance().data.config.profile_country) ? @string/profile_country : stringData.instance().data.config.profile_country , default=@string/profile_country}"
                                 android:paddingEnd="@dimen/_20sdp"
                                 android:singleLine="true"
+                                android:drawableEnd="@drawable/ic_drow_icon"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/dOB"/>

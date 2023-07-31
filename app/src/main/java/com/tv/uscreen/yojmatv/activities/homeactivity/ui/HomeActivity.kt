@@ -164,8 +164,8 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
     }
 
     private fun switchToMoreFragment() {
-        binding!!.toolbar.llSearchIcon.visibility = View.VISIBLE
-        binding!!.toolbar.clNotification.visibility = View.VISIBLE
+        binding!!.toolbar.llSearchIcon.visibility = View.GONE
+        binding!!.toolbar.clNotification.visibility = View.GONE
         fragmentManager!!.beginTransaction().hide(active!!).show(moreFragment!!).commit()
         active = moreFragment
     }

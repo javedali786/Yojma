@@ -28,6 +28,10 @@ public class Data implements Parcelable
     @SerializedName("description")
     @Expose
     private String description;
+
+    @SerializedName("longDescription")
+    @Expose
+    private String longDescription;
     @SerializedName("contentType")
     @Expose
     private String contentType;
@@ -243,12 +247,21 @@ public class Data implements Parcelable
         this.contentSource = contentSource;
     }
 
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
+    }
+
     public void writeToParcel(android.os.Parcel dest, int flags) {
         dest.writeValue(dateCreated);
         dest.writeValue(lastUpdated);
         dest.writeValue(id);
         dest.writeValue(title);
         dest.writeValue(description);
+        dest.writeValue(longDescription);
         dest.writeValue(contentType);
         dest.writeList(keywords);
         dest.writeValue(premium);

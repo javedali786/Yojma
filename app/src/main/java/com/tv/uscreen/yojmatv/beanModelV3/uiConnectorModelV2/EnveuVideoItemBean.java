@@ -352,6 +352,7 @@ public class EnveuVideoItemBean implements Serializable {
             //Gson gson = new Gson();
             this.title = details.getTitle() == null ? "" : details.getTitle();
             this.description = details.getDescription() == null ? "" : details.getDescription().trim();
+            this.longDescription = details.getLongDescription() == null ? "" : details.getLongDescription().trim();
             this.keywords = details.getKeywords() == null ? new ArrayList<>() : details.getKeywords();
             this.premium = details.getPremium();
             this.assetType = details.getContentType() == null ? "" : details.getContentType();
@@ -383,6 +384,23 @@ public class EnveuVideoItemBean implements Serializable {
 
             Object customeFiled = details.getCustomData();
             LinkedTreeMap<Object, Object> t = (LinkedTreeMap) customeFiled;
+
+            Object customedata = details.getCustomData();
+            Logger.e("customedata", customedata.toString());
+            LinkedTreeMap<Object, Object> t1 = (LinkedTreeMap) customedata;
+
+
+            if (t1.containsKey(CustomeFields.SKIP_INTRO_START)) {
+                String producer = t1.get((CustomeFields.SKIP_INTRO_START)).toString();
+                this.skipintro_startTime = producer;
+
+            }
+
+            if (t1.containsKey(CustomeFields.SKIP_INTRO_END)) {
+                String producer = t1.get((CustomeFields.SKIP_INTRO_END)).toString();
+                this.skipintro_endTime = producer;
+
+            }
 
             if (t.containsKey(CustomeFields.description_two)) {
                 String description_two = t.get((CustomeFields.description_two)).toString();

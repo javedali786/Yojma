@@ -43,7 +43,6 @@ class AccountListAdapter(private val mContext: Activity, private val itemsList: 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         val moreItemBinding = DataBindingUtil.inflate<MoreItemBinding>(LayoutInflater.from(viewGroup.context), R.layout.more_item, viewGroup, false)
-        //        ThemeHandler.getInstance().applyMoreItemPage(viewGroup.getContext(),moreItemBinding);
         moreItemBinding.colorsData = colorsHelper
 
         editProfile = stringsHelper.stringParse(

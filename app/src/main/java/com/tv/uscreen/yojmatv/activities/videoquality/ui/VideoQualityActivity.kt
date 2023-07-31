@@ -51,7 +51,7 @@ class VideoQualityActivity : BaseBindingActivity<VideoQualityActivityBinding?>()
         binding!!.toolbar.logoMain2.visibility = View.GONE
         binding!!.toolbar.backLayout.visibility = View.VISIBLE
         binding!!.toolbar.searchIcon.visibility = View.GONE
-        binding!!.toolbar.titleMid.visibility = View.GONE
+        binding!!.toolbar.titleMid.visibility = View.VISIBLE
         val streamingTile = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.streaming_settings_title.toString(),
             getString(R.string.streaming_settings_title)

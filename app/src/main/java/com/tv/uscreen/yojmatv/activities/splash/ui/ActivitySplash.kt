@@ -581,7 +581,7 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         if (aBoolean) {
             binding?.connection?.noConnectionLayout?.visibility = View.GONE
             loadAnimations()
-            callNextForRedirection()
+          //  callNextForRedirection()
             dynamicLink
         } else {
             binding?.connection?.noConnectionLayout?.visibility = View.VISIBLE
