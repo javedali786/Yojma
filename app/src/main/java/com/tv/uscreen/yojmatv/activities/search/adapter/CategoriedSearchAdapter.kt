@@ -57,11 +57,11 @@ class CategoriedSearchAdapter(private val context: Context, private val list: Li
         var header = ""
         when (getItemViewType(pos)) {
             0 -> {
-                val movies = stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.search_movies.toString(), context.getString(R.string.search_movies))
+                val movies = stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.search_result.toString(), context.getString(R.string.search_result))
                 header = movies
             }
 
-            1 -> {
+          /*  1 -> {
                 val episodes = stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.detail_page_episodes.toString(), context.getString(R.string.detail_page_episodes))
                 header = episodes
             }
@@ -69,7 +69,7 @@ class CategoriedSearchAdapter(private val context: Context, private val list: Li
             2 -> {
                 val documentries = stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.search_documentaries.toString(), context.getString(R.string.search_documentaries))
                 header = documentries
-            }
+            }*/
         }
 
         videoTypeViewHolder.binding.tvTitle.text = header + " - " + totalCount + " " + searchResults

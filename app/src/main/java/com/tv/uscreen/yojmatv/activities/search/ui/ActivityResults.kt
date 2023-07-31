@@ -100,13 +100,13 @@ class ActivityResults : BaseBindingActivity<ActivityResultBinding?>(), CommonSea
 
     private fun setHeader() {
         if (searchType.equals(AppConstants.VIDEO, ignoreCase = true)) {
-            if (header.equals(getString(R.string.search_movies), ignoreCase = true)) {
-                binding!!.toolbar.titleMid.text = getString(R.string.search_movies) + " - " + totalCount + " " + getString(R.string.search_results)
-            } else if (header.equals(getString(R.string.detail_page_episodes), ignoreCase = true)) {
+            if (header.equals(getString(R.string.search_result), ignoreCase = true)) {
+                binding!!.toolbar.titleMid.text = getString(R.string.search_result) + "-" + totalCount + " " + getString(R.string.search_results)
+            } /*else if (header.equals(getString(R.string.detail_page_episodes), ignoreCase = true)) {
                 binding!!.toolbar.titleMid.text = getString(R.string.detail_page_episodes) + " - " + totalCount + " " + getString(R.string.search_results)
             } else if (header.equals(getString(R.string.documentaries), ignoreCase = true)) {
                 binding!!.toolbar.titleMid.text = getString(R.string.documentaries) + " - " + totalCount + " " + getString(R.string.search_results)
-            }
+            }*/
         }
     }
 

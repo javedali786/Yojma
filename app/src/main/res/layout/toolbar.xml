@@ -29,8 +29,7 @@
               android:id="@+id/back_layout"
               android:layout_width="@dimen/toolbar_back_button_width_70dp"
               android:layout_height="match_parent"
-              android:gravity="center"
-                android:padding="5dp"
+              android:gravity="center" android:padding="5dp"
                 android:visibility="visible">
 
                 <ImageView
