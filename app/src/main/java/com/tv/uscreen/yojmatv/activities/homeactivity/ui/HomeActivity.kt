@@ -140,38 +140,39 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
     }
 
     private fun switchToHomeFragment() {
-        binding!!.toolbar.llSearchIcon.visibility = View.VISIBLE
+        binding!!.toolbar.searchIcon.visibility = View.VISIBLE
         fragmentManager!!.beginTransaction().hide(active!!).show(homeFragment!!).commit()
         active = homeFragment
     }
 
     private fun switchToReelsFragment() {
-        binding!!.toolbar.llSearchIcon.visibility = View.VISIBLE
+        binding!!.toolbar.searchIcon.visibility = View.VISIBLE
         fragmentManager!!.beginTransaction().hide(active!!).show(reelsFragment!!).commit()
         active = reelsFragment
     }
 
     private fun switchToGamingFragment() {
-        binding!!.toolbar.llSearchIcon.visibility = View.VISIBLE
+        binding!!.toolbar.searchIcon.visibility = View.VISIBLE
+
         fragmentManager!!.beginTransaction().hide(active!!).show(gamingFragment!!).commit()
         active = gamingFragment
     }
 
     private fun switchToPodCastFragment() {
-        binding!!.toolbar.llSearchIcon.visibility = View.VISIBLE
+        binding!!.toolbar.searchIcon.visibility = View.VISIBLE
         fragmentManager!!.beginTransaction().hide(active!!).show(podcastFragment!!).commit()
         active = podcastFragment
     }
 
     private fun switchToMoreFragment() {
-        binding!!.toolbar.llSearchIcon.visibility = View.VISIBLE
-        binding!!.toolbar.clNotification.visibility = View.VISIBLE
+        binding!!.toolbar.searchIcon.visibility = View.INVISIBLE
+      //  binding!!.toolbar.clNotification.visibility = View.GONE
         fragmentManager!!.beginTransaction().hide(active!!).show(moreFragment!!).commit()
         active = moreFragment
     }
 
     private fun switchToMovieFragment() {
-        binding!!.toolbar.llSearchIcon.visibility = View.VISIBLE
+        binding!!.toolbar.searchIcon.visibility = View.VISIBLE
         fragmentManager!!.beginTransaction().hide(active!!).show(movieFragment!!).commit()
         active = movieFragment
     }

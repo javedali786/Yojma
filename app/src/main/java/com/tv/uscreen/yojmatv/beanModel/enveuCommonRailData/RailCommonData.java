@@ -86,6 +86,7 @@ public class RailCommonData {
             for (int i=0;i<videos.size();i++){
                 Item videoItem= videos.get(i);
 
+
                 EnveuVideoItemBean enveuVideoItemBean = new EnveuVideoItemBean(videoItem,imageType,"",isIntentFromForYou);
                 try {
                     if (videoItem!=null){

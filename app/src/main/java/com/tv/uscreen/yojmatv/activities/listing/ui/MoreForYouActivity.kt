@@ -53,7 +53,7 @@ class MoreForYouActivity : BaseBindingActivity<MoreForyouActivityBinding?>(), Fo
         binding!!.colorsData = ColorsHelper
         binding!!.toolbarGrid.colorsData = ColorsHelper
         binding!!.toolbarGrid.stringData = StringsHelper
-        binding!!.toolbarGrid.searchIcon.visibility = View.VISIBLE
+        binding!!.toolbarGrid.searchIcon.visibility = View.GONE
         binding!!.toolbarGrid.backLayout.visibility = View.VISIBLE
       //  binding!!.toolbarGrid..setBackgroundColor(resources.getColor(R.color.buy_now_pay_now_btn_text_color))
         binding!!.toolbarGrid.backLayout.setOnClickListener { onBackPressed() }

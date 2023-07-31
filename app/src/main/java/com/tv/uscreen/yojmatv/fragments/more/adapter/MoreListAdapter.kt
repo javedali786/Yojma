@@ -103,10 +103,10 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
             0 -> callDrawableHelper(mContext, R.drawable.ic_my_list, v)
             1 -> callDrawableHelper(mContext, R.drawable.ic_account, v)
             2 -> callDrawableHelper(mContext, R.drawable.ic_settings, v)
-            3 -> callDrawableHelper(mContext, R.drawable.ic_buy_now, v)
-            4 -> callDrawableHelper(mContext, R.drawable.ic_order_history, v)
-            5 -> callDrawableHelper(mContext, R.drawable.ic_privacy, v)
-            6 -> callDrawableHelper(mContext, R.drawable.ic_terms, v)
+           // 3 -> callDrawableHelper(mContext, R.drawable.ic_buy_now, v)
+           // 4 -> callDrawableHelper(mContext, R.drawable.ic_order_history, v)
+            3 -> callDrawableHelper(mContext, R.drawable.ic_privacy, v)
+            4 -> callDrawableHelper(mContext, R.drawable.ic_terms, v)
             else -> {}
         }
     }

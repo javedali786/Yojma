@@ -232,15 +232,15 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
                                     temp.assetType = enveuVideoItemBean.assetType
                                     temp.status = true
                                     if (data[i].enveuVideoItemBeans[0].assetType.equals(AppConstants.VIDEO, ignoreCase = true)) {
-                                        if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(MediaTypeConstants.getInstance().movie, ignoreCase = true)) {
+                                        if (data[i].enveuVideoItemBeans[0].videoDetails.videoType == MediaTypeConstants.getInstance().movie || data[i].enveuVideoItemBeans[0].videoDetails.videoType == MediaTypeConstants.getInstance().movie || data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(MediaTypeConstants.getInstance().movie )) {
                                             temp.layoutType = 0
                                         }
-                                        if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(MediaTypeConstants.getInstance().episode, ignoreCase = true)) {
+                                       /* if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(MediaTypeConstants.getInstance().episode, ignoreCase = true)) {
                                             temp.layoutType = 1
                                         }
                                         if (data[i].enveuVideoItemBeans[0].videoDetails.videoType.equals(MediaTypeConstants.getInstance().documentaries, ignoreCase = true)) {
                                             temp.layoutType = 2
-                                        }
+                                        }*/
 
                                     }
                                     temp.searchKey = searchKeyword

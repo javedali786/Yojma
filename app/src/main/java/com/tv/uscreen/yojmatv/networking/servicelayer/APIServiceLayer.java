@@ -794,35 +794,35 @@ public class APIServiceLayer {
 
             ApiInterface endpoint = RequestConfig.getClientSearch().create(ApiInterface.class);
             String videoContentTypes = AppConstants.VIDEO;
+            String StringMediaTypes = MediaTypeConstants.getInstance().getMovie() + "," + MediaTypeConstants.getInstance().getEpisode()  + "," + MediaTypeConstants.getInstance().getDocumentaries();
 
-            Observable<ResponseSearch> movies = null;
+            Observable<ResponseSearch> allResults = null;
             Observable<ResponseSearch> episode = null;
             Observable<ResponseSearch> documentaries = null;
 
 
-            movies = endpoint.getSearchByFilters(keyword,
-                            videoContentTypes, size, page, languageCode,MediaTypeConstants.getInstance().getMovie(), allFilters,
+            allResults = endpoint.getSearchByFilters(keyword,
+                            videoContentTypes, size, page, languageCode,StringMediaTypes, allFilters,
                             filterSortSavedListKeyForApi)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io());
 
             episode = endpoint.getSearchByFilters(keyword,
-                            videoContentTypes, size, page, languageCode,MediaTypeConstants.getInstance().getEpisode(), allFilters,
+                            "Custom", size, page, languageCode,"", allFilters,
                             filterSortSavedListKeyForApi)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io());
 
-            documentaries = endpoint.getSearchByFilters(keyword,
+          /*  documentaries = endpoint.getSearchByFilters(keyword,
                             videoContentTypes, size, page, languageCode,MediaTypeConstants.getInstance().getDocumentaries(), allFilters,
                             filterSortSavedListKeyForApi)
                     .subscribeOn(Schedulers.io())
-                    .observeOn(Schedulers.io());
+                    .observeOn(Schedulers.io());*/
 
-            Observable<List<ResponseSearch>> combined = Observable.zip(movies,episode,documentaries, (moviess,episodes,documentariess) -> {
+            Observable<List<ResponseSearch>> combined = Observable.zip(allResults,episode, (allResult,episodes) -> {
                 List<ResponseSearch> combinedList = new ArrayList<>();
-                combinedList.add(moviess);
+                combinedList.add(allResult);
                 combinedList.add(episodes);
-                combinedList.add(documentariess);
                 return combinedList;
             }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
             combined.subscribe(new Observer<List<ResponseSearch>>() {
@@ -893,19 +893,20 @@ public class APIServiceLayer {
         Call<ResponseSearch> call = null;
 
         responsePopular = new MutableLiveData<>();
+        String StringMediaTypes = MediaTypeConstants.getInstance().getMovie() + "," + MediaTypeConstants.getInstance().getEpisode()  + "," + MediaTypeConstants.getInstance().getDocumentaries();
+
         {
 
             try {
-                // keyword= URLEncoder.encode(keyword, "UTF-8");
                 ApiInterface backendApi = RequestConfig.getClientSearch().create(ApiInterface.class);
                 if (type.equalsIgnoreCase(AppConstants.VIDEO)) {
-                    if (header.equalsIgnoreCase(AppConstants.Movies)) {
-                        call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,MediaTypeConstants.getInstance().getMovie());
-                    } else if (header.equalsIgnoreCase(AppConstants.episodes)){
+                    if (header.equalsIgnoreCase(AppConstants.SEARCH_RESULT)) {
+                        call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,StringMediaTypes);
+                    } /*else if (header.equalsIgnoreCase(AppConstants.episodes)){
                         call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,MediaTypeConstants.getInstance().getEpisode());
                     }  else if (header.equalsIgnoreCase(AppConstants.Documentaries)){
                         call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,MediaTypeConstants.getInstance().getDocumentaries());
-                    }
+                    }*/
                 }
 
 

@@ -25,7 +25,7 @@
                 android:fontFamily="@font/sfuitext_medium"
                 android:gravity="center_vertical"
                 android:text=""
-                android:textColor="?attr/more_item_text_color"
+                android:textColor="@color/series_detail_all_episode_txt_color"
                 android:textSize="@dimen/nav_more_fragment_item_title" />
 
 

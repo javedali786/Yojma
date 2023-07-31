@@ -191,33 +191,51 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
 
 
     private fun checkGeoBlocking() {
-        viewModel!!.getGeoBlocking(currentEpisodeId.toString())
-            .observe(this@SeriesDetailActivity) { response ->
-                if (response != null && response.data != null) {
-                    if(response.data.isIsBlocked) {
-                        isGeoBlocking = true
-                    }
-                } else {
-                    if (response!!.responseCode != null && response.responseCode == 4302) {
-
+        try {
+            viewModel!!.getGeoBlocking(currentEpisodeId.toString())
+                .observe(this@SeriesDetailActivity) { response ->
+                    if (response != null && response.data != null) {
+                        if(response.data.isIsBlocked) {
+                            isGeoBlocking = true
+                        }
                     } else {
-                        commonDialog(
-                            stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_error.toString(),
-                                getString(R.string.popup_error)
-                            ),
-                            stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
-                                getString(R.string.popup_something_went_wrong)
-                            ),
-                            stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_continue.toString(),
-                                getString(R.string.popup_continue)
+                        if (response!!.responseCode != null && response.responseCode == 4302) {
+                            commonDialog(
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                    getString(R.string.popup_error)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                    getString(R.string.popup_something_went_wrong)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                    getString(R.string.popup_continue)
+                                )
                             )
-                        )
+                        } else {
+                            commonDialog(
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                    getString(R.string.popup_error)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                    getString(R.string.popup_something_went_wrong)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                    getString(R.string.popup_continue)
+                                )
+                            )
+                        }
                     }
                 }
-            }
+        } catch (e:Exception) {
+
+        }
+
     }
 
 
@@ -781,7 +799,6 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         singleItem = itemValue
         if (itemValue != null) {
             // setUserInteractionFragment(seriesId);
-            checkGeoBlocking()
             isPremium = itemValue.isPremium
             currentEpisodeId = itemValue.id
             tittle = itemValue.title
@@ -792,8 +809,15 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             if (itemValue.sku != null) {
                 sku = itemValue.sku
             }
-            skipIntroStartTime = itemValue.skipintro_startTime
-            skipIntroEndTime = itemValue.skipintro_endTime
+            if(itemValue.skipintro_startTime != null) {
+                skipIntroStartTime = itemValue.skipintro_startTime
+            }
+
+            if(itemValue.skipintro_endTime != null) {
+                skipIntroEndTime = itemValue.skipintro_endTime
+            }
+
+            checkGeoBlocking()
             Log.d("getFirstItem", "getFirstItem2: $itemValue")
             //   setUiComponents(itemValue);
         }
@@ -1079,7 +1103,6 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                     ) {
                         val enveuCommonResponse = assetResponse.baseCategory as RailCommonData
                         if (enveuCommonResponse != null && enveuCommonResponse.enveuVideoItemBeans.size > 0) {
-                            // videoDetails = enveuCommonResponse.getEnveuVideoItemBeans().get(0);
                             if (!enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals(
                                     "",
                                     ignoreCase = true

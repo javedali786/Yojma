@@ -142,7 +142,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/sfuitext_medium"
                                 android:text="@string/cancel"
-                                android:textColor="?attr/cancel_text_color"
+                                android:textColor="@color/popup_cancel_txt_color"
                                 android:textSize="@dimen/search_cancel" />
                         </LinearLayout>
 

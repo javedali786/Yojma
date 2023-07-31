@@ -8,7 +8,6 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,12 +66,10 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var screenName: String? = null
     private var skipIntroStartTime: String = ""
     private var skipIntroEndTime: String = ""
-
     private var contentPlayed: String? = null
     private var contentDuration: String? = null
     private var posterUrl: String? = null
     private var contentType: String? = null
-
     private var id: Int? = null
     private var episodeId: Int? = 0
     private var currentPlayingIndex: Int? = -1
@@ -536,7 +533,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                 }
             }
         }
-        Log.w("SkipIntro", "${mPlayer?.position}---------${skipIntroStartTime.toDouble()}")
+      //  Log.w("SkipIntro", "${mPlayer?.position}---------${skipIntroStartTime.toDouble()}")
 
         if (!skipIntroStartTime.isNullOrEmpty() && !skipIntroEndTime.isNullOrEmpty()) {
             if (mPlayer?.position!! >= skipIntroStartTime.toDouble() && mPlayer?.position!! <= skipIntroEndTime.toDouble()) {

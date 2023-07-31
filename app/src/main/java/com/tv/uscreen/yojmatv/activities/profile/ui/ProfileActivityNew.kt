@@ -1,7 +1,6 @@
 package com.tv.uscreen.yojmatv.activities.profile.ui
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -18,10 +17,8 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
 import com.google.gson.Gson
 import com.moe.pushlibrary.MoEHelper
 import com.moengage.core.Properties
-
 import com.tv.uscreen.yojmatv.Bookmarking.BookmarkingViewModel
 import com.tv.uscreen.yojmatv.R
-
 import com.tv.uscreen.yojmatv.activities.profile.CountryListActivity
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.activities.usermanagment.viewmodel.RegistrationLoginViewModel
@@ -29,7 +26,6 @@ import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
 import com.tv.uscreen.yojmatv.beanModel.AppUserModel
 import com.tv.uscreen.yojmatv.beanModel.userProfile.UserProfileResponse
 import com.tv.uscreen.yojmatv.databinding.ProfileActivityNewBinding
-
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment.EditDialogListener
 import com.tv.uscreen.yojmatv.utils.Logger
@@ -46,8 +42,6 @@ import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 import java.text.DecimalFormat
-import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -105,7 +99,7 @@ class ProfileActivityNew : BaseBindingActivity<ProfileActivityNewBinding?>(), Ed
         binding?.countryId?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
         binding?.userMobile?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
         binding?.cityId?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
-        binding?.dOB?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
+       // binding?.dOB?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
         ColorsHelper.textViewDrawableColor(binding!!.dOB, AppColors.dobIconColor())
         ColorsHelper.textViewDrawableColor(binding!!.countryId, AppColors.dropDownIconColor())
     }
@@ -183,7 +177,7 @@ class ProfileActivityNew : BaseBindingActivity<ProfileActivityNewBinding?>(), Ed
 
 
 
-        binding?.dOB?.setOnClickListener(View.OnClickListener {
+      /*  binding?.dOB?.setOnClickListener(View.OnClickListener {
             val mcurrentDate = Calendar.getInstance()
             val mYear = mcurrentDate[Calendar.YEAR]
             val mMonth = mcurrentDate[Calendar.MONTH]
@@ -219,11 +213,11 @@ class ProfileActivityNew : BaseBindingActivity<ProfileActivityNewBinding?>(), Ed
                 }, mYear, mMonth, mDay
             )
             mDatePicker.show()
-        })
+        })*/
 
 
         binding?.countryId?.setOnClickListener{
-           // ActivityLauncher.getInstance().CountryListActivity(this@ProfileActivityNew, CountryListActivity::class.java)
+          //  ActivityLauncher.getInstance().CountryListActivity(this@ProfileActivityNew, CountryListActivity::class.java)
             val intent = Intent(this, CountryListActivity::class.java)
             startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE)
         }

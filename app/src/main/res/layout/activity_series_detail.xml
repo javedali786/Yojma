@@ -135,7 +135,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="@dimen/signUp_15dp_margin"
                         android:layout_marginEnd="@dimen/signUp_15dp_margin"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:background="@color/unselected_indicator_color"
                         android:layout_height="1dp"/>
 
