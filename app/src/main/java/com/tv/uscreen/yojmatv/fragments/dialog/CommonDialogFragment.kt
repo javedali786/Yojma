@@ -54,7 +54,7 @@ class CommonDialogFragment : DialogFragment() {
             if (titleValue!!.isEmpty()) {
                 title?.visibility = View.GONE
             }
-            if (titleValue.contains(requireContext().getString(R.string.log_out))) {
+            if (titleValue.contains(requireContext().getString(R.string.popup_logout))) {
                 cancel?.visibility = View.VISIBLE
             }
             //  cancel.setVisibility(View.GONE);

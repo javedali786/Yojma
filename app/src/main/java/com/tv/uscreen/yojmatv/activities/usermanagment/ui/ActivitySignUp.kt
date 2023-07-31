@@ -592,8 +592,8 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
     private fun connectionValidation(aBoolean: Boolean) {
         if (aBoolean) {
             binding?.loginMainFrame?.visibility = View.VISIBLE
-            binding?.toolbar?.rlToolBar?.visibility=View.VISIBLE
             binding?.toolbar?.logoMain2?.visibility = View.VISIBLE
+            binding?.toolbar?.searchIcon?.visibility = View.GONE
             binding?.connection?.noConnectionLayout?.visibility = View.GONE
         } else {
             noConnectionLayout()
@@ -614,7 +614,6 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
     private fun noConnectionLayout() {
         binding?.loginMainFrame?.visibility = View.GONE
         binding?.connection?.noConnectionLayout?.visibility = View.VISIBLE
-        binding?.toolbar?.rlToolBar?.visibility=View.GONE
         binding?.connection?.retryTxt?.setOnClickListener { view -> connectionObserver() }
     }
 
