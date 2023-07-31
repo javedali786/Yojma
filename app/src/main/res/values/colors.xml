@@ -151,7 +151,7 @@
     <color name="signup_radio_btn_unchecked_color">#FFFFFF</color>
     <color name="signup_radio_btn_checked_color">#f48700</color>
     <color name="series_detail_now_playing_title_color">#FFFFFF</color>
-    <color name="series_detail_now_playing_bg_color">#f48700</color>
+    <color name="series_detail_now_playing_bg_color">#7f79f4ff</color>
     <color name="selected_indicator_color">#f48700</color>
     <color name="unselected_indicator_color">#838A90</color>
 </resources>
