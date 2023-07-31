@@ -765,7 +765,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
         spannableString.setSpan(object : ClickableSpan() {
             override fun onClick(view: View) {
                 val browserIntent =
-                    Intent(Intent.ACTION_VIEW, Uri.parse("https://app.iberaliago.com/terms-and-conditions"))
+                    Intent(Intent.ACTION_VIEW, Uri.parse("https://www.yojma.tv/pages/tyc"))
                 startActivity(browserIntent)
             }
 
@@ -781,7 +781,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
         spannableString1.setSpan(object : ClickableSpan() {
             override fun onClick(view: View) {
                 val browserIntent =
-                    Intent(Intent.ACTION_VIEW, Uri.parse("https://app.iberaliago.com/privacy"))
+                    Intent(Intent.ACTION_VIEW, Uri.parse("https://www.yojma.tv/pages/privacidad"))
                 startActivity(browserIntent)
             }
 

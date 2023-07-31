@@ -260,13 +260,13 @@
     <string name="ep_cd_fullscreen">Fullscreen button</string>
     <string name="ep_cd_exit_fullscreen">Exit fullscreen button</string>
 
-    <string name="ep_next_episode">Next Episode</string>
-    <string name="ep_prev_episode">Previous Episode</string>
-    <string name="ep_more_episodes">More Episodes</string>
+    <string name="ep_next_episode">Siguiente episodio</string>
+    <string name="ep_prev_episode">Episodio anterior</string>
+    <string name="ep_more_episodes">Más episodios</string>
     <string name="ep_default_time">00:00</string>
     <string name="ep_live_tag">Directos</string>
     <string name="ep_video_auto">Auto</string>
-    <string name="ep_video_auto_desc">Default video quality</string>
+    <string name="ep_video_auto_desc">Calidad de vídeo predeterminada</string>
     <string name="ep_video_low">Low</string>
     <string name="ep_video_low_desc">Low data usage</string>
     <string name="ep_video_medium">Medium</string>
@@ -280,12 +280,12 @@
     <string name="auto">Auto</string>
     <string name="ep_video_4k_desc">Best video quality</string>
 
-    <string name="ep_dialog_settings_title">Settings</string>
-    <string name="ep_settings_video">Video Quality</string>
-    <string name="ep_settings_audio">Multi Audio</string>
-    <string name="ep_settings_subtitle">Subtitles</string>
-    <string name="skip_intro">Skip Intro</string>
-    <string name="ep_dialog_settings_cancel">Cancel</string>
+    <string name="ep_dialog_settings_title">Ajustes</string>
+    <string name="ep_settings_video">Calidad de video</string>
+    <string name="ep_settings_audio">Audio múltiple</string>
+    <string name="ep_settings_subtitle">subtítulos</string>
+    <string name="skip_intro">Presiona Intro</string>
+    <string name="ep_dialog_settings_cancel">Cancelar</string>
     <string name="type_video">Video</string>
     <string name="type_audio">Audio</string>
     <string name="type_subtitle">Subtitle</string>
@@ -325,7 +325,7 @@
     <string name="please_unsubcribe_to_continue">"Por favor cancele la suscripción al plan actual de Play Store para continuar."</string>
     <string name="payment_error">Hubo un error al procesando tu solicitud, inténtalo en un rato. Si requieres soporte adicional, por favor contáctanos en</string>
     <string name="detail_page_no_data_available">Datos no disponibles</string>
-    <string name="fcm_host_link" translatable="false">https://iberaliago.page.link</string>
+    <string name="fcm_host_link" translatable="false">https://yojmatv.page.link</string>
     <string name="detail_page_related_videos">Videos relacionados</string>
     <string name="tab_heading_episodes">Espisodios</string>
     <string name="remove">Eliminar </string>

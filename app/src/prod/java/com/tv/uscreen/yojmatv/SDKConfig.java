@@ -26,27 +26,13 @@ public class SDKConfig {
         return (sdkConfigInstance);
     }
 
-    /* UAT keys*//*
-     */
-   /* public static final String CONFIG_BASE_URL = "https://api-eu1.enveu.com/experience-manager-fe-api/app/api/v1/config/";
-    public static final String API_KEY_MOB = "xsswbnbjcmfpvjnufsskjzgqwkhbvbvpniivahdl";
-    public static final String API_KEY_TAB = "obgbedzdgzcjsxwhzvtvdzegzgtkhvnxtmeraxlt";*/
-    //Prod config
 
     //PROD KEYS
-    public static final String CONFIG_BASE_URL = "https://api-eu1.enveu.com/experience-manager-fe-api/app/api/v1/config/";
-    public static final String API_KEY_MOB = "ubjoadpovgmagoxqikaerdqpbowqlddivfbvtsxp";
-    public static final String API_KEY_TAB = "huwlvryczkqciosjcdepvcgjliuefimvhruieucy";
+    public static final String CONFIG_BASE_URL = "https://api-us.enveu.com/experience-manager-fe-api/app/api/v1/config/";
+    public static final String API_KEY_MOB = "axkxaeobdrpqqvhfvnlrkvkrstnbyhyr";
+    public static final String API_KEY_TAB = "tamvrupdkecgabywsnescbzrnsscpkvm";
 
 
-//    public static final String CONFIG_BASE_URL = "https://api-eu1.enveu.com/experience-manager-fe-api/app/api/v1/config/";
-//    public static final String API_KEY_MOB = "jyeubkiluqkpsmsiszzfazpcqidydarzoblqcmxh";
-//    public static final String API_KEY_TAB = "kumnqiowcgouixukvlnufaptcjzmhulhtyqbbflr";
-
-    /* UAT keys*/
-   /* public static String CONFIG_BASE_URL = "https://experience-manager-fe-api.uat.enveu.com/app/api/v1/config/";
-    public static String API_KEY_MOB = "spkuaohqsngqcrvfrgforegkooveiobspgwwbmce";
-    public static String API_KEY_TAB = "unwtftwilxazacjururwsdtwuepymqqxlvamahqf";*/
     public static final int CONFIG_VERSION = 1;
     public static String ApplicationStatus = "disconnected";
     public static final String WEBP_QUALITY = "filters:format(webp):quality(60)/";
@@ -54,12 +40,6 @@ public class SDKConfig {
     public static final String PUBNUB_KEY_PUBLISH = "pub-c-88bde132-793e-415b-a436-e7d9a6b83856";
     public static final String PUBNUB_KEY_SUBSCRIBE = "sub-c-ecb62526-738c-11ec-8c2d-5a0a4f87b172";
 
-    /*uat keys*//*
-    public static String CONFIG_BASE_URL = "https://experience-manager-fe-api.uat.enveu.com/app/api/v1/config/";
-    public static String API_KEY_MOB = "zzSQzVoXQl9oA6d75OPCJ5UHowG2upc6520dJ3zs";
-    public static String API_KEY_TAB = "2hpaUCvN395jJA6AMaamk8wyOQbvAGhNQaIuH2Nf";
-    public static int CONFIG_VERSION = 1;
-    public static String ApplicationStatus = "disconnected";*/
 
     public void setConfigObject(ConfigBean configResponse, boolean isTablet) {
         this.configBean = configResponse;
@@ -95,6 +75,10 @@ public class SDKConfig {
     }
     public String getPARTICIPATION_BASE_URL() {
         return configBean == null ? "" : configBean.getData().getAppConfig().getParticipationBaseUrl();
+    }
+
+    public String getJwPlayerDiliveryBaseUrl() {
+        return configBean == null ? "" : configBean.getData().getAppConfig().getJwPlayerDiliveryBaseUrl();
     }
     public String getKidsModeId() {
         return null;

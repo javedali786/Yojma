@@ -76,13 +76,13 @@ class EnterOTPActivity : BaseBindingActivity<ActivityEnterOtpBinding?>(), Common
 
     private fun setupToolbar() {
         binding?.toolbar?.backLayout?.visibility = View.VISIBLE
-        binding?.toolbar?.titleMid?.visibility = View.VISIBLE
+        binding?.toolbar?.titleMid?.visibility = View.GONE
         binding?.toolbar?.logoMain2?.visibility = View.VISIBLE
         binding?.toolbar?.llSearchIcon?.visibility = View.GONE
         if(fromWhich!!.equals("DetailPage",ignoreCase = true)) {
             binding?.toolbar?.backLayout?.visibility=View.VISIBLE
         }else{
-            binding?.toolbar?.backLayout?.visibility=View.GONE
+            binding?.toolbar?.backLayout?.visibility=View.VISIBLE
         }
 
         val otpSkip = stringsHelper.stringParse(
@@ -400,11 +400,17 @@ class EnterOTPActivity : BaseBindingActivity<ActivityEnterOtpBinding?>(), Common
     }
 
     override fun onActionBtnClicked() {
-     if (isOtpVerified)
-         ActivityLauncher.getInstance().goToPlanScreen(
+     if (isOtpVerified) {
+        /* ActivityLauncher.getInstance().goToPlanScreen(
              this@EnterOTPActivity,
              ActivitySelectSubscriptionPlan::class.java,
-             "OTP"
-         )
+             "OTP")  */
+
+         ActivityLauncher.getInstance().homeScreen(
+             this@EnterOTPActivity,
+             HomeActivity::class.java)
+     }
+
+
     }
 }

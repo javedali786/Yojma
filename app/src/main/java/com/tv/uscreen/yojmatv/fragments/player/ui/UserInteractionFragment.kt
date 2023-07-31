@@ -14,10 +14,8 @@ import androidx.core.widget.ImageViewCompat
 import androidx.lifecycle.ViewModelProvider
 import com.enveu.client.utils.ClickHandler.disallowClick
 import com.google.gson.JsonObject
-
 import com.tv.uscreen.yojmatv.Bookmarking.BookmarkingViewModel
 import com.tv.uscreen.yojmatv.R
-
 import com.tv.uscreen.yojmatv.activities.detail.ui.DetailActivity
 import com.tv.uscreen.yojmatv.activities.detail.ui.EpisodeActivity
 import com.tv.uscreen.yojmatv.activities.live.LiveActivity
@@ -28,7 +26,6 @@ import com.tv.uscreen.yojmatv.beanModel.responseGetWatchlist.ResponseGetIsWatchl
 import com.tv.uscreen.yojmatv.beanModel.responseIsLike.ResponseIsLike
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.databinding.DetailWatchlistLikeShareViewBinding
-
 import com.tv.uscreen.yojmatv.enums.DownloadStatus
 import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogSingleButtonFragment
@@ -109,12 +106,12 @@ class UserInteractionFragment : BaseBindingFragment<DetailWatchlistLikeShareView
 
     private fun setClickListeners() {
         binding!!.shareWith.setOnClickListener(this)
-        //        getBinding().showComments.setOnClickListener(this);
-//        getBinding().downloadVideo.setOnClickListener(this);
-//        getBinding().videoDownloaded.setOnClickListener(this);
-//        getBinding().videoDownloading.setProgress(0);
-//        getBinding().videoDownloading.setOnClickListener(this);
-//        getBinding().pauseDownload.setOnClickListener(this);
+       /*   getBinding().showComments.setOnClickListener(this);
+       getBinding().downloadVideo.setOnClickListener(this);
+       getBinding().videoDownloaded.setOnClickListener(this);
+        getBinding().videoDownloading.setProgress(0);
+        getBinding().videoDownloading.setOnClickListener(this);
+        getBinding().pauseDownload.setOnClickListener(this);*/
         binding!!.downloadStatus = DownloadStatus.START
         if (activity is SeriesDetailActivity) {
 //            getBinding().download.setVisibility(View.GONE);
@@ -144,23 +141,27 @@ class UserInteractionFragment : BaseBindingFragment<DetailWatchlistLikeShareView
     fun uiInitialisation() {
         likeClick()
         watchListClick()
-        binding!!.shareWith.setOnTouchListener { _: View?, motionEvent: MotionEvent? -> gestureDetector.onTouchEvent(motionEvent!!) }
+        binding!!.shareWith.setOnTouchListener { _: View?, motionEvent: MotionEvent? ->
+            gestureDetector.onTouchEvent(
+                motionEvent!!
+            )
+        }
 
         // setTrailerColor();
         //    getBinding().llTrailer.setOnClickListener(v -> showTrailer());
 
-//        setWhiteColorOnShareButton(getBinding().addIcon, getBinding().tvWatch);
-//        setWhiteColorOnShareButton(getBinding().likeIcon, getBinding().tvLike);
-//        setWhiteColorOnShareButton(getBinding().shareImg, getBinding().shareTxt);
+      /*  setWhiteColorOnShareButton(binding?.addIcon, binding?.tvWatch)
+        setWhiteColorOnShareButton(binding?.likeIcon, binding?.tvLike)
+        setWhiteColorOnShareButton(binding!!.shareImg, binding!!.shareTxt)
+*/
     }
 
-    //    private void setWhiteColorOnShareButton(ImageView imageView, TextView textView) {
-    //        Drawable unwrappedDrawable = imageView.getBackground();
-    //        Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
-    //        int iconColor = ColorsHelper.INSTANCE.colorParser(colorsHelper.instance()).etData?().getConfig?().getSeries_detail_share_unselected_color?(), R.toString().color.series_detail_share_unselected_color);
-    //        DrawableCompat.setTint(wrappedDrawable, iconColor);
-    //        textView.setTextColor(iconColor);
-    //    }
+      /*  open fun setWhiteColorOnShareButton(imageView: ImageView, textView: TextView) {
+            val unwrappedDrawable = imageView.background
+            val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable)
+            DrawableCompat.setTint(wrappedDrawable, resources.getColor(R.color.signup_et_hint))
+            textView.setTextColor(ContextCompat.getColor(textView.context, R.color.signup_et_hint))
+        }*/
     private fun showTrailer() {
         val args = Bundle()
         args.putString(AppConstants.BUNDLE_VIDEO_ID_BRIGHTCOVE, trailerRefId.toString())

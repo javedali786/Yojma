@@ -168,7 +168,7 @@
             <intent-filter>
                 <data
                     android:host="open"
-                    android:scheme="iberalia" />
+                    android:scheme="https://web-qa.yojmatv.enveu.com" />
 
                 <action android:name="android.intent.action.VIEW" />
 
@@ -180,7 +180,6 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data
                     android:host="@string/fcm_host_link"
                     android:scheme="https" />

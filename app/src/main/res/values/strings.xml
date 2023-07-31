@@ -19,7 +19,7 @@
     <string name="redeem_code_expired">Redeem code is expired</string>
     <string name="please_try">Please try again or contact support</string>
     <string name="cannot_find_any_subs">cannot find any subscription or subscription cannot contain price</string>
-    <string name="on_enveu">on Iberalia!</string>
+    <string name="on_enveu">on Yojma Tv!</string>
     <string name="more_term_condition">Terms &amp; Conditions</string>
     <string name="full_name">Name</string>
     <string name="display_name">Enter your display Name</string>
@@ -236,7 +236,7 @@
     <string name="something_went_wrong_at_our_end_please_try_later">Something went wrong at our end. Please try again.</string>
 
     <string name="membership_and_plan_title">join us to watch latest blockbusters, exclusive videos</string>
-    <string name="fcm_host_link" translatable="false">https://iberaliago.page.link</string>
+    <string name="fcm_host_link" translatable="false">https://yojmatv.page.link</string>
     <string name="logged_out">Logged Out</string>
     <string name="subscription">Subscription</string>
     <string name="subscribe">Subscribe</string>
