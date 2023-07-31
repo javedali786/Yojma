@@ -84,7 +84,7 @@ public class EntitlementLayer {
                     Log.d("Javed", "onResponse: " +  json);
                     responseOutput.postValue(response1);
                 } else {
-                    responseOutput.postValue(null);
+                    responseOutput.postValue(response.body());
                 }
             }
             @Override

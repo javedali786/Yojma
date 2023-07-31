@@ -385,20 +385,16 @@ public class EnveuVideoItemBean implements Serializable {
             Object customeFiled = details.getCustomData();
             LinkedTreeMap<Object, Object> t = (LinkedTreeMap) customeFiled;
 
-            Object customedata = details.getCustomData();
-            Logger.e("customedata", customedata.toString());
-            LinkedTreeMap<Object, Object> t1 = (LinkedTreeMap) customedata;
 
-
-            if (t1.containsKey(CustomeFields.SKIP_INTRO_START)) {
-                String producer = t1.get((CustomeFields.SKIP_INTRO_START)).toString();
-                this.skipintro_startTime = producer;
+            if (t.containsKey(CustomeFields.SKIP_INTRO_START)) {
+                String skipintro_startTime = t.get((CustomeFields.SKIP_INTRO_START)).toString();
+                this.skipintro_startTime = skipintro_startTime;
 
             }
 
-            if (t1.containsKey(CustomeFields.SKIP_INTRO_END)) {
-                String producer = t1.get((CustomeFields.SKIP_INTRO_END)).toString();
-                this.skipintro_endTime = producer;
+            if (t.containsKey(CustomeFields.SKIP_INTRO_END)) {
+                String skipintro_startTime = t.get((CustomeFields.SKIP_INTRO_END)).toString();
+                this.skipintro_endTime = skipintro_startTime;
 
             }
 
@@ -507,6 +503,19 @@ public class EnveuVideoItemBean implements Serializable {
             Object customeFiled = details.getCustomData();
             LinkedTreeMap<Object, Object> t = (LinkedTreeMap) customeFiled;
 
+
+            if (t.containsKey(CustomeFields.SKIP_INTRO_START)) {
+                String skipintro_startTime = t.get((CustomeFields.SKIP_INTRO_START)).toString();
+                this.skipintro_startTime = skipintro_startTime;
+
+            }
+
+            if (t.containsKey(CustomeFields.SKIP_INTRO_END)) {
+                String producer = t.get((CustomeFields.SKIP_INTRO_END)).toString();
+                this.skipintro_endTime = producer;
+
+            }
+
             if (t.containsKey(CustomeFields.sponsors)) {
                 String sponsors = t.get((CustomeFields.sponsors)).toString();
                 this.sponsors = sponsors;
@@ -613,8 +622,8 @@ public class EnveuVideoItemBean implements Serializable {
 
             }
             if (t1.containsKey(CustomeFields.SKIP_INTRO_START)) {
-                String producer = t1.get((CustomeFields.SKIP_INTRO_START)).toString();
-                this.skipintro_startTime = producer;
+                String skipintro_startTime = t1.get((CustomeFields.SKIP_INTRO_START)).toString();
+                this.skipintro_startTime = skipintro_startTime;
 
             }
 
