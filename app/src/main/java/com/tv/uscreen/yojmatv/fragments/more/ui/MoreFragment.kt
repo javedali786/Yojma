@@ -55,6 +55,8 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
     private var termsCondition= ""
     private var manageSubscription= ""
     private var privacyPolicy= ""
+    private var contactUs= ""
+
 
     private val stringsHelper by lazy { StringsHelper }
     private val colorsHelper by lazy { ColorsHelper }
@@ -142,7 +144,13 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
             stringsHelper.instance()?.data?.config?.more_term_condition.toString(),
             getString(R.string.more_term_condition)
         )
-        val label3 = arrayOf(myList, account, settings,privacyPolicy, termsCondition)
+
+        contactUs = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.more_contact_us.toString(),
+            getString(R.string.more_contact_us)
+        )
+
+        val label3 = arrayOf(myList, account, settings,privacyPolicy, termsCondition,contactUs)
         val mListLogOut: List<String> = ArrayList(listOf(*label3))
         val mListWithSub: List<String> = ArrayList(listOf(*label3))
         mListLogin = ArrayList()
@@ -318,6 +326,9 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
         } else if (caption == termsCondition) {
             requireActivity().startActivity(Intent(requireActivity(), HelpActivity::class.java).putExtra("type", "1"))
         }
+       else if (caption == contactUs) {
+           requireActivity().startActivity(Intent(requireActivity(), HelpActivity::class.java).putExtra("type", "3"))
+       }
     }
 
     inner class AppSyncBroadcast : BroadcastReceiver() {

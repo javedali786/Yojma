@@ -128,6 +128,15 @@ public class SDKConfig {
         return AppCommonMethod.getHomeTabId(configBean, "MOVIE");
 
     }
+
+    public String getThirdTabId() {
+        return AppCommonMethod.getHomeTabId(configBean, "SERIES");
+    }
+
+    public String getFourthTabId() {
+        return AppCommonMethod.getHomeTabId(configBean, "YOJMA KIDS");
+
+    }
     public String getMovieDetailId() {
 //        return AppCommonMethod.getHomeTabId(configBean, "MOVIE DETAIL");
         return null;

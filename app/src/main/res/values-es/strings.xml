@@ -49,6 +49,7 @@
     <string name="preferences_title_fisherman_types">Mdalidades De pesca</string>
     <string name="preferences_title_fisherman">Especies De Pesca</string>
     <string name="agree"> Accepto los Terminos y Condiciones</string>
+    <string name="more_contact_us">Contáctanos</string>
     <string name="preferences_title_both_types">Ambos tipos</string>
     <string name="preferences_heading">Para ofrecerte un servicio más personalizado, por favor selecciona las 4 especies que más te gustan</string>
     <string name="preferences_title_both">Ambas Especies</string>
@@ -245,6 +246,7 @@
     <string name="mu_list_title">My List</string>
     <string name="watcho_now_title">Ver Ahora</string>
     <string name="detail_page_now_playing">En Reproducción</string>
+    <string name="search_result">Resultado de búsqueda</string>
     <string name="explore_more_title">Descubre Más</string>
     <string name="see_offer_title">Ver Oferta</string>
     <string name="view_series_title">Ver Series</string>
@@ -299,7 +301,9 @@
     <string name="home_tabbar">Home</string>
     <string name="reel_tabbar">Reel</string>
     <string name="podcast_tabbar">Podcast</string>
-    <string name="movie_tabbar">Movie</string>
+    <string name="movie_tabbar">Películas</string>
+    <string name="kids_tabbar">Yojma Kids</string>
+    <string name="series_tabbar">Series y Docu</string>
     <string name="offers_icon">OFFERS</string>
     <string name="market_icon">MARKET</string>
     <string name="settings_content_preferences">Preferencias de Contenido</string>
@@ -342,7 +346,7 @@
     <string name="one_year">1 Anual</string>
     <string name="monthly">Mensual</string>
     <string name="account_logout">Cerrar sesión</string>
-    <string name="signup_term_condition">Acepto los Términos y Condiciones y la Política de Privacidad</string>
+    <string name="signup_term_condition">Accepto los Terminos y Condiciones  y la Política de Privacidad</string>
     <string name="popup_error">Error</string>
     <string name="popup_mobile_number_digit">El número de móvil debe tener 9 dígitos</string>
     <string name="my_list">Mi Lista</string>

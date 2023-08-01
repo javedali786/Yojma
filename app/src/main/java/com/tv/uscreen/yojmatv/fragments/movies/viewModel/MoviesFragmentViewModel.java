@@ -1,4 +1,4 @@
-package com.tv.uscreen.yojmatv.fragments.gaming.viewModel;
+package com.tv.uscreen.yojmatv.fragments.movies.viewModel;
 
 import android.app.Application;
 
@@ -13,9 +13,9 @@ import com.tv.uscreen.yojmatv.utils.constants.AppConstants;
 import java.util.List;
 
 
-public class GamingFragmentViewModel extends HomeBaseViewModel {
+public class MoviesFragmentViewModel extends HomeBaseViewModel {
 
-    public GamingFragmentViewModel(@NonNull Application application) {
+    public MoviesFragmentViewModel(@NonNull Application application) {
         super(application);
 
     }

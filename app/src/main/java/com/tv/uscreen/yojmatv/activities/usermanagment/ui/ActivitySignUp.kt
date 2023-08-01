@@ -94,9 +94,9 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
         uiCall()
         setClicks()
         connectionObserver()
-//        setTextWatcher()
-//        emailTextWatcher()
-//        passwordTextWatcher()
+        setTextWatcher()
+        emailTextWatcher()
+        passwordTextWatcher()
     }
 
     private fun parseColor() {
@@ -128,7 +128,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
             }
             override fun afterTextChanged(editable: Editable) {
-//               editTextEmptyCheck()
+               editTextEmptyCheck()
             }
         })
     }
@@ -139,9 +139,27 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
             }
             override fun afterTextChanged(editable: Editable) {
-//                editTextEmptyCheck()
+                editTextEmptyCheck()
             }
         })
+    }
+
+
+    private fun editTextEmptyCheck(): Boolean {
+        val email=binding?.email?.text
+        val pass=binding?.password?.text
+        val cnfPass=binding?.confPassword?.text
+        if(!email.isNullOrEmpty() && !pass.isNullOrEmpty() && !cnfPass.isNullOrEmpty()&& binding?.checkBox?.isChecked == true) {
+            binding?.signUp?.isEnabled = true
+            binding?.signUp?.setBackgroundResource(R.drawable.roundedcornerforbtn)
+            binding?.signUp?.setTextColor(getColor(R.color.main_btn_txt_color))
+            return true
+        } else{
+            binding?.signUp?.isEnabled = false
+            binding?.signUp?.setBackgroundResource(R.drawable.signup_btn_gredient)
+            binding?.signUp?.setTextColor(getColor(R.color.main_btn_txt_color))
+            return false
+        }
     }
 
 
@@ -811,7 +829,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
             }
             override fun afterTextChanged(editable: Editable) {
-//               editTextEmptyCheck()
+               editTextEmptyCheck()
             }
         })
     }

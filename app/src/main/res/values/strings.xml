@@ -932,6 +932,9 @@ When children go to school. and found lessons from the documentary Children will
     <string name="account_edit_profile">Edit Profile</string>
     <string name="account_change_password">Change Password</string>
     <string name="account_logout">Logout</string>
+    <string name="more_contact_us">Contact Us</string>
+    <string name="kids_tabbar">Yojma Kids</string>
+    <string name="series_tabbar">Series &amp; Docs</string>
     <string name="signup_term_condition">I accept the Terms and Conditions and the Privacy Policy</string>
     <string name="popup_empty_Password">Empty password</string>
 

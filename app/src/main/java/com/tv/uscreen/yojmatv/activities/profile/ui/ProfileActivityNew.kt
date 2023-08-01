@@ -19,6 +19,7 @@ import com.moe.pushlibrary.MoEHelper
 import com.moengage.core.Properties
 import com.tv.uscreen.yojmatv.Bookmarking.BookmarkingViewModel
 import com.tv.uscreen.yojmatv.R
+import com.tv.uscreen.yojmatv.activities.homeactivity.ui.HomeActivity
 import com.tv.uscreen.yojmatv.activities.profile.CountryListActivity
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.activities.usermanagment.viewmodel.RegistrationLoginViewModel
@@ -505,7 +506,7 @@ class ProfileActivityNew : BaseBindingActivity<ProfileActivityNewBinding?>(), Ed
             deleteAccount()
         }
         if(isUpdateRecord){
-            ActivityLauncher.getInstance().goToAccountSetting(this, AccountSettingActivity::class.java)
+            ActivityLauncher.getInstance().homeScreen(this, HomeActivity::class.java)
         }
     }
 

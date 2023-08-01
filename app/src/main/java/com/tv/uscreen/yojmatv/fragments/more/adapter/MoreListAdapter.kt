@@ -41,6 +41,8 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
     private var termsCondition= ""
     private var manageSubscription= ""
     private var privacyPolicy= ""
+    private var contactUs= ""
+
 
     init {
         val layoutInflater = LayoutInflater.from(mContext)
@@ -86,6 +88,12 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
             stringsHelper.instance()?.data?.config?.more_term_condition.toString(),
            mContext.getString(R.string.more_term_condition)
         )
+
+        contactUs = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.more_contact_us.toString(),
+            mContext.getString(R.string.more_contact_us)
+        )
+
         return ViewHolder(moreItemBinding)
     }
 
@@ -107,6 +115,8 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
            // 4 -> callDrawableHelper(mContext, R.drawable.ic_order_history, v)
             3 -> callDrawableHelper(mContext, R.drawable.ic_privacy, v)
             4 -> callDrawableHelper(mContext, R.drawable.ic_terms, v)
+            5 -> callDrawableHelper(mContext, R.drawable.ic_contact_us, v)
+
             else -> {}
         }
     }
@@ -162,6 +172,8 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
                     itemClickListener.onClick(privacyPolicy)
                 } else if (itemsList[layoutPosition] ==termsCondition) {
                     itemClickListener.onClick(termsCondition)
+                }  else if (itemsList[layoutPosition] ==contactUs ) {
+                    itemClickListener.onClick(contactUs)
                 }
             }
         }

@@ -361,8 +361,6 @@ public final class ActivityLauncher {
         Intent intent = new Intent(source, destination);
         intent.putExtra("fromWhich", screenName);
         source.startActivity(intent);
-        source.finish();
-
     }
 
     public void goToPlanScreen(Activity source, Class<ActivitySelectSubscriptionPlan> destination, String screenName) {
