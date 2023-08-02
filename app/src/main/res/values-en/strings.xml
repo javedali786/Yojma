@@ -258,7 +258,6 @@
     <string name="show_comment">Show Comment</string>
     <string name="error_branch_sharing_url">Unable to share currently. Please try again later.</string>
     <string name="branch_key">key_live_cdJ7zkyRJg31rm79E5t5QkleDAmzOaM7</string>
-    <string name="fcm_host_link" translatable="false">https://yojmatv.page.link</string>
     <string name="branch_key_test">key_test_gpJ7BfyMRb11xoZ01dyIsjhbwCfwJgWb</string>
     <string name="VIDEO">VOD</string>
     <string name="tab_heading_episodes">EPISODES</string>

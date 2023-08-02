@@ -303,7 +303,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                         sharingIntent.setType("text/plain")
                                         sharingIntent.putExtra(
                                             Intent.EXTRA_TEXT,
-                                            activity.getResources().getString(R.string.checkout) + " " + title + " " + activity.getResources()
+                                            activity.resources.getString(R.string.checkout) + " " + title + " " + activity.getResources()
                                                 .getString(R.string.on_enveu) + "\n" + dynamicLinkUri.toString()
                                         )
                                         // sharingIntent.putExtra(Intent.EXTRA_TEXT, activity.getResources().getString(R.string.checkout) + " " + asset.getName() + " " + activity.getResources().getString(R.string.on_Dialog) + "\n" + "https://stagingsott.page.link/?link="+dynamicLinkUri.toString()+"&apn=com.astro.stagingsott");

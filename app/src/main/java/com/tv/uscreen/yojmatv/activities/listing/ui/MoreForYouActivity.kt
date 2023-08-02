@@ -77,7 +77,7 @@ class MoreForYouActivity : BaseBindingActivity<MoreForyouActivityBinding?>(), Re
     private fun hideProgressBar() {}
     private val episodeList: Unit
         get() {
-            binding!!.listMoreRecyclerview.addItemDecoration(GridSpacingItemDecoration(3, 6, true))
+            binding!!.listMoreRecyclerview.addItemDecoration(GridSpacingItemDecoration(2, 4, true))
             railInjectionHelper = ViewModelProvider(this)[RailInjectionHelper::class.java]
             forYouContent
         }// all episode view to set here
@@ -108,7 +108,7 @@ class MoreForYouActivity : BaseBindingActivity<MoreForyouActivityBinding?>(), Re
                                     RecyclerAnimator(this@MoreForYouActivity).animate(binding!!.listMoreRecyclerview)
                                     RelatedContentAdapter = RelatedContentAdapter(this@MoreForYouActivity, allEpiosdes, seriesId, currentAssetId, this@MoreForYouActivity)
                                     updateSeasonEpisodeNumber(-1, RelatedContentAdapter!!.currentEpisodeNumber)
-                                    binding!!.listMoreRecyclerview.layoutManager = GridLayoutManager(this@MoreForYouActivity, 3)
+                                     binding!!.listMoreRecyclerview.layoutManager = GridLayoutManager(this@MoreForYouActivity, 2)
                                     (binding!!.listMoreRecyclerview.itemAnimator as SimpleItemAnimator?)!!.supportsChangeAnimations = false
                                     binding!!.listMoreRecyclerview.adapter = RelatedContentAdapter
                                 } else {

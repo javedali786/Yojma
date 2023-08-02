@@ -331,7 +331,6 @@
     <string name="please_unsubcribe_to_continue">"Por favor cancele la suscripción al plan actual de Play Store para continuar."</string>
     <string name="payment_error">Hubo un error al procesando tu solicitud, inténtalo en un rato. Si requieres soporte adicional, por favor contáctanos en</string>
     <string name="detail_page_no_data_available">Datos no disponibles</string>
-    <string name="fcm_host_link" translatable="false">https://yojmatv.page.link</string>
     <string name="detail_page_related_videos">Videos relacionados</string>
     <string name="tab_heading_episodes">Espisodios</string>
     <string name="remove">Eliminar </string>

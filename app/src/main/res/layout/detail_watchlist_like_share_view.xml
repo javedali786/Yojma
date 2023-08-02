@@ -61,7 +61,7 @@
                 <ImageView
                     android:id="@+id/addIcon"
                     android:layout_width="@dimen/top_logo_34dp"
-                    android:layout_height="@dimen/icon_size_22dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
                     android:contentDescription="@string/watchlist"
                     android:background="@drawable/ic_list"
@@ -92,7 +92,7 @@
                 <ImageView
                     android:id="@+id/share_img"
                     android:layout_width="@dimen/top_size_29dp"
-                    android:layout_height="@dimen/top_size_28dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:background="@drawable/ic_share_icon"
                     android:contentDescription="@string/detail_page_share"

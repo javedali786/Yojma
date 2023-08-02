@@ -236,7 +236,6 @@
     <string name="something_went_wrong_at_our_end_please_try_later">Something went wrong at our end. Please try again.</string>
 
     <string name="membership_and_plan_title">join us to watch latest blockbusters, exclusive videos</string>
-    <string name="fcm_host_link" translatable="false">https://yojmatv.page.link</string>
     <string name="logged_out">Logged Out</string>
     <string name="subscription">Subscription</string>
     <string name="subscribe">Subscribe</string>
