@@ -583,7 +583,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="login_pwd">Password</string>
     <string name="login_sign_in">Sign In</string>
     <string name="login_forgot_pwd">Forgot Password?</string>
-    <string name="login_do_not_an_account">Don’t have an account</string>
+    <string name="login_do_not_an_account">Don’t have an account?</string>
     <string name="forgot_enter_email">Please enter your e-mail</string>
     <string name="onboarding_title">We would like to know your preferences</string>
     <string name="onbording_subtitle">I Am A</string>

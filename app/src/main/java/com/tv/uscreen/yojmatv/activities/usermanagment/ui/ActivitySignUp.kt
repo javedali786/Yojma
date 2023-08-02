@@ -94,9 +94,9 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
         uiCall()
         setClicks()
         connectionObserver()
-        setTextWatcher()
+       /* setTextWatcher()
         emailTextWatcher()
-        passwordTextWatcher()
+        passwordTextWatcher()*/
     }
 
     private fun parseColor() {
@@ -451,7 +451,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
             mLastClickTime = SystemClock.elapsedRealtime()
             hideSoftKeyboard(binding?.signUp)
             if (CheckInternetConnection.isOnline(this@ActivitySignUp)) {
-                if(validateEmptyEmail() && validateEmail() && validateEmptyPassword() && validateEmptyConfirmPassword() && confirmPasswordCheck(binding?.password?.text.toString(),binding?.confPassword?.text.toString())){
+                if(validateEmptyEmail() && validateEmail() && validateEmptyPassword() && validateEmptyConfirmPassword() && confirmPasswordCheck(binding?.password?.text.toString(),binding?.confPassword?.text.toString()) && binding?.checkBox?.isChecked == true){
                     hitSignUpApi()
                 }
 

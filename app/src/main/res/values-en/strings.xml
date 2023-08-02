@@ -543,7 +543,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="login_pwd">Password</string>
     <string name="login_sign_in">Sign In</string>
     <string name="login_forgot_pwd">Forgot Password?</string>
-    <string name="login_do_not_an_account">Don’t have an account</string>
+    <string name="login_do_not_an_account">Don’t have an account?</string>
     <string name="forgot_enter_email">Please enter your e-mail</string>
     <string name="hunting_species">hunting species</string>
     <string name="hunting_types">hunting types</string>
@@ -661,8 +661,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="error">Error</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="not_entitled">You are not entitled to view this content</string>
-    <string name="select_plan">Access to premium content is just a click away. Please select
-the purchase option : </string>
+    <string name="select_plan">Access to premium content is just a click away. Please select the purchase option : </string>
     <string name="select_plan_player"> Access to premium content you need to purchase subscription</string>
     <string name="user_empty_name">Please update your mobile no. and name in your profile.</string>
     <string name="user_verify_player">You need to verify your account to watch content.</string>

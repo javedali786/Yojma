@@ -72,7 +72,7 @@
     <color name="series_detail_keyword_text_color">#FFFFFF</color>
     <color name="series_detail_quality_text_color">#FFFFFF</color>
     <color name="series_detail_watch_trailer_text_color">#FFFFFF</color>
-    <color name="series_detail_watch_trailer_background_color">#000000</color>
+    <color name="series_detail_watch_trailer_background_color">#0D002A</color>
     <color name="series_detail_watch_trailer_border_color">#FFFFFF</color>
     <color name="series_detail_userInteraction_text_color">#FFFFFF</color>
     <color name="series_detail_episode_unselected_btn_bg_color">#FFFFFF</color>
