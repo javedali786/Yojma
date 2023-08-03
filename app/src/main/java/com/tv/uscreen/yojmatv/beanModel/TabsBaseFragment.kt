@@ -34,7 +34,9 @@ import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.CommonRailtItemClickList
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.MoreClickListner
 import com.tv.uscreen.yojmatv.databinding.FragmentHomeBinding
 import com.tv.uscreen.yojmatv.fragments.home.viewModel.HomeFragmentViewModel
-import com.tv.uscreen.yojmatv.fragments.movies.viewModel.MovieFragmentViewModel
+import com.tv.uscreen.yojmatv.fragments.kids.viewModel.KidsFragmentViewModel
+import com.tv.uscreen.yojmatv.fragments.movies.viewModel.MoviesFragmentViewModel
+import com.tv.uscreen.yojmatv.fragments.series.viewModel.SeriesFragmentViewModel
 import com.tv.uscreen.yojmatv.utils.Logger
 import com.tv.uscreen.yojmatv.utils.ObjectHelper
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
@@ -89,13 +91,17 @@ open class TabsBaseFragment<T : HomeBaseViewModel?> : BaseBindingFragment<Fragme
             if (configResponse.data != null && configResponse.data.appConfig != null && configResponse.data.appConfig.navScreens != null) {
                 if (viewModel is HomeFragmentViewModel) {
                     tabId = SDKConfig.getInstance().firstTabId
-                } else if (viewModel is MovieFragmentViewModel) {
+                }  else if (viewModel is MoviesFragmentViewModel) {
                     tabId = SDKConfig.getInstance().secondTabId
+                } else if (viewModel is SeriesFragmentViewModel) {
+                    tabId = SDKConfig.getInstance().thirdTabId
+                } else if (viewModel is KidsFragmentViewModel) {
+                    tabId = SDKConfig.getInstance().fourthTabId
                 }
             } else {
                 tabId = if (viewModel is HomeFragmentViewModel) {
                     AppConstants.HOME_ENVEU
-                }  else if (viewModel is MovieFragmentViewModel) {
+                }  else if (viewModel is KidsFragmentViewModel) {
                     AppConstants.ORIGINAL_ENVEU
                 } else {
                     AppConstants.HOME_ENVEU
@@ -104,7 +110,7 @@ open class TabsBaseFragment<T : HomeBaseViewModel?> : BaseBindingFragment<Fragme
         } catch (ex: Exception) {
             tabId = if (viewModel is HomeFragmentViewModel) {
                 AppConstants.HOME_ENVEU
-            }  else if (viewModel is MovieFragmentViewModel) {
+            }  else if (viewModel is KidsFragmentViewModel) {
                 AppConstants.ORIGINAL_ENVEU
             } else {
                 AppConstants.HOME_ENVEU

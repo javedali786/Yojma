@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:458328131335:android:4ebffc1b7effe2829867a2",
+        "mobilesdk_app_id": "1:458328131335:android:be404f1ed3d4a3959867a2",
         "android_client_info": {
-          "package_name": "com.tv.uscreen.yojmatv"
+          "package_name": "tv.uscreen.yojmatv"
         }
       },
       "oauth_client": [

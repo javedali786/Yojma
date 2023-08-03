@@ -900,7 +900,7 @@ public class APIServiceLayer {
             try {
                 ApiInterface backendApi = RequestConfig.getClientSearch().create(ApiInterface.class);
                 if (type.equalsIgnoreCase(AppConstants.VIDEO)) {
-                    if (header.equalsIgnoreCase(AppConstants.SEARCH_RESULT)) {
+                    if (header.equalsIgnoreCase(AppConstants.SEARCH_RESULT) || header.equalsIgnoreCase(AppConstants.SPANISH_SEARCH_RESULT) ) {
                         call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,StringMediaTypes);
                     } /*else if (header.equalsIgnoreCase(AppConstants.episodes)){
                         call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,MediaTypeConstants.getInstance().getEpisode());

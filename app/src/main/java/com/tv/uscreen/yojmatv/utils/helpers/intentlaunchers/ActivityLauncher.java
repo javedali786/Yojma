@@ -12,7 +12,6 @@ import com.enveu.client.baseCollection.baseCategoryModel.BaseCategory;
 import com.example.jwplayer.PlayerActivity;
 import com.tv.uscreen.yojmatv.activities.Novelties.ui.NoveltiesActivity;
 import com.tv.uscreen.yojmatv.activities.detail.ui.DetailActivity;
-import com.tv.uscreen.yojmatv.activities.detail.ui.DetailsNew;
 import com.tv.uscreen.yojmatv.activities.detail.ui.EpisodeActivity;
 import com.tv.uscreen.yojmatv.activities.downloads.MyDownloads;
 import com.tv.uscreen.yojmatv.activities.homeactivity.ui.HomeActivity;
@@ -361,8 +360,6 @@ public final class ActivityLauncher {
         Intent intent = new Intent(source, destination);
         intent.putExtra("fromWhich", screenName);
         source.startActivity(intent);
-        source.finish();
-
     }
 
     public void goToPlanScreen(Activity source, Class<ActivitySelectSubscriptionPlan> destination, String screenName) {
@@ -409,22 +406,6 @@ public final class ActivityLauncher {
         activity.startActivity(new Intent(activity, destination));
     }
 
-    public void goToNewsDetail(Activity activity, Class<DetailsNew> destination, int Id) {
-        Intent intent = new Intent(activity, destination);
-        intent.putExtra("contentId", Id);
-        activity.startActivity(intent);
-    }
-
-    public void goToEventDetail(Activity activity, Class<DetailsNew> destination) {
-        activity.startActivity(new Intent(activity, destination));
-    }
-
-//    public void goToExpeditionDetail(Activity activity, Class<ExpeditionDetail> destination,int Id,boolean IsFrom){
-//        Intent intent = new Intent(activity, destination);
-//        intent.putExtra("contentId",Id);
-//        intent.putExtra("isFrom",IsFrom);
-//        activity.startActivity(intent);
-//    }
 
     public void resultActivityBundle(Activity source, Class<ActivityResults> destination, String assetType, String searchKey, int total, boolean applyFilter, String customContentType, String videoType, String header) {
         Bundle args = new Bundle();

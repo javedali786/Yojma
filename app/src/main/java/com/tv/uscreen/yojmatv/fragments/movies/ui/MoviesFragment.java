@@ -3,12 +3,12 @@ package com.tv.uscreen.yojmatv.fragments.movies.ui;
 import android.os.Bundle;
 
 import com.tv.uscreen.yojmatv.beanModel.TabsBaseFragment;
-import com.tv.uscreen.yojmatv.fragments.movies.viewModel.MovieFragmentViewModel;
+import com.tv.uscreen.yojmatv.fragments.movies.viewModel.MoviesFragmentViewModel;
 
-public class MovieFragment extends TabsBaseFragment<MovieFragmentViewModel> {
+public class MoviesFragment extends TabsBaseFragment<MoviesFragmentViewModel> {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setViewModel(MovieFragmentViewModel.class);
+        setViewModel(MoviesFragmentViewModel.class);
     }
 }

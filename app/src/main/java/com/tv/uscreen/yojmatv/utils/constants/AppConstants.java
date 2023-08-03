@@ -353,6 +353,8 @@ public interface AppConstants {
     String Gaming = "GAMING";
     String Reel = "REEL";
     String SEARCH_RESULT= "Search result";
+    String SPANISH_SEARCH_RESULT= "Resultado de búsqueda";
+
 
 
 

@@ -12,7 +12,7 @@
     <string name="playstore_subscription_monthly" translatable="false">monthly</string>
     <string name="playstore_subscription_weekly" translatable="false">weekly</string>
     <string name="enter_valid_coupon_code">Please enter a coupon code</string>
-    <string name="fcm_host_link" translatable="false">https://yojmatv.page.link</string>
+    <string name="fcm_host_link" translatable="false">https://yojma.page.link</string>
     <string name="minutes">minutes</string>
 
 </resources>

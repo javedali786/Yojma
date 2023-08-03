@@ -41,7 +41,7 @@ class HelpActivity : BaseBindingActivity<ActivityHelpBinding?>() {
         } else if (type.equals("2", ignoreCase = true)) {
             ToolBarHandler.getInstance().setHelpAction(binding, this@HelpActivity.resources.getString(R.string.privacy_policy), this)
         } else if (type.equals("3", ignoreCase = true)) {
-            ToolBarHandler.getInstance().setHelpAction(binding, this@HelpActivity.resources.getString(R.string.contact_us), this)
+            ToolBarHandler.getInstance().setHelpAction(binding, this@HelpActivity.resources.getString(R.string.more_contact_us), this)
         } else if (type.equals("4", ignoreCase = true)) {
             ToolBarHandler.getInstance().setHelpAction(binding, this@HelpActivity.resources.getString(R.string.faq), this)
         } else if (type.equals("5", ignoreCase = true)) {

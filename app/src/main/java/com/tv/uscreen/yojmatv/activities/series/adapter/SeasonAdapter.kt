@@ -61,8 +61,7 @@ class SeasonAdapter(
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): SeasonViewHolder {
-        val itemBinding: RowEpisodeListBinding
-        itemBinding = DataBindingUtil.inflate(
+        val itemBinding: RowEpisodeListBinding = DataBindingUtil.inflate(
             LayoutInflater.from(viewGroup.context),
             R.layout.row_episode_list, viewGroup, false
         )

@@ -525,8 +525,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
                 SDKConfig.getInstance().getBASE_URL(),
                 SDKConfig.getInstance().getOVP_BASE_URL(),
                 "",
-                BuildConfig.VERSION_NAME,
-                DEVICE_TYPE, API_KEY,
+                DEVICE_TYPE,BuildConfig.VERSION_NAME, API_KEY,
                 BasePlatform.android.name(), isTablet,
                 AppCommonMethod.getDeviceId(getContentResolver()),SDKConfig.getInstance().getSUBSCRIPTION_BASE_URL());
         BaseConfiguration.Companion.getInstance().clientSetup(client);

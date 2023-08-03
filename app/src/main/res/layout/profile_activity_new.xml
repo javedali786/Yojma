@@ -211,7 +211,7 @@
                                 android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_txt_color) ? @color/tph_txt_color : Color.parseColor(colorsData.instance().data.config.tph_txt_color), default=@color/tph_txt_color}"
                                 android:hint="@{TextUtils.isEmpty(stringData.instance().data.config.profile_mobile_number) ? @string/profile_mobile_number : stringData.instance().data.config.profile_mobile_number , default=@string/profile_mobile_number}"
                                 android:inputType="phone"
-                                android:maxLength="9"
+                                android:maxLength="20"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/user_e_mail" />

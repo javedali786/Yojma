@@ -203,18 +203,24 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         }
 
         override fun onSettingClicked() {
-            super.onSettingClicked()
-            var settingList = ArrayList<String>()
-            if (!audioList.isNullOrEmpty() && audioList?.size!! > 1)
-                settingList.add(resources.getString(R.string.ep_settings_audio))
-            if (!captionList.isNullOrEmpty() && captionList?.size!! > 1)
-                settingList.add(resources.getString(R.string.ep_settings_subtitle))
+            try {
+                super.onSettingClicked()
+                var settingList = ArrayList<String>()
+                if (!audioList.isNullOrEmpty() && audioList?.size!! > 1)
+                    settingList.add(resources.getString(R.string.ep_settings_audio))
+                if (!captionList.isNullOrEmpty() && captionList?.size!! > 1)
+                    settingList.add(resources.getString(R.string.ep_settings_subtitle))
 
-            videoTracks =
-                TrackOptions.createVideoTracks(activity!!, mPlayer?.qualityLevels!!)
-            if (!videoTracks.isNullOrEmpty())
-                settingList.add(resources.getString(R.string.ep_settings_video))
-            viewBinding.seriesDetailAllEpisodeTxtColors.setSettingAdapter(settingList)
+                if(TrackOptions.createVideoTracks(activity!!, mPlayer?.qualityLevels!!).isNotEmpty()) {
+                    videoTracks = TrackOptions.createVideoTracks(activity!!, mPlayer?.qualityLevels!!)
+                }
+                if (!videoTracks.isNullOrEmpty())
+                    settingList.add(resources.getString(R.string.ep_settings_video))
+                viewBinding.seriesDetailAllEpisodeTxtColors.setSettingAdapter(settingList)
+            } catch (e:java.lang.Exception) {
+
+            }
+
 
         }
 

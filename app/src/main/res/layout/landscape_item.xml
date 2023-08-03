@@ -82,7 +82,7 @@
                     style="@style/Custom.Widget.CardView"
                     android:layout_width="match_parent"
                     card_view:cardCornerRadius="8dp"
-                    app:cardBackgroundColor="@color/try_again_btn_txt_color"
+                    app:cardBackgroundColor="@color/app_bg_color"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/NontonSize2">
 

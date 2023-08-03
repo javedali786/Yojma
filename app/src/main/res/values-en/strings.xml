@@ -18,6 +18,9 @@
     <string name="check_connection">Check Connection</string>
     <string name="no_order_history">No order history found</string>
     <string name="search_result">Search result</string>
+    <string name="more_contact_us">Contact Us</string>
+    <string name="kids_tabbar">Yojma Kids</string>
+    <string name="series_tabbar">Series &amp; Docs</string>
     <string name="on_enveu">on Yojma Tv!</string>
     <string name="full_name">Name</string>
     <string name="recent_search">"Recent Searches"</string>
@@ -255,7 +258,6 @@
     <string name="show_comment">Show Comment</string>
     <string name="error_branch_sharing_url">Unable to share currently. Please try again later.</string>
     <string name="branch_key">key_live_cdJ7zkyRJg31rm79E5t5QkleDAmzOaM7</string>
-    <string name="fcm_host_link" translatable="false">https://yojmatv.page.link</string>
     <string name="branch_key_test">key_test_gpJ7BfyMRb11xoZ01dyIsjhbwCfwJgWb</string>
     <string name="VIDEO">VOD</string>
     <string name="tab_heading_episodes">EPISODES</string>
@@ -540,7 +542,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="login_pwd">Password</string>
     <string name="login_sign_in">Sign In</string>
     <string name="login_forgot_pwd">Forgot Password?</string>
-    <string name="login_do_not_an_account">Don’t have an account</string>
+    <string name="login_do_not_an_account">Don’t have an account?</string>
     <string name="forgot_enter_email">Please enter your e-mail</string>
     <string name="hunting_species">hunting species</string>
     <string name="hunting_types">hunting types</string>
@@ -658,8 +660,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="error">Error</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="not_entitled">You are not entitled to view this content</string>
-    <string name="select_plan">Access to premium content is just a click away. Please select
-the purchase option : </string>
+    <string name="select_plan">Access to premium content is just a click away. Please select the purchase option : </string>
     <string name="select_plan_player"> Access to premium content you need to purchase subscription</string>
     <string name="user_empty_name">Please update your mobile no. and name in your profile.</string>
     <string name="user_verify_player">You need to verify your account to watch content.</string>

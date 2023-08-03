@@ -236,7 +236,6 @@
     <string name="something_went_wrong_at_our_end_please_try_later">Something went wrong at our end. Please try again.</string>
 
     <string name="membership_and_plan_title">join us to watch latest blockbusters, exclusive videos</string>
-    <string name="fcm_host_link" translatable="false">https://yojmatv.page.link</string>
     <string name="logged_out">Logged Out</string>
     <string name="subscription">Subscription</string>
     <string name="subscribe">Subscribe</string>
@@ -583,7 +582,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="login_pwd">Password</string>
     <string name="login_sign_in">Sign In</string>
     <string name="login_forgot_pwd">Forgot Password?</string>
-    <string name="login_do_not_an_account">Don’t have an account</string>
+    <string name="login_do_not_an_account">Don’t have an account?</string>
     <string name="forgot_enter_email">Please enter your e-mail</string>
     <string name="onboarding_title">We would like to know your preferences</string>
     <string name="onbording_subtitle">I Am A</string>
@@ -932,6 +931,9 @@ When children go to school. and found lessons from the documentary Children will
     <string name="account_edit_profile">Edit Profile</string>
     <string name="account_change_password">Change Password</string>
     <string name="account_logout">Logout</string>
+    <string name="more_contact_us">Contact Us</string>
+    <string name="kids_tabbar">Yojma Kids</string>
+    <string name="series_tabbar">Series &amp; Docs</string>
     <string name="signup_term_condition">I accept the Terms and Conditions and the Privacy Policy</string>
     <string name="popup_empty_Password">Empty password</string>
 

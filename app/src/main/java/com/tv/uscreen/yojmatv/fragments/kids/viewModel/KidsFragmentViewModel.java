@@ -1,4 +1,4 @@
-package com.tv.uscreen.yojmatv.fragments.news.viewModel;
+package com.tv.uscreen.yojmatv.fragments.kids.viewModel;
 
 import android.app.Application;
 
@@ -13,17 +13,17 @@ import com.tv.uscreen.yojmatv.utils.constants.AppConstants;
 import java.util.List;
 
 
-public class ReelsFragmentViewModel extends HomeBaseViewModel {
+public class KidsFragmentViewModel extends HomeBaseViewModel {
 
-    public ReelsFragmentViewModel(@NonNull Application application) {
+    public KidsFragmentViewModel(@NonNull Application application) {
         super(application);
-
     }
+
 
     @Override
     public LiveData<List<BaseCategory>> getAllCategories() {
 
-        return HomeFragmentRepository.getInstance().getCategories(AppConstants.ORIGINAL_ENVEU);
+        return HomeFragmentRepository.getInstance().getCategories(AppConstants.HOME_ENVEU);
     }
 
 

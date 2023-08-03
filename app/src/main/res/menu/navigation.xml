@@ -11,6 +11,16 @@
         android:icon="@drawable/ic_movie"
         android:title="@string/movie_tabbar" />
 
+    <item
+        android:id="@+id/navigation_series"
+        android:icon="@drawable/ic_series"
+        android:title="@string/series_tabbar" />
+
+    <item
+        android:id="@+id/navigation_Kids"
+        android:icon="@drawable/ic_kids"
+        android:title="@string/kids_tabbar" />
+
 
     <item
         android:id="@+id/navigation_more"

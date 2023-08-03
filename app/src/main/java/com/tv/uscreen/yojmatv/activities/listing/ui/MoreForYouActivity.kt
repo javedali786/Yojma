@@ -9,11 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.tv.uscreen.yojmatv.R
+import com.tv.uscreen.yojmatv.activities.series.adapter.RelatedContentAdapter
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
 import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.databinding.MoreForyouActivityBinding
-import com.tv.uscreen.yojmatv.fragments.foryou.ui.ForYouAdapter
 import com.tv.uscreen.yojmatv.networking.apistatus.APIStatus
 import com.tv.uscreen.yojmatv.utils.Logger
 import com.tv.uscreen.yojmatv.utils.MediaTypeConstants
@@ -26,14 +26,14 @@ import com.tv.uscreen.yojmatv.utils.helpers.RecyclerAnimator
 import com.tv.uscreen.yojmatv.utils.helpers.StringUtils
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 
-class MoreForYouActivity : BaseBindingActivity<MoreForyouActivityBinding?>(), ForYouAdapter.EpisodeItemClick {
+class MoreForYouActivity : BaseBindingActivity<MoreForyouActivityBinding?>(), RelatedContentAdapter.EpisodeItemClick {
     private var contentType: String? = null
     var totalPages = 0
     private var railInjectionHelper: RailInjectionHelper? = null
     private val seriesId = 0
     private val context: Context? = null
     private val currentAssetId = 0
-    private var forYouAdapter: ForYouAdapter? = null
+    private var RelatedContentAdapter: RelatedContentAdapter? = null
     private var allEpiosdes: MutableList<EnveuVideoItemBean> = ArrayList()
     private var videoType: String? = ""
     private var tag: String? = ""
@@ -77,7 +77,7 @@ class MoreForYouActivity : BaseBindingActivity<MoreForyouActivityBinding?>(), Fo
     private fun hideProgressBar() {}
     private val episodeList: Unit
         get() {
-            binding!!.listMoreRecyclerview.addItemDecoration(GridSpacingItemDecoration(3, 6, true))
+            binding!!.listMoreRecyclerview.addItemDecoration(GridSpacingItemDecoration(2, 4, true))
             railInjectionHelper = ViewModelProvider(this)[RailInjectionHelper::class.java]
             forYouContent
         }// all episode view to set here
@@ -99,21 +99,21 @@ class MoreForYouActivity : BaseBindingActivity<MoreForyouActivityBinding?>(), Fo
                                 // all episode view to set here
                                 if (enveuCommonResponse.pageTotal - 1 > totalPages) {
                                 }
-                                if (forYouAdapter == null) {
+                                if (RelatedContentAdapter == null) {
                                     allEpiosdes = enveuCommonResponse.enveuVideoItemBeans
                                     if (contentType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
                                         if (videoType.equals(MediaTypeConstants.getInstance().expedition, ignoreCase = true)) {
                                         }
                                     }
                                     RecyclerAnimator(this@MoreForYouActivity).animate(binding!!.listMoreRecyclerview)
-                                    forYouAdapter = ForYouAdapter(this@MoreForYouActivity, allEpiosdes, seriesId, currentAssetId, this@MoreForYouActivity)
-                                    updateSeasonEpisodeNumber(-1, forYouAdapter!!.currentEpisodeNumber)
-                                    binding!!.listMoreRecyclerview.layoutManager = GridLayoutManager(this@MoreForYouActivity, 3)
+                                    RelatedContentAdapter = RelatedContentAdapter(this@MoreForYouActivity, allEpiosdes, seriesId, currentAssetId, this@MoreForYouActivity)
+                                    updateSeasonEpisodeNumber(-1, RelatedContentAdapter!!.currentEpisodeNumber)
+                                     binding!!.listMoreRecyclerview.layoutManager = GridLayoutManager(this@MoreForYouActivity, 2)
                                     (binding!!.listMoreRecyclerview.itemAnimator as SimpleItemAnimator?)!!.supportsChangeAnimations = false
-                                    binding!!.listMoreRecyclerview.adapter = forYouAdapter
+                                    binding!!.listMoreRecyclerview.adapter = RelatedContentAdapter
                                 } else {
                                     allEpiosdes.addAll(enveuCommonResponse.enveuVideoItemBeans)
-                                    forYouAdapter!!.notifyDataSetChanged()
+                                    RelatedContentAdapter!!.notifyDataSetChanged()
                                 }
                                 hideProgressBar()
                             }

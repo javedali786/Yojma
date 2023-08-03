@@ -22,8 +22,10 @@ import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
 import com.tv.uscreen.yojmatv.databinding.ActivityMainBinding
 import com.tv.uscreen.yojmatv.fragments.home.ui.HomeFragment
+import com.tv.uscreen.yojmatv.fragments.kids.ui.KidsFragment
 import com.tv.uscreen.yojmatv.fragments.more.ui.MoreFragment
-import com.tv.uscreen.yojmatv.fragments.movies.ui.MovieFragment
+import com.tv.uscreen.yojmatv.fragments.movies.ui.MoviesFragment
+import com.tv.uscreen.yojmatv.fragments.series.ui.SeriesFragment
 import com.tv.uscreen.yojmatv.utils.Logger
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.AppColors
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
@@ -42,9 +44,9 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
     private var preference: KsPreferenceKeys? = null
     private var homeFragment: Fragment? = null
     private var reelsFragment: Fragment? = null
-    private var gamingFragment: Fragment? = null
+    private var kidsFragment: Fragment? = null
     private var movieFragment: Fragment? = null
-    private var podcastFragment: Fragment? = null
+    private var seriesFragment: Fragment? = null
     private var moreFragment: Fragment? = null
     private var position = 0
     private var fragmentManager: FragmentManager? = null
@@ -111,13 +113,39 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
             }
 
             R.id.navigation_movie -> {
-                if (active !is MovieFragment) {
+                if (active !is MoviesFragment) {
                     if (movieFragment == null) {
-                        movieFragment = MovieFragment()
-                        fragmentManager!!.beginTransaction().add(R.id.content_frame, movieFragment as MovieFragment, "2")
-                            .hide(movieFragment as MovieFragment).commit()
+                        movieFragment =
+                            MoviesFragment()
+                        fragmentManager!!.beginTransaction().add(R.id.content_frame, movieFragment as MoviesFragment, "2")
+                            .hide(movieFragment as MoviesFragment).commit()
                     }
                     switchToMovieFragment()
+                }
+                return@OnItemSelectedListener true
+            }
+
+            R.id.navigation_series -> {
+                if (active !is SeriesFragment) {
+                    if (seriesFragment == null) {
+                        seriesFragment = SeriesFragment()
+                        fragmentManager!!.beginTransaction().add(R.id.content_frame, seriesFragment as SeriesFragment, "2")
+                            .hide(seriesFragment as SeriesFragment).commit()
+                    }
+                    switchToSeriesFragment()
+                }
+                return@OnItemSelectedListener true
+            }
+
+            R.id.navigation_Kids -> {
+                if (active !is KidsFragment) {
+                    if (kidsFragment == null) {
+                        kidsFragment =
+                            KidsFragment()
+                        fragmentManager!!.beginTransaction().add(R.id.content_frame, kidsFragment as KidsFragment, "2")
+                            .hide(kidsFragment as KidsFragment).commit()
+                    }
+                    switchToKidsFragment()
                 }
                 return@OnItemSelectedListener true
             }
@@ -151,17 +179,16 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
         active = reelsFragment
     }
 
-    private fun switchToGamingFragment() {
+    private fun switchToKidsFragment() {
         binding!!.toolbar.searchIcon.visibility = View.VISIBLE
-
-        fragmentManager!!.beginTransaction().hide(active!!).show(gamingFragment!!).commit()
-        active = gamingFragment
+        fragmentManager!!.beginTransaction().hide(active!!).show(kidsFragment!!).commit()
+        active = kidsFragment
     }
 
-    private fun switchToPodCastFragment() {
+    private fun switchToSeriesFragment() {
         binding!!.toolbar.searchIcon.visibility = View.VISIBLE
-        fragmentManager!!.beginTransaction().hide(active!!).show(podcastFragment!!).commit()
-        active = podcastFragment
+        fragmentManager!!.beginTransaction().hide(active!!).show(seriesFragment!!).commit()
+        active = seriesFragment
     }
 
     private fun switchToMoreFragment() {
@@ -195,6 +222,8 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
 
         bottomNavigationTextFromJson(navigation, R.id.navigation_home, stringsHelper.instance()?.data?.config?.home_tabbar.toString(), R.string.home_tabbar)
         bottomNavigationTextFromJson(navigation, R.id.navigation_movie, stringsHelper.instance()?.data?.config?.movie_tabbar.toString(), R.string.movie_tabbar)
+        bottomNavigationTextFromJson(navigation, R.id.navigation_series, stringsHelper.instance()?.data?.config?.series_tabbar.toString(), R.string.series_tabbar)
+        bottomNavigationTextFromJson(navigation, R.id.navigation_Kids, stringsHelper.instance()?.data?.config?.kids_tabbar.toString(), R.string.kids_tabbar)
         bottomNavigationTextFromJson(navigation, R.id.navigation_more, stringsHelper.instance()?.data?.config?.more_tabbar.toString(), R.string.more_tabbar)
 
         parseColor(navigation)

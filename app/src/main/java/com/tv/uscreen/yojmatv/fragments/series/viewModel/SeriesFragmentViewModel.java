@@ -1,4 +1,4 @@
-package com.tv.uscreen.yojmatv.fragments.movies.viewModel;
+package com.tv.uscreen.yojmatv.fragments.series.viewModel;
 
 import android.app.Application;
 
@@ -13,17 +13,17 @@ import com.tv.uscreen.yojmatv.utils.constants.AppConstants;
 import java.util.List;
 
 
-public class MovieFragmentViewModel extends HomeBaseViewModel {
+public class SeriesFragmentViewModel extends HomeBaseViewModel {
 
-    public MovieFragmentViewModel(@NonNull Application application) {
+    public SeriesFragmentViewModel(@NonNull Application application) {
         super(application);
-    }
 
+    }
 
     @Override
     public LiveData<List<BaseCategory>> getAllCategories() {
 
-        return HomeFragmentRepository.getInstance().getCategories(AppConstants.HOME_ENVEU);
+        return HomeFragmentRepository.getInstance().getCategories(AppConstants.ORIGINAL_ENVEU);
     }
 
 

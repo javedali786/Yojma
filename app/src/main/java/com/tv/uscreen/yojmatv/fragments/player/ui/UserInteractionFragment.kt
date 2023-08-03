@@ -66,7 +66,6 @@ class UserInteractionFragment : BaseBindingFragment<DetailWatchlistLikeShareView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //        ThemeHandler.getInstance().applyUserInterationPage(view.getContext(),getBinding());
         binding!!.stringData = StringsHelper
         binding!!.colorsData = ColorsHelper
         try {
