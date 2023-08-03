@@ -29,7 +29,6 @@ import com.tv.uscreen.yojmatv.fragments.more.adapter.MoreListAdapter
 import com.tv.uscreen.yojmatv.utils.Logger
 import com.tv.uscreen.yojmatv.utils.ObjectHelper
 import com.tv.uscreen.yojmatv.utils.TrackerUtil.MoEUserTracker.setUserProperties
-import com.tv.uscreen.yojmatv.utils.colorsJson.converter.AppColors
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.CheckInternetConnection
@@ -78,7 +77,7 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
         binding!!.colorsData = colorsHelper
         binding?.connection?.colorsData = colorsHelper
         binding?.connection?.stringData = stringsHelper
-        binding?.titleLayout?.background = colorsHelper.strokeBgDrawable(AppColors.appBgColor(), AppColors.profileImageBorderColor(), 200f)
+       // binding?.titleLayout?.background = colorsHelper.strokeBgDrawable(AppColors.appBgColor(), AppColors.profileImageBorderColor(), 200f)
     }
 
     private fun setUI() {

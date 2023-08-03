@@ -79,24 +79,29 @@ class RelatedContentAdapter(
     }
 
     override fun onBindViewHolder(holder: SeasonViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        if (videoItemBeans!![position] != null) {
-            holder.itemBinding.playlistItem = videoItemBeans[position]
-        }
+        holder.itemBinding.playlistItem = videoItemBeans[position]
 
         ImageHelper.getInstance(context).loadListImage(holder.itemBinding.itemImage, videoItemBeans[position]!!.posterURL)
 
 
+        //  ImageHelper.getInstance(context).loadImageToListPortrait(holder.itemBinding.itemImage, videoItemBeans.get(position).getPosterURL());
+        // Glide.with(context).load(videoItemBeans.get(position).getPosterURL()).into(holder.itemBinding.itemImage);
         holder.itemBinding.itemImage.setOnClickListener(View.OnClickListener {
-            if (videoItemBeans[position]!!.id == currentAssetId) {
+            if (videoItemBeans[position].id === currentAssetId) {
                 return@OnClickListener
             }
-            listner.onItemClick(videoItemBeans[position], videoItemBeans[position]!!.isPremium, position)
+            listner.onItemClick(
+                videoItemBeans[position],
+                videoItemBeans[position].isPremium,
+                position
+            )
         })
-        holder.itemBinding.itemImage.setOnClickListener { view: View? ->
+
+       /* holder.itemBinding.itemImage.setOnClickListener { view: View? ->
             Logger.d("positionIs" + videoItemBeans[position])
             id = videoItemBeans[position]!!.id
             notifyDataSetChanged()
-        }
+        }*/
     }
 
 

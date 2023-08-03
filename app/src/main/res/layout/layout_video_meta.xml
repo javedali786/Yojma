@@ -241,7 +241,6 @@
             android:layout_marginTop="@dimen/NontonSize10"
             android:background="@drawable/roundcorner"
             android:fontFamily="@font/sfuitext_bold"
-            android:backgroundTint="@{TextUtils.isEmpty(colorsData.instance().data.config.series_detail_watch_trailer_background_color) ? @color/series_detail_watch_trailer_background_color : Color.parseColor(colorsData.instance().data.config.series_detail_watch_trailer_background_color), default=@color/series_detail_watch_trailer_background_color}"
             android:gravity="center"
             android:text="@{TextUtils.isEmpty(stringData.instance().data.config.detail_page_trailer) ? @string/detail_page_trailer : stringData.instance().data.config.detail_page_trailer , default=@string/detail_page_trailer}"
             android:textAlignment="center"

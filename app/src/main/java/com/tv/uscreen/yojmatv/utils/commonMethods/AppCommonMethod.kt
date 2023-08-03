@@ -1687,20 +1687,20 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         }
 
         @JvmStatic
-        fun getMultilingualTitle(currentLang: String?, multilingualTitle: JsonObject, thaiCode: String?, englishCode: String?): String {
+        fun getMultilingualTitle(currentLang: String?, multilingualTitle: JsonObject, spanishCode: String?, englishCode: String?): String {
             var name = ""
             try {
-                if (KsPreferenceKeys.getInstance().getAppLanguage().equals("Thai", ignoreCase = true) || KsPreferenceKeys.getInstance().getAppLanguage().equals("हिंदी", ignoreCase = true)) {
+                if (KsPreferenceKeys.getInstance().appLanguage.equals("Spanish", ignoreCase = true)) {
                     for ((key, value) in multilingualTitle.entrySet()) {
-                        if (key.equals(thaiCode, ignoreCase = true)) {
-                            name = value.getAsString()
+                        if (key.equals(spanishCode, ignoreCase = true)) {
+                            name = value.asString
                             break
                         }
                     }
                 } else {
                     for ((key, value) in multilingualTitle.entrySet()) {
                         if (key.equals(englishCode, ignoreCase = true)) {
-                            name = value.getAsString()
+                            name = value.asString
                             break
                         }
                     }

@@ -151,7 +151,6 @@ open class TabsBaseFragment<T : HomeBaseViewModel?> : BaseBindingFragment<Fragme
     private fun uiInitialisation() {
         swipeToRefresh()
         callShimmer()
-        //ThemeHandler.getInstance().applyThemeHomeTabOne(requireContext(), getBinding());
         binding!!.noResultFound.colorsData = ColorsHelper
         binding!!.connection.colorsData = ColorsHelper
         binding!!.noResultFound.stringData = StringsHelper

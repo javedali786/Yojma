@@ -94,7 +94,7 @@ class ProfileActivityNew : BaseBindingActivity<ProfileActivityNewBinding?>(), Ed
     }
 
     private fun parseColor() {
-        binding?.titleLayout?.background = colorsHelper.strokeBgDrawable(AppColors.appBgColor(), AppColors.profileImageBorderColor(), 200f)
+       // binding?.titleLayout?.background = colorsHelper.strokeBgDrawable(AppColors.appBgColor(), AppColors.profileImageBorderColor(), 200f)
         binding?.userName?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
         binding?.userEMail?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
         binding?.countryId?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)

@@ -4,7 +4,6 @@ package com.tv.uscreen.yojmatv.fragments.player.ui
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -179,7 +178,6 @@ class RelatedContentFragment : BaseBindingFragment<RelatedContentFragmentLayoutB
 
     override fun onItemClick(enveuVideoItemBean: EnveuVideoItemBean?, isPremium: Boolean, position: Int) {
         val assetType = enveuVideoItemBean?.assetType?.uppercase(Locale.getDefault())
-        Log.w("assetclicked 1", isPremium.toString() + "")
         AppCommonMethod.redirectionLogic(requireContext(), railCommonData!!, position)
     }
 

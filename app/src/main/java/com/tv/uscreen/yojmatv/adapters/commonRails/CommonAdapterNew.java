@@ -524,23 +524,23 @@ public class CommonAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHold
                         headingRailsBinding.headingTitle.setText(name);
                     }
                 } else {
-                    if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("Thai")) {
-                        headingRailsBinding.headingTitle.setText("ดูต่อสำหรับ" + " " + headingRailsBinding.headingTitle.getContext().getResources().getString(R.string.For) + " " + KsPreferenceKeys.getInstance().getAppPrefUserName());
+                    if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("Spanish")) {
+                        headingRailsBinding.headingTitle.setText(item.getScreenWidget().getName()+ " " + headingRailsBinding.headingTitle.getContext().getResources().getString(R.string.For) + " " + KsPreferenceKeys.getInstance().getAppPrefUserName());
                     } else {
                         headingRailsBinding.headingTitle.setText(item.getScreenWidget().getName()+"");
                     }
                 }
             } else {
-                if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("Thai")) {
-                    headingRailsBinding.headingTitle.setText("ดูต่อสำหรับ" + " " + headingRailsBinding.headingTitle.getContext().getResources().getString(R.string.For) + " " + KsPreferenceKeys.getInstance().getAppPrefUserName());
+                if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("Spanish")) {
+                    headingRailsBinding.headingTitle.setText(item.getScreenWidget().getName() + " " + headingRailsBinding.headingTitle.getContext().getResources().getString(R.string.For) + " " + KsPreferenceKeys.getInstance().getAppPrefUserName());
                 } else {
                     headingRailsBinding.headingTitle.setText(
                             item.getScreenWidget().getName()+"");
                 }
             }
         } catch (Exception ignored) {
-            if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("Thai")) {
-                headingRailsBinding.headingTitle.setText("ดูต่อสำหรับ" + " " + headingRailsBinding.headingTitle.getContext().getResources().getString(R.string.For) + " " + KsPreferenceKeys.getInstance().getAppPrefUserName());
+            if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("Spanish")) {
+                headingRailsBinding.headingTitle.setText(item.getScreenWidget().getName()  + " " + headingRailsBinding.headingTitle.getContext().getResources().getString(R.string.For) + " " + KsPreferenceKeys.getInstance().getAppPrefUserName());
             } else {
                 headingRailsBinding.headingTitle.setText(item.getScreenWidget().getName()+ "");
             }

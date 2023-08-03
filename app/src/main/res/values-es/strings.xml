@@ -8,6 +8,7 @@
     <string name="onboarding_both_text">AMBOS</string>
     <string name="onboarding_btn_one_text">Personalizar</string>
     <string name="onboarding_btn_two_text">Llevame al Inicio</string>
+    <string name="my_watchlist">Mi favorito</string>
     <string name="popup_logout">Cerrar sesión</string>
     <string name="signup_display_name">Ingresa tu nombre</string>
     <string name="login_email">correo eléctronico</string>
