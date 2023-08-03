@@ -1,6 +1,7 @@
 package com.tv.uscreen.yojmatv.jwplayer.cast
 
 import android.content.Context
+import com.google.android.gms.cast.CastMediaControlIntent
 import com.google.android.gms.cast.LaunchOptions
 import com.google.android.gms.cast.framework.CastOptions
 import com.google.android.gms.cast.framework.OptionsProvider
@@ -18,7 +19,7 @@ class CastOptionsProvider : OptionsProvider {
             .build();
 
         val castOptions = CastOptions.Builder()
-            .setReceiverApplicationId(context.getString(R.string.cast_receiver_app_id))
+            .setReceiverApplicationId(CastMediaControlIntent.DEFAULT_MEDIA_RECEIVER_APPLICATION_ID)
             .setLaunchOptions(launchOptions)
             .build()
 
