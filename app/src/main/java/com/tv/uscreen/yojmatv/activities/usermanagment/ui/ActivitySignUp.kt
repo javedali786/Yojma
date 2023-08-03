@@ -56,7 +56,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
     AppleSignInListener {
     var font: Typeface? = null
     private var viewModel: RegistrationLoginViewModel? = null
-    private val permissionNeeds = Arrays.asList("email", "public_profile")
+    private val permissionNeeds = listOf("email", "public_profile")
     private var isNotificationEnable = false
     private val ifCheckboxIsChecked = true
     private lateinit var name:String
@@ -379,12 +379,9 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
             stringsHelper.instance()?.data?.config?.signup_term_condition.toString(),
             getString(R.string.signup_term_condition)
         )
-        val iAcceptThe = signupTermConditionText?.substring(0, 33) ?: getString(R.string.agree)
-        val terms = signupTermConditionText?.substring(13, 33) ?: getString(R.string.term)
-        val privacy = signupTermConditionText?.substring(signupTermConditionText.length-14, signupTermConditionText.length) ?: getString(R.string.term)
-        val andThe = signupTermConditionText?.substring(signupTermConditionText.length-22, signupTermConditionText.length) ?: getString(R.string.term)
 
-        setClickableString(terms, iAcceptThe, privacy , andThe)
+        setClickableString(getString(R.string.term), getString(R.string.agree),getString(R.string.privacy) , getString(R.string.and_the))
+
 
         binding?.checkBox?.setOnCheckedChangeListener { compoundButton: CompoundButton?, b: Boolean ->
             if (b) {

@@ -34,8 +34,7 @@ public class ImageLayer {
             if (videoItem.getContentType().equalsIgnoreCase(AppConstants.VIDEO)) {
                 if (videoItem.getVideo().getImages().size() > 0) {
                     for (int i = 0; i < videoItem.getVideo().getImages().size(); i++) {
-                        Log.d("JAVED", "getPosterImageUrl: " + videoItem.getVideo());
-                        if (videoItem.getVideo().getImages().get(i).isDefault()) {
+                       if (videoItem.getVideo().getImages().get(i).isDefault()) {
                             finalUrl = videoItem.getVideo().getImages().get(i).getSrc();
                             Log.w("imageURL", finalUrl);
                             break;
@@ -46,7 +45,6 @@ public class ImageLayer {
             } else if (videoItem.getContentType().equalsIgnoreCase(AppConstants.CUSTOM)) {
                 if (videoItem.getCustomContent().getImages().size() > 0) {
                     for (int i = 0; i < videoItem.getCustomContent().getImages().size(); i++) {
-                        Log.d("JAVED", "getPosterImageUrl: " + videoItem.getCustomContent());
                         if (videoItem.getCustomContent().getImages().get(i).isDefault()) {
                             finalUrl = videoItem.getCustomContent().getImages().get(i).getSrc();
                             Log.w("imageURL", finalUrl);

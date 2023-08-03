@@ -869,6 +869,19 @@ public class EnveuVideoItemBean implements Serializable {
             this.assetCast = details.getCast() == null ? new ArrayList<>() : details.getCast();
 
             if (details.getContentType().equalsIgnoreCase(AppConstants.VIDEO)) {
+                if (details.getVideo() != null) {
+                    this.videoDetails = details.getVideo();
+                    this.setVideoDetails(videoDetails);
+                }
+            }  else {
+                if (details.getContentType().equalsIgnoreCase(AppConstants.CUSTOM)) {
+                    if (details.getCustomContent() != null) {
+                        this.customType = details.getCustomContent().getCustomType();
+                    }
+                }
+            }
+
+            if (details.getContentType().equalsIgnoreCase(AppConstants.VIDEO)) {
                 this.posterURL = ImageLayer.getInstance().getPosterImageUrl1(details);
 
             } else if (details.getContentType().equalsIgnoreCase(AppConstants.CUSTOM)) {
@@ -896,16 +909,6 @@ public class EnveuVideoItemBean implements Serializable {
                 this.imageType = imageType;
             }
 
-            if (details.getContentType().equalsIgnoreCase(AppConstants.VIDEO)) {
-                if (details.getVideo() != null) {
-                    this.videoDetails = details.getVideo();
-                    Gson gson = new Gson();
-                    String tmp = gson.toJson(videoDetails);
-                    Log.d("Javed", "EnveuVideoItemBean: " + tmp);
-
-                    this.setVideoDetails(videoDetails);
-                }
-            }
 
 
             Object customeData = details.getCustomData();

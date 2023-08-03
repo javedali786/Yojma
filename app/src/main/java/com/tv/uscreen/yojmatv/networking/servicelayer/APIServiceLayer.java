@@ -924,7 +924,6 @@ public class APIServiceLayer {
                                         enveuVideoItemBeans = new ArrayList<>();
                                         Gson gson = new Gson();
                                         String json = gson.toJson(itemsItem);
-                                        Log.d("ENVUE", "onResponse: " + json);
                                         for (com.tv.uscreen.yojmatv.beanModelV3.searchV2.ItemsItem videoItem : itemsItem) {
                                             EnveuVideoItemBean enveuVideoItemBean = new EnveuVideoItemBean(videoItem);
                                             if (type.equalsIgnoreCase(MediaTypeConstants.getInstance().getSeries()) && videoItem.getSeasons() != null)

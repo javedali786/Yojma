@@ -11,23 +11,20 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-
-
 import com.tv.uscreen.yojmatv.R;
 import com.tv.uscreen.yojmatv.activities.search.ui.ActivitySearch;
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean;
-;
 import com.tv.uscreen.yojmatv.databinding.CommonSearchAdapterBinding;
 import com.tv.uscreen.yojmatv.utils.Logger;
-import com.tv.uscreen.yojmatv.utils.MediaTypeConstants;
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper;
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod;
-import com.tv.uscreen.yojmatv.utils.constants.AppConstants;
 import com.tv.uscreen.yojmatv.utils.helpers.ImageHelper;
 import com.tv.uscreen.yojmatv.utils.helpers.StringUtils;
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys;
 
 import java.util.List;
+
+;
 
 public class RowSearchAdapter extends RecyclerView.Adapter<RowSearchAdapter.SingleItemRowHolder> {
     private static final int ITEM = 0;
@@ -94,13 +91,16 @@ public class RowSearchAdapter extends RecyclerView.Adapter<RowSearchAdapter.Sing
         if (list.get(position) != null) {
             viewHolder.itemBinding.setPlaylistItem(list.get(position));
         }
-        try {
+        if (list.get(position).getPosterURL()!=null) {
+            ImageHelper.getInstance(context).loadListImage(viewHolder.itemBinding.itemImage, AppCommonMethod.getListLDSImage(list.get(position).getPosterURL(), context));
+        }
+
+        /*try {
             if (list.get(position).getAssetType().equalsIgnoreCase(AppConstants.VIDEO)) {
                 if (list.get(position).getVideoDetails().getVideoType().equalsIgnoreCase(MediaTypeConstants.getInstance().getSeries()) ||
                         list.get(position).getVideoDetails().getVideoType().equalsIgnoreCase(MediaTypeConstants.getInstance().getEpisode())
                         || list.get(position).getVideoDetails().getVideoType().equalsIgnoreCase(MediaTypeConstants.getInstance().getMovie())) {
                     if (list.get(position).getPosterURL() != null && !list.get(position).getPosterURL().equalsIgnoreCase("")) {
-                          ImageHelper.getInstance(context).loadListImage(viewHolder.itemBinding.itemImage, AppCommonMethod.getListLDSImage(list.get(position).getPosterURL(), context));
                     }
                     viewHolder.itemBinding.tvEpisode.setText(list.get(position).getDescription());
                 }
@@ -144,7 +144,7 @@ public class RowSearchAdapter extends RecyclerView.Adapter<RowSearchAdapter.Sing
 
         } catch (Exception e) {
             Logger.w(e);
-        }
+        }*/
     }
 
     private void setSeasonEpisodeValue(EnveuVideoItemBean enveuVideoItemBean, TextView tvEpisode) {
