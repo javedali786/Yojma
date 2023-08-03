@@ -37,6 +37,13 @@
                     android:layout_width="@dimen/NontonSize66"
                     android:layout_height="@dimen/NontonSize118">
 
+                    <androidx.cardview.widget.CardView
+                        style="@style/Custom.Widget.CardView"
+                        android:layout_width="@dimen/NontonSize66"
+                        android:layout_height="@dimen/NontonSize118"
+                        card_view:cardCornerRadius="8dp"
+                        app:cardBackgroundColor="@color/app_bg_color">
+
                     <ImageView
                         android:id="@+id/itemImage"
                         errorImage="@{@drawable/placeholder_potrait}"
@@ -47,7 +54,10 @@
                         android:scaleType="fitXY"
                         android:src="@drawable/placeholder_potrait" />
 
-                    <FrameLayout
+                     </androidx.cardview.widget.CardView>
+
+
+            <FrameLayout
                         android:id="@+id/flNew"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

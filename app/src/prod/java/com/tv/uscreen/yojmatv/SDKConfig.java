@@ -127,15 +127,15 @@ public class SDKConfig {
     }
 
     public String getSecondTabId() {
-        return AppCommonMethod.getHomeTabId(configBean, "PROGRAM");
+        return AppCommonMethod.getHomeTabId(configBean, "MOVIE");
     }
 
     public String getThirdTabId() {
-        return AppCommonMethod.getHomeTabId(configBean, "PODCAST");
+        return AppCommonMethod.getHomeTabId(configBean, "SERIES");
     }
 
     public String getFourthTabId() {
-        return AppCommonMethod.getHomeTabId(configBean, "LIVE");
+        return AppCommonMethod.getHomeTabId(configBean, "YOJMA KIDS");
     }
 
     public String getMovieDetailId() {

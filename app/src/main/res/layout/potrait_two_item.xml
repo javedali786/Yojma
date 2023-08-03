@@ -29,6 +29,11 @@
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_167sdp">
 
+                <androidx.cardview.widget.CardView
+                    style="@style/Custom.Widget.CardView"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_167sdp"
+                    app:cardCornerRadius="8dp">
                 <ImageView
                     android:id="@+id/itemImage"
                     errorImage="@{@drawable/placeholder_landscape}"
@@ -38,8 +43,9 @@
                     android:layout_height="@dimen/_167sdp"
                     android:contentDescription="TODO"
                     android:scaleType="centerCrop"
-
                     />
+
+                </androidx.cardview.widget.CardView>
                 <FrameLayout
                     android:id="@+id/flNew"
                     android:layout_width="wrap_content"

@@ -39,7 +39,7 @@
                     style="@style/Custom.Widget.CardView"
                     android:layout_width="match_parent"
                     card_view:cardCornerRadius="8dp"
-                    app:cardBackgroundColor="@color/try_again_btn_txt_color"
+                    app:cardBackgroundColor="@color/app_bg_color"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/NontonSize2">
 
@@ -55,6 +55,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/NontonSize126">
 
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/Custom.Widget.CardView"
+                            android:layout_width="@dimen/NontonSize224"
+                            android:layout_height="@dimen/NontonSize126"
+                            card_view:cardCornerRadius="8dp"
+                            app:cardBackgroundColor="@color/app_bg_color">
+
                         <ImageView
                             android:id="@+id/itemImage"
                             errorImage="@{@drawable/placeholder_landscape}"
@@ -65,6 +73,7 @@
                             android:contentDescription="TODO"
                             android:scaleType="fitXY" />
 
+                        </androidx.cardview.widget.CardView>
 
 
                         <LinearLayout

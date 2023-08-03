@@ -29,12 +29,18 @@
                 style="@style/Custom.Widget.CardView"
                 android:layout_width="wrap_content"
                 app:cardCornerRadius="8dp"
-                app:cardBackgroundColor="@color/try_again_btn_txt_color"
+                app:cardBackgroundColor="@color/app_bg_color"
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
                     android:layout_width="@dimen/potarit_large_item_width"
                     android:layout_height="@dimen/potarit_large_item_height">
+
+                    <androidx.cardview.widget.CardView
+                        style="@style/Custom.Widget.CardView"
+                        android:layout_width="@dimen/potarit_large_item_width"
+                        android:layout_height="@dimen/potarit_large_item_height"
+                        app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:id="@+id/itemImage"
@@ -43,6 +49,7 @@
                         android:contentDescription="TODO"
                         android:scaleType="fitXY"
                         android:src="@drawable/placeholder_potrait" />
+                    </androidx.cardview.widget.CardView>
 
                     <FrameLayout
                         android:id="@+id/flNew"
