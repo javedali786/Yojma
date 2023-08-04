@@ -352,8 +352,8 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
                                 stringsHelper.instance()?.data?.config?.popup_error.toString(),
                                 getString(R.string.popup_error)
                             ), stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_user_does_not_exists.toString(),
-                                getString(R.string.popup_user_does_not_exists)
+                                stringsHelper.instance()?.data?.config?.popup_username_pwd_does_not_match.toString(),
+                                getString(R.string.popup_username_pwd_does_not_match)
                             ), stringsHelper.stringParse(
                                 stringsHelper.instance()?.data?.config?.popup_continue.toString(),
                                 getString(R.string.popup_continue)

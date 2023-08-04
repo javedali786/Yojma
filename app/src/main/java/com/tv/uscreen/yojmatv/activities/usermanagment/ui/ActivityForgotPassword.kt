@@ -24,6 +24,7 @@ import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper.strokeBgDr
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.CheckInternetConnection
 import com.tv.uscreen.yojmatv.utils.helpers.NetworkConnectivity
+import com.tv.uscreen.yojmatv.utils.helpers.StringUtils
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
@@ -103,13 +104,14 @@ class ActivityForgotPassword : BaseBindingActivity<ActivityForgotPasswordBinding
 
     private fun setClicks() {
         binding?.toolbar?.logoMain2?.visibility =View.VISIBLE
+        binding?.toolbar?.searchIcon?.visibility =View.GONE
         binding?.toolbar?.titleSkip?.visibility = View.GONE
         binding?.toolbar?.backLayout?.setOnClickListener { onBackPressed() }
 //        setTextWatcher()
         binding?.continueBtnOne?.setOnClickListener{
             hideSoftKeyboard(binding?.continueBtnOne)
             if (CheckInternetConnection.isOnline(this@ActivityForgotPassword)) {
-                if (validateEmail()){
+                if (validateEmptyEmail()  && validateEmail()){
                     if(forceLogin == true)
                         callForceFbApi()
                     else
@@ -222,25 +224,45 @@ class ActivityForgotPassword : BaseBindingActivity<ActivityForgotPasswordBinding
         binding?.etPasswordRecoveryEmail?.setText("")
     }
 
-
     private fun validateEmail(): Boolean {
         var check = false
-        email= binding?.etPasswordRecoveryEmail?.text.toString()
-        if (email.matches(regex)) {
+        if (binding?.etPasswordRecoveryEmail?.text.toString().trim().matches(regex)) {
             check = true
         } else {
-            commonDialog(stringsHelper.stringParse(
-                stringsHelper.instance()?.data?.config?.popup_invalid_email_tittle.toString(),
-                getString(R.string.popup_invalid_email_tittle)
-            ), stringsHelper.stringParse(
-                stringsHelper.instance()?.data?.config?.popup_invalid_email_subtitle.toString(),
-                getString(R.string.popup_invalid_email_subtitle)
-            ), stringsHelper.stringParse(
-                stringsHelper.instance()?.data?.config?.popup_continue.toString(),
-                getString(R.string.popup_continue)))
+            commonDialog(stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_invalid_email_tittle.toString(), getString(R.string.popup_invalid_email_tittle)),
+                stringsHelper.stringParse(
+                    stringsHelper.instance()?.data?.config?.popup_invalid_email_subtitle.toString(),
+                    getString(R.string.popup_invalid_email_subtitle)
+                ), stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_continue.toString(), getString(R.string.popup_continue))
+            )
         }
         return check
     }
+
+    private fun validateEmptyEmail(): Boolean {
+        var check = false
+        email=binding?.etPasswordRecoveryEmail?.text.toString().trim()
+        if (StringUtils.isNullOrEmptyOrZero(email)) {
+            commonDialog(
+                stringsHelper.stringParse(
+                    stringsHelper.instance()?.data?.config?.popup_empty_email_tittle.toString(),
+                    getString(R.string.popup_empty_email_tittle)
+                ),
+                stringsHelper.stringParse(
+                    stringsHelper.instance()?.data?.config?.popup_empty_email_subtitle.toString(),
+                    getString(R.string.popup_empty_email_subtitle)
+                ),
+                stringsHelper.stringParse(
+                    stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                    getString(R.string.popup_continue)
+                )
+            )
+        } else {
+            check = true
+        }
+        return check
+    }
+
 
     private fun commonDialog(title: String, description: String, actionBtn: String) {
         val fm: FragmentManager = supportFragmentManager

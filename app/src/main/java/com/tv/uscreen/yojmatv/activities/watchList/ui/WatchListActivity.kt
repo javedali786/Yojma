@@ -15,10 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.enveu.client.enums.ImageType
 import com.enveu.client.watchHistory.beans.ResponseWatchHistoryAssetList
 import com.google.gson.JsonObject
-
 import com.tv.uscreen.yojmatv.Bookmarking.BookmarkingViewModel
 import com.tv.uscreen.yojmatv.R
-
 import com.tv.uscreen.yojmatv.activities.detail.ui.DetailActivity
 import com.tv.uscreen.yojmatv.activities.detail.ui.EpisodeActivity
 import com.tv.uscreen.yojmatv.activities.listing.callback.ItemClickListener
@@ -32,10 +30,11 @@ import com.tv.uscreen.yojmatv.activities.watchList.adapter.WatchListAdapter.Watc
 import com.tv.uscreen.yojmatv.activities.watchList.viewModel.WatchListViewModel
 import com.tv.uscreen.yojmatv.adapters.CommonShimmerAdapter
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
+import com.tv.uscreen.yojmatv.beanModel.allWatchList.ItemsItem
 import com.tv.uscreen.yojmatv.beanModel.emptyResponse.ResponseEmpty
 import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
-
+import com.tv.uscreen.yojmatv.databinding.WatchListActivityBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogSingleButtonFragment
 import com.tv.uscreen.yojmatv.utils.Logger
@@ -50,8 +49,6 @@ import com.tv.uscreen.yojmatv.utils.helpers.ToastHandler
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
-import com.tv.uscreen.yojmatv.beanModel.allWatchList.ItemsItem
-import com.tv.uscreen.yojmatv.databinding.WatchListActivityBinding
 import java.util.Objects
 
 class WatchListActivity : BaseBindingActivity<WatchListActivityBinding?>(), WatchListAdaperListener, WatchHistoryAdaperListener, DeleteWatchList, AlertDialogFragment.AlertDialogListener,
@@ -108,7 +105,8 @@ class WatchListActivity : BaseBindingActivity<WatchListActivityBinding?>(), Watc
         setRecyclerProperties(binding!!.watchListRecycler)
         binding!!.toolbarWatchlist.backLayout.setOnClickListener { onBackPressed() }
         binding!!.toolbarWatchlist.backLayout.visibility = View.VISIBLE
-        binding!!.toolbarWatchlist.titleMid.visibility = View.VISIBLE
+        binding!!.toolbarWatchlist.titleMid.visibility = View.GONE
+        binding!!.toolbarWatchlist.searchIcon.visibility = View.GONE
         binding!!.toolbarWatchlist.titleMid.setText(R.string.my_history)
         connectionObserver()
     }
