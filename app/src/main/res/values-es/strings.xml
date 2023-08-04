@@ -355,4 +355,6 @@
     <string name="search_documentaries">Documentales</string>
     <string name="popup_select_plan">El acceso a contenido premium está a solo un clic de distancia. Por favor seleccione</string>
     <string name="geo_blocking_title">Disculpas. Nuestro servicio no está disponible en su país</string>
+    <string name="rate_the_app">Rate the app</string>
+
 </resources>

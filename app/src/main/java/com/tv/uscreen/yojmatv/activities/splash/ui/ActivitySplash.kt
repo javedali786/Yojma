@@ -1,13 +1,11 @@
 package com.tv.uscreen.yojmatv.activities.splash.ui
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.text.TextUtils
@@ -15,12 +13,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.SkuDetails
@@ -61,7 +54,6 @@ import com.tv.uscreen.yojmatv.utils.helpers.AnalyticsController
 import com.tv.uscreen.yojmatv.utils.helpers.ForceUpdateHandler
 import com.tv.uscreen.yojmatv.utils.helpers.NetworkConnectivity
 import com.tv.uscreen.yojmatv.utils.helpers.SharedPrefHelper
-import com.tv.uscreen.yojmatv.utils.helpers.downloads.DownloadHelper
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
@@ -93,11 +85,6 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         return ActivitySplashBinding.inflate(inflater)
     }
 
-    var downloadHelper: DownloadHelper? = null
-    private val requestPermissionLauncher: ActivityResultLauncher<String> =
-        registerForActivityResult<String, Boolean>(
-            ActivityResultContracts.RequestPermission(),
-            ActivityResultCallback<Boolean> { isGranted: Boolean? -> })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,25 +120,10 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         // binding.noConnectionLayout.btnMyDownloads.setOnClickListener(view -> ActivityLauncher.getInstance().launchMyDownloads(ActivitySplash.this));
         Logger.d("IntentData: " + this.intent.data)
         printKeyHash()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requestPermission()
-        } else {
-            Logger.e("First_Screen", "Device_below_Android_13")
-        }
+
     }
 
-    @RequiresApi(api = 33)
-    private fun requestPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.POST_NOTIFICATIONS
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-        } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
-        } else {
-            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-        }
-    }
+
 
     var bp: BillingProcessor? = null
     private fun initBilling() {

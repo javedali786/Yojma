@@ -42,7 +42,7 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
     private var manageSubscription= ""
     private var privacyPolicy= ""
     private var contactUs= ""
-
+    private var rateUs= ""
 
     init {
         val layoutInflater = LayoutInflater.from(mContext)
@@ -94,6 +94,11 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
             mContext.getString(R.string.more_contact_us)
         )
 
+        rateUs = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.rate_the_app.toString(),
+            mContext.getString(R.string.rate_the_app)
+        )
+
         return ViewHolder(moreItemBinding)
     }
 
@@ -116,6 +121,8 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
             3 -> callDrawableHelper(mContext, R.drawable.ic_privacy, v)
             4 -> callDrawableHelper(mContext, R.drawable.ic_terms, v)
             5 -> callDrawableHelper(mContext, R.drawable.ic_contact_us, v)
+            6 -> callDrawableHelper(mContext, R.drawable.ic_star, v)
+
 
             else -> {}
         }
@@ -160,7 +167,6 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
                     itemClickListener.onClick(account)
                 } else if (itemsList[layoutPosition] == settings) {
                     itemClickListener.onClick(settings)
-
                 }/* else if (itemsList[layoutPosition]== buyNow) {
                     itemClickListener.onClick(buyNow)
                 } else if (itemsList[layoutPosition] == manageSubscription) {
@@ -172,8 +178,10 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
                     itemClickListener.onClick(privacyPolicy)
                 } else if (itemsList[layoutPosition] ==termsCondition) {
                     itemClickListener.onClick(termsCondition)
-                }  else if (itemsList[layoutPosition] ==contactUs ) {
+                } else if (itemsList[layoutPosition] ==contactUs ) {
                     itemClickListener.onClick(contactUs)
+                } else if (itemsList[layoutPosition] ==rateUs ) {
+                    itemClickListener.onClick(rateUs)
                 }
             }
         }

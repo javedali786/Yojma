@@ -1,12 +1,19 @@
 package com.tv.uscreen.yojmatv.activities.homeactivity.ui
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -53,12 +60,26 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
     private val colorsHelper by lazy { ColorsHelper }
     private val stringsHelper by lazy { StringsHelper }
 
+
+
     override fun inflateBindingLayout(inflater: LayoutInflater): ActivityMainBinding {
         return ActivityMainBinding.inflate(inflater)
     }
 
+    private val requestPermissionLauncher: ActivityResultLauncher<String> =
+        registerForActivityResult<String, Boolean>(
+            ActivityResultContracts.RequestPermission(),
+            ActivityResultCallback<Boolean> { isGranted: Boolean? -> })
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermission()
+        } else {
+            Logger.e("First_Screen", "Device_below_Android_13")
+        }
+
         val strCurrentTheme = KsPreferenceKeys.getInstance().currentTheme
         binding!!.toolbar.colorsData = colorsHelper
         binding!!.colorsData = colorsHelper
@@ -84,6 +105,20 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
             }
         }
         AnalyticsController(this@HomeActivity).callAnalytics("home_activity", "Action", "Launch")
+    }
+
+
+    @RequiresApi(api = 33)
+    private fun requestPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+        } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
     }
 
 

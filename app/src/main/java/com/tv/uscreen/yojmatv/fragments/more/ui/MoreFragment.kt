@@ -1,15 +1,18 @@
 package com.tv.uscreen.yojmatv.fragments.more.ui
 
 
+import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
+import com.tv.uscreen.yojmatv.BuildConstants
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.activities.homeactivity.ui.HomeActivity
 import com.tv.uscreen.yojmatv.activities.homeactivity.viewmodel.HomeViewModel
@@ -55,6 +58,8 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
     private var manageSubscription= ""
     private var privacyPolicy= ""
     private var contactUs= ""
+    private var rateUs= ""
+
 
 
     private val stringsHelper by lazy { StringsHelper }
@@ -149,7 +154,12 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
             getString(R.string.more_contact_us)
         )
 
-        val label3 = arrayOf(myList, account, settings,privacyPolicy, termsCondition,contactUs)
+        rateUs = stringsHelper.stringParse(
+            stringsHelper.instance()?.data?.config?.rate_the_app.toString(),
+            getString(R.string.rate_the_app)
+        )
+
+        val label3 = arrayOf(myList, account, settings,privacyPolicy, termsCondition,contactUs,rateUs)
         val mListLogOut: List<String> = ArrayList(listOf(*label3))
         val mListWithSub: List<String> = ArrayList(listOf(*label3))
         mListLogin = ArrayList()
@@ -322,11 +332,27 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
         }*/
        else if (caption == privacyPolicy) {
             requireActivity().startActivity(Intent(requireActivity(), HelpActivity::class.java).putExtra("type", "2"))
-        } else if (caption == termsCondition) {
+        }
+       else if (caption == termsCondition) {
             requireActivity().startActivity(Intent(requireActivity(), HelpActivity::class.java).putExtra("type", "1"))
         }
        else if (caption == contactUs) {
            requireActivity().startActivity(Intent(requireActivity(), HelpActivity::class.java).putExtra("type", "3"))
+       }
+       else if (caption == rateUs) {
+           val uri: Uri = Uri.parse("market://details?id=${BuildConstants.FIREBASE_ANDROID_PACKAGE}")
+           val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+           // To count with Play market backstack, After pressing back button,
+           // to taken back to our application, we need to add following flags to intent.
+           goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
+                   Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                   Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+           try {
+               startActivity(goToMarket)
+           } catch (e: ActivityNotFoundException) {
+               startActivity(Intent(Intent.ACTION_VIEW,
+                   Uri.parse("http://play.google.com/store/apps/details?id=${BuildConstants.FIREBASE_ANDROID_PACKAGE}")))
+           }
        }
     }
 

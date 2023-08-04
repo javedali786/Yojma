@@ -369,7 +369,6 @@ public class CommonAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHold
             case GRD_HORIZONTAL_PR_POSTER:
                 GridPosterPotraitRecyclerItemBinding gridPosterPotraitRecyclerItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.grid_poster_potrait_recycler_item, parent, false);
                 GridPosterPotraitHolder gridPosterPotraitHolder = new GridPosterPotraitHolder(gridPosterPotraitRecyclerItemBinding);
-               // ThemeHandler.getInstance().applyheadingTextColorHoriPotrait(parent.getContext(),gridPosterPotraitRecyclerItemBinding);
                 setGrdRecylerProperties(gridPosterPotraitHolder.gridPosterPotraitRecyclerItemBinding.recyclerViewList2);
                 return gridPosterPotraitHolder;
             case HORIZONTAL_PR_POTRAIT:

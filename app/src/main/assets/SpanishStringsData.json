@@ -185,7 +185,8 @@
       "popup_change_pwd_incorrect_confirm_pwd": "Seguir observando",
       "search_see_all": "Ver todo",
       "geo_blocking_title": "Disculpas. Nuestro servicio no está disponible en su país",
-      "search_results": "Resultados"
+      "search_results": "Resultados",
+      "rate_the_app": "Rate the app"
     }
   },
   "responseCode": 2000,

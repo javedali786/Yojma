@@ -188,7 +188,8 @@ data class Config(
     val popup_change_pwd_incorrect_confirm_pwd: String,
     val search_movies: String,
     val search_documentaries: String,
-    val search_see_all: String
+    val search_see_all: String,
+    val rate_the_app:String
 
 
     )
