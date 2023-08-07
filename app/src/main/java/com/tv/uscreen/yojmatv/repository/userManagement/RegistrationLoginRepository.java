@@ -174,7 +174,6 @@ public class RegistrationLoginRepository {
             }
 
 
-            ApiInterface endpoint = RequestConfig.getClient().create(ApiInterface.class);
             final JsonObject requestParam = new JsonObject();
             requestParam.addProperty(AppConstants.API_PARAM_NAME, "");
             requestParam.addProperty(AppConstants.API_PARAM_EMAIL, "");

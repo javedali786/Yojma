@@ -116,12 +116,12 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
             0 -> callDrawableHelper(mContext, R.drawable.ic_my_list, v)
             1 -> callDrawableHelper(mContext, R.drawable.ic_account, v)
             2 -> callDrawableHelper(mContext, R.drawable.ic_settings, v)
-           // 3 -> callDrawableHelper(mContext, R.drawable.ic_buy_now, v)
-           // 4 -> callDrawableHelper(mContext, R.drawable.ic_order_history, v)
-            3 -> callDrawableHelper(mContext, R.drawable.ic_privacy, v)
-            4 -> callDrawableHelper(mContext, R.drawable.ic_terms, v)
-            5 -> callDrawableHelper(mContext, R.drawable.ic_contact_us, v)
-            6 -> callDrawableHelper(mContext, R.drawable.ic_star, v)
+            3 -> callDrawableHelper(mContext, R.drawable.ic_buy_now, v)
+            4 -> callDrawableHelper(mContext, R.drawable.ic_order_history, v)
+            5 -> callDrawableHelper(mContext, R.drawable.ic_privacy, v)
+            6-> callDrawableHelper(mContext, R.drawable.ic_terms, v)
+            7 -> callDrawableHelper(mContext, R.drawable.ic_contact_us, v)
+            8 -> callDrawableHelper(mContext, R.drawable.ic_star, v)
 
 
             else -> {}
@@ -167,13 +167,13 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
                     itemClickListener.onClick(account)
                 } else if (itemsList[layoutPosition] == settings) {
                     itemClickListener.onClick(settings)
-                }/* else if (itemsList[layoutPosition]== buyNow) {
+                } else if (itemsList[layoutPosition]== buyNow) {
                     itemClickListener.onClick(buyNow)
-                } else if (itemsList[layoutPosition] == manageSubscription) {
+                } /*else if (itemsList[layoutPosition] == manageSubscription) {
                     itemClickListener.onClick(manageSubscription)
-                } else if (itemsList[layoutPosition] == orderHistory) {
+                }*/ else if (itemsList[layoutPosition] == orderHistory) {
                     itemClickListener.onClick(orderHistory)
-                }*/
+                }
                 else if (itemsList[layoutPosition]==privacyPolicy) {
                     itemClickListener.onClick(privacyPolicy)
                 } else if (itemsList[layoutPosition] ==termsCondition) {

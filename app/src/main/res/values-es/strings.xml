@@ -39,7 +39,7 @@
     <string name="noti_title">Notifications</string>
     <string name="notification_setting">Notificaciones Configuración</string>
     <string name="only_register">Solo Registro</string>
-    <string name="buy_in_case_query">Si tienes cualquier duda, envíanos un correo a info@iberaliago.net</string>
+    <string name="buy_in_case_query">Si tienes cualquier duda, envíanos un correo a info@YojmaTv.net</string>
     <string name="buy_select_subscription">POR FAVOR SELECCIONA TU\n SUSCRIPCIÓN</string>
     <string name="plan_description">Te hemos enviado un correo, por favor entra en tu bandeja de entrada y confirma tu cuenta para poder Iniciar Sesión en Iberalia GO!</string>
     <string name="buy_pay_now">Reproducir ahora</string>
@@ -357,6 +357,6 @@
     <string name="geo_blocking_title">Disculpas. Nuestro servicio no está disponible en su país</string>
     <string name="rate_the_app">Rate the app</string>
     <string name="popup_username_pwd_does_not_match">El nombre de usuario o la contraseña no coinciden.</string>
-
+    <string name="free_trial">FREE TRAIL</string>
 
 </resources>

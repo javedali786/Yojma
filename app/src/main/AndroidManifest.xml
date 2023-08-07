@@ -249,9 +249,6 @@
             android:launchMode="singleTop" />
 
         <activity
-            android:name="com.tv.uscreen.yojmatv.activities.termsandconditions.ui.TermAndCondition"
-            android:launchMode="singleTop" />
-        <activity
             android:name="com.tv.uscreen.yojmatv.activities.privacypolicy.ui.WebViewActivity"
             android:launchMode="singleTop" />
         <activity

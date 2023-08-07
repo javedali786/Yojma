@@ -30,7 +30,7 @@ public class AdapterPlan extends RecyclerView.Adapter<AdapterPlan.ViewHolder>{
         this.items = items1;
         Collections.sort(items, new Comparator<PurchaseModel>(){
             public int compare(PurchaseModel o1, PurchaseModel o2){
-                return Integer.compare(o1.getSubscriptionOrder(), o2.getSubscriptionOrder());
+                return Long.compare(o1.getSubscriptionOrder(), o2.getSubscriptionOrder());
             }
         });
 
@@ -55,7 +55,15 @@ public class AdapterPlan extends RecyclerView.Adapter<AdapterPlan.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.planName.setText(items.get(position).getTitle());
+        holder.lltrialBtn.bringToFront();
         holder.amountName.setText(items.get(position).getPrice());
+
+        if (items.get(position).getAllowedTrial()) {
+            holder.trialBtn.setText(items.get(position).getTrialDuration() + " " + items.get(position).getTrialType() + " " + context.getString(R.string.free_trial) );
+        } else {
+           holder.lltrialBtn.setVisibility(View.GONE);
+        }
+
         Drawable drawable;
         if (items.get(position).isSelected()) {
             mListener.setDescription(items.get(position).getDescription(),items.get(position));
@@ -85,7 +93,7 @@ public class AdapterPlan extends RecyclerView.Adapter<AdapterPlan.ViewHolder>{
     private Drawable selected(Context context, ViewHolder holder) {
         holder.planName.setTextColor(context.getResources().getColor(R.color.buy_now_pay_now_btn_text_color));
         holder.amountName.setTextColor(context.getResources().getColor(R.color.buy_now_pay_now_btn_text_color));
-        return ResourcesCompat.getDrawable(context.getResources(), R.drawable.roundedcornerforbtn, null);
+        return ResourcesCompat.getDrawable(context.getResources(), R.drawable.roundedbutlist, null);
     }
 
     @Override
@@ -94,14 +102,17 @@ public class AdapterPlan extends RecyclerView.Adapter<AdapterPlan.ViewHolder>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView planName,amountName;
-        LinearLayout mainLay;
+        public TextView planName,amountName,trialBtn;
+        LinearLayout mainLay,lltrialBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             planName = (TextView) itemView.findViewById(R.id.plan_name_text);
+            trialBtn = (TextView) itemView.findViewById(R.id.trialBtn);
             amountName = (TextView) itemView.findViewById(R.id.plan_amount_text);
             mainLay=(LinearLayout)itemView.findViewById(R.id.main_lay);
+            lltrialBtn=(LinearLayout)itemView.findViewById(R.id.ll_trialBtn);
+
         }
     }
 

@@ -29,6 +29,8 @@ public class PurchaseModel implements Serializable {
     private boolean fromClick;
     private String subscriptionType;
     private String trialType;
+    private Boolean allowedTrial;
+
     private int trialDuration;
     private List<String> subscriptionList;
     private List productList;
@@ -38,7 +40,15 @@ public class PurchaseModel implements Serializable {
     String transactionID;
     String orderStatus;
 
-    int subscriptionOrder;
+    Long subscriptionOrder;
+
+    public Boolean getAllowedTrial() {
+        return allowedTrial;
+    }
+
+    public void setAllowedTrial(Boolean allowedTrial) {
+        this.allowedTrial = allowedTrial;
+    }
 
     public void setTrialType(String trialType) {
         this.trialType = trialType;
@@ -284,11 +294,11 @@ public class PurchaseModel implements Serializable {
         return Objects.hash(purchaseOptions, price, isSelected);
     }
 
-    public int getSubscriptionOrder() {
+    public Long getSubscriptionOrder() {
         return subscriptionOrder;
     }
 
-    public void setSubscriptionOrder(int subscriptionOrder) {
+    public void setSubscriptionOrder(Long subscriptionOrder) {
         this.subscriptionOrder = subscriptionOrder;
     }
 

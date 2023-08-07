@@ -228,7 +228,7 @@
 
     <string name="delete_from_watchlist">Are you sure want to remove video from Watchlist?</string>
     <string name="delete_from_watchhistory_message">Are you sure want to remove video from Watch History?</string>
-   <string name="buy_in_case_query">In case of any query,email us at info@iberaliago.net</string>
+   <string name="buy_in_case_query">In case of any query,email us at info@YojmaTv.net</string>
     <string name="detail_page_all_episode">All Episodes</string>
     <string name="video_streaming">VIDEO STREAMING PLATFORM</string>
     <string name="purchased_successfully">Purchased Successfully</string>
@@ -943,13 +943,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="search_see_all">See all</string>
     <string name="geo_blocking_title">Apologies. Our service is not available in your country</string>
     <string name="rate_the_app">Rate the app</string>
+    <string name="free_trial">FREE TRAIL</string>
 
-
-
-
-
-
-
-
-
+    
 </resources>

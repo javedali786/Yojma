@@ -26,12 +26,17 @@ public class SDKConfig {
         return (sdkConfigInstance);
     }
 
+    //QA BASED KEYS  FOR PROD (PAYMENT TESTING)
+    public static final String CONFIG_BASE_URL = "https://experience-manager-fe-api.beta.enveu.com/app/api/v1/config/";
+    public static final String API_KEY_MOB = "vssatqjctyrqghzopdulzkleguurqqxzyvxsodqj";
+    public static final String API_KEY_TAB = "fkzmmfinyqdwecanpzkvbrmclntmklthnmiarzfr";
+
 
     //PROD KEYS
-    public static final String CONFIG_BASE_URL = "https://api-us.enveu.com/experience-manager-fe-api/app/api/v1/config/";
+  /*  public static final String CONFIG_BASE_URL = "https://api-us.enveu.com/experience-manager-fe-api/app/api/v1/config/";
     public static final String API_KEY_MOB = "axkxaeobdrpqqvhfvnlrkvkrstnbyhyr";
     public static final String API_KEY_TAB = "tamvrupdkecgabywsnescbzrnsscpkvm";
-
+*/
 
     public static final int CONFIG_VERSION = 1;
     public static String ApplicationStatus = "disconnected";

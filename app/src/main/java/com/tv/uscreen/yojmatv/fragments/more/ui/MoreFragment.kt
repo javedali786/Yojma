@@ -17,10 +17,13 @@ import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.activities.homeactivity.ui.HomeActivity
 import com.tv.uscreen.yojmatv.activities.homeactivity.viewmodel.HomeViewModel
 import com.tv.uscreen.yojmatv.activities.listing.ui.MyListActivity
+import com.tv.uscreen.yojmatv.activities.profile.order_history.ui.OrderHistoryActivity
 import com.tv.uscreen.yojmatv.activities.profile.ui.AccountSettingActivity
+import com.tv.uscreen.yojmatv.activities.profile.ui.ManageSubscriptionAccount
 import com.tv.uscreen.yojmatv.activities.purchase.plans_layer.GetPlansLayer
 import com.tv.uscreen.yojmatv.activities.settings.ActivitySettings
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
+import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivitySelectSubscriptionPlan
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingFragment
 import com.tv.uscreen.yojmatv.beanModel.AppUserModel
 import com.tv.uscreen.yojmatv.beanModel.userProfile.UserProfileResponse
@@ -128,18 +131,18 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
             stringsHelper.instance()?.data?.config?.more_settings.toString(),
             getString(R.string.more_settings)
         )
-        /* buyNow = stringsHelper.stringParse(
+         buyNow = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_buy_now.toString(),
             getString(R.string.more_buy_now)
         )
          manageSubscription = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_manage_subscription.toString(),
             getString(R.string.more_manage_subscription)
-        )*/
-        /* orderHistory = stringsHelper.stringParse(
+        )
+         orderHistory = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_order_history.toString(),
             getString(R.string.more_order_history)
-        )*/
+        )
          privacyPolicy = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_privacy_policy.toString(),
             getString(R.string.more_privacy_policy)
@@ -159,7 +162,7 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
             getString(R.string.rate_the_app)
         )
 
-        val label3 = arrayOf(myList, account, settings,privacyPolicy, termsCondition,contactUs,rateUs)
+        val label3 = arrayOf(myList, account, settings,privacyPolicy, termsCondition,buyNow,orderHistory,contactUs,rateUs)
         val mListLogOut: List<String> = ArrayList(listOf(*label3))
         val mListWithSub: List<String> = ArrayList(listOf(*label3))
         mListLogin = ArrayList()
@@ -305,7 +308,7 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
         } else if (caption == settings) {
             ActivityLauncher.getInstance().goToSetting(requireActivity(), ActivitySettings::class.java)
         }
-      /* else if (caption == buyNow) {
+       else if (caption == buyNow) {
             if (loginStatus) {
                 if (hasEntitlement) {
                     ActivityLauncher.getInstance().manageAccount(requireActivity(), ManageSubscriptionAccount::class.java)
@@ -316,20 +319,20 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
                 ActivityLauncher.getInstance().goToLogin(requireActivity(), ActivityLogin::class.java)
             }
         }
-       else if (caption ==manageSubscription) {
+      /* else if (caption ==manageSubscription) {
             if (loginStatus) {
                 ActivityLauncher.getInstance().goToPlanScreen(requireActivity(), ActivitySelectSubscriptionPlan::class.java, "moreFragment")
             } else {
                 ActivityLauncher.getInstance().goToLogin(requireActivity(), ActivityLogin::class.java)
             }
-        }
+        }*/
        else if (caption == orderHistory) {
             if (loginStatus) {
                 ActivityLauncher.getInstance().orderHistroy(requireActivity(), OrderHistoryActivity::class.java)
             } else {
                 ActivityLauncher.getInstance().goToLogin(requireActivity(), ActivityLogin::class.java)
             }
-        }*/
+        }
        else if (caption == privacyPolicy) {
             requireActivity().startActivity(Intent(requireActivity(), HelpActivity::class.java).putExtra("type", "2"))
         }

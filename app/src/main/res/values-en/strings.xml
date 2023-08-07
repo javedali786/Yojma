@@ -90,7 +90,7 @@
     <string name="title_trending">Trending</string>
     <string name="email_address">Email Address</string>
     <string name="send_email">Send Email</string>
-    <string name="buy_in_case_query">In case of any query,email us at info@iberaliago.net</string>
+    <string name="buy_in_case_query">In case of any query,email us at info@YojmaTv.net</string>
     <string name="save">Save</string>
     <string name="new_password">New Password</string>
     <string name="watchlist_empty_message">Keep track of Movies, TV shows and clips you want to watch</string>
@@ -841,5 +841,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="gaming_tabbar">Gaming</string>
     <string name="geo_blocking_title">Apologies. Our service is not available in your country</string>
     <string name="rate_the_app">Rate the app</string>
+    <string name="free_trial">FREE TRAIL</string>
+
 
 </resources>

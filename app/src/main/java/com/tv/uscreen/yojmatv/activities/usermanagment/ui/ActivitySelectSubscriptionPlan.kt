@@ -15,11 +15,7 @@ import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.SkuDetails
 import com.google.gson.Gson
-import com.moe.pushlibrary.MoEHelper
-import com.moengage.core.Properties
 import com.tv.uscreen.yojmatv.R
-
-
 import com.tv.uscreen.yojmatv.activities.homeactivity.ui.HomeActivity
 import com.tv.uscreen.yojmatv.activities.profile.adapter.AdapterManageSubscription
 import com.tv.uscreen.yojmatv.activities.purchase.call_back.EntitlementStatus
@@ -76,11 +72,7 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
         val intent = intent
         from = intent.getStringExtra("intentFrom")
         initBilling()
-        //ThemeHandler.getInstance().applySelectPlan(this,binding)
         setClicks()
-        val properties = Properties()
-        properties.addAttribute(AppConstants.SUBSCRIPTION, AppConstants.SUBSCRIPTION)
-        MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
 
         preference = KsPreferenceKeys.getInstance()
         isUserVerified = preference?.isVerified
@@ -98,7 +90,6 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
             binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
             binding?.toolbar!!.backLayout.visibility = View.GONE
         } else if (from!!.equals("SignUp",ignoreCase = true) ){
-            // binding?.toolbar!!.titleSkip.text = resources.getText(R.string.only_register)
             binding?.mainPaymentLayout!!.visibility = View.VISIBLE
             binding?.bottomLay!!.visibility = View.VISIBLE
             binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
@@ -282,7 +273,7 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
         callGetPlansApi()
     }
 
-    private val SUPPORT = "info@iberaliago.net"
+    private val SUPPORT = "info@YojmaTv.net"
     private val BILLING_RESULT = "BillingResult"
     private val PURCHASED_SKU = "purchasedSKU"
     override fun onPurchasesUpdated(

@@ -101,7 +101,6 @@ public class GetPlansLayer {
             call.enqueue(new Callback<ResponseMembershipAndPlan>() {
                 @Override
                 public void onResponse(@NonNull Call<ResponseMembershipAndPlan> call, @NonNull Response<ResponseMembershipAndPlan> response) {
-
                     boolean entitlementState=false;
                     ResponseMembershipAndPlan purchaseResponseModel = new ResponseMembershipAndPlan();
                     if (response.code() == 200) {
