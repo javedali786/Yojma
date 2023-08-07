@@ -401,14 +401,14 @@ class EnterOTPActivity : BaseBindingActivity<ActivityEnterOtpBinding?>(), Common
 
     override fun onActionBtnClicked() {
      if (isOtpVerified) {
-        /* ActivityLauncher.getInstance().goToPlanScreen(
+         ActivityLauncher.getInstance().goToPlanScreen(
              this@EnterOTPActivity,
              ActivitySelectSubscriptionPlan::class.java,
-             "OTP")  */
+             "OTP")
 
-         ActivityLauncher.getInstance().homeScreen(
+       /*  ActivityLauncher.getInstance().homeScreen(
              this@EnterOTPActivity,
-             HomeActivity::class.java)
+             HomeActivity::class.java)*/
      }
 
 

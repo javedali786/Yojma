@@ -430,9 +430,7 @@ public class CommonAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHold
             //TODO COLOURS
 
 
-            if (ObjectHelper.isSame(item.getScreenWidget().getReferenceName(), AppConstants.ContentType.MY_WATCHLIST.name())) {
-                headingRailsBinding.headingTitle.setText(R.string.my_watchlist);
-            } else if (item.isContinueWatching()) {
+            if (item.isContinueWatching()) {
                 setContinueWatchMultiLngTitle(item, headingRailsBinding);
             } else {
                 setMultiLingTitle(item, headingRailsBinding);

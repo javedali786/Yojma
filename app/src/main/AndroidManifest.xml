@@ -94,10 +94,6 @@
             android:exported="false"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name="com.tv.uscreen.yojmatv.activities.detail.ui.DetailsNew"
-            android:exported="false"
-            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.tv.uscreen.yojmatv.activities.manageAccounts.ManageAccount"
@@ -332,33 +328,6 @@
         <meta-data
             android:name="com.google.android.gms.ads.AD_MANAGER_APP"
             android:value="true" />
-<!--        <meta-data-->
-<!--            android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"-->
-<!--            android:value="com.brightcove.cast.DefaultOptionsProvider" />-->
-<!--        <meta-data-->
-<!--            android:name="com.brightcove.cast.DefaultOptionsProvider.EXPANDED_CONTROLLER_ACTIVITY_CLASS_NAME"-->
-<!--            android:value="com.brightcove.cast.DefaultExpandedControllerActivity" />-->
-<!--        <meta-data-->
-<!--            android:name="com.brightcove.cast.DefaultOptionsProvider.NOTIFICATION_TARGET_ACTIVITY_CLASS_NAME"-->
-<!--            android:value="com.brightcove.cast.DefaultExpandedControllerActivity" />-->
-
-
-
-
-
-<!--        <activity-->
-<!--            android:name=".jwplayer.cast.ExpandedControlsActivity"-->
-<!--            android:exported="true"-->
-<!--            android:launchMode="singleInstance"-->
-<!--            android:parentActivityName=".activities.onBoarding.ui.HomeSliderActivity"-->
-<!--            android:screenOrientation="portrait">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--            </intent-filter>-->
-<!--            <meta-data-->
-<!--                android:name="android.support.PARENT_ACTIVITY"-->
-<!--                android:value=".activities.onBoarding.ui.HomeSliderActivity" />-->
-<!--        </activity>-->
 
         <receiver
             android:name="com.enveu.player.receiver.ConnectivityReceiver"

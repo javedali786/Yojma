@@ -51,6 +51,7 @@ import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 import java.util.Objects
 
+
 class WatchListActivity : BaseBindingActivity<WatchListActivityBinding?>(), WatchListAdaperListener, WatchHistoryAdaperListener, DeleteWatchList, AlertDialogFragment.AlertDialogListener,
     ItemClickListener, View.OnClickListener {
     private var counter = 0
@@ -103,12 +104,13 @@ class WatchListActivity : BaseBindingActivity<WatchListActivityBinding?>(), Watc
         listAdapter = WatchListAdapter(this@WatchListActivity, ArrayList(), this@WatchListActivity, this@WatchListActivity)
         historyAdapter = WatchHistoryAdapter(this@WatchListActivity, ArrayList(), this@WatchListActivity)
         setRecyclerProperties(binding!!.watchListRecycler)
+        connectionObserver()
         binding!!.toolbarWatchlist.backLayout.setOnClickListener { onBackPressed() }
         binding!!.toolbarWatchlist.backLayout.visibility = View.VISIBLE
-        binding!!.toolbarWatchlist.titleMid.visibility = View.GONE
+        binding!!.toolbarWatchlist.titleMid.visibility = View.VISIBLE
+        binding!!.toolbarWatchlist.logoMain2.visibility = View.GONE
         binding!!.toolbarWatchlist.searchIcon.visibility = View.GONE
-        binding!!.toolbarWatchlist.titleMid.setText(R.string.my_history)
-        connectionObserver()
+        binding!!.toolbarWatchlist.titleMid.text = viewType
     }
 
     private fun setRecyclerProperties(recyclerView: RecyclerView) {

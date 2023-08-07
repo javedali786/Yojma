@@ -165,15 +165,6 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
                             ) {
                                 if (status) {
                                     orderID = response.data.orderId
-
-                                  /*  val properties = Properties()
-                                    properties.addAttribute(AppConstants.CURRENCY, response.data.orderCurrency)
-                                    properties.addAttribute(AppConstants.PRICE, response.data.orderAmount)
-                                    properties.addAttribute(AppConstants.SUBSCRIPTION_TITTLE, subscriptionTittle)
-                                    properties.addAttribute(AppConstants.PAYMENT_METHOD, AppConstants.GOOGLE)
-                                    MoEHelper.getInstance(applicationContext).trackEvent(
-                                        AppConstants.USER_SUBSCRIPTION, properties)*/
-
                                     KsPreferenceKeys.getInstance().paymentorderid = orderID
                                     Log.w("orderIdOf", orderID.toString())
                                     callInitiateOrder(response)
