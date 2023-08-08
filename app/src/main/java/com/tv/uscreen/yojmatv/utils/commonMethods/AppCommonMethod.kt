@@ -1802,9 +1802,9 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                 }
                                 if (responseEntitlementModel.getData().get(i).getRecurringOffer().getOfferPeriod() != null) {
                                     if (responseEntitlementModel.getData().get(i).getRecurringOffer().getOfferPeriod().equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
-                                        model.setOfferPeriod(VodOfferType.MONTHLY.name)
-                                    } else if (responseEntitlementModel.getData().get(i).getRecurringOffer().getOfferPeriod().equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
-                                        model.setOfferPeriod(VodOfferType.ANNUAL.name)
+                                        model.offerPeriod = VodOfferType.MONTHLY.name
+                                    } else if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
+                                        model.offerPeriod = VodOfferType.ANNUAL.name
                                     }
                                 }
                             }
@@ -1857,6 +1857,9 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                     }
                                 }
                             }
+                            val allowedTrial : Boolean = responseEntitlementModel.data[i].allowedTrial
+                            model.allowedTrial = allowedTrial
+                            model.identifier = responseEntitlementModel.data[i].identifier
 
                             if(responseEntitlementModel.data[i].customData !=null){
                                 model.title_en = responseEntitlementModel.data[i].customData.title_en
@@ -1921,7 +1924,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                         purchaseModel.description_en =  purchaseModelList[j].description_en
                         purchaseModel.description_es =  purchaseModelList[j].description_es
                         purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
-                        purchaseModel.trialType_es =  purchaseModelList[j].trialType_es                        //purchaseModel.setDescription("" + skuDetails.getDescription());
+                        purchaseModel.trialType_en =  purchaseModelList[j].trialType_en                        //purchaseModel.setDescription("" + skuDetails.getDescription());
                         purchaseFinalList.add(purchaseModel)
                     }
                 }
@@ -2010,6 +2013,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                             purchaseModel.trialType = "" + purchaseModelList[j].trialType
                             purchaseModel.trialDuration = purchaseModelList[j].trialDuration
                             purchaseModel.isSelected = false
+                            purchaseModel.allowedTrial = purchaseModelList[j].allowedTrial
                             purchaseModel.purchaseOptions = VodOfferType.RECURRING_SUBSCRIPTION.name
                             purchaseModel.offerPeriod = VodOfferType.WEEKLY.name
                             purchaseModel.identifier = purchaseModelList[j].identifier
@@ -2022,7 +2026,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                             purchaseModel.description_en =  purchaseModelList[j].description_en
                             purchaseModel.description_es =  purchaseModelList[j].description_es
                             purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
-                            purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
+                            purchaseModel.trialType_en =  purchaseModelList[j].trialType_en
 
                             purchaseModel.subscriptionOrder = purchaseModelList[j].subscriptionOrder
                             if (purchaseModelList[j].entitlementState != null && purchaseModelList[j].entitlementState == true) {
@@ -2044,8 +2048,6 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                         for (i in responseEntitlementModel.data.purchaseAs.indices) {
                             val model = PurchaseModel()
                             if (responseEntitlementModel.data != null && responseEntitlementModel.data.purchaseAs[i].offerType != null && responseEntitlementModel.data.purchaseAs[i].offerType.contains(VodOfferType.RECURRING_SUBSCRIPTION.name)) {
-                                val allowedTrial : Boolean = responseEntitlementModel.data.purchaseAs[i].allowedTrial
-                                model.allowedTrial = allowedTrial
                                 val identifier: String = responseEntitlementModel.data.getPurchaseAs().get(i).getCustomData().getAndroidProductId()
                                 model.identifier = responseEntitlementModel.getData().getPurchaseAs().get(i).getIdentifier()
                                 model.customIdentifier = identifier
@@ -2053,6 +2055,9 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                     model.subscriptionOrder =
                                         responseEntitlementModel.data.purchaseAs[i].subscriptionOrder
                                 }
+
+                                val allowedTrial : Boolean = responseEntitlementModel.data.purchaseAs[i].allowedTrial
+                                model.allowedTrial = allowedTrial
 
                                 model.subscriptionType = VodOfferType.RECURRING_SUBSCRIPTION.name
                                 subSkuList.add(identifier)
@@ -2131,6 +2136,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                         }
                                     }
                                 }
+
                                 if(responseEntitlementModel.data.purchaseAs[i].customData!=null){
                                     model.title_en = responseEntitlementModel.data.purchaseAs[i].customData.title_en
                                     model.title_es = responseEntitlementModel.data.purchaseAs[i].customData.title_es
@@ -2203,7 +2209,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                         purchaseModel.description_en =  purchaseModelList[j].description_en
                         purchaseModel.description_es =  purchaseModelList[j].description_es
                         purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
-                        purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
+                        purchaseModel.trialType_en =  purchaseModelList[j].trialType_en
 
                         purchaseModel.identifier = purchaseModelList[j].identifier
                         purchaseModel.customIdentifier = purchaseModelList[j].customIdentifier

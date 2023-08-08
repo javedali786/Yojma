@@ -39,8 +39,7 @@ public class PaymentCustomData implements Serializable {
     @SerializedName("title_en")
     @Expose
     private String title_en;
-
-
+    
     @SerializedName("title_es")
     @Expose
     private String title_es;

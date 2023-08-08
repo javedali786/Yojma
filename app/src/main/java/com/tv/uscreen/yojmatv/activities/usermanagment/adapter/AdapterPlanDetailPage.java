@@ -70,6 +70,7 @@ public class AdapterPlanDetailPage extends RecyclerView.Adapter<AdapterPlanDetai
             }
         }
 
+        
         Drawable drawable;
         if (items.get(position).isSelected()) {
             drawable=selected(context,holder);

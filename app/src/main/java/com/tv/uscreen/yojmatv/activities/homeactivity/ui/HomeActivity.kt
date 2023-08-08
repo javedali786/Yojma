@@ -286,7 +286,7 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
 
     private fun bottomNavigationTextFromJson(navigation: BottomNavigationView, itemID: Int, jsonString: String, localString: Int) {
         val itemTitle = navigation.menu.findItem(itemID)
-        val itemTabBar: String = if (jsonString != null && jsonString != "null" && jsonString != "") {
+        val itemTabBar: String = if (jsonString != "null" && jsonString != "") {
             jsonString
         } else {
             getString(localString)

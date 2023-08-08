@@ -107,11 +107,11 @@ class OrderHistoryAdapter(private val list: List<PurchaseModel>, private val cur
         }
         if (list[position].offerPeriod != null && !list[position].offerPeriod.equals("", ignoreCase = true) && list[position].offerPeriod.equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
             val duration = context!!.getString(R.string.one_month)
-            holder.binding.textView.text = list[position].offerPeriod
+            holder.binding.textView.text = context!!.getString(R.string.monthly)
             holder.binding.duration.text = duration
         } else if (list[position].offerPeriod != null && !list[position].offerPeriod.equals("", ignoreCase = true) && list[position].offerPeriod.equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
             val duration = " " + context!!.getString(R.string.one_year)
-            holder.binding.textView.text = list[position].offerPeriod
+            holder.binding.textView.text = context!!.getString(R.string.order_history_annual)
             holder.binding.duration.text = duration
         } else {
             holder.binding.duration.visibility = View.GONE

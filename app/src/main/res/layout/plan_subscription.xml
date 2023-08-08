@@ -10,7 +10,7 @@
         android:id="@+id/ll_trialBtn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="18dp"
         android:background="@drawable/roundedtrialbtn"
         app:layout_constraintBottom_toTopOf="@+id/main_lay"
         app:layout_constraintStart_toStartOf="@+id/main_lay"

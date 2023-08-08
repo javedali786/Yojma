@@ -55,17 +55,18 @@ public class AdapterPlan extends RecyclerView.Adapter<AdapterPlan.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.lltrialBtn.bringToFront();
-        holder.amountName.setText(items.get(position).getPrice());
 
         if (KsPreferenceKeys.getInstance().getAppLanguage().equals("spanish")) {
-            holder.planName.setText(items.get(position).getTrialType_en());
+            holder.amountName.setText(items.get(position).getPrice() +" /"+ items.get(position).getTitle_es());
+            holder.planName.setText(items.get(position).getTitle_es());
             if (items.get(position).getAllowedTrial()) {
                 holder.trialBtn.setText(items.get(position).getTrialDuration() + " " + items.get(position).getTrialType_es() + " " + context.getString(R.string.free_trial) );
             } else {
                 holder.lltrialBtn.setVisibility(View.GONE);
             }
         } else if (KsPreferenceKeys.getInstance().getAppLanguage().equals("English")) {
-            holder.planName.setText(items.get(position).getTrialType_es());
+            holder.amountName.setText(items.get(position).getPrice() +" /"+ items.get(position).getTitle_en());
+            holder.planName.setText(items.get(position).getTitle_en());
             if (items.get(position).getAllowedTrial()) {
                 holder.trialBtn.setText(items.get(position).getTrialDuration() + " " + items.get(position).getTrialType_en() + " " + context.getString(R.string.free_trial) );
             } else {

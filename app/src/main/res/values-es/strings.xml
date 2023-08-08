@@ -358,5 +358,7 @@
     <string name="rate_the_app">Califica la app</string>
     <string name="popup_username_pwd_does_not_match">El nombre de usuario o la contraseña no coinciden.</string>
     <string name="free_trial">Prueba gratuita</string>
+    <string name="order_history_annual">Anual</string>
+
 
 </resources>

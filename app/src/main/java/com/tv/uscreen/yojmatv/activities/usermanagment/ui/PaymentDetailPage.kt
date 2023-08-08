@@ -234,7 +234,7 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
 
     }
 
-    private val SUPPORT = "info@iberaliago.net"
+    private val SUPPORT = "help@yojma.tv"
     private val BILLING_RESULT = "BillingResult"
     private val PURCHASED_SKU = "purchasedSKU"
     override fun onPurchasesUpdated(

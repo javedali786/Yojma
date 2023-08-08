@@ -272,7 +272,7 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
         callGetPlansApi()
     }
 
-    private val SUPPORT = "info@YojmaTv.net"
+    private val SUPPORT = "help@yojma.tv"
     private val BILLING_RESULT = "BillingResult"
     private val PURCHASED_SKU = "purchasedSKU"
     override fun onPurchasesUpdated(
@@ -474,14 +474,13 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
                 purchaseModel = AppCommonMethod.fetchRecSubscriptionModel(plans!!, subSkuList as java.util.ArrayList<String>, productSkuList as java.util.ArrayList<String>)
                 if (purchaseModel != null && purchaseModel!!.isNotEmpty()) {
                     if(from!!.equals("settings",ignoreCase = true)) {
-                        callManageSubscriptionAdapter(purchaseModel!!,plans);
+                        callManageSubscriptionAdapter(purchaseModel!!,plans)
                     }else{
                         bp.getAllSkuDetails(
                             purchaseModel!![0].subscriptionList,
                             purchaseModel!![0].productList
                         )
                     }
-
                 }else{
                     commonDialog(
                         stringsHelper.stringParse(
