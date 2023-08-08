@@ -14,9 +14,9 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.tv.uscreen.yojmatv.R;
 import com.tv.uscreen.yojmatv.activities.purchase.purchase_model.PurchaseModel;
+import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -54,19 +54,32 @@ public class AdapterPlan extends RecyclerView.Adapter<AdapterPlan.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.planName.setText(items.get(position).getTitle());
         holder.lltrialBtn.bringToFront();
         holder.amountName.setText(items.get(position).getPrice());
 
-        if (items.get(position).getAllowedTrial()) {
-            holder.trialBtn.setText(items.get(position).getTrialDuration() + " " + items.get(position).getTrialType() + " " + context.getString(R.string.free_trial) );
-        } else {
-           holder.lltrialBtn.setVisibility(View.GONE);
+        if (KsPreferenceKeys.getInstance().getAppLanguage().equals("spanish")) {
+            holder.planName.setText(items.get(position).getTrialType_en());
+            if (items.get(position).getAllowedTrial()) {
+                holder.trialBtn.setText(items.get(position).getTrialDuration() + " " + items.get(position).getTrialType_es() + " " + context.getString(R.string.free_trial) );
+            } else {
+                holder.lltrialBtn.setVisibility(View.GONE);
+            }
+        } else if (KsPreferenceKeys.getInstance().getAppLanguage().equals("English")) {
+            holder.planName.setText(items.get(position).getTrialType_es());
+            if (items.get(position).getAllowedTrial()) {
+                holder.trialBtn.setText(items.get(position).getTrialDuration() + " " + items.get(position).getTrialType_en() + " " + context.getString(R.string.free_trial) );
+            } else {
+                holder.lltrialBtn.setVisibility(View.GONE);
+            }
         }
 
         Drawable drawable;
         if (items.get(position).isSelected()) {
-            mListener.setDescription(items.get(position).getDescription(),items.get(position));
+            if (KsPreferenceKeys.getInstance().getAppLanguage().equals("spanish")) {
+                mListener.setDescription(items.get(position).getDescription_es(),items.get(position));
+            } else if (KsPreferenceKeys.getInstance().getAppLanguage().equals("English")) {
+                mListener.setDescription(items.get(position).getDescription_en(),items.get(position));
+            }
             drawable=selected(context,holder);
         } else {
             drawable=unselected(context,holder);

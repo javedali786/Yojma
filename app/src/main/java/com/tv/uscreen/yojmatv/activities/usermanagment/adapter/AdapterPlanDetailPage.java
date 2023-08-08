@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tv.uscreen.yojmatv.R;
 import com.tv.uscreen.yojmatv.activities.purchase.purchase_model.PurchaseModel;
+import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys;
 
 import java.util.List;
 
@@ -47,15 +48,26 @@ public class AdapterPlanDetailPage extends RecyclerView.Adapter<AdapterPlanDetai
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.planName.setText(items.get(position).getTitle());
         holder.lltrialBtn.bringToFront();
         holder.amountName.setText(items.get(position).getPrice());
-        holder.description.setText(items.get(position).getDescription());
 
-        if (items.get(position).getAllowedTrial()) {
-            holder.trialBtn.setText(items.get(position).getTrialDuration() + " " + items.get(position).getTrialType() + " " + context.getString(R.string.free_trial) );
-        } else {
-            holder.lltrialBtn.setVisibility(View.GONE);
+
+        if (KsPreferenceKeys.getInstance().getAppLanguage().equals("spanish")) {
+            holder.description.setText(items.get(position).getDescription_es());
+            holder.planName.setText(items.get(position).getTrialType_en());
+            if (items.get(position).getAllowedTrial()) {
+                holder.trialBtn.setText(items.get(position).getTrialDuration() + " " + items.get(position).getTrialType_es() + " " + context.getString(R.string.free_trial) );
+            } else {
+                holder.lltrialBtn.setVisibility(View.GONE);
+            }
+        } else if (KsPreferenceKeys.getInstance().getAppLanguage().equals("English")) {
+            holder.planName.setText(items.get(position).getTrialType_es());
+            holder.description.setText(items.get(position).getDescription_en());
+            if (items.get(position).getAllowedTrial()) {
+                holder.trialBtn.setText(items.get(position).getTrialDuration() + " " + items.get(position).getTrialType_en() + " " + context.getString(R.string.free_trial) );
+            } else {
+                holder.lltrialBtn.setVisibility(View.GONE);
+            }
         }
 
         Drawable drawable;

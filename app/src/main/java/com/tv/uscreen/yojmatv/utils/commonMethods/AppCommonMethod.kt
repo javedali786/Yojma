@@ -1780,7 +1780,6 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                     for (i in responseEntitlementModel.data.indices) {
                         val model = PurchaseModel()
                         if (responseEntitlementModel.data != null && responseEntitlementModel.data[i].offerType != null && responseEntitlementModel.getData().get(i).getOfferType().contains(VodOfferType.RECURRING_SUBSCRIPTION.name)) {
-                            model.title = responseEntitlementModel.data[i].title
                             val identifier: String = responseEntitlementModel.data[i].customData.androidProductId
                             val allowedTrial : Boolean = responseEntitlementModel.data[i].allowedTrial
                             model.allowedTrial = allowedTrial
@@ -1809,23 +1808,27 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                     }
                                 }
                             }
-
-
+                            if(responseEntitlementModel.data[i].customData !=null){
+                                model.title_en = responseEntitlementModel.data[i].customData.title_en
+                                model.title_es = responseEntitlementModel.data[i].customData.title_es
+                                model.description_en = responseEntitlementModel.data[i].customData.description_en
+                                model.description_es = responseEntitlementModel.data[i].customData.description_es
+                                model.trialType_en = responseEntitlementModel.data[i].customData.trialType_en
+                                model.trialType_es = responseEntitlementModel.data[i].customData.trialType_es
+                            }
 
                             model.subscriptionList = subSkuList
-                            if (responseEntitlementModel.getData().get(i).getExpiryDate() != null) {
-                                model.setExpiryDate(responseEntitlementModel.getData().get(i).getExpiryDate())
+                            if (responseEntitlementModel.data[i].expiryDate != null) {
+                                model.expiryDate = responseEntitlementModel.data[i].expiryDate
                             }
                             model.setEntitlementState(responseEntitlementModel.getData().get(i).getEntitlementState() != null && responseEntitlementModel.getData().get(i).getEntitlementState())
                             if (responseEntitlementModel.getData().get(i).getCustomData() != null) {
                                 model.setCustomData(responseEntitlementModel.getData().get(i).getCustomData())
                             }
                             if (responseEntitlementModel.getData().get(i).getCurrentExpiry() != null && responseEntitlementModel.getData().get(i).getCurrentExpiry() > 0) {
-                                model.setCurrentExpiryDate(responseEntitlementModel.getData().get(i).getCurrentExpiry())
+                                model.currentExpiryDate = responseEntitlementModel.getData().get(i).getCurrentExpiry()
                             }
-                            if (responseEntitlementModel.getData().get(i).getDescription() != null) {
-                                model.setDescription(responseEntitlementModel.getData().get(i).getDescription())
-                            }
+
                             if (responseEntitlementModel.getData().get(i).getNextChargeDate() != null && responseEntitlementModel.getData().get(i).getNextChargeDate() > 0) {
                                 model.setNextChargeDate(responseEntitlementModel.getData().get(i).getNextChargeDate())
                             }
@@ -1854,7 +1857,16 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                     }
                                 }
                             }
-                            model.setEntitlementState(responseEntitlementModel.getData().get(i).getEntitlementState() != null && responseEntitlementModel.getData().get(i).getEntitlementState())
+
+                            if(responseEntitlementModel.data[i].customData !=null){
+                                model.title_en = responseEntitlementModel.data[i].customData.title_en
+                                model.title_es = responseEntitlementModel.data[i].customData.title_es
+                                model.description_en = responseEntitlementModel.data[i].customData.description_en
+                                model.description_es = responseEntitlementModel.data[i].customData.description_es
+                                model.trialType_en = responseEntitlementModel.data[i].customData.trialType_en
+                                model.trialType_es = responseEntitlementModel.data[i].customData.trialType_es
+                            }
+                            model.entitlementState = responseEntitlementModel.data[i].entitlementState != null && responseEntitlementModel.data[i].entitlementState
                             if (responseEntitlementModel.getData().get(i).getCustomData() != null) {
                                 model.setCustomData(responseEntitlementModel.getData().get(i).getCustomData())
                             }
@@ -1865,16 +1877,16 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                             if (responseEntitlementModel.getData().get(i).getSubscriptionOrder() != null) {
                                 model.setSubscriptionOrder(responseEntitlementModel.getData().get(i).getSubscriptionOrder())
                             }
-                            if (responseEntitlementModel.getData().get(i).getDescription() != null) {
-                                model.setDescription(responseEntitlementModel.getData().get(i).getDescription())
+                            if (responseEntitlementModel.data[i].getDescription() != null) {
+                                model.description = responseEntitlementModel.getData().get(i).getDescription()
                             }
-                            if (responseEntitlementModel.getData().get(i).getCurrentExpiry() != null && responseEntitlementModel.getData().get(i).getCurrentExpiry() > 0) {
-                                model.setCurrentExpiryDate(responseEntitlementModel.getData().get(i).getCurrentExpiry())
+                            if (responseEntitlementModel.data.get(i).getCurrentExpiry() != null && responseEntitlementModel.getData().get(i).getCurrentExpiry() > 0) {
+                                model.currentExpiryDate = responseEntitlementModel.getData().get(i).getCurrentExpiry()
                             }
                             if (responseEntitlementModel.getData().get(i).getNextChargeDate() != null && responseEntitlementModel.getData().get(i).getNextChargeDate() > 0) {
-                                model.setNextChargeDate(responseEntitlementModel.getData().get(i).getNextChargeDate())
+                                model.nextChargeDate = responseEntitlementModel.getData().get(i).getNextChargeDate()
                             }
-                            model.setOnTrial(responseEntitlementModel.getData().get(i).isOnTrial())
+                            model.isOnTrial = responseEntitlementModel.getData().get(i).isOnTrial()
                             modelList.add(model)
                         }
                     }
@@ -1888,25 +1900,28 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         fun createPurchaseList(purchaseModelList: List<PurchaseModel>?, purchases: List<SkuDetails>, purchaseFinalList: ArrayList<PurchaseModel?>, bp: BillingProcessor): List<PurchaseModel?> {
             var skuDetails: SkuDetails
             for (i in purchases.indices) {
-                val identifier: String = purchases[i].getSku()
+                val identifier: String = purchases[i].sku
                 for (j in purchaseModelList!!.indices) {
-                    if (identifier.equals(purchaseModelList[j].getCustomIdentifier(), ignoreCase = true)) {
+                    if (identifier.equals(purchaseModelList[j].customIdentifier, ignoreCase = true)) {
                         val purchaseModel = PurchaseModel()
                         skuDetails = bp.getLocalSubscriptionSkuDetail(identifier)
-                        purchaseModel.setPrice("" + skuDetails.getPrice())
-                        purchaseModel.setTrialType("" + purchaseModelList[j].getTrialType())
+                        purchaseModel.price = "" + skuDetails.price
                         purchaseModel.allowedTrial = purchaseModelList[j].allowedTrial
-                        purchaseModel.setTrialDuration(purchaseModelList[j].getTrialDuration())
-                        purchaseModel.setSelected(false)
-                        purchaseModel.setPurchaseOptions(VodOfferType.RECURRING_SUBSCRIPTION.name)
-                        purchaseModel.setOfferPeriod(VodOfferType.WEEKLY.name)
-                        purchaseModel.setTitle(purchaseModelList[j].getTitle())
-                        purchaseModel.setIdentifier(purchaseModelList[j].getIdentifier())
-                        purchaseModel.setCustomIdentifier(purchaseModelList[j].getCustomIdentifier())
-                        purchaseModel.setCurrency(skuDetails.getPriceCurrencyCode())
-                        purchaseModel.setSubscriptionOrder(purchaseModelList[j].getSubscriptionOrder())
-                        purchaseModel.setDescription(purchaseModelList[j].getDescription())
-                        //purchaseModel.setDescription("" + skuDetails.getDescription());
+                        purchaseModel.trialDuration = purchaseModelList[j].trialDuration
+                        purchaseModel.isSelected = false
+                        purchaseModel.purchaseOptions = VodOfferType.RECURRING_SUBSCRIPTION.name
+                        purchaseModel.offerPeriod = VodOfferType.WEEKLY.name
+                        purchaseModel.identifier = purchaseModelList[j].identifier
+                        purchaseModel.customIdentifier = purchaseModelList[j].customIdentifier
+                        purchaseModel.currency = skuDetails.priceCurrencyCode
+                        purchaseModel.subscriptionOrder = purchaseModelList[j].subscriptionOrder
+
+                        purchaseModel.title_en = purchaseModelList[j].title_en
+                        purchaseModel.title_es = purchaseModelList[j].title_es
+                        purchaseModel.description_en =  purchaseModelList[j].description_en
+                        purchaseModel.description_es =  purchaseModelList[j].description_es
+                        purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
+                        purchaseModel.trialType_es =  purchaseModelList[j].trialType_es                        //purchaseModel.setDescription("" + skuDetails.getDescription());
                         purchaseFinalList.add(purchaseModel)
                     }
                 }
@@ -1985,7 +2000,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         fun createManagePurchaseList(purchaseModelList: List<PurchaseModel>?, purchases: List<SkuDetails>, purchaseFinalList: ArrayList<PurchaseModel?>, bp: BillingProcessor): List<PurchaseModel?> {
             var skuDetails: SkuDetails
             for (i in purchases.indices) {
-                val identifier: String = purchases[i].getSku()
+                val identifier: String = purchases[i].sku
                 if (purchaseModelList != null) {
                     for (j in purchaseModelList.indices) {
                         if (identifier.equals(purchaseModelList[j].customIdentifier, ignoreCase = true)) {
@@ -1997,12 +2012,18 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                             purchaseModel.isSelected = false
                             purchaseModel.purchaseOptions = VodOfferType.RECURRING_SUBSCRIPTION.name
                             purchaseModel.offerPeriod = VodOfferType.WEEKLY.name
-                            purchaseModel.title = purchaseModelList[j].title
                             purchaseModel.identifier = purchaseModelList[j].identifier
                             purchaseModel.customIdentifier = purchaseModelList[j].customIdentifier
                             purchaseModel.currency = skuDetails.priceCurrencyCode
                             purchaseModel.createdDate = purchaseModelList[j].createdDate
-                            purchaseModel.description = purchaseModelList[j].description
+
+                            purchaseModel.title_en = purchaseModelList[j].title_en
+                            purchaseModel.title_es = purchaseModelList[j].title_es
+                            purchaseModel.description_en =  purchaseModelList[j].description_en
+                            purchaseModel.description_es =  purchaseModelList[j].description_es
+                            purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
+                            purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
+
                             purchaseModel.subscriptionOrder = purchaseModelList[j].subscriptionOrder
                             if (purchaseModelList[j].entitlementState != null && purchaseModelList[j].entitlementState == true) {
                                 purchaseModel.entitlementState = purchaseModelList[j].entitlementState
@@ -2023,7 +2044,6 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                         for (i in responseEntitlementModel.data.purchaseAs.indices) {
                             val model = PurchaseModel()
                             if (responseEntitlementModel.data != null && responseEntitlementModel.data.purchaseAs[i].offerType != null && responseEntitlementModel.data.purchaseAs[i].offerType.contains(VodOfferType.RECURRING_SUBSCRIPTION.name)) {
-                                model.title = responseEntitlementModel.data.purchaseAs[i].title
                                 val allowedTrial : Boolean = responseEntitlementModel.data.purchaseAs[i].allowedTrial
                                 model.allowedTrial = allowedTrial
                                 val identifier: String = responseEntitlementModel.data.getPurchaseAs().get(i).getCustomData().getAndroidProductId()
@@ -2033,13 +2053,12 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                     model.subscriptionOrder =
                                         responseEntitlementModel.data.purchaseAs[i].subscriptionOrder
                                 }
+
                                 model.subscriptionType = VodOfferType.RECURRING_SUBSCRIPTION.name
                                 subSkuList.add(identifier)
                                 if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer() != null) {
                                     if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod() != null) {
-                                        if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType() != null && !responseEntitlementModel.getData()
-                                                .getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType().equals("", ignoreCase = true)
-                                        ) {
+                                        if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType() != null && !responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType().equals("", ignoreCase = true)) {
                                             model.setTrialType(responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType())
                                         }
                                         if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialDuration() > 0) {
@@ -2054,6 +2073,15 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                         }
                                     }
                                 }
+                                if(responseEntitlementModel.data.purchaseAs[i].customData!=null){
+                                    model.title_en = responseEntitlementModel.data.purchaseAs[i].customData.title_en
+                                    model.title_es = responseEntitlementModel.data.purchaseAs[i].customData.title_es
+                                    model.description_en = responseEntitlementModel.data.purchaseAs[i].customData.description_en
+                                    model.description_es = responseEntitlementModel.data.purchaseAs[i].customData.description_es
+                                    model.trialType_en = responseEntitlementModel.data.purchaseAs[i].customData.trialType_en
+                                    model.trialType_es = responseEntitlementModel.data.purchaseAs[i].customData.trialType_es
+                                }
+
                                 model.setSubscriptionList(subSkuList)
                                 if (responseEntitlementModel.getData().getPurchaseAs().get(i).getExpiryDate() != null) {
                                     model.setExpiryDate(responseEntitlementModel.getData().getPurchaseAs().get(i).getExpiryDate())
@@ -2102,6 +2130,14 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                             model.setOfferPeriod(VodOfferType.ANNUAL.name)
                                         }
                                     }
+                                }
+                                if(responseEntitlementModel.data.purchaseAs[i].customData!=null){
+                                    model.title_en = responseEntitlementModel.data.purchaseAs[i].customData.title_en
+                                    model.title_es = responseEntitlementModel.data.purchaseAs[i].customData.title_es
+                                    model.description_en = responseEntitlementModel.data.purchaseAs[i].customData.description_en
+                                    model.description_es = responseEntitlementModel.data.purchaseAs[i].customData.description_es
+                                    model.trialType_en = responseEntitlementModel.data.purchaseAs[i].customData.trialType_en
+                                    model.trialType_es = responseEntitlementModel.data.purchaseAs[i].customData.trialType_es
                                 }
                                 model.setEntitlementState(
                                     responseEntitlementModel.getData().getPurchaseAs().get(i).getEntitlementState() != null && responseEntitlementModel.getData().getPurchaseAs().get(i)
@@ -2161,7 +2197,14 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                         purchaseModel.isSelected = false
                         purchaseModel.purchaseOptions = VodOfferType.RECURRING_SUBSCRIPTION.name
                         purchaseModel.offerPeriod = VodOfferType.WEEKLY.name
-                        purchaseModel.title = purchaseModelList[j].title
+
+                        purchaseModel.title_en = purchaseModelList[j].title_en
+                        purchaseModel.title_es = purchaseModelList[j].title_es
+                        purchaseModel.description_en =  purchaseModelList[j].description_en
+                        purchaseModel.description_es =  purchaseModelList[j].description_es
+                        purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
+                        purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
+
                         purchaseModel.identifier = purchaseModelList[j].identifier
                         purchaseModel.customIdentifier = purchaseModelList[j].customIdentifier
                         // purchaseModel.setCurrency(purchaseModelList.get(j).getCurrency());

@@ -26,6 +26,14 @@ public class PurchaseModel implements Serializable {
     private Long createdDate;
 
     private String description;
+
+    private String description_en;
+    private String description_es;
+    private String title_en;
+    private String trialType_en;
+    private String title_es;
+    private String trialType_es;
+
     private boolean fromClick;
     private String subscriptionType;
     private String trialType;
@@ -308,5 +316,53 @@ public class PurchaseModel implements Serializable {
 
     public Long getCreatedDate() {
         return createdDate;
+    }
+
+    public String getDescription_en() {
+        return description_en;
+    }
+
+    public void setDescription_en(String description_en) {
+        this.description_en = description_en;
+    }
+
+    public String getDescription_es() {
+        return description_es;
+    }
+
+    public void setDescription_es(String description_es) {
+        this.description_es = description_es;
+    }
+
+    public String getTitle_en() {
+        return title_en;
+    }
+
+    public void setTitle_en(String title_en) {
+        this.title_en = title_en;
+    }
+
+    public String getTrialType_en() {
+        return trialType_en;
+    }
+
+    public void setTrialType_en(String trialType_en) {
+        this.trialType_en = trialType_en;
+    }
+
+    public String getTitle_es() {
+        return title_es;
+    }
+
+    public void setTitle_es(String title_es) {
+        this.title_es = title_es;
+    }
+
+    public String getTrialType_es() {
+        return trialType_es;
+    }
+
+    public void setTrialType_es(String trialType_es) {
+        this.trialType_es = trialType_es;
     }
 }

@@ -357,6 +357,6 @@
     <string name="geo_blocking_title">Disculpas. Nuestro servicio no está disponible en su país</string>
     <string name="rate_the_app">Califica la app</string>
     <string name="popup_username_pwd_does_not_match">El nombre de usuario o la contraseña no coinciden.</string>
-    <string name="free_trial">FREE TRAIL</string>
+    <string name="free_trial">Prueba gratuita</string>
 
 </resources>

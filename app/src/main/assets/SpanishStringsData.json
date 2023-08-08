@@ -186,7 +186,10 @@
       "search_see_all": "Ver todo",
       "geo_blocking_title": "Disculpas. Nuestro servicio no está disponible en su país",
       "search_results": "Resultados",
-      "rate_the_app": "Califica la app"
+      "rate_the_app": "Califica la app",
+      "free_trail": "prueba gratuita",
+      "subscription_Active": "ACTIVO",
+      "exclusive_content": "Todo el contenido original y en exclusiva de Yojma TV"
     }
   },
   "responseCode": 2000,

@@ -189,7 +189,9 @@ data class Config(
     val search_movies: String,
     val search_documentaries: String,
     val search_see_all: String,
-    val rate_the_app:String
-
+    val rate_the_app:String,
+    val free_trail : String,
+    val subscription_Active: String,
+    val exclusive_content: String
 
     )

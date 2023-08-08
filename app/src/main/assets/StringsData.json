@@ -187,7 +187,10 @@
       "search_movies": "Movies",
       "search_documentaries": "Documentaries",
       "search_results": "Results",
-      "rate_the_app": "Rate the app"
+      "rate_the_app": "Rate the app",
+      "free_trail": "Free Trial",
+      "subscription_Active": "ACTIVE",
+      "exclusive_content": "All Yojma TV & Exclusive Contents"
     }
   },
   "responseCode": 2000,
