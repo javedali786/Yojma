@@ -228,7 +228,7 @@
 
     <string name="delete_from_watchlist">Are you sure want to remove video from Watchlist?</string>
     <string name="delete_from_watchhistory_message">Are you sure want to remove video from Watch History?</string>
-   <string name="buy_in_case_query">In case of any query,email us at info@YojmaTv.net</string>
+   <string name="buy_in_case_query">In case of any query,email us at help@yojma.tv</string>
     <string name="detail_page_all_episode">All Episodes</string>
     <string name="video_streaming">VIDEO STREAMING PLATFORM</string>
     <string name="purchased_successfully">Purchased Successfully</string>
@@ -653,7 +653,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="euro_74_99_text">Euro 74,99€</string>
     <string name="annually_title">ANNUALLY</string>
     <string name="date_of_purchase_02_jul_2021_text">Date of Purchase : </string>
-    <string name="all_iberalia_originals_or_exclusive_contents_text">All Iberalia Originals or Exclusive Contents</string>
+    <string name="all_iberalia_originals_or_exclusive_contents_text">The best content that inspires you and improves your life</string>
     <string name="status_title">Status</string>
     <string name="payment_mode_title">Payment Mode</string>
     <string name="auto_renewal_text">Auto Renewal</string>

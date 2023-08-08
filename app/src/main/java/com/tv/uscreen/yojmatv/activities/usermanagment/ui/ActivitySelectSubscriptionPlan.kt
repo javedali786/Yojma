@@ -78,30 +78,29 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
         isUserVerified = preference?.isVerified
         binding?.toolbar!!.logoMain2.visibility=View.VISIBLE
         binding?.toolbar!!.llSearchIcon.visibility=View.GONE
-        if(from!!.equals("moreFragment",ignoreCase = true)) {
+        if(from!!.equals("settings",ignoreCase = true)) {
+            binding?.toolbar!!.titleMid.visibility =View.VISIBLE
             binding?.toolbar!!.titleMid.text=resources.getString(R.string.manage_account)
             binding?.toolbar?.logoMain2?.visibility = View.GONE
             binding?.mainPaymentLayout!!.visibility = View.GONE
             binding?.bottomLay!!.visibility = View.GONE
             binding?.mainManageSubscriptionLayout!!.visibility = View.VISIBLE
+            binding?.toolbar!!.titleSkip.visibility=View.GONE
         }else if(from!!.equals("Login",ignoreCase = true)){
             binding?.mainPaymentLayout!!.visibility = View.VISIBLE
             binding?.bottomLay!!.visibility = View.VISIBLE
             binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
             binding?.toolbar!!.backLayout.visibility = View.GONE
-        } else if (from!!.equals("SignUp",ignoreCase = true) ){
+
+        } else if (from!!.equals("OTP",ignoreCase = true) ){
             binding?.mainPaymentLayout!!.visibility = View.VISIBLE
             binding?.bottomLay!!.visibility = View.VISIBLE
             binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
             binding?.toolbar!!.backLayout.visibility = View.GONE
-        }  else if (from!!.equals("OTP",ignoreCase = true) ){
-            binding?.toolbar!!.titleSkip.visibility = View.VISIBLE
-            binding?.mainPaymentLayout!!.visibility = View.VISIBLE
-            binding?.bottomLay!!.visibility = View.VISIBLE
-            binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
-            binding?.toolbar!!.backLayout.visibility = View.GONE
+            binding?.toolbar!!.titleSkip.visibility=View.VISIBLE
         }
         else{
+            binding?.toolbar!!.titleSkip.visibility=View.GONE
             binding?.mainPaymentLayout!!.visibility = View.VISIBLE
             binding?.bottomLay!!.visibility = View.VISIBLE
             binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
@@ -532,7 +531,7 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
                 clickedPlan = planName
                 subscriptionTittle = clickedPlan!!.title
                 binding?.descriptionLongText?.text = planName.description
-                AppCommonMethod.activeBtn(binding,getColor(R.color.buy_now_pay_now_btn_text_color));
+                AppCommonMethod.activeBtn(binding,getColor(R.color.main_btn_txt_color));
                 adapter?.notifyDataSetChanged()
             }
         }

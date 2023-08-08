@@ -2017,23 +2017,23 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
 
         fun fetchEntitleRecSubscriptionModel(responseEntitlementModel: ResponseEntitle, subSkuList: MutableList<String>, productSkuList: MutableList<String>): List<PurchaseModel> {
             val modelList: MutableList<PurchaseModel> = ArrayList<PurchaseModel>()
+            try {
                 if (responseEntitlementModel.data != null) {
                     if (responseEntitlementModel.data.purchaseAs != null && responseEntitlementModel.data.purchaseAs.isNotEmpty()) {
                         for (i in responseEntitlementModel.data.purchaseAs.indices) {
                             val model = PurchaseModel()
-                            if (responseEntitlementModel.getData() != null && responseEntitlementModel.getData().purchaseAs.get(i).getOfferType() != null && responseEntitlementModel.getData()
-                                    .getPurchaseAs().get(i).getOfferType().contains(VodOfferType.RECURRING_SUBSCRIPTION.name)
-                            ) {
-                                model.title =
-                                    responseEntitlementModel.data.purchaseAs[i].title
+                            if (responseEntitlementModel.data != null && responseEntitlementModel.data.purchaseAs[i].offerType != null && responseEntitlementModel.data.purchaseAs[i].offerType.contains(VodOfferType.RECURRING_SUBSCRIPTION.name)) {
+                                model.title = responseEntitlementModel.data.purchaseAs[i].title
+                                val allowedTrial : Boolean = responseEntitlementModel.data.purchaseAs[i].allowedTrial
+                                model.allowedTrial = allowedTrial
                                 val identifier: String = responseEntitlementModel.data.getPurchaseAs().get(i).getCustomData().getAndroidProductId()
-                                model.identifier =
-                                    responseEntitlementModel.getData().getPurchaseAs().get(i).getIdentifier()
-                                model.setCustomIdentifier(identifier)
+                                model.identifier = responseEntitlementModel.getData().getPurchaseAs().get(i).getIdentifier()
+                                model.customIdentifier = identifier
                                 if (responseEntitlementModel.getData().getPurchaseAs().get(i).getSubscriptionOrder() != null) {
-                                    model.setSubscriptionOrder(responseEntitlementModel.getData().getPurchaseAs().get(i).getSubscriptionOrder())
+                                    model.subscriptionOrder =
+                                        responseEntitlementModel.data.purchaseAs[i].subscriptionOrder
                                 }
-                                model.setSubscriptionType(VodOfferType.RECURRING_SUBSCRIPTION.name)
+                                model.subscriptionType = VodOfferType.RECURRING_SUBSCRIPTION.name
                                 subSkuList.add(identifier)
                                 if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer() != null) {
                                     if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod() != null) {
@@ -2131,11 +2131,17 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                     model.setNextChargeDate(responseEntitlementModel.getData().getPurchaseAs().get(i).getNextChargeDate())
                                 }
                                 model.setOnTrial(responseEntitlementModel.getData().getPurchaseAs().get(i).isOnTrial())
+                                val allowedTrial : Boolean = responseEntitlementModel.data.purchaseAs[i].allowedTrial
+                                model.allowedTrial = allowedTrial
                                 modelList.add(model)
                             }
                         }
                     }
                 }
+            } catch (e:java.lang.Exception) {
+                Log.d("fetchEntitleRecSubscriptionModel", "fetchEntitleRecSubscriptionModel: " + e)
+            }
+
             return modelList
         }
 

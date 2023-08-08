@@ -38,6 +38,7 @@ import com.tv.uscreen.yojmatv.activities.downloads.NetworkHelper.isWifiEnabled
 import com.tv.uscreen.yojmatv.activities.listing.listui.ListActivity
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.EnterOTPActivity
+import com.tv.uscreen.yojmatv.activities.usermanagment.ui.PaymentDetailPage
 import com.tv.uscreen.yojmatv.activities.usermanagment.viewmodel.RegistrationLoginViewModel
 import com.tv.uscreen.yojmatv.adapters.player.EpisodeTabAdapter
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
@@ -1198,8 +1199,8 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
             ActivityLauncher.getInstance()
                 .goToEnterOTP(this, EnterOTPActivity::class.java, "DetailPage")
         } else if (isUserNotEntitle) {
-          /*  ActivityLauncher.getInstance()
-                .goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)*/
+            ActivityLauncher.getInstance()
+                .goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)
         }
     }
 

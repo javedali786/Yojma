@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.activities.profile.order_history.ui
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,18 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import app.doxzilla.activities.order_history.model.OrderHistoryModel
-import com.moe.pushlibrary.MoEHelper
-import com.moengage.core.Properties
 import com.tv.uscreen.yojmatv.R
-
-
 import com.tv.uscreen.yojmatv.activities.profile.order_history.adapter.OrderHistoryAdapter
 import com.tv.uscreen.yojmatv.activities.purchase.purchase_model.PurchaseModel
 import com.tv.uscreen.yojmatv.activities.purchase.ui.VodOfferType
 import com.tv.uscreen.yojmatv.activities.watchList.viewModel.WatchListViewModel
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
 import com.tv.uscreen.yojmatv.databinding.OrderHistoryActivityBinding
-
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.NetworkConnectivity
@@ -47,12 +43,8 @@ class OrderHistoryActivity : BaseBindingActivity<OrderHistoryActivityBinding?>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //ThemeHandler.getInstance().applyOrderHistory(this, getBinding());
         parseColor()
         connectionValidation(NetworkConnectivity.isOnline(this))
-        val properties = Properties()
-        properties.addAttribute(AppConstants.ORDER_HISTORY, AppConstants.ORDER_HISTORY)
-        MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
     }
 
     private fun parseColor() {

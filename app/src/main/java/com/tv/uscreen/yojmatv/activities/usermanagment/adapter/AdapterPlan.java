@@ -93,7 +93,7 @@ public class AdapterPlan extends RecyclerView.Adapter<AdapterPlan.ViewHolder>{
     private Drawable selected(Context context, ViewHolder holder) {
         holder.planName.setTextColor(context.getResources().getColor(R.color.buy_now_pay_now_btn_text_color));
         holder.amountName.setTextColor(context.getResources().getColor(R.color.buy_now_pay_now_btn_text_color));
-        return ResourcesCompat.getDrawable(context.getResources(), R.drawable.roundedbutlist, null);
+        return ResourcesCompat.getDrawable(context.getResources(), R.drawable.roundedbuylist, null);
     }
 
     @Override
@@ -109,9 +109,9 @@ public class AdapterPlan extends RecyclerView.Adapter<AdapterPlan.ViewHolder>{
             super(itemView);
             planName = (TextView) itemView.findViewById(R.id.plan_name_text);
             trialBtn = (TextView) itemView.findViewById(R.id.trialBtn);
+            lltrialBtn=(LinearLayout)itemView.findViewById(R.id.ll_trialBtn);
             amountName = (TextView) itemView.findViewById(R.id.plan_amount_text);
             mainLay=(LinearLayout)itemView.findViewById(R.id.main_lay);
-            lltrialBtn=(LinearLayout)itemView.findViewById(R.id.ll_trialBtn);
 
         }
     }

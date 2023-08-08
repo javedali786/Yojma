@@ -90,7 +90,7 @@
     <string name="title_trending">Trending</string>
     <string name="email_address">Email Address</string>
     <string name="send_email">Send Email</string>
-    <string name="buy_in_case_query">In case of any query,email us at info@YojmaTv.net</string>
+    <string name="buy_in_case_query">In case of any query,email us at help@yojma.tv</string>
     <string name="save">Save</string>
     <string name="new_password">New Password</string>
     <string name="watchlist_empty_message">Keep track of Movies, TV shows and clips you want to watch</string>
@@ -600,7 +600,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="euro_74_99_text">Euro 74,99€</string>
     <string name="annually_title">ANNUALLY</string>
     <string name="date_of_purchase_02_jul_2021_text">Date of Purchase : </string>
-    <string name="all_iberalia_originals_or_exclusive_contents_text">All Iberalia Originals or Exclusive Contents</string>
+    <string name="all_iberalia_originals_or_exclusive_contents_text">The best content that inspires you and improves your life.</string>
     <string name="status_title">Status</string>
     <string name="payment_mode_title">Payment Mode</string>
     <string name="auto_renewal_text">Auto Renewal</string>

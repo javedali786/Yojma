@@ -39,7 +39,7 @@
     <string name="noti_title">Notifications</string>
     <string name="notification_setting">Notificaciones Configuración</string>
     <string name="only_register">Solo Registro</string>
-    <string name="buy_in_case_query">Si tienes cualquier duda, envíanos un correo a info@YojmaTv.net</string>
+    <string name="buy_in_case_query">Si tienes cualquier duda, envíanos un correo a help@yojma.tv</string>
     <string name="buy_select_subscription">POR FAVOR SELECCIONA TU\n SUSCRIPCIÓN</string>
     <string name="plan_description">Te hemos enviado un correo, por favor entra en tu bandeja de entrada y confirma tu cuenta para poder Iniciar Sesión en Iberalia GO!</string>
     <string name="buy_pay_now">Reproducir ahora</string>
@@ -128,12 +128,12 @@
     <string name="detail_page_produced_by">Producido por :</string>
     <string name="meta_produced_description">Alex Moraras</string>
     <string name="account_title">Cuenta</string>
-    <string name="more_manage_subscription">Administrar suscripción</string>
+    <string name="more_manage_subscription">Gestionar Suscripción</string>
     <string name="premium_title">Premium</string>
     <string name="euro_74_99_text">Euros 74,99€</string>
     <string name="annually_title">ANUAL</string>
     <string name="date_of_purchase_02_jul_2021_text">Fecha de Compra: </string>
-    <string name="all_iberalia_originals_or_exclusive_contents_text">Todo el contenido original y en exclusiva de\n Iberalia GO</string>
+    <string name="all_iberalia_originals_or_exclusive_contents_text">El mejor contenido que te inspira y mejora tu vida.</string>
     <string name="status_title">Status</string>
     <string name="payment_mode_title">Metodo de Pago</string>
     <string name="auto_renewal_text">Renovación Automática</string>
@@ -293,7 +293,7 @@
     <string name="ep_dialog_settings_cancel">Cancelar</string>
     <string name="type_video">Video</string>
     <string name="type_audio">Audio</string>
-    <string name="type_subtitle">Sibtitulos</string>
+    <string name="type_subtitle">Subtítulos</string>
     <string name="search_hint">Buscar</string>
     <string name="cancel">Cancelar</string>
     <string name="cancel_search">Cancelar</string>
@@ -355,7 +355,7 @@
     <string name="search_documentaries">Documentales</string>
     <string name="popup_select_plan">El acceso a contenido premium está a solo un clic de distancia. Por favor seleccione</string>
     <string name="geo_blocking_title">Disculpas. Nuestro servicio no está disponible en su país</string>
-    <string name="rate_the_app">Rate the app</string>
+    <string name="rate_the_app">Califica la app</string>
     <string name="popup_username_pwd_does_not_match">El nombre de usuario o la contraseña no coinciden.</string>
     <string name="free_trial">FREE TRAIL</string>
 

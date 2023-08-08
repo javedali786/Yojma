@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -47,8 +48,15 @@ public class AdapterPlanDetailPage extends RecyclerView.Adapter<AdapterPlanDetai
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.planName.setText(items.get(position).getTitle());
+        holder.lltrialBtn.bringToFront();
         holder.amountName.setText(items.get(position).getPrice());
         holder.description.setText(items.get(position).getDescription());
+
+        if (items.get(position).getAllowedTrial()) {
+            holder.trialBtn.setText(items.get(position).getTrialDuration() + " " + items.get(position).getTrialType() + " " + context.getString(R.string.free_trial) );
+        } else {
+            holder.lltrialBtn.setVisibility(View.GONE);
+        }
 
         Drawable drawable;
         if (items.get(position).isSelected()) {
@@ -85,7 +93,7 @@ public class AdapterPlanDetailPage extends RecyclerView.Adapter<AdapterPlanDetai
         holder.description.setTextColor(context.getResources().getColor(R.color.buy_now_pay_now_btn_text_color));
 
         holder.amountName.setBackground(context.getDrawable(R.drawable.rounded_corner_textview_black));
-        return ResourcesCompat.getDrawable(context.getResources(), R.drawable.roundedcornerforbtn, null);
+        return ResourcesCompat.getDrawable(context.getResources(), R.drawable.roundedbuylist, null);
     }
 
     @Override
@@ -94,11 +102,14 @@ public class AdapterPlanDetailPage extends RecyclerView.Adapter<AdapterPlanDetai
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView planName,amountName,description;
+        public TextView planName,amountName,description,trialBtn;
         RelativeLayout mainLay;
+        LinearLayout lltrialBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            trialBtn = (TextView) itemView.findViewById(R.id.trialBtn);
+            lltrialBtn=(LinearLayout)itemView.findViewById(R.id.ll_trialBtn);
             planName = (TextView) itemView.findViewById(R.id.plan_name_text);
             amountName = (TextView) itemView.findViewById(R.id.plan_amount_text);
             description = (TextView) itemView.findViewById(R.id.description);

@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/market_gradents"
         android:layout_margin="@dimen/_10sdp"
         android:padding="@dimen/signUp_8dp_margin">
 
@@ -46,7 +47,7 @@
 
         <TextView
             android:id="@+id/annually_id"
-            style="@style/TextView_Bold_Gray"
+            style="@style/TextView_Medium_20"
             android:layout_marginTop="@dimen/signUp_8dp_margin"
             android:text="@string/annually_title"
             android:gravity="center"
@@ -156,7 +157,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/sfuitext_medium"
             android:text="@string/cancel_subscription_button"
-            android:textColor="@color/series_detail_all_episode_txt_color"
+            android:textColor="@color/series_detail_my_list_selected_color"
             android:textSize="14dp"
             android:gravity="center"
             android:visibility="gone"

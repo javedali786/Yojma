@@ -34,6 +34,7 @@ import com.tv.uscreen.yojmatv.SDKConfig
 import com.tv.uscreen.yojmatv.activities.detail.viewModel.DetailViewModel
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.EnterOTPActivity
+import com.tv.uscreen.yojmatv.activities.usermanagment.ui.PaymentDetailPage
 import com.tv.uscreen.yojmatv.activities.usermanagment.viewmodel.RegistrationLoginViewModel
 import com.tv.uscreen.yojmatv.adapters.player.EpisodeTabAdapter
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
@@ -1075,16 +1076,16 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
     }
 
     override fun onActionBtnClicked() {
-        /* if (isItemValueEmpty){
-            onBackPressed();
-        }*/
+//         if (isItemValueEmpty){
+//            onBackPressed();
+//        }
         if (isUserNotVerify) {
             ActivityLauncher.getInstance()
                 .goToEnterOTP(this, EnterOTPActivity::class.java, "DetailPage")
         }
         if (isUserNotEntitle) {
-            /*ActivityLauncher.getInstance()
-                .goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)*/
+            ActivityLauncher.getInstance()
+                .goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)
         }
     }
 

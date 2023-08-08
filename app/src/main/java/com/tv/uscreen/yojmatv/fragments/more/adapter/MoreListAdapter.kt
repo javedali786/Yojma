@@ -26,9 +26,10 @@ import com.tv.uscreen.yojmatv.utils.helpers.DrawableHelperAboutUs
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 
-class MoreListAdapter(private val mContext: Activity, private val itemsList: List<String>, call: MoreItemClickListener, islogin: Boolean) : RecyclerView.Adapter<MoreListAdapter.ViewHolder>() {
+class MoreListAdapter(private val mContext: Activity, private val itemsList: List<String>, call: MoreItemClickListener,hasEntitlement: Boolean, islogin: Boolean) : RecyclerView.Adapter<MoreListAdapter.ViewHolder>() {
     val itemClickListener: MoreItemClickListener
     private val islogin: Boolean
+    private val hasEntitlement: Boolean
     private var mLastClickTime: Long = 0
     private val stringsHelper by lazy { StringsHelper }
     private val colorsHelper by lazy { ColorsHelper }
@@ -48,6 +49,7 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
         val layoutInflater = LayoutInflater.from(mContext)
         itemClickListener = call
         this.islogin = islogin
+        this.hasEntitlement =hasEntitlement
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
@@ -68,10 +70,17 @@ class MoreListAdapter(private val mContext: Activity, private val itemsList: Lis
             stringsHelper.instance()?.data?.config?.more_settings.toString(),
             mContext.getString(R.string.more_settings)
         )
-        buyNow = stringsHelper.stringParse(
-            stringsHelper.instance()?.data?.config?.more_buy_now.toString(),
-            mContext.getString(R.string.more_buy_now)
-        )
+        buyNow = if (hasEntitlement) {
+            stringsHelper.stringParse(
+                stringsHelper.instance()?.data?.config?.more_manage_subscription.toString(),
+                mContext.getString(R.string.more_manage_subscription)
+            )
+        } else {
+            stringsHelper.stringParse(
+                stringsHelper.instance()?.data?.config?.more_buy_now.toString(),
+                mContext.getString(R.string.more_buy_now)
+            )
+        }
         manageSubscription = stringsHelper.stringParse(
             stringsHelper.instance()?.data?.config?.more_manage_subscription.toString(),
             mContext.getString(R.string.more_manage_subscription)

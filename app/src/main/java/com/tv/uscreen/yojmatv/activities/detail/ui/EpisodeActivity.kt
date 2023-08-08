@@ -47,6 +47,7 @@ import com.tv.uscreen.yojmatv.activities.listing.listui.ListActivity
 import com.tv.uscreen.yojmatv.activities.purchase.planslayer.GetPlansLayer
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.EnterOTPActivity
+import com.tv.uscreen.yojmatv.activities.usermanagment.ui.PaymentDetailPage
 import com.tv.uscreen.yojmatv.activities.usermanagment.viewmodel.RegistrationLoginViewModel
 import com.tv.uscreen.yojmatv.adapters.player.EpisodeTabAdapter
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingActivity
@@ -1423,7 +1424,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
                 .goToEnterOTP(this, EnterOTPActivity::class.java, "DetailPage")
         }
         if (isUserNotEntitle) {
-          //  ActivityLauncher.getInstance().goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)
+           ActivityLauncher.getInstance().goToDetailPlanScreen(this, PaymentDetailPage::class.java, true, resEntitle)
         }
     }
 

@@ -73,11 +73,23 @@ public class PurchaseA implements Serializable {
     @Expose
     private Object onTrial;
 
+
+    @SerializedName("allowedTrial")
+    @Expose
+    private Boolean allowedTrial;
+
     @SerializedName("description")
     @Expose
     private String description;
 
 
+    public Boolean getAllowedTrial() {
+        return allowedTrial;
+    }
+
+    public void setAllowedTrial(Boolean allowedTrial) {
+        this.allowedTrial = allowedTrial;
+    }
 
     public Object isOnTrial() {
         return onTrial;

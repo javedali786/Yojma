@@ -76,7 +76,6 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
 
         }
         initBilling()
-        //ThemeHandler.getInstance().applySelectPlan(this,binding)
         setClicks()
         binding?.toolbar!!.logoMain2.visibility=View.VISIBLE
         if(from!=null && from!!.equals("settings",ignoreCase = true)) {
@@ -87,6 +86,7 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
             binding?.mainManageSubscriptionLayout!!.visibility = View.VISIBLE
         }else{
             binding?.toolbar!!.titleSkip.visibility= View.VISIBLE
+            binding?.toolbar!!.backLayout.visibility= View.VISIBLE
             binding?.mainPaymentLayout!!.visibility = View.VISIBLE
             binding?.mainManageSubscriptionLayout!!.visibility = View.GONE
             binding?.toolbar!!.titleSkip.visibility=View.GONE
@@ -465,7 +465,7 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
         runOnUiThread {
             if (adapter != null) {
                 clickedPlan = planName
-                AppCommonMethod.activeBtn(binding,getColor(R.color.buy_now_pay_now_btn_text_color));
+                AppCommonMethod.activeBtn(binding,getColor(R.color.main_btn_txt_color));
                 adapter?.notifyDataSetChanged()
             }
         }
@@ -481,7 +481,6 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
     }*/
 
     private fun checkBackCondition() {
-        Log.d("sumit", "checkBackCondition: " + fromTo)
         finish()
     }
 }
