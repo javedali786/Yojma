@@ -1,8 +1,8 @@
 {
   "data": {
     "config": {
-      "login_email": "correo eléctronico",
-      "login_pwd": "contraseña",
+      "login_email": "Correo eléctronico",
+      "login_pwd": "Contraseña",
       "login_sign_in": "Iniciar Sesión",
       "login_forgot_pwd": "¿Olvidaste la contraseña?",
       "login_or_sign_in_with": "o Iniciar sesión con",
@@ -18,7 +18,7 @@
       "signup_already_have_an_account": "¿Ya tienes una cuenta?",
       "signup_signin": "Iniciar Sesión",
       "forgot_enter_email": "Por favor introduce tu correo",
-      "forgot_email": "correo eléctronico",
+      "forgot_email": "Correo eléctronico",
       "more_contact_us": "Contáctanos",
       "forgot_continue": "Continuar",
       "otp_enter_otp": "Introduce el OTP",
@@ -41,7 +41,7 @@
       "change_pwd_update_pwd": "Actualizar Contraseña",
       "buy_select_subscription": "POR FAVOR SELECCIONA TU\n SUSCRIPCIÓN",
       "buy_restore_subscription": "Restaurar Suscripción",
-      "buy_pay_now": "Reproducir ahora",
+      "buy_pay_now": "Comenzar ahora",
       "buy_in_case_query": "Si tienes cualquier duda, envíanos un correo a help@yojma.tv",
       "order_history_title": "Historial de Suscripción",
       "order_history_payment_mode": "Modo de pago",
@@ -85,7 +85,7 @@
       "my_list": "Mi Lista",
       "more_account": "Cuenta",
       "more_settings": "Ajustes",
-      "more_buy_now": "Compra ahora",
+      "more_buy_now": "Suscríbete",
       "more_order_history": "Historial de Suscripción",
       "more_privacy_policy": "Política de Privacidad",
       "more_term_condition": "Términos y condiciones",

@@ -2192,7 +2192,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 for (j in purchaseModelList.indices) {
                     if (purchaseModelList[j].entitlementState != null && purchaseModelList[j].entitlementState == true) {
                         val purchaseModel = PurchaseModel()
-                        purchaseModel.price = "" + plans?.data?.get(j)?.prices?.get(0)?.getPrice()
+                        purchaseModel.price = "" + plans?.data?.get(j)?.prices?.get(0)?.price
                         purchaseModel.currency =
                             "" + plans?.data?.get(j)?.prices?.get(0)?.currencyCode
                         purchaseModel.paymentProvider =

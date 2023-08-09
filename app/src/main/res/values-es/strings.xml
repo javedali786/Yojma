@@ -11,7 +11,7 @@
     <string name="my_watchlist">Mi favorito</string>
     <string name="popup_logout">Cerrar sesión</string>
     <string name="signup_display_name">Ingresa tu nombre</string>
-    <string name="login_email">correo eléctronico</string>
+    <string name="login_email">Correo eléctronico</string>
     <string name="signup_email_address">Ingrasa tu contraseña</string>
     <string name="signup_create_pwd">Crea una contraseña de 8 dígitos </string>
     <string name="signup_confirm_pwd">Confirmar Contraseña</string>
@@ -26,8 +26,8 @@
     <string name="otp_code_valid">Código OTP valido para</string>
     <string name="otp_resend_otp">Reenviar OTP</string>
     <string name="login_signup"><u>Regístrate</u></string>
-    <string name="login_email_text">correo</string>
-    <string name="login_pwd">contraseña</string>
+    <string name="login_email_text">Correo</string>
+    <string name="login_pwd">Contraseña</string>
     <string name="login_sign_in">Iniciar Sesión</string>
     <string name="login_forgot_pwd">¿Olvidaste la contraseña?</string>
     <string name="login_do_not_an_account">¿No tienes una cuenta?</string>
@@ -42,7 +42,7 @@
     <string name="buy_in_case_query">Si tienes cualquier duda, envíanos un correo a help@yojma.tv</string>
     <string name="buy_select_subscription">POR FAVOR SELECCIONA TU\n SUSCRIPCIÓN</string>
     <string name="plan_description">Te hemos enviado un correo, por favor entra en tu bandeja de entrada y confirma tu cuenta para poder Iniciar Sesión en Iberalia GO!</string>
-    <string name="buy_pay_now">Reproducir ahora</string>
+    <string name="buy_pay_now">Comenzar ahora</string>
     <string name="preferences_title_hunting_types">Modalidades De Caza</string>
     <string name="preferences_title_hunting">Especies De Caza</string>
     <string name="hunting_types">Modalidades De Caza</string>
@@ -59,7 +59,6 @@
     <string name="and_the">y la Política de Privacidad</string>
     <string name="privacy"><u>Política de Privacidad</u></string>
     <string name="pop_title" />
-    <string name="title_pop"></string>
     <string name="pop_button">ES Continuar</string>
     <string name="popular_search">Busqueda Popular</string>
     <string name="recent_searches">Busquedas Recientes</string>
@@ -180,7 +179,7 @@
     <string name="change_password">Cambiar Contraseña</string>
     <string name="player">Player</string>
     <string name="order_history_title">Historial de Pedidos</string>
-    <string name="spanish_change_language">español</string>
+    <string name="spanish_change_language">Español</string>
     <string name="manage_account">Gestionar Suscripción</string>
     <string name="change_language_comman">Change Language</string>
     <string name="big_game_hunting">Caza Mayor</string>
@@ -339,7 +338,7 @@
     <string name="more">Más</string>
     <string name="less">Menos</string>
     <string name="no_order_history">No hay historial de pedidos</string>
-    <string name="language_spanish">español</string>
+    <string name="language_spanish">Español</string>
     <string name="payment_detail_header">Access to premium content is just a click away. Select the package bexst suited for you:</string>
     <string name="previous_account_deletion_msg">Your Previous Account deletion request is already under review. Our team will get back with the details on the same</string>
     <string name="please_update_your_app">We have a new version available. Kindly update to enjoy Iberalia.</string>
@@ -359,6 +358,8 @@
     <string name="popup_username_pwd_does_not_match">El nombre de usuario o la contraseña no coinciden.</string>
     <string name="free_trial">Prueba gratuita</string>
     <string name="order_history_annual">Anual</string>
+    <string name="we_could_not">Oops, parece que el botón de suscripción está tomando un descanso. Por favor, inténtalo más tarde. Si el problema persiste, escríbenos a help@yojma.tv y lo solucionaremos.</string>
+
 
 
 </resources>

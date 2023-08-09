@@ -149,7 +149,7 @@
                     android:layout_marginLeft="@dimen/NontonSize25"
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="@dimen/NontonSize25"
-                    android:background="@{TextUtils.isEmpty(colorsData.instance().data.config.main_btn_selected_bg_color) ? @color/main_btn_selected_bg_color : Color.parseColor(colorsData.instance().data.config.main_btn_selected_bg_color), default=@color/main_btn_selected_bg_color}"
+                    android:background="@drawable/signup_btn_gredient"
                     android:gravity="center">
 
                     <TextView

@@ -61,14 +61,14 @@ public class PurchaseHandler {
                         callGetPlansAPI(purchases,callback);
                     }
                 }else {
-                    callback.subscriptionStatus(false, OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+                    callback.subscriptionStatus(false, OttApplication.getInstance().getResources().getString(R.string.we_could_not));
                 }
 
             } catch (Exception e) {
                 Logger.e(e);
             }
         }else {
-            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
         }
     }
 
@@ -87,7 +87,7 @@ public class PurchaseHandler {
                         checkEntitlementState(purchaseResponseModel,purchases,callback);
                     } else {
                         purchaseResponseModel.setStatus(false);
-                        callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+                        callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
                     }
 
                 }
@@ -140,7 +140,7 @@ public class PurchaseHandler {
                     }
                 }
                 if (!initiatePurchase){
-                    callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+                    callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
                 }
             }else {
                 getPlans=false;
@@ -170,7 +170,7 @@ public class PurchaseHandler {
                             callCreateNewPurchase(purchaseModel,purchase,dataItem,callback);
                         }else {
                             getPlans=false;
-                            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+                            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
                         }
                     });
 
@@ -227,7 +227,7 @@ public class PurchaseHandler {
 
                         PurchaseResponseModel purchaseResponseModel2 = ErrorCodesIntercepter.getInstance().createNewOrder(response);
                         getPlans=false;
-                        callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+                        callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
                     }
 
                 }
@@ -239,12 +239,12 @@ public class PurchaseHandler {
                     purchaseResponseModel.setResponseCode(500);
                     purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
                     getPlans=false;
-                    callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+                    callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
                 }
             });
         }catch (Exception ignored){
             getPlans=false;
-            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
         }
 
     }
@@ -279,7 +279,7 @@ public class PurchaseHandler {
                     } else {
                         PurchaseResponseModel purchaseResponseModel2 = ErrorCodesIntercepter.getInstance().initiateOrder(response);
                         getPlans=false;
-                        callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+                        callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
                     }
 
                 }
@@ -291,12 +291,12 @@ public class PurchaseHandler {
                     purchaseResponseModel.setResponseCode(500);
                     purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
                     getPlans=false;
-                    callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+                    callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
                 }
             });
         }catch (Exception ignored){
             getPlans=false;
-            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
         }
 
 
@@ -352,7 +352,7 @@ public class PurchaseHandler {
                     } else {
                         PurchaseResponseModel purchaseResponseModel2 = ErrorCodesIntercepter.getInstance().updateOrder(response);
                         getPlans=false;
-                        callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+                        callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
                     }
 
 
@@ -365,12 +365,12 @@ public class PurchaseHandler {
                     purchaseResponseModel.setResponseCode(500);
                     purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
                     getPlans=false;
-                    callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+                    callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
                 }
             });
         }catch (Exception ignored){
             getPlans=false;
-            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not)+ " " + "info@iberaliago.net");
+            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
         }
 
     }

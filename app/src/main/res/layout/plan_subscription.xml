@@ -31,8 +31,8 @@
 
     <LinearLayout
         android:id="@+id/main_lay"
-        android:layout_width="168dp"
-        android:layout_height="85dp"
+        android:layout_width="180dp"
+        android:layout_height="90dp"
         android:layout_margin="20dp"
         android:background="@drawable/border_plan"
         android:gravity="center"

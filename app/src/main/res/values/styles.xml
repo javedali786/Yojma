@@ -65,6 +65,7 @@
     </style>
 
 
+
     <style name="buttonStyle_two" parent="@android:style/Widget.Button.Small">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">@dimen/sign_up_text_size16sp</item>
