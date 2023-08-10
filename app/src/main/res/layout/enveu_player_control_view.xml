@@ -309,6 +309,7 @@
             android:id="@+id/mrb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:mediaRouteButtonTint="@color/moe_white"
             android:layout_marginTop="@dimen/ep_common_margin_vertical"
             android:layout_marginEnd="@dimen/ep_common_margin_horizontal"
             app:layout_constraintEnd_toStartOf="@id/iv_ep_setting"
