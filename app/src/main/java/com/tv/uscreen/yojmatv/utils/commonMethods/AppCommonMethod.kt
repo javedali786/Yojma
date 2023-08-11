@@ -1780,6 +1780,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                     for (i in responseEntitlementModel.data.indices) {
                         val model = PurchaseModel()
                         if (responseEntitlementModel.data != null && responseEntitlementModel.data[i].offerType != null && responseEntitlementModel.getData().get(i).getOfferType().contains(VodOfferType.RECURRING_SUBSCRIPTION.name)) {
+                            model.title = responseEntitlementModel.data[i].title
                             val identifier: String = responseEntitlementModel.data[i].customData.androidProductId
                             val allowedTrial : Boolean = responseEntitlementModel.data[i].allowedTrial
                             model.allowedTrial = allowedTrial
@@ -1918,7 +1919,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                         purchaseModel.customIdentifier = purchaseModelList[j].customIdentifier
                         purchaseModel.currency = skuDetails.priceCurrencyCode
                         purchaseModel.subscriptionOrder = purchaseModelList[j].subscriptionOrder
-
+                        purchaseModel.title = purchaseModelList[j].title
                         purchaseModel.title_en = purchaseModelList[j].title_en
                         purchaseModel.title_es = purchaseModelList[j].title_es
                         purchaseModel.description_en =  purchaseModelList[j].description_en
@@ -2020,7 +2021,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                             purchaseModel.customIdentifier = purchaseModelList[j].customIdentifier
                             purchaseModel.currency = skuDetails.priceCurrencyCode
                             purchaseModel.createdDate = purchaseModelList[j].createdDate
-
+                            purchaseModel.title = purchaseModelList[j].title
                             purchaseModel.title_en = purchaseModelList[j].title_en
                             purchaseModel.title_es = purchaseModelList[j].title_es
                             purchaseModel.description_en =  purchaseModelList[j].description_en
@@ -2048,10 +2049,11 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                         for (i in responseEntitlementModel.data.purchaseAs.indices) {
                             val model = PurchaseModel()
                             if (responseEntitlementModel.data != null && responseEntitlementModel.data.purchaseAs[i].offerType != null && responseEntitlementModel.data.purchaseAs[i].offerType.contains(VodOfferType.RECURRING_SUBSCRIPTION.name)) {
-                                val identifier: String = responseEntitlementModel.data.getPurchaseAs().get(i).getCustomData().getAndroidProductId()
-                                model.identifier = responseEntitlementModel.getData().getPurchaseAs().get(i).getIdentifier()
+                                val identifier: String = responseEntitlementModel.data.purchaseAs[i].customData.androidProductId
+                                model.title = responseEntitlementModel.data.purchaseAs[i].title
+                                model.identifier = responseEntitlementModel.data.purchaseAs[i].identifier
                                 model.customIdentifier = identifier
-                                if (responseEntitlementModel.getData().getPurchaseAs().get(i).getSubscriptionOrder() != null) {
+                                if (responseEntitlementModel.data.purchaseAs[i].subscriptionOrder != null) {
                                     model.subscriptionOrder =
                                         responseEntitlementModel.data.purchaseAs[i].subscriptionOrder
                                 }
@@ -2061,7 +2063,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
 
                                 model.subscriptionType = VodOfferType.RECURRING_SUBSCRIPTION.name
                                 subSkuList.add(identifier)
-                                if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer() != null) {
+                                if (responseEntitlementModel.data.purchaseAs[i].recurringOffer != null) {
                                     if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod() != null) {
                                         if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType() != null && !responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType().equals("", ignoreCase = true)) {
                                             model.setTrialType(responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType())
@@ -2203,7 +2205,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                         purchaseModel.isSelected = false
                         purchaseModel.purchaseOptions = VodOfferType.RECURRING_SUBSCRIPTION.name
                         purchaseModel.offerPeriod = VodOfferType.WEEKLY.name
-
+                        purchaseModel.title = purchaseModelList[j].title
                         purchaseModel.title_en = purchaseModelList[j].title_en
                         purchaseModel.title_es = purchaseModelList[j].title_es
                         purchaseModel.description_en =  purchaseModelList[j].description_en
