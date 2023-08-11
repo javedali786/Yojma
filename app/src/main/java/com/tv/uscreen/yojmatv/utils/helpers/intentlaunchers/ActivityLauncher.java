@@ -368,6 +368,13 @@ public final class ActivityLauncher {
         source.startActivity(intent);
     }
 
+    public void goToPlanScreenFromOtp(Activity source, Class<ActivitySelectSubscriptionPlan> destination, String screenName) {
+        Intent intent = new Intent(source, destination);
+        intent.putExtra("intentFrom", screenName);
+        source.startActivity(intent);
+        source.finish();
+    }
+
     public void changePassword(Activity activity, Class<ChangePasswordActivity> destination) {
         activity.startActivity(new Intent(activity, destination));
     }
