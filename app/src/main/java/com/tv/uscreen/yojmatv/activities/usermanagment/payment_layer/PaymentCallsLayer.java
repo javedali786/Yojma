@@ -62,8 +62,6 @@ public class PaymentCallsLayer {
                 jsonObject1.put("enveuSMSPlanTitle", model.getTitle());
                 jsonObject1.put("enveuSMSSubscriptionOfferType", model.getPurchaseOptions());
                 jsonObject1.put("enveuSMSPurchaseCurrency",  model.getCurrency());
-                jsonObject1.put("enveuSMSOfferContentSKU", model.getIdentifier());
-
             }
 
 

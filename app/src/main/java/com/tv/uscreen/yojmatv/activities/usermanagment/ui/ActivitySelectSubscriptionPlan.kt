@@ -139,7 +139,6 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
         binding?.toolbar?.backLayout?.setOnClickListener {
             checkBackCondition()
         }
-        binding?.toolbar?.backLayout?.setOnClickListener { checkBackCondition() }
         binding?.btnBuy?.setOnClickListener {
             clickedPlan?.let {
                 Log.w("itemClick", clickedPlan!!.identifier.toString() + "")
@@ -551,7 +550,7 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
     }
 
     private fun checkBackCondition() {
-        finish()
+            finish()
     }
 
     private fun restoreSubscription() {
@@ -586,5 +585,6 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
                 ActivityLauncher.getInstance().homeScreen(this@ActivitySelectSubscriptionPlan, HomeActivity::class.java)
             }
     }
+
 
 }

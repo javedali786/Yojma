@@ -78,7 +78,7 @@
     <string name="or_caps">- OR -</string>
     <string name="skip">Skip</string>
     <string name="only_register">Only Register</string>
-    <string name="popup_payment_success">Payment Completed, we’ve send you a e-mail, please confirm your account to login</string>
+    <string name="popup_payment_success">Purchased Successfully</string>
     <string name="skip_line"><u>Skip</u></string>
     <string name="forgot_password">Forgot Password</string>
     <string name="forgot_password_u">Forgot Password</string>

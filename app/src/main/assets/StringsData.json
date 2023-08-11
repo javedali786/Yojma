@@ -151,7 +151,7 @@
       "popup_remove": "Remove",
       "popup_user_does_not_exists": "User with this email id does not exist",
       "popup_payment_error": "There was an error processing your request, please try after some time. If additional support is required, please contact us at",
-      "popup_payment_success": "Payment Completed, we’ve send you a e-mail, please confirm your account to login",
+      "popup_payment_success": "Purchased Successfully",
       "popup_confirm_pwd": "Confirm Password",
       "popup_your_account_has_been_verified": "Your Account Has been Verified Successfully",
       "popup_date_difference": "You must be 18 years old and above.",

@@ -153,7 +153,7 @@
       "popup_remove": "Eliminar",
       "popup_user_does_not_exists": "El usuario con esta identificación de correo electrónico no existe",
       "popup_payment_error": "Hubo un error al procesar su solicitud, inténtelo después de un tiempo. Si requiere soporte adicional, por favor contáctenos en",
-      "popup_payment_success": "Pago completado, le enviamos un correo electrónico, confirme su cuenta para iniciar sesión",
+      "popup_payment_success": "Comprado con Éxito",
       "popup_confirm_pwd": "confirmar Contraseña",
       "popup_your_account_has_been_verified": "Su cuenta ha sido verificada con éxito",
       "popup_date_difference": "Debes tener 18 años o más.",

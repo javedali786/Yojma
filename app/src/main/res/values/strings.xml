@@ -574,7 +574,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="toolbar_back_text">Back</string>
     <string name="toolbar_skip_text">Skip</string>
     <string name="show_all_results">Show All</string>
-    <string name="popup_payment_success">Payment Completed, we’ve send you a e-mail, please confirm your account to login</string>
+    <string name="popup_payment_success">Purchased Successfully</string>
     <string name="only_register">Only Register</string>
     <string name="enter_otp_contact_us"><u>Contact Us!</u></string>
     <string name="login_signup"><u>Sign Up</u></string>
