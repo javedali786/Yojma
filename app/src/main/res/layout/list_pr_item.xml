@@ -186,7 +186,7 @@
                     android:contentDescription="TODO"
                     android:gravity="center"
                     android:padding="@dimen/NontonSize5"
-                    android:src="?attr/watchlist_delete_icon" />
+                    android:background="@drawable/ic_delete" />
             </FrameLayout>
 
 
