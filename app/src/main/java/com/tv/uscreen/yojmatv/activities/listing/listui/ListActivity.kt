@@ -99,6 +99,8 @@ class ListActivity : BaseBindingActivity<ListingActivityBinding?>(), ItemClickLi
         binding!!.toolbarGrid.backLayout.setOnClickListener { onBackPressed() }
         binding!!.listRecyclerview.layoutManager = gridLayoutManager
         binding!!.toolbarGrid.titleMid.visibility = View.VISIBLE
+        binding!!.toolbarGrid.logoMain2.visibility = View.GONE
+        binding!!.toolbarGrid.searchIcon.visibility = View.GONE
         binding!!.toolbarGrid.titleMid.text = title
         binding!!.toolbarGrid.backLayout.visibility = View.VISIBLE
         binding!!.toolbarGrid.titleMid.visibility = View.VISIBLE
