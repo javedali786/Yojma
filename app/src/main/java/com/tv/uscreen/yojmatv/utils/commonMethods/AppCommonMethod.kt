@@ -1255,9 +1255,9 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         }
 
         fun updateLanguage(context: Context) {
-            if (KsPreferenceKeys.getInstance().getAppLanguage().equals("spanish", ignoreCase = true) || KsPreferenceKeys.getInstance().getAppLanguage().equals("हिंदी", ignoreCase = true)) {
+            if (KsPreferenceKeys.getInstance().appLanguage.equals("spanish", ignoreCase = true)) {
                 updateLanguage("es", context)
-            } else if (KsPreferenceKeys.getInstance().getAppLanguage().equals("English", ignoreCase = true)) {
+            } else if (KsPreferenceKeys.getInstance().appLanguage.equals("English", ignoreCase = true)) {
                 updateLanguage("en", context)
             }
         }

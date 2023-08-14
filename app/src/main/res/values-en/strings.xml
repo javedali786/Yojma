@@ -200,7 +200,7 @@
     <string name="delete_confirmation">Are you sure you want to delete this comment?</string>
     <string name="cannot_delete_this_comment">You can delete only your comments.</string>
     <string name="more_buy_now">Subscribe</string>
-    <string name="purhcase_options">Purchase Options</string>
+    <string name="purhcase_options">Subscribe Options</string>
     <string name="pls_select_purchase_option">Please select purchase option</string>
     <string name="purchased">Purchased</string>
     <string name="subscribed">Subscribed</string>
@@ -666,7 +666,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="user_not_verify">You need to verify your account to access the selected content</string>
     <string name="purchase_option">Purchase</string>
     <string name="ok">Ok</string>
-    <string name="verify">Verify</string>
+    <string name="verify">Verify</string>popup_purchase
     <string name="password_changed">Password Changed</string>
     <string name="password_changed_successfully">Your password has been changed successfully</string>
     <string name="delete_account">Delete Account</string>
@@ -792,7 +792,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="popup_search_yes">Yes</string>
     <string name="popup_search_no">No</string>
     <string name="popup_subscribe_access_to_premium">Access to premium content is just a click away. Please visit mobile apps or website</string>
-    <string name="popup_subscribe_purchase">Purchase</string>
+    <string name="popup_subscribe_purchase">Subscribe</string>
     <string name="popup_logout">Log Out</string>
     <string name="popup_logout_you_want_to_logout">Are you sure you want to logout?</string>
     <string name="popup_change_language_tittle">Change Language</string>
@@ -821,7 +821,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="popup_select_plan">Access to premium content is just a click away. Please select</string>
     <string name="popup_ok">OK</string>
     <string name="popup_minutes">min</string>
-    <string name="popup_purchase">Purchase</string>
+    <string name="popup_purchase">Subscribe</string>
     <string name="detail_page_episodes">Episodes</string>
     <string name="popup_remove">Remove</string>
     <string name="popup_confirm_pwd">Confirm Password</string>

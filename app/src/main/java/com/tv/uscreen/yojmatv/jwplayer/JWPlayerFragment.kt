@@ -52,6 +52,7 @@ import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.databinding.FragmentJWPlayerBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.DialogPlayer
 import com.tv.uscreen.yojmatv.utils.Logger
+import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
@@ -205,6 +206,11 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         override fun onSettingClicked() {
             try {
                 super.onSettingClicked()
+                if (KsPreferenceKeys.getInstance().appLanguage.equals("spanish", ignoreCase = true)) {
+                    activity?.let { AppCommonMethod.updateLanguage("es", it) }
+                } else if (KsPreferenceKeys.getInstance().appLanguage.equals("English", ignoreCase = true)) {
+                    activity?.let { AppCommonMethod.updateLanguage("en", it) }
+                }
                 var settingList = ArrayList<String>()
                 if (!audioList.isNullOrEmpty() && audioList?.size!! > 1)
                     settingList.add(resources.getString(R.string.ep_settings_audio))
@@ -220,7 +226,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             } catch (e:java.lang.Exception) {
 
             }
-
 
         }
 
