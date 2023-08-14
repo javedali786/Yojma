@@ -51,6 +51,11 @@ public class AdapterPlanDetailPage extends RecyclerView.Adapter<AdapterPlanDetai
         holder.lltrialBtn.bringToFront();
         holder.amountName.setText(items.get(position).getPrice());
 
+        if (KsPreferenceKeys.getInstance().getAppLanguage().equals("spanish")) {
+            mListener.setDescription(items.get(position).getDescription_es(),items.get(position));
+        } else if (KsPreferenceKeys.getInstance().getAppLanguage().equals("English")) {
+            mListener.setDescription(items.get(position).getDescription_en(),items.get(position));
+        }
 
         if (KsPreferenceKeys.getInstance().getAppLanguage().equals("spanish")) {
             holder.description.setText(items.get(position).getDescription_es());
@@ -69,7 +74,6 @@ public class AdapterPlanDetailPage extends RecyclerView.Adapter<AdapterPlanDetai
                 holder.lltrialBtn.setVisibility(View.GONE);
             }
         }
-
 
         Drawable drawable;
         if (items.get(position).isSelected()) {
