@@ -61,15 +61,15 @@ android {
     productFlavors {
         qa {
             dimension 'default'
-            versionCode 1
-            versionName "1.2"
+            versionCode 8
+            versionName "4.0.0"
             applicationId "tv.uscreen.yojmatv.qa"
             buildConfigField "String", "MOENGAGE_APP_ID", "\"RKRIA1W5XU7NWCY5X9935YBF\""
         }
         prod {
             dimension 'default'
-            versionCode 1
-            versionName "1.6"
+            versionCode 8
+            versionName "4.0.0"
             applicationId "tv.uscreen.yojmatv"
             buildConfigField "String", "MOENGAGE_APP_ID", "\"RKRIA1W5XU7NWCY5X9935YBF\""
         }
