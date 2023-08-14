@@ -192,6 +192,8 @@ data class Config(
     val rate_the_app:String,
     val free_trail : String,
     val subscription_Active: String,
-    val exclusive_content: String
+    val exclusive_content: String,
+    val popup_notEntitled: String
+
 
     )

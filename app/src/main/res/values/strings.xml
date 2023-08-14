@@ -717,7 +717,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="error">Error</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="your_request_has_been_processed_correctly"> You request has been processed correctly and shortly we will get in touch with you</string>
-    <string name="not_entitled">You are not entitled to view this content</string>
+    <string name="popup_notEntitled">You are not entitled to view this content</string>
     <string name="select_plan">Access to premium content is just a click away. Please select the purchase option :</string>
     <string name="purchase_option">Purchase</string>
     <string name="select_plan_player"> Access to premium content you need to purchase subscription</string>

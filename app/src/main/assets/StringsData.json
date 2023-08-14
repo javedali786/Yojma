@@ -190,7 +190,8 @@
       "rate_the_app": "Rate the app",
       "free_trail": "Free Trial",
       "subscription_Active": "ACTIVE",
-      "exclusive_content": "All Yojma TV & Exclusive Contents"
+      "exclusive_content": "All Yojma TV & Exclusive Contents",
+      "popup_notEntitled": "You are not entitled to view this content"
     }
   },
   "responseCode": 2000,

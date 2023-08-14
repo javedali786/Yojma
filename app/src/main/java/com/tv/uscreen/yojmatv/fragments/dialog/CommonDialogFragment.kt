@@ -86,16 +86,17 @@ class CommonDialogFragment : DialogFragment() {
                 cancel?.visibility = View.VISIBLE
                 cancel?.text = "No"
             }
+            if (titleValue.contains(requireContext().getString(R.string.popup_notEntitled))) {
+                cancel?.visibility = View.VISIBLE
+            }
             if (message!!.isEmpty()) {
                 description?.visibility = View.GONE
             }
-            if (message.contains(resources.getString(R.string.popup_select_plan))) {
+
+            if (message.contains(requireContext().getString(R.string.user_not_verify))) {
                 cancel?.visibility = View.VISIBLE
             }
-            if (message.contains(resources.getString(R.string.user_not_verify))) {
-                cancel?.visibility = View.VISIBLE
-            }
-            if (message.contains(resources.getString(R.string.delete_hunting))) {
+            if (message.contains(requireContext().getString(R.string.delete_hunting))) {
                 cancel?.visibility = View.VISIBLE
             }
             description?.text = message

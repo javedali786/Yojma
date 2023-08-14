@@ -325,7 +325,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
                                 } else {
                                     isUserNotEntitle = true
                                     commonDialog(
-                                        "",
+                                        stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_notEntitled.toString(), getString(R.string.popup_notEntitled)),
                                         stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_select_plan.toString(), getString(R.string.popup_select_plan)),
                                         stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_purchase.toString(), getString(R.string.popup_purchase))
                                     )

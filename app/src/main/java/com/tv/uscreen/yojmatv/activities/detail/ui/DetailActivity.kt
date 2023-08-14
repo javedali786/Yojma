@@ -599,7 +599,10 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
                                     } else {
                                         isUserNotEntitle = true
                                         commonDialog(
-                                            "",
+                                            stringsHelper.stringParse(
+                                                stringsHelper.instance()?.data?.config?.popup_notEntitled.toString(),
+                                                getString(R.string.popup_notEntitled)
+                                                ),
                                             stringsHelper.stringParse(
                                                 stringsHelper.instance()?.data?.config?.popup_select_plan.toString(),
                                                 getString(R.string.popup_select_plan)

@@ -945,7 +945,10 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                             } else {
                                 isUserNotVerify = true
                                 commonDialog(
-                                    "",
+                                    stringsHelper.stringParse(
+                                        stringsHelper.instance()?.data?.config?.popup_notEntitled.toString(),
+                                        getString(R.string.popup_notEntitled)
+                                    ),
                                     stringsHelper.stringParse(
                                         stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
                                         getString(R.string.popup_user_not_verify)

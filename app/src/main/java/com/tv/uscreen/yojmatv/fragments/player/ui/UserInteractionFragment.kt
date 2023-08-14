@@ -467,7 +467,7 @@ class UserInteractionFragment : BaseBindingFragment<DetailWatchlistLikeShareView
         if (disallowClick()) {
             return
         }
-        imgUrl = AppCommonMethod.getBranchUrl(imgUrl, requireContext())
+        imgUrl = AppCommonMethod.getListLDSImage(imgUrl, requireContext())
         //    AppCommonMethod.openShareDialog(getActivity(), title, id, assetType, imgUrl, seriesDetailBean.getSeriesId()  == null ? "" : seriesDetailBean.getSeriesId(), seriesDetailBean.getSeason());
         AppCommonMethod.openShareFirebaseDynamicLinks(requireActivity(), title, id, assetType, imgUrl, seriesDetailBean!!.series, seriesDetailBean!!.season)
         Handler().postDelayed({

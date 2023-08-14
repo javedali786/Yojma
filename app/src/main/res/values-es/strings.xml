@@ -214,7 +214,7 @@
     <string name="please_enter_a_valid_date">Por favor introduzca una fecha valida</string>
     <string name="incorrect_password">Contraseña Incorrecta</string>
     <string name="something_went_wrong">Something went wrong</string>
-    <string name="not_entitled">¡Oh, oh! ¡Parece que no tienes acceso a este contenido! </string>
+    <string name="popup_notEntitled">¡Oh, oh! ¡Parece que no tienes acceso a este contenido! </string>
     <string name="select_plan">¡El mejor contenido que te inspira y mejora tu vida esta a un clic! ¡Selecciona tu plan favorito y sumérgete en el contenido exclusivo!</string>
     <string name="user_empty_name">Por favor actualice tu número de móvil y nombre en tu perfil</string>
     <string name="select_plan_player"> Access to premium content you need to purchase subscription</string>
@@ -353,7 +353,7 @@
     <string name="my_list">Mi Lista</string>
     <string name="search_movies">Movies</string>
     <string name="search_documentaries">Documentales</string>
-    <string name="popup_select_plan">El acceso a contenido premium está a solo un clic de distancia. Por favor seleccione</string>
+    <string name="popup_select_plan">¡El mejor contenido que te inspira y mejora tu vida esta a un clic! ¡Selecciona tu plan favorito y sumérgete en el contenido exclusivo!</string>
     <string name="geo_blocking_title">Disculpas. Nuestro servicio no está disponible en su país</string>
     <string name="rate_the_app">Califica la app</string>
     <string name="popup_username_pwd_does_not_match">El nombre de usuario o la contraseña no coinciden.</string>

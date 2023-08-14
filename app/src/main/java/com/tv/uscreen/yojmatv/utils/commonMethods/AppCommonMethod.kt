@@ -292,15 +292,15 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                     .buildShortDynamicLink(ShortDynamicLink.Suffix.SHORT)
                     .addOnCompleteListener(activity, OnCompleteListener<ShortDynamicLink> { task ->
                         if (task.isSuccessful) {
-                            dynamicLinkUri = task.result.getShortLink()
-                            val flowchartLink: Uri = task.result.getPreviewLink()!!
+                            dynamicLinkUri = task.result.shortLink
+                            val flowchartLink: Uri = task.result.previewLink!!
                             Log.e("dynamicUrl", dynamicLinkUri.toString() + flowchartLink)
                             // Log.e("flowchartLink", String.valueOf(flowchartLink));
                             try {
                                 activity.runOnUiThread(Runnable {
                                     if (dynamicLinkUri != null) {
                                         val sharingIntent = Intent(Intent.ACTION_SEND)
-                                        sharingIntent.setType("text/plain")
+                                        sharingIntent.type = "text/plain"
                                         sharingIntent.putExtra(
                                             Intent.EXTRA_TEXT,
                                             activity.resources.getString(R.string.checkout) + " " + title + " " + activity.getResources()

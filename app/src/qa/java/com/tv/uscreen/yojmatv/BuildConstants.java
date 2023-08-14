@@ -10,6 +10,6 @@ public class BuildConstants {
     public static final String INAPP_WEEKLY = "weekly";
     public static final String INAPP_MONTHLY = "monthly";
     public static final String FIREBASE_ANDROID_PACKAGE = "tv.uscreen.yojmatv.qa";
-    public static final String FIREBASE_DPLNK_URL = "https://web-qa.yojmatv.enveu.com/";
+    public static final String FIREBASE_DPLNK_URL = "https://web-qa.yojmatv.enveu.com/data";
     public static final String FIREBASE_DPLNK_PREFIX ="https://yojmatv.page.link";
 }

@@ -282,10 +282,7 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         val isUserVerified: String
         var isLoggedIn = false
         preference = KsPreferenceKeys.getInstance()
-        if (preference.getAppPrefLoginStatus()
-                .equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)
-        ) {
-            isLoggedIn = true
+        if (preference.appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) { isLoggedIn = true
         }
         isUserVerified = preference.isVerified
         Logger.d("branchRedirectors onAnimationEnd1")
@@ -342,7 +339,7 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
                 if (bundle != null) {
                     notid = bundle.getString("id")
                     if (notid != null && !notid.equals("", ignoreCase = true)) {
-                        notAssetType = bundle.getString("mediaType")
+                        notAssetType = bundle.getString("mediaContentId")
                         if (notAssetType != null && !notAssetType.equals("", ignoreCase = true)) {
                             parseNotification(notid, notAssetType)
                         } else {

@@ -144,7 +144,7 @@
       "popup_change_pwd_your_pwd_does_not_match": "Lo sentimos, su contraseña no coincide, verifique su contraseña nuevamente",
       "popup_user_not_verify": "Necesitas verificar tu cuenta para acceder al contenido seleccionado",
       "popup_verify": "Verificar",
-      "popup_select_plan": "El acceso a contenido premium está a solo un clic de distancia. Por favor seleccione",
+      "popup_select_plan": "¡El mejor contenido que te inspira y mejora tu vida esta a un clic! ¡Selecciona tu plan favorito y sumérgete en el contenido exclusivo!",
       "popup_ok": "OK",
       "kids_tabbar": "Yojma Kids",
       "series_tabbar": "Series y Docu",
@@ -189,7 +189,9 @@
       "rate_the_app": "Califica la app",
       "free_trail": "prueba gratuita",
       "subscription_Active": "ACTIVO",
-      "exclusive_content": "Todo el contenido original y en exclusiva de Yojma TV"
+      "exclusive_content": "Todo el contenido original y en exclusiva de Yojma TV",
+      "popup_notEntitled": "¡Oh, oh! ¡Parece que no tienes acceso a este contenido!"
+
     }
   },
   "responseCode": 2000,
