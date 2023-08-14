@@ -428,10 +428,7 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
             if(response!!.data.purchaseAs!=null && response!!.data.purchaseAs.size>0){
                 purchaseModel = AppCommonMethod.fetchEntitleRecSubscriptionModel(response!!, subSkuList as java.util.ArrayList<String>, productSkuList as java.util.ArrayList<String>)
                 if (purchaseModel != null) {
-                    bp.getAllSkuDetails(
-                        purchaseModel!![0].subscriptionList,
-                        purchaseModel!![0].productList
-                    )
+                    bp.getAllSkuDetails(purchaseModel!![0].subscriptionList, purchaseModel!![0].productList)
                 }
             }else{
                 binding!!.progressBar.visibility = View.GONE

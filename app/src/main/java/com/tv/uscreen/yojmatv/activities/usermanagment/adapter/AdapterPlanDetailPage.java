@@ -54,14 +54,14 @@ public class AdapterPlanDetailPage extends RecyclerView.Adapter<AdapterPlanDetai
 
         if (KsPreferenceKeys.getInstance().getAppLanguage().equals("spanish")) {
             holder.description.setText(items.get(position).getDescription_es());
-            holder.planName.setText(items.get(position).getTrialType_en());
+            holder.planName.setText(items.get(position).getTitle_es());
             if (items.get(position).getAllowedTrial()) {
                 holder.trialBtn.setText(items.get(position).getTrialDuration() + " " + items.get(position).getTrialType_es() + " " + context.getString(R.string.free_trial) );
             } else {
                 holder.lltrialBtn.setVisibility(View.GONE);
             }
         } else if (KsPreferenceKeys.getInstance().getAppLanguage().equals("English")) {
-            holder.planName.setText(items.get(position).getTrialType_es());
+            holder.planName.setText(items.get(position).getTitle_en());
             holder.description.setText(items.get(position).getDescription_en());
             if (items.get(position).getAllowedTrial()) {
                 holder.trialBtn.setText(items.get(position).getTrialDuration() + " " + items.get(position).getTrialType_en() + " " + context.getString(R.string.free_trial) );
@@ -70,7 +70,7 @@ public class AdapterPlanDetailPage extends RecyclerView.Adapter<AdapterPlanDetai
             }
         }
 
-        
+
         Drawable drawable;
         if (items.get(position).isSelected()) {
             drawable=selected(context,holder);
