@@ -443,13 +443,44 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
 
                 }
                 override fun getPlans(plans: ResponseMembershipAndPlan?, apiStatus: Boolean) {
-                    purchaseModel = AppCommonMethod.fetchRecSubscriptionModel(plans!!, subSkuList as java.util.ArrayList<String>, productSkuList as java.util.ArrayList<String>)
-                    if (purchaseModel != null) {
-                        bp.getAllSkuDetails(
-                            purchaseModel!![0].subscriptionList,
-                            purchaseModel!![0].productList
+                    if (apiStatus) {
+                        purchaseModel = AppCommonMethod.fetchRecSubscriptionModel(plans!!, subSkuList as java.util.ArrayList<String>, productSkuList as java.util.ArrayList<String>)
+                        if (purchaseModel != null) {
+                            bp.getAllSkuDetails(
+                                purchaseModel!![0].subscriptionList,
+                                purchaseModel!![0].productList
+                            )
+                        } else{
+                            commonDialog(
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                    getString(R.string.popup_error)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_payment_error.toString(),
+                                    getString(R.string.popup_payment_error)
+                                ) + " " + SUPPORT,
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_ok.toString(),
+                                    getString(R.string.popup_ok))
+                            )
+                        }
+                    } else{
+                        commonDialog(
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                getString(R.string.popup_error)
+                            ),
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_payment_error.toString(),
+                                getString(R.string.popup_payment_error)
+                            ) + " " + SUPPORT,
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_ok.toString(),
+                                getString(R.string.popup_ok))
                         )
                     }
+
                 }
             })
 

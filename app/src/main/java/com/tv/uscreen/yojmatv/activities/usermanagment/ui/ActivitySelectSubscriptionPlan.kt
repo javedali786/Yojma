@@ -470,17 +470,33 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
 
             }
             override fun getPlans(plans: ResponseMembershipAndPlan?, apiStatus: Boolean) {
-                purchaseModel = AppCommonMethod.fetchRecSubscriptionModel(plans!!, subSkuList as java.util.ArrayList<String>, productSkuList as java.util.ArrayList<String>)
-                if (purchaseModel != null && purchaseModel!!.isNotEmpty()) {
-                    if(from!!.equals("settings",ignoreCase = true)) {
-                        callManageSubscriptionAdapter(purchaseModel!!,plans)
+                if(apiStatus) {
+                    purchaseModel = AppCommonMethod.fetchRecSubscriptionModel(plans!!, subSkuList as java.util.ArrayList<String>, productSkuList as java.util.ArrayList<String>)
+                    if (purchaseModel != null && purchaseModel!!.isNotEmpty()) {
+                        if(from!!.equals("settings",ignoreCase = true)) {
+                            callManageSubscriptionAdapter(purchaseModel!!,plans)
+                        }else{
+                            bp.getAllSkuDetails(
+                                purchaseModel!![0].subscriptionList,
+                                purchaseModel!![0].productList
+                            )
+                        }
                     }else{
-                        bp.getAllSkuDetails(
-                            purchaseModel!![0].subscriptionList,
-                            purchaseModel!![0].productList
+                        commonDialog(
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                getString(R.string.popup_error)
+                            ),
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_payment_error.toString(),
+                                getString(R.string.popup_payment_error)
+                            ) + " " + SUPPORT,
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_ok.toString(),
+                                getString(R.string.popup_ok))
                         )
                     }
-                }else{
+                } else {
                     commonDialog(
                         stringsHelper.stringParse(
                             stringsHelper.instance()?.data?.config?.popup_error.toString(),
@@ -495,6 +511,7 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
                             getString(R.string.popup_ok))
                     )
                 }
+
             }
         })
     }
