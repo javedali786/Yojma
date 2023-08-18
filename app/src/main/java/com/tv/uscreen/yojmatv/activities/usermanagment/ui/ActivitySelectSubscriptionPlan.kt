@@ -8,6 +8,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.billingclient.api.BillingClient
@@ -110,6 +111,8 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
 
     private fun initBilling() {
         binding?.progressBar?.visibility=View.VISIBLE
+        window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+
         bp = BillingProcessor(this@ActivitySelectSubscriptionPlan, this)
         bp.initializeBillingProcessor()
         val serviceIntent = Intent("com.android.vending.billing.InAppBillingService.BIND")
@@ -118,12 +121,6 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
 
     var orderID: String? = null
     private fun setClicks() {
-        /*binding?.btnBuy?.setOnClickListener {
-        binding?.toolbar?.logo?.visibility = View.VISIBLE
-        binding?.btnBuy?.setOnClickListener {
-            ActivityLauncher.getInstance().goToEnterOTP(this@ActivitySelectSubscriptionPlan, EnterOTPActivity::class.java)
-        }*/
-
         binding?.toolbar?.titleSkip?.setOnClickListener{
             if (from!!.equals("SignUp",ignoreCase = true)) {
                 ActivityLauncher.getInstance().homeActivity(this,HomeActivity::class.java)
@@ -145,6 +142,8 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
                 val token = KsPreferenceKeys.getInstance().appPrefAccessToken
                 if (token != null && !token.equals("", ignoreCase = true)) {
                     binding?.progressBar?.visibility=View.VISIBLE
+                    window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+
                     PaymentCallsLayer.getInstance()
                         .createOrder(token, clickedPlan, object : PaymentCallBack {
                             override
@@ -220,6 +219,7 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
     private fun buySubscription(paymentId: String?) {
         if (paymentId != null && !paymentId.equals("", ignoreCase = true)) {
             binding!!.progressBar.visibility = View.GONE
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             bp.purchase(
                 this@ActivitySelectSubscriptionPlan,
                 clickedPlan!!.customIdentifier,
@@ -279,6 +279,8 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
         purchases: MutableList<Purchase>?
     ) {
         binding?.progressBar?.visibility=View.GONE
+        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
         val gson = Gson()
         val json = gson.toJson(billingResult)
         Log.w(BILLING_RESULT, json)
@@ -290,6 +292,8 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
         Log.w(BILLING_RESULT, json2)
 
         binding!!.progressBar.visibility = View.VISIBLE
+        window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
             if (purchases[0].purchaseToken != null) {
                 processPurchase(purchases)
@@ -344,6 +348,8 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
                         status: Boolean
                     ) {
                         binding!!.progressBar.visibility = View.GONE
+                        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
                         if (status) {
                             if (response.data.orderStatus != null) {
                                 if (response.data.orderStatus.equals("COMPLETED",ignoreCase = true)) {
@@ -400,6 +406,7 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
     private fun processPurchase(purchases: List<Purchase>) {
         try {
             binding?.progressBar?.visibility=View.VISIBLE
+            window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             for (purchase in purchases) {
                 Log.w(BILLING_RESULT,
                     "new line"
@@ -428,6 +435,8 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
         Log.w("onListOfSKUFetched", purchases!!.size.toString() + "")
         runOnUiThread {
             binding?.progressBar?.visibility=View.GONE
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
             if(from!!.equals("settings",ignoreCase = true)){
                 purchaseFinalList= AppCommonMethod.createManagePurchaseList(purchaseModel, purchases,
                     purchaseFinalList as java.util.ArrayList<PurchaseModel?>,bp
@@ -522,6 +531,8 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
     ) {
         purchaseFinalList = java.util.ArrayList()
         binding?.progressBar?.visibility=View.GONE
+        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
         runOnUiThread{
             purchaseFinalList= AppCommonMethod.createManagePurchaseListNew(
                 purchaseModel,plans,
@@ -572,10 +583,13 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
 
     private fun restoreSubscription() {
         binding!!.progressBar.visibility = View.VISIBLE
+        window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+
         if (bp != null) {
             if (bp.isReady) {
                 bp.queryPurchases { status, message ->
                     binding!!.progressBar.visibility = View.GONE
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     if (status) {
                         commonRestoreDialog("", message, 1)
                     } else {

@@ -44,6 +44,10 @@ public class PaymentCustomData implements Serializable {
     @Expose
     private String title_es;
 
+    @SerializedName("isCancelled")
+    @Expose
+    private boolean isCancelled;
+
 
     public String getDescription_en() {
         return description_en;
@@ -150,5 +154,12 @@ public class PaymentCustomData implements Serializable {
         this.orderIdentifier = orderIdentifier;
     }
 
+    public boolean isCancelled() {
+        return isCancelled;
+    }
+
+    public void setCancelled(boolean cancelled) {
+        isCancelled = cancelled;
+    }
 }
 

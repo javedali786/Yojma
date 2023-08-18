@@ -154,18 +154,37 @@
             app:layout_constraintTop_toBottomOf="@+id/apple_id" />
 
         <TextView
-            android:id="@+id/cancel_subscription_id"
+            android:id="@+id/cancelation_date"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sfuitext_medium"
-            android:text="@string/cancel_subscription_button"
+            android:text="@string/cancelation_date"
             android:textColor="@color/series_detail_my_list_selected_color"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:gravity="center"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_marginStart="@dimen/signUp_8dp_margin"
             android:layout_marginEnd="@dimen/signUp_8dp_margin"
             android:layout_marginTop="@dimen/signUp_15dp_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/auto_renewal"
+            tools:ignore="MissingConstraints" />
+
+
+        <TextView
+            android:id="@+id/cancel_subscription_id"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sfuitext_medium"
+            android:text="@string/cancel_subscription_button"
+            android:textColor="@color/series_detail_my_list_selected_color"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/signUp_8dp_margin"
+            android:layout_marginEnd="@dimen/signUp_8dp_margin"
+            android:layout_marginTop="@dimen/signUp_30dp_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/auto_renewal"

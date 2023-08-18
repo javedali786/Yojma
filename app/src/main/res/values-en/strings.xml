@@ -476,6 +476,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="signup_subtitle_two">Unlimited Documentary, and more</string>
     <string name="signup_subtitle_three">You can watch anywhere, anytime</string>
     <string name="signup_few_more_step">Just a few more steps and you\'re done</string>
+    <string name="cancelation_date">plan expired</string>
     <string name="signup_email">Email</string>
     <string name="signup_password">Password</string>
     <string name="signup_cfm_pass">Confirm password</string>

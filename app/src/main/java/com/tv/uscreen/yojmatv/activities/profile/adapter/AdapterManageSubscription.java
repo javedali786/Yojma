@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.tv.uscreen.yojmatv.R;
 import com.tv.uscreen.yojmatv.activities.purchase.purchase_model.PurchaseModel;
 import com.tv.uscreen.yojmatv.activities.purchase.ui.VodOfferType;
-;
 import com.tv.uscreen.yojmatv.databinding.ManageSubscriptionItemBinding;
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod;
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants;
 
 import java.util.List;
+
+;
 
 public class AdapterManageSubscription extends RecyclerView.Adapter<AdapterManageSubscription.ItemHolder> {
 
@@ -79,6 +79,16 @@ public class AdapterManageSubscription extends RecyclerView.Adapter<AdapterManag
             holder.binding.activeId.setText("");
             /*holder.binding.st.setVisibility(View.GONE);
             holder.binding.activeExpired.setVisibility(View.GONE);*/
+        }
+
+
+        if (model.isCancelled()) {
+            holder.binding.cancelSubscriptionId.setVisibility(View.GONE);
+            holder.binding.cancelationDate.setVisibility(View.VISIBLE);
+            String date = AppCommonMethod.expiryDate(Math.toIntExact(model.getExpiryDate()));
+            holder.binding.cancelationDate.setText(R.string.cancelation_date +" "+date);
+        } else {
+            holder.binding.cancelationDate.setVisibility(View.GONE);
         }
 
 

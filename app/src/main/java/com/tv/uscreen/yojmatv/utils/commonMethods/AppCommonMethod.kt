@@ -1429,12 +1429,12 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         val currentTimeStamp: Long
             get() = System.currentTimeMillis() / 1000
 
+
+        @JvmStatic
         fun expiryDate(days: Int): String {
             val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
             val currentDate = Date()
             Logger.d(dateFormat.format(currentDate))
-            //Logger.d("DTGLogs", "expiryDays-->>" + dateFormat.format(currentDate));
-
             // convert date to calendar
             val c = Calendar.getInstance()
             c.time = currentDate
@@ -1442,7 +1442,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             // manipulate date
             c.add(Calendar.YEAR, 0)
             c.add(Calendar.MONTH, 0)
-            c.add(Calendar.DATE, days) //same with c.add(Calendar.DAY_OF_MONTH, 1);
+            c.add(Calendar.DATE, days)
             c.add(Calendar.HOUR, 0)
             c.add(Calendar.MINUTE, 1)
             c.add(Calendar.SECOND, 1)
@@ -1450,8 +1450,6 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             // convert calendar to date
             val currentDatePlusOne = c.time
             Logger.d(dateFormat.format(currentDatePlusOne))
-
-            //  Logger.d("DTGLogs", "expiryDays-->>" + dateFormat.format(currentDatePlusOne));
             return dateFormat.format(currentDatePlusOne)
         }
 
@@ -1816,24 +1814,25 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                 model.description_es = responseEntitlementModel.data[i].customData.description_es
                                 model.trialType_en = responseEntitlementModel.data[i].customData.trialType_en
                                 model.trialType_es = responseEntitlementModel.data[i].customData.trialType_es
+                                model.isCancelled  = responseEntitlementModel.data[i].customData.isCancelled
                             }
 
                             model.subscriptionList = subSkuList
                             if (responseEntitlementModel.data[i].expiryDate != null) {
                                 model.expiryDate = responseEntitlementModel.data[i].expiryDate
                             }
-                            model.setEntitlementState(responseEntitlementModel.getData().get(i).getEntitlementState() != null && responseEntitlementModel.getData().get(i).getEntitlementState())
-                            if (responseEntitlementModel.getData().get(i).getCustomData() != null) {
+                            model.entitlementState = responseEntitlementModel.getData().get(i).getEntitlementState() != null && responseEntitlementModel.getData().get(i).getEntitlementState()
+                            if (responseEntitlementModel.data[i].customData != null) {
                                 model.setCustomData(responseEntitlementModel.getData().get(i).getCustomData())
                             }
-                            if (responseEntitlementModel.getData().get(i).getCurrentExpiry() != null && responseEntitlementModel.getData().get(i).getCurrentExpiry() > 0) {
-                                model.currentExpiryDate = responseEntitlementModel.getData().get(i).getCurrentExpiry()
+                            if (responseEntitlementModel.data[i].currentExpiry != null && responseEntitlementModel.data[i].currentExpiry > 0) {
+                                model.currentExpiryDate = responseEntitlementModel.data[i].currentExpiry
                             }
 
-                            if (responseEntitlementModel.getData().get(i).getNextChargeDate() != null && responseEntitlementModel.getData().get(i).getNextChargeDate() > 0) {
-                                model.setNextChargeDate(responseEntitlementModel.getData().get(i).getNextChargeDate())
+                            if (responseEntitlementModel.data[i].nextChargeDate != null && responseEntitlementModel.data[i].nextChargeDate > 0) {
+                                model.nextChargeDate = responseEntitlementModel.data[i].nextChargeDate
                             }
-                            model.setOnTrial(responseEntitlementModel.getData().get(i).isOnTrial())
+                            model.isOnTrial = responseEntitlementModel.data[i].isOnTrial
                             modelList.add(model)
                         } else {
                             val identifier: String = responseEntitlementModel.getData().get(i).getCustomData().getAndroidProductId()
@@ -1869,6 +1868,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                 model.description_es = responseEntitlementModel.data[i].customData.description_es
                                 model.trialType_en = responseEntitlementModel.data[i].customData.trialType_en
                                 model.trialType_es = responseEntitlementModel.data[i].customData.trialType_es
+                                model.isCancelled  = responseEntitlementModel.data[i].customData.isCancelled
+
                             }
                             model.entitlementState = responseEntitlementModel.data[i].entitlementState != null && responseEntitlementModel.data[i].entitlementState
                             if (responseEntitlementModel.getData().get(i).getCustomData() != null) {
@@ -1925,7 +1926,9 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                         purchaseModel.description_en =  purchaseModelList[j].description_en
                         purchaseModel.description_es =  purchaseModelList[j].description_es
                         purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
-                        purchaseModel.trialType_en =  purchaseModelList[j].trialType_en                        //purchaseModel.setDescription("" + skuDetails.getDescription());
+                        purchaseModel.trialType_en =  purchaseModelList[j].trialType_en
+                        purchaseModel.isCancelled  = purchaseModelList[j].isCancelled
+                        purchaseModel.description = "" + skuDetails.description
                         purchaseFinalList.add(purchaseModel)
                     }
                 }
@@ -2090,11 +2093,13 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                         model.description_es = responseEntitlementModel.data.purchaseAs[i].customData.description_es
                                         model.trialType_en = responseEntitlementModel.data.purchaseAs[i].customData.trialType_en
                                         model.trialType_es = responseEntitlementModel.data.purchaseAs[i].customData.trialType_es
+                                        model.isCancelled = responseEntitlementModel.data.purchaseAs[i].customData.isCancelled
                                     }
 
-                                    model.setSubscriptionList(subSkuList)
-                                    if (responseEntitlementModel.getData().getPurchaseAs().get(i).getExpiryDate() != null) {
-                                        model.setExpiryDate(responseEntitlementModel.getData().getPurchaseAs().get(i).getExpiryDate())
+                                    model.subscriptionList = subSkuList
+                                    if (responseEntitlementModel.data.purchaseAs[i].expiryDate != null) {
+                                        model.expiryDate =
+                                            responseEntitlementModel.getData().getPurchaseAs().get(i).getExpiryDate()
                                     }
                                     model.setEntitlementState(
                                         responseEntitlementModel.getData().getPurchaseAs().get(i).getEntitlementState() != null && responseEntitlementModel.getData().getPurchaseAs().get(i)
@@ -2153,6 +2158,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                         model.description_es = responseEntitlementModel.data.purchaseAs[i].customData.description_es
                                         model.trialType_en = responseEntitlementModel.data.purchaseAs[i].customData.trialType_en
                                         model.trialType_es = responseEntitlementModel.data.purchaseAs[i].customData.trialType_es
+                                        model.isCancelled = responseEntitlementModel.data.purchaseAs[i].customData.isCancelled
+
                                     }
                                     model.setEntitlementState(
                                         responseEntitlementModel.getData().getPurchaseAs().get(i).getEntitlementState() != null && responseEntitlementModel.getData().getPurchaseAs().get(i)
@@ -2221,6 +2228,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                         purchaseModel.description_es =  purchaseModelList[j].description_es
                         purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
                         purchaseModel.trialType_en =  purchaseModelList[j].trialType_en
+                        purchaseModel.isCancelled = purchaseModelList[j].isCancelled
 
                         purchaseModel.identifier = purchaseModelList[j].identifier
                         purchaseModel.customIdentifier = purchaseModelList[j].customIdentifier

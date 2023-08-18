@@ -7,6 +7,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.billingclient.api.BillingClient
@@ -96,6 +97,7 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
 
     private fun initBilling() {
         binding?.progressBar?.visibility= View.VISIBLE
+        window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         bp = BillingProcessor(this@PaymentDetailPage, this)
         bp.initializeBillingProcessor()
         val serviceIntent = Intent("com.android.vending.billing.InAppBillingService.BIND")
@@ -121,6 +123,7 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
                 val token = KsPreferenceKeys.getInstance().appPrefAccessToken
                 if (token != null && !token.equals("", ignoreCase = true)) {
                     binding?.progressBar?.visibility=View.VISIBLE
+                    window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
                     PaymentCallsLayer.getInstance()
                         .createOrder(token, clickedPlan, object : PaymentCallBack {
                             override
@@ -196,6 +199,7 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
     private fun buySubscription(paymentId: String?) {
         if (paymentId != null && !paymentId.equals("", ignoreCase = true)) {
             binding!!.progressBar.visibility = View.GONE
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             bp.purchase(
                 this@PaymentDetailPage,
                 clickedPlan!!.customIdentifier,
@@ -239,9 +243,9 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
     private val PURCHASED_SKU = "purchasedSKU"
     override fun onPurchasesUpdated(
         billingResult: BillingResult,
-        purchases: MutableList<Purchase>?
-    ) {
+        purchases: MutableList<Purchase>?) {
         binding?.progressBar?.visibility=View.GONE
+        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         val gson = Gson()
         val json = gson.toJson(billingResult)
         Log.w(BILLING_RESULT, json)
@@ -253,6 +257,8 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
         Log.w(BILLING_RESULT, json2)
 
         binding!!.progressBar.visibility = View.VISIBLE
+        window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
             if (purchases[0].purchaseToken != null) {
                 processPurchase(purchases)
@@ -307,6 +313,8 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
                         status: Boolean
                     ) {
                         binding!!.progressBar.visibility = View.GONE
+                        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
                         if (status) {
                             if (response.data.orderStatus != null) {
                                 if (response.data.orderStatus.equals("COMPLETED",ignoreCase = true)) {
@@ -389,6 +397,7 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
         Log.w("onListOfSKUFetched", purchases!!.size.toString() + "")
         runOnUiThread {
             binding?.progressBar?.visibility= View.GONE
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             if(from!=null && from!!.equals("settings",ignoreCase = true)){
                 purchaseFinalList= AppCommonMethod.createManagePurchaseList(purchaseModel, purchases,
                     purchaseFinalList as java.util.ArrayList<PurchaseModel?>,bp
@@ -432,6 +441,7 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
                 }
             }else{
                 binding!!.progressBar.visibility = View.GONE
+                window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 binding!!.planRecycleView.visibility = View.GONE
                 binding!!.bottomLay.visibility = View.INVISIBLE
                 binding!!.noPlans.visibility=View.VISIBLE

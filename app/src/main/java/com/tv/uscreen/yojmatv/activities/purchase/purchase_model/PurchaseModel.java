@@ -33,7 +33,7 @@ public class PurchaseModel implements Serializable {
     private String trialType_en;
     private String title_es;
     private String trialType_es;
-
+    private boolean isCancelled;
     private boolean fromClick;
     private String subscriptionType;
     private String trialType;
@@ -364,5 +364,13 @@ public class PurchaseModel implements Serializable {
 
     public void setTrialType_es(String trialType_es) {
         this.trialType_es = trialType_es;
+    }
+
+    public boolean isCancelled() {
+        return isCancelled;
+    }
+
+    public void setCancelled(boolean cancelled) {
+        isCancelled = cancelled;
     }
 }

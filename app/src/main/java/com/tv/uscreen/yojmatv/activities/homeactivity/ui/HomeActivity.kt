@@ -187,7 +187,11 @@ class HomeActivity : BaseBindingActivity<ActivityMainBinding?>(), AppUpdateCallB
 
             R.id.navigation_more -> {
                 if (moreFragment != null) {
+                    moreFragment = MoreFragment()
+                    fragmentManager!!.beginTransaction().add(R.id.content_frame, moreFragment as MoreFragment, "4")
+                        .hide(moreFragment as MoreFragment).commit()
                     switchToMoreFragment()
+                    Handler(Looper.getMainLooper()).postDelayed({ (moreFragment as MoreFragment).clickEvent() }, 200)
                 } else {
                     moreFragment = MoreFragment()
                     fragmentManager!!.beginTransaction().add(R.id.content_frame, moreFragment as MoreFragment, "4")
