@@ -37,8 +37,6 @@ import com.example.jwplayer.PlayerActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.gson.Gson
-import com.moe.pushlibrary.MoEHelper
-import com.moengage.core.Properties
 import com.tv.uscreen.yojmatv.Bookmarking.BookmarkingViewModel
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.SDKConfig
@@ -61,7 +59,6 @@ import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.MoreClickListner
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.NetworkChangeReceiver
 import com.tv.uscreen.yojmatv.databinding.EpisodeScreenBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogFragment
-import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogSingleButtonFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment.Companion.newInstance
 import com.tv.uscreen.yojmatv.fragments.player.ui.RelatedContentFragment
@@ -212,18 +209,9 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
                     if (response!!.responseCode != null && response.responseCode == 4302) {
 
                     } else {
-                        commonDialog(
-                            stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_error.toString(),
-                                getString(R.string.popup_error)
-                            ),
-                            stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
-                                getString(R.string.popup_something_went_wrong)
-                            ),
-                            stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_continue.toString(),
-                                getString(R.string.popup_continue)
+                        commonDialog(stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
+                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong)),
+                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_continue.toString(), getString(R.string.popup_continue)
                             )
                         )
                     }
@@ -859,15 +847,21 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
                         )
                     ) {
                         if (assetResponse.errorModel != null && assetResponse.errorModel.errorCode != 0) {
-                            //   showDialog(EpisodeActivity.this.getResources().getString(R.string.error), getResources().getString(R.string.something_went_wrong));
-                        }
+                            commonDialog(stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
+                                stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong)),
+                                stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_continue.toString(), getString(R.string.popup_continue)
+                                )
+                            )                        }
                     } else if (assetResponse.status.equals(
                             APIStatus.FAILURE.name,
                             ignoreCase = true
                         )
                     ) {
-                        // showDialog(EpisodeActivity.this.getResources().getString(R.string.error), getResources().getString(R.string.something_went_wrong));
-                    }
+                        commonDialog(stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
+                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong)),
+                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_continue.toString(), getString(R.string.popup_continue)
+                            )
+                        )                    }
                 }
             }
     }
@@ -965,12 +959,18 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
                     } else if (response.status.equals(APIStatus.ERROR.name, ignoreCase = true)) {
                         if (response.errorModel.errorCode != 0) {
                             stopShimmer()
-                            //  showDialog(EpisodeActivity.this.getResources().getString(R.string.error), getResources().getString(R.string.something_went_wrong));
-                        }
+                            commonDialog(stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
+                                stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong)),
+                                stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_continue.toString(), getString(R.string.popup_continue)
+                                )
+                            )                        }
                     } else if (response.status.equals(APIStatus.FAILURE.name, ignoreCase = true)) {
                         stopShimmer()
-                        //  showDialog(EpisodeActivity.this.getResources().getString(R.string.error), getResources().getString(R.string.something_went_wrong));
-                    }
+                        commonDialog(stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_error.toString(), getString(R.string.popup_error)),
+                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(), getString(R.string.popup_something_went_wrong)),
+                            stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_continue.toString(), getString(R.string.popup_continue)
+                            )
+                        )                    }
                 }
             }
         }
@@ -1037,20 +1037,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
         }
     }
 
-    private fun showDialog(title: String, message: String) {
-        val fm = supportFragmentManager
-        val alertDialog = AlertDialogSingleButtonFragment.newInstance(
-            title,
-            message,
-            stringsHelper.stringParse(
-                stringsHelper.instance()?.data?.config?.popup_ok.toString(),
-                getString(R.string.popup_ok)
-            )
-        )
-        alertDialog.isCancelable = false
-        alertDialog.setAlertDialogCallBack(this)
-        alertDialog.show(fm, "fragment_alert")
-    }
+
 
     private fun setDetails(responseDetailPlayer: EnveuVideoItemBean?) {
         if (responseDetailPlayer!!.assetType != null && responseDetailPlayer.duration > 0) {
@@ -1062,8 +1049,6 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
             setCustomFields(responseDetailPlayer, durationInMinutes)
         } else {
             setCustomFields(responseDetailPlayer, "")
-            // showDialog("",getResources().getString(R.string.can_not_play_error));
-            // ToastHandler.getInstance().show(EpisodeActivity.this, EpisodeActivity.this.getResources().getString(R.string.can_not_play_error));
         }
         if (responseDetailPlayer.description != null && responseDetailPlayer.description.equals(
                 "",
@@ -1082,21 +1067,18 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
 
     private fun setCustomFields(videoItemBean: EnveuVideoItemBean?, duration: String) {
         try {
-            val properties = Properties()
-            properties.addAttribute(AppConstants.CONTENT_DETAIL_TITTLE, videoItemBean!!.title)
-            MoEHelper.getInstance(applicationContext)
-                .trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
-            if (videoItemBean.title != null) {
+
+            if (videoItemBean?.title != null) {
                 binding!!.metaDetails.tvTitle.text = videoItemBean.title
             } else {
                 binding!!.metaDetails.tvTitle.visibility = View.GONE
             }
-            if (videoItemBean.longDescription != null) {
+            if (videoItemBean?.longDescription != null) {
                 binding!!.metaDetails.descriptionText.htmlParseToString(videoItemBean.longDescription)
             } else {
                 binding!!.metaDetails.descriptionText.visibility = View.GONE
             }
-            val duration1 = videoItemBean.duration.toString()
+            val duration1 = videoItemBean?.duration.toString()
             var properDuration = ""
             properDuration = if (!StringUtils.isNullOrEmpty(duration1)) {
                 AppCommonMethod.convertToMinutes(duration1.toLong()) + " " + stringsHelper.stringParse(
@@ -1117,12 +1099,12 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
             } else {
                 binding!!.metaDetails.time.visibility = View.GONE
             }
-            if (videoItemBean.quality != null) {
+            if (videoItemBean?.quality != null) {
                 binding!!.metaDetails.qualityPic.text = videoItemBean.quality
             } else {
                 binding!!.metaDetails.durationLl.visibility = View.GONE
             }
-            if (videoItemBean.producer != null) {
+            if (videoItemBean?.producer != null) {
                 var producer = videoItemBean.producer
                 producer = producer.replace(",".toRegex(), " \u25AA ")
                 binding!!.metaDetails.producedDescrption.text = producer
@@ -1130,7 +1112,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
                 binding!!.metaDetails.producedDescrption.visibility = View.GONE
                 binding!!.metaDetails.produced.visibility = View.GONE
             }
-            if (videoItemBean.sponsors != null) {
+            if (videoItemBean?.sponsors != null) {
                 var sponsors = videoItemBean.sponsors
                 sponsors = sponsors.replace(",".toRegex(), " \u25AA ")
                 binding!!.metaDetails.sponseredDescription.text = sponsors
@@ -1138,7 +1120,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
                 binding!!.metaDetails.sponseredDescription.visibility = View.GONE
                 binding!!.metaDetails.sponsered.visibility = View.GONE
             }
-            if ("true".equals(videoItemBean.comingSoon, ignoreCase = true)) {
+            if ("true".equals(videoItemBean?.comingSoon, ignoreCase = true)) {
                 binding!!.backButton.visibility = View.VISIBLE
             } else {
                 binding!!.backButton.visibility = View.VISIBLE

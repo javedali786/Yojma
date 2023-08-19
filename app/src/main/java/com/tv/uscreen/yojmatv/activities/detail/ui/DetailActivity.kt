@@ -27,8 +27,6 @@ import com.example.jwplayer.PlayerActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.BaseOnTabSelectedListener
 import com.google.gson.Gson
-import com.moe.pushlibrary.MoEHelper
-import com.moengage.core.Properties
 import com.tv.uscreen.yojmatv.Bookmarking.BookmarkingViewModel
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.SDKConfig
@@ -51,7 +49,6 @@ import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.MoreClickListner
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.NetworkChangeReceiver
 import com.tv.uscreen.yojmatv.databinding.DetailScreenBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogFragment
-import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogSingleButtonFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment.Companion.newInstance
 import com.tv.uscreen.yojmatv.fragments.player.ui.RelatedContentFragment
@@ -687,7 +684,7 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
                             )
                         ) {
                             if (assetResponse.errorModel != null && assetResponse.errorModel.errorCode != 0) {
-                                showDialog(
+                                commonDialog(
                                     stringsHelper.stringParse(
                                         stringsHelper.instance()?.data?.config?.popup_error.toString(),
                                         getString(R.string.popup_error)
@@ -695,15 +692,15 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
                                     stringsHelper.stringParse(
                                         stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
                                         getString(R.string.popup_something_went_wrong)
+                                    ),
+                                    stringsHelper.stringParse(
+                                        stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                        getString(R.string.popup_continue)
                                     )
                                 )
                             }
-                        } else if (assetResponse.status.equals(
-                                APIStatus.FAILURE.name,
-                                ignoreCase = true
-                            )
-                        ) {
-                            showDialog(
+                        } else if (assetResponse.status.equals(APIStatus.FAILURE.name, ignoreCase = true)) {
+                            commonDialog(
                                 stringsHelper.stringParse(
                                     stringsHelper.instance()?.data?.config?.popup_error.toString(),
                                     getString(R.string.popup_error)
@@ -711,6 +708,10 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
                                 stringsHelper.stringParse(
                                     stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
                                     getString(R.string.popup_something_went_wrong)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                    getString(R.string.popup_continue)
                                 )
                             )
                         }
@@ -761,7 +762,6 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
                     ) {
                         val enveuCommonResponse = assetResponse.baseCategory as RailCommonData
                         if (enveuCommonResponse != null && enveuCommonResponse.enveuVideoItemBeans.size > 0) {
-                            // videoDetails = enveuCommonResponse.getEnveuVideoItemBeans().get(0);
                             if (!enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals(
                                     "",
                                     ignoreCase = true
@@ -777,13 +777,9 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
                                     SDKConfig.getInstance().playbacK_URL + enveuCommonResponse.enveuVideoItemBeans[0].externalRefId + ".m3u8"
                             }
                         }
-                    } else if (assetResponse.status.equals(
-                            APIStatus.ERROR.name,
-                            ignoreCase = true
-                        )
-                    ) {
+                    } else if (assetResponse.status.equals(APIStatus.ERROR.name, ignoreCase = true)) {
                         if (assetResponse.errorModel != null && assetResponse.errorModel.errorCode != 0) {
-                            showDialog(
+                            commonDialog(
                                 stringsHelper.stringParse(
                                     stringsHelper.instance()?.data?.config?.popup_error.toString(),
                                     getString(R.string.popup_error)
@@ -791,15 +787,15 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
                                 stringsHelper.stringParse(
                                     stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
                                     getString(R.string.popup_something_went_wrong)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                    getString(R.string.popup_continue)
                                 )
                             )
                         }
-                    } else if (assetResponse.status.equals(
-                            APIStatus.FAILURE.name,
-                            ignoreCase = true
-                        )
-                    ) {
-                        showDialog(
+                    } else if (assetResponse.status.equals(APIStatus.FAILURE.name, ignoreCase = true)) {
+                        commonDialog(
                             stringsHelper.stringParse(
                                 stringsHelper.instance()?.data?.config?.popup_error.toString(),
                                 getString(R.string.popup_error)
@@ -807,6 +803,10 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
                             stringsHelper.stringParse(
                                 stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
                                 getString(R.string.popup_something_went_wrong)
+                            ),
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                getString(R.string.popup_continue)
                             )
                         )
                     }
@@ -865,16 +865,13 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
     private fun setCustomFields(videoItemBean: EnveuVideoItemBean?, duration: String?) {
         Log.d("duration", "setCustomFields: $duration")
         try {
-            val properties = Properties()
-            properties.addAttribute(AppConstants.CONTENT_DETAIL_TITTLE, videoItemBean!!.title)
-            MoEHelper.getInstance(applicationContext)
-                .trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
-            if (videoItemBean.title != null) {
+
+            if (videoItemBean?.title != null) {
                 binding!!.metaDetails.tvTitle.text = videoItemBean.title
             } else {
                 binding!!.metaDetails.tvTitle.visibility = View.GONE
             }
-            if (videoItemBean.longDescription != null) {
+            if (videoItemBean?.longDescription != null) {
                 binding!!.metaDetails.descriptionText.htmlParseToString(videoItemBean.longDescription)
                 // binding!!.metaDetails.descriptionText.text = videoItemBean.longDescription
             } else {
@@ -891,12 +888,12 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
             } else {
                 binding!!.metaDetails.duration.visibility = View.INVISIBLE
             }
-            if (videoItemBean.quality != null) {
+            if (videoItemBean?.quality != null) {
                 binding!!.metaDetails.qualityPic.text = videoItemBean.quality
             } else {
                 binding!!.metaDetails.durationLl.visibility = View.GONE
             }
-            if (videoItemBean.producer != null) {
+            if (videoItemBean?.producer != null) {
                 var producer = videoItemBean.producer
                 producer = producer.replace(",".toRegex(), " \u25AA ")
                 binding!!.metaDetails.producedDescrption.text = producer
@@ -904,7 +901,7 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
                 binding!!.metaDetails.producedDescrption.visibility = View.GONE
                 binding!!.metaDetails.produced.visibility = View.GONE
             }
-            if (videoItemBean.sponsors != null) {
+            if (videoItemBean?.sponsors != null) {
                 var sponsors = videoItemBean.sponsors
                 sponsors = sponsors.replace(",".toRegex(), " \u25AA ")
                 binding!!.metaDetails.sponseredDescription.text = sponsors
@@ -912,42 +909,6 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
                 binding!!.metaDetails.sponseredDescription.visibility = View.GONE
                 binding!!.metaDetails.sponsered.visibility = View.GONE
             }
-
-//            if ("true".equalsIgnoreCase(videoItemBean.getComingSoon())) {
-//                getBinding().backButton.setVisibility(View.VISIBLE);
-//            } else {
-//                getBinding().backButton.setVisibility(View.GONE);
-//                getBinding().pBar.setVisibility(View.GONE);
-//                if (!AppCommonMethod.getCheckBCID(videoDetails.getBrightcoveVideoId())) {
-//                    isLogin = preference.getAppPrefLoginStatus();
-//                    if (isLogin.equalsIgnoreCase(AppConstants.UserStatus.Login.toString())) {
-//                        if (!preference.getEntitlementStatus()) {
-//                            GetPlansLayer.getInstance().getEntitlementStatus(preference, token,
-//                                    (entitlementStatus, apiStatus) -> {
-//                                        getBinding().pBar.setVisibility(View.GONE);
-//                                        if (entitlementStatus && apiStatus) {
-//                                            isAdShowingToUser = false;
-//                                        }
-//                                        if (videoDetails.getBrightcoveVideoId() != null && !videoDetails.getBrightcoveVideoId().equalsIgnoreCase("")) {
-//                                            brightCoveVideoId = Long.parseLong(videoDetails.getBrightcoveVideoId());
-//                                        }
-//                                        playPlayerWhenShimmer();
-//                                    });
-//                        } else {
-//                            getBinding().pBar.setVisibility(View.GONE);
-//                            brightCoveVideoId = Long.parseLong(videoDetails.getBrightcoveVideoId());
-//                            playPlayerWhenShimmer();
-//                        }
-//
-//                    } else {
-//                        getBinding().pBar.setVisibility(View.GONE);
-//                        brightCoveVideoId = 0L;
-//                        playPlayerWhenShimmer();
-//                    }
-//                } else {
-//                    getBinding().pBar.setVisibility(View.GONE);
-//                }
-//            }
         } catch (e: Exception) {
             Logger.w(e)
         }
@@ -963,19 +924,6 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
         }
     }
 
-    private fun showDialog(title: String, message: String) {
-        val fm = supportFragmentManager
-        val alertDialog = AlertDialogSingleButtonFragment.newInstance(
-            title, message,
-            stringsHelper.stringParse(
-                stringsHelper.instance()?.data?.config?.popup_ok.toString(),
-                getString(R.string.popup_ok)
-            )
-        )
-        alertDialog.isCancelable = false
-        alertDialog.setAlertDialogCallBack(this)
-        alertDialog.show(fm, "fragment_alert")
-    }
 
     private fun setDetails(responseDetailPlayer: EnveuVideoItemBean?) {
         if (responseDetailPlayer!!.assetType != null && responseDetailPlayer.duration > 0) {

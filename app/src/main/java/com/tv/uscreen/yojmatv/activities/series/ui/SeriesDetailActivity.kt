@@ -45,7 +45,6 @@ import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.FirstEpisodeItem
 import com.tv.uscreen.yojmatv.databinding.ActivitySeriesDetailBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogFragment
-import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogSingleButtonFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment.Companion.newInstance
 import com.tv.uscreen.yojmatv.fragments.player.ui.RelatedContentFragment
@@ -344,7 +343,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                                         hitApiLogout()
                                     }
                                 } else {
-                                    showDialog(
+                                    commonDialog(
                                         stringsHelper.stringParse(
                                             stringsHelper.instance()?.data?.config?.popup_error.toString(),
                                             getString(R.string.popup_error)
@@ -352,6 +351,10 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                                         stringsHelper.stringParse(
                                             stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
                                             getString(R.string.popup_something_went_wrong)
+                                        ),
+                                        stringsHelper.stringParse(
+                                            stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                            getString(R.string.popup_continue)
                                         )
                                     )
                                 }
@@ -361,7 +364,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                                 ignoreCase = true
                             )
                         ) {
-                            showDialog(
+                            commonDialog(
                                 stringsHelper.stringParse(
                                     stringsHelper.instance()?.data?.config?.popup_error.toString(),
                                     getString(R.string.popup_error)
@@ -369,6 +372,10 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                                 stringsHelper.stringParse(
                                     stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
                                     getString(R.string.popup_something_went_wrong)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                    getString(R.string.popup_continue)
                                 )
                             )
                         }
@@ -406,7 +413,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                         hitApiLogout()
                     }
                 } else {
-                    showDialog(
+                    commonDialog(
                         stringsHelper.stringParse(
                             stringsHelper.instance()?.data?.config?.popup_error.toString(),
                             getString(R.string.popup_error)
@@ -414,6 +421,10 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                         stringsHelper.stringParse(
                             stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
                             getString(R.string.popup_something_went_wrong)
+                        ),
+                        stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                            getString(R.string.popup_continue)
                         )
                     )
                 }
@@ -647,20 +658,6 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         }
     }
 
-    private fun showDialog(title: String, message: String) {
-        val fm = supportFragmentManager
-        val alertDialog = AlertDialogSingleButtonFragment.newInstance(
-            title,
-            message,
-            stringsHelper.stringParse(
-                stringsHelper.instance()?.data?.config?.popup_ok.toString(),
-                getString(R.string.popup_ok)
-            )
-        )
-        alertDialog.isCancelable = false
-        alertDialog.setAlertDialogCallBack(this)
-        alertDialog.show(fm, "fragment_alert")
-    }
 
     override fun onBackPressed() {
         if (preference!!.appPrefJumpBack) {
@@ -1128,7 +1125,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                         )
                     ) {
                         if (assetResponse.errorModel != null && assetResponse.errorModel.errorCode != 0) {
-                            showDialog(
+                            commonDialog(
                                 stringsHelper.stringParse(
                                     stringsHelper.instance()?.data?.config?.popup_error.toString(),
                                     getString(R.string.popup_error)
@@ -1136,6 +1133,10 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                                 stringsHelper.stringParse(
                                     stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
                                     getString(R.string.popup_something_went_wrong)
+                                ),
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                    getString(R.string.popup_continue)
                                 )
                             )
                         }
@@ -1144,8 +1145,20 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                             ignoreCase = true
                         )
                     ) {
-                        // showDialog(SeriesDetailActivity.this.getResources().getString(R.string.error), getResources().getString(R.string.something_went_wrong));
-                    }
+                        commonDialog(
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                getString(R.string.popup_error)
+                            ),
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                getString(R.string.popup_something_went_wrong)
+                            ),
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                getString(R.string.popup_continue)
+                            )
+                        )                    }
                 }
             }
     }
