@@ -3,12 +3,17 @@ package com.tv.uscreen.yojmatv.networking.apiendpoints;
 
 import static com.tv.uscreen.yojmatv.BuildConstants.BASE_URL;
 
+import android.os.Build;
+
 import com.tv.uscreen.yojmatv.BuildConfig;
 import com.tv.uscreen.yojmatv.SDKConfig;
 import com.tv.uscreen.yojmatv.networking.profiler.HttpProfiler;
 import com.tv.uscreen.yojmatv.utils.Logger;
+import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod;
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys;
 
+import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -59,7 +64,16 @@ public class RequestConfig {
                 Request original = chain.request();
                 // Request customization: add request headers
                 Request.Builder requestBuilder = original.newBuilder()
-                        .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey());
+                        .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey())
+                        .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                        .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                        .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                        .addHeader("x-device-platform", "ANDROID")
+                        .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                        .addHeader("x-tracking-sdk-version", "0.0.1")
+                        .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                        .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                        .addHeader("x-device-name", "");
                 Request request = requestBuilder.build();
 
                 return chain.proceed(request);
@@ -155,7 +169,16 @@ public class RequestConfig {
                 Request original = chain.request();
                 // Request customization: add request headers
                 Request.Builder requestBuilder = original.newBuilder()
-                        .addHeader("x-api-key", SDKConfig.API_KEY_MOB);
+                        .addHeader("x-api-key", SDKConfig.API_KEY_MOB)
+                        .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                        .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                        .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                        .addHeader("x-device-platform", "ANDROID")
+                        .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                        .addHeader("x-tracking-sdk-version", "0.0.1")
+                        .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                        .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                        .addHeader("x-device-name", "");
                 Request request = requestBuilder.build();
 
                 return chain.proceed(request);
@@ -198,7 +221,16 @@ public class RequestConfig {
                 Request original = chain.request();
                 // Request customization: add request headers
                 Request.Builder requestBuilder = original.newBuilder()
-                        .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey());
+                        .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey())
+                        .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                        .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                        .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                        .addHeader("x-device-platform", "ANDROID")
+                        .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                        .addHeader("x-tracking-sdk-version", "0.0.1")
+                        .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                        .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                        .addHeader("x-device-name", "");
                 requestBuilder.addHeader("x-auth",token);
                 Request request = requestBuilder.build();
 
@@ -242,7 +274,16 @@ public class RequestConfig {
                 Request original = chain.request();
                 // Request customization: add request headers
                 Request.Builder requestBuilder = original.newBuilder()
-                        .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey());
+                        .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey())
+                        .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                        .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                        .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                        .addHeader("x-device-platform", "ANDROID")
+                        .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                        .addHeader("x-tracking-sdk-version", "0.0.1")
+                        .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                        .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                        .addHeader("x-device-name", "");
                 requestBuilder.addHeader("x-auth",token);
                 Request request = requestBuilder.build();
 
@@ -288,7 +329,16 @@ public class RequestConfig {
                 Request original = chain.request();
                 // Request customization: add request headers
                 Request.Builder requestBuilder = original.newBuilder()
-                        .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey());
+                        .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey())
+                        .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                        .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                        .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                        .addHeader("x-device-platform", "ANDROID")
+                        .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                        .addHeader("x-tracking-sdk-version", "0.0.1")
+                        .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                        .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                        .addHeader("x-device-name", "");
                 Request request = requestBuilder.build();
 
                 return chain.proceed(request);
@@ -330,7 +380,17 @@ public class RequestConfig {
             httpClient.addInterceptor(chain -> {
                 Request original = chain.request();
                 // Request customization: add request headers
-                Request.Builder requestBuilder = original.newBuilder().addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey()).addHeader("x-auth",token);
+                Request.Builder requestBuilder = original.newBuilder().addHeader("x-api-key",
+                        SDKConfig.getInstance().getOvpApiKey()).addHeader("x-auth",token)
+                        .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                        .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                        .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                        .addHeader("x-device-platform", "ANDROID")
+                        .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                        .addHeader("x-tracking-sdk-version", "0.0.1")
+                        .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                        .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                        .addHeader("x-device-name", "");
                 Request request = requestBuilder.build();
 
                 return chain.proceed(request);
@@ -376,7 +436,16 @@ public class RequestConfig {
                     .addHeader("Content-Type", " application/json")
                     .addHeader("x-platform", " android")
                     .addHeader("x-auth", token)
-                    .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey());
+                    .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey())
+                    .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                    .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                    .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                    .addHeader("x-device-platform", "ANDROID")
+                    .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                    .addHeader("x-tracking-sdk-version", "0.0.1")
+                    .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                    .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                    .addHeader("x-device-name", "");
 
             Request request = requestBuilder.build();
             return chain.proceed(request);
@@ -413,7 +482,16 @@ public class RequestConfig {
                     .addHeader("Content-Type", " application/json")
                     .addHeader("x-platform", " android")
                     .addHeader("x-auth", token)
-                    .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey());
+                    .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey())
+                    .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                    .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                    .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                    .addHeader("x-device-platform", "ANDROID")
+                    .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                    .addHeader("x-tracking-sdk-version", "0.0.1")
+                    .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                    .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                    .addHeader("x-device-name", "");
 
             Request request = requestBuilder.build();
             return chain.proceed(request);
@@ -459,7 +537,16 @@ public class RequestConfig {
             Request.Builder requestBuilder = original.newBuilder()
                     .addHeader("Content-Type", " application/json")
                     .addHeader("x-platform", " android")
-                    .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey());
+                    .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey())
+                    .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                    .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                    .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                    .addHeader("x-device-platform", "ANDROID")
+                    .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                    .addHeader("x-tracking-sdk-version", "0.0.1")
+                    .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                    .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                    .addHeader("x-device-name", "");
 
             Request request = requestBuilder.build();
             return chain.proceed(request);
@@ -504,7 +591,16 @@ public class RequestConfig {
                     .addHeader("Content-Type", " application/json")
                     .addHeader("x-platform", " android")
                     .addHeader("x-auth", token)
-                    .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey());
+                    .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey())
+                    .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                    .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                    .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                    .addHeader("x-device-platform", "ANDROID")
+                    .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                    .addHeader("x-tracking-sdk-version", "0.0.1")
+                    .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                    .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                    .addHeader("x-device-name", "");
 
             Request request = requestBuilder.build();
             return chain.proceed(request);
@@ -541,7 +637,16 @@ public class RequestConfig {
                     .addHeader("Content-Type", " application/json")
                     .addHeader("x-platform", " android")
                     .addHeader("x-auth", token)
-                    .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey());
+                    .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey())
+                    .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                    .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                    .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                    .addHeader("x-device-platform", "ANDROID")
+                    .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                    .addHeader("x-tracking-sdk-version", "0.0.1")
+                    .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                    .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                    .addHeader("x-device-name", "");
 
             Request request = requestBuilder.build();
             return chain.proceed(request);
@@ -580,7 +685,16 @@ public class RequestConfig {
                 Request original = chain.request();
                 // Request customization: add request headers
                 Request.Builder requestBuilder = original.newBuilder()
-                        .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey());
+                        .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey())
+                        .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                        .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                        .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                        .addHeader("x-device-platform", "ANDROID")
+                        .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                        .addHeader("x-tracking-sdk-version", "0.0.1")
+                        .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                        .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                        .addHeader("x-device-name", "");
                 Request request = requestBuilder.build();
 
                 return chain.proceed(request);
@@ -618,7 +732,16 @@ public class RequestConfig {
             Request original = chain.request();
             // Request customization: add request headers
             Request.Builder requestBuilder = original.newBuilder()
-                    .addHeader("Content-Type", " application/json");
+                    .addHeader("Content-Type", " application/json")
+                    .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                    .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                    .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                    .addHeader("x-device-platform", "ANDROID")
+                    .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                    .addHeader("x-tracking-sdk-version", "0.0.1")
+                    .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                    .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                    .addHeader("x-device-name", "");
             Request request = requestBuilder.build();
             return chain.proceed(request);
         });
@@ -657,7 +780,16 @@ public class RequestConfig {
                     .addHeader("Content-Type", " application/json")
                     .addHeader("x-platform", " android")
                     .addHeader("x-auth", token)
-                    .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey());
+                    .addHeader("x-api-key", SDKConfig.getInstance().getOvpApiKey())
+                    .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                    .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                    .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                    .addHeader("x-device-platform", "ANDROID")
+                    .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                    .addHeader("x-tracking-sdk-version", "0.0.1")
+                    .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                    .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                    .addHeader("x-device-name", "");
 
             Request request = requestBuilder.build();
             return chain.proceed(request);

@@ -81,16 +81,18 @@ public class AdapterManageSubscription extends RecyclerView.Adapter<AdapterManag
             holder.binding.activeExpired.setVisibility(View.GONE);*/
         }
 
+      /*  try {
+            if (model.isCancelled()) {
+                holder.binding.cancelSubscriptionId.setVisibility(View.GONE);
+                holder.binding.cancelationDate.setVisibility(View.VISIBLE);
+                String date = AppCommonMethod.expiryDate(Math.toIntExact(model.getExpiryDate()));
+                holder.binding.cancelationDate.setText(R.string.cancelation_date + " " + date);
+            } else {
+                holder.binding.cancelationDate.setVisibility(View.GONE);
+            }
+        } catch (Exception e) {
 
-        if (model.isCancelled()) {
-            holder.binding.cancelSubscriptionId.setVisibility(View.GONE);
-            holder.binding.cancelationDate.setVisibility(View.VISIBLE);
-            String date = AppCommonMethod.expiryDate(Math.toIntExact(model.getExpiryDate()));
-            holder.binding.cancelationDate.setText(R.string.cancelation_date +" "+date);
-        } else {
-            holder.binding.cancelationDate.setVisibility(View.GONE);
-        }
-
+        }*/
 
         if (model.getPaymentProvider() != null && !model.getPaymentProvider().equalsIgnoreCase("") && !model.getPaymentProvider().equalsIgnoreCase("null") ) {
             switch (model.getPaymentProvider()){

@@ -794,7 +794,7 @@ public class APIServiceLayer {
 
             ApiInterface endpoint = RequestConfig.getClientSearch().create(ApiInterface.class);
             String videoContentTypes = AppConstants.VIDEO;
-            String StringMediaTypes = MediaTypeConstants.getInstance().getMovie() + "," + MediaTypeConstants.getInstance().getEpisode()  + "," + MediaTypeConstants.getInstance().getDocumentaries();
+            String StringMediaTypes = MediaTypeConstants.getInstance().getMovie() + "," + MediaTypeConstants.getInstance().getEpisode()  + "," + MediaTypeConstants.getInstance().getDocumentaries() + "," + MediaTypeConstants.getInstance().getSeries();
 
             Observable<ResponseSearch> allResults = null;
             Observable<ResponseSearch> episode = null;

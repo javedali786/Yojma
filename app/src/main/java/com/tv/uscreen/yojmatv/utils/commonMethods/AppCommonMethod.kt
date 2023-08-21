@@ -10,6 +10,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.net.Uri
+import android.os.Build
 import android.os.SystemClock
 import android.provider.Settings
 import android.util.Base64
@@ -47,6 +48,7 @@ import com.google.gson.JsonObject
 import com.moe.pushlibrary.MoEHelper
 import com.moengage.core.Properties
 import com.tv.uscreen.yojmatv.BuildConstants
+import com.tv.uscreen.yojmatv.OttApplication
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.SDKConfig
 import com.tv.uscreen.yojmatv.activities.detail.ui.DetailActivity
@@ -100,7 +102,6 @@ import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONObject
 import retrofit2.Response
 import java.lang.ref.WeakReference
-import java.text.DateFormat
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -758,6 +759,45 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 posterURL, context.resources.getInteger(R.integer.landscape_image_width)
                     .toString() + "x" + context.resources.getInteger(R.integer.landscape_image_height)
             )
+        }
+
+        @JvmStatic
+        fun getDeviceName(): String? {
+            val manufacturer = Build.MANUFACTURER
+            val model = Build.MODEL
+            return if (model.lowercase(Locale.getDefault()).startsWith(
+                    manufacturer.lowercase(
+                        Locale.getDefault()
+                    )
+                )
+            ) {
+                capitalize(model)
+            } else {
+                capitalize(manufacturer) + " " + model
+            }
+        }
+        @JvmStatic
+        fun getDeviceType(): String? {
+            val isTablet: Boolean =
+                OttApplication.getContext().getResources().getBoolean(R.bool.isTablet)
+            return if (isTablet) {
+                "TABLET"
+            } else {
+                "MOBILE"
+            }
+        }
+
+
+        private fun capitalize(s: String?): String? {
+            if (s == null || s.length == 0) {
+                return ""
+            }
+            val first = s[0]
+            return if (Character.isUpperCase(first)) {
+                s
+            } else {
+                first.uppercaseChar().toString() + s.substring(1)
+            }
         }
 
         @JvmStatic
@@ -1431,26 +1471,10 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
 
 
         @JvmStatic
-        fun expiryDate(days: Int): String {
-            val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
-            val currentDate = Date()
-            Logger.d(dateFormat.format(currentDate))
-            // convert date to calendar
-            val c = Calendar.getInstance()
-            c.time = currentDate
-
-            // manipulate date
-            c.add(Calendar.YEAR, 0)
-            c.add(Calendar.MONTH, 0)
-            c.add(Calendar.DATE, days)
-            c.add(Calendar.HOUR, 0)
-            c.add(Calendar.MINUTE, 1)
-            c.add(Calendar.SECOND, 1)
-
-            // convert calendar to date
-            val currentDatePlusOne = c.time
-            Logger.d(dateFormat.format(currentDatePlusOne))
-            return dateFormat.format(currentDatePlusOne)
+        fun expiryDate(days: Long): String {
+            val date = Date(days)
+            val df2 = SimpleDateFormat("dd/MM/yyyy")
+            return df2.format(date)
         }
 
         fun getTodaysDifference(completionDate: String?): Int {
@@ -2206,40 +2230,48 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         }
 
         fun createManagePurchaseListNew(purchaseModelList: List<PurchaseModel>, plans: ResponseMembershipAndPlan?, purchaseFinalList: ArrayList<PurchaseModel?>): List<PurchaseModel?> {
-            if (purchaseModelList != null) {
-                for (j in purchaseModelList.indices) {
-                    if (purchaseModelList[j].entitlementState != null && purchaseModelList[j].entitlementState == true) {
-                        val purchaseModel = PurchaseModel()
-                        purchaseModel.price = "" + plans?.data?.get(j)?.prices?.get(0)?.price
-                        purchaseModel.currency =
-                            "" + plans?.data?.get(j)?.prices?.get(0)?.currencyCode
-                        purchaseModel.paymentProvider =
-                            "" + plans?.data?.get(j)?.customData?.paymentProvider
-                        purchaseModel.trialType = "" + purchaseModelList[j].trialType
-                        purchaseModel.allowedTrial = purchaseModelList[j].allowedTrial
-                        purchaseModel.trialDuration = purchaseModelList[j].trialDuration
-                        purchaseModel.isSelected = false
-                        purchaseModel.purchaseOptions = VodOfferType.RECURRING_SUBSCRIPTION.name
-                        purchaseModel.offerPeriod = VodOfferType.WEEKLY.name
-                        purchaseModel.title = purchaseModelList[j].title
-                        purchaseModel.title_en = purchaseModelList[j].title_en
-                        purchaseModel.title_es = purchaseModelList[j].title_es
-                        purchaseModel.description_en =  purchaseModelList[j].description_en
-                        purchaseModel.description_es =  purchaseModelList[j].description_es
-                        purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
-                        purchaseModel.trialType_en =  purchaseModelList[j].trialType_en
-                        purchaseModel.isCancelled = purchaseModelList[j].isCancelled
+            try {
+                if (purchaseModelList != null) {
+                    for (j in purchaseModelList.indices) {
+                        if (purchaseModelList[j].entitlementState != null && purchaseModelList[j].entitlementState == true) {
+                            val purchaseModel = PurchaseModel()
+                            purchaseModel.price = "" + plans?.data?.get(j)?.prices?.get(0)?.price
+                            purchaseModel.currency =
+                                "" + plans?.data?.get(j)?.prices?.get(0)?.currencyCode
+                            purchaseModel.paymentProvider =
+                                "" + plans?.data?.get(j)?.customData?.paymentProvider
+                            purchaseModel.trialType = "" + purchaseModelList[j].trialType
+                            purchaseModel.allowedTrial = purchaseModelList[j].allowedTrial
+                            purchaseModel.trialDuration = purchaseModelList[j].trialDuration
+                            purchaseModel.isSelected = false
+                            purchaseModel.purchaseOptions = VodOfferType.RECURRING_SUBSCRIPTION.name
+                            purchaseModel.offerPeriod = VodOfferType.WEEKLY.name
+                            purchaseModel.title = purchaseModelList[j].title
+                            purchaseModel.title_en = purchaseModelList[j].title_en
+                            purchaseModel.title_es = purchaseModelList[j].title_es
+                            purchaseModel.description_en =  purchaseModelList[j].description_en
+                            purchaseModel.description_es =  purchaseModelList[j].description_es
+                            purchaseModel.trialType_es =  purchaseModelList[j].trialType_es
+                            purchaseModel.trialType_en =  purchaseModelList[j].trialType_en
+                            purchaseModel.isCancelled = purchaseModelList[j].isCancelled
 
-                        purchaseModel.identifier = purchaseModelList[j].identifier
-                        purchaseModel.customIdentifier = purchaseModelList[j].customIdentifier
-                        // purchaseModel.setCurrency(purchaseModelList.get(j).getCurrency());
-                        purchaseModel.createdDate = purchaseModelList[j].createdDate
-                        purchaseModel.subscriptionOrder = purchaseModelList[j].subscriptionOrder
-                        purchaseModel.entitlementState = purchaseModelList[j].entitlementState
-                        purchaseFinalList.add(purchaseModel)
+                            purchaseModel.identifier = purchaseModelList[j].identifier
+                            purchaseModel.customIdentifier = purchaseModelList[j].customIdentifier
+                            // purchaseModel.setCurrency(purchaseModelList.get(j).getCurrency());
+                            purchaseModel.createdDate = purchaseModelList[j].createdDate
+                            purchaseModel.subscriptionOrder = purchaseModelList[j].subscriptionOrder
+                            purchaseModel.entitlementState = purchaseModelList[j].entitlementState
+                            if (purchaseModelList[j].expiryDate !=null) {
+                                purchaseModel.expiryDate = purchaseModelList[j].expiryDate
+                            }
+                            purchaseFinalList.add(purchaseModel)
+                        }
                     }
                 }
+            } catch (e:Exception) {
+                e.message?.let { Logger.w(it) }
             }
+
             return purchaseFinalList
         }
 
