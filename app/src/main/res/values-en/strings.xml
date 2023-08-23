@@ -351,8 +351,7 @@
     <string name="user_deactivated">This user has been deactivated. Please contact support</string>
     <string name="user_can_not_login">User cannot login with this method</string>
     <string name="username_password_doest_match">Username or Password doesn\'t match</string>
-    ​
-    <string name="username_must_be_loggedin">User must be logged in​​</string>
+    <string name="username_must_be_loggedin">User must be logged in</string>
     <string name="user_not_found">User not found</string>
     <string name="payment_error">There was an error processing your request, please try after some time. If additional support is required, please contact us at</string>
     <string name="delete">Delete</string>
@@ -839,7 +838,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="popup_change_pwd_incorrect_confirm_pwd">Incorrect confirm Password</string>
     <string name="search_see_all">See all</string>
     <string name="gaming_tabbar">Gaming</string>
-    <string name="geo_blocking_title">¡Oops! It seems that the content you're trying to play is not available in your country. But don't worry, there's always something good to watch!</string>
+    <string name="geo_blocking_title">Apologies. Our service is not available in your country</string>
     <string name="rate_the_app">Rate the app</string>
     <string name="free_trial">FREE TRAIL</string>
     <string name="order_history_annual">Annual</string>
