@@ -123,9 +123,9 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
     private fun setClicks() {
         binding?.toolbar?.titleSkip?.setOnClickListener{
             if (from!!.equals("SignUp",ignoreCase = true)) {
-                ActivityLauncher.getInstance().homeActivity(this,HomeActivity::class.java)
+                ActivityLauncher.getInstance().homeScreen(this,HomeActivity::class.java)
             }else{
-                ActivityLauncher.getInstance().homeActivity(this,HomeActivity::class.java)
+                ActivityLauncher.getInstance().homeScreen(this,HomeActivity::class.java)
             }
         }
 
