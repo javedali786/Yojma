@@ -43,7 +43,6 @@ public class RecentListAdapter extends RecyclerView.Adapter<RecentListAdapter.Ke
                 LayoutInflater.from(viewGroup.getContext()),
                 R.layout.keyword_item, viewGroup, false);
         keywordItemBinding.setColorsData(ColorsHelper.INSTANCE);
-        //ThemeHandler.getInstance().applyRecentSearch(viewGroup.getContext(),keywordItemBinding);
 
         return new KeywordItemHolder(keywordItemBinding);
     }

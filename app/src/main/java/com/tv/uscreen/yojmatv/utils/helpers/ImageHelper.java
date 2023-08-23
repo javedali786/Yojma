@@ -32,37 +32,37 @@ public class ImageHelper {
     public void loadImageTo(ImageView imageView, String imageUrl) {
         requestOptions.placeholder(R.drawable.ic_placeholder_square);
         Glide.with(mGlideObj.getContext()).setDefaultRequestOptions(requestOptions).
-                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.6f).into(imageView);
+                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(2)).thumbnail(0.6f).into(imageView);
     }
     public void loadImageToListPortrait(ImageView imageView, String imageUrl) {
         requestOptions.placeholder(R.drawable.placeholder_potrait);
         Glide.with(mGlideObj.getContext()).setDefaultRequestOptions(requestOptions).
-                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.6f).into(imageView);
+                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(2)).thumbnail(0.6f).into(imageView);
     }
 
     public void loadListImage(ImageView imageView, String imageUrl) {
         Logger.d("ImageURLL-->>"+imageUrl);
         requestOptions.placeholder(R.drawable.placeholder_landscape);
         Glide.with(mGlideObj.getContext()).setDefaultRequestOptions(requestOptions).
-                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.6f).into(imageView);
+                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(2)).thumbnail(0.6f).into(imageView);
     }
     public void loadPortraitImage(ImageView imageView, String imageUrl) {
         Logger.d("ImageURLL-->>"+imageUrl);
         requestOptions.placeholder(R.drawable.placeholder_potrait);
         Glide.with(mGlideObj.getContext()).setDefaultRequestOptions(requestOptions).
-                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.6f).into(imageView);
+                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(2)).thumbnail(0.6f).into(imageView);
     }
 
 
     public void loadListSQRImage(ImageView imageView, String imageUrl) {
         requestOptions.placeholder(R.drawable.ic_placeholder_square);
         Glide.with(mGlideObj.getContext()).setDefaultRequestOptions(requestOptions).
-                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.6f).into(imageView);
+                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(2)).thumbnail(0.6f).into(imageView);
     }
     public void loadListLandscapeImage(ImageView imageView, String imageUrl) {
         requestOptions.placeholder(R.drawable.placeholder_landscape);
         Glide.with(mGlideObj.getContext()).setDefaultRequestOptions(requestOptions).
-                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.6f).into(imageView);
+                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(2)).thumbnail(0.6f).into(imageView);
     }
 
     public void loadImageToProfile(ImageView imageView, String imageUrl) {
@@ -72,14 +72,14 @@ public class ImageHelper {
            // Glide.with(mGlideObj.getContext()).setDefaultRequestOptions(AppCommonMethod.options).load(R.drawable.profile_dark).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.6f).into(imageView);
         } else {
             Glide.with(mGlideObj.getContext()).setDefaultRequestOptions(AppCommonMethod.options).
-                    load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.6f).into(imageView);
+                    load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(2)).thumbnail(0.6f).into(imageView);
         }
     }
 
     public void loadCircleImageTo(ImageView imageView, String imageUrl) {
         requestOptions.placeholder(R.drawable.placeholder_circle);
         Glide.with(mGlideObj.getContext()).setDefaultRequestOptions(requestOptions).
-                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.6f).into(imageView);
+                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(2)).thumbnail(0.6f).into(imageView);
 
     }
 
@@ -87,17 +87,17 @@ public class ImageHelper {
         requestOptions.placeholder(R.drawable.default_player_pic);
 
         Glide.with(mGlideObj.getContext()).setDefaultRequestOptions(requestOptions).
-                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.1f).into(imageView);
+                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(2)).thumbnail(0.1f).into(imageView);
     }
 
     public void loadImageTo(ImageView imageView, Uri imageUrl) {
         Glide.with(mGlideObj.getContext()).setDefaultRequestOptions(requestOptions).
-                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.1f).into(imageView);
+                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(2)).thumbnail(0.1f).into(imageView);
     }
 
     public void loadImageTo(ImageView imageView, String imageUrl, SimpleTarget<Drawable> simpleTarget) {
         Glide.with(mGlideObj.getContext()).
-                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(250)).thumbnail(0.6f).into(simpleTarget);
+                load(imageUrl).transition(DrawableTransitionOptions.withCrossFade(2)).thumbnail(0.6f).into(simpleTarget);
 
 
     }
@@ -106,13 +106,13 @@ public class ImageHelper {
     public void tabsloadImage(ImageView imageView, String url, Drawable placeholder) {
         if (placeholder==null){
             Glide.with(imageView.getContext())
-                    .load(url).transition(DrawableTransitionOptions.withCrossFade(250))
+                    .load(url).transition(DrawableTransitionOptions.withCrossFade(2))
                     .apply(new RequestOptions()
                     .fitCenter())
                     .into(imageView);
         }else {
             Glide.with(imageView.getContext())
-                    .load(url).transition(DrawableTransitionOptions.withCrossFade(250))
+                    .load(url).transition(DrawableTransitionOptions.withCrossFade(2))
                     .apply(new RequestOptions().placeholder(placeholder)
                     .error(placeholder))
                     .into(imageView);

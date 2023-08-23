@@ -355,7 +355,7 @@
     <string name="search_movies">Movies</string>
     <string name="search_documentaries">Documentales</string>
     <string name="popup_select_plan">¡El mejor contenido que te inspira y mejora tu vida esta a un clic! ¡Selecciona tu plan favorito y sumérgete en el contenido exclusivo!</string>
-    <string name="geo_blocking_title">Disculpas. Nuestro servicio no está disponible en su país</string>
+    <string name="geo_blocking_title">¡Oops! Parece que el contenido que estás intentando reproducir no está disponible en tu país. ¡Pero no te preocupes, siempre hay algo bueno que ver!</string>
     <string name="rate_the_app">Califica la app</string>
     <string name="popup_username_pwd_does_not_match">El nombre de usuario o la contraseña no coinciden.</string>
     <string name="free_trial">Prueba gratuita</string>

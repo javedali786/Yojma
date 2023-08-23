@@ -514,7 +514,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             Logger.d("PRPosterImage-->>: $oldUrl $imageSize")
             val stringBuilder = StringBuilder()
             val urlImage = oldUrl.trim { it <= ' ' }
-            val one: String = SDKConfig.getInstance().getWebPUrl()
+            val one: String = SDKConfig.getInstance().webPUrl
             val two = imageSize + "/" + SDKConfig.WEBP_QUALITY
             stringBuilder.append(one).append(two).append(urlImage)
             Logger.d("ImageUrld-->>$one  $two $urlImage")

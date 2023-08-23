@@ -74,7 +74,6 @@ public class RowSearchAdapter extends RecyclerView.Adapter<RowSearchAdapter.Sing
                 LayoutInflater.from(viewGroup.getContext()),
                 R.layout.common_search_adapter, viewGroup, false);
         itemBinding.setColorsData(ColorsHelper.INSTANCE);
-        //ThemeHandler.getInstance().applyRowSearch(viewGroup.getContext(), itemBinding);
 
         return new SingleItemRowHolder(itemBinding);
     }
