@@ -279,8 +279,7 @@ public interface ApiInterface {
                                                                @Query("page") int page,
                                                                @Query("locale") String locale,
                                                                @Query("videoType") String videoType,
-                                                               @Query("filters") List<String> filterGenreSavedListKeyForApi,
-                                                               @Query("sort") List<String> filterSortSavedListKeyForApi);
+                                                               @Query("customType") String customType);
     @Headers("x-platform: android")
     @GET("v1_0/search")
     io.reactivex.Observable<ResponseSearch> getSearchByCustomFilters(@Query("keyword") String keyword,
@@ -304,7 +303,8 @@ public interface ApiInterface {
                                           @Query("contentType") String type,
                                           @Query("size") int size, @Query("page") int page,
                                           @Query("locale") String locale,
-                                          @Query("videoType") String videoType);
+                                          @Query("videoType") String videoType,
+                                          @Query("customType") String customType);
     @Headers("x-platform: android")
     @GET("v1_0/search")
     Call<ResponseSearch> getSearchResults(@Query("keyword") String keyword, @Query("contentType") List<String> type, @Query("size") int size, @Query("page") int page, @Query("locale") String locale);

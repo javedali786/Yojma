@@ -99,7 +99,7 @@ class ActivityResults : BaseBindingActivity<ActivityResultBinding?>(), CommonSea
         }
 
     private fun setHeader() {
-        if (searchType.equals(AppConstants.VIDEO, ignoreCase = true)) {
+        if (searchType.equals(AppConstants.VIDEO, ignoreCase = true) || searchType.equals(AppConstants.CUSTOM, ignoreCase = true) ) {
             if (header.equals(getString(R.string.search_result), ignoreCase = true)) {
                 binding!!.toolbar.titleMid.text = getString(R.string.search_result) + "-" + totalCount + " " + getString(R.string.search_results)
             } /*else if (header.equals(getString(R.string.detail_page_episodes), ignoreCase = true)) {

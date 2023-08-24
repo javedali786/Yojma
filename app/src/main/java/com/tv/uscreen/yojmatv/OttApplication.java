@@ -11,12 +11,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.moengage.firebase.MoEFireBaseHelper;
 import com.tv.uscreen.yojmatv.dependencies.DaggerEnveuComponent;
 import com.tv.uscreen.yojmatv.dependencies.EnveuComponent;
 import com.tv.uscreen.yojmatv.dependencies.modules.UserPreferencesModule;
 import com.tv.uscreen.yojmatv.utils.Logger;
-import com.tv.uscreen.yojmatv.utils.TrackerUtil.MoEngageManager;
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants;
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys;
 public class OttApplication extends MultiDexApplication {
@@ -37,7 +35,7 @@ public class OttApplication extends MultiDexApplication {
         MultiDex.install(this);
         initializeFirebase();
         firebaseCrashlyticSetup();
-        setUpMoengage();
+       // setUpMoengage();
 
     }
 
@@ -63,11 +61,11 @@ public class OttApplication extends MultiDexApplication {
 
 
 
-    private void setUpMoengage() {
+  /*  private void setUpMoengage() {
         MoEngageManager.INSTANCE.init(this);
         MoEFireBaseHelper.getInstance().addTokenListener(MoEngageManager.INSTANCE);
     }
-
+*/
     private void firebaseCrashlyticSetup() {
         if (KsPreferenceKeys.getInstance().getAppPrefLoginStatus().equalsIgnoreCase(AppConstants.UserStatus.Login.toString())) {
             String userId = KsPreferenceKeys.getInstance().getAppPrefUserId();
