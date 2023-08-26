@@ -303,8 +303,7 @@ public interface ApiInterface {
                                           @Query("contentType") String type,
                                           @Query("size") int size, @Query("page") int page,
                                           @Query("locale") String locale,
-                                          @Query("videoType") String videoType,
-                                          @Query("customType") String customType);
+                                          @Query("videoType") String videoType);
     @Headers("x-platform: android")
     @GET("v1_0/search")
     Call<ResponseSearch> getSearchResults(@Query("keyword") String keyword, @Query("contentType") List<String> type, @Query("size") int size, @Query("page") int page, @Query("locale") String locale);

@@ -793,8 +793,8 @@ public class APIServiceLayer {
 
 
             ApiInterface endpoint = RequestConfig.getClientSearch().create(ApiInterface.class);
-            String contentTypes = AppConstants.VIDEO + "," + AppConstants.CUSTOM ;
-            String StringVideoTypes = MediaTypeConstants.getInstance().getMovie() + "," + MediaTypeConstants.getInstance().getEpisode()  + "," + MediaTypeConstants.getInstance().getDocumentaries();
+            String contentTypes = AppConstants.VIDEO;
+            String StringVideoTypes = MediaTypeConstants.getInstance().getMovie() + "," + MediaTypeConstants.getInstance().getEpisode()  + "," + MediaTypeConstants.getInstance().getDocumentaries() + "," + MediaTypeConstants.getInstance().getSeries();
 
             Observable<ResponseSearch> allResults = null;
             Observable<ResponseSearch> episode = null;
@@ -802,12 +802,12 @@ public class APIServiceLayer {
 
 
             allResults = endpoint.getSearchByFilters(keyword,
-                            contentTypes, size, page, languageCode,StringVideoTypes,MediaTypeConstants.getInstance().getSeries())
+                            contentTypes, size, page, languageCode,StringVideoTypes)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io());
 
             episode = endpoint.getSearchByFilters(keyword,
-                            "Custom", size, page, languageCode,"","")
+                            "Custom", size, page, languageCode,"")
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io());
 
@@ -891,9 +891,11 @@ public class APIServiceLayer {
         Call<ResponseSearch> call = null;
 
         responsePopular = new MutableLiveData<>();
-        String StringVideoTypes = MediaTypeConstants.getInstance().getMovie() + "," + MediaTypeConstants.getInstance().getEpisode()  + "," + MediaTypeConstants.getInstance().getDocumentaries();
+        String StringVideoTypes = MediaTypeConstants.getInstance().getMovie() + "," + MediaTypeConstants.getInstance().getEpisode()  + "," + MediaTypeConstants.getInstance().getDocumentaries()+ "," + MediaTypeConstants.getInstance().getSeries();
 
-        String contentTypes = AppConstants.VIDEO + "," + AppConstants.CUSTOM ;
+      //  String contentTypes = AppConstants.VIDEO + "," + AppConstants.CUSTOM ;
+        String contentTypes = AppConstants.VIDEO;
+
 
         {
 
@@ -901,7 +903,7 @@ public class APIServiceLayer {
                 ApiInterface backendApi = RequestConfig.getClientSearch().create(ApiInterface.class);
                 if (type.equalsIgnoreCase(AppConstants.VIDEO) || type.equalsIgnoreCase(AppConstants.CUSTOM) ) {
                     if (header.equalsIgnoreCase(AppConstants.SEARCH_RESULT) || header.equalsIgnoreCase(AppConstants.SPANISH_SEARCH_RESULT)) {
-                        call = backendApi.getVideoSearchResults(keyword, contentTypes, size, page, languageCode,StringVideoTypes,MediaTypeConstants.getInstance().getSeries());
+                        call = backendApi.getVideoSearchResults(keyword, contentTypes, size, page, languageCode,StringVideoTypes);
                     } /*else if (header.equalsIgnoreCase(AppConstants.episodes)){
                         call = backendApi.getVideoSearchResults(keyword, type, size, page, languageCode,MediaTypeConstants.getInstance().getEpisode());
                     }  else if (header.equalsIgnoreCase(AppConstants.Documentaries)){
