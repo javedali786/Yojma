@@ -247,10 +247,11 @@
     <string name="minutes">min</string>
     <string name="mu_list_title">My List</string>
     <string name="watcho_now_title">Ver Ahora</string>
-    <string name="detail_page_now_playing">En Reproducción</string>
+    <string name="detail_page_now_playing">Viendo ahora</string>
     <string name="search_result">Resultado de búsqueda</string>
     <string name="explore_more_title">Descubre Más</string>
     <string name="see_offer_title">Ver Oferta</string>
+    <string name="detail_page_all_episode">Todos los episodios</string>
     <string name="view_series_title">Ver Series</string>
     <string name="watch_trailer">Ver Trailer</string>
     <string name="ep_cd_back">Back button</string>
@@ -314,7 +315,7 @@
     <string name="plan_date">02 jun 2020-02 jul 2021</string>
     <string name="subscription_date">Fecha</string>
     <string name="order_history_payment_mode">Método de Pago</string>
-    <string name="order_history_payment_status">Estado de Pago</string>
+    <string name="order_history_payment_status">Estado del pago</string>
     <string name="order_history_order_Id">Id de Orden</string>
     <string name="order_history_transaction_type">Tipo de Transacción</string>
     <string name="go_title">+Go</string>
