@@ -1823,8 +1823,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                             responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration
                                     }
                                 }
-                                if (responseEntitlementModel.getData().get(i).getRecurringOffer().getOfferPeriod() != null) {
-                                    if (responseEntitlementModel.getData().get(i).getRecurringOffer().getOfferPeriod().equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
+                                if (responseEntitlementModel.data[i].recurringOffer.offerPeriod != null) {
+                                    if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
                                         model.offerPeriod = VodOfferType.MONTHLY.name
                                     } else if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
                                         model.offerPeriod = VodOfferType.ANNUAL.name

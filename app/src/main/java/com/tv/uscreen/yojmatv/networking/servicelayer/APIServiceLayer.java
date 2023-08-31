@@ -655,37 +655,6 @@ public class APIServiceLayer {
 
                     }
                 });
-
-//                endpoint.getVideoIdData(manualImageAssetId, languageCode).enqueue(new Callback<ContinueWatchingModel>() {
-//                    @Override
-//                    public void onResponse(Call<ContinueWatchingModel> call, Response<ContinueWatchingModel> response) {
-//                        if (response.isSuccessful()) {
-//                            ArrayList<DataItem> enveuVideoDetailsArrayList = new ArrayList<>();
-//                            ArrayList<DataItem> enveuVideoDetails = (ArrayList<DataItem>) response.body().getData();
-//
-//                            for (ContinueWatchingBookmark continueWatchingBookmark : continueWatchingBookmarkList) {
-//                                for (DataItem enveuVideoDetail : enveuVideoDetails) {
-//
-//                                    if (continueWatchingBookmark.getAssetId().intValue() == enveuVideoDetail.getId()) {
-//                                        if (continueWatchingBookmark.getPosition() != null)
-//                                            enveuVideoDetail.setPosition(continueWatchingBookmark.getPosition());
-//                                        enveuVideoDetailsArrayList.add(enveuVideoDetail);
-//                                    }
-//                                }
-//                            }
-//                            commonApiCallBack.onSuccess(enveuVideoDetailsArrayList);
-//                        } else {
-//                            commonApiCallBack.onFailure(new Throwable("Details Not Found"));
-//
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<ContinueWatchingModel> call, Throwable t) {
-//                        commonApiCallBack.onFailure(new Throwable("Details Not Found"));
-//
-//                    }
-//                });
             }
         }
     }
