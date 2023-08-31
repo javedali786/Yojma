@@ -18,7 +18,9 @@ import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeParams;
 import com.android.billingclient.api.ConsumeResponseListener;
 import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.QueryPurchasesParams;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
@@ -620,55 +622,66 @@ public class BillingProcessor implements PurchasesUpdatedListener {
     RestoreSubscriptionCallback callback;
     public void queryPurchases(RestoreSubscriptionCallback calling) {
         try {
-            this.callback=calling;
+            this.callback = calling;
             if (KsPreferenceKeys.getInstance().getAppPrefLoginStatus().equalsIgnoreCase(AppConstants.UserStatus.Login.toString()) && myBillingClient != null) {
-                final Purchase.PurchasesResult purchasesResult =
-                        myBillingClient.    queryPurchases(BillingClient.SkuType.SUBS);
+                myBillingClient.queryPurchasesAsync(
+                        QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.SUBS).build(),
+                        new PurchasesResponseListener() {
+                            public void onQueryPurchasesResponse(
+                                    BillingResult billingResult,
+                                    List<Purchase> purchases) {
+                                List<Purchase> PurchaseListOne = new ArrayList<>();
+                                if (purchases != null) {
+                                    purchases.addAll(purchases);
+                                }
+                                if (!purchases.isEmpty()) {
+                                    purchasedSKU = purchases.get(0).getSkus().get(0);
+                                    purchasedToken = purchases.get(0).getPurchaseToken();
+                                }
+                                PurchaseHandler.getInstance().checkPurchaseHistory(purchases, myBillingClient, callback);
 
-                final List<Purchase> purchases = new ArrayList<>();
-                if (purchasesResult.getPurchasesList() != null) {
-                    purchases.addAll(purchasesResult.getPurchasesList());
-                }
-                if (!purchases.isEmpty()) {
-                    purchasedSKU = purchases.get(0).getSkus().get(0);
-                    purchasedToken = purchases.get(0).getPurchaseToken();
-                }
+                            }
+                        }
+                );
 
-
-                PurchaseHandler.getInstance().checkPurchaseHistory(purchases, myBillingClient, callback);
             }
-        }catch (Exception e){
-            Log.w("crashHap",e.toString());
+        } catch (Exception e) {
+            Log.w("crashHap", e.toString());
         }
-
-
     }
 
-    public void queryPurchases(RestoreSubscriptionCallback calling,int type) {
+    public void queryPurchases(RestoreSubscriptionCallback calling, int type) {
         try {
-            Log.w("identifiers","in queryPurchases");
+            Log.w("identifiers", "in queryPurchases");
             if (KsPreferenceKeys.getInstance().getAppPrefLoginStatus().equalsIgnoreCase(AppConstants.UserStatus.Login.toString()) && myBillingClient != null) {
-                final Purchase.PurchasesResult purchasesResult =
-                        myBillingClient.queryPurchases(BillingClient.SkuType.SUBS);
+                myBillingClient.queryPurchasesAsync(
+                        QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.SUBS).build(),
+                        new PurchasesResponseListener() {
+                            public void onQueryPurchasesResponse(
+                                    BillingResult billingResult,
+                                    List<Purchase> purchases) {
+                                List<Purchase> PurchaseListOne = new ArrayList<>();
+                                if (purchases != null) {
+                                    purchases.addAll(purchases);
+                                }
+                                if (!purchases.isEmpty()) {
+                                    purchasedSKU = purchases.get(0).getSkus().get(0);
+                                    purchasedToken = purchases.get(0).getPurchaseToken();
+                                    calling.subscriptionHistory(true, purchases);
+                                }
 
-                final List<Purchase> purchases = new ArrayList<>();
-                if (purchasesResult.getPurchasesList() != null) {
-                    purchases.addAll(purchasesResult.getPurchasesList());
-                }
-                if (!purchases.isEmpty()) {
-                    purchasedSKU = purchases.get(0).getSkus().get(0);
-                    purchasedToken = purchases.get(0).getPurchaseToken();
-                    calling.subscriptionHistory(true,purchases);
-                }
+                                Gson gson = new Gson();
+                                String json = gson.toJson(purchases);
+                                Log.w("BillingResult_purchases", json);
+                                Log.w("identifiers", "in queryPurchases 2");
 
-                Gson gson = new Gson();
-                String json = gson.toJson(purchases);
-                Log.w("BillingResult_purchases", json);
-                Log.w("identifiers","in queryPurchases 2");
-
+                            }
+                        }
+                );
             }
-        }catch (Exception e){
-            Log.w("crashHap",e.toString());
+
+        } catch (Exception e) {
+            Log.w("crashHap", e.toString());
         }
     }
 
