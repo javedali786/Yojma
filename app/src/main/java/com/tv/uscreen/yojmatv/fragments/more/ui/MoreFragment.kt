@@ -23,6 +23,7 @@ import com.tv.uscreen.yojmatv.activities.purchase.plans_layer.GetPlansLayer
 import com.tv.uscreen.yojmatv.activities.settings.ActivitySettings
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivitySelectSubscriptionPlan
+import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivitySignUp
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingFragment
 import com.tv.uscreen.yojmatv.beanModel.AppUserModel
 import com.tv.uscreen.yojmatv.beanModel.userProfile.UserProfileResponse
@@ -247,10 +248,8 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
             val gson = Gson()
             val userProfileData = gson.toJson(userProfileResponse)
             KsPreferenceKeys.getInstance().userProfileData = userProfileData
-            Logger.d("savedata2 " + KsPreferenceKeys.getInstance().userProfileData)
             val json = KsPreferenceKeys.getInstance().userProfileData
             val newObject = gson.fromJson(json, UserProfileResponse::class.java)
-            Logger.d("savedata3 $newObject")
             var emailId = ""
             if (ObjectHelper.isNotEmpty(newObject.data.email)) {
                 emailId = newObject.data.email as String
@@ -322,7 +321,7 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
                     ActivityLauncher.getInstance().goToPlanScreen(requireActivity(), ActivitySelectSubscriptionPlan::class.java, "")
                 }
             } else {
-                ActivityLauncher.getInstance().goToLogin(requireActivity(), ActivityLogin::class.java)
+                ActivityLauncher.getInstance().activitySignUp(requireActivity(), ActivitySignUp::class.java)
             }
         }
       /* else if (caption ==manageSubscription) {

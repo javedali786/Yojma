@@ -68,7 +68,6 @@ public final class ActivityLauncher {
     public void activitySignUp(Activity source, Class<ActivitySignUp> destination) {
         Intent intent = new Intent(source, destination);
         source.startActivity(intent);
-        source.finish();
     }
 
     /*public void liveTvActivity(Activity source, Class<ActivityLiveTv> destination) {
