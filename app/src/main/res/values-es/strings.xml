@@ -290,7 +290,7 @@
     <string name="ep_settings_video">Calidad de video</string>
     <string name="ep_settings_audio">Cambiar audio</string>
     <string name="ep_settings_subtitle">Subtítulos</string>
-    <string name="cancelation_date">Plan caducado</string>
+    <string name="cancelation_date">Tu Plan vence el día :</string>
     <string name="skip_intro">Saltar Intro</string>
     <string name="ep_dialog_settings_cancel">Cancelar</string>
     <string name="type_video">Video</string>

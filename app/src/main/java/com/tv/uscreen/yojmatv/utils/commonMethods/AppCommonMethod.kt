@@ -102,6 +102,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONObject
 import retrofit2.Response
 import java.lang.ref.WeakReference
+import java.text.DateFormat
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -1472,9 +1473,9 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
 
         @JvmStatic
         fun expiryDate(days: Long): String {
+            val obj: DateFormat = SimpleDateFormat("MMMM dd , yyyy")
             val date = Date(days)
-            val df2 = SimpleDateFormat("dd/MM/yyyy")
-            return df2.format(date)
+            return obj.format(date)
         }
 
         fun getTodaysDifference(completionDate: String?): Int {

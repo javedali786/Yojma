@@ -7,6 +7,8 @@
     <string name="checkout">Checkout</string>
     <string name="by_email">By Email</string>
     <string name="by_line">By Line</string>
+    <string name="cancelation_date">plan Expires: </string>
+
     <string name="email">Enter Email ID</string>
     <string name="password">Enter Your Password</string>
     <string name="guest_user">Guest User</string>
@@ -667,7 +669,6 @@ When children go to school. and found lessons from the documentary Children will
     <string name="apple_text">Apple</string>
     <string name="yes_text">Yes</string>
     <string name="cancel_subscription_button">Cancel Subscription</string>
-    <string name="cancelation_date">plan expired</string>
     <string name="cancel_button">Cancel</string>
     <string name="profile_enter_name">Enter Name</string>
     <string name="profile_mobile_number">Mobile Number (Optional)</string>

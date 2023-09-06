@@ -1,5 +1,8 @@
 package com.tv.uscreen.yojmatv.activities.profile.adapter;
 
+import static com.tv.uscreen.yojmatv.R.layout;
+import static com.tv.uscreen.yojmatv.R.string;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,10 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tv.uscreen.yojmatv.R;
 import com.tv.uscreen.yojmatv.activities.purchase.purchase_model.PurchaseModel;
 import com.tv.uscreen.yojmatv.activities.purchase.ui.VodOfferType;
 import com.tv.uscreen.yojmatv.databinding.ManageSubscriptionItemBinding;
+import com.tv.uscreen.yojmatv.utils.Logger;
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod;
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants;
 
@@ -37,7 +40,7 @@ public class AdapterManageSubscription extends RecyclerView.Adapter<AdapterManag
     @NonNull
     @Override
     public AdapterManageSubscription.ItemHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        ManageSubscriptionItemBinding manageSubscriptionItemBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.manage_subscription_item, viewGroup, false);
+        ManageSubscriptionItemBinding manageSubscriptionItemBinding = DataBindingUtil.inflate(LayoutInflater.from(context), layout.manage_subscription_item, viewGroup, false);
         return new AdapterManageSubscription.ItemHolder(manageSubscriptionItemBinding);
     }
 
@@ -55,12 +58,12 @@ public class AdapterManageSubscription extends RecyclerView.Adapter<AdapterManag
 
         if (model.getOfferPeriod() != null && !model.getOfferPeriod().equalsIgnoreCase("") && model.getOfferPeriod().equalsIgnoreCase(VodOfferType.MONTHLY.name())) {
 
-            String duration = context.getString(R.string.one_month);
+            String duration = context.getString(string.one_month);
            // holder.binding.annuallyId.setText(model.getOfferPeriod());
             //holder.binding.duration.setText(duration);
         } else if (model.getOfferPeriod() != null && !model.getOfferPeriod().equalsIgnoreCase("") && model.getOfferPeriod().equalsIgnoreCase(VodOfferType.ANNUAL.name())) {
 
-            String duration = " " + context.getString(R.string.one_year);
+            String duration = " " + context.getString(string.one_year);
             holder.binding.annuallyId.setText(model.getOfferPeriod());
 
             //holder.binding.duration.setText(duration);
@@ -74,25 +77,25 @@ public class AdapterManageSubscription extends RecyclerView.Adapter<AdapterManag
 
         if (model.getEntitlementState()) {
             holder.binding.activeId.setVisibility(View.VISIBLE);
-            holder.binding.activeId.setText(R.string.active_text);
+            holder.binding.activeId.setText(string.active_text);
         } else {
             holder.binding.activeId.setText("");
             /*holder.binding.st.setVisibility(View.GONE);
             holder.binding.activeExpired.setVisibility(View.GONE);*/
         }
 
-      /*  try {
+        try {
             if (model.isCancelled()) {
                 holder.binding.cancelSubscriptionId.setVisibility(View.GONE);
-                holder.binding.cancelationDate.setVisibility(View.VISIBLE);
+                holder.binding.llCancellationDate.setVisibility(View.VISIBLE);
                 String date = AppCommonMethod.expiryDate(Math.toIntExact(model.getExpiryDate()));
-                holder.binding.cancelationDate.setText(R.string.cancelation_date + " " + date);
+                holder.binding.cancellationDate.setText(date);
             } else {
-                holder.binding.cancelationDate.setVisibility(View.GONE);
+                holder.binding.llCancellationDate.setVisibility(View.GONE);
             }
         } catch (Exception e) {
-
-        }*/
+            Logger.e(e);
+        }
 
         if (model.getPaymentProvider() != null && !model.getPaymentProvider().equalsIgnoreCase("") && !model.getPaymentProvider().equalsIgnoreCase("null") ) {
             switch (model.getPaymentProvider()){
