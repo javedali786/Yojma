@@ -886,7 +886,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             } else if (screenType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
                 if (customContentType.equals(MediaTypeConstants.getInstance().series, ignoreCase = true)) {
                     ActivityLauncher.getInstance().seriesDetailScreen(context as BaseActivity, SeriesDetailActivity::class.java, id)
-                }            }
+                }
+            }
         }
 
         private fun checkLoggedInAndUserVerifyCondition(loggedIn: String): Boolean {

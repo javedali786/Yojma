@@ -98,7 +98,7 @@ class PlayerActivity : AppCompatActivity(), Serializable,
 
         isBingeWatchEnable?.let { args.putBoolean("binge_watch", it) }
         myFragment = JWPlayerFragment()
-        myFragment!!.setArguments(args)
+        myFragment!!.arguments = args
         supportFragmentManager
             .beginTransaction()
             .add(R.id.container_player, myFragment!!, "JWPlayerFragment")

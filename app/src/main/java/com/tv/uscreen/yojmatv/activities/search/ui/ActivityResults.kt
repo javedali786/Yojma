@@ -284,6 +284,10 @@ class ActivityResults : BaseBindingActivity<ActivityResultBinding?>(), CommonSea
                     externalUrl = itemValue.liveContent.externalUrl
                 }
             }
+        } else {
+            if (itemValue.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
+                customContentType = itemValue.customType
+            }
         }
         AppCommonMethod.launchDetailScreenFromSearch(
             this,

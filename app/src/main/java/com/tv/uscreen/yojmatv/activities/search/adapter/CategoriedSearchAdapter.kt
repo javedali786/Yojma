@@ -141,7 +141,7 @@ class CategoriedSearchAdapter(private val context: Context, private val list: Li
             }
         } else {
             if (itemValue.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
-                customContentType = itemValue.customContent.customType
+                customContentType = itemValue.customType
             }
         }
         launchDetailScreenFromSearch(

@@ -80,10 +80,6 @@ public class RowSearchAdapter extends RecyclerView.Adapter<RowSearchAdapter.Sing
 
     @Override
     public void onBindViewHolder(@NonNull RowSearchAdapter.SingleItemRowHolder viewHolder, final int position) {
-
-//        viewHolder.itemBinding.tvTitle.setTextColor(context.getColor(R.color.series_detail_now_playing_title_color_search));
-//        viewHolder.itemBinding.tvEpisode.setTextColor(context.getColor(R.color.signup_et_hint));
-
         viewHolder.itemBinding.tvTitle.setText(list.get(position).getTitle());
         viewHolder.itemBinding.clRoot.setOnClickListener(view -> listener.onRowItemClicked(list.get(position), position));
 
@@ -93,57 +89,6 @@ public class RowSearchAdapter extends RecyclerView.Adapter<RowSearchAdapter.Sing
         if (list.get(position).getPosterURL()!=null) {
             ImageHelper.getInstance(context).loadListImage(viewHolder.itemBinding.itemImage, AppCommonMethod.getListLDSImage(list.get(position).getPosterURL(), context));
         }
-
-        /*try {
-            if (list.get(position).getAssetType().equalsIgnoreCase(AppConstants.VIDEO)) {
-                if (list.get(position).getVideoDetails().getVideoType().equalsIgnoreCase(MediaTypeConstants.getInstance().getSeries()) ||
-                        list.get(position).getVideoDetails().getVideoType().equalsIgnoreCase(MediaTypeConstants.getInstance().getEpisode())
-                        || list.get(position).getVideoDetails().getVideoType().equalsIgnoreCase(MediaTypeConstants.getInstance().getMovie())) {
-                    if (list.get(position).getPosterURL() != null && !list.get(position).getPosterURL().equalsIgnoreCase("")) {
-                    }
-                    viewHolder.itemBinding.tvEpisode.setText(list.get(position).getDescription());
-                }
-
-            } else {
-                if (list.get(position).getAssetType().equalsIgnoreCase(AppConstants.CUSTOM)) {
-                    if (list.get(position).getCustomContent().getCustomType().equalsIgnoreCase(MediaTypeConstants.getInstance().getContest())) {
-                        if (list.get(position).getPosterURL() != null && !list.get(position).getPosterURL().equalsIgnoreCase("")) {
-                            ImageHelper.getInstance(context).loadListImage(viewHolder.itemBinding.itemImage, AppCommonMethod.getListLDSImage(list.get(position).getPosterURL(), context));
-                        }
-                        viewHolder.itemBinding.tvEpisode.setText(list.get(position).getDescription());
-                    } else if (list.get(position).getCustomContent().getCustomType().equalsIgnoreCase(MediaTypeConstants.getInstance().getEvent())) {
-                        if (list.get(position).getPosterURL() != null && !list.get(position).getPosterURL().equalsIgnoreCase("")) {
-                            ImageHelper.getInstance(context).loadListImage(viewHolder.itemBinding.itemImage, AppCommonMethod.getListLDSImage(list.get(position).getPosterURL(), context));
-                        }
-                        viewHolder.itemBinding.tvEpisode.setText(list.get(position).getDescription());
-                    } else if (list.get(position).getCustomContent().getCustomType().equalsIgnoreCase(MediaTypeConstants.getInstance().getExpedition())) {
-                        if (list.get(position).getPosterURL() != null && !list.get(position).getPosterURL().equalsIgnoreCase("")) {
-                            ImageHelper.getInstance(context).loadListImage(viewHolder.itemBinding.itemImage, AppCommonMethod.getListLDSImage(list.get(position).getPosterURL(), context));
-                        }
-                        viewHolder.itemBinding.tvEpisode.setText(list.get(position).getDescription());
-                    } else if (list.get(position).getCustomContent().getCustomType().equalsIgnoreCase(MediaTypeConstants.getInstance().getOffer())) {
-                        if (list.get(position).getPosterURL() != null && !list.get(position).getPosterURL().equalsIgnoreCase("")) {
-                            ImageHelper.getInstance(context).loadListImage(viewHolder.itemBinding.itemImage, AppCommonMethod.getListLDSImage(list.get(position).getPosterURL(), context));
-                        }
-                        viewHolder.itemBinding.tvEpisode.setText(list.get(position).getDescription());
-                    } else if (list.get(position).getCustomContent().getCustomType().equalsIgnoreCase(MediaTypeConstants.getInstance().getMarketPlace())) {
-                        if (list.get(position).getPosterURL() != null && !list.get(position).getPosterURL().equalsIgnoreCase("")) {
-                            ImageHelper.getInstance(context).loadListImage(viewHolder.itemBinding.itemImage, AppCommonMethod.getListLDSImage(list.get(position).getPosterURL(), context));
-                        }
-                        viewHolder.itemBinding.tvEpisode.setText(list.get(position).getDescription());
-                    } else if (list.get(position).getCustomContent().getCustomType().equalsIgnoreCase(MediaTypeConstants.getInstance().getNews())) {
-                        if (list.get(position).getPosterURL() != null && !list.get(position).getPosterURL().equalsIgnoreCase("")) {
-                            ImageHelper.getInstance(context).loadListImage(viewHolder.itemBinding.itemImage, AppCommonMethod.getListLDSImage(list.get(position).getPosterURL(), context));
-                        }
-                        viewHolder.itemBinding.tvEpisode.setText(list.get(position).getDescription());
-                    }
-                }
-            }
-
-
-        } catch (Exception e) {
-            Logger.w(e);
-        }*/
     }
 
     private void setSeasonEpisodeValue(EnveuVideoItemBean enveuVideoItemBean, TextView tvEpisode) {
