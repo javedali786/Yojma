@@ -1,29 +1,25 @@
 package com.tv.uscreen.yojmatv.jwplayer.cast
 
+
 import android.content.Context
 import com.google.android.gms.cast.CastMediaControlIntent
 import com.google.android.gms.cast.LaunchOptions
 import com.google.android.gms.cast.framework.CastOptions
 import com.google.android.gms.cast.framework.OptionsProvider
 import com.google.android.gms.cast.framework.SessionProvider
-import com.tv.uscreen.yojmatv.R
-
-
 import java.util.Locale
 
 class CastOptionsProvider : OptionsProvider {
     override fun getCastOptions(context: Context): CastOptions {
 
         val launchOptions = LaunchOptions.Builder()
-            .setLocale(Locale.US)
-            .build();
+            .setLocale(Locale.getDefault())
+            .build()
 
-        val castOptions = CastOptions.Builder()
+        return CastOptions.Builder()
             .setReceiverApplicationId(CastMediaControlIntent.DEFAULT_MEDIA_RECEIVER_APPLICATION_ID)
             .setLaunchOptions(launchOptions)
             .build()
-
-        return castOptions;
 //        val notificationOptions = NotificationOptions.Builder()
 //            .setTargetActivityClassName(ExpandedControlsActivity::class.java.name)
 //            .build()

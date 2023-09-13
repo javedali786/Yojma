@@ -117,7 +117,8 @@ abstract class BasePlayerFragment : Fragment() {
             val deviceName = session.castDevice?.friendlyName ?: ""
             enveuPlayerControlView.onCastInProgress(deviceName)
             isChromeCastConnected(true)
-          //  pause()
+            pause()
+            enveuPlayerControlView.updateBufferingState(false)
         }
 
         private fun onDisconnected() {

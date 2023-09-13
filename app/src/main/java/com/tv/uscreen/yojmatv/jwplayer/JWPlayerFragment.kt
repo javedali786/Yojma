@@ -64,6 +64,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var playbackUrl: String? = null
     private var externalRefId: String? = null
     private var tittle: String? = null
+    private var isChromcastConnected=false
     private var screenName: String? = null
     private var skipIntroStartTime: String = ""
     private var skipIntroEndTime: String = ""
@@ -141,11 +142,9 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     }
 
     override fun isChromeCastConnected(isConnected: Boolean) {
+        isChromcastConnected=isConnected
         posterUrl?.let {
-            viewBinding.seriesDetailAllEpisodeTxtColors.chromeCastStatus(
-                isConnected,
-                it
-            )
+            viewBinding.seriesDetailAllEpisodeTxtColors.chromeCastStatus(isConnected, it)
         }
     }
 
@@ -505,7 +504,9 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     }
 
     override fun onBuffer(p0: BufferEvent?) {
-        viewBinding.seriesDetailAllEpisodeTxtColors.updateBufferingState(true)
+        if(!isChromcastConnected) {
+            viewBinding.seriesDetailAllEpisodeTxtColors.updateBufferingState(true)
+        }
     }
 
     override fun onIdle(p0: IdleEvent?) {
