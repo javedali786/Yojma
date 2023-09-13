@@ -511,8 +511,8 @@ public class EnveuVideoItemBean implements Serializable {
             }
 
             if (t.containsKey(CustomeFields.SKIP_INTRO_END)) {
-                String producer = t.get((CustomeFields.SKIP_INTRO_END)).toString();
-                this.skipintro_endTime = producer;
+                String skipintro_endTime = t.get((CustomeFields.SKIP_INTRO_END)).toString();
+                this.skipintro_endTime = skipintro_endTime;
 
             }
 
@@ -628,8 +628,8 @@ public class EnveuVideoItemBean implements Serializable {
             }
 
             if (t1.containsKey(CustomeFields.SKIP_INTRO_END)) {
-                String producer = t1.get((CustomeFields.SKIP_INTRO_END)).toString();
-                this.skipintro_endTime = producer;
+                String skipintro_endTime = t1.get((CustomeFields.SKIP_INTRO_END)).toString();
+                this.skipintro_endTime = skipintro_endTime;
 
             }
 
@@ -745,6 +745,18 @@ public class EnveuVideoItemBean implements Serializable {
 
             Object customedata = details.getCustomData();
             LinkedTreeMap<Object, Object> t1 = (LinkedTreeMap) customedata;
+
+            if (t1.containsKey(CustomeFields.SKIP_INTRO_START)) {
+                String skipintro_startTime = t1.get((CustomeFields.SKIP_INTRO_START)).toString();
+                this.skipintro_startTime = skipintro_startTime;
+
+            }
+
+            if (t1.containsKey(CustomeFields.SKIP_INTRO_END)) {
+                String skipintro_endTime = t1.get((CustomeFields.SKIP_INTRO_END)).toString();
+                this.skipintro_endTime = skipintro_endTime;
+
+            }
 
             if (t1.containsKey(CustomeFields.display_tags)) {
                 String display_tags = t1.get((CustomeFields.display_tags)).toString();
@@ -1435,6 +1447,8 @@ public class EnveuVideoItemBean implements Serializable {
                         ",assetKeywords = '" + assetKeywords + '\'' +
                         ",likeCount = '" + likeCount + '\'' +
                         ",title = '" + title + '\'' +
+                        ",skipintro_startTime = '" + skipintro_startTime + '\'' +
+                        ",skipintro_endTime = '" + skipintro_endTime + '\'' +
                         ",svod = '" + svod + '\'' +
                         ",contentProvider = '" + contentProvider + '\'' +
                         ",assetCast = '" + assetCast + '\'' +

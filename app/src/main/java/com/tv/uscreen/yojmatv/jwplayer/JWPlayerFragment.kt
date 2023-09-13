@@ -614,10 +614,15 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                         if (id == episodeId && i < total!! - 1) {
                             Logger.d("id: $id")
                             val nextEpisodeItem = seasonEpisodesList?.get(i + 1)
+                            Logger.d("seasonEpisodesList: $seasonEpisodesList")
                             this.tittle = nextEpisodeItem?.title
                             this.episodeId = nextEpisodeItem?.id
-                            Logger.d("next id: $episodeId")
-                            Logger.d("next assetId: $episodeId")
+
+                            this.skipIntroStartTime = nextEpisodeItem?.skipintro_startTime?:""
+                            this.skipIntroEndTime = nextEpisodeItem?.skipintro_endTime?:""
+                            Logger.d("seasonEpisodesList: $skipIntroStartTime  $skipIntroEndTime")
+
+
                             //currentPlayingIndex = i + 1
                             mPlayer?.stop()
                             viewBinding.seriesDetailAllEpisodeTxtColors.hidePlayerControls()
@@ -625,7 +630,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                             sku = nextEpisodeItem?.sku.toString()
                             if (nextEpisodeItem != null) {
                                 playNextEpisode(
-                                    nextEpisodeItem?.isPremium,
+                                    nextEpisodeItem.isPremium,
                                     nextEpisodeItem.externalRefId
                                 )
                             }
