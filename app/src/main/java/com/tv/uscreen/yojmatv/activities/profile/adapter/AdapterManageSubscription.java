@@ -88,7 +88,7 @@ public class AdapterManageSubscription extends RecyclerView.Adapter<AdapterManag
             if (model.isCancelled()) {
                 holder.binding.cancelSubscriptionId.setVisibility(View.GONE);
                 holder.binding.llCancellationDate.setVisibility(View.VISIBLE);
-                String date = AppCommonMethod.expiryDate(Math.toIntExact(model.getExpiryDate()));
+                String date = AppCommonMethod.expiryDate(model.getExpiryDate());
                 holder.binding.cancellationDate.setText(date);
             } else {
                 holder.binding.llCancellationDate.setVisibility(View.GONE);
@@ -104,7 +104,9 @@ public class AdapterManageSubscription extends RecyclerView.Adapter<AdapterManag
                     break;
                 case AppConstants.GOOGLE_IAP:
                     setTextView("Google",holder);
-                    holder.binding.cancelSubscriptionId.setVisibility(View.VISIBLE);
+                    if (!model.isCancelled()) {
+                        holder.binding.cancelSubscriptionId.setVisibility(View.VISIBLE);
+                    }
                     break;
                 case AppConstants.TWO_C_TWO_P:
                     setTextView("Apple",holder);

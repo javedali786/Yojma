@@ -180,7 +180,7 @@
                 android:id="@+id/cancellation_date"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sfuitext_medium"
-                android:text="abcd"
+                android:text=""
                 android:textColor="@color/series_detail_my_list_selected_color"
                 android:textSize="14sp"
                 android:layout_width="match_parent"
