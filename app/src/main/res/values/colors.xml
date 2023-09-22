@@ -5,6 +5,7 @@
     <color name="trial_color">#7f79f4</color>
     <color name="toolbar_text_color">#FFFFFF</color>
     <color name="back_icon_color">#f48700</color>
+    <color name="cast_expanded_controller_text_color">#FFFFFF</color>
     <color name="main_btn_txt_color">#FFFFFF</color>
     <color name="login_or_sign_in_with_line_color">#FFFFFF</color>
     <color name="login_or_sign_in_with_txt_color">#FFFFFF</color>

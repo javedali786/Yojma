@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
 import com.tv.uscreen.yojmatv.beanModel.entitle.ResponseEntitle;
+import com.tv.uscreen.yojmatv.jwplayer.cast.PlayDetailResponse;
 import com.tv.uscreen.yojmatv.networking.apiendpoints.RequestConfig;
 import com.tv.uscreen.yojmatv.networking.detailPlayer.APIDetails;
 import com.tv.uscreen.yojmatv.networking.intercepter.ErrorCodesIntercepter;
@@ -21,6 +22,7 @@ import retrofit2.Response;
 public class EntitlementLayer {
 
     private static EntitlementLayer entitlement;
+
     public synchronized static EntitlementLayer getInstance() {
         if (entitlement == null) {
             entitlement = new EntitlementLayer();
@@ -44,7 +46,7 @@ public class EntitlementLayer {
                     responseEntitlement.setData(Objects.requireNonNull(response.body()).getData());
                     Gson gson = new Gson();
                     String json = gson.toJson(response.body().getData());
-                    Log.d("Javed", "onResponse: " +  json);
+                    Log.d("Javed", "onResponse: " + json);
                     responseOutput.postValue(responseEntitlement);
                 } else {
                     ResponseEntitle responseModel = ErrorCodesIntercepter.getInstance().checkEntitlement(response);
@@ -64,9 +66,30 @@ public class EntitlementLayer {
         return responseOutput;
     }
 
+    public LiveData<PlayDetailResponse> getPlayDetails(String url) {
+        MutableLiveData<PlayDetailResponse> responseOutput = new MutableLiveData<>();
+
+        APIDetails endpoint = RequestConfig.getPlayRetrofit().create(APIDetails.class);
+        Call<PlayDetailResponse> call = endpoint.getSubtitle(url);
+        call.enqueue(new Callback<PlayDetailResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<PlayDetailResponse> call, @NonNull Response<PlayDetailResponse> response) {
+                if (response.code() == 200) {
+                    responseOutput.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<PlayDetailResponse> call, @NonNull Throwable t) {
 
 
-    public LiveData<com.tv.uscreen.yojmatv.activities.detail.viewModel.Response> getGeoBlocking( String mediaContentId) {
+            }
+        });
+        return responseOutput;
+    }
+
+
+    public LiveData<com.tv.uscreen.yojmatv.activities.detail.viewModel.Response> getGeoBlocking(String mediaContentId) {
         MutableLiveData<com.tv.uscreen.yojmatv.activities.detail.viewModel.Response> responseOutput = new MutableLiveData<>();
 
         APIDetails endpoint = RequestConfig.getGeoBlocking().create(APIDetails.class);
@@ -81,12 +104,13 @@ public class EntitlementLayer {
                     response1.setData(Objects.requireNonNull(response.body()).getData());
                     Gson gson = new Gson();
                     String json = gson.toJson(response.body().getData());
-                    Log.d("Javed", "onResponse: " +  json);
+                    Log.d("Javed", "onResponse: " + json);
                     responseOutput.postValue(response1);
                 } else {
                     responseOutput.postValue(response.body());
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<com.tv.uscreen.yojmatv.activities.detail.viewModel.Response> call, @NonNull Throwable t) {
                 com.tv.uscreen.yojmatv.activities.detail.viewModel.Response response = new com.tv.uscreen.yojmatv.activities.detail.viewModel.Response();
@@ -96,7 +120,6 @@ public class EntitlementLayer {
         });
         return responseOutput;
     }
-
 
 
 }

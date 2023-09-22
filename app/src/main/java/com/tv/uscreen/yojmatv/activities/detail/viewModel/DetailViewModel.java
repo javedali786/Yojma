@@ -23,6 +23,7 @@ import com.tv.uscreen.yojmatv.beanModel.responseModels.landingTabResponses.Commo
 import com.tv.uscreen.yojmatv.beanModel.responseModels.series.SeriesResponse;
 import com.tv.uscreen.yojmatv.beanModel.responseModels.series.season.SeasonResponse;
 import com.tv.uscreen.yojmatv.beanModel.watchList.ResponseWatchList;
+import com.tv.uscreen.yojmatv.jwplayer.cast.PlayDetailResponse;
 import com.tv.uscreen.yojmatv.repository.bookmarking.BookmarkingRepository;
 import com.tv.uscreen.yojmatv.repository.detail.DetailRepository;
 import com.tv.uscreen.yojmatv.repository.home.HomeFragmentRepository;
@@ -83,6 +84,9 @@ public class DetailViewModel extends DetailBaseViewModel {
 
     public LiveData<ResponseEntitle> hitApiEntitlement(String token, String sku) {
         return EntitlementLayer.getInstance().hitApiEntitlement(token, sku);
+    }
+    public LiveData<PlayDetailResponse> getPlayDetail(String url) {
+        return EntitlementLayer.getInstance().getPlayDetails(url);
     }
 
     public LiveData<Response> getGeoBlocking( String mediaContentId) {

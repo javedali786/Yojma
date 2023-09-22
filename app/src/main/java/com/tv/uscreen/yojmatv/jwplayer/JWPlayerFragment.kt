@@ -21,8 +21,10 @@ import com.enveu.player.model.TrackItem
 import com.enveu.player.utils.Network
 import com.enveu.player.utils.TrackOptions
 import com.example.PlayerListener
+import com.google.android.exoplayer2.util.Log
 import com.google.android.exoplayer2.util.Util
 import com.google.android.gms.cast.framework.CastContext
+import com.google.gson.Gson
 import com.jwplayer.pub.api.JWPlayer
 import com.jwplayer.pub.api.PlayerState
 import com.jwplayer.pub.api.UiGroup
@@ -51,26 +53,28 @@ import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.databinding.FragmentJWPlayerBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.DialogPlayer
+import com.tv.uscreen.yojmatv.jwplayer.cast.PlayDetailResponse
 import com.tv.uscreen.yojmatv.utils.Logger
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.URL
+import java.net.URLConnection
 
 class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.DialogListener {
     private var mPlayer: JWPlayer? = null
     private var mListener: OnPlayerInteractionListener? = null
     private var mActivity: Activity? = null
-    private var playbackUrl: String? = null
     private var externalRefId: String? = null
-    private var tittle: String? = null
-    private var isChromcastConnected=false
+    private var isChromcastConnected = false
     private var screenName: String? = null
     private var skipIntroStartTime: String = ""
     private var skipIntroEndTime: String = ""
     private var contentPlayed: String? = null
     private var contentDuration: String? = null
-    private var posterUrl: String? = null
     private var contentType: String? = null
     private var id: Int? = null
     private var episodeId: Int? = 0
@@ -142,7 +146,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     }
 
     override fun isChromeCastConnected(isConnected: Boolean) {
-        isChromcastConnected=isConnected
+        isChromcastConnected = isConnected
         posterUrl?.let {
             viewBinding.seriesDetailAllEpisodeTxtColors.chromeCastStatus(isConnected, it)
         }
@@ -205,9 +209,17 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         override fun onSettingClicked() {
             try {
                 super.onSettingClicked()
-                if (KsPreferenceKeys.getInstance().appLanguage.equals("spanish", ignoreCase = true)) {
+                if (KsPreferenceKeys.getInstance().appLanguage.equals(
+                        "spanish",
+                        ignoreCase = true
+                    )
+                ) {
                     activity?.let { AppCommonMethod.updateLanguage("es", it) }
-                } else if (KsPreferenceKeys.getInstance().appLanguage.equals("English", ignoreCase = true)) {
+                } else if (KsPreferenceKeys.getInstance().appLanguage.equals(
+                        "English",
+                        ignoreCase = true
+                    )
+                ) {
                     activity?.let { AppCommonMethod.updateLanguage("en", it) }
                 }
                 var settingList = ArrayList<String>()
@@ -216,13 +228,16 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                 if (!captionList.isNullOrEmpty() && captionList?.size!! > 1)
                     settingList.add(resources.getString(R.string.ep_settings_subtitle))
 
-                if(TrackOptions.createVideoTracks(activity!!, mPlayer?.qualityLevels!!).isNotEmpty()) {
-                    videoTracks = TrackOptions.createVideoTracks(activity!!, mPlayer?.qualityLevels!!)
+                if (TrackOptions.createVideoTracks(activity!!, mPlayer?.qualityLevels!!)
+                        .isNotEmpty()
+                ) {
+                    videoTracks =
+                        TrackOptions.createVideoTracks(activity!!, mPlayer?.qualityLevels!!)
                 }
                 if (!videoTracks.isNullOrEmpty())
                     settingList.add(resources.getString(R.string.ep_settings_video))
                 viewBinding.seriesDetailAllEpisodeTxtColors.setSettingAdapter(settingList)
-            } catch (e:java.lang.Exception) {
+            } catch (e: java.lang.Exception) {
 
             }
 
@@ -387,9 +402,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         setUpCast()
         initializaPlayer()
         mPlayer?.isCaptionsRendering = true
-//        setupCast()
-//        viewBinding.seriesDetailAllEpisodeTxtColors.initCast()
-//        mCastContext = CastContext.getSharedInstance(requireActivity())
     }
 
     private fun callBookMarkApi() {
@@ -479,6 +491,21 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                 viewBinding.seriesDetailAllEpisodeTxtColors.shouldShowNext(false)
             }
         }
+        callPlayDetails()
+    }
+
+    private fun callPlayDetails() {
+        activity?.let {
+            viewModel!!.getPlayDetail("${SDKConfig.getInstance().jwPlayerDiliveryBaseUrl}$externalRefId")
+                .observe(
+                    it
+                ) { playDetailResponse: PlayDetailResponse? ->
+                    if (!playDetailResponse?.playlist?.get(0)?.tracks.isNullOrEmpty()) {
+                        subtitleTracks = playDetailResponse?.playlist?.get(0)?.tracks
+                    }
+                }
+        }
+
     }
 
     private fun addListener() {
@@ -504,7 +531,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     }
 
     override fun onBuffer(p0: BufferEvent?) {
-        if(!isChromcastConnected) {
+        if (!isChromcastConnected) {
             viewBinding.seriesDetailAllEpisodeTxtColors.updateBufferingState(true)
         }
     }
@@ -545,7 +572,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                 }
             }
         }
-      //  Log.w("SkipIntro", "${mPlayer?.position}---------${skipIntroStartTime.toDouble()}")
 
         if (!skipIntroStartTime.isNullOrEmpty() && !skipIntroEndTime.isNullOrEmpty()) {
             if (mPlayer?.position!! >= skipIntroStartTime.toDouble() && mPlayer?.position!! <= skipIntroEndTime.toDouble()) {
@@ -599,9 +625,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     override fun onComplete(p0: CompleteEvent?) {
         onVideoComplete()
         handler!!.removeCallbacksAndMessages(runnable)
-//        mPlayer.seek(0.0)
-//        viewBinding.seriesDetailAllEpisodeTxtColors.updateSeekBar()
-//        mPlayer.play()
     }
 
     private fun onVideoComplete() {
@@ -618,8 +641,8 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                             this.tittle = nextEpisodeItem?.title
                             this.episodeId = nextEpisodeItem?.id
 
-                            this.skipIntroStartTime = nextEpisodeItem?.skipintro_startTime?:""
-                            this.skipIntroEndTime = nextEpisodeItem?.skipintro_endTime?:""
+                            this.skipIntroStartTime = nextEpisodeItem?.skipintro_startTime ?: ""
+                            this.skipIntroEndTime = nextEpisodeItem?.skipintro_endTime ?: ""
                             Logger.d("seasonEpisodesList: $skipIntroStartTime  $skipIntroEndTime")
 
 
@@ -643,7 +666,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             mPlayer?.stop()
             viewBinding.seriesDetailAllEpisodeTxtColors.hidePlayerControls()
             removeListener()
-            // showDialog(resources.getString(R.string.not_entitled), resources.getString(R.string.select_plan), resources.getString(R.string.purchase_option))
             activity?.finish()
             activity?.onBackPressed()
         }
@@ -705,8 +727,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                                 externalRefId = it.data.externalRefId
                                 initializaPlayer()
                             } else {
-                                //activity?.finish()
-                                //activity?.onBackPressed()
                                 showDialog(
                                     "",
                                     resources.getString(R.string.user_verify_player),
@@ -719,8 +739,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                                 resources.getString(R.string.select_plan_player),
                                 resources.getString(R.string.ok)
                             )
-                            //activity?.finish()
-                            //activity?.onBackPressed()
                         }
                     } else {
                         showDialog(
@@ -729,8 +747,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                             resources.getString(R.string.countinue)
                         )
 
-                        //activity?.finish()
-                        // activity?.onBackPressed()
                     }
                 }
             }

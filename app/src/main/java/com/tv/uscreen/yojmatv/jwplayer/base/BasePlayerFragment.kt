@@ -1,7 +1,9 @@
 package com.enveu.player.base
 
+import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,25 +11,35 @@ import androidx.fragment.app.Fragment
 import com.enveu.player.controls.EnveuPlayerControlView
 import com.enveu.player.receiver.ConnectivityReceiver
 import com.google.android.gms.cast.MediaInfo
+import com.google.android.gms.cast.MediaLoadRequestData
 import com.google.android.gms.cast.MediaMetadata
+import com.google.android.gms.cast.MediaTrack
 import com.google.android.gms.cast.framework.CastContext
 import com.google.android.gms.cast.framework.CastSession
 import com.google.android.gms.cast.framework.SessionManagerListener
 import com.google.android.gms.cast.framework.media.RemoteMediaClient
+import com.google.android.gms.common.images.WebImage
 import com.google.gson.Gson
+import com.tv.uscreen.yojmatv.jwplayer.cast.ExpandedControlsActivity
+import com.tv.uscreen.yojmatv.jwplayer.cast.TracksItem
 import com.tv.uscreen.yojmatv.utils.Logger
 
 abstract class BasePlayerFragment : Fragment() {
     protected var currentPosition: Long = 0L
     var isUpdatedChromecastMedia = false
-    var videoMetadata: VideoMetadata? = null
+    var playbackUrl: String? = null
+    var subtitleTracks: List<TracksItem?>? = null
+    var tittle: String? = null
+    var posterUrl: String? = null
+
     abstract fun play()
     abstract fun pause()
     abstract fun checkNetworkConnectivity(isConnected: Boolean)
     abstract fun seekPlayerTo(position: Double)
     abstract fun seekAfterDisconnected()
     abstract fun isChromeCastConnected(isConnected: Boolean)
-  //  private var mCastSession: CastSession? = null
+
+    //  private var mCastSession: CastSession? = null
     private val mSessionManagerListener: SessionManagerListener<CastSession> =
         SessionManagerListenerImpl()
 
@@ -58,11 +70,12 @@ abstract class BasePlayerFragment : Fragment() {
     protected fun setUpCast() {
         enveuPlayerControlView.initCast()
         mCastContext = CastContext.getSharedInstance()
-       // mCastSession = mCastContext?.sessionManager?.currentCastSession
+        // mCastSession = mCastContext?.sessionManager?.currentCastSession
     }
+
     fun isCasting(): Boolean = mCastSession?.castDevice != null
 
-    fun isCasting(videoUrl: String) : Boolean  {
+    fun isCasting(videoUrl: String): Boolean {
         Logger.d("video url: $videoUrl")
         Logger.d("cast content id: ${mCastSession?.remoteMediaClient?.currentItem?.media?.contentId}")
         return mCastSession?.remoteMediaClient?.currentItem?.media?.contentId == videoUrl
@@ -169,15 +182,20 @@ abstract class BasePlayerFragment : Fragment() {
 //                        }
                     }
                 }
-
-//                val intent = Intent(activity, ExpandedControlsActivity::class.java)
-//                startActivity(intent)
+                val intent = Intent(activity, ExpandedControlsActivity::class.java)
+                startActivity(intent)
                 if (isUpdatedChromecastMedia) {
                     remoteMediaClient?.unregisterCallback(this)
                 }
             }
         })
-
+        remoteMediaClient?.load(
+            MediaLoadRequestData.Builder()
+                .setMediaInfo(buildMediaInfo())
+                .setAutoplay(autoPlay)
+                .setCurrentTime(position)
+                .build()
+        )
 //        val movieMetadata = MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE)
 //
 //        movieMetadata.putString(MediaMetadata.KEY_TITLE, "ABC")
@@ -204,20 +222,36 @@ abstract class BasePlayerFragment : Fragment() {
 
     private fun buildMediaInfo(): MediaInfo? {
         val movieMetadata = MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE)
-        movieMetadata.putString(MediaMetadata.KEY_TITLE, "Playing from SDK")
-        Logger.d("videoMetadata: $videoMetadata")
-        videoMetadata?.title?.let { movieMetadata.putString(MediaMetadata.KEY_TITLE, it) }
-      //  videoMetadata?.posterUrl?.let { movieMetadata.addImage(WebImage(Uri.parse(it))) }
-
-        return videoMetadata?.videoUrl?.let {
-            MediaInfo.Builder(it)
-                .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
-                .setContentType("videos/mp4")
-                .setMetadata(movieMetadata)
-                .build()
-        }
+        movieMetadata.putString(MediaMetadata.KEY_TITLE, tittle ?: "")
+        val tracks: MutableList<MediaTrack> = ArrayList<MediaTrack>()
+        createSubtitleTracks(tracks)
+        posterUrl?.let { movieMetadata.addImage(WebImage(Uri.parse(it))) }
+        return MediaInfo.Builder(playbackUrl ?: "")
+            .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
+            .setContentType("videos/mp4")
+            .setMetadata(movieMetadata)
+            .setMediaTracks(tracks)
+            .setStreamDuration(0L)
+            .build()
     }
 
+    private fun createSubtitleTracks(tracks: MutableList<MediaTrack>) {
+        if (!subtitleTracks.isNullOrEmpty()) {
+            subtitleTracks?.forEachIndexed { index, tracksItem ->
+                if (tracksItem?.kind.equals("captions")) {
+                    val subtitleTracks =
+                        MediaTrack.Builder(index.toLong() /* ID */, MediaTrack.TYPE_TEXT)
+                            .setName(tracksItem?.label)
+                            .setSubtype(MediaTrack.SUBTYPE_SUBTITLES)
+                            .setContentId(tracksItem?.file)
+                            /* language is required for subtitle type but optional otherwise */
+                            .setLanguage(tracksItem?.language ?: "")
+                            .build()
+                    tracks.add(subtitleTracks)
+                }
+            }
+        }
+    }
 
 
     override fun onResume() {
@@ -226,7 +260,7 @@ abstract class BasePlayerFragment : Fragment() {
         mCastSession?.castDevice?.let {
             enveuPlayerControlView.onCastInProgress(it.friendlyName)
             play()
-           // pause()
+            // pause()
         } ?: enveuPlayerControlView.onCastDisconnected()
     }
 
@@ -256,8 +290,8 @@ abstract class BasePlayerFragment : Fragment() {
     }
 
     data class VideoMetadata(
-       // var bcoveVideoId: String? = null,
-      //  var posterUrl: String = "",
+        // var bcoveVideoId: String? = null,
+        //  var posterUrl: String = "",
         var title: String = "ABC",
         var videoUrl: String = "https://cdn.jwplayer.com/manifests/bJeozcfa.m3u8",
         var mediaType: Int = 123

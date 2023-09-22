@@ -195,7 +195,7 @@ dependencies {
     implementation 'com.android.billingclient:billing:5.2.0'
     implementation "com.jwplayer:jwplayer-core:$jwPlayerVersion"
     implementation "com.jwplayer:jwplayer-common:$jwPlayerVersion"
-    implementation "com.jwplayer:jwplayer-chromecast:$jwPlayerVersion"
+   /* implementation "com.jwplayer:jwplayer-chromecast:$jwPlayerVersion"*/
     implementation "androidx.mediarouter:mediarouter:1.4.0"
     //noinspection GradleDependency
     implementation 'com.google.android.gms:play-services-cast-framework:21.1.0'

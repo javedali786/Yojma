@@ -518,6 +518,40 @@ public class RequestConfig {
         return retrofit;
     }
 
+    public static Retrofit getPlayRetrofit() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(interceptor);
+
+        if(HttpProfiler.getInstance().needHttpProfiler()){
+            if (BuildConfig.DEBUG) {
+                httpClient.addInterceptor(HttpProfiler.getInstance().getOkHttpProfilerInterceptor());
+            }
+        }
+
+        OkHttpClient client = httpClient.build();
+
+
+        if (SDKConfig.getInstance().getSUBSCRIPTION_BASE_URL()!=null && !SDKConfig.getInstance().getSUBSCRIPTION_BASE_URL().equalsIgnoreCase("")){
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(SDKConfig.getInstance().getSUBSCRIPTION_BASE_URL())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
+                    .build();
+        }else {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(KsPreferenceKeys.getInstance().getSUBSCRIPTION_BASE_URL())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
+                    .build();
+        }
+
+
+        return retrofit;
+    }
+
 
     public static Retrofit getGeoBlocking() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

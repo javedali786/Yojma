@@ -20,6 +20,7 @@ import com.tv.uscreen.yojmatv.beanModel.responseModels.series.SeriesResponse;
 import com.tv.uscreen.yojmatv.beanModel.responseModels.series.season.SeasonResponse;
 import com.tv.uscreen.yojmatv.beanModel.watchHistory.ResponseWatchHistory;
 import com.tv.uscreen.yojmatv.beanModel.watchList.ResponseWatchList;
+import com.tv.uscreen.yojmatv.jwplayer.cast.PlayDetailResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -28,6 +29,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface APIDetails {
 
@@ -106,6 +108,9 @@ public interface APIDetails {
     @GET("v5/subscription/checkEntitlement")
     Call<ResponseEntitle> checkEntitlement(@Query("vodSKU") String sku);
 
+
+    @GET
+    Call<PlayDetailResponse> getSubtitle(@Url String url);
     @Headers("x-platform: android")
     @GET("v1_0/mediaContent/geo/check?")
     Call<Response> getGeoBlocking(@Query("mediaContentId") String mediaContentId);
