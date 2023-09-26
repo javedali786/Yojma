@@ -2076,7 +2076,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 if (responseEntitlementModel.data != null) {
                     if (responseEntitlementModel.data.purchaseAs != null && responseEntitlementModel.data.purchaseAs.isNotEmpty()) {
                         for (i in responseEntitlementModel.data.purchaseAs.indices) {
-                            if (responseEntitlementModel.data.purchaseAs[i].offerStatus.equals("PUBLISHED")) {
+                            if (responseEntitlementModel.data.purchaseAs[i].offerStatus.equals("PUBLISHED") && responseEntitlementModel.data.purchaseAs[i].customData.androidProductId!=null) {
                                 val model = PurchaseModel()
                                 if (responseEntitlementModel.data != null && responseEntitlementModel.data.purchaseAs[i].offerType != null && responseEntitlementModel.data.purchaseAs[i].offerType.contains(VodOfferType.RECURRING_SUBSCRIPTION.name)) {
                                     if(responseEntitlementModel.data.purchaseAs[i].customData!=null) {
