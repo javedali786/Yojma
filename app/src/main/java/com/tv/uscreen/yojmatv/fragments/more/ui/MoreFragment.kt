@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -47,7 +48,7 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
     private var mPreference: KsPreferenceKeys? = null
     private var isLogin: String? = null
     private var mListLogin: MutableList<String>? = null
-    private val viewModel: HomeViewModel? = null
+    private var viewModel: HomeViewModel? = null
     private var hasEntitlement = false
     private var token = ""
     private var userState = ""
@@ -198,6 +199,7 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
         try {
             isLogin = mPreference?.appPrefLoginStatus
             if (isLogin.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
+                viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
                 val token = mPreference?.appPrefAccessToken
                 viewModel!!.hitUserProfile(context, token).observe(requireActivity()) { userProfileResponse: UserProfileResponse? ->
                     if (userProfileResponse != null && userProfileResponse.status) {
