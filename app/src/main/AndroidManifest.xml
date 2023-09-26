@@ -34,6 +34,7 @@
             android:name=".jwplayer.cast.ExpandedControlsActivity"
             android:exported="true"
             android:launchMode="singleInstance"
+            android:theme="@style/SplashTheme"
             android:screenOrientation="landscape"
             android:parentActivityName="com.example.jwplayer.PlayerActivity">
             <intent-filter>
