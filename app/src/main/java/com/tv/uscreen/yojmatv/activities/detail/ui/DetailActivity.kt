@@ -499,27 +499,18 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
     private var resEntitle: ResponseEntitle? = null
     private fun setClicks() {
         binding!!.metaDetails.watchTrailer.setOnClickListener {
-            if (isLoggedIn) {
+            startPlayer(trailerUrl, true, trailerExternalRefId ?: "")
+            /*if (isLoggedIn) {
                 if (isUserVerified.equals("true", ignoreCase = true)) {
-                    startPlayer(trailerUrl, true, trailerExternalRefId ?: "")
+
                 } else {
                     isUserNotVerify = true
-                    commonDialog(
-                        "",
-                        stringsHelper.stringParse(
-                            stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(),
-                            getString(R.string.popup_user_not_verify)
-                        ),
-                        stringsHelper.stringParse(
-                            stringsHelper.instance()?.data?.config?.popup_verify.toString(),
-                            getString(R.string.popup_verify)
-                        )
-                    )
+                    commonDialog("", stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_user_not_verify.toString(), getString(R.string.popup_user_not_verify)), stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_verify.toString(), getString(R.string.popup_verify)))
                 }
             } else {
                 ActivityLauncher.getInstance()
                     .loginActivity(this@DetailActivity, ActivityLogin::class.java)
-            }
+            }*/
         }
         binding!!.metaDetails.playButton.setOnClickListener {
             if (isLoggedIn) {

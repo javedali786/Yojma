@@ -889,14 +889,15 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         token = preference!!.appPrefAccessToken
         viewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         binding!!.metaDetails.watchTrailer.setOnClickListener {
-            if (isLoggedIn) {
+            startPlayer(
+                trailerUrl,
+                bingeWatchEnable = false,
+                isTrailer = true,
+                trailerExternalRefId
+            )
+           /* if (isLoggedIn) {
                 if (isUserVerified.equals("true", ignoreCase = true)) {
-                    startPlayer(
-                        trailerUrl,
-                        bingeWatchEnable = false,
-                        isTrailer = true,
-                        trailerExternalRefId
-                    )
+
                 } else {
                     isUserNotVerify = true
                     commonDialog(
@@ -914,7 +915,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             } else {
                 ActivityLauncher.getInstance()
                     .loginActivity(this@SeriesDetailActivity, ActivityLogin::class.java)
-            }
+            }*/
         }
         try {
             binding!!.metaDetails.playButton.setOnClickListener {
