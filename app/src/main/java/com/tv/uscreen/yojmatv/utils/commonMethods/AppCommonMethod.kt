@@ -1043,10 +1043,10 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             if (null != playback_url && !playback_url.isEmpty()) {
                 if (isIntentFromLive) {
                     ActivityLauncher.getInstance()
-                        .launchPlayerActitivity(context as Activity, PlayerActivity::class.java, playback_url, false, null, id, tittle, assetType, isTrailer, true, posterUrl, AppConstants.home,externalRefId,"","")
+                        .launchPlayerActitivity(context as Activity, PlayerActivity::class.java, playback_url, false, null, id,"", tittle, assetType, isTrailer, true, posterUrl, AppConstants.home,externalRefId,"","","")
                 } else {
                     ActivityLauncher.getInstance()
-                        .launchPlayerActitivity(context as Activity, PlayerActivity::class.java, playback_url, false, null, id, tittle, assetType, isTrailer, false, posterUrl, AppConstants.home,externalRefId,"","")
+                        .launchPlayerActitivity(context as Activity, PlayerActivity::class.java, playback_url, false, null, id,"", tittle, assetType, isTrailer, false, posterUrl, AppConstants.home,externalRefId,"","","")
                 }
             } else {
                 createShowDialog("", context.getString(R.string.something_went_wrong), context.getString(R.string.countinue), context)

@@ -45,6 +45,10 @@ import com.jwplayer.pub.api.media.audio.AudioTrack
 import com.jwplayer.pub.api.media.captions.Caption
 import com.jwplayer.pub.api.media.playlists.PlaylistItem
 import com.jwplayer.pub.view.JWPlayerView
+import com.npaw.youbora.lib6.jwplayer.JWPlayerAdapter
+import com.npaw.youbora.lib6.jwplayer.JWPlayerAdsAdapter
+import com.npaw.youbora.lib6.plugin.Options
+import com.npaw.youbora.lib6.plugin.Plugin
 import com.tv.uscreen.yojmatv.BuildConfig
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.SDKConfig
@@ -107,6 +111,16 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var isLive: Boolean? = false
     private var isBookMarkUpdated: Boolean? = false
     private var bookmarkPosition = 0.0
+    private var plugin : Plugin? = null
+    private var userId: String? = ""
+    private var contentId: String? = null
+    private var genre: String? = ""
+    private var seriesTittle: String? = ""
+
+
+
+
+
 
 
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {
@@ -348,6 +362,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        userId = KsPreferenceKeys.getInstance().appPrefUserId
         val bundle = arguments
         if (bundle != null) {
             playbackUrl = bundle.getString("playBackUrl")
@@ -360,6 +375,11 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             posterUrl = bundle.getString("posterUrl")
             contentType = bundle.getString("contentType")
             screenName = bundle.getString("screenName")
+            seriesTittle = bundle.getString("seriesTittle")
+            genre = bundle.getString("tag")
+            contentId = episodeId.toString()
+
+
             bundle.getString("skipIntroStartTime")?.let {
                 skipIntroStartTime = it
             }
@@ -403,6 +423,50 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         initializaPlayer()
         mPlayer?.isCaptionsRendering = true
     }
+
+    fun initializePlugin(context: Activity,userId:String?,tittle:String?,isLive:Boolean?,seriesTittle:String?,contentId:String?,contentType:String?,genre:String?) {
+        plugin =null
+        val options = Options()
+        options.accountCode = AppConstants.YOUBORA_ACCOUNT_CODE
+
+        options.username = userId
+        options.contentTitle = tittle
+        //  options.contentDuration = contentDurationInLong
+        options.contentIsLive = isLive
+        options.contentTvShow = seriesTittle
+        options.contentSeason = seriesTittle
+        options.contentEpisodeTitle = tittle
+        options.contentChannel = tittle
+        options.contentId = contentId
+        options.contentType = contentType
+        options.contentGenre= genre
+        options.appName = "Yojma TV"
+        options.appReleaseVersion = BuildConfig.VERSION_NAME
+        options.contentCustomDimension8= "Yojma TV"
+
+        if (isLive == true) {
+            options.contentChannel = tittle
+        } else {
+            options.contentChannel = ""
+        }
+
+        plugin = Plugin(options, context as Context)
+        plugin?.activity = context // Activity where the player is
+        plugin?.fireInit()
+        android.util.Log.w("FirebasePerformance","InitCalled")
+        /*  plugin?.adapter = JWPlayerAdapter(mPlayer)
+          plugin?.adsAdapter = JWPlayerAdsAdapter(mPlayer)*/
+
+    }
+    private fun setJwPlayerAdapter(mPlayer: JWPlayer?){
+        plugin?.adapter = JWPlayerAdapter(mPlayer)
+        plugin?.adsAdapter = JWPlayerAdsAdapter(mPlayer)
+    }
+    private fun stopPlugin(){
+        plugin?.fireStop()
+        plugin?.removeAdapter()
+    }
+
 
     private fun callBookMarkApi() {
         if (isTrailer == true && isLive == true) {
@@ -480,6 +544,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                 .uiConfig(hideJwControlUiConfig)
                 .build()
             mPlayer?.setup(config)
+            setJwPlayerAdapter(mPlayer)
             startBookmarking()
             tittle?.let { viewBinding.seriesDetailAllEpisodeTxtColors.setTittle(it) }
             viewBinding.seriesDetailAllEpisodeTxtColors.addHideHandler()
@@ -648,6 +713,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
                             //currentPlayingIndex = i + 1
                             mPlayer?.stop()
+                            stopPlugin()
                             viewBinding.seriesDetailAllEpisodeTxtColors.hidePlayerControls()
                             // removeListener()
                             sku = nextEpisodeItem?.sku.toString()
@@ -704,6 +770,8 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                 if (isUserVerified.equals("true", ignoreCase = true)) {
                     this.playbackUrl = SDKConfig.getInstance().playbacK_URL + RefId + ".m3u8"
                     // startPlayer(playback_url)
+                    activity?.let { initializePlugin(it,userId,tittle,isLive,seriesTittle,contentId,contentType,genre) }
+
                     externalRefId = RefId
                     initializaPlayer()
                 } else {
@@ -725,6 +793,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                                 this.playbackUrl =
                                     SDKConfig.getInstance().playbacK_URL + it.data.externalRefId + ".m3u8"
                                 externalRefId = it.data.externalRefId
+                                activity?.let { initializePlugin(it,userId,tittle,isLive,seriesTittle,contentId,contentType,genre)}
                                 initializaPlayer()
                             } else {
                                 showDialog(

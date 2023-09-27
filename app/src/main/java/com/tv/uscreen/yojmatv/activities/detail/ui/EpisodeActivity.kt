@@ -357,6 +357,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
             bingeWatchEnable,
             seasonEpisodesList,
             currentEpisodeId,
+            "",
             videoDetails!!.title,
             videoDetails!!.assetType,
             isTrailer,
@@ -365,7 +366,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
             AppConstants.EPISODEACTIVITY,
             externalRefId,
             videoDetails?.skipintro_startTime ?: "",
-            videoDetails?.skipintro_endTime ?: ""
+            videoDetails?.skipintro_endTime ?: "",keyword
         )
     }
 

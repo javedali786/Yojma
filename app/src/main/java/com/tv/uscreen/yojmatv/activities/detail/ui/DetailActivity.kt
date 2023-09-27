@@ -643,12 +643,13 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
             false,
             null,
             videoDetails!!.id,
+            "",
             videoDetails!!.title,
             videoDetails!!.assetType,
             isTrailer,
             false,
             videoDetails!!.posterURL,
-            AppConstants.DETAILACTIVITY,externalRefId,videoDetails?.skipintro_startTime?:"",videoDetails?.skipintro_endTime?:""
+            AppConstants.DETAILACTIVITY,externalRefId,videoDetails?.skipintro_startTime?:"",videoDetails?.skipintro_endTime?:"",keyword
         )
     }
 

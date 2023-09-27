@@ -211,6 +211,9 @@ dependencies {
     implementation(moengage.inapp)
     implementation("com.moengage:moe-android-sdk:12.5.06")
     implementation("androidx.core:core:1.9.0")
+    //Youbora
+    implementation 'com.nicepeopleatwork:jwplayer-adapter:6.7.5'
+
 //    implementation("androidx.appcompat:appcompat:1.6.0")
 //    implementation("androidx.lifecycle:lifecycle-process:2.4.0")
 
