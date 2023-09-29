@@ -16,6 +16,8 @@
     <string name="signup_create_pwd">Crea una contraseña de 8 dígitos </string>
     <string name="signup_confirm_pwd">Confirmar Contraseña</string>
     <string name="signup_signup">Crear Cuenta</string>
+    <string name="on_enveu">en Yojma Tv!.Inicia tu prueba gratis hoy.</string>
+    <string name="checkout">Disfruta de</string>
     <string name="popup_thanks_for_putting_request">¡Solicitud recibida!  Buscáremos tu correo y, si lo encontramos, te enviaremos un correo para que puedas restablecer tu contraseña.</string>
     <string name="signup_or_signup_with">o Regístrate con</string>
     <string name="login_or_sign_in_with">o Iniciar sesión con</string>

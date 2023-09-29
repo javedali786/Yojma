@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.icu.text.Transliterator.Position
 import android.net.Uri
 import android.os.Build
 import android.os.SystemClock
@@ -162,6 +163,11 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         private var isUserNotVerify = false
         private var isUserNotEntitle = false
         private var resEntitle: ResponseEntitle? = null
+        private var lanName: String? = null
+        private var langPos = 0
+
+
+
 
         @JvmStatic
         fun convertDpToPixel(dp: Int): Int {
@@ -271,6 +277,12 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 //String imageURL = imgUrl + AppConstants.WIDTH + (int) activity.getResources().getDimension(R.dimen.width1) + AppConstants.HEIGHT + (int) activity.getResources().getDimension(R.dimen.height1) + AppConstants.QUALITY_IMAGE;
                 //  Log.e("FinalUrl-->>in", imageURL);
                 // Log.e("ImageUrl-->>in", imgUrl);
+                val preference: KsPreferenceKeys? = KsPreferenceKeys.getInstance()
+                if (preference?.appLanguage.equals(activity.resources.getString(R.string.language_spanish_title), ignoreCase = true)) {
+                    updateLanguage("es", activity)
+                } else if (preference?.appLanguage.equals(activity.resources.getString(R.string.language_english_title), ignoreCase = true)) {
+                    updateLanguage("en", activity)
+                }
                 val uri = createURI(title, assetId, assetType, imgUrl, activity)
                 val shortLinkTask: Task<ShortDynamicLink> = FirebaseDynamicLinks.getInstance().createDynamicLink() // .setDomainUriPrefix("https://link.panteao.com")
                     .setLink(Uri.parse(uri))
@@ -305,11 +317,11 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                         sharingIntent.type = "text/plain"
                                         sharingIntent.putExtra(
                                             Intent.EXTRA_TEXT,
-                                            activity.resources.getString(R.string.checkout) + " " + title + " " + activity.getResources()
+                                            activity.resources.getString(R.string.checkout) + " " + title + " " + activity.resources
                                                 .getString(R.string.on_enveu) + "\n" + dynamicLinkUri.toString()
                                         )
                                         // sharingIntent.putExtra(Intent.EXTRA_TEXT, activity.getResources().getString(R.string.checkout) + " " + asset.getName() + " " + activity.getResources().getString(R.string.on_Dialog) + "\n" + "https://stagingsott.page.link/?link="+dynamicLinkUri.toString()+"&apn=com.astro.stagingsott");
-                                        activity.startActivity(Intent.createChooser(sharingIntent, activity.getResources().getString(R.string.detail_page_share)))
+                                        activity.startActivity(Intent.createChooser(sharingIntent, activity.resources.getString(R.string.detail_page_share)))
                                     }
                                 })
                             } catch (e: Exception) {
