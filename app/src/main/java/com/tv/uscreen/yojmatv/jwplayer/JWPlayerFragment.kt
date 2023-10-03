@@ -21,10 +21,8 @@ import com.enveu.player.model.TrackItem
 import com.enveu.player.utils.Network
 import com.enveu.player.utils.TrackOptions
 import com.example.PlayerListener
-import com.google.android.exoplayer2.util.Log
 import com.google.android.exoplayer2.util.Util
 import com.google.android.gms.cast.framework.CastContext
-import com.google.gson.Gson
 import com.jwplayer.pub.api.JWPlayer
 import com.jwplayer.pub.api.PlayerState
 import com.jwplayer.pub.api.UiGroup
@@ -63,10 +61,6 @@ import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.URL
-import java.net.URLConnection
 
 class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.DialogListener {
     private var mPlayer: JWPlayer? = null
@@ -116,7 +110,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var contentId: String? = null
     private var genre: String? = ""
     private var seriesTittle: String? = ""
-
+    private var timer = 30
 
 
 
@@ -362,6 +356,8 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        timer = SDKConfig.getInstance().timer
+        timer *= 1000
         userId = KsPreferenceKeys.getInstance().appPrefUserId
         val bundle = arguments
         if (bundle != null) {
@@ -616,14 +612,14 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     override fun onCaptionsList(captionsListEvent: CaptionsListEvent?) {
         if (captionsListEvent != null) {
             captionList = ArrayList()
-            captionList?.addAll(captionsListEvent?.captions)
+            captionList?.addAll(captionsListEvent.captions)
         }
     }
 
     override fun onAudioTracks(audioTrackEvent: AudioTracksEvent?) {
         if (audioTrackEvent != null) {
             audioList = ArrayList()
-            audioList?.addAll(audioTrackEvent?.audioTracks)
+            audioList?.addAll(audioTrackEvent.audioTracks)
         }
     }
 
@@ -669,7 +665,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                         }
                         Logger.d("PercentagePlayed $percentagePlayed")
                         Logger.d("PercentagePlayed", "Start")
-                        handler?.postDelayed(this, 10000)
+                        handler?.postDelayed(this, timer.toLong())
                     } else if (percentagePlayed > 95) {
                         if (mListener != null) {
                             mListener = mActivity as OnPlayerInteractionListener
@@ -678,12 +674,12 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                         Logger.d("PercentagePlayed $percentagePlayed")
                         Logger.d("PercentagePlayed", "Finish")
                     } else {
-                        handler?.postDelayed(this, 10000)
+                        handler?.postDelayed(this, timer.toLong())
                     }
                 }
             }
         }
-        handler!!.postDelayed(runnable as Runnable, 10000)
+        handler!!.postDelayed(runnable as Runnable, timer.toLong())
     }
 
 

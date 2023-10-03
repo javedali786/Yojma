@@ -97,6 +97,16 @@ public class AdapterManageSubscription extends RecyclerView.Adapter<AdapterManag
             Logger.e(e);
         }
 
+        try {
+            if (model.getCustomData().getOrderIdentifier()==null) {
+                holder.binding.llCancellationDate.setVisibility(View.VISIBLE);
+                String date = AppCommonMethod.expiryDate(model.getExpiryDate());
+                holder.binding.cancellationDate.setText(date);
+            }
+        } catch (Exception e) {
+
+        }
+
         if (model.getPaymentProvider() != null && !model.getPaymentProvider().equalsIgnoreCase("") && !model.getPaymentProvider().equalsIgnoreCase("null") ) {
             switch (model.getPaymentProvider()){
                 case AppConstants.APPLE:

@@ -111,7 +111,6 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
                         if (response.code() == 404) {
                             JsonObject jsonObject = new JsonObject();
                             jsonObject.addProperty(AppConstants.API_RESPONSE_CODE, response.code());
-
                         }
                         if (response.code() == 403) {
                             JsonObject jsonObject = new JsonObject();
