@@ -4,7 +4,7 @@
     <string name="no_connection">No internet connection found.</string>
     <string name="check_connection_text">Check your connection.</string>
     <string name="change_password">Change Password</string>
-    <string name="checkout">Checkout</string>
+    <string name="checkout">Disfruta de</string>
     <string name="by_email">By Email</string>
     <string name="by_line">By Line</string>
     <string name="cancelation_date">plan Expires: </string>
@@ -21,7 +21,7 @@
     <string name="redeem_code_expired">Redeem code is expired</string>
     <string name="please_try">Please try again or contact support</string>
     <string name="cannot_find_any_subs">cannot find any subscription or subscription cannot contain price</string>
-    <string name="on_enveu">on Yojma Tv!</string>
+    <string name="on_enveu">en Yojma Tv!.Inicia tu prueba gratis hoy.</string>
     <string name="more_term_condition">Terms &amp; Conditions</string>
     <string name="full_name">Name</string>
     <string name="display_name">Enter your display Name</string>

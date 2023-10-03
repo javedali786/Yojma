@@ -233,14 +233,15 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
     private var resEntitle: ResponseEntitle? = null
     private fun setClicks() {
         binding!!.metaDetails.watchTrailer.setOnClickListener {
-            if (isLoggedIn) {
+            startPlayer(
+                trailerUrl,
+                bingeWatchEnable = false,
+                isTrailer = true,
+                trailerExternalRefId ?: ""
+            )
+           /* if (isLoggedIn) {
                 if (isUserVerified.equals("true", ignoreCase = true)) {
-                    startPlayer(
-                        trailerUrl,
-                        bingeWatchEnable = false,
-                        isTrailer = true,
-                        trailerExternalRefId ?: ""
-                    )
+
                 } else {
                     isUserNotVerify = true
                     commonDialog(
@@ -258,7 +259,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
             } else {
                 ActivityLauncher.getInstance()
                     .loginActivity(this@EpisodeActivity, ActivityLogin::class.java)
-            }
+            }*/
         }
         binding!!.metaDetails.playButton.setOnClickListener {
             currentEpisodeId = videoDetails!!.id
@@ -356,6 +357,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
             bingeWatchEnable,
             seasonEpisodesList,
             currentEpisodeId,
+            "",
             videoDetails!!.title,
             videoDetails!!.assetType,
             isTrailer,
@@ -364,7 +366,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
             AppConstants.EPISODEACTIVITY,
             externalRefId,
             videoDetails?.skipintro_startTime ?: "",
-            videoDetails?.skipintro_endTime ?: ""
+            videoDetails?.skipintro_endTime ?: "",keyword
         )
     }
 

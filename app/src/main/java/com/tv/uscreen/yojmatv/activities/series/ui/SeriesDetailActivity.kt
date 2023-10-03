@@ -80,6 +80,8 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
     private var isGeoBlocking = false
     private var episodeTabAdapter: EpisodeTabAdapter? = null
     private var newIntentCall = false
+    private var seriesTittle = ""
+
 
     @JvmField
     var isSeasonData = false
@@ -844,6 +846,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             binding!!.responseApi = seriesResponse.description.trim { it <= ' ' }
             Logger.d("SeriesResponse: $seriesResponse")
             if (seriesResponse.title != null) {
+                seriesTittle = seriesResponse.title
                 binding!!.metaDetails.tvTitle.text = seriesResponse.title
             } else {
                 binding!!.metaDetails.tvTitle.visibility = View.GONE
@@ -889,14 +892,15 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         token = preference!!.appPrefAccessToken
         viewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         binding!!.metaDetails.watchTrailer.setOnClickListener {
-            if (isLoggedIn) {
+            startPlayer(
+                trailerUrl,
+                bingeWatchEnable = false,
+                isTrailer = true,
+                trailerExternalRefId
+            )
+           /* if (isLoggedIn) {
                 if (isUserVerified.equals("true", ignoreCase = true)) {
-                    startPlayer(
-                        trailerUrl,
-                        bingeWatchEnable = false,
-                        isTrailer = true,
-                        trailerExternalRefId
-                    )
+
                 } else {
                     isUserNotVerify = true
                     commonDialog(
@@ -914,7 +918,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             } else {
                 ActivityLauncher.getInstance()
                     .loginActivity(this@SeriesDetailActivity, ActivityLogin::class.java)
-            }
+            }*/
         }
         try {
             binding!!.metaDetails.playButton.setOnClickListener {
@@ -1059,12 +1063,13 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             bingeWatchEnable,
             seasonEpisodesList,
             currentEpisodeId,
+            seriesTittle,
             tittle,
             assetType,
             isTrailer,
             false,
             posterUrl,
-            AppConstants.SERIESDEATILACTIVITY, externalRefId, skipIntroStartTime, skipIntroEndTime
+            AppConstants.SERIESDEATILACTIVITY, externalRefId, skipIntroStartTime, skipIntroEndTime,keyword
         )
     }
 

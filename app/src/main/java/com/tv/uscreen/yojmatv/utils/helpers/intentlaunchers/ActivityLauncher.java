@@ -134,12 +134,13 @@ public final class ActivityLauncher {
         source.startActivity(intent);
     }
 
-    public void launchPlayerActitivity(Activity source, Class<PlayerActivity> destination, String playbackurl, boolean IsBingeWatchEnable, List<EnveuVideoItemBean> seasonEpisodesList, int currentEpisodeId, String tittle, String contentType, Boolean isTrailer, Boolean isLive, String posterUrl, String screenName, String externalRefId, String skipIntroStartTime, String skipIntroEndTime) {
+    public void launchPlayerActitivity(Activity source, Class<PlayerActivity> destination, String playbackurl, boolean IsBingeWatchEnable, List<EnveuVideoItemBean> seasonEpisodesList, int currentEpisodeId,String seriesTittle, String tittle, String contentType, Boolean isTrailer, Boolean isLive, String posterUrl, String screenName, String externalRefId, String skipIntroStartTime, String skipIntroEndTime,String tag) {
         Intent intent = new Intent(source, destination);
         intent.putExtra("activity", String.valueOf(source));
         intent.putExtra("playBackUrl", playbackurl);
         intent.putExtra("binge_watch", IsBingeWatchEnable);
         intent.putExtra("episodeId", currentEpisodeId);
+        intent.putExtra("seriesTittle",seriesTittle);
         intent.putExtra("tittle", tittle);
         intent.putExtra("contentType", contentType);
         intent.putExtra("episodeList", (Serializable) seasonEpisodesList);
@@ -150,6 +151,8 @@ public final class ActivityLauncher {
         intent.putExtra("externalRefId", externalRefId);
         intent.putExtra("skipIntroStartTime", skipIntroStartTime);
         intent.putExtra("skipIntroEndTime", skipIntroEndTime);
+        intent.putExtra("tag",tag);
+
         source.startActivity(intent);
     }
 

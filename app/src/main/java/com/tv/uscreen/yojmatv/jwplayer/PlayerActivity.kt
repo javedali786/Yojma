@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.google.ads.interactivemedia.v3.internal.it
 
 import com.tv.uscreen.yojmatv.Bookmarking.BookmarkingViewModel
 import com.tv.uscreen.yojmatv.R
@@ -28,6 +29,7 @@ class PlayerActivity : AppCompatActivity(), Serializable,
     private var isLogin: String? = null
     private var token: String? = null
     private var tittle: String? = null
+    private var seriesTittle: String? = null
     private var posterUrl: String? = null
     private var externalRefid: String? = null
     private var contentType: String? = null
@@ -38,6 +40,8 @@ class PlayerActivity : AppCompatActivity(), Serializable,
     private var isTrailer: Boolean? = false
     private var isLive: Boolean? = false
     private var activity: String? = null
+    private var tag: String? = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
@@ -55,11 +59,14 @@ class PlayerActivity : AppCompatActivity(), Serializable,
             isTrailer = bundle.getBoolean("isTrailer")
             isLive = bundle.getBoolean("isLive")
             tittle = bundle.getString("tittle")
+            seriesTittle = bundle.getString("seriesTittle")
             posterUrl = bundle.getString("posterUrl")
             contentType = bundle.getString("contentType")
             screenName = bundle.getString("screenName")
             externalRefid = bundle.getString("externalRefId")
             activity = bundle.getString("activity")
+            tag = bundle.getString("tag")
+
             if (activity?.contains("HomeSliderActivity") == true) {
                 screenName = "HomeSliderActivity"
             }
@@ -89,6 +96,9 @@ class PlayerActivity : AppCompatActivity(), Serializable,
         screenName?.let { args.putString("screenName", it) }
         activity?.let { args.putString("activity", it) }
         episodeId?.let { args.putInt("episodeId", it) }
+        episodeId?.let { args.putInt("episodeId", it) }
+        seriesTittle?.let { args.putString("seriesTittle", it) }
+        tag?.let { args.putString("tag", it) }
         externalRefid?.let { args.putString("externalRefId", it) }
         bundle?.getString("skipIntroStartTime")?.let { args.putString("skipIntroStartTime", it) }
         bundle?.getString("skipIntroEndTime")?.let { args.putString("skipIntroEndTime", it) }
@@ -98,6 +108,8 @@ class PlayerActivity : AppCompatActivity(), Serializable,
 
         isBingeWatchEnable?.let { args.putBoolean("binge_watch", it) }
         myFragment = JWPlayerFragment()
+        val userId = KsPreferenceKeys.getInstance().appPrefUserId
+        myFragment?.initializePlugin(this,userId,tittle,isLive,seriesTittle,episodeId.toString(),contentType,tag)
         myFragment!!.arguments = args
         supportFragmentManager
             .beginTransaction()
