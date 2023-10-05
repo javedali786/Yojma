@@ -97,6 +97,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var mCastContext: CastContext? = null
     var total: Int? = 0
     private var isInitialised = false
+    private var isSeries = false
     private var isNetworkConnected = true
     private var lastBookmarkTime = 0L
     private val progress = Progress()
@@ -542,6 +543,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             viewBinding.seriesDetailAllEpisodeTxtColors.addHideHandler()
 
             addListener()
+            isSeries = isBingeWatchEnable == true && currentPlayingIndex!! < seasonEpisodesList?.size!! - 1
         }
         callPlayDetails()
     }
@@ -635,19 +637,19 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         }
         contentDuration = mPlayer?.duration.toString()
         var durationPosition = mPlayer?.position!!
-
-        if(durationPosition > 1 && totalDuration!! > 1) {
-            val minusDuration = totalDuration?.minus(timer)
-            if (minusDuration!! > 1) {
-                if (durationPosition >= minusDuration) {
-                    viewBinding.seriesDetailAllEpisodeTxtColors.shouldShowNext(true)
-                } else {
-                    viewBinding.seriesDetailAllEpisodeTxtColors.shouldShowNext(false)
+        if(isSeries) {
+            if(durationPosition > 1 && totalDuration!! > 1) {
+                val minusDuration = totalDuration?.minus(timer)
+                if (minusDuration!! > 1) {
+                    if (durationPosition >= minusDuration) {
+                        viewBinding.seriesDetailAllEpisodeTxtColors.shouldShowNext(true)
+                    } else {
+                        viewBinding.seriesDetailAllEpisodeTxtColors.shouldShowNext(false)
+                    }
                 }
+
             }
-
         }
-
 
         mPlayer?.duration?.let { viewBinding.seriesDetailAllEpisodeTxtColors.updateDuration(it) }
         mPlayer?.position?.let { viewBinding.seriesDetailAllEpisodeTxtColors.updateProgress(it) }
