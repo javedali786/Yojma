@@ -13,6 +13,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
@@ -310,7 +311,7 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
     private fun parseColor() {
         val textColorStates = ColorStateList(
             arrayOf(intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)),
-            intArrayOf(AppColors.pwdSelectedEyeColor(), AppColors.pwdUnselectedEyeColor(),)
+            intArrayOf(AppColors.pwdSelectedEyeColor(), AppColors.pwdUnselectedEyeColor())
         )
         binding?.confirmPasswordEye?.buttonDrawable?.setTintList(textColorStates)
         binding?.name?.background = strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor(), 10f)
@@ -338,14 +339,15 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
             if (it != null) {
                 dismissLoading(binding?.progressBar)
                 Log.d("LoginResponse", Gson().toJson(it))
+
                 try {
+
                     if (it.responseCode === 2000) {
                         val gson = Gson()
                         val loginData: Data = it.data
                         modelLogin = it.data
                         val stringJson = gson.toJson(loginData)
-                        saveUserDetails(stringJson, true)
-                        clearEditView()
+                         callLoginDevice(stringJson)
                     } else if (it.debugMessage != null) {
                         commonDialog(
                             stringsHelper.stringParse(
@@ -465,23 +467,6 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
         if (fbLoginData.name != null) {
             preference?.appPrefUserName = fbLoginData.name.toString()
         }
-        try {
-            MoEUserTracker.setUserProperties(
-                this,
-                fbLoginData.id,
-                fbLoginData.name,
-                fbLoginData.email,
-                fbLoginData.phoneNumber,
-                fbLoginData.dateOfBirth
-            )
-        } catch (e: NullPointerException) {
-
-        }
-
-        val properties = Properties()
-        properties.addAttribute(AppConstants.LOGIN, AppConstants.LOGIN)
-        MoEHelper.getInstance(applicationContext)
-            .trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
 
         if (fbLoginData.isVerified) {
             ActivityLauncher.getInstance()
@@ -657,6 +642,45 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
         val commonDialogFragment = CommonDialogFragment.newInstance(title, description, actionBtn)
         commonDialogFragment.setEditDialogCallBack(this)
         commonDialogFragment.show(fm, AppConstants.MESSAGE)
+    }
+
+    private fun callLoginDevice(stringJson:String){
+        viewModel!!.getLoginDevice(KsPreferenceKeys.getInstance().appPrefAccessToken)?.observe(this){
+            if(it.data!=null && it !=null) {
+                if(it.responseCode == 2000) {
+                    clearEditView()
+                    saveUserDetails(stringJson, true)
+                } else if (it.debugMessage != null) {
+                    commonDialog(
+                        stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                            getString(R.string.popup_error)
+                        ), stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_username_pwd_does_not_match.toString(),
+                            getString(R.string.popup_username_pwd_does_not_match)
+                        ), stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                            getString(R.string.popup_continue)
+                        )
+                    )
+                } else {
+                    commonDialog(
+                        stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                            getString(R.string.popup_error)
+                        ), stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                            getString(R.string.something_went_wrong)
+                        ), stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                            getString(R.string.popup_continue)
+                        )
+                    )
+                }
+            }
+
+
+        }
     }
 
     override fun onActionBtnClicked() {

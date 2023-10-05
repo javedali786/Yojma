@@ -31,6 +31,7 @@ import com.tv.uscreen.yojmatv.OttApplication;
 
 import com.tv.uscreen.yojmatv.R;
 import com.tv.uscreen.yojmatv.activities.usermanagment.model.OtpResponse;
+import com.tv.uscreen.yojmatv.beanModel.LoginDeviceModel.LoginDeviceModel;
 import com.tv.uscreen.yojmatv.beanModel.connectFb.ResponseConnectFb;
 import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData;
 import com.tv.uscreen.yojmatv.beanModel.forgotPassword.CommonResponse;
@@ -157,6 +158,48 @@ public class RegistrationLoginRepository {
         });
         return responseApi;
     }
+    public LiveData<LoginDeviceModel> getLoginDevice(String token) {
+
+        final MutableLiveData<LoginDeviceModel> responseApi;
+        responseApi = new MutableLiveData<>();
+
+        try {
+
+            Call<LoginDeviceModel> result =
+                    RequestConfig.getUserInteration(token).create(ApiInterface.class)
+                            .getLoginDeviceResponse(true);
+
+            result.enqueue(new Callback<LoginDeviceModel>() {
+                @Override
+                public void onResponse(Call<LoginDeviceModel> call, Response<LoginDeviceModel> response) {
+
+                    if  (response.body() != null){
+                    Gson gson = new Gson();
+                    String tmp = gson.toJson(response.body());
+                    LoginDeviceModel loginItemBean = gson.fromJson(tmp, LoginDeviceModel.class);
+                    responseApi.postValue(loginItemBean);
+                    Log.d("jay", "onSuccessful: ");
+                    }
+                    else {
+                        responseApi.postValue(null);
+
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LoginDeviceModel> call, Throwable t) {
+                    Log.d("jay", "onFailure: ");
+                    responseApi.postValue(null);
+                }
+            });
+
+        } catch (Exception exception) {
+        }
+
+        return responseApi;
+    }
+
 
     public LiveData<SignupResponseAccessToken> getSignupAPIResponse(String name, String email, String dob,String pwd, boolean isNotificationEnable) {
         String typeList = "";
@@ -277,7 +320,7 @@ public class RegistrationLoginRepository {
                 // SignUpResponseModel cl = response.body();
 
                 if (response.code() == 200) {
-                    ResponseRegisteredSignup temp = response.body();
+            ResponseRegisteredSignup temp = response.body();
                     temp.setStatus(true);
                     temp.setResponseCode(response.code());
                     responseApi.postValue(response.body());

@@ -495,6 +495,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
                       KsPreferenceKeys.getInstance().appPrefAccessToken=it.accessToken
                       val signUpData: Data = it.responseModel.data
                       val stringJson = gson.toJson(signUpData)
+                      callSignupDevice(stringJson)
                       saveUserDetails(stringJson, true)
                      /* try {
                           setUserProperties(this,signUpData.id,signUpData.name,signUpData.email,signUpData.phoneNumber,signUpData.dateOfBirth)
@@ -816,6 +817,59 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
         commonDialogFragment.setEditDialogCallBack(this)
         commonDialogFragment.show(fm, AppConstants.MESSAGE)
     }
+
+    private fun callSignupDevice(stringJson:String){
+        viewModel!!.getLoginDevice(KsPreferenceKeys.getInstance().appPrefAccessToken)?.observe(this){
+            if(it.data!=null && it !=null) {
+                if(it.responseCode == 2000) {
+                    clearEditView()
+                    saveUserDetails(stringJson, true)
+                } else if (it.debugMessage != null) {
+                    commonDialog(
+                        stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                            getString(R.string.popup_error)
+                        ), stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_username_pwd_does_not_match.toString(),
+                            getString(R.string.popup_username_pwd_does_not_match)
+                        ), stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                            getString(R.string.popup_continue)
+                        )
+                    )
+                } else {
+                    commonDialog(
+                        stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                            getString(R.string.popup_error)
+                        ), stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                            getString(R.string.something_went_wrong)
+                        ), stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                            getString(R.string.popup_continue)
+                        )
+                    )
+                }
+            }  else {
+                commonDialog(
+                    stringsHelper.stringParse(
+                        stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                        getString(R.string.popup_error)
+                    ), stringsHelper.stringParse(
+                        stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                        getString(R.string.something_went_wrong)
+                    ), stringsHelper.stringParse(
+                        stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                        getString(R.string.popup_continue)
+                    )
+                )
+            }
+
+
+        }
+    }
+
 
     override fun onActionBtnClicked()
     {
