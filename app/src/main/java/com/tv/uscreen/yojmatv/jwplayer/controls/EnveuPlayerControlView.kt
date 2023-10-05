@@ -275,8 +275,6 @@ class EnveuPlayerControlView : FrameLayout {
         binding.tvEpLiveTag.visibility = visibility
 
         if (visibility == View.VISIBLE) {
-            binding.tvNextEpisode.visibility =
-                if (isLandscape && showNext) View.VISIBLE else View.GONE
             binding.tvMoreEpisodes.visibility =
                 if (isLandscape && showMore) View.VISIBLE else View.GONE
             binding.tvPreviousEpisode.visibility =
@@ -304,9 +302,9 @@ class EnveuPlayerControlView : FrameLayout {
         binding.tvEpLiveTag.visibility = View.GONE
         binding.rvQuality.visibility = View.GONE
 
+
         if (visibility == View.VISIBLE) {
-            binding.tvNextEpisode.visibility =
-                if (showNext) View.VISIBLE else View.GONE
+            binding.tvNextEpisode.visibility = View.GONE
             binding.tvMoreEpisodes.visibility =
                 if (isLandscape && showMore) View.VISIBLE else View.GONE
             binding.tvPreviousEpisode.visibility =
@@ -315,6 +313,12 @@ class EnveuPlayerControlView : FrameLayout {
             binding.tvNextEpisode.visibility = View.GONE
             binding.tvMoreEpisodes.visibility = View.GONE
             binding.tvPreviousEpisode.visibility = View.GONE
+        }
+
+        if (showNext) {
+            binding.tvNextEpisode.visibility = View.VISIBLE
+        } else {
+            binding.tvNextEpisode.visibility = View.GONE
         }
     }
 

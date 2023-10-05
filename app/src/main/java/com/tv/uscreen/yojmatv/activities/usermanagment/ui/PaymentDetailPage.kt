@@ -211,10 +211,15 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
 
 
     private fun commonDialog(title: String, description: String, actionBtn: String) {
-        val fm: FragmentManager = supportFragmentManager
-        val commonDialogFragment = CommonDialogFragment.newInstance(title, description, actionBtn)
-        commonDialogFragment.setEditDialogCallBack(this)
-        commonDialogFragment.show(fm, AppConstants.MESSAGE)
+        try {
+            val fm: FragmentManager = supportFragmentManager
+            val commonDialogFragment = CommonDialogFragment.newInstance(title, description, actionBtn)
+            commonDialogFragment.setEditDialogCallBack(this)
+            commonDialogFragment.show(fm, AppConstants.MESSAGE)
+        }catch (e :Exception){
+            e.printStackTrace()
+        }
+
     }
 
     override fun onActionBtnClicked() {

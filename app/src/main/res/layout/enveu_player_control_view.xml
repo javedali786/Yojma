@@ -278,6 +278,7 @@
             android:contentDescription="@string/ep_cd_next_episode"
             android:drawablePadding="8dp"
             android:focusable="true"
+            android:visibility="gone"
             android:gravity="center"
             android:padding="@dimen/ep_common_padding"
             android:text="@string/ep_next_episode"
@@ -290,7 +291,7 @@
             app:layout_constraintHorizontal_bias="0.80"
             app:layout_constraintStart_toEndOf="@id/guideline_center"
             tools:background="#090909"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <ProgressBar
             android:id="@+id/pb_ep_progress"

@@ -76,6 +76,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var contentType: String? = null
     private var id: Int? = null
     private var episodeId: Int? = 0
+    var totalDuration: Double? = 0.0
     private var currentPlayingIndex: Int? = -1
     private var isBingeWatchEnable: Boolean? = false
     var videoTracks: ArrayList<TrackItem>? = ArrayList<TrackItem>()
@@ -111,10 +112,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var genre: String? = ""
     private var seriesTittle: String? = ""
     private var timer = 30
-
-
-
-
 
 
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {
@@ -357,7 +354,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         timer = SDKConfig.getInstance().timer
-        timer *= 1000
         userId = KsPreferenceKeys.getInstance().appPrefUserId
         val bundle = arguments
         if (bundle != null) {
@@ -438,7 +434,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         options.contentGenre= genre
         options.appName = "Yojma TV"
         options.appReleaseVersion = BuildConfig.VERSION_NAME
-        options.contentCustomDimension8= "Yojma TV"
+        options.contentCustomDimension8= "yojmatv"
 
         if (isLive == true) {
             options.contentChannel = tittle
@@ -546,11 +542,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             viewBinding.seriesDetailAllEpisodeTxtColors.addHideHandler()
 
             addListener()
-            if (isBingeWatchEnable == true && currentPlayingIndex!! < seasonEpisodesList?.size!! - 1) {
-                viewBinding.seriesDetailAllEpisodeTxtColors.shouldShowNext(true)
-            } else {
-                viewBinding.seriesDetailAllEpisodeTxtColors.shouldShowNext(false)
-            }
         }
         callPlayDetails()
     }
@@ -643,6 +634,21 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
         }
         contentDuration = mPlayer?.duration.toString()
+        var durationPosition = mPlayer?.position!!
+
+        if(durationPosition > 1 && totalDuration!! > 1) {
+            val minusDuration = totalDuration?.minus(timer)
+            if (minusDuration!! > 1) {
+                if (durationPosition >= minusDuration) {
+                    viewBinding.seriesDetailAllEpisodeTxtColors.shouldShowNext(true)
+                } else {
+                    viewBinding.seriesDetailAllEpisodeTxtColors.shouldShowNext(false)
+                }
+            }
+
+        }
+
+
         mPlayer?.duration?.let { viewBinding.seriesDetailAllEpisodeTxtColors.updateDuration(it) }
         mPlayer?.position?.let { viewBinding.seriesDetailAllEpisodeTxtColors.updateProgress(it) }
     }
@@ -655,9 +661,9 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         runnable = object : Runnable {
             override fun run() {
                 if (mPlayer != null) {
-                    val totalDuration: Double = mPlayer!!.duration
+                     totalDuration = mPlayer!!.duration
                     val currentPosition: Double = mPlayer!!.position
-                    val percentagePlayed = currentPosition / totalDuration * 100L
+                    val percentagePlayed = currentPosition / totalDuration!! * 100L
                     if (percentagePlayed > 1 && percentagePlayed <= 95) {
                         if (mListener != null) {
                             mListener = mActivity as OnPlayerInteractionListener
@@ -665,21 +671,22 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                         }
                         Logger.d("PercentagePlayed $percentagePlayed")
                         Logger.d("PercentagePlayed", "Start")
-                        handler?.postDelayed(this, timer.toLong())
+                        handler?.postDelayed(this, 10000)
                     } else if (percentagePlayed > 95) {
                         if (mListener != null) {
                             mListener = mActivity as OnPlayerInteractionListener
                             episodeId?.let { mListener!!.onBookmarkFinish(it) }
                         }
+
                         Logger.d("PercentagePlayed $percentagePlayed")
                         Logger.d("PercentagePlayed", "Finish")
                     } else {
-                        handler?.postDelayed(this, timer.toLong())
+                        handler?.postDelayed(this, 10000)
                     }
                 }
             }
         }
-        handler!!.postDelayed(runnable as Runnable, timer.toLong())
+        handler!!.postDelayed(runnable as Runnable, 10000)
     }
 
 
