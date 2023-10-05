@@ -72,13 +72,13 @@ public class ConfigManager {
         String name= BuildConfig.VERSION_NAME;
         int code= BuildConfig.VERSION_CODE;
 
-       /* if (code == 11) {
+        /*if (code == 10 || code == 11) {
             if (!KsPreferenceKeys.getInstance().getEncryptionUpdate()) {
                 KsPreferenceKeys.getInstance().clear();
                 KsPreferenceKeys.getInstance().setEncryptionUpdate(true);
             }
-        }*/
-
+        }
+*/
         boolean _date = verifyDmsDate(KsPreferenceKeys.getInstance().getString("DMS_Date", "mDate"));
         Logger.w("configResponse", _date + "");
         if (_date) {
