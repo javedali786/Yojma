@@ -2,6 +2,7 @@ package com.tv.uscreen.yojmatv.utils.config;
 
 import android.util.Log;
 
+import com.enveu.client.epgListing.epgResponseNew.MediaContent;
 import com.tv.uscreen.yojmatv.beanModelV3.continueWatching.DataItem;
 import com.tv.uscreen.yojmatv.beanModelV3.playListModelV2.VideosItem;
 import com.tv.uscreen.yojmatv.beanModelV3.searchV2.ItemsItem;
@@ -60,6 +61,20 @@ public class ImageLayer {
         return finalUrl;
     }
 
+
+    public String getLivePosterImageUrl(MediaContent itemsItem) {
+        String finalUrl = "";
+        if (itemsItem.getLiveContent().getImages().size() > 0) {
+            for (int i = 0; i < itemsItem.getLiveContent().getImages().size(); i++) {
+                if (itemsItem.getLiveContent().getImages().get(i).isIsDefault()) {
+                    finalUrl = itemsItem.getLiveContent().getImages().get(i).getSrc();
+                    Log.w("imageURL", finalUrl);
+                    break;
+                }
+            }
+        }
+        return finalUrl;
+    }
 
     public String getPosterImageUrl(VideosItem videoItem, String imageIdentifier) {
         String finalUrl = "";

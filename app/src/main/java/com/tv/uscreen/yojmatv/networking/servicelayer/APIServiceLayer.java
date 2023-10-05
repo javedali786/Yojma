@@ -108,7 +108,7 @@ public class APIServiceLayer {
         MutableLiveData<EnveuCommonResponse> enveuCommonResponseMutableLiveData = new MutableLiveData<>();
         languageCode = LanguageLayer.getCurrentLanguageCode();
         Gson gson = new Gson();
-        BaseCategoryServices.Companion.getInstance().getEnvPlaylistDetailsById(playListId, languageCode, pageNumber, pageSize, new EnvPlaylistResponse() {
+        BaseCategoryServices.Companion.getInstance().getEnvPlaylistDetailsById(playListId, languageCode, pageNumber, pageSize, "",new EnvPlaylistResponse() {
                     @Override
                     public void success(boolean status, @NonNull Response<com.enveu.client.playlist.beanv1_0.EnvPlaylistContents> response) {
                         if (response.isSuccessful()) {
@@ -486,7 +486,7 @@ public class APIServiceLayer {
         MutableLiveData<RailCommonData> railCommonDataMutableLiveData = new MutableLiveData<>();
         languageCode = LanguageLayer.getCurrentLanguageCode();
         Gson gson = new Gson();
-        BaseCategoryServices.Companion.getInstance().getEnvPlaylistDetailsById(playlistID, languageCode, pageNumber, pageSize, new EnvPlaylistResponse() {
+        BaseCategoryServices.Companion.getInstance().getEnvPlaylistDetailsById(playlistID, languageCode, pageNumber, pageSize, "",new EnvPlaylistResponse() {
             @Override
             public void success(boolean status, @NonNull Response<com.enveu.client.playlist.beanv1_0.EnvPlaylistContents> response) {
                 if (response.isSuccessful()) {

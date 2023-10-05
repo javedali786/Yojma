@@ -11,7 +11,6 @@ import com.enveu.client.baseCollection.baseCategoryServices.BaseCategoryServices
 import com.enveu.client.deleteAccount.DeleteAccountCallback;
 import com.enveu.client.deleteAccount.DeleteAccountResponse;
 import com.enveu.client.epgCallBacks.EpgCallBack;
-import com.enveu.client.epgListing.epgResponse.ItemsItem;
 import com.enveu.client.joinContest.joinContestCallBack.JoinContestCallback;
 import com.enveu.client.userManagement.bean.allSecondaryDetails.AllSecondaryDetails;
 import com.enveu.client.userManagement.bean.allSecondaryDetails.SecondaryUserDetails;
@@ -26,9 +25,7 @@ import com.enveu.client.userManagement.callBacks.UserProfileCallBack;
 import com.google.gson.Gson;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
-
 import com.tv.uscreen.yojmatv.OttApplication;
-
 import com.tv.uscreen.yojmatv.R;
 import com.tv.uscreen.yojmatv.activities.usermanagment.model.OtpResponse;
 import com.tv.uscreen.yojmatv.beanModel.connectFb.ResponseConnectFb;
@@ -875,31 +872,38 @@ public class RegistrationLoginRepository {
             }
 
             @Override
-            public void success(boolean status, Response<com.enveu.client.epgListing.epgResponse.Response> response) {
+            public void success(boolean status, Response<com.enveu.client.epgListing.epgResponseNew.Response> response) {
                 if (status) {
                     if (response != null) {
                         if (response.code() == 200) {
                             RailCommonData railCommonData = null;
                             railCommonData = new RailCommonData();
-                            Gson gson = new Gson();
-                            String tmp = gson.toJson(response.body());
-                            if (response.body().getData() !=null && response.body().getData().getItems() !=null) {
-                                List<ItemsItem> itemsItems = response.body().getData().getItems();
-                                enveuVideoItemBeans = new ArrayList<>();
-                                for (ItemsItem itemsItem : itemsItems) {
-                                EnveuVideoItemBean enveuVideoItemBean = new EnveuVideoItemBean(itemsItem);
-                                enveuVideoItemBeans.add(enveuVideoItemBean);
-                            }
-                            railCommonData.setEnveuVideoItemBeans(enveuVideoItemBeans);
-                            }
 
+                            if (response.body()!=null) {
+                                if (response.body().getData() !=null){
+                                    List<com.enveu.client.epgListing.epgResponseNew.DataItem> dataItem = response.body().getData();
+                                    enveuVideoItemBeans = new ArrayList<>();
+                                    for (int i=0;i<dataItem.size();i++){
+                                        com.enveu.client.epgListing.epgResponseNew.MediaContent mediaContent= dataItem.get(i).getMediaContent();
+                                        Gson gson1 = new Gson();
+                                        String tmp1 = gson1.toJson(mediaContent);
+                                        EnveuVideoItemBean enveuVideoItemBean = new EnveuVideoItemBean(mediaContent);
 
+                                        if (dataItem.get(i).getSchedules()!=null) {
+                                            railCommonData.setSchedulesItemArrayList(dataItem.get(i).getSchedules());
+                                            enveuVideoItemBeans.add(enveuVideoItemBean);
+                                        }
+                                    }
+                                    railCommonData.setEnveuVideoItemBeans(enveuVideoItemBeans);
+                                }
+
+                            }
                             mutableLiveData.postValue(railCommonData);
                         } else {
                             mutableLiveData.postValue(null);
                         }
                     }
-                    }
+                }
                 }
 
         });

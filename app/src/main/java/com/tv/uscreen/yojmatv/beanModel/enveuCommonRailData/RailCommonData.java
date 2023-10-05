@@ -9,6 +9,7 @@ import com.enveu.client.enums.ImageType;
 import com.enveu.client.enums.LandingPageType;
 import com.enveu.client.enums.Layouts;
 import com.enveu.client.enums.WidgetImageType;
+import com.enveu.client.epgListing.epgResponseNew.SchedulesItem;
 import com.google.gson.Gson;
 import com.tv.uscreen.yojmatv.beanModelV3.continueWatching.DataItem;
 import com.tv.uscreen.yojmatv.beanModelV3.playListModelV2.ItemsItem;
@@ -51,6 +52,9 @@ public class RailCommonData {
     private boolean isSeries = false;
     private boolean isContinueWatching=false;
     private boolean isAd=false;
+
+    private List<com.enveu.client.epgListing.epgResponseNew.SchedulesItem> schedulesItemArrayList = new ArrayList<>();
+
 
 
     // for playlist constructor
@@ -588,5 +592,11 @@ public class RailCommonData {
         this.seasonName = seasonName;
     }
 
+    public List<SchedulesItem> getSchedulesItemArrayList() {
+        return schedulesItemArrayList;
+    }
 
+    public void setSchedulesItemArrayList(List<SchedulesItem> schedulesItemArrayList) {
+        this.schedulesItemArrayList = schedulesItemArrayList;
+    }
 }

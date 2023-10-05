@@ -323,20 +323,19 @@ public class EnveuVideoItemBean implements Serializable {
     }
 
     // Parsing EPG Details
-    public EnveuVideoItemBean(com.enveu.client.epgListing.epgResponse.ItemsItem itemsItem) {
+    // Parsing EPG Details
+    public EnveuVideoItemBean(com.enveu.client.epgListing.epgResponseNew.MediaContent itemsItem) {
         try {
-            this.title = itemsItem.getProgram().getContent().getTitle() == null ? "" : itemsItem.getProgram().getContent().getTitle();
-            this.description = itemsItem.getProgram().getContent().getDescription() == null ? "" : itemsItem.getProgram().getContent().getDescription();
-            this.posterURL = ImageLayer.getInstance().getPosterImageUrl(itemsItem);
-            this.isCurrentlyPlaying = itemsItem.isIsCurrentlyPlaying();
-            this.startTime = itemsItem.getStartDateTime();
-
+            this.title = itemsItem.getTitle() == null ? "" : itemsItem.getTitle();
+            this.description = itemsItem.getDescription() == null ? "" : itemsItem.getDescription();
+            this.posterURL = ImageLayer.getInstance().getLivePosterImageUrl(itemsItem);
         } catch (Exception e) {
             Logger.w(e);
         }
 
 
     }
+
 
     public Program getProgram() {
         return program;
