@@ -483,7 +483,6 @@ class GridActivity : BaseBindingActivity<ListingActivityBinding?>(), ItemClickLi
 
     override fun onRowItemClicked(itemValue: EnveuVideoItemBean, position: Int) {
         //AppCommonMethod.redirectionLogic(this,railCommonData,position);
-        Log.d("javed", "onRowItemClicked: $itemValue")
         var trailerReferenceId: String? = ""
         var isParentContentNull = false
         var isHosted = false

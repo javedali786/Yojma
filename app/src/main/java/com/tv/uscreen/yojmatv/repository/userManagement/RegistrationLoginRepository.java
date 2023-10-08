@@ -178,7 +178,6 @@ public class RegistrationLoginRepository {
                     String tmp = gson.toJson(response.body());
                     LoginDeviceModel loginItemBean = gson.fromJson(tmp, LoginDeviceModel.class);
                     responseApi.postValue(loginItemBean);
-                    Log.d("jay", "onSuccessful: ");
                     }
                     else {
                         responseApi.postValue(null);
@@ -189,7 +188,6 @@ public class RegistrationLoginRepository {
 
                 @Override
                 public void onFailure(Call<LoginDeviceModel> call, Throwable t) {
-                    Log.d("jay", "onFailure: ");
                     responseApi.postValue(null);
                 }
             });
@@ -871,7 +869,6 @@ public class RegistrationLoginRepository {
 
 
     public LiveData<UserProfileResponse> getUpdateProfile(Context context, String token, String name, String mobile, String spinnerValue, String dob, String address, String imageUrl, String via, String contentPreference, boolean isNotificationEnable, String pin, String city, String country, String profile, String species, String type) {
-        Log.d("Javed", "getUpdateProfile: ");
 
         MutableLiveData<UserProfileResponse> mutableLiveData = new MutableLiveData<>();
         BaseCategoryServices.Companion.getInstance().userUpdateProfileServiceWithNoti(token, name,mobile,spinnerValue,dob,address,imageUrl,via,contentPreference,isNotificationEnable,pin,city,country,profile,species,type, new UserProfileCallBack() {

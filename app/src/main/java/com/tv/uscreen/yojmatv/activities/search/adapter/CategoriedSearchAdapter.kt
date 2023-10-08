@@ -102,7 +102,6 @@ class CategoriedSearchAdapter(private val context: Context, private val list: Li
     internal inner class VideoTypeViewHolder(val binding: RowSearchCategoryBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onRowItemClicked(itemValue: EnveuVideoItemBean, position: Int) {
-        Log.d("javed", "onRowItemClicked: $itemValue")
         var isParentContentNull = false
         var isHosted = false
         var externalUrl: String? = ""

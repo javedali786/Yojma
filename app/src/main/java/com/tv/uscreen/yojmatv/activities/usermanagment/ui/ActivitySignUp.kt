@@ -332,6 +332,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
                     val gson = Gson()
                     modelLogin = loginResponseModelResponse.data
                     val stringJson = gson.toJson(loginResponseModelResponse.data)
+                    callSignupDevice(stringJson)
                     Log.d("stringJson", stringJson)
                     saveUserDetails(stringJson,  false)
                     Log.d("stringJson", loginResponseModelResponse.data.isVerified.toString())
@@ -851,23 +852,11 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
                         )
                     )
                 }
-            }  else {
-                commonDialog(
-                    stringsHelper.stringParse(
-                        stringsHelper.instance()?.data?.config?.popup_error.toString(),
-                        getString(R.string.popup_error)
-                    ), stringsHelper.stringParse(
-                        stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
-                        getString(R.string.something_went_wrong)
-                    ), stringsHelper.stringParse(
-                        stringsHelper.instance()?.data?.config?.popup_continue.toString(),
-                        getString(R.string.popup_continue)
-                    )
-                )
             }
 
 
         }
+
     }
 
 

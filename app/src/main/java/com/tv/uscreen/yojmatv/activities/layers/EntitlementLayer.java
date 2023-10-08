@@ -46,7 +46,6 @@ public class EntitlementLayer {
                     responseEntitlement.setData(Objects.requireNonNull(response.body()).getData());
                     Gson gson = new Gson();
                     String json = gson.toJson(response.body().getData());
-                    Log.d("Javed", "onResponse: " + json);
                     responseOutput.postValue(responseEntitlement);
                 } else {
                     ResponseEntitle responseModel = ErrorCodesIntercepter.getInstance().checkEntitlement(response);
@@ -104,7 +103,6 @@ public class EntitlementLayer {
                     response1.setData(Objects.requireNonNull(response.body()).getData());
                     Gson gson = new Gson();
                     String json = gson.toJson(response.body().getData());
-                    Log.d("Javed", "onResponse: " + json);
                     responseOutput.postValue(response1);
                 } else {
                     responseOutput.postValue(response.body());
