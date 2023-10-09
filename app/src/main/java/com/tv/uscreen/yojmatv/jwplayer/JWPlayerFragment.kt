@@ -420,8 +420,11 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     fun initializePlugin(context: Activity,userId:String?,tittle:String?,isLive:Boolean?,seriesTittle:String?,contentId:String?,contentType:String?,genre:String?) {
         plugin =null
         val options = Options()
-        options.accountCode = AppConstants.YOUBORA_ACCOUNT_CODE
-
+        if (BuildConfig.FLAVOR.equals("qa", ignoreCase = true)) {
+            options.accountCode = AppConstants.QA_YOUBORA_ACCOUNT_CODE
+        } else {
+            options.accountCode = AppConstants.PROD_YOUBORA_ACCOUNT_CODE
+        }
         options.username = userId
         options.contentTitle = tittle
         //  options.contentDuration = contentDurationInLong

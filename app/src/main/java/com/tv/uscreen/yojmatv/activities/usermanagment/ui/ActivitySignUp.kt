@@ -475,7 +475,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
     private fun clearEditView() {
         binding?.name?.setText("")
         binding?.email?.setText("")
-        binding?.dOB?.setText("")
+        binding?.dOB?.text = ""
         binding?.password?.setText("")
         binding?.confPassword?.setText("")
 

@@ -354,7 +354,9 @@ public interface AppConstants {
     String Reel = "REEL";
     String SEARCH_RESULT= "Search result";
     String SPANISH_SEARCH_RESULT= "Resultado de búsqueda";
-    String YOUBORA_ACCOUNT_CODE = "enveudev";
+    String QA_YOUBORA_ACCOUNT_CODE = "enveudev";
+    String PROD_YOUBORA_ACCOUNT_CODE = "enveu";
+
 
 
 
