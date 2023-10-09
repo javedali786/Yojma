@@ -58,7 +58,6 @@ public class RailInjectionHelper extends AndroidViewModel {
     private final MutableLiveData<RailCommonData> mutableRailCommonData = new MutableLiveData<>();
     private final ObservableRxList<RailCommonData> observableList = new ObservableRxList<>();
     private int i = 0;
-    private Boolean finalTag;
     private List<BaseCategory> baseCategories;
     private KsPreferenceKeys preference;
     private String isLogin;
@@ -69,7 +68,6 @@ public class RailInjectionHelper extends AndroidViewModel {
     }
 
     public void getScreenWidgets(Activity activity, String screenId, Boolean tag, CommonApiCallBack commonApiCallBack) {
-        finalTag = tag;
         if(screenId!=null){
             APIServiceLayer.getInstance().getCategories(screenId).observe((LifecycleOwner) activity, baseCategoriesList -> {
                 baseCategories = baseCategoriesList;
@@ -94,33 +92,8 @@ public class RailInjectionHelper extends AndroidViewModel {
             if (screenWidget.getType() != null)
                 type = screenWidget.getType();
             if (type.equalsIgnoreCase(AppConstants.WIDGET_TYPE_CONTENT)) {
-
                 if (activity instanceof HomeActivity) {
-
-                    isLogin = KsPreferenceKeys.getInstance().getAppPrefLoginStatus();
-                    entittleStatus = KsPreferenceKeys.getInstance().getEntitlementStatus();
-                    if (isLogin.equalsIgnoreCase(AppConstants.UserStatus.Login.toString())) {
-                        if (entittleStatus && baseCategories.get(i).getShowRail().equalsIgnoreCase(AppConstants.FREE_RAIL)) {
-                        i++;
-                        getScreenListing(activity, commonApiCallBack);
-                        } else {
-                            if (finalTag) {
-                                if (i == 0) {
-                                    getRailDetails(activity, screenWidget, commonApiCallBack);
-                                }
-                            } else {
-                                getRailDetails(activity, screenWidget, commonApiCallBack);
-                            }
-                        }
-                    } else {
-                        if (finalTag) {
-                            if (i == 0) {
-                                getRailDetails(activity, screenWidget, commonApiCallBack);
-                            }
-                        } else {
-                            getRailDetails(activity, screenWidget, commonApiCallBack);
-                        }
-                    }
+                    getRailDetails(activity, screenWidget, commonApiCallBack);
                 }
             } else if (type.equalsIgnoreCase(AppConstants.WIDGET_TYPE_AD)) {
                 getAdsDetails(activity, screenWidget, commonApiCallBack);
