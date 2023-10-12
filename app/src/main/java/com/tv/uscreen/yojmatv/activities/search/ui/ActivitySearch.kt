@@ -228,7 +228,6 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
                                     val enveuVideoItemBean = railCommonData.enveuVideoItemBeans[0]
                                     val gson = Gson()
                                     val tmp = gson.toJson(enveuVideoItemBean)
-                                    Log.d("Javed", "main: $tmp")
                                     temp.assetType = enveuVideoItemBean.assetType
                                     temp.status = true
                                     if (data[i].enveuVideoItemBeans[0].assetType.equals(AppConstants.VIDEO, ignoreCase = true)) {

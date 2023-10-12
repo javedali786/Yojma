@@ -328,7 +328,6 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                                 parseSeriesData(enveuCommonResponse)
                                 val gson = Gson()
                                 val json = gson.toJson(enveuCommonResponse)
-                                Log.d("javed", "getSeriesDetail1: $json")
                             }
                         } else if (response.status.equals(
                                 APIStatus.ERROR.name,

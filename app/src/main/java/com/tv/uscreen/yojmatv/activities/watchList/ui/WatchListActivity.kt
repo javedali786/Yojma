@@ -461,7 +461,7 @@ class WatchListActivity : BaseBindingActivity<WatchListActivityBinding?>(), Watc
     }
 
     override fun onRowItemClicked(itemValue: EnveuVideoItemBean, position: Int) {
-        Log.d("javed", "onRowItemClicked: $itemValue")
+
         var trailerReferenceId: String? = ""
         var isParentContentNull = false
         var isHosted = false

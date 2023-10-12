@@ -789,7 +789,6 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
                                     if (videoDetails?.trailerReferenceId != null) {
                                         getTrailer(videoDetails?.trailerReferenceId!!)
                                     }
-                                    Log.d("javed", "getEpisodeDetails: $videoDetails")
                                     parseVideoDetails(videoDetails)
                                 }
                             }
@@ -995,7 +994,6 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
     }
 
     private fun setUI(responseDetailPlayer: EnveuVideoItemBean?) {
-        Log.d("Javed", "setUI: $responseDetailPlayer")
         if (responseDetailPlayer!!.assetCast != null && !responseDetailPlayer.assetCast[0].equals(
                 "",
                 ignoreCase = true

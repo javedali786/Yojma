@@ -406,7 +406,6 @@ class SeasonTabFragment : BaseBindingFragment<SeasonFragmentLayoutBinding?>(), S
     }
 
     override fun onItemClick(itemValue: EnveuVideoItemBean?, isPremium: Boolean, position: Int) {
-        Log.d("javed", "onRowItemClicked: $itemValue")
         var trailerReferenceId: String? = ""
         var isParentContentNull = false
         var isHosted = false

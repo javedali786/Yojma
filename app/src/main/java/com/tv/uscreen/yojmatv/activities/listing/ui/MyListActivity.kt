@@ -237,7 +237,6 @@ class MyListActivity : BaseBindingActivity<FragmentMyListBinding?>(), ItemClickL
                                             setRail(railCommonData)
                                             val gson = Gson()
                                             val railCommon = gson.toJson(railCommonData)
-                                            Log.d("Javed_MyList", "getWatchListData: $railCommon")
                                         } else {
                                             hideRecyclerViewData()
                                         }
@@ -300,7 +299,6 @@ class MyListActivity : BaseBindingActivity<FragmentMyListBinding?>(), ItemClickL
     }
 
     override fun onRowItemClicked(itemValue: EnveuVideoItemBean, position: Int) {
-        Log.d("javed", "onRowItemClicked: $itemValue")
         var trailerReferenceId: String? = ""
         var isParentContentNull = false
         var isHosted = false

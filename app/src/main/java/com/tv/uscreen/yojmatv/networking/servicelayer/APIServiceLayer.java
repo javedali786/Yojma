@@ -459,7 +459,6 @@ public class APIServiceLayer {
                         if (response.isSuccessful()) {
                             Gson gson = new Gson();
                             String json = gson.toJson(response.body());
-                            Log.d("Javed", "onResponse: " +  json);
                             RailCommonData railCommonData = new RailCommonData();
                             AppCommonMethod.getEpisodeAssetDetail(railCommonData, response, isIntentFromExpedition);
                             callBack.onSuccess(railCommonData);

@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData;
 import com.enveu.client.deleteAccount.DeleteAccountResponse;
 import com.enveu.client.joinContest.joinContestResponse.Response;
 import com.tv.uscreen.yojmatv.activities.usermanagment.model.OtpResponse;
+import com.tv.uscreen.yojmatv.beanModel.LoginDeviceModel.LoginDeviceModel;
 import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData;
 import com.tv.uscreen.yojmatv.beanModel.forgotPassword.CommonResponse;
 import com.tv.uscreen.yojmatv.beanModel.responseModels.LoginResponse.LoginResponseModel;
@@ -60,6 +61,9 @@ public class RegistrationLoginViewModel extends AndroidViewModel {
 
     public LiveData<LoginResponseModel> hitApiForceFbLogin(Context context, String email, String fbToken, String name, String fbId, String profilePic, boolean isEmail) {
         return loginRepository.getForceFbLogin(context, email, fbToken, name, fbId, profilePic, isEmail);
+    }
+    public LiveData<LoginDeviceModel> getLoginDevice(String token){
+        return loginRepository.getLoginDevice(token);
     }
     public LiveData<UserProfileResponse> hitUserProfile(Context context, String token) {
         return loginRepository.getUserProfile(context,token);

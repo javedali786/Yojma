@@ -822,7 +822,6 @@ public class EnveuVideoItemBean implements Serializable {
                     this.videoDetails = details.getVideo();
                     Gson gson = new Gson();
                     String tmp = gson.toJson(videoDetails);
-                    Log.d("Javed", "EnveuVideoItemBean: " + tmp);
                     this.setVideoDetails(videoDetails);
                 }
             }

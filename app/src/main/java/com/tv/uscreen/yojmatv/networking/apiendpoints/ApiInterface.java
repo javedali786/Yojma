@@ -4,6 +4,7 @@ package com.tv.uscreen.yojmatv.networking.apiendpoints;
 import com.google.gson.JsonObject;
 import com.tv.uscreen.yojmatv.activities.watchList.model.VideoIdModel;
 import com.tv.uscreen.yojmatv.beanModel.AssetHistoryContinueWatching.ResponseAssetHistory;
+import com.tv.uscreen.yojmatv.beanModel.LoginDeviceModel.LoginDeviceModel;
 import com.tv.uscreen.yojmatv.beanModel.changePassword.ResponseChangePassword;
 import com.tv.uscreen.yojmatv.beanModel.configBean.ResponseConfig;
 import com.tv.uscreen.yojmatv.beanModel.connectFb.ResponseConnectFb;
@@ -380,5 +381,9 @@ public interface ApiInterface {
 
     @GET("v2/order/orderHistory")
     Call<OrderHistoryModel> getOrderHistory(@Query("page") String page, @Query("size") String size);
+    @POST("v5/user/device/linkUserDevice")
+    Call<LoginDeviceModel> getLoginDeviceResponse(@Query("forceLogout") Boolean forceLogout);
+
+
 }
 
