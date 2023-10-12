@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.activities.usermanagment.ui
 
+
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Paint
@@ -13,7 +14,6 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
@@ -29,11 +29,7 @@ import com.facebook.GraphResponse
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.gson.Gson
-import com.moe.pushlibrary.MoEHelper
-import com.moengage.core.Properties
 import com.tv.uscreen.yojmatv.R
-
-
 import com.tv.uscreen.yojmatv.activities.homeactivity.ui.HomeActivity
 import com.tv.uscreen.yojmatv.activities.purchase.plans_layer.GetPlansLayer
 import com.tv.uscreen.yojmatv.activities.usermanagment.viewmodel.RegistrationLoginViewModel
@@ -43,7 +39,6 @@ import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.AppleSignInListener
 import com.tv.uscreen.yojmatv.databinding.ActivityLoginBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment
 import com.tv.uscreen.yojmatv.utils.Logger
-import com.tv.uscreen.yojmatv.utils.TrackerUtil.MoEUserTracker
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.AppColors
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper.strokeBgDrawable
@@ -174,7 +169,7 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
                     dismissLoading(binding?.progressBar)
                     Log.d("LoginResponse", Gson().toJson(it))
                     try {
-                        if (it.responseCode === 2000 && it.data.authURL != null) {
+                        if (it.responseCode == 2000 && it.data.authURL != null) {
                             AppleSignInManager.setContext(this)
                             AppleSignInManager.setUrl(it.data.authURL)
                             AppleSignInManager.setupAppleWebViewDialog()
@@ -341,8 +336,7 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
                 Log.d("LoginResponse", Gson().toJson(it))
 
                 try {
-
-                    if (it.responseCode === 2000) {
+                    if (it.responseCode == 2000) {
                         val gson = Gson()
                         val loginData: Data = it.data
                         modelLogin = it.data

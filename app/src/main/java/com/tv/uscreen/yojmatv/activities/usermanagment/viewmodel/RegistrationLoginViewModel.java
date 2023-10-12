@@ -34,6 +34,10 @@ public class RegistrationLoginViewModel extends AndroidViewModel {
     public LiveData<LoginResponseModel> hitLoginAPI( String userName, String pwd) {
         return loginRepository.getLoginAPIResponse(userName, pwd);
     }
+
+    public LiveData<LoginDeviceModel> getLoginDevice(String token){
+        return loginRepository.getLoginDevice(token);
+    }
     public LiveData<AuthResponse> getAuthResponse() {
         return loginRepository.getAuthResponse();
     }
@@ -62,9 +66,7 @@ public class RegistrationLoginViewModel extends AndroidViewModel {
     public LiveData<LoginResponseModel> hitApiForceFbLogin(Context context, String email, String fbToken, String name, String fbId, String profilePic, boolean isEmail) {
         return loginRepository.getForceFbLogin(context, email, fbToken, name, fbId, profilePic, isEmail);
     }
-    public LiveData<LoginDeviceModel> getLoginDevice(String token){
-        return loginRepository.getLoginDevice(token);
-    }
+
     public LiveData<UserProfileResponse> hitUserProfile(Context context, String token) {
         return loginRepository.getUserProfile(context,token);
     }

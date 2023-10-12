@@ -60,6 +60,8 @@ public class RequestConfig {
                 }
             }
 
+
+
             httpClient.addInterceptor(chain -> {
                 Request original = chain.request();
                 // Request customization: add request headers
@@ -126,7 +128,16 @@ public class RequestConfig {
                 Request original = chain.request();
                 // Request customization: add request headers
                 Request.Builder requestBuilder = original.newBuilder()
-                        .addHeader("x-api-key", SDKConfig.API_KEY_MOB);
+                        .addHeader("x-api-key", SDKConfig.API_KEY_MOB)
+                        .addHeader("x-device-identifier", String.valueOf(UUID.randomUUID()))
+                        .addHeader("x-device-os-version", String.valueOf(Build.VERSION.SDK_INT))
+                        .addHeader("x-device-model", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase())
+                        .addHeader("x-device-platform", "ANDROID")
+                        .addHeader("x-device-make", Build.MANUFACTURER.toUpperCase())
+                        .addHeader("x-tracking-sdk-version", "0.0.1")
+                        .addHeader("x-app-version", BuildConfig.VERSION_NAME)
+                        .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
+                        .addHeader("x-device-name", "");
                 Request request = requestBuilder.build();
 
                 return chain.proceed(request);

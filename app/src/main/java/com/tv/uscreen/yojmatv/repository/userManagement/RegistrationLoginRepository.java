@@ -1,7 +1,6 @@
 package com.tv.uscreen.yojmatv.repository.userManagement;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -124,6 +123,38 @@ public class RegistrationLoginRepository {
         return responseApi;
     }
 
+    public LiveData<LoginDeviceModel> getLoginDevice(String token) {
+        final MutableLiveData<LoginDeviceModel> responseApi;
+        responseApi = new MutableLiveData<>();
+        Call<LoginDeviceModel> result = RequestConfig.getUserInteration(token).create(ApiInterface.class)
+                .getLoginDeviceResponse(true);
+        result.enqueue(new Callback<LoginDeviceModel>() {
+            @Override
+            public void onResponse(@NonNull Call<LoginDeviceModel> call, @NonNull Response<LoginDeviceModel> response) {
+                if  (response.body() != null){
+                    Gson gson = new Gson();
+                    String tmp = gson.toJson(response.body());
+                    LoginDeviceModel loginItemBean = gson.fromJson(tmp, LoginDeviceModel.class);
+                    responseApi.postValue(loginItemBean);
+                }
+                else {
+                    LoginDeviceModel cl = new LoginDeviceModel();
+                    cl.getResponseCode();
+                    responseApi.postValue(cl);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<LoginDeviceModel> call, Throwable t) {
+                LoginDeviceModel cl = new LoginDeviceModel();
+                cl.getResponseCode();
+                responseApi.postValue(cl);
+            }
+        });
+        return responseApi;
+    }
+
+
     public LiveData<AuthResponse> getAuthResponse() {
         final MutableLiveData<AuthResponse> responseApi;
         responseApi = new MutableLiveData<>();
@@ -140,7 +171,7 @@ public class RegistrationLoginRepository {
                         AuthResponse loginItemBean = gson.fromJson(tmp, AuthResponse.class);
                         responseApi.postValue(loginItemBean);
                     } else {
-                        AuthResponse responseModel = ErrorCodesIntercepter.getInstance().Auth(authResponse);
+                        AuthResponse responseModel = Objects.requireNonNull(ErrorCodesIntercepter.getInstance()).Auth(authResponse);
                         responseApi.postValue(responseModel);
                     }
                 }
@@ -153,45 +184,6 @@ public class RegistrationLoginRepository {
                 responseApi.postValue(cl);
             }
         });
-        return responseApi;
-    }
-    public LiveData<LoginDeviceModel> getLoginDevice(String token) {
-
-        final MutableLiveData<LoginDeviceModel> responseApi;
-        responseApi = new MutableLiveData<>();
-
-        try {
-
-            Call<LoginDeviceModel> result =
-                    RequestConfig.getUserInteration(token).create(ApiInterface.class)
-                            .getLoginDeviceResponse(true);
-
-            result.enqueue(new Callback<LoginDeviceModel>() {
-                @Override
-                public void onResponse(Call<LoginDeviceModel> call, Response<LoginDeviceModel> response) {
-
-                    if  (response.body() != null){
-                    Gson gson = new Gson();
-                    String tmp = gson.toJson(response.body());
-                    LoginDeviceModel loginItemBean = gson.fromJson(tmp, LoginDeviceModel.class);
-                    responseApi.postValue(loginItemBean);
-                    }
-                    else {
-                        responseApi.postValue(null);
-
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<LoginDeviceModel> call, Throwable t) {
-                    responseApi.postValue(null);
-                }
-            });
-
-        } catch (Exception exception) {
-        }
-
         return responseApi;
     }
 
