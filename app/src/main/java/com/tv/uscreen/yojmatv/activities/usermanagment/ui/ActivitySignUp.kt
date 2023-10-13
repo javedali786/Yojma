@@ -17,6 +17,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.CompoundButton
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -61,6 +62,8 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
     private val ifCheckboxIsChecked = true
     private lateinit var name:String
     private lateinit var email:String
+    private  var selectedCountryCode:String?= null
+    private lateinit var phoneNumber:String
     private var dob:String = ""
     private var dateMilliseconds = ""
     private var accessTokenFB: String? = null
@@ -120,6 +123,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
         ColorsHelper.textViewDrawableColor(binding!!.dOB, AppColors.dobIconColor())
         binding?.password?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor() , 10f)
         binding?.confPassword?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor() , 10f)
+
     }
 
     private fun passwordTextWatcher() {
@@ -164,6 +168,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
 
 
     private fun setClicks() {
+
         binding?.toolbar?.backLayout?.setOnClickListener { onBackPressed() }
 
         callbackManager = CallbackManager.Factory.create()
@@ -319,8 +324,28 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
             }
         } )
 
+        binding?.countryCodePicker?.setOnClickListener{
+            Toast.makeText(this, " country code", Toast.LENGTH_SHORT).show()
+
+
+
+        }
+        binding?.phoneNumber?.setOnClickListener{
+
+            Toast.makeText(this, "phone number", Toast.LENGTH_SHORT).show()
+        }
+
+        // Get the selected country code
+         selectedCountryCode = binding?.countryCodePicker?.selectedCountryCode
+
+       // Get the text from the EditText
+         phoneNumber = binding?.phoneNumber?.text.toString()
+
+
 
     }
+
+
 
 
     fun hitApiFBLogin() {

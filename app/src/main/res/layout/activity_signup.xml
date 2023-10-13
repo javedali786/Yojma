@@ -136,7 +136,45 @@
                     android:hint="@{TextUtils.isEmpty(stringData.instance().data.config.profile_dob) ? @string/profile_dob : stringData.instance().data.config.profile_dob , default=@string/profile_dob}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/email" />
+                    app:layout_constraintTop_toBottomOf="@+id/phoneLayout" />
+
+                <LinearLayout
+                    android:id="@+id/phoneLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/email"
+                    android:layout_marginTop="25dp">
+
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/countryCodePicker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/EditTextStyle"
+                        android:layout_marginEnd="6dp"
+                        android:padding="2.1dp"
+                        app:ccp_textSize="@dimen/sign_up_et_text_size"
+                        app:ccpDialog_textColor="@color/tph_txt_color"
+                        app:ccpDialog_backgroundColor="@color/app_bg_color"
+                        app:ccp_contentColor="@color/tph_txt_color"
+                        app:ccp_arrowColor="@color/moe_white"/>
+
+                    <EditText
+                        android:id="@+id/phoneNumber"
+                        style="@style/EditTextStyle"
+                        android:layout_marginStart="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_txt_color) ? @color/tph_txt_color : Color.parseColor(colorsData.instance().data.config.tph_txt_color), default=@color/tph_txt_color}"
+                        android:textColorHint="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_hint_txt_color) ? @color/tph_hint_txt_color : Color.parseColor(colorsData.instance().data.config.tph_hint_txt_color), default=@color/tph_hint_txt_color}"
+                        android:hint="Enter Phone"
+                        android:inputType="phone" />
+
+                </LinearLayout>
 
 
 
