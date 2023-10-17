@@ -139,7 +139,7 @@ public class RegistrationLoginRepository {
                 }
                 else {
                     LoginDeviceModel cl = new LoginDeviceModel();
-                    cl.getResponseCode();
+                    cl.setResponseCode(cl.getResponseCode());
                     responseApi.postValue(cl);
                 }
             }
@@ -147,7 +147,7 @@ public class RegistrationLoginRepository {
             @Override
             public void onFailure(@NonNull Call<LoginDeviceModel> call, Throwable t) {
                 LoginDeviceModel cl = new LoginDeviceModel();
-                cl.getResponseCode();
+                cl.setResponseCode(500);
                 responseApi.postValue(cl);
             }
         });
