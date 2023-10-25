@@ -6,14 +6,10 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.google.ads.interactivemedia.v3.internal.it
-
 import com.tv.uscreen.yojmatv.Bookmarking.BookmarkingViewModel
 import com.tv.uscreen.yojmatv.R
-
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.databinding.ActivityPlayerBinding
-
 import com.tv.uscreen.yojmatv.jwplayer.utils.Logger
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
@@ -118,7 +114,7 @@ class PlayerActivity : AppCompatActivity(), Serializable,
     }
 
     private fun fitPlayerToFullScreen() {
-        val params: ViewGroup.LayoutParams = binding.containerPlayer.getLayoutParams()
+        val params: ViewGroup.LayoutParams = binding.containerPlayer.layoutParams
         params.width = ViewGroup.LayoutParams.MATCH_PARENT
         params.height = ViewGroup.LayoutParams.MATCH_PARENT
         binding.containerPlayer.requestLayout()

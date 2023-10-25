@@ -546,7 +546,12 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             viewBinding.seriesDetailAllEpisodeTxtColors.addHideHandler()
 
             addListener()
-            isSeries = isBingeWatchEnable == true && currentPlayingIndex!! < seasonEpisodesList?.size!! - 1
+
+            try{
+                isSeries = isBingeWatchEnable == true && currentPlayingIndex!! < seasonEpisodesList?.size!! - 1
+            } catch (e:Exception) {
+              Logger.w(e)
+            }
         }
         callPlayDetails()
     }
