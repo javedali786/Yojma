@@ -491,33 +491,24 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
               dismissLoading(binding?.progressBar)
               Log.d("SIgnupResponse", Gson().toJson(it))
              try {
-                  if (it.responseModel.responseCode === 200) {
-                      val gson = Gson()
-                      KsPreferenceKeys.getInstance().appPrefAccessToken=it.accessToken
-                      val signUpData: Data = it.responseModel.data
-                      val stringJson = gson.toJson(signUpData)
-                      callSignupDevice(stringJson)
-                      saveUserDetails(stringJson, true)
-                     /* try {
-                          setUserProperties(this,signUpData.id,signUpData.name,signUpData.email,signUpData.phoneNumber,signUpData.dateOfBirth)
-                      } catch (e: NullPointerException ) {
-                        Logger.w(e)
-                      }*/
-
-                     /* val properties = Properties()
-                      properties.addAttribute(AppConstants.REGISTER, AppConstants.REGISTER)
-                      MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
-                      val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
-                      val date = Date()
-                      System.out.println(dateFormat.format(date))
-                      properties.addAttribute(AppConstants.REGISTER_DATE, date)
-                      MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.REGISTER_DATE, properties)
-                      AppCommonMethod.screenViewedTrack(applicationContext, AppConstants.SIGN_UP_SUCCESS, "ActivitySignUp")*/
-
-                      clearEditView()
-                  }else if(it.responseModel.responseCode==4901){
-                      commonDialog(it.debugMessage.toString(),"",stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_continue.toString(), getString(R.string.popup_continue)))
-                  }else if (it.responseModel.responseCode==400){
+                 if (it.responseModel.responseCode === 200) {
+                     val gson = Gson()
+                     KsPreferenceKeys.getInstance().appPrefAccessToken = it.accessToken
+                     val signUpData: Data = it.responseModel.data
+                     val stringJson = gson.toJson(signUpData)
+                     callSignupDevice(stringJson)
+                     saveUserDetails(stringJson, true)
+                     clearEditView()
+                 } else if (it.responseModel.responseCode == 4901) {
+                     commonDialog(
+                         it.debugMessage.toString(),
+                         "",
+                         stringsHelper.stringParse(
+                             stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                             getString(R.string.popup_continue)
+                         )
+                     )
+                 } else if (it.responseModel.responseCode==400){
                       commonDialog(stringsHelper.stringParse(
                                     stringsHelper.instance()?.data?.config?.popup_error.toString(),
                                     getString(R.string.popup_error)

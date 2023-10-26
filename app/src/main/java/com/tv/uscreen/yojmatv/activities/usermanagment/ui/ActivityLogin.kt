@@ -342,33 +342,41 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
                         modelLogin = it.data
                         val stringJson = gson.toJson(loginData)
                          callLoginDevice(stringJson)
-                    } else if (it.debugMessage != null) {
-                        commonDialog(
-                            stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_error.toString(),
-                                getString(R.string.popup_error)
-                            ), stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_username_pwd_does_not_match.toString(),
-                                getString(R.string.popup_username_pwd_does_not_match)
-                            ), stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_continue.toString(),
-                                getString(R.string.popup_continue)
-                            )
-                        )
+                    } else if (it.responseCode == 4089){
+                        commonDialog(stringsHelper.stringParse(
+                            stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                            getString(R.string.popup_error)
+                        ),it.debugMessage.toString(),stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_continue.toString(), getString(R.string.popup_continue)))
                     } else {
-                        commonDialog(
-                            stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_error.toString(),
-                                getString(R.string.popup_error)
-                            ), stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
-                                getString(R.string.something_went_wrong)
-                            ), stringsHelper.stringParse(
-                                stringsHelper.instance()?.data?.config?.popup_continue.toString(),
-                                getString(R.string.popup_continue)
+                         if (it.debugMessage != null) {
+                            commonDialog(
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                    getString(R.string.popup_error)
+                                ), stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_username_pwd_does_not_match.toString(),
+                                    getString(R.string.popup_username_pwd_does_not_match)
+                                ), stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                    getString(R.string.popup_continue)
+                                )
                             )
-                        )
+                        } else {
+                            commonDialog(
+                                stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                    getString(R.string.popup_error)
+                                ), stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                    getString(R.string.something_went_wrong)
+                                ), stringsHelper.stringParse(
+                                    stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                    getString(R.string.popup_continue)
+                                )
+                            )
+                        }
                     }
+
                 } catch (e: NullPointerException) {
                     Logger.w(e)
                 }
