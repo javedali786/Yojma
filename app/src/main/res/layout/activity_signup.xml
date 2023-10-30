@@ -169,9 +169,11 @@
                         android:layout_marginStart="0dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_txt_color) ? @color/tph_txt_color : Color.parseColor(colorsData.instance().data.config.tph_txt_color), default=@color/tph_txt_color}"
                         android:textColorHint="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_hint_txt_color) ? @color/tph_hint_txt_color : Color.parseColor(colorsData.instance().data.config.tph_hint_txt_color), default=@color/tph_hint_txt_color}"
-                        android:hint="Enter Phone"
+                        android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_txt_color) ? @color/tph_txt_color : Color.parseColor(colorsData.instance().data.config.tph_txt_color), default=@color/tph_txt_color}"
+                        android:hint="@{TextUtils.isEmpty(stringData.instance().data.config.profile_mobile_number) ? @string/profile_mobile_number : stringData.instance().data.config.profile_mobile_number , default=@string/profile_mobile_number}"
+                        android:maxLength="10"
+                        app:layout_constraintHorizontal_bias="0.412"
                         android:inputType="phone" />
 
                 </LinearLayout>

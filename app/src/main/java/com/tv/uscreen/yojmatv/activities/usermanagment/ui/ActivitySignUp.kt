@@ -17,7 +17,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.CompoundButton
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -87,7 +86,6 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //ThemeHandler.getInstance().applyActivitySignUp(this,binding)
         parseColor()
         binding?.signIn?.paintFlags = binding!!.signIn.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         viewModel = ViewModelProvider(this@ActivitySignUp).get(
@@ -324,16 +322,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
             }
         } )
 
-        binding?.countryCodePicker?.setOnClickListener{
-            Toast.makeText(this, " country code", Toast.LENGTH_SHORT).show()
 
-
-
-        }
-        binding?.phoneNumber?.setOnClickListener{
-
-            Toast.makeText(this, "phone number", Toast.LENGTH_SHORT).show()
-        }
 
         // Get the selected country code
          selectedCountryCode = binding?.countryCodePicker?.selectedCountryCode
@@ -511,33 +500,18 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
     private fun hitSignUpApi() {
         showLoading(binding?.progressBar,true)
         preference?.appPrefAccessToken = ""
-        viewModel?.hitSignUpAPI(binding?.name?.text.toString(),binding?.email?.text.toString(),dateMilliseconds,binding?.password?.text.toString(),true)?.observe(this, Observer {
+        viewModel?.hitSignUpAPI(binding?.name?.text.toString(),binding?.email?.text.toString(),dateMilliseconds,binding?.password?.text.toString(),true,binding?.phoneNumber?.text.toString(),selectedCountryCode)?.observe(this, Observer {
           if (it!=null) {
               dismissLoading(binding?.progressBar)
               Log.d("SIgnupResponse", Gson().toJson(it))
              try {
-                  if (it.responseModel.responseCode === 200) {
+                  if (it.responseModel.responseCode == 200) {
                       val gson = Gson()
                       KsPreferenceKeys.getInstance().appPrefAccessToken=it.accessToken
                       val signUpData: Data = it.responseModel.data
                       val stringJson = gson.toJson(signUpData)
                       callSignupDevice(stringJson)
                       saveUserDetails(stringJson, true)
-                     /* try {
-                          setUserProperties(this,signUpData.id,signUpData.name,signUpData.email,signUpData.phoneNumber,signUpData.dateOfBirth)
-                      } catch (e: NullPointerException ) {
-                        Logger.w(e)
-                      }*/
-
-                     /* val properties = Properties()
-                      properties.addAttribute(AppConstants.REGISTER, AppConstants.REGISTER)
-                      MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
-                      val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
-                      val date = Date()
-                      System.out.println(dateFormat.format(date))
-                      properties.addAttribute(AppConstants.REGISTER_DATE, date)
-                      MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.REGISTER_DATE, properties)
-                      AppCommonMethod.screenViewedTrack(applicationContext, AppConstants.SIGN_UP_SUCCESS, "ActivitySignUp")*/
 
                       clearEditView()
                   }else if(it.responseModel.responseCode==4901){

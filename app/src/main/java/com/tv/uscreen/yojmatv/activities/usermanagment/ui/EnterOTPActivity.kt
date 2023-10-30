@@ -94,7 +94,7 @@ class EnterOTPActivity : BaseBindingActivity<ActivityEnterOtpBinding?>(), Common
             ActivityLauncher.getInstance().homeScreen(this, HomeActivity::class.java)
         }
         binding?.toolbar?.backLayout?.setOnClickListener{
-            onBackPressed()
+           ActivityLauncher.getInstance().homeActivity(this,HomeActivity::class.java)
         }
     }
 
@@ -151,7 +151,6 @@ class EnterOTPActivity : BaseBindingActivity<ActivityEnterOtpBinding?>(), Common
     }
 
     private fun handleClick() {
-        binding?.toolbar?.backLayout?.setOnClickListener { view: View? -> onBackPressed() }
         binding?.resendOtp?.setOnClickListener { v: View? ->
             if (NetworkConnectivity.isOnline(this@EnterOTPActivity)) {
                 if (otpSendCount < 3) {
@@ -374,11 +373,7 @@ class EnterOTPActivity : BaseBindingActivity<ActivityEnterOtpBinding?>(), Common
 
 
     override fun onBackPressed() {
-        if (fromWhich!!.equals("DetailPage", ignoreCase = true)) {
-            super.onBackPressed()
-        }else{
-            super.onBackPressed()
-        }
+        super.onBackPressed()
         hideSoftKeyboard(binding?.pinViewOtp)
         if (mCountDownTimer != null) {
             mCountDownTimer?.cancel()

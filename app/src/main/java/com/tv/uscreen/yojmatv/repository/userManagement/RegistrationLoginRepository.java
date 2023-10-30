@@ -188,28 +188,18 @@ public class RegistrationLoginRepository {
     }
 
 
-    public LiveData<SignupResponseAccessToken> getSignupAPIResponse(String name, String email, String dob,String pwd, boolean isNotificationEnable) {
-        String typeList = "";
-        String speciesList = "";
-        String profileId = KsPreferenceKeys.getInstance().getPreferenceProfileId();
-        Logger.w("profileId",profileId);
+    public LiveData<SignupResponseAccessToken> getSignupAPIResponse(String name, String email, String dob,String pwd, boolean isNotificationEnable,String phoneNumber,String countryCode) {
+
         final MutableLiveData<SignupResponseAccessToken> responseApi;
         {
             responseApi = new MutableLiveData<>();
-            if (null!= KsPreferenceKeys.getInstance().getTypeList()) {
-                 typeList = AppCommonMethod.getTypeList();
-            }
-            if (null!= KsPreferenceKeys.getInstance().getSpeciesList()) {
-                speciesList = AppCommonMethod.getSpeciesList();
-            }
-
 
             final JsonObject requestParam = new JsonObject();
             requestParam.addProperty(AppConstants.API_PARAM_NAME, "");
             requestParam.addProperty(AppConstants.API_PARAM_EMAIL, "");
             requestParam.addProperty(AppConstants.API_PARAM_PASSWORD, pwd);
 
-            BaseCategoryServices.Companion.getInstance().registerWithContentPreferences(name.trim(), email.trim(),dob.trim(), pwd.trim(),isNotificationEnable,profileId,speciesList,typeList, new LoginCallBack() {
+            BaseCategoryServices.Companion.getInstance().registerWithContentPreferences(name.trim(), email.trim(),dob.trim(), pwd.trim(),isNotificationEnable,"","","",phoneNumber,countryCode, new LoginCallBack() {
                 @Override
                 public void success(boolean status, Response< com.enveu.client.userManagement.bean.LoginResponse.LoginResponseModel> response) {
                     if (status) {
