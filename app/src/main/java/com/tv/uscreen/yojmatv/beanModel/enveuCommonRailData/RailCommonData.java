@@ -258,9 +258,9 @@ public class RailCommonData {
                     enveuVideoItemBean.setVodCount(videos.size());
                     if (screenWidget != null && screenWidget.getWidgetImageType() != null && screenWidget.getWidgetImageType().equalsIgnoreCase(WidgetImageType.THUMBNAIL.toString()))
                     {
-                        Logger.d("Screen WidgetType "+screenWidget.getWidgetImageType());
+                       /* Logger.d("Screen WidgetType "+screenWidget.getWidgetImageType());
                         String imageUrl=ImageLayer.getInstance().getThumbNailImageUrl(videoItem);
-                        enveuVideoItemBean.setPosterURL(imageUrl);
+                        enveuVideoItemBean.setPosterURL(imageUrl);*/
 
                     }
                     else{
