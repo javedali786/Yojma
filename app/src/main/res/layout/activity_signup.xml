@@ -143,7 +143,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="0dp"
+                    android:padding="0.5dp"
+                    style="@style/EditTextStyle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -154,8 +155,7 @@
                         android:id="@+id/countryCodePicker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/EditTextStyle"
-                        android:layout_marginEnd="6dp"
+                        android:layout_marginEnd="2dp"
                         android:padding="2.1dp"
                         app:ccp_textSize="@dimen/sign_up_et_text_size"
                         app:ccpDialog_textColor="@color/tph_txt_color"
@@ -163,12 +163,14 @@
                         app:ccp_contentColor="@color/tph_txt_color"
                         app:ccp_arrowColor="@color/moe_white"/>
 
+
+
                     <EditText
                         android:id="@+id/phoneNumber"
-                        style="@style/EditTextStyle"
                         android:layout_marginStart="0dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
                         android:textColor="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_txt_color) ? @color/tph_txt_color : Color.parseColor(colorsData.instance().data.config.tph_txt_color), default=@color/tph_txt_color}"
                         android:textColorHint="@{TextUtils.isEmpty(colorsData.instance().data.config.tph_hint_txt_color) ? @color/tph_hint_txt_color : Color.parseColor(colorsData.instance().data.config.tph_hint_txt_color), default=@color/tph_hint_txt_color}"
                         android:hint="Enter Phone"
