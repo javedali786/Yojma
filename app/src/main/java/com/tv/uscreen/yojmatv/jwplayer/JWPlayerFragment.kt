@@ -77,18 +77,14 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var id: Int? = null
     private var episodeId: Int? = 0
     var totalDuration: Double? = 0.0
-    private var currentPlayingIndex: Int? = -1
     private var isBingeWatchEnable: Boolean? = false
     var videoTracks: ArrayList<TrackItem>? = ArrayList<TrackItem>()
-    var seasonEpisodesList: List<EnveuVideoItemBean>? = null
     var selectedVideoTrack = "Auto"
     private var preference: KsPreferenceKeys? = null
     var isLoggedIn = false
     var isUserVerified = ""
-    private var token: String? = null
     private var RefId = ""
     private var sku = ""
-    private var viewModel: DetailViewModel? = null
     private var captionList: ArrayList<Caption>? = null
     private var audioList: ArrayList<AudioTrack>? = null
 
@@ -97,7 +93,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var mCastContext: CastContext? = null
     var total: Int? = 0
     private var isInitialised = false
-    private var isSeries = false
     private var isNetworkConnected = true
     private var lastBookmarkTime = 0L
     private val progress = Progress()
@@ -107,7 +102,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var isLive: Boolean? = false
     private var isBookMarkUpdated: Boolean? = false
     private var bookmarkPosition = 0.0
-    private var plugin : Plugin? = null
+    private var plugin: Plugin? = null
     private var userId: String? = ""
     private var contentId: String? = null
     private var genre: String? = ""
@@ -178,6 +173,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         mPlayer?.play()
         viewBinding.seriesDetailAllEpisodeTxtColors.updatePlayPauseIcon(true)
     }
+
 
     private val playerControlClickListener = object : ControlClickListener() {
         override fun onPlayPauseClicked() {
@@ -413,12 +409,24 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         mListener = mActivity as OnPlayerInteractionListener
         UIInitialization()
         setUpCast()
+        counter=currentPlayingIndex!!
+        chromecastPlaylist = ArrayList()
         initializaPlayer()
+        getChromecastList()
         mPlayer?.isCaptionsRendering = true
     }
 
-    fun initializePlugin(context: Activity,userId:String?,tittle:String?,isLive:Boolean?,seriesTittle:String?,contentId:String?,contentType:String?,genre:String?) {
-        plugin =null
+    fun initializePlugin(
+        context: Activity,
+        userId: String?,
+        tittle: String?,
+        isLive: Boolean?,
+        seriesTittle: String?,
+        contentId: String?,
+        contentType: String?,
+        genre: String?
+    ) {
+        plugin = null
         val options = Options()
         if (BuildConfig.FLAVOR.equals("qa", ignoreCase = true)) {
             options.accountCode = AppConstants.QA_YOUBORA_ACCOUNT_CODE
@@ -435,10 +443,10 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         options.contentChannel = tittle
         options.contentId = contentId
         options.contentType = contentType
-        options.contentGenre= genre
+        options.contentGenre = genre
         options.appName = "Yojma TV"
         options.appReleaseVersion = BuildConfig.VERSION_NAME
-        options.contentCustomDimension8= "yojmatv"
+        options.contentCustomDimension8 = "yojmatv"
 
         if (isLive == true) {
             options.contentChannel = tittle
@@ -449,16 +457,18 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         plugin = Plugin(options, context as Context)
         plugin?.activity = context // Activity where the player is
         plugin?.fireInit()
-        android.util.Log.w("FirebasePerformance","InitCalled")
+        android.util.Log.w("FirebasePerformance", "InitCalled")
         /*  plugin?.adapter = JWPlayerAdapter(mPlayer)
           plugin?.adsAdapter = JWPlayerAdsAdapter(mPlayer)*/
 
     }
-    private fun setJwPlayerAdapter(mPlayer: JWPlayer?){
+
+    private fun setJwPlayerAdapter(mPlayer: JWPlayer?) {
         plugin?.adapter = JWPlayerAdapter(mPlayer)
         plugin?.adsAdapter = JWPlayerAdsAdapter(mPlayer)
     }
-    private fun stopPlugin(){
+
+    private fun stopPlugin() {
         plugin?.fireStop()
         plugin?.removeAdapter()
     }
@@ -534,6 +544,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             .build()
         val playlist: MutableList<PlaylistItem> = ArrayList()
         playlist.add(playlistItem)
+
         if (!SDKConfig.getInstance().jwPlayerDiliveryBaseUrl.isNullOrEmpty()) {
             val config = PlayerConfig.Builder()
                 .playlistUrl("${SDKConfig.getInstance().jwPlayerDiliveryBaseUrl}$externalRefId")
@@ -546,7 +557,8 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             viewBinding.seriesDetailAllEpisodeTxtColors.addHideHandler()
 
             addListener()
-            isSeries = isBingeWatchEnable == true && currentPlayingIndex!! < seasonEpisodesList?.size!! - 1
+            isSeries =
+                isBingeWatchEnable == true && currentPlayingIndex!! < seasonEpisodesList?.size!! - 1
         }
         callPlayDetails()
     }
@@ -640,8 +652,8 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         }
         contentDuration = mPlayer?.duration.toString()
         var durationPosition = mPlayer?.position!!
-        if(isSeries) {
-            if(durationPosition > 1 && totalDuration!! > 1) {
+        if (isSeries) {
+            if (durationPosition > 1 && totalDuration!! > 1) {
                 val minusDuration = totalDuration?.minus(timer)
                 if (minusDuration!! > 1) {
                     if (durationPosition >= minusDuration) {
@@ -666,7 +678,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         runnable = object : Runnable {
             override fun run() {
                 if (mPlayer != null) {
-                     totalDuration = mPlayer!!.duration
+                    totalDuration = mPlayer!!.duration
                     val currentPosition: Double = mPlayer!!.position
                     val percentagePlayed = currentPosition / totalDuration!! * 100L
                     if (percentagePlayed > 1 && percentagePlayed <= 95) {
@@ -778,7 +790,18 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                 if (isUserVerified.equals("true", ignoreCase = true)) {
                     this.playbackUrl = SDKConfig.getInstance().playbacK_URL + RefId + ".m3u8"
                     // startPlayer(playback_url)
-                    activity?.let { initializePlugin(it,userId,tittle,isLive,seriesTittle,contentId,contentType,genre) }
+                    activity?.let {
+                        initializePlugin(
+                            it,
+                            userId,
+                            tittle,
+                            isLive,
+                            seriesTittle,
+                            contentId,
+                            contentType,
+                            genre
+                        )
+                    }
 
                     externalRefId = RefId
                     initializaPlayer()
@@ -801,7 +824,18 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                                 this.playbackUrl =
                                     SDKConfig.getInstance().playbacK_URL + it.data.externalRefId + ".m3u8"
                                 externalRefId = it.data.externalRefId
-                                activity?.let { initializePlugin(it,userId,tittle,isLive,seriesTittle,contentId,contentType,genre)}
+                                activity?.let {
+                                    initializePlugin(
+                                        it,
+                                        userId,
+                                        tittle,
+                                        isLive,
+                                        seriesTittle,
+                                        contentId,
+                                        contentType,
+                                        genre
+                                    )
+                                }
                                 initializaPlayer()
                             } else {
                                 showDialog(
