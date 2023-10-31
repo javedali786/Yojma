@@ -47,6 +47,7 @@ import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.AppleSignInManager
 import com.tv.uscreen.yojmatv.utils.helpers.CheckInternetConnection
 import com.tv.uscreen.yojmatv.utils.helpers.NetworkConnectivity
+import com.tv.uscreen.yojmatv.utils.helpers.SharedPrefHelper
 import com.tv.uscreen.yojmatv.utils.helpers.StringUtils
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
@@ -89,6 +90,8 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        SharedPrefHelper.getInstance().setColorJson(ColorsHelper.loadDataFromJson())
+        SharedPrefHelper.getInstance().setStringJson(StringsHelper.loadDataFromJson())
 
         binding?.stringData = stringsHelper
         binding?.colorsData = colorsHelper
