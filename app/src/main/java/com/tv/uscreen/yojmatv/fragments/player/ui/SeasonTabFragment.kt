@@ -411,39 +411,31 @@ class SeasonTabFragment : BaseBindingFragment<SeasonFragmentLayoutBinding?>(), S
         var isHosted = false
         var externalUrl: String? = ""
         if (itemValue?.trailerReferenceId != null) {
-            trailerReferenceId = itemValue?.trailerReferenceId
+            trailerReferenceId = itemValue.trailerReferenceId
         }
         var tittle: String? = ""
         if (itemValue?.title != null) {
-            tittle = itemValue?.title
+            tittle = itemValue.title
         }
         if (itemValue?.parentContent == null) {
             isParentContentNull = true
         }
         var externalRefId: String? = ""
         if (itemValue?.externalRefId != null) {
-            externalRefId = itemValue?.externalRefId
+            externalRefId = itemValue.externalRefId
         }
         var skuId: String? = ""
         if (itemValue?.sku != null) {
-            skuId = itemValue?.sku
+            skuId = itemValue.sku
         }
         var customContentType: String? = ""
         val assetType = itemValue?.assetType
         var videoType: String? = ""
         if (itemValue?.assetType.equals(AppConstants.VIDEO, ignoreCase = true)) {
             videoType = itemValue?.videoDetails?.videoType
-        } else if (itemValue?.assetType.equals(AppConstants.LIVE, ignoreCase = true)) {
-            if (java.lang.Boolean.TRUE == itemValue?.liveContent?.isHosted) {
-                isHosted = true
-            } else {
-                if (itemValue?.liveContent?.externalUrl != null) {
-                    externalUrl = itemValue?.liveContent.externalUrl
-                }
-            }
         } else {
             if (itemValue?.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
-                customContentType = itemValue?.customContent?.customType
+                customContentType = itemValue?.customType
             }
         }
         AppCommonMethod.launchDetailScreenFromSearch(

@@ -2,7 +2,6 @@ package com.tv.uscreen.yojmatv.activities.listing.ui
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.RequiresApi
@@ -16,7 +15,6 @@ import com.enveu.client.bookmarking.bean.continuewatching.GetContinueWatchingBea
 import com.enveu.client.enums.ImageType
 import com.tv.uscreen.yojmatv.Bookmarking.BookmarkingViewModel
 import com.tv.uscreen.yojmatv.R
-
 import com.tv.uscreen.yojmatv.activities.homeactivity.ui.HomeActivity
 import com.tv.uscreen.yojmatv.activities.listing.callback.ItemClickListener
 import com.tv.uscreen.yojmatv.adapters.CommonListingAdapter
@@ -33,7 +31,6 @@ import com.tv.uscreen.yojmatv.beanModelV3.continueWatching.DataItem
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.CommonApiCallBack
 import com.tv.uscreen.yojmatv.databinding.ListingActivityBinding
-
 import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogSingleButtonFragment
 import com.tv.uscreen.yojmatv.layersV2.ContinueWatchingLayer
@@ -482,7 +479,6 @@ class GridActivity : BaseBindingActivity<ListingActivityBinding?>(), ItemClickLi
     }
 
     override fun onRowItemClicked(itemValue: EnveuVideoItemBean, position: Int) {
-        //AppCommonMethod.redirectionLogic(this,railCommonData,position);
         var trailerReferenceId: String? = ""
         var isParentContentNull = false
         var isHosted = false
@@ -511,17 +507,9 @@ class GridActivity : BaseBindingActivity<ListingActivityBinding?>(), ItemClickLi
         var videoType: String? = ""
         if (itemValue.assetType.equals(AppConstants.VIDEO, ignoreCase = true)) {
             videoType = itemValue.videoDetails.videoType
-        } else if (itemValue.assetType.equals(AppConstants.LIVE, ignoreCase = true)) {
-            if (java.lang.Boolean.TRUE == itemValue.liveContent.isHosted) {
-                isHosted = true
-            } else {
-                if (itemValue.liveContent.externalUrl != null) {
-                    externalUrl = itemValue.liveContent.externalUrl
-                }
-            }
         } else {
             if (itemValue.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
-                customContentType = itemValue.customContent.customType
+                customContentType = itemValue.customType
             }
         }
         AppCommonMethod.launchDetailScreenFromSearch(

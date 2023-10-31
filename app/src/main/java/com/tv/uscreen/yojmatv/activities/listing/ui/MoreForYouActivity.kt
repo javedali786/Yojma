@@ -2,7 +2,6 @@ package com.tv.uscreen.yojmatv.activities.listing.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -142,48 +141,40 @@ class MoreForYouActivity : BaseBindingActivity<MoreForyouActivityBinding?>(), Re
     override fun onItemClick(itemValue: EnveuVideoItemBean?, isPremium: Boolean, position: Int) {
         var trailerReferenceId: String? = ""
         var isParentContentNull = false
-        var isHosted = false
-        var externalUrl: String? = ""
+        val isHosted = false
+        val externalUrl: String = ""
         if (itemValue?.trailerReferenceId != null) {
-            trailerReferenceId = itemValue?.trailerReferenceId
+            trailerReferenceId = itemValue.trailerReferenceId
         }
         var tittle: String? = ""
         if (itemValue?.title != null) {
-            tittle = itemValue?.title
+            tittle = itemValue.title
         }
         if (itemValue?.parentContent == null) {
             isParentContentNull = true
         }
         var externalRefId: String? = ""
         if (itemValue?.externalRefId != null) {
-            externalRefId = itemValue?.externalRefId
+            externalRefId = itemValue.externalRefId
         }
         var skuId: String? = ""
         if (itemValue?.sku != null) {
-            skuId = itemValue?.sku
+            skuId = itemValue.sku
         }
         var customContentType: String? = ""
         val assetType = itemValue?.assetType
         var videoType: String? = ""
         if (itemValue?.assetType.equals(AppConstants.VIDEO, ignoreCase = true)) {
             videoType = itemValue?.videoDetails?.videoType
-        } else if (itemValue?.assetType.equals(AppConstants.LIVE, ignoreCase = true)) {
-            if (java.lang.Boolean.TRUE == itemValue?.liveContent?.isHosted) {
-                isHosted = true
-            } else {
-                if (itemValue?.liveContent?.externalUrl != null) {
-                    externalUrl = itemValue?.liveContent?.externalUrl
-                }
-            }
         } else {
             if (itemValue?.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
-                customContentType = itemValue?.customContent?.customType
+                customContentType = itemValue?.customType
             }
         }
         AppCommonMethod.launchDetailScreenFromSearch(
             this,
             assetType!!,
-            itemValue?.id!!,
+            itemValue.id,
             customContentType!!,
             videoType,
             trailerReferenceId,
@@ -194,7 +185,7 @@ class MoreForYouActivity : BaseBindingActivity<MoreForyouActivityBinding?>(), Re
             tittle,
             isHosted,
             externalUrl!!,
-            itemValue?.posterURL
+            itemValue.posterURL
         )
     }
 }
