@@ -159,7 +159,7 @@
     <string name="cancel_subscription_button">Cancelar Suscripción</string>
     <string name="cancel_button">Cancelar</string>
     <string name="profile_enter_name">Introducir Nombre</string>
-    <string name="profile_mobile_number">Numero de Movil (Opcional)</string>
+    <string name="profile_mobile_number">Número de WhatsApp (opcional)</string>
     <string name="profile_dob">Fecha de Nacimiento</string>
     <string name="profile_country">País (Opcional)</string>
     <string name="profile_city">Ciudad (Opcional)</string>
