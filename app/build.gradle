@@ -184,10 +184,10 @@ dependencies {
     // implementation project(':enveusdk')
 //    implementation project(':player')
 
-   // implementation files('libs/enveuandroidclient-debug.aar')
+    implementation files('libs/enveuandroidclient-debug.aar')
     implementation files('libs/enveuandroidsdk-debug.aar')
    // implementation project(':enveuandroidsdk')
-    implementation project(':enveuandroidclient')
+   // implementation project(':enveuandroidclient')
 
     //noinspection GradleDependency
     implementation("androidx.lifecycle:lifecycle-process:2.5.0")
