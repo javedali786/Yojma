@@ -66,7 +66,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var mPlayer: JWPlayer? = null
     private var mListener: OnPlayerInteractionListener? = null
     private var mActivity: Activity? = null
-    private var externalRefId: String? = null
     private var isChromcastConnected = false
     private var screenName: String? = null
     private var skipIntroStartTime: String = ""
@@ -294,8 +293,10 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
         override fun onSkipIntroClicked() {
             super.onSkipIntroClicked()
-            if (!skipIntroEndTime.isNullOrEmpty())
-                seekPlayerTo(skipIntroEndTime.toDouble())
+            if (!isCasting()) {
+                if (!skipIntroEndTime.isNullOrEmpty())
+                    seekPlayerTo(skipIntroEndTime.toDouble())
+            }
         }
 
         override fun onRewindClick() {
@@ -331,11 +332,13 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
         override fun onOutsideClicked(root: View) {
             super.onOutsideClicked(root)
-            isLive?.let {
-                viewBinding.seriesDetailAllEpisodeTxtColors.toggleControlVisibility(
-                    123,
-                    it
-                )
+            if (!isCasting()) {
+                isLive?.let {
+                    viewBinding.seriesDetailAllEpisodeTxtColors.toggleControlVisibility(
+                        123,
+                        it
+                    )
+                }
             }
         }
     }
@@ -409,10 +412,9 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         mListener = mActivity as OnPlayerInteractionListener
         UIInitialization()
         setUpCast()
-        counter=currentPlayingIndex!!
         chromecastPlaylist = ArrayList()
         initializaPlayer()
-        getChromecastList()
+
         mPlayer?.isCaptionsRendering = true
     }
 
@@ -576,6 +578,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         }
 
     }
+
 
     private fun addListener() {
         mPlayer?.addListener(EventType.PLAY, this)
@@ -886,6 +889,8 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                 initializaPlayer()
             }
         }
+        if (isCasting())
+            mPlayer?.pause()
     }
 
     override fun onStart() {
@@ -913,6 +918,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         mPlayer?.removeListener(EventType.READY, this)
         mPlayer?.removeListener(EventType.BUFFER, this)
         mPlayer?.removeListener(EventType.TIME, this)
+        endSession()
     }
 
     override fun onDestroyView() {

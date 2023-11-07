@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
 import com.tv.uscreen.yojmatv.beanModel.entitle.ResponseEntitle;
+import com.tv.uscreen.yojmatv.callbacks.apicallback.EntitlementCallBack;
 import com.tv.uscreen.yojmatv.jwplayer.cast.PlayDetailResponse;
 import com.tv.uscreen.yojmatv.networking.apiendpoints.RequestConfig;
 import com.tv.uscreen.yojmatv.networking.detailPlayer.APIDetails;
@@ -29,7 +30,37 @@ public class EntitlementLayer {
         }
         return entitlement;
     }
+    public void checkEntitlement(String token, String sku, EntitlementCallBack entitlementCallBack) {
 
+        APIDetails endpoint = RequestConfig.getUserInteration(token).create(APIDetails.class);
+        Call<ResponseEntitle> call = endpoint.checkEntitlement(sku);
+        call.enqueue(new Callback<ResponseEntitle>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseEntitle> call, @NonNull Response<ResponseEntitle> response) {
+                if (response.code() == 200) {
+                    ResponseEntitle responseEntitlement = new ResponseEntitle();
+
+                    responseEntitlement.setResponseCode(response.code());
+                    responseEntitlement.setStatus(true);
+                    responseEntitlement.setData(Objects.requireNonNull(response.body()).getData());
+                    Gson gson = new Gson();
+                   entitlementCallBack.entitlementStatus(responseEntitlement);
+                } else {
+                    ResponseEntitle responseModel = ErrorCodesIntercepter.getInstance().checkEntitlement(response);
+                    entitlementCallBack.entitlementStatus(responseModel);
+
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ResponseEntitle> call, @NonNull Throwable t) {
+                ResponseEntitle responseEntitlement = new ResponseEntitle();
+                responseEntitlement.setStatus(false);
+                entitlementCallBack.entitlementStatus(responseEntitlement);
+
+            }
+        });
+    }
     public LiveData<ResponseEntitle> hitApiEntitlement(String token, String sku) {
         MutableLiveData<ResponseEntitle> responseOutput = new MutableLiveData<>();
 
