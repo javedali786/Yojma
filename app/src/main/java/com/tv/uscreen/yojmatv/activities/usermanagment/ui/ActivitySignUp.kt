@@ -42,6 +42,7 @@ import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.AppleSignInManager
 import com.tv.uscreen.yojmatv.utils.helpers.CheckInternetConnection
 import com.tv.uscreen.yojmatv.utils.helpers.NetworkConnectivity
+import com.tv.uscreen.yojmatv.utils.helpers.SharedPrefHelper
 import com.tv.uscreen.yojmatv.utils.helpers.StringUtils
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
@@ -61,6 +62,8 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
     private val ifCheckboxIsChecked = true
     private lateinit var name:String
     private lateinit var email:String
+    private  var selectedCountryCode:String?= null
+    private lateinit var phoneNumber:String
     private var dob:String = ""
     private var dateMilliseconds = ""
     private var accessTokenFB: String? = null
@@ -84,12 +87,11 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //ThemeHandler.getInstance().applyActivitySignUp(this,binding)
+        SharedPrefHelper.getInstance().setColorJson(ColorsHelper.loadDataFromJson())
+        SharedPrefHelper.getInstance().setStringJson(StringsHelper.loadDataFromJson())
         parseColor()
         binding?.signIn?.paintFlags = binding!!.signIn.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-        viewModel = ViewModelProvider(this@ActivitySignUp).get(
-            RegistrationLoginViewModel::class.java
-        )
+        viewModel = ViewModelProvider(this@ActivitySignUp)[RegistrationLoginViewModel::class.java]
         preference= KsPreferenceKeys.getInstance()
         uiCall()
         setClicks()
@@ -120,6 +122,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
         ColorsHelper.textViewDrawableColor(binding!!.dOB, AppColors.dobIconColor())
         binding?.password?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor() , 10f)
         binding?.confPassword?.background = ColorsHelper.strokeBgDrawable(AppColors.tphBgColor(), AppColors.tphBrColor() , 10f)
+
     }
 
     private fun passwordTextWatcher() {
@@ -164,6 +167,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
 
 
     private fun setClicks() {
+
         binding?.toolbar?.backLayout?.setOnClickListener { onBackPressed() }
 
         callbackManager = CallbackManager.Factory.create()
@@ -320,7 +324,18 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
         } )
 
 
+
+        // Get the selected country code
+         selectedCountryCode = binding?.countryCodePicker?.selectedCountryCode
+
+       // Get the text from the EditText
+         phoneNumber = binding?.phoneNumber?.text.toString()
+
+
+
     }
+
+
 
 
     fun hitApiFBLogin() {
@@ -486,33 +501,18 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
     private fun hitSignUpApi() {
         showLoading(binding?.progressBar,true)
         preference?.appPrefAccessToken = ""
-        viewModel?.hitSignUpAPI(binding?.name?.text.toString(),binding?.email?.text.toString(),dateMilliseconds,binding?.password?.text.toString(),true)?.observe(this, Observer {
+        viewModel?.hitSignUpAPI(binding?.name?.text.toString(),binding?.email?.text.toString(),dateMilliseconds,binding?.password?.text.toString(),true,binding?.phoneNumber?.text.toString(),selectedCountryCode)?.observe(this, Observer {
           if (it!=null) {
               dismissLoading(binding?.progressBar)
               Log.d("SIgnupResponse", Gson().toJson(it))
              try {
-                  if (it.responseModel.responseCode === 200) {
+                  if (it.responseModel.responseCode == 200) {
                       val gson = Gson()
                       KsPreferenceKeys.getInstance().appPrefAccessToken=it.accessToken
                       val signUpData: Data = it.responseModel.data
                       val stringJson = gson.toJson(signUpData)
                       callSignupDevice(stringJson)
                       saveUserDetails(stringJson, true)
-                     /* try {
-                          setUserProperties(this,signUpData.id,signUpData.name,signUpData.email,signUpData.phoneNumber,signUpData.dateOfBirth)
-                      } catch (e: NullPointerException ) {
-                        Logger.w(e)
-                      }*/
-
-                     /* val properties = Properties()
-                      properties.addAttribute(AppConstants.REGISTER, AppConstants.REGISTER)
-                      MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.TAB_SCREEN_VIEWED, properties)
-                      val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
-                      val date = Date()
-                      System.out.println(dateFormat.format(date))
-                      properties.addAttribute(AppConstants.REGISTER_DATE, date)
-                      MoEHelper.getInstance(applicationContext).trackEvent(AppConstants.REGISTER_DATE, properties)
-                      AppCommonMethod.screenViewedTrack(applicationContext, AppConstants.SIGN_UP_SUCCESS, "ActivitySignUp")*/
 
                       clearEditView()
                   }else if(it.responseModel.responseCode==4901){

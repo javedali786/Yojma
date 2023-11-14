@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.repository.bookmarking;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -18,6 +19,8 @@ import com.tv.uscreen.yojmatv.utils.Logger;
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants;
 
 import org.json.JSONObject;
+
+import java.util.Objects;
 
 import retrofit2.Response;
 
@@ -118,7 +121,7 @@ public class BookmarkingRepository {
 
         BaseCategoryServices.Companion.getInstance().getContinueWatchingData(token,pageNumber,pageSize, new GetContinueWatchingCallback() {
             @Override
-            public void success(boolean status, Response<GetContinueWatchingBean> getBookmarkResponse) {
+            public void success(boolean status, @NonNull Response<GetContinueWatchingBean> getBookmarkResponse) {
                 GetContinueWatchingBean cl;
                 if (status){
                     if (getBookmarkResponse!=null){
@@ -131,7 +134,7 @@ public class BookmarkingRepository {
 
                             bookmarkingResponseMutableLiveData.postValue(profileItemBean);
                         }else {
-                            cl = ErrorCodesIntercepter.getInstance().continueWatch(getBookmarkResponse);
+                            cl = Objects.requireNonNull(ErrorCodesIntercepter.getInstance()).continueWatch(getBookmarkResponse);
                             bookmarkingResponseMutableLiveData.postValue(cl);
                         }
                     }

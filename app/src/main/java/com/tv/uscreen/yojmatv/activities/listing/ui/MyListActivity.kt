@@ -3,7 +3,6 @@ package com.tv.uscreen.yojmatv.activities.listing.ui
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
@@ -16,7 +15,6 @@ import com.enveu.client.watchHistory.beans.ResponseWatchHistoryAssetList
 import com.google.gson.Gson
 import com.tv.uscreen.yojmatv.Bookmarking.BookmarkingViewModel
 import com.tv.uscreen.yojmatv.R
-
 import com.tv.uscreen.yojmatv.activities.listing.callback.ItemClickListener
 import com.tv.uscreen.yojmatv.activities.listing.listadapter.ListAdapter
 import com.tv.uscreen.yojmatv.adapters.CommonShimmerAdapter
@@ -25,7 +23,6 @@ import com.tv.uscreen.yojmatv.beanModel.emptyResponse.ResponseEmpty
 import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.databinding.FragmentMyListBinding
-
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment.Companion.newInstance
 import com.tv.uscreen.yojmatv.utils.Logger
@@ -326,15 +323,7 @@ class MyListActivity : BaseBindingActivity<FragmentMyListBinding?>(), ItemClickL
         var videoType: String? = ""
         if (itemValue.assetType.equals(AppConstants.VIDEO, ignoreCase = true)) {
             videoType = itemValue.videoDetails.videoType
-        } else if (itemValue.assetType.equals(AppConstants.LIVE, ignoreCase = true)) {
-            if (itemValue.liveContent.isHosted == true) {
-                isHosted = true
-            } else {
-                if (itemValue.liveContent.externalUrl != null) {
-                    externalUrl = itemValue.liveContent.externalUrl
-                }
-            }
-        } else {
+        }else {
             if (itemValue.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
                 customContentType = itemValue.customContent.customType
             }

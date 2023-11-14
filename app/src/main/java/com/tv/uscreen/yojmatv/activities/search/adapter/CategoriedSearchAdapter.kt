@@ -1,7 +1,7 @@
 package com.tv.uscreen.yojmatv.activities.search.adapter
 
+
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +9,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tv.uscreen.yojmatv.R
-
-
 import com.tv.uscreen.yojmatv.activities.search.adapter.RowSearchAdapter.RowSearchListener
 import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.SearchClickCallbacks
 import com.tv.uscreen.yojmatv.databinding.RowSearchCategoryBinding
-
 import com.tv.uscreen.yojmatv.utils.Logger
 import com.tv.uscreen.yojmatv.utils.colorsJson.converter.ColorsHelper
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod.Companion.launchDetailScreenFromSearch
@@ -130,14 +127,6 @@ class CategoriedSearchAdapter(private val context: Context, private val list: Li
         var videoType: String? = ""
         if (itemValue.assetType.equals(AppConstants.VIDEO, ignoreCase = true)) {
             videoType = itemValue.videoDetails.videoType
-        } else if (itemValue.assetType.equals(AppConstants.LIVE, ignoreCase = true)) {
-            if (java.lang.Boolean.TRUE == itemValue.liveContent.isHosted) {
-                isHosted = true
-            } else {
-                if (itemValue.liveContent.externalUrl != null) {
-                    externalUrl = itemValue.liveContent.externalUrl
-                }
-            }
         } else {
             if (itemValue.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
                 customContentType = itemValue.customType

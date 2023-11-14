@@ -33,16 +33,6 @@ public class RequestConfig {
     private static Retrofit configRetrofit = null;
     private static Retrofit recoClickRetrofit = null;
 
-    public static Retrofit getClient() {
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .build();
-        }
-        return retrofit;
-    }
 
     public static Retrofit getEnveuClient() {
         if (enveuRetrofit == null) {

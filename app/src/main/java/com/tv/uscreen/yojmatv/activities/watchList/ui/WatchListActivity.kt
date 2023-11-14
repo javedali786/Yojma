@@ -3,7 +3,6 @@ package com.tv.uscreen.yojmatv.activities.watchList.ui
 import android.content.Context
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
@@ -489,17 +488,9 @@ class WatchListActivity : BaseBindingActivity<WatchListActivityBinding?>(), Watc
         var videoType: String? = ""
         if (itemValue.assetType.equals(AppConstants.VIDEO, ignoreCase = true)) {
             videoType = itemValue.videoDetails.videoType
-        } else if (itemValue.assetType.equals(AppConstants.LIVE, ignoreCase = true)) {
-            if (java.lang.Boolean.TRUE == itemValue.liveContent.isHosted) {
-                isHosted = true
-            } else {
-                if (itemValue.liveContent.externalUrl != null) {
-                    externalUrl = itemValue.liveContent.externalUrl
-                }
-            }
         } else {
             if (itemValue.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
-                customContentType = itemValue.customContent.customType
+                customContentType = itemValue.customType
             }
         }
         AppCommonMethod.launchDetailScreenFromSearch(

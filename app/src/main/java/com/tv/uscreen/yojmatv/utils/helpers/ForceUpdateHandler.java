@@ -2,24 +2,14 @@ package com.tv.uscreen.yojmatv.utils.helpers;
 
 import android.app.Activity;
 
-import androidx.annotation.NonNull;
-
-import com.google.gson.Gson;
 import com.tv.uscreen.yojmatv.OttApplication;
-import com.tv.uscreen.yojmatv.beanModel.configBean.ResponseConfig;
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.DialogInterface;
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.VersionUpdateCallBack;
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.VersionValidator;
-import com.tv.uscreen.yojmatv.networking.apiendpoints.ApiInterface;
-import com.tv.uscreen.yojmatv.networking.apiendpoints.RequestConfig;
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod;
 import com.tv.uscreen.yojmatv.utils.config.bean.dmsResponse.ConfigBean;
 import com.tv.uscreen.yojmatv.utils.config.bean.dmsResponse.Version;
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ForceUpdateHandler {
     final Activity activity;
@@ -109,6 +99,7 @@ public class ForceUpdateHandler {
         }
     }
 
+/*
     private void checkPlaystoreVersion(final int currentVersion, final VersionValidator callBack) {
         versionValidator = callBack;
         ApiInterface endpoint = RequestConfig.getClient().create(ApiInterface.class);
@@ -126,7 +117,9 @@ public class ForceUpdateHandler {
                     String json = gson.toJson(cl);
 
 
-                    AppCommonMethod.urlPoints = /*AppConstants.PROFILE_URL +*/ response.body().getData().getImageTransformationEndpoint();
+                    AppCommonMethod.urlPoints = */
+/*AppConstants.PROFILE_URL +*//*
+ response.body().getData().getImageTransformationEndpoint();
 
                     ksPreferenceKeys.setAppPrefLastConfigHit(String.valueOf(System.currentTimeMillis()));
                     ksPreferenceKeys.setAppPrefConfigResponse(json);
@@ -146,6 +139,7 @@ public class ForceUpdateHandler {
             }
         });
     }
+*/
 
     public void hideDialog() {
         materialDialog.hide();

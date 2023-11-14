@@ -68,8 +68,8 @@ android {
         }
         prod {
             dimension 'default'
-            versionCode 101
-            versionName "2.9"
+            versionCode 14
+            versionName "4.6.0"
             applicationId "tv.uscreen.yojmatv"
             buildConfigField "String", "MOENGAGE_APP_ID", "\"RKRIA1W5XU7NWCY5X9935YBF\""
         }
@@ -216,5 +216,9 @@ dependencies {
 
 //    implementation("androidx.appcompat:appcompat:1.6.0")
 //    implementation("androidx.lifecycle:lifecycle-process:2.4.0")
+
+    implementation ("com.hbb20:ccp:2.5.1")
+
+
 
 }

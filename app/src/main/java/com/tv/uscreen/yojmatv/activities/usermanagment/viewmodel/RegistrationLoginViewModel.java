@@ -49,8 +49,8 @@ public class RegistrationLoginViewModel extends AndroidViewModel {
         return loginRepository.getSecondaryUserAPIReponse(token,userName);
     }
 
-    public LiveData<SignupResponseAccessToken> hitSignUpAPI(String name, String userName, String dob,String pwd, boolean isNotificationEnable) {
-        return loginRepository.getSignupAPIResponse(name, userName,dob, pwd,isNotificationEnable);
+    public LiveData<SignupResponseAccessToken> hitSignUpAPI(String name, String userName, String dob,String pwd, boolean isNotificationEnable,String phoneNumber,String countryCode) {
+        return loginRepository.getSignupAPIResponse(name, userName,dob, pwd,isNotificationEnable,phoneNumber,countryCode);
     }
     public LiveData<CommonResponse> hitForgotPasswordApi(String email) {
         return loginRepository.getForgotPasswordAPIResponse(email);

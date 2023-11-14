@@ -1,5 +1,6 @@
 package com.tv.uscreen.yojmatv.activities.search.ui
 
+
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
@@ -9,7 +10,6 @@ import android.graphics.drawable.InsetDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -27,8 +27,6 @@ import com.google.gson.reflect.TypeToken
 import com.moe.pushlibrary.MoEHelper
 import com.moengage.core.Properties
 import com.tv.uscreen.yojmatv.R
-
-
 import com.tv.uscreen.yojmatv.SDKConfig
 import com.tv.uscreen.yojmatv.activities.detail.ui.DetailActivity
 import com.tv.uscreen.yojmatv.activities.search.adapter.CategoriedSearchAdapter
@@ -426,17 +424,9 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
         var videoType: String? = ""
         if (itemValue.assetType.equals(AppConstants.VIDEO, ignoreCase = true)) {
             videoType = itemValue.videoDetails.videoType
-        } else if (itemValue.assetType.equals(AppConstants.LIVE, ignoreCase = true)) {
-            if (java.lang.Boolean.TRUE == itemValue.liveContent.isHosted) {
-                isHosted = true
-            } else {
-                if (itemValue.liveContent.externalUrl != null) {
-                    externalUrl = itemValue.liveContent.externalUrl
-                }
-            }
         } else {
             if (itemValue.assetType.equals(AppConstants.CUSTOM, ignoreCase = true)) {
-                customContentType = itemValue.customContent.customType
+                customContentType = itemValue.customType
             }
         }
         AppCommonMethod.launchDetailScreenFromSearch(

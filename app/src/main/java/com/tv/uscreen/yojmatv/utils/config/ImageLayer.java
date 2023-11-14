@@ -248,16 +248,28 @@ public class ImageLayer {
     public String getPosterImageUrl(DataItem videoItem) {
         String finalUrl = "";
         try {
-
-            if (videoItem.getVideo().getImages().size() > 0) {
-                for (int i = 0; i < videoItem.getVideo().getImages().size(); i++) {
-                    if (videoItem.getVideo().getImages().get(i).isDefault()) {
-                        finalUrl = videoItem.getVideo().getImages().get(i).getSrc();
-                        Log.w("imageURL", finalUrl);
-                        break;
+            if (videoItem.getContentType().equalsIgnoreCase(AppConstants.VIDEO)) {
+                if (videoItem.getVideo().getImages().size() > 0) {
+                    for (int i = 0; i < videoItem.getVideo().getImages().size(); i++) {
+                        if (videoItem.getVideo().getImages().get(i).isDefault()) {
+                            finalUrl = videoItem.getVideo().getImages().get(i).getSrc();
+                            Log.w("imageURL", finalUrl);
+                            break;
+                        }
+                    }
+                }
+            } else if (videoItem.getContentType().equalsIgnoreCase(AppConstants.CUSTOM)) {
+                if (videoItem.getCustomContent().getImages().size() > 0) {
+                    for (int i = 0; i < videoItem.getCustomContent().getImages().size(); i++) {
+                        if (videoItem.getCustomContent().getImages().get(i).isDefault()) {
+                            finalUrl = videoItem.getCustomContent().getImages().get(i).getSrc();
+                            Log.w("imageURL", finalUrl);
+                            break;
+                        }
                     }
                 }
             }
+
         } catch (Exception ignored) {
 
         }
@@ -266,71 +278,6 @@ public class ImageLayer {
     }
 
 
-    public String getThumbNailImageUrl(VideosItem videoItem) {
-       /* String finalUrl="";
-        try {
-
-        if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("English")) {
-            if (videoItem.getImages()!=null && videoItem.getImages().getThumbnailEn()!=null && videoItem.getImages().getThumbnailEn().getSources()!=null
-                    && videoItem.getImages().getThumbnailEn().getSources().size()>0){
-                finalUrl=videoItem.getImages().getThumbnailEn().getSources().get(0).getSrc();
-            }else {
-                if (videoItem.getImages()!=null && videoItem.getImages().getThumbnail()!=null && videoItem.getImages().getThumbnail().getSources()!=null
-                        && videoItem.getImages().getThumbnail().getSources().size()>0){
-                    finalUrl=videoItem.getImages().getThumbnail().getSources().get(0).getSrc();
-                }
-            }
-        }
-        else if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("Thai")){
-            if (videoItem.getImages()!=null && videoItem.getImages().getThumbnail()!=null && videoItem.getImages().getThumbnail().getSources()!=null
-                    && videoItem.getImages().getThumbnail().getSources().size()>0){
-                finalUrl=videoItem.getImages().getThumbnail().getSources().get(0).getSrc();
-            }
-        }
-        }catch (Exception ignored){
-
-        }
-        if(finalUrl.isEmpty()){
-            if (videoItem.getImages()!=null && videoItem.getImages().getThumbnail()!=null && videoItem.getImages().getThumbnail().getSources()!=null
-                    && videoItem.getImages().getThumbnail().getSources().size()>0){
-                finalUrl=videoItem.getImages().getThumbnail().getSources().get(0).getSrc();
-            }
-        }
-        return finalUrl;*/
-
-        String finalUrl = "";
-        try {
-      /*  if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("English")) {
-            if (videoItem.getImages() != null && videoItem.getImages().getPosterEn() != null && videoItem.getImages().getPosterEn().getSources() != null
-                    && videoItem.getImages().getPosterEn().getSources().size() > 0) {
-                finalUrl= videoItem.getImages().getPosterEn().getSources().get(0).getSrc();
-            }else {
-                if (videoItem.getImages() != null && videoItem.getImages().getPoster() != null && videoItem.getImages().getPoster().getSources() != null
-                        && videoItem.getImages().getPoster().getSources().size() > 0) {
-                    finalUrl= videoItem.getImages().getPoster().getSources().get(0).getSrc();
-                }
-            }
-        }
-        else if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("Thai")){
-            if (videoItem.getImages() != null && videoItem.getImages().getPoster() != null && videoItem.getImages().getPoster().getSources() != null
-                    && videoItem.getImages().getPoster().getSources().size() > 0) {
-                finalUrl= videoItem.getImages().getPoster().getSources().get(0).getSrc();
-            }
-        }*/
-
-            finalUrl = videoItem.getVideo().getImages().get(0).getSrc();
-
-        } catch (Exception ignored) {
-
-        }
-        if (finalUrl.isEmpty()) {
-            if (videoItem.getImages() != null && videoItem.getImages().getPoster() != null && videoItem.getImages().getPoster().getSources() != null
-                    && videoItem.getImages().getPoster().getSources().size() > 0) {
-                finalUrl = videoItem.getImages().getPoster().getSources().get(0).getSrc();
-            }
-        }
-        return finalUrl;
-    }
 
     public String getThumbNailImageUrl(DataItem videoItem) {
         String finalUrl = "";
