@@ -8,7 +8,7 @@ import com.tv.uscreen.yojmatv.beanModelV3.videoDetailsV2.VideoDetails;
 
 import java.util.List;
 
-public class DataItem{
+public class DataItem implements Comparable{
 	@SerializedName("dateCreated")
 	@Expose
 	private long dateCreated;
@@ -449,5 +449,10 @@ public class DataItem{
 
 	public Long getPosition() {
 		return position;
+	}
+
+	@Override
+	public int compareTo(Object dataItem) {
+		return 0;
 	}
 }

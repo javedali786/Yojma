@@ -1,5 +1,7 @@
 package com.tv.uscreen.yojmatv.utils.helpers;
 
+import static kotlinx.coroutines.flow.FlowKt.first;
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -29,6 +31,7 @@ import com.tv.uscreen.yojmatv.beanModel.responseGetWatchlist.ResponseGetIsWatchl
 import com.tv.uscreen.yojmatv.beanModel.responseIsLike.ResponseIsLike;
 import com.tv.uscreen.yojmatv.beanModel.search.SearchRequestModel;
 import com.tv.uscreen.yojmatv.beanModelV3.continueWatching.DataItem;
+import com.tv.uscreen.yojmatv.beanModelV3.videoDetailsV2.EnveuVideoDetails;
 import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.RequestOfferList.Response;
 import com.tv.uscreen.yojmatv.callbacks.RequestOffferCallBack.RequestOfferCallBack;
 import com.tv.uscreen.yojmatv.callbacks.apicallback.ApiResponseModel;
@@ -51,6 +54,9 @@ import com.tv.uscreen.yojmatv.utils.constants.AppConstants;
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -260,17 +266,41 @@ public class RailInjectionHelper extends AndroidViewModel {
                 String videoIds = "";
                 if (getContinueWatchingBean != null && getContinueWatchingBean.getData() != null) {
                     List<ContinueWatchingBookmark> continueWatchingBookmarkLists = getContinueWatchingBean.getData().getContinueWatchingBookmarks();
+                    Log.d("sumit1", "injectContinueWatchingRails: "+continueWatchingBookmarkLists);
+                    // Add the data one time
+                    /*continueWatchingBookmarkLists.addAll(getContinueWatchingBean.getData().getContinueWatchingBookmarks());
+                    Log.d("sumit2", "injectContinueWatchingRails: "+continueWatchingBookmarkLists);
+
+
+                    // Add the data a second time
+                    continueWatchingBookmarkLists.addAll(getContinueWatchingBean.getData().getContinueWatchingBookmarks());
+                    Log.d("sumit3", "injectContinueWatchingRails: "+continueWatchingBookmarkLists);
+                    for (int i = 0; i < continueWatchingBookmarkLists.size(); i++) {
+                        Log.d("sumit4", "injectContinueWatchingRails>>>>: "+continueWatchingBookmarkLists.get(i).getAssetId());
+                    }*/
                     List<ContinueWatchingBookmark> continueWatchingBookmarkList = removeDuplicates(continueWatchingBookmarkLists);
+                    for (int i = 0; i < continueWatchingBookmarkList.size(); i++) {
+                        Log.d("sumit5", "injectContinueWatchingRails: "+continueWatchingBookmarkList.get(i).getAssetId());
+                    }
                     for (ContinueWatchingBookmark continueWatchingBookmark : continueWatchingBookmarkList) {
                         videoIds = videoIds.concat(String.valueOf(continueWatchingBookmark.getAssetId())).concat(",");
+                        Log.d("sumit7", "injectContinueWatchingRails: "+videoIds);
                     }
                     ContinueWatchingLayer.getInstance().getContinueWatchingVideos(continueWatchingBookmarkList, videoIds, new CommonApiCallBack() {
                         @Override
                         public void onSuccess(Object item) {
                             if (item instanceof List) {
                                 ArrayList<DataItem> enveuVideoDetails = (ArrayList<DataItem>) item;
+                                List<DataItem> enveuItem = new ArrayList<>();
+                                enveuItem.addAll(enveuVideoDetails);
+                                Collections.sort(enveuItem);
+                                ArrayList<DataItem> stringArrayList = new ArrayList<>();
+                                stringArrayList.addAll(enveuItem);
+                                for (int i = 0; i < stringArrayList.size(); i++) {
+                                    Log.d("sumit6", "injectContinueWatchingRails: "+stringArrayList.get(i).getId());
+                                }
                                 RailCommonData railCommonData = new RailCommonData();
-                                railCommonData.setContinueWatchingData(screenWidget, true, enveuVideoDetails, new CommonApiCallBack() {
+                                railCommonData.setContinueWatchingData(screenWidget, true, stringArrayList, new CommonApiCallBack() {
                                     @Override
                                     public void onSuccess(Object item) {
                                         commonApiCallBack.onSuccess(railCommonData);
@@ -318,6 +348,7 @@ public class RailInjectionHelper extends AndroidViewModel {
 
     private List<ContinueWatchingBookmark> removeDuplicates(List<ContinueWatchingBookmark> continueWatchingBookmarkList) {
         List<ContinueWatchingBookmark> noRepeat = new ArrayList<>();
+        List<ContinueWatchingBookmark> duplicateRepeat = new ArrayList<>();
         try {
             for (ContinueWatchingBookmark event : continueWatchingBookmarkList) {
                 boolean isFound = false;
@@ -700,10 +731,10 @@ public class RailInjectionHelper extends AndroidViewModel {
     public LiveData<Response> getRequstedOfferForUser(int page, int size, String token, int userId, String offers, String currentLanguageCode) {
         MutableLiveData<Response> responseMutableLiveData = new MutableLiveData<>();
 
-        SeasonEpisodesList.getInstance().getRequestedOfferForUser(page,size,token,userId,offers,currentLanguageCode, new RequestOfferCallBack() {
+        SeasonEpisodesList.getInstance().getRequestedOfferForUser(page, size, token, userId, offers, currentLanguageCode, new RequestOfferCallBack() {
             @Override
             public void success(boolean isStatus, Response response) {
-                    responseMutableLiveData.postValue(response);
+                responseMutableLiveData.postValue(response);
             }
 
             @Override
