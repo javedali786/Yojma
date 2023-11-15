@@ -266,39 +266,24 @@ public class RailInjectionHelper extends AndroidViewModel {
                 String videoIds = "";
                 if (getContinueWatchingBean != null && getContinueWatchingBean.getData() != null) {
                     List<ContinueWatchingBookmark> continueWatchingBookmarkLists = getContinueWatchingBean.getData().getContinueWatchingBookmarks();
-                    Log.d("sumit1", "injectContinueWatchingRails: "+continueWatchingBookmarkLists);
-                    // Add the data one time
-                    /*continueWatchingBookmarkLists.addAll(getContinueWatchingBean.getData().getContinueWatchingBookmarks());
-                    Log.d("sumit2", "injectContinueWatchingRails: "+continueWatchingBookmarkLists);
-
-
-                    // Add the data a second time
-                    continueWatchingBookmarkLists.addAll(getContinueWatchingBean.getData().getContinueWatchingBookmarks());
-                    Log.d("sumit3", "injectContinueWatchingRails: "+continueWatchingBookmarkLists);
-                    for (int i = 0; i < continueWatchingBookmarkLists.size(); i++) {
-                        Log.d("sumit4", "injectContinueWatchingRails>>>>: "+continueWatchingBookmarkLists.get(i).getAssetId());
-                    }*/
                     List<ContinueWatchingBookmark> continueWatchingBookmarkList = removeDuplicates(continueWatchingBookmarkLists);
-                    for (int i = 0; i < continueWatchingBookmarkList.size(); i++) {
-                        Log.d("sumit5", "injectContinueWatchingRails: "+continueWatchingBookmarkList.get(i).getAssetId());
-                    }
                     for (ContinueWatchingBookmark continueWatchingBookmark : continueWatchingBookmarkList) {
                         videoIds = videoIds.concat(String.valueOf(continueWatchingBookmark.getAssetId())).concat(",");
-                        Log.d("sumit7", "injectContinueWatchingRails: "+videoIds);
                     }
                     ContinueWatchingLayer.getInstance().getContinueWatchingVideos(continueWatchingBookmarkList, videoIds, new CommonApiCallBack() {
                         @Override
                         public void onSuccess(Object item) {
                             if (item instanceof List) {
                                 ArrayList<DataItem> enveuVideoDetails = (ArrayList<DataItem>) item;
+                                // create new List type Array
                                 List<DataItem> enveuItem = new ArrayList<>();
+                                // add item enveuVideoDetails in enveuItem List
                                 enveuItem.addAll(enveuVideoDetails);
+                                // sorting enveuItem List based peverious assetId
                                 Collections.sort(enveuItem);
+                                // stored item new stringArrayList Array
                                 ArrayList<DataItem> stringArrayList = new ArrayList<>();
                                 stringArrayList.addAll(enveuItem);
-                                for (int i = 0; i < stringArrayList.size(); i++) {
-                                    Log.d("sumit6", "injectContinueWatchingRails: "+stringArrayList.get(i).getId());
-                                }
                                 RailCommonData railCommonData = new RailCommonData();
                                 railCommonData.setContinueWatchingData(screenWidget, true, stringArrayList, new CommonApiCallBack() {
                                     @Override
