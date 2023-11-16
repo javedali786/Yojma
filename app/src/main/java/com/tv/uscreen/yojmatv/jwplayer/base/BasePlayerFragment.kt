@@ -248,14 +248,11 @@ abstract class BasePlayerFragment : Fragment() {
 
     var counter: Int = 0
     fun getChromecastList() {
-        /*for (i in currentPlayingIndex?.until(seasonEpisodesList?.size!! - 1)!!) {*/
         if (counter < seasonEpisodesList?.size!! - 1 && isAdded) {
             getPlaylist(counter)
         } else {
 
         }
-
-        /*}*/
     }
 
     // to get the item count in the queue
@@ -293,16 +290,10 @@ abstract class BasePlayerFragment : Fragment() {
                                     .setPreloadTime(20.0)
                                     .build()
 
-                            if (count == 0) {
-                               /* val newItemArray: Array<MediaQueueItem> = arrayOf(queueItem)
-                                remoteMediaClient?.queueLoad(
-                                    newItemArray, 0,
-                                    MediaStatus.REPEAT_MODE_REPEAT_OFF, JSONObject()
-                                )*/
-                            } else {
+                            if (count != 0) {
                                 remoteMediaClient?.queueAppendItem(queueItem, JSONObject())
+
                             }
-                            // chromecastPlaylist?.add(queueItem)
 
                         }
                     }
@@ -311,9 +302,6 @@ abstract class BasePlayerFragment : Fragment() {
                 }
 
             })
-            /*  viewModel?.hitApiEntitlement(token, sku)?.observe(this) {
-
-              }*/
         } else {
             externalRefId = seasonEpisodesList!![i]?.externalRefId
             val queueItem: MediaQueueItem =
