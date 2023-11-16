@@ -1068,7 +1068,8 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             isTrailer,
             false,
             posterUrl,
-            AppConstants.SERIESDEATILACTIVITY, externalRefId, skipIntroStartTime, skipIntroEndTime,keyword
+            AppConstants.SERIESDEATILACTIVITY, externalRefId, skipIntroStartTime, skipIntroEndTime,keyword,null
+
         )
     }
 

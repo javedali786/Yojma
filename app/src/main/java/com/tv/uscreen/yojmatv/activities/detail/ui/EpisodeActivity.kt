@@ -54,6 +54,8 @@ import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData
 import com.tv.uscreen.yojmatv.beanModel.responseModels.detailPlayer.Data
 import com.tv.uscreen.yojmatv.beanModel.selectedSeason.SelectedSeasonModel
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackList
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.CommonRailtItemClickListner
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.MoreClickListner
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.NetworkChangeReceiver
@@ -83,6 +85,7 @@ import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.htmlParseToString
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
+
 
 class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
     AlertDialogFragment.AlertDialogListener, NetworkChangeReceiver.ConnectivityReceiverListener,
@@ -174,6 +177,18 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
                 extras = extras.getBundle(AppConstants.BUNDLE_ASSET_BUNDLE)
                 assetId = extras?.getInt(AppConstants.BUNDLE_ASSET_ID)!!
                 brightCoveVideoId = extras.getLong(AppConstants.BUNDLE_VIDEO_ID_BRIGHTCOVE)
+                try {
+
+                    val receivedAudioTrackList: ArrayList<AudioTrackListItem> =
+                        (extras.getSerializable(AppConstants.AUDIO_TRACK_ITEM) as ArrayList<AudioTrackListItem>?)!!
+
+                    if (receivedAudioTrackList != null) {
+                        Log.d("audioTrackList", "onCreateAudioTrackList: " + receivedAudioTrackList)
+
+                    }
+                } catch (e: Exception) {
+                    Logger.w(e)
+                }
             }
         }
         setClicks()
@@ -366,7 +381,8 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
             AppConstants.EPISODEACTIVITY,
             externalRefId,
             videoDetails?.skipintro_startTime ?: "",
-            videoDetails?.skipintro_endTime ?: "",keyword
+            videoDetails?.skipintro_endTime ?: "",keyword,
+            videoDetails?.audioTrackList
         )
     }
 

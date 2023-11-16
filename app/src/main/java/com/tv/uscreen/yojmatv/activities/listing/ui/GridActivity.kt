@@ -526,7 +526,8 @@ class GridActivity : BaseBindingActivity<ListingActivityBinding?>(), ItemClickLi
             tittle,
             isHosted,
             externalUrl.toString(),
-            itemValue.posterURL
+            itemValue.posterURL,
+            itemValue.videoDetails.audioTracks
         )
     }
 

@@ -649,7 +649,8 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
             isTrailer,
             false,
             videoDetails!!.posterURL,
-            AppConstants.DETAILACTIVITY,externalRefId,videoDetails?.skipintro_startTime?:"",videoDetails?.skipintro_endTime?:"",keyword
+            AppConstants.DETAILACTIVITY,externalRefId,videoDetails?.skipintro_startTime?:"",videoDetails?.skipintro_endTime?:"",keyword,
+            videoDetails?.audioTrackList
         )
     }
 

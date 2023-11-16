@@ -20,6 +20,7 @@ import com.tv.uscreen.yojmatv.baseModels.BaseBindingFragment
 import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData
 import com.tv.uscreen.yojmatv.beanModel.selectedSeason.SelectedSeasonModel
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.FirstEpisodeItem
 import com.tv.uscreen.yojmatv.databinding.SeasonFragmentLayoutBinding
 import com.tv.uscreen.yojmatv.networking.apistatus.APIStatus
@@ -51,6 +52,11 @@ class SeasonTabFragment : BaseBindingFragment<SeasonFragmentLayoutBinding?>(), S
     private var allEpiosdes: MutableList<EnveuVideoItemBean> = ArrayList()
     private var mLastClickTime: Long = 0
     private var railCommonData: RailCommonData? = null
+    private  var audioTrackList : List<AudioTrackListItem>? =null
+
+
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         this.context = context
@@ -229,6 +235,8 @@ class SeasonTabFragment : BaseBindingFragment<SeasonFragmentLayoutBinding?>(), S
                         if (response.baseCategory != null) {
                             val enveuCommonResponse = response.baseCategory as RailCommonData
                             railCommonData = enveuCommonResponse
+                            audioTrackList = railCommonData!!.enveuVideoItemBeans[0].videoDetails.audioTracks
+                            Log.e("TAG16", ":railCommonData "+audioTrackList?.size)
                             binding!!.comingSoon.visibility = View.GONE
                             binding!!.progressBar.visibility = View.GONE
                             if (!StringUtils.isNullOrEmptyOrZero(enveuCommonResponse.seasonName)) {
@@ -304,6 +312,12 @@ class SeasonTabFragment : BaseBindingFragment<SeasonFragmentLayoutBinding?>(), S
                         binding!!.progressBar.visibility = View.GONE
                         binding!!.seriesRecyclerView.visibility = View.VISIBLE
                         val enveuCommonResponse = response.baseCategory as RailCommonData
+                        railCommonData = enveuCommonResponse
+                        railCommonData = enveuCommonResponse
+                        audioTrackList = railCommonData!!.enveuVideoItemBeans[0].videoDetails.audioTracks
+
+                        Log.e("TAG12", ":railCommonData "+ audioTrackList?.size)
+
                         parseSeriesData(enveuCommonResponse)
                     }
                 } else if (response.status.equals(APIStatus.ERROR.name, ignoreCase = true)) {
@@ -452,7 +466,9 @@ class SeasonTabFragment : BaseBindingFragment<SeasonFragmentLayoutBinding?>(), S
             tittle,
             isHosted,
             externalUrl!!,
-            itemValue.posterURL
+            itemValue.posterURL,
+            itemValue.videoDetails.audioTracks,
+
         )
     }
 

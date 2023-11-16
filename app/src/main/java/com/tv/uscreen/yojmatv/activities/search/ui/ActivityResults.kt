@@ -303,9 +303,9 @@ class ActivityResults : BaseBindingActivity<ActivityResultBinding?>(), CommonSea
             tittle,
             isHosted,
             externalUrl!!,
-            itemValue.posterURL
+            itemValue.posterURL,
+            itemValue.videoDetails.audioTracks
         )
-
         // AppCommonMethod.redirectionLogic(this,railCommonData,position);
     }
 

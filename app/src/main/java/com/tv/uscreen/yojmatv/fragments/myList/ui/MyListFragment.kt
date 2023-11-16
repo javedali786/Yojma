@@ -245,7 +245,8 @@ class MyListFragment : BaseBindingFragment<FragmentMyListBinding?>(), ItemClickL
             tittle,
             isHosted,
             externalUrl!!,
-            itemValue.posterURL
+            itemValue.posterURL,
+            itemValue.videoDetails.audioTracks
         )
     }
 

@@ -2,6 +2,8 @@ package com.example.jwplayer
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.os.Parcelable
+import android.util.Log
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.tv.uscreen.yojmatv.Bookmarking.BookmarkingViewModel
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackList
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.databinding.ActivityPlayerBinding
 import com.tv.uscreen.yojmatv.jwplayer.utils.Logger
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
@@ -37,6 +41,7 @@ class PlayerActivity : AppCompatActivity(), Serializable,
     private var isLive: Boolean? = false
     private var activity: String? = null
     private var tag: String? = ""
+    private var audioTrackList: List<AudioTrackList>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +71,19 @@ class PlayerActivity : AppCompatActivity(), Serializable,
             if (activity?.contains("HomeSliderActivity") == true) {
                 screenName = "HomeSliderActivity"
             }
+            try {
+
+                val receivedAudioTrackList: ArrayList<AudioTrackListItem> =
+                    (bundle.getSerializable(AppConstants.AUDIO_TRACK_ITEM) as ArrayList<AudioTrackListItem>?)!!
+
+                if (receivedAudioTrackList != null) {
+                    Log.d("audioTrackList", "onCreateAudioTrackList: " + receivedAudioTrackList)
+
+                }
+            } catch (e: Exception) {
+                com.tv.uscreen.yojmatv.utils.Logger.w(e)
+            }
+
             try {
                 if (bundle.getSerializable("episodeList") as List<EnveuVideoItemBean> != null) {
                     seasonEpisodesList =
@@ -100,6 +118,10 @@ class PlayerActivity : AppCompatActivity(), Serializable,
         bundle?.getString("skipIntroEndTime")?.let { args.putString("skipIntroEndTime", it) }
         if (null != seasonEpisodesList) {
             args.putSerializable("episodeList", seasonEpisodesList as Serializable)
+        }
+
+        if (null != audioTrackList) {
+            args.putSerializable(AppConstants.AUDIO_TRACK_ITEM, audioTrackList as Serializable)
         }
 
         isBingeWatchEnable?.let { args.putBoolean("binge_watch", it) }

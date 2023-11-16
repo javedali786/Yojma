@@ -8,6 +8,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,6 +54,8 @@ import com.tv.uscreen.yojmatv.SDKConfig
 import com.tv.uscreen.yojmatv.activities.detail.viewModel.DetailViewModel
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackList
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.databinding.FragmentJWPlayerBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.DialogPlayer
 import com.tv.uscreen.yojmatv.jwplayer.cast.PlayDetailResponse
@@ -113,6 +116,8 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     private var genre: String? = ""
     private var seriesTittle: String? = ""
     private var timer = 30
+    private var receivedAudioTrackList: ArrayList<AudioTrackListItem>? = null
+
 
 
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {
@@ -382,6 +387,18 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             if (screenName == null) {
                 screenName = AppConstants.SCREEN_NAME
             }
+            try {
+                receivedAudioTrackList =
+                    (bundle.getSerializable(AppConstants.AUDIO_TRACK_ITEM) as ArrayList<AudioTrackListItem>?)!!
+                if (receivedAudioTrackList != null) {
+                    for (defultAudio in receivedAudioTrackList!!)
+                    Log.d("audioTrackList", "onCreateAudioTrackList: " + receivedAudioTrackList!![0].language)
+                }
+            } catch (e: Exception) {
+                com.tv.uscreen.yojmatv.utils.Logger.w(e)
+            }
+
+
             try {
                 if (bundle.getSerializable("episodeList") as ArrayList<EnveuVideoItemBean> != null) {
                     seasonEpisodesList =
