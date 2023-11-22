@@ -506,18 +506,24 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
               dismissLoading(binding?.progressBar)
               Log.d("SIgnupResponse", Gson().toJson(it))
              try {
-                  if (it.responseModel.responseCode == 200) {
-                      val gson = Gson()
-                      KsPreferenceKeys.getInstance().appPrefAccessToken=it.accessToken
-                      val signUpData: Data = it.responseModel.data
-                      val stringJson = gson.toJson(signUpData)
-                      callSignupDevice(stringJson)
-                      saveUserDetails(stringJson, true)
-
-                      clearEditView()
-                  }else if(it.responseModel.responseCode==4901){
-                      commonDialog(it.debugMessage.toString(),"",stringsHelper.stringParse(stringsHelper.instance()?.data?.config?.popup_continue.toString(), getString(R.string.popup_continue)))
-                  }else if (it.responseModel.responseCode==400){
+                 if (it.responseModel.responseCode === 200) {
+                     val gson = Gson()
+                     KsPreferenceKeys.getInstance().appPrefAccessToken = it.accessToken
+                     val signUpData: Data = it.responseModel.data
+                     val stringJson = gson.toJson(signUpData)
+                     callSignupDevice(stringJson)
+                     saveUserDetails(stringJson, true)
+                     clearEditView()
+                 } else if (it.responseModel.responseCode == 4901) {
+                     commonDialog(
+                         it.debugMessage.toString(),
+                         "",
+                         stringsHelper.stringParse(
+                             stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                             getString(R.string.popup_continue)
+                         )
+                     )
+                 } else if (it.responseModel.responseCode==400){
                       commonDialog(stringsHelper.stringParse(
                                     stringsHelper.instance()?.data?.config?.popup_error.toString(),
                                     getString(R.string.popup_error)

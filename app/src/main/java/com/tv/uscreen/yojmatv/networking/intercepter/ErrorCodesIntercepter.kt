@@ -62,6 +62,8 @@ class ErrorCodesIntercepter private constructor() {
                 if (errorObject.getInt("responseCode") != 0) {
                     if (errorObject.getInt("responseCode") == 4003) {
                         responseModel.setDebugMessage(OttApplication.getInstance().resources.getString(R.string.password_cannot_be_blank))
+                    }  else if (errorObject.getInt("responseCode") == 4089) {
+                        responseModel.setDebugMessage(OttApplication.getInstance().resources.getString(R.string.InvalidEmailDomainException))
                     } else if (errorObject.getInt("responseCode") == 4004) {
                         responseModel.setDebugMessage(OttApplication.getInstance().resources.getString(R.string.please_provide_valid_name))
                     } else if (errorObject.getInt("responseCode") == 4005) {
@@ -145,6 +147,9 @@ class ErrorCodesIntercepter private constructor() {
                         responseModel.setDebugMessage(OttApplication.getInstance().resources.getString(R.string.password_cannot_be_blank))
                     } else if (errorObject.getInt("responseCode") == 4004) {
                         responseModel.setDebugMessage(OttApplication.getInstance().resources.getString(R.string.please_provide_valid_name))
+                    }  else if (errorObject.getInt("responseCode") == 4089) {
+                        responseModel.responseCode = 4089
+                        responseModel.setDebugMessage(OttApplication.getInstance().resources.getString(R.string.InvalidEmailDomainException))
                     } else if (errorObject.getInt("responseCode") == 4401) {
                         responseModel.setDebugMessage(OttApplication.getInstance().resources.getString(R.string.popup_user_does_not_exists))
                     } else if (errorObject.getInt("responseCode") == 4103) {

@@ -105,7 +105,7 @@ public class RegistrationLoginRepository {
                         LoginResponseModel loginItemBean = gson.fromJson(tmp, LoginResponseModel.class);
                         responseApi.postValue(loginItemBean);
                     } else {
-                        LoginResponseModel responseModel = ErrorCodesIntercepter.getInstance().Login(response);
+                        LoginResponseModel responseModel = Objects.requireNonNull(ErrorCodesIntercepter.getInstance()).Login(response);
                         responseApi.postValue(responseModel);
                     }
                 }
@@ -225,11 +225,11 @@ public class RegistrationLoginRepository {
                                 responseApi.postValue(responseModel);
                                 Logger.e("", "REsponse" + response.body());
                             } else {
-                                SignupResponseAccessToken responseModel = ErrorCodesIntercepter.getInstance().manualSignUp(response);
+                                SignupResponseAccessToken responseModel = Objects.requireNonNull(ErrorCodesIntercepter.getInstance()).manualSignUp(response);
                                 responseApi.postValue(responseModel);
                             }
                         }else {
-                            SignupResponseAccessToken responseModel = ErrorCodesIntercepter.getInstance().manualSignUp(response);
+                            SignupResponseAccessToken responseModel = Objects.requireNonNull(ErrorCodesIntercepter.getInstance()).manualSignUp(Objects.requireNonNull(response));
                             responseApi.postValue(responseModel);
                         }
 

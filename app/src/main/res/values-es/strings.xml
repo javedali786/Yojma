@@ -363,6 +363,7 @@
     <string name="popup_username_pwd_does_not_match">El nombre de usuario o la contraseña no coinciden.</string>
     <string name="free_trial">Prueba gratuita</string>
     <string name="order_history_annual">Anual</string>
+    <string name="InvalidEmailDomainException">¡Oh no! Parece que este correo electrónico no esta siendo aceptado para registrarte. Pero no te preocupes,  prueba registrarte utilizando una dirección de correo diferente, como Gmail, Yahoo, Hotmail, etc.</string>
     <string name="we_could_not">Oops, parece que el botón de suscripción está tomando un descanso. Por favor, inténtalo más tarde. Si el problema persiste, escríbenos a help@yojma.tv y lo solucionaremos.</string>
 
 

@@ -107,6 +107,7 @@
     <string name="notification_setting">Notification Setting</string>
     <string name="binge_setting">Binge Watch</string>
     <string name="invalid_email_id">Invalid email id</string>
+    <string name="InvalidEmailDomainException">This email id cannot be used to register the user as this domain has been blacklisted</string>
     <string name="manage_account">Manage Subscription</string>
     <string name="login_signup_">Log In / Sign Up</string>
     <string name="login_txt">Login</string>

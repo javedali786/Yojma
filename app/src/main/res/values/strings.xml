@@ -946,7 +946,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="rate_the_app">Rate the app</string>
     <string name="free_trial">FREE TRAIL</string>
     <string name="order_history_annual">Annual</string>
-
+    <string name="InvalidEmailDomainException">This email id cannot be used to register the user as this domain has been blacklisted</string>
 
 
 </resources>
