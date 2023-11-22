@@ -8,6 +8,7 @@ import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.enveu.client.baseCollection.baseCategoryModel.BaseCategory;
 import com.example.jwplayer.PlayerActivity;
@@ -156,6 +157,7 @@ public final class ActivityLauncher {
         intent.putExtra("skipIntroEndTime", skipIntroEndTime);
         intent.putExtra("tag",tag);
         intent.putExtra(AppConstants.AUDIO_TRACK_ITEM, (Serializable) audioTrackListItems);
+        Log.d("test1", "launchPlayerActitivity: "+audioTrackListItems.get(0).getType());
 
         source.startActivity(intent);
     }

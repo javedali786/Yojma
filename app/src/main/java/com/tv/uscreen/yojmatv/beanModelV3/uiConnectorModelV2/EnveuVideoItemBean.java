@@ -497,6 +497,7 @@ public class EnveuVideoItemBean implements Serializable {
             this.title = details.getTitle() == null ? "" : details.getTitle();
             this.externalRefId = details.getExternalRefId() == null ? "" : details.getExternalRefId().trim();
             this.assetType = details.getContentType() == null ? "" : details.getContentType();
+
             this.description = details.getDescription() == null ? "" : details.getDescription().trim();
             this.premium = details.getPremium();
             this.parentContent2 = details.getParentContent();

@@ -54,7 +54,6 @@ import com.tv.uscreen.yojmatv.SDKConfig
 import com.tv.uscreen.yojmatv.activities.detail.viewModel.DetailViewModel
 import com.tv.uscreen.yojmatv.activities.usermanagment.ui.ActivityLogin
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
-import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackList
 import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.databinding.FragmentJWPlayerBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.DialogPlayer
@@ -389,9 +388,18 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             }
             try {
                 receivedAudioTrackList = (bundle.getSerializable(AppConstants.AUDIO_TRACK_ITEM) as ArrayList<AudioTrackListItem>?)!!
+                var finalAudioList = receivedAudioTrackList
+                Log.d("test1", "onViewCreated:1 ")
                 if (receivedAudioTrackList != null) {
-                    for (defultAudio in receivedAudioTrackList!!)
-                    Log.d("audioTrackList", "onCreateAudioTrackList: " + receivedAudioTrackList!![0].language)
+                    Log.d("test1", "onViewCreated:2 "+receivedAudioTrackList?.get(0)?.type)
+                    if (finalAudioList != null) {
+                        Log.d("test1", "onViewCreated:player tracks:: "+audioList?.get(0))
+                        Log.d("test1", "onViewCreated:new trakcs ::: "+finalAudioList.get(0))
+                        for (i in finalAudioList){
+                            Log.d("test1", "onViewCreated:4 ")
+                            Log.d("audioTrackList", "onCreateAudioTrackList: " + i.type)
+                        }
+                    }
                 }
             } catch (e: Exception) {
                 com.tv.uscreen.yojmatv.utils.Logger.w(e)

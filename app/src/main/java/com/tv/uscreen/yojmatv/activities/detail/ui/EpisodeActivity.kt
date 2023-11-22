@@ -54,8 +54,6 @@ import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData
 import com.tv.uscreen.yojmatv.beanModel.responseModels.detailPlayer.Data
 import com.tv.uscreen.yojmatv.beanModel.selectedSeason.SelectedSeasonModel
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
-import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackList
-import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.CommonRailtItemClickListner
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.MoreClickListner
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.NetworkChangeReceiver
@@ -376,6 +374,7 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
             videoDetails?.skipintro_endTime ?: "",keyword,
             videoDetails?.audioTrackList
         )
+        Log.d("test1", "startPlayer: episode"+videoDetails?.audioTrackList?.get(0)?.type)
     }
 
     private fun connectionObserver() {
