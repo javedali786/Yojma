@@ -32,7 +32,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Yojma TV - Android"
 include ':app'
-//include ':enveuandroidsdk'
-//include ':enveuandroidclient'
+include ':enveuandroidsdk'
+include ':enveuandroidclient'
 //project(":enveuandroidclient").projectDir = file("../enveuandroidclient")
 // project(":enveuandroidsdk").projectDir = file("../enveuandroidsdk")

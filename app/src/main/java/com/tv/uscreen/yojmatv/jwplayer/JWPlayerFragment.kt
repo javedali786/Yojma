@@ -57,12 +57,15 @@ import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.databinding.FragmentJWPlayerBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.DialogPlayer
+import com.tv.uscreen.yojmatv.jwplayer.AudioTracks
 import com.tv.uscreen.yojmatv.jwplayer.cast.PlayDetailResponse
 import com.tv.uscreen.yojmatv.utils.Logger
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
+
+private const val s = "audioTrackList"
 
 class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.DialogListener {
     private var mPlayer: JWPlayer? = null
@@ -267,7 +270,9 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                 resources.getString(R.string.ep_settings_audio) -> {
                     viewBinding.seriesDetailAllEpisodeTxtColors.setAudioAdapter(
                         audioList,
-                        selectedVideoTrack
+                        selectedVideoTrack,
+                        receivedAudioTrackList,
+                        false
                     )
                 }
 
@@ -388,7 +393,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             }
             try {
                 receivedAudioTrackList = (bundle.getSerializable(AppConstants.AUDIO_TRACK_ITEM) as ArrayList<AudioTrackListItem>?)!!
-                var finalAudioList = receivedAudioTrackList
+                val finalAudioList = receivedAudioTrackList
                 Log.d("test1", "onViewCreated:1 ")
                 if (receivedAudioTrackList != null) {
                     Log.d("test1", "onViewCreated:2 "+receivedAudioTrackList?.get(0)?.type)
@@ -397,7 +402,13 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                         Log.d("test1", "onViewCreated:new trakcs ::: "+finalAudioList.get(0))
                         for (i in finalAudioList){
                             Log.d("test1", "onViewCreated:4 ")
-                            Log.d("audioTrackList", "onCreateAudioTrackList: " + i.type)
+                            Log.d("audioTrackList", "onCreateAudioTrackList:  " + i.type)
+                            Log.d("audioTrackList2", "onCreateAudioTrackList: " + i.language)
+                            Log.d("audioTrackList3", "onCreateAudioTrackList: " + i.langCode)
+                           if(i.type.equals("primary")){
+                               Log.d("audioTrackListforprimary", "onCreateAudioTrackList: " + i.language)
+                               break;
+                           }
                         }
                     }
                 }
@@ -641,9 +652,19 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
     }
 
     override fun onAudioTracks(audioTrackEvent: AudioTracksEvent?) {
+        Log.d("AudioSumit", "onAudioTracks: " +"Called")
         if (audioTrackEvent != null) {
             audioList = ArrayList()
+           // audioList1 = ArrayList()
             audioList?.addAll(audioTrackEvent.audioTracks)
+            if (!audioList.isNullOrEmpty()) {
+                viewBinding.seriesDetailAllEpisodeTxtColors.setAudioAdapter(
+                    audioList,
+                    selectedVideoTrack,
+                    receivedAudioTrackList,
+                    true
+                )
+            }
         }
     }
 

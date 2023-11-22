@@ -651,7 +651,7 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
             videoDetails!!.posterURL,
             AppConstants.DETAILACTIVITY,externalRefId,videoDetails?.skipintro_startTime?:"",
             videoDetails?.skipintro_endTime?:"",keyword,
-            null
+            videoDetails?.videoDetails?.audioTracks
         )
     }
 
