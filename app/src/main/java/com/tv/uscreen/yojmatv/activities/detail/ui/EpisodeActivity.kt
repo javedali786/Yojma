@@ -178,14 +178,6 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
                 assetId = extras?.getInt(AppConstants.BUNDLE_ASSET_ID)!!
                 brightCoveVideoId = extras.getLong(AppConstants.BUNDLE_VIDEO_ID_BRIGHTCOVE)
                 try {
-
-                    val receivedAudioTrackList: ArrayList<AudioTrackListItem> =
-                        (extras.getSerializable(AppConstants.AUDIO_TRACK_ITEM) as ArrayList<AudioTrackListItem>?)!!
-
-                    if (receivedAudioTrackList != null) {
-                        Log.d("audioTrackList", "onCreateAudioTrackList: " + receivedAudioTrackList)
-
-                    }
                 } catch (e: Exception) {
                     Logger.w(e)
                 }

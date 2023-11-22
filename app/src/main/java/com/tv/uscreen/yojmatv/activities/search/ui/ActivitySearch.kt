@@ -443,8 +443,7 @@ class ActivitySearch : BaseBindingActivity<ActivitySearchBinding?>(), SearchClic
             tittle,
             isHosted,
             externalUrl!!,
-            itemValue.posterURL,
-            itemValue.videoDetails.audioTracks
+            itemValue.posterURL
         )
     }
 

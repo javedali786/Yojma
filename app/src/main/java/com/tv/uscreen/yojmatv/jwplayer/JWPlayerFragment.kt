@@ -388,8 +388,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
                 screenName = AppConstants.SCREEN_NAME
             }
             try {
-                receivedAudioTrackList =
-                    (bundle.getSerializable(AppConstants.AUDIO_TRACK_ITEM) as ArrayList<AudioTrackListItem>?)!!
+                receivedAudioTrackList = (bundle.getSerializable(AppConstants.AUDIO_TRACK_ITEM) as ArrayList<AudioTrackListItem>?)!!
                 if (receivedAudioTrackList != null) {
                     for (defultAudio in receivedAudioTrackList!!)
                     Log.d("audioTrackList", "onCreateAudioTrackList: " + receivedAudioTrackList!![0].language)
@@ -397,7 +396,6 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
             } catch (e: Exception) {
                 com.tv.uscreen.yojmatv.utils.Logger.w(e)
             }
-
 
             try {
                 if (bundle.getSerializable("episodeList") as ArrayList<EnveuVideoItemBean> != null) {

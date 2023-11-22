@@ -342,8 +342,7 @@ class MyListActivity : BaseBindingActivity<FragmentMyListBinding?>(), ItemClickL
             tittle,
             isHosted,
             externalUrl!!,
-            itemValue.posterURL,
-            itemValue.videoDetails.audioTracks
+            itemValue.posterURL
         )
     }
 

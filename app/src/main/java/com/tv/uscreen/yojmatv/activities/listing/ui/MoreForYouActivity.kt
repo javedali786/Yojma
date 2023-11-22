@@ -185,8 +185,7 @@ class MoreForYouActivity : BaseBindingActivity<MoreForyouActivityBinding?>(), Re
             tittle,
             isHosted,
             externalUrl!!,
-            itemValue.posterURL,
-            itemValue.videoDetails.audioTracks
+            itemValue.posterURL
         )
     }
 }

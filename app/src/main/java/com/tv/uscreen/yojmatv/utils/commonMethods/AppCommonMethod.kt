@@ -859,8 +859,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             tittle: String?,
             isHosted: Boolean,
             externalUrl: String,
-            posterUrl: String,
-            audioTrackItem : List<AudioTrackListItem>) {
+            posterUrl: String) {
             //checkLoginStatus(context);
             if (SystemClock.elapsedRealtime() - mLastClickTime < 2000) {
                 return
@@ -882,7 +881,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                     } else if (screenType.uppercase(Locale.getDefault()) == MediaTypeConstants.getInstance().documentaries) {
                         ActivityLauncher.getInstance().detailScreenBrightCove(context as BaseActivity, DetailActivity::class.java, id)
                     } else if (videoType.equals(MediaTypeConstants.getInstance().episode, ignoreCase = true)) {
-                        ActivityLauncher.getInstance().episodeScreenBrightcove(context as BaseActivity, EpisodeActivity::class.java, id,audioTrackItem)
+                        ActivityLauncher.getInstance().episodeScreenBrightcove(context as BaseActivity, EpisodeActivity::class.java, id)
                     } else if (videoType.equals(MediaTypeConstants.getInstance().show, ignoreCase = true)) {
                         showRedirection(context, externalRefId, isPremium, skuId, id, tittle, screenType, false, posterUrl)
                     } else if (videoType.equals(MediaTypeConstants.getInstance().trailer, ignoreCase = true)) {
@@ -1079,7 +1078,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                     posterUrl
                 )
             } else if (screenType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().episode, ignoreCase = true)) {
-                ActivityLauncher.getInstance().episodeScreenBrightcove(context as BaseActivity, EpisodeActivity::class.java, railCommonData.enveuVideoItemBeans[position].id,railCommonData.enveuVideoItemBeans[position].audioTrackList)
+                ActivityLauncher.getInstance().episodeScreenBrightcove(context as BaseActivity, EpisodeActivity::class.java, railCommonData.enveuVideoItemBeans[position].id)
             } else if (screenType.uppercase(Locale.getDefault()) == MediaTypeConstants.getInstance().movie) {
                 ActivityLauncher.getInstance().detailScreenBrightCove(context as BaseActivity, DetailActivity::class.java, railCommonData.enveuVideoItemBeans[position].id)
             } else if (screenType.uppercase(Locale.getDefault()) == MediaTypeConstants.getInstance().documentaries) {

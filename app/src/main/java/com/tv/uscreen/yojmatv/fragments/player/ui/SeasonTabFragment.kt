@@ -466,8 +466,7 @@ class SeasonTabFragment : BaseBindingFragment<SeasonFragmentLayoutBinding?>(), S
             tittle,
             isHosted,
             externalUrl!!,
-            itemValue.posterURL,
-            itemValue.videoDetails.audioTracks,
+            itemValue.posterURL
 
         )
     }

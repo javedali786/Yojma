@@ -507,8 +507,7 @@ class WatchListActivity : BaseBindingActivity<WatchListActivityBinding?>(), Watc
             tittle,
             isHosted,
             externalUrl!!,
-            itemValue.posterURL,
-            itemValue.videoDetails.audioTracks
+            itemValue.posterURL
         )
     }
 

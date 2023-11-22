@@ -80,6 +80,7 @@ public class DetailVideo implements Serializable
         this.drmDisabled = in.readValue((Object.class.getClassLoader()));
         this.textTracks = in.readValue((Object.class.getClassLoader()));
         in.readList(this.images, (DetailVideoImage.class.getClassLoader()));
+        in.readList(this.audioTracks, (AudioTrackListItem.class.getClassLoader()));
     }
 
     public DetailVideo() {
@@ -193,6 +194,7 @@ public class DetailVideo implements Serializable
         dest.writeValue(drmDisabled);
         dest.writeValue(textTracks);
         dest.writeList(images);
+        dest.writeList(audioTracks);
     }
 
     public int describeContents() {

@@ -276,12 +276,11 @@ public final class ActivityLauncher {
     }
 
 
-    public void episodeScreenBrightcove(Activity source, Class<EpisodeActivity> destination, int id , List<AudioTrackListItem> audioTrackListItems) {
+    public void episodeScreenBrightcove(Activity source, Class<EpisodeActivity> destination, int id ) {
         KsPreferenceKeys preference = KsPreferenceKeys.getInstance();
 
         Bundle args = new Bundle();
         args.putInt(AppConstants.BUNDLE_ASSET_ID, id);
-        args.putSerializable(AppConstants.AUDIO_TRACK_ITEM, (Serializable) audioTrackListItems);
 
 
 
