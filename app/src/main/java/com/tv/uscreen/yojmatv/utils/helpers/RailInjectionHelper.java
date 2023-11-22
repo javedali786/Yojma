@@ -276,6 +276,7 @@ public class RailInjectionHelper extends AndroidViewModel {
                             if (item instanceof List) {
                                 ArrayList<DataItem> enveuVideoDetails = (ArrayList<DataItem>) item;
                                 // create new List type Array
+
                                 List<DataItem> enveuItem = new ArrayList<>();
                                 // add item enveuVideoDetails in enveuItem List
                                 enveuItem.addAll(enveuVideoDetails);
