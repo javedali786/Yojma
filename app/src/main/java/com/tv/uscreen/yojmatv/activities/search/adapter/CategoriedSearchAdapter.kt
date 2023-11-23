@@ -146,7 +146,6 @@ class CategoriedSearchAdapter(private val context: Context, private val list: Li
             tittle,
             isHosted,
             externalUrl!!,
-            itemValue.posterURL
-        )
+            itemValue.posterURL)
     }
 }

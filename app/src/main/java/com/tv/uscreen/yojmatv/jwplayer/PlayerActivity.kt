@@ -2,6 +2,7 @@ package com.example.jwplayer
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.tv.uscreen.yojmatv.Bookmarking.BookmarkingViewModel
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.databinding.ActivityPlayerBinding
 import com.tv.uscreen.yojmatv.jwplayer.utils.Logger
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
@@ -37,6 +39,7 @@ class PlayerActivity : AppCompatActivity(), Serializable,
     private var isLive: Boolean? = false
     private var activity: String? = null
     private var tag: String? = ""
+    private var audioTrackList: List<AudioTrackListItem>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +69,20 @@ class PlayerActivity : AppCompatActivity(), Serializable,
             if (activity?.contains("HomeSliderActivity") == true) {
                 screenName = "HomeSliderActivity"
             }
+            try {
+                if (bundle.getSerializable(AppConstants.AUDIO_TRACK_ITEM) as List<EnveuVideoItemBean> != null) {
+                     audioTrackList =
+                        (bundle.getSerializable(AppConstants.AUDIO_TRACK_ITEM) as List<AudioTrackListItem>?)
+
+                    if (audioTrackList != null) {
+                        Log.d("audioTrackList", "onCreateAudioTrackList: " + audioTrackList)
+
+                    }
+                }
+            } catch (e: Exception) {
+                com.tv.uscreen.yojmatv.utils.Logger.w(e)
+            }
+
             try {
                 if (bundle.getSerializable("episodeList") as List<EnveuVideoItemBean> != null) {
                     seasonEpisodesList =
@@ -102,10 +119,24 @@ class PlayerActivity : AppCompatActivity(), Serializable,
             args.putSerializable("episodeList", seasonEpisodesList as Serializable)
         }
 
+        if (null != audioTrackList) {
+            args.putSerializable(AppConstants.AUDIO_TRACK_ITEM, audioTrackList as Serializable)
+            Log.d("test1", "onCreate:playeracctivity " + audioTrackList?.get(0))
+        }
+
         isBingeWatchEnable?.let { args.putBoolean("binge_watch", it) }
         myFragment = JWPlayerFragment()
         val userId = KsPreferenceKeys.getInstance().appPrefUserId
-        myFragment?.initializePlugin(this,userId,tittle,isLive,seriesTittle,episodeId.toString(),contentType,tag)
+        myFragment?.initializePlugin(
+            this,
+            userId,
+            tittle,
+            isLive,
+            seriesTittle,
+            episodeId.toString(),
+            contentType,
+            tag
+        )
         myFragment!!.arguments = args
         supportFragmentManager
             .beginTransaction()

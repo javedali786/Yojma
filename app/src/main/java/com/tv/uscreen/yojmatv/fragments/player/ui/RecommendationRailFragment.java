@@ -154,7 +154,7 @@ public class RecommendationRailFragment extends BaseBindingFragment<DetailFooter
     }
 
     public void hideProgressBar() {
-        if (context instanceof SeriesDetailActivity) {
+       /* if (context instanceof SeriesDetailActivity) {
             ((SeriesDetailActivity) context).isRailData = true;
             ((SeriesDetailActivity) context).stopShimmer();
             ((SeriesDetailActivity) context).dismissLoading(((SeriesDetailActivity) context).getBinding().progressBar);
@@ -165,7 +165,7 @@ public class RecommendationRailFragment extends BaseBindingFragment<DetailFooter
             ((EpisodeActivity) context).stopShimmercheck();
 
 
-        }
+        }*/
 
     }
 

@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.tv.uscreen.yojmatv.beanModelV3.playListModelV2.NewImages;
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem;
 
 import java.io.Serializable;
 import java.util.List;
@@ -43,6 +44,9 @@ public class VideoDetails implements Serializable
     @SerializedName("textTracks")
     @Expose
     private Object textTracks;
+    @SerializedName("audioTracks")
+    @Expose
+    private List<AudioTrackListItem> audioTracks;
     @SerializedName("images")
     @Expose
     private List<NewImages> images = null;
@@ -163,6 +167,14 @@ public class VideoDetails implements Serializable
 
     public void setImages(List<NewImages> images) {
         this.images = images;
+    }
+
+    public List<AudioTrackListItem> getAudioTracks() {
+        return audioTracks;
+    }
+
+    public void setAudioTracks(List<AudioTrackListItem> audioTracks) {
+        this.audioTracks = audioTracks;
     }
 
     public void writeToParcel(android.os.Parcel dest, int flags) {

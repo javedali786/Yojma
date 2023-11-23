@@ -153,6 +153,7 @@ public interface AppConstants {
     String EXTRA_TRAILER_DETAILS = "extra_trailer_details";
     String EXTRA_SHOW_PRE_ROLL_VIDEO = "extra_show_pre_roll_video";
     String IS_SIGN_LANG_ENABLE = "signLangParentRefId";
+    String AUDIO_TRACK_ITEM = "audioTracks";
     String SIGN_LANG_ID = "signLangId";
     String IS_PODCAST = "podcast";
     String BUNDLE_SELECTED_SEASON="selectedSeasonId";

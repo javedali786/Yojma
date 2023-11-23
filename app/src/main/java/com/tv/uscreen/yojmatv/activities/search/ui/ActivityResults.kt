@@ -305,7 +305,6 @@ class ActivityResults : BaseBindingActivity<ActivityResultBinding?>(), CommonSea
             externalUrl!!,
             itemValue.posterURL
         )
-
         // AppCommonMethod.redirectionLogic(this,railCommonData,position);
     }
 

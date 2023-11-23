@@ -649,7 +649,9 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
             isTrailer,
             false,
             videoDetails!!.posterURL,
-            AppConstants.DETAILACTIVITY,externalRefId,videoDetails?.skipintro_startTime?:"",videoDetails?.skipintro_endTime?:"",keyword
+            AppConstants.DETAILACTIVITY,externalRefId,videoDetails?.skipintro_startTime?:"",
+            videoDetails?.skipintro_endTime?:"",keyword,
+            videoDetails?.videoDetails?.audioTracks
         )
     }
 
@@ -663,6 +665,8 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
                     if (assetResponse != null) {
                         val gson = Gson()
                         val json = gson.toJson(assetResponse.baseCategory)
+                        Log.w("getAssetDetailsV2-->>>>>", json)
+
                         if (assetResponse.status.equals(APIStatus.START.name, ignoreCase = true)) {
                         } else if (assetResponse.status.equals(
                                 APIStatus.SUCCESS.name,
@@ -855,7 +859,12 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
     }
 
     private fun setCustomFields(videoItemBean: EnveuVideoItemBean?, duration: String?) {
-        Log.d("duration", "setCustomFields: $duration")
+        Log.d("duration", "setCustomFields: ${videoItemBean?.videoDetails?.audioTracks}")
+        if(videoItemBean?.videoDetails?.audioTracks != null) {
+            val  audioTrackListItem= videoItemBean.videoDetails.audioTracks
+            Log.d("serisename", "seriseAudioTrack: $audioTrackListItem")
+
+        }
         try {
 
             if (videoItemBean?.title != null) {

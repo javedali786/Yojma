@@ -37,8 +37,6 @@ class SettingAdapter(private val mList: ArrayList<String>?, val itemClick: ItemC
           /*  holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected)
             holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.buy_now_pay_now_btn_text_color));
        */ }
-
-
     }
 
     // return the number of the items in the list

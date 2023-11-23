@@ -84,6 +84,7 @@ import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import com.tv.uscreen.yojmatv.utils.htmlParseToString
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 
+
 class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
     AlertDialogFragment.AlertDialogListener, NetworkChangeReceiver.ConnectivityReceiverListener,
     OnAudioFocusChangeListener,
@@ -174,6 +175,10 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
                 extras = extras.getBundle(AppConstants.BUNDLE_ASSET_BUNDLE)
                 assetId = extras?.getInt(AppConstants.BUNDLE_ASSET_ID)!!
                 brightCoveVideoId = extras.getLong(AppConstants.BUNDLE_VIDEO_ID_BRIGHTCOVE)
+                try {
+                } catch (e: Exception) {
+                    Logger.w(e)
+                }
             }
         }
         setClicks()
@@ -366,8 +371,10 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
             AppConstants.EPISODEACTIVITY,
             externalRefId,
             videoDetails?.skipintro_startTime ?: "",
-            videoDetails?.skipintro_endTime ?: "",keyword
+            videoDetails?.skipintro_endTime ?: "",keyword,
+            videoDetails?.audioTrackList
         )
+        Log.d("test1", "startPlayer: episode"+videoDetails?.audioTrackList?.get(0)?.type)
     }
 
     private fun connectionObserver() {

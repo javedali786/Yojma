@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem;
 
 import java.io.Serializable;
 import java.util.List;
@@ -43,6 +44,10 @@ public class DetailVideo implements Serializable
     @SerializedName("textTracks")
     @Expose
     private Object textTracks;
+    @SerializedName("audioTracks")
+    @Expose
+    private List<AudioTrackListItem> audioTracks;
+
     @SerializedName("images")
     @Expose
     private List<DetailVideoImage> images = null;
@@ -75,6 +80,7 @@ public class DetailVideo implements Serializable
         this.drmDisabled = in.readValue((Object.class.getClassLoader()));
         this.textTracks = in.readValue((Object.class.getClassLoader()));
         in.readList(this.images, (DetailVideoImage.class.getClassLoader()));
+        in.readList(this.audioTracks, (AudioTrackListItem.class.getClassLoader()));
     }
 
     public DetailVideo() {
@@ -168,6 +174,14 @@ public class DetailVideo implements Serializable
         this.images = images;
     }
 
+    public List<AudioTrackListItem> getAudioTracks() {
+        return audioTracks;
+    }
+
+    public void setAudioTracks(List<AudioTrackListItem> audioTracks) {
+        this.audioTracks = audioTracks;
+    }
+
     public void writeToParcel(android.os.Parcel dest, int flags) {
         dest.writeValue(cuePoints);
         dest.writeValue(seasonNo);
@@ -180,6 +194,7 @@ public class DetailVideo implements Serializable
         dest.writeValue(drmDisabled);
         dest.writeValue(textTracks);
         dest.writeList(images);
+        dest.writeList(audioTracks);
     }
 
     public int describeContents() {

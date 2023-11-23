@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 
 import com.enveu.client.baseCollection.baseCategoryModel.BaseCategory;
 import com.example.jwplayer.PlayerActivity;
@@ -42,6 +44,7 @@ import com.tv.uscreen.yojmatv.activities.usermanagment.ui.PaymentDetailPage;
 import com.tv.uscreen.yojmatv.activities.watchList.ui.WatchListActivity;
 import com.tv.uscreen.yojmatv.beanModel.entitle.ResponseEntitle;
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean;
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem;
 import com.tv.uscreen.yojmatv.utils.Logger;
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants;
 import com.tv.uscreen.yojmatv.utils.helpers.ADHelper;
@@ -49,6 +52,7 @@ import com.tv.uscreen.yojmatv.utils.helpers.StringUtils;
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -134,7 +138,7 @@ public final class ActivityLauncher {
         source.startActivity(intent);
     }
 
-    public void launchPlayerActitivity(Activity source, Class<PlayerActivity> destination, String playbackurl, boolean IsBingeWatchEnable, List<EnveuVideoItemBean> seasonEpisodesList, int currentEpisodeId,String seriesTittle, String tittle, String contentType, Boolean isTrailer, Boolean isLive, String posterUrl, String screenName, String externalRefId, String skipIntroStartTime, String skipIntroEndTime,String tag) {
+    public void launchPlayerActitivity(Activity source, Class<PlayerActivity> destination, String playbackurl, boolean IsBingeWatchEnable, List<EnveuVideoItemBean> seasonEpisodesList, int currentEpisodeId,String seriesTittle, String tittle, String contentType, Boolean isTrailer, Boolean isLive, String posterUrl, String screenName, String externalRefId, String skipIntroStartTime, String skipIntroEndTime,String tag,List<AudioTrackListItem> audioTrackListItems) {
         Intent intent = new Intent(source, destination);
         intent.putExtra("activity", String.valueOf(source));
         intent.putExtra("playBackUrl", playbackurl);
@@ -152,7 +156,7 @@ public final class ActivityLauncher {
         intent.putExtra("skipIntroStartTime", skipIntroStartTime);
         intent.putExtra("skipIntroEndTime", skipIntroEndTime);
         intent.putExtra("tag",tag);
-
+        intent.putExtra(AppConstants.AUDIO_TRACK_ITEM, (Serializable) audioTrackListItems);
         source.startActivity(intent);
     }
 
@@ -272,11 +276,14 @@ public final class ActivityLauncher {
     }
 
 
-    public void episodeScreenBrightcove(Activity source, Class<EpisodeActivity> destination, int id) {
+    public void episodeScreenBrightcove(Activity source, Class<EpisodeActivity> destination, int id ) {
         KsPreferenceKeys preference = KsPreferenceKeys.getInstance();
 
         Bundle args = new Bundle();
         args.putInt(AppConstants.BUNDLE_ASSET_ID, id);
+
+
+
 //      args.putLong(AppConstants.BUNDLE_VIDEO_ID_BRIGHTCOVE, videoId);
 //        args.putBoolean(AppConstants.BUNDLE_IS_PREMIUM, isPremium);
         args.putBoolean(AppConstants.EXTRA_SHOW_PRE_ROLL_VIDEO, !(source instanceof EpisodeActivity));

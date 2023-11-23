@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -22,9 +23,11 @@ import com.example.jwplayer.VideoQualityAdapter.CaptionAdapter
 import com.example.jwplayer.VideoQualityAdapter.CustomAdapter
 import com.example.jwplayer.VideoQualityAdapter.SettingAdapter
 import com.google.android.gms.cast.framework.CastButtonFactory
+import com.google.gson.Gson
 import com.jwplayer.pub.api.media.audio.AudioTrack
 import com.jwplayer.pub.api.media.captions.Caption
 import com.tv.uscreen.yojmatv.R
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.databinding.EnveuPlayerControlViewBinding
 
 
@@ -88,6 +91,10 @@ class EnveuPlayerControlView : FrameLayout {
                 controlClickListener?.onAudioSelected(trackIndex)
                 addHideHandler()
             }
+        }
+
+        override fun initialAudioSelected(trackIndex: Int) {
+            controlClickListener?.onAudioSelected(trackIndex)
         }
 
     }
@@ -408,13 +415,61 @@ class EnveuPlayerControlView : FrameLayout {
         }
     }
 
-    fun setAudioAdapter(videoTracks: ArrayList<AudioTrack>?, selectedVideoTrack: String) {
+    fun setAudioAdapter(
+        videoTracks: ArrayList<AudioTrack>?,
+        selectedVideoTrack: String,
+        receivedAudioTrackList: ArrayList<AudioTrackListItem>?, initialAudioSetup: Boolean) {
+        var text : String? = null
+        var defaultLanguage: String? = null
+        var primaryLanguage: String? = null
         if (videoTracks != null) {
-            updateRecyclerViewVisibility()
-            visibilityHandler.removeCallbacksAndMessages(null)
-            val adapter = AudioAdapter(videoTracks, audioItemClick, selectedVideoTrack)
+            if (receivedAudioTrackList != null) {
+                val gson = Gson()
+                val jsonString = gson.toJson(receivedAudioTrackList)
+                Log.d("ListItemData", jsonString)
+
+                for (audioTrack in receivedAudioTrackList) {
+                    if (audioTrack.type == "primary" && audioTrack.isJsonMemberDefault) {
+                        // If a primary type is marked as default, pick language and name from that object
+                        defaultLanguage = audioTrack.name
+                        primaryLanguage = audioTrack.name
+                        Log.d("Sumit1", "setAudioAdapter1:$defaultLanguage")
+                        Log.d("Sumit1", "setAudioAdapter2:$primaryLanguage")
+                        break
+                    } else if (audioTrack.type != "primary" && audioTrack.isJsonMemberDefault) {
+                        // If a non-primary audio track is marked as default, use langCode to pick the default track
+                       // var defaultLanguage = audioTrack.langCode
+                         defaultLanguage = audioTrack.name
+                        Log.d("Sumit2", "setAudioAdapter3:$defaultLanguage")
+                       // Log.d("Sumit2", "setAudioAdapter3:$defaultName")
+                    }
+                    else if (audioTrack.type == "primary" && !audioTrack.isJsonMemberDefault) {
+                      //  var defaultLanguage = audioTrack.langCode
+                        primaryLanguage = audioTrack.name
+                        Log.d("Sumit3", "setAudioAdapter3:$primaryLanguage")
+                      //  Log.d("Sumit3", "setAudioAdapter3:$defaultName")
+                    }
+                }
+            }
+                updateRecyclerViewVisibility()
+                visibilityHandler.removeCallbacksAndMessages(null)
+            val isDefaultLanguageEnable = isDefaultLangExist(defaultLanguage,videoTracks)
+            val adapter = AudioAdapter(videoTracks, audioItemClick, selectedVideoTrack, defaultLanguage,primaryLanguage,isDefaultLanguageEnable)
             binding.rvQuality.adapter = adapter
         }
+    }
+
+    private  fun isDefaultLangExist(
+        defaultLanguage: String?,
+        videoTracks: java.util.ArrayList<AudioTrack>):Boolean {
+        var isDefaultLangExist = false
+        for (i in videoTracks){
+          if (defaultLanguage.equals(i.name,ignoreCase = true))  {
+              isDefaultLangExist = true
+              break
+          }
+        }
+        return isDefaultLangExist
     }
 
     fun setVideoAdapter(videoTracks: ArrayList<TrackItem>?, selectedVideoTrack: String) {

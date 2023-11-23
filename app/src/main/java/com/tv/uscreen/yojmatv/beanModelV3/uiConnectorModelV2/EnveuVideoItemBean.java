@@ -19,6 +19,7 @@ import com.tv.uscreen.yojmatv.beanModelV3.playListModelV2.VideosItem;
 import com.tv.uscreen.yojmatv.beanModelV3.searchV2.ItemsItem;
 import com.tv.uscreen.yojmatv.beanModelV3.videoDetailsV2.EnveuVideoDetailsBean;
 import com.tv.uscreen.yojmatv.beanModelV3.videoDetailsV2.VideoDetails;
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem;
 import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.Item;
 import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.ParentContent;
 import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.VideoItem;
@@ -105,8 +106,18 @@ public class EnveuVideoItemBean implements Serializable {
     private VideoItem videoDetailsEpisodes;
     private String epgChannelId;
     private boolean isSelected;
+    private List<AudioTrackListItem> audioTrackList;
+
     private com.tv.uscreen.yojmatv.bean_model_v1_0.videoDetailBean.ParentContent parentContent;
     private ParentContent parentContent2;
+
+
+    public List<AudioTrackListItem> getAudioTrackList() {
+        return audioTrackList;
+    }
+    public void setAudioTrackList(List<AudioTrackListItem> audioTrackList) {
+        this.audioTrackList = audioTrackList;
+    }
 
     public ParentContent getParentContent2() {
         return parentContent2;
@@ -295,6 +306,7 @@ public class EnveuVideoItemBean implements Serializable {
     private String islivedrm = "false";
     private boolean isCurrentlyPlaying;
 
+
     public boolean isCurrentlyPlaying() {
         return isCurrentlyPlaying;
     }
@@ -355,6 +367,15 @@ public class EnveuVideoItemBean implements Serializable {
             this.keywords = details.getKeywords() == null ? new ArrayList<>() : details.getKeywords();
             this.premium = details.getPremium();
             this.assetType = details.getContentType() == null ? "" : details.getContentType();
+
+            if(isIntentFromExpedition) {
+
+            } else {
+                 if(details.getVideo().getAudioTracks()!=null) {
+                this.audioTrackList=details.getVideo().getAudioTracks();
+            }
+            }
+
 
             if (details.getExternalRefId() != null && !details.getExternalRefId().equalsIgnoreCase("")) {
                 this.externalRefId = details.getExternalRefId();
@@ -484,6 +505,11 @@ public class EnveuVideoItemBean implements Serializable {
             this.title = details.getTitle() == null ? "" : details.getTitle();
             this.externalRefId = details.getExternalRefId() == null ? "" : details.getExternalRefId().trim();
             this.assetType = details.getContentType() == null ? "" : details.getContentType();
+
+            if (details.getVideo().getAudioTracks() != null) {
+                this.audioTrackList = details.getVideo().getAudioTracks();
+            }
+
             this.description = details.getDescription() == null ? "" : details.getDescription().trim();
             this.premium = details.getPremium();
             this.parentContent2 = details.getParentContent();
