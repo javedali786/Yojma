@@ -658,12 +658,12 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
            // audioList1 = ArrayList()
             audioList?.addAll(audioTrackEvent.audioTracks)
             if (!audioList.isNullOrEmpty()) {
-                viewBinding.seriesDetailAllEpisodeTxtColors.setAudioAdapter(
+               /* viewBinding.seriesDetailAllEpisodeTxtColors.setAudioAdapter(
                     audioList,
                     selectedVideoTrack,
                     receivedAudioTrackList,
                     true
-                )
+                )*/
             }
         }
     }
