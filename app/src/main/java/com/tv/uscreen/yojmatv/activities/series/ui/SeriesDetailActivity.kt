@@ -316,7 +316,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
         private get() {
             modelCall()
             railInjectionHelper = ViewModelProvider(this)[RailInjectionHelper::class.java]
-            railInjectionHelper!!.getSeriesDetailsV2(seriesId.toString(), false)
+            railInjectionHelper!!.getSeriesDetailsV2(seriesId.toString(), true)
                 .observe(this@SeriesDetailActivity) { response: ResponseModel<*>? ->
                     if (response != null) {
                         if (response.status.equals(APIStatus.START.name, ignoreCase = true)) {

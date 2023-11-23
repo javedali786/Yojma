@@ -765,6 +765,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
                             this.skipIntroStartTime = nextEpisodeItem?.skipintro_startTime ?: ""
                             this.skipIntroEndTime = nextEpisodeItem?.skipintro_endTime ?: ""
+                            this.receivedAudioTrackList = ArrayList(nextEpisodeItem?.audioTrackList ?: listOf())
                             Logger.d("seasonEpisodesList: $skipIntroStartTime  $skipIntroEndTime")
 
 
