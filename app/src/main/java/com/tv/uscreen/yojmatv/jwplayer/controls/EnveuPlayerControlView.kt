@@ -29,7 +29,6 @@ import com.jwplayer.pub.api.media.captions.Caption
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.databinding.EnveuPlayerControlViewBinding
-import com.tv.uscreen.yojmatv.jwplayer.AudioTracks
 
 
 import com.tv.uscreen.yojmatv.jwplayer.utils.Logger
@@ -433,7 +432,7 @@ class EnveuPlayerControlView : FrameLayout {
                     if (audioTrack.type == "primary" && audioTrack.isJsonMemberDefault) {
                         // If a primary type is marked as default, pick language and name from that object
                         defaultLanguage = audioTrack.name
-                       // primaryLanguage = audioTrack.name
+                        primaryLanguage = audioTrack.name
                         Log.d("Sumit1", "setAudioAdapter1:$defaultLanguage")
                         Log.d("Sumit1", "setAudioAdapter2:$primaryLanguage")
                         break
@@ -454,9 +453,23 @@ class EnveuPlayerControlView : FrameLayout {
             }
                 updateRecyclerViewVisibility()
                 visibilityHandler.removeCallbacksAndMessages(null)
-            val adapter = AudioAdapter(videoTracks, audioItemClick, selectedVideoTrack, defaultLanguage,primaryLanguage)
+            val isDefaultLanguageEnable = isDefaultLangExist(defaultLanguage,videoTracks)
+            val adapter = AudioAdapter(videoTracks, audioItemClick, selectedVideoTrack, defaultLanguage,primaryLanguage,isDefaultLanguageEnable)
             binding.rvQuality.adapter = adapter
         }
+    }
+
+    private  fun isDefaultLangExist(
+        defaultLanguage: String?,
+        videoTracks: java.util.ArrayList<AudioTrack>):Boolean {
+        var isDefaultLangExist = false
+        for (i in videoTracks){
+          if (defaultLanguage.equals(i.name,ignoreCase = true))  {
+              isDefaultLangExist = true
+              break
+          }
+        }
+        return isDefaultLangExist
     }
 
     fun setVideoAdapter(videoTracks: ArrayList<TrackItem>?, selectedVideoTrack: String) {

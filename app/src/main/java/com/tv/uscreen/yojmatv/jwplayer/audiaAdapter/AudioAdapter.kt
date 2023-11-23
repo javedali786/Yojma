@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jwplayer.pub.api.media.audio.AudioTrack
 import com.tv.uscreen.yojmatv.R
-import com.tv.uscreen.yojmatv.jwplayer.AudioTracks
 
 
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
@@ -18,12 +17,13 @@ class AudioAdapter(
     itemClick: ItemClick?,
     private val receivedAudioTrackList: String?,
     defaultLanguage: String?,
-    primaryLanguage: String?
+    primaryLanguage: String?,
+    isDefaultLanguageEnable: Boolean
 ) : RecyclerView.Adapter<AudioAdapter.ViewHolder>() {
      var itemClick = itemClick
     var defaultLanguage = defaultLanguage
     var primaryLanguage = primaryLanguage
-
+    var isDefaultLanguageEnable = isDefaultLanguageEnable
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -59,14 +59,20 @@ class AudioAdapter(
             }
         }else {
             if (mList.get(position).name.equals("Default", ignoreCase = true)) {
-                holder.titleText.text = primaryLanguage
+                if (!isDefaultLanguageEnable){
+                    holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected_blue)
+                    holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
+                }
+                 holder.titleText.text = primaryLanguage
+                //holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
             } else {
-                holder.titleText.text = mList.get(position).name
-                if (defaultLanguage.equals(mList.get(position).name)) {
+                if (defaultLanguage.equals(mList.get(position).name ,ignoreCase = true)) {
+                    holder.titleText.text = mList.get(position).name
                     itemClick?.initialAudioSelected(position)
                     holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected_blue)
                     holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
                 } else {
+                    holder.titleText.text = mList.get(position).name
                     holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected)
                     holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.buy_now_pay_now_btn_text_color));
                 }
