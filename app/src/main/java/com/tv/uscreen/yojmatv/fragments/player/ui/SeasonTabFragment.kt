@@ -268,12 +268,12 @@ class SeasonTabFragment : BaseBindingFragment<SeasonFragmentLayoutBinding?>(), S
                                     allEpiosdes.addAll(enveuCommonResponse.enveuVideoItemBeans)
                                     seasonAdapter!!.notifyDataSetChanged()
                                 }
-                                hideProgressBar()
                                 if (context is EpisodeActivity) {
                                     (context as EpisodeActivity).episodesList(allEpiosdes)
                                 } else if (context is SeriesDetailActivity) {
                                     (context as SeriesDetailActivity).episodesList(allEpiosdes)
                                 }
+                                hideProgressBar()
                             }
                         }
                     } else if (response.status.equals(APIStatus.ERROR.name, ignoreCase = true)) {

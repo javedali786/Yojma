@@ -157,8 +157,6 @@ public final class ActivityLauncher {
         intent.putExtra("skipIntroEndTime", skipIntroEndTime);
         intent.putExtra("tag",tag);
         intent.putExtra(AppConstants.AUDIO_TRACK_ITEM, (Serializable) audioTrackListItems);
-        Log.d("test1", "launchPlayerActitivity: "+audioTrackListItems.get(0).getType());
-
         source.startActivity(intent);
     }
 

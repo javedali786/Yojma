@@ -367,7 +367,10 @@ public class EnveuVideoItemBean implements Serializable {
             this.keywords = details.getKeywords() == null ? new ArrayList<>() : details.getKeywords();
             this.premium = details.getPremium();
             this.assetType = details.getContentType() == null ? "" : details.getContentType();
-            this.audioTrackList=details.getVideo().getAudioTracks();
+
+          /*  if(details.getVideo().getAudioTracks()!=null) {
+                this.audioTrackList=details.getVideo().getAudioTracks();
+            }*/
 
             if (details.getExternalRefId() != null && !details.getExternalRefId().equalsIgnoreCase("")) {
                 this.externalRefId = details.getExternalRefId();
@@ -497,6 +500,10 @@ public class EnveuVideoItemBean implements Serializable {
             this.title = details.getTitle() == null ? "" : details.getTitle();
             this.externalRefId = details.getExternalRefId() == null ? "" : details.getExternalRefId().trim();
             this.assetType = details.getContentType() == null ? "" : details.getContentType();
+
+            if (details.getVideo().getAudioTracks() != null) {
+                this.audioTrackList = details.getVideo().getAudioTracks();
+            }
 
             this.description = details.getDescription() == null ? "" : details.getDescription().trim();
             this.premium = details.getPremium();

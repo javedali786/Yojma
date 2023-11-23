@@ -10,8 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tv.uscreen.yojmatv.R
+import com.tv.uscreen.yojmatv.activities.detail.ui.EpisodeActivity
 import com.tv.uscreen.yojmatv.activities.listing.ui.MoreForYouActivity
 import com.tv.uscreen.yojmatv.activities.series.adapter.RelatedContentAdapter
+import com.tv.uscreen.yojmatv.activities.series.ui.SeriesDetailActivity
 import com.tv.uscreen.yojmatv.baseModels.BaseBindingFragment
 import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
@@ -29,6 +31,7 @@ import com.tv.uscreen.yojmatv.utils.helpers.StringUtils
 import com.tv.uscreen.yojmatv.utils.helpers.intentlaunchers.ActivityLauncher
 import com.tv.uscreen.yojmatv.utils.stringsJson.converter.StringsHelper
 import java.util.Locale
+
 
 class RelatedContentFragment : BaseBindingFragment<RelatedContentFragmentLayoutBinding?>(), RelatedContentAdapter.EpisodeItemClick, MoreItemClickListner {
     private var railInjectionHelper: RailInjectionHelper? = null
@@ -82,16 +85,14 @@ class RelatedContentFragment : BaseBindingFragment<RelatedContentFragmentLayoutB
     }
 
     private fun hideProgressBar() {
-        /* if (context instanceof SeriesDetailActivity) {
-            ((SeriesDetailActivity) context).isSeasonData = true;
-            ((SeriesDetailActivity) context).stopShimmer();
-
-            ((SeriesDetailActivity) context).dismissLoading(((SeriesDetailActivity) context).getBinding().progressBar);
-
-        } else if (context instanceof EpisodeActivity) {
-            ((EpisodeActivity) context).dismissLoading(((EpisodeActivity) context).getBinding().progressBar);
-            ((EpisodeActivity) context).isSeasonData = true;
-            ((EpisodeActivity) context).stopShimmercheck();
+       /* if (context is SeriesDetailActivity) {
+            (context as SeriesDetailActivity).isSeasonData = true
+            (context as SeriesDetailActivity).stopShimmer()
+            (context as SeriesDetailActivity).dismissLoading((context as SeriesDetailActivity).binding!!.progressBar)
+        } else if (context is EpisodeActivity) {
+            (context as EpisodeActivity).dismissLoading((context as EpisodeActivity).binding!!.progressBar)
+            (context as EpisodeActivity).isSeasonData = true
+            (context as EpisodeActivity).stopShimmercheck()
         }*/
     }
 

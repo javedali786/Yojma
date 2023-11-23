@@ -42,6 +42,7 @@ import com.tv.uscreen.yojmatv.beanModel.entitle.ResponseEntitle
 import com.tv.uscreen.yojmatv.beanModel.enveuCommonRailData.RailCommonData
 import com.tv.uscreen.yojmatv.beanModel.selectedSeason.SelectedSeasonModel
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
+import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.callbacks.commonCallbacks.FirstEpisodeItem
 import com.tv.uscreen.yojmatv.databinding.ActivitySeriesDetailBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.AlertDialogFragment
@@ -78,6 +79,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
     private var relatedContentFragment: RelatedContentFragment? = null
     private var alertDialog: AlertDialog? = null
     private var isGeoBlocking = false
+    private var audioTrackList : List<AudioTrackListItem>? = null
     private var episodeTabAdapter: EpisodeTabAdapter? = null
     private var newIntentCall = false
     private var seriesTittle = ""
@@ -816,6 +818,10 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                 skipIntroEndTime = itemValue.skipintro_endTime
             }
 
+            if(itemValue.audioTrackList != null) {
+                audioTrackList= itemValue.audioTrackList
+            }
+
             checkGeoBlocking()
             Log.d("getFirstItem", "getFirstItem2: $itemValue")
             //   setUiComponents(itemValue);
@@ -1068,8 +1074,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
             isTrailer,
             false,
             posterUrl,
-            AppConstants.SERIESDEATILACTIVITY, externalRefId, skipIntroStartTime, skipIntroEndTime,keyword,null
-
+            AppConstants.SERIESDEATILACTIVITY, externalRefId, skipIntroStartTime, skipIntroEndTime,keyword,audioTrackList
         )
     }
 
