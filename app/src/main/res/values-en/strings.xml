@@ -769,7 +769,7 @@ When children go to school. and found lessons from the documentary Children will
     <string name="popup_request_sent">Request Sent</string>
     <string name="popup_thanks_for_putting_request">Thanks for putting the request. If we find the email address in our system, we will send the reset link over the mail please enter new password</string>
     <string name="popup_check_your_email">Check your email</string>
-    <string name="popup_pwd_must_be_8_to_16_char">Password must be 8-16 characters, at least 1 number, 1 lowercase letter &amp; 1 uppercase letter</string>
+    <string name="popup_pwd_must_be_8_to_16_char">Passwords must be at least 6-20 characters.</string>
     <string name="popup_user_already_has_an_account">User already has an account with this email or credential.</string>
     <string name="popup_error">Error</string>
     <string name="popup_mobile_number_digit">Mobile number should be 9 digit</string>
