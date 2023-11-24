@@ -1,18 +1,24 @@
 package com.tv.uscreen.yojmatv.jwplayer.cast
 
-import android.graphics.PorterDuff
+import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.ContextThemeWrapper
 import android.view.Menu
+import android.widget.ImageButton
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.mediarouter.app.MediaRouteButton
 import com.google.android.gms.cast.framework.CastButtonFactory
+import com.google.android.gms.cast.framework.media.uicontroller.UIMediaController
 import com.google.android.gms.cast.framework.media.widget.ExpandedControllerActivity
 import com.tv.uscreen.yojmatv.R
-import io.reactivex.annotations.NonNull
 
 
 class ExpandedControlsActivity : ExpandedControllerActivity() {
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+        setContentView(R.layout.cast_expanded_controller_activity)
+    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.expanded_controller, menu)
@@ -35,4 +41,5 @@ class ExpandedControlsActivity : ExpandedControllerActivity() {
         CastButtonFactory.setUpMediaRouteButton(this, menu, R.id.media_route_menu_item)
         return true
     }
+
 }

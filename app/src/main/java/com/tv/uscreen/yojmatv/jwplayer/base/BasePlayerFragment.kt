@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,23 +14,40 @@ import com.enveu.player.receiver.ConnectivityReceiver
 import com.google.android.gms.cast.MediaInfo
 import com.google.android.gms.cast.MediaLoadRequestData
 import com.google.android.gms.cast.MediaMetadata
+import com.google.android.gms.cast.MediaQueueItem
+import com.google.android.gms.cast.MediaStatus
 import com.google.android.gms.cast.MediaTrack
 import com.google.android.gms.cast.framework.CastContext
 import com.google.android.gms.cast.framework.CastSession
 import com.google.android.gms.cast.framework.SessionManagerListener
+import com.google.android.gms.cast.framework.media.MediaQueue
 import com.google.android.gms.cast.framework.media.RemoteMediaClient
 import com.google.android.gms.common.images.WebImage
 import com.google.gson.Gson
+import com.tv.uscreen.yojmatv.SDKConfig
+import com.tv.uscreen.yojmatv.activities.detail.viewModel.DetailViewModel
+import com.tv.uscreen.yojmatv.beanModel.entitle.ResponseEntitle
+import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
+import com.tv.uscreen.yojmatv.callbacks.apicallback.EntitlementCallBack
 import com.tv.uscreen.yojmatv.jwplayer.cast.ExpandedControlsActivity
 import com.tv.uscreen.yojmatv.jwplayer.cast.TracksItem
 import com.tv.uscreen.yojmatv.utils.Logger
+import org.json.JSONObject
 
 abstract class BasePlayerFragment : Fragment() {
     protected var currentPosition: Long = 0L
     var isUpdatedChromecastMedia = false
+     var externalRefId: String? = null
     var playbackUrl: String? = null
+    var isSeries: Boolean = false
+    var currentPlayingIndex: Int? = -1
+    var viewModel: DetailViewModel? = null
+    var token: String? = null
+
+    var seasonEpisodesList: List<EnveuVideoItemBean>? = null
     var subtitleTracks: List<TracksItem?>? = null
     var tittle: String? = null
+    var chromecastPlaylist: ArrayList<MediaQueueItem>? = null
     var posterUrl: String? = null
 
     abstract fun play()
@@ -70,6 +88,7 @@ abstract class BasePlayerFragment : Fragment() {
     protected fun setUpCast() {
         enveuPlayerControlView.initCast()
         mCastContext = CastContext.getSharedInstance()
+
         // mCastSession = mCastContext?.sessionManager?.currentCastSession
     }
 
@@ -189,35 +208,131 @@ abstract class BasePlayerFragment : Fragment() {
                 }
             }
         })
-        remoteMediaClient?.load(
-            MediaLoadRequestData.Builder()
-                .setMediaInfo(buildMediaInfo())
-                .setAutoplay(autoPlay)
-                .setCurrentTime(position)
-                .build()
+        if (isSeries) {
+            counter = currentPlayingIndex!!+1
+           externalRefId?.let {
+               val queueItem: MediaQueueItem =
+                   MediaQueueItem.Builder(
+                       buildMediaInfo(
+                           seasonEpisodesList!![currentPlayingIndex!!],
+                           it
+                       )!!
+                   )
+                       .setAutoplay(true)
+                       .setPreloadTime(20.0)
+                       .build()
+               val newItemArray: Array<MediaQueueItem> = arrayOf(queueItem)
+               remoteMediaClient?.queueLoad(
+                   newItemArray, 0,
+                   MediaStatus.REPEAT_MODE_REPEAT_OFF, JSONObject()
+               )
+           }
+            AsyncTask.execute { getChromecastList() }
+        } else {
+            remoteMediaClient?.load(
+                MediaLoadRequestData.Builder()
+                    .setMediaInfo(buildMediaInfo())
+                    .setAutoplay(autoPlay)
+                    .setCurrentTime(position)
+                    .build()
+            )
+        }
+
+    }
+
+    // end the chromecast session
+    fun endSession() {
+        remoteMediaClient?.stop()
+        mCastContext?.sessionManager?.endCurrentSession(true)
+    }
+
+    var counter: Int = 0
+    fun getChromecastList() {
+        if (counter < seasonEpisodesList?.size!! - 1 && isAdded) {
+            getPlaylist(counter)
+        } else {
+
+        }
+    }
+
+    // to get the item count in the queue
+    val count: Int
+        get() {
+            val queue: MediaQueue = mediaQueue ?: return 0
+            return queue.itemCount
+        }
+
+    // will return the Media Queue
+    val mediaQueue: MediaQueue?
+        get() {
+            val queue: MediaQueue? =
+                if (remoteMediaClient == null) null else remoteMediaClient!!.mediaQueue
+            return queue
+        }
+
+    private fun getPlaylist(i: Int) {
+        var externalRefId = ""
+        if (seasonEpisodesList!![i].isPremium) {
+            val sku = seasonEpisodesList!![i].sku
+            viewModel?.checkEntitlement(token, sku, object : EntitlementCallBack {
+                override fun entitlementStatus(it: ResponseEntitle) {
+                    if (it != null) {
+                        if (it.data.entitled) {
+                            externalRefId = it.data.externalRefId
+                            val queueItem: MediaQueueItem =
+                                MediaQueueItem.Builder(
+                                    buildMediaInfo(
+                                        seasonEpisodesList!![i],
+                                        externalRefId
+                                    )!!
+                                )
+                                    .setAutoplay(true)
+                                    .setPreloadTime(20.0)
+                                    .build()
+
+                            if (count != 0) {
+                                remoteMediaClient?.queueAppendItem(queueItem, JSONObject())
+
+                            }
+
+                        }
+                    }
+                    counter++
+                    getChromecastList()
+                }
+
+            })
+        } else {
+            externalRefId = seasonEpisodesList!![i]?.externalRefId
+            val queueItem: MediaQueueItem =
+                MediaQueueItem.Builder(buildMediaInfo(seasonEpisodesList!![i], externalRefId)!!)
+                    .setAutoplay(true)
+                    .build()
+            chromecastPlaylist?.add(queueItem)
+            counter++
+            getChromecastList()
+        }
+
+    }
+
+    private fun buildMediaInfo(
+        enveuVideoItemBean: EnveuVideoItemBean,
+        externalRefid: String
+    ): MediaInfo? {
+        val movieMetadata = MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE)
+        movieMetadata.putString(MediaMetadata.KEY_TITLE, enveuVideoItemBean.title ?: "")
+        val tracks: MutableList<MediaTrack> = ArrayList<MediaTrack>()
+        createSubtitleTracks(tracks)
+        enveuVideoItemBean?.posterURL?.let { movieMetadata.addImage(WebImage(Uri.parse(it))) }
+        return MediaInfo.Builder(
+            SDKConfig.getInstance().playbacK_URL + externalRefid + ".m3u8" ?: ""
         )
-//        val movieMetadata = MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE)
-//
-//        movieMetadata.putString(MediaMetadata.KEY_TITLE, "ABC")
-//        movieMetadata.putString(MediaMetadata.KEY_SUBTITLE, "ABC")
-//        //movieMetadata.addImage(WebImage(posterUrl))
-//       // movieMetadata.addImage(WebImage(Uri.parse("https://resources-eu1.enveu.tv/IberaliaGo_1666014283572-proj-1666014298392/main-app/contents/img_1676888820270.jpg")))
-//
-//        val mediaInfo = MediaInfo.Builder("https://cdn.jwplayer.com/manifests/bJeozcfa.m3u8")
-//            .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
-//            .setContentType("videos/mp4")
-//            .setMetadata(movieMetadata)
-//          //  .setStreamDuration(mSelectedMedia.getDuration() * 1000)
-//            .build()
-//        val remoteMediaClient = mCastSession!!.remoteMediaClient
-//        remoteMediaClient?.load(MediaLoadRequestData.Builder().setMediaInfo(mediaInfo).setAutoplay(true).build())
-//        remoteMediaClient?.load(
-//            MediaLoadRequestData.Builder()
-//                .setMediaInfo(buildMediaInfo())
-//                .setAutoplay(true)
-//                .setCurrentTime(position)
-//                .build()
-//        )
+            .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
+            .setContentType("videos/mp4")
+            .setMetadata(movieMetadata)
+            .setMediaTracks(tracks)
+            .setStreamDuration(0L)
+            .build()
     }
 
     private fun buildMediaInfo(): MediaInfo? {
@@ -259,7 +374,7 @@ abstract class BasePlayerFragment : Fragment() {
         ConnectivityReceiver.connectivityReceiverListener = listener
         mCastSession?.castDevice?.let {
             enveuPlayerControlView.onCastInProgress(it.friendlyName)
-            play()
+            /*  play()*/
             // pause()
         } ?: enveuPlayerControlView.onCastDisconnected()
     }

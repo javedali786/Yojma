@@ -22,6 +22,7 @@
     </style>
 
 
+
     <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
         <item name="android:calendarTextColor">@color/try_again_btn_txt_color</item>
         <item name="android:dayOfWeekBackground">@color/series_detail_now_playing_title_color</item>
