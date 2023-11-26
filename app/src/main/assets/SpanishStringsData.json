@@ -98,7 +98,7 @@
       "popup_request_sent": "Solicitud enviada",
       "popup_thanks_for_putting_request": "¡Solicitud recibida!  Buscáremos tu correo y, si lo encontramos, te enviaremos un correo para que puedas restablecer tu contraseña.",
       "popup_check_your_email": "Revisa tu correo electrónico",
-      "popup_pwd_must_be_8_to_16_char": "La contraseña debe tener entre 8 y 16 caracteres, al menos 1 número, 1 letra minúscula y 1 letra mayúscula",
+      "popup_pwd_must_be_8_to_16_char": "La contraseña debe tener entre 6 y 20 caracteres",
       "popup_user_already_has_an_account": "El usuario ya tiene una cuenta con este correo electrónico o credencial.",
       "popup_error": "Error",
       "popup_mobile_number_digit": "El número de móvil debe tener 9 dígitos",

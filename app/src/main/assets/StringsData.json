@@ -98,7 +98,7 @@
       "popup_request_sent": "Request Sent",
       "popup_thanks_for_putting_request": "Thanks for putting the request. If we find the email address in our system, we will send the reset link over the mail please enter new password",
       "popup_check_your_email": "Check your email",
-      "popup_pwd_must_be_8_to_16_char": "Password must be 8-16 characters, at least 1 number, 1 lowercase letter & 1 uppercase letter",
+      "popup_pwd_must_be_8_to_16_char": "Passwords must be at least 6–20 characters",
       "popup_user_already_has_an_account": "User already has an account with this email or credential.",
       "popup_error": "Error",
       "popup_mobile_number_digit": "Mobile number should be 9 digit",

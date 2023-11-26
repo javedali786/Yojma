@@ -365,6 +365,7 @@
     <string name="order_history_annual">Anual</string>
     <string name="InvalidEmailDomainException">¡Oh no! Parece que este correo electrónico no esta siendo aceptado para registrarte. Pero no te preocupes,  prueba registrarte utilizando una dirección de correo diferente, como Gmail, Yahoo, Hotmail, etc.</string>
     <string name="we_could_not">Oops, parece que el botón de suscripción está tomando un descanso. Por favor, inténtalo más tarde. Si el problema persiste, escríbenos a help@yojma.tv y lo solucionaremos.</string>
+    <string name="popup_pwd_must_be_8_to_16_char">La contraseña debe tener entre 6 y 20 caracteres</string>
 
 
 

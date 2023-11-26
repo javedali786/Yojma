@@ -374,7 +374,6 @@ class EpisodeActivity : BaseBindingActivity<EpisodeScreenBinding?>(),
             videoDetails?.skipintro_endTime ?: "",keyword,
             videoDetails?.audioTrackList
         )
-        Log.d("test1", "startPlayer: episode"+videoDetails?.audioTrackList?.get(0)?.type)
     }
 
     private fun connectionObserver() {

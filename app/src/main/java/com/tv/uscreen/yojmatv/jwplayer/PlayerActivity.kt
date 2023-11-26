@@ -121,7 +121,6 @@ class PlayerActivity : AppCompatActivity(), Serializable,
 
         if (null != audioTrackList) {
             args.putSerializable(AppConstants.AUDIO_TRACK_ITEM, audioTrackList as Serializable)
-            Log.d("test1", "onCreate:playeracctivity " + audioTrackList?.get(0))
         }
 
         isBingeWatchEnable?.let { args.putBoolean("binge_watch", it) }

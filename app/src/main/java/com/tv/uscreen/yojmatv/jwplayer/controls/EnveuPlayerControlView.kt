@@ -433,25 +433,21 @@ class EnveuPlayerControlView : FrameLayout {
                         // If a primary type is marked as default, pick language and name from that object
                         defaultLanguage = audioTrack.name
                         primaryLanguage = audioTrack.name
-                        Log.d("Sumit1", "setAudioAdapter1:$defaultLanguage")
-                        Log.d("Sumit1", "setAudioAdapter2:$primaryLanguage")
                         break
                     } else if (audioTrack.type != "primary" && audioTrack.isJsonMemberDefault) {
                         // If a non-primary audio track is marked as default, use langCode to pick the default track
                        // var defaultLanguage = audioTrack.langCode
                          defaultLanguage = audioTrack.name
-                        Log.d("Sumit2", "setAudioAdapter3:$defaultLanguage")
-                       // Log.d("Sumit2", "setAudioAdapter3:$defaultName")
                     }
                     else if (audioTrack.type == "primary" && !audioTrack.isJsonMemberDefault) {
                       //  var defaultLanguage = audioTrack.langCode
                         primaryLanguage = audioTrack.name
-                        Log.d("Sumit3", "setAudioAdapter3:$primaryLanguage")
-                      //  Log.d("Sumit3", "setAudioAdapter3:$defaultName")
                     }
                 }
             }
+            if (!initialAudioSetup){
                 updateRecyclerViewVisibility()
+            }
                 visibilityHandler.removeCallbacksAndMessages(null)
             val isDefaultLanguageEnable = isDefaultLangExist(defaultLanguage,videoTracks)
             val adapter = AudioAdapter(videoTracks, audioItemClick, selectedVideoTrack, defaultLanguage,primaryLanguage,isDefaultLanguageEnable)
