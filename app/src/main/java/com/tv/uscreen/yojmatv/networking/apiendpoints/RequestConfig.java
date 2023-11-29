@@ -65,7 +65,7 @@ public class RequestConfig {
                         .addHeader("x-tracking-sdk-version", "0.0.1")
                         .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                         .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                        .addHeader("x-device-name", "");
+                        .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
                 Request request = requestBuilder.build();
 
                 return chain.proceed(request);
@@ -127,7 +127,7 @@ public class RequestConfig {
                         .addHeader("x-tracking-sdk-version", "0.0.1")
                         .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                         .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                        .addHeader("x-device-name", "");
+                        .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
                 Request request = requestBuilder.build();
 
                 return chain.proceed(request);
@@ -179,7 +179,7 @@ public class RequestConfig {
                         .addHeader("x-tracking-sdk-version", "0.0.1")
                         .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                         .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                        .addHeader("x-device-name", "");
+                        .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
                 Request request = requestBuilder.build();
 
                 return chain.proceed(request);
@@ -231,7 +231,7 @@ public class RequestConfig {
                         .addHeader("x-tracking-sdk-version", "0.0.1")
                         .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                         .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                        .addHeader("x-device-name", "");
+                        .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
                 requestBuilder.addHeader("x-auth",token);
                 Request request = requestBuilder.build();
 
@@ -284,7 +284,7 @@ public class RequestConfig {
                         .addHeader("x-tracking-sdk-version", "0.0.1")
                         .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                         .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                        .addHeader("x-device-name", "");
+                        .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
                 requestBuilder.addHeader("x-auth",token);
                 Request request = requestBuilder.build();
 
@@ -339,7 +339,7 @@ public class RequestConfig {
                         .addHeader("x-tracking-sdk-version", "0.0.1")
                         .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                         .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                        .addHeader("x-device-name", "");
+                        .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
                 Request request = requestBuilder.build();
 
                 return chain.proceed(request);
@@ -391,7 +391,7 @@ public class RequestConfig {
                         .addHeader("x-tracking-sdk-version", "0.0.1")
                         .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                         .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                        .addHeader("x-device-name", "");
+                        .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
                 Request request = requestBuilder.build();
 
                 return chain.proceed(request);
@@ -446,7 +446,7 @@ public class RequestConfig {
                     .addHeader("x-tracking-sdk-version", "0.0.1")
                     .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                     .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                    .addHeader("x-device-name", "");
+                    .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
 
             Request request = requestBuilder.build();
             return chain.proceed(request);
@@ -492,7 +492,7 @@ public class RequestConfig {
                     .addHeader("x-tracking-sdk-version", "0.0.1")
                     .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                     .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                    .addHeader("x-device-name", "");
+                    .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
 
             Request request = requestBuilder.build();
             return chain.proceed(request);
@@ -581,7 +581,7 @@ public class RequestConfig {
                     .addHeader("x-tracking-sdk-version", "0.0.1")
                     .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                     .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                    .addHeader("x-device-name", "");
+                    .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
 
             Request request = requestBuilder.build();
             return chain.proceed(request);
@@ -635,7 +635,8 @@ public class RequestConfig {
                     .addHeader("x-tracking-sdk-version", "0.0.1")
                     .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                     .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                    .addHeader("x-device-name", "");
+                    .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
+
 
             Request request = requestBuilder.build();
             return chain.proceed(request);
@@ -681,7 +682,8 @@ public class RequestConfig {
                     .addHeader("x-tracking-sdk-version", "0.0.1")
                     .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                     .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                    .addHeader("x-device-name", "");
+                    .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
+
 
             Request request = requestBuilder.build();
             return chain.proceed(request);
@@ -729,7 +731,8 @@ public class RequestConfig {
                         .addHeader("x-tracking-sdk-version", "0.0.1")
                         .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                         .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                        .addHeader("x-device-name", "");
+                        .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
+
                 Request request = requestBuilder.build();
 
                 return chain.proceed(request);
@@ -776,7 +779,8 @@ public class RequestConfig {
                     .addHeader("x-tracking-sdk-version", "0.0.1")
                     .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                     .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                    .addHeader("x-device-name", "");
+                    .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
+
             Request request = requestBuilder.build();
             return chain.proceed(request);
         });
@@ -824,7 +828,8 @@ public class RequestConfig {
                     .addHeader("x-tracking-sdk-version", "0.0.1")
                     .addHeader("x-app-version", BuildConfig.VERSION_NAME)
                     .addHeader("x-device-type", Objects.requireNonNull(AppCommonMethod.getDeviceType()))
-                    .addHeader("x-device-name", "");
+                    .addHeader("x-device-name", Objects.requireNonNull(AppCommonMethod.getDeviceName()).toUpperCase());
+
 
             Request request = requestBuilder.build();
             return chain.proceed(request);
