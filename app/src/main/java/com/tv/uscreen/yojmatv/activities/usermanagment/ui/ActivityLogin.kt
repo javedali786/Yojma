@@ -78,7 +78,7 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
     private var type = ""
     private var fromSplash:Boolean? = false
     private var socialLoginToken = ""
-    val regexPass: Regex = Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=\\S+\$).{8,16}\$")
+    val regexPass: Regex = Regex("^[A-Za-z0-9\\d!&^%$#-@()\\_+,.<>?/*={}|~]{6,20}$")
     val regex: Regex = Regex("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,100}")
     private var isSubscriptionPurchased = true
     private val colorsHelper by lazy { ColorsHelper }

@@ -43,7 +43,7 @@ class ChangePasswordActivity : BaseBindingActivity<ChangePasswordNewBinding?>(),
     private var isChnagePassword: Boolean=false
     private val stringsHelper by lazy { StringsHelper }
     private val colorsHelper by lazy { ColorsHelper }
-    val regexPass:Regex=Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=\\S+\$).{8,16}\$")
+    val regexPass: Regex = Regex("^[A-Za-z0-9\\d!&^%$#-@()\\_+,.<>?/*={}|~]{6,20}$")
     override fun inflateBindingLayout(inflater: LayoutInflater): ChangePasswordNewBinding {
         return ChangePasswordNewBinding.inflate(inflater)
     }

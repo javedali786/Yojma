@@ -78,7 +78,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
     private var jwtToken = ""
     private val stringsHelper by lazy { StringsHelper }
     private val colorsHelper by lazy { ColorsHelper }
-    val regexPass:Regex=Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=\\S+\$).{8,16}\$")
+    val regexPass: Regex = Regex("^[A-Za-z0-9\\d!&^%$#-@()\\_+,.<>?/*={}|~]{6,20}$")
     val regex: Regex = Regex("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,100}")
     override fun inflateBindingLayout(inflater: LayoutInflater): ActivitySignupBinding {
         return ActivitySignupBinding.inflate(inflater)
