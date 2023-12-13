@@ -1,4 +1,4 @@
-package com.example.jwplayer
+package com.tv.uscreen.yojmatv.jwplayer
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle

@@ -770,12 +770,12 @@ public class APIServiceLayer {
 
 
             allResults = endpoint.getSearchByFilters(keyword,
-                            contentTypes, size, page, languageCode,StringVideoTypes,MediaTypeConstants.getInstance().getSeries())
+                            contentTypes, size, page, languageCode,StringVideoTypes,MediaTypeConstants.getInstance().getSeries(),true)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io());
 
             episode = endpoint.getSearchByFilters(keyword,
-                            "Custom", size, page, languageCode,"","")
+                            "Custom", size, page, languageCode,"","",false)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io());
 

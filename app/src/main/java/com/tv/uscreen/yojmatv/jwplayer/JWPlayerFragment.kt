@@ -1,4 +1,4 @@
-package com.example.jwplayer
+package com.tv.uscreen.yojmatv.jwplayer
 
 //import com.enveu.player.utils.TrackOptions
 
@@ -8,7 +8,6 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,7 +56,6 @@ import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.databinding.FragmentJWPlayerBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.DialogPlayer
-import com.tv.uscreen.yojmatv.jwplayer.AudioTracks
 import com.tv.uscreen.yojmatv.jwplayer.cast.PlayDetailResponse
 import com.tv.uscreen.yojmatv.utils.Logger
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod

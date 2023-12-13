@@ -280,7 +280,8 @@ public interface ApiInterface {
                                                                @Query("page") int page,
                                                                @Query("locale") String locale,
                                                                @Query("videoType") String videoType,
-                                                               @Query("customType") String customType);
+                                                               @Query("customType") String customType,
+                                                               @Query("trackEvent") Boolean trackEvent);
     @Headers("x-platform: android")
     @GET("v1_0/search")
     io.reactivex.Observable<ResponseSearch> getSearchByCustomFilters(@Query("keyword") String keyword,
