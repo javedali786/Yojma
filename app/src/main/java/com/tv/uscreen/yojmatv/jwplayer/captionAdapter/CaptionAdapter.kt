@@ -1,4 +1,4 @@
-package com.example.jwplayer.VideoQualityAdapter
+package com.tv.uscreen.yojmatv.jwplayer.captionAdapter
 
 import android.view.LayoutInflater
 import android.view.View

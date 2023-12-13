@@ -1,5 +1,6 @@
 package com.enveu.player.controls
 
+
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Handler
@@ -19,7 +20,6 @@ import com.enveu.player.model.TrackItem
 import com.enveu.player.utils.ClickHandler
 import com.enveu.player.utils.TimeUtils
 import com.example.jwplayer.VideoQualityAdapter.AudioAdapter
-import com.example.jwplayer.VideoQualityAdapter.CaptionAdapter
 import com.example.jwplayer.VideoQualityAdapter.CustomAdapter
 import com.example.jwplayer.VideoQualityAdapter.SettingAdapter
 import com.google.android.gms.cast.framework.CastButtonFactory
@@ -29,8 +29,7 @@ import com.jwplayer.pub.api.media.captions.Caption
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.databinding.EnveuPlayerControlViewBinding
-
-
+import com.tv.uscreen.yojmatv.jwplayer.captionAdapter.CaptionAdapter
 import com.tv.uscreen.yojmatv.jwplayer.utils.Logger
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.helpers.ImageHelper

@@ -103,7 +103,7 @@ class AudioAdapter(
 
         holder.titleText.setOnClickListener {
             itemClick?.itemClick(position)
-            KsPreferenceKeys.getInstance().audioName = mList?.get(position)?.name
+            KsPreferenceKeys.getInstance().audioName = mList[position].name
             Log.d(
                 "ClickedOperation",
                 "onBindViewHolder: " + KsPreferenceKeys.getInstance().audioName
@@ -118,7 +118,7 @@ class AudioAdapter(
 
     // return the number of the items in the list
     override fun getItemCount(): Int {
-        return mList!!.size
+        return mList.size
     }
 
     // Holds the views for adding it to image and text
