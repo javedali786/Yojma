@@ -23,7 +23,6 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.enveu.client.enums.Layouts
-import com.example.jwplayer.PlayerActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.BaseOnTabSelectedListener
 import com.google.gson.Gson
@@ -53,6 +52,7 @@ import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment
 import com.tv.uscreen.yojmatv.fragments.dialog.CommonDialogFragment.Companion.newInstance
 import com.tv.uscreen.yojmatv.fragments.player.ui.RelatedContentFragment
 import com.tv.uscreen.yojmatv.fragments.player.ui.UserInteractionFragment
+import com.tv.uscreen.yojmatv.jwplayer.PlayerActivity
 import com.tv.uscreen.yojmatv.networking.apistatus.APIStatus
 import com.tv.uscreen.yojmatv.networking.responsehandler.ResponseModel
 import com.tv.uscreen.yojmatv.utils.Logger

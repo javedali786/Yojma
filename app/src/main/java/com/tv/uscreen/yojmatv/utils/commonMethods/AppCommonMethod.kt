@@ -35,7 +35,6 @@ import com.enveu.client.baseCollection.baseCategoryModel.BaseCategory
 import com.enveu.client.enums.ImageType
 import com.enveu.client.enums.RailCardType
 import com.enveu.client.enums.WidgetImageType
-import com.example.jwplayer.PlayerActivity
 import com.facebook.login.LoginManager
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -81,6 +80,7 @@ import com.tv.uscreen.yojmatv.databinding.ActivityPurchaseBinding
 import com.tv.uscreen.yojmatv.databinding.ActivitySelectSubscriptionPlanBinding
 import com.tv.uscreen.yojmatv.fragments.dialog.DialogPlayer
 import com.tv.uscreen.yojmatv.fragments.player.ui.UserInteractionFragment
+import com.tv.uscreen.yojmatv.jwplayer.PlayerActivity
 import com.tv.uscreen.yojmatv.tarcker.EventConstant
 import com.tv.uscreen.yojmatv.tarcker.FCMEvents
 import com.tv.uscreen.yojmatv.utils.Logger

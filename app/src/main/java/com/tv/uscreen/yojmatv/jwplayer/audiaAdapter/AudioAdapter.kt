@@ -37,7 +37,7 @@ class AudioAdapter(
 
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("ListLanguageIs", "onBindViewHolder: " + mList?.get(position)!!.name)
+        Log.d("ListLanguageIs", "onBindViewHolder: " + mList[position].name)
 
         if (KsPreferenceKeys.getInstance().audioName != "" && KsPreferenceKeys.getInstance().audioName != null) {
             if (mList.get(position).name.equals(
@@ -50,24 +50,24 @@ class AudioAdapter(
                 ) {
                     holder.titleText.text = primaryLanguage
                 } else {
-                    holder.titleText.text = mList.get(position).name
+                    holder.titleText.text = mList[position].name
                 }
                 holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected_blue)
                 holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
             } else {
-                if (mList.get(position).name.equals("Default", ignoreCase = true)
-                    || (mList.get(position).name.equals("Undefined", ignoreCase = true))
+                if (mList[position].name.equals("Default", ignoreCase = true)
+                    || (mList[position].name.equals("Undefined", ignoreCase = true))
                 ) {
                     holder.titleText.text = primaryLanguage
                 } else {
-                    holder.titleText.text = mList.get(position).name
+                    holder.titleText.text = mList[position].name
                 }
                 holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected)
                 holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.buy_now_pay_now_btn_text_color));
             }
         } else {
-            if (mList.get(position).name.equals("Default", ignoreCase = true)
-                || mList.get(position).name.equals("Undefined", ignoreCase = true)
+            if (mList[position].name.equals("Default", ignoreCase = true)
+                || mList[position].name.equals("Undefined", ignoreCase = true)
             ) {
                 if (!isDefaultLanguageEnable) {
                     holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected_blue)
@@ -76,13 +76,13 @@ class AudioAdapter(
                 holder.titleText.text = primaryLanguage
                 //holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
             } else {
-                if (defaultLanguage.equals(mList.get(position).name, ignoreCase = true)) {
-                    holder.titleText.text = mList.get(position).name
+                if (defaultLanguage.equals(mList[position].name, ignoreCase = true)) {
+                    holder.titleText.text = mList[position].name
                     itemClick?.initialAudioSelected(position)
                     holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected_blue)
                     holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
                 } else {
-                    holder.titleText.text = mList.get(position).name
+                    holder.titleText.text = mList[position].name
                     holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected)
                     holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.buy_now_pay_now_btn_text_color));
                 }

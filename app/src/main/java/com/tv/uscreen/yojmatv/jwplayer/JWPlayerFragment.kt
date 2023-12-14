@@ -520,9 +520,9 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
     private fun getCurrentPlayingIndex(seasonEpisodesList: List<EnveuVideoItemBean>): Int? {
         var currnetPlayingIndex: Int? = 0
-        val total = seasonEpisodesList?.size
-        for (i in 0 until total!!) {
-            val id = seasonEpisodesList!![i].id
+        val total = seasonEpisodesList.size
+        for (i in 0 until total) {
+            val id = seasonEpisodesList[i].id
             if (id == episodeId) {
                 currnetPlayingIndex = i
                 break
