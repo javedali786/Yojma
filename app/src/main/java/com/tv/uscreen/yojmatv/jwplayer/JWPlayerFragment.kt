@@ -215,19 +215,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         override fun onSettingClicked() {
             try {
                 super.onSettingClicked()
-                if (KsPreferenceKeys.getInstance().appLanguage.equals(
-                        "spanish",
-                        ignoreCase = true
-                    )
-                ) {
-                    activity?.let { AppCommonMethod.updateLanguage("es", it) }
-                } else if (KsPreferenceKeys.getInstance().appLanguage.equals(
-                        "English",
-                        ignoreCase = true
-                    )
-                ) {
-                    activity?.let { AppCommonMethod.updateLanguage("en", it) }
-                }
+                callLangMethod()
                 var settingList = ArrayList<String>()
                 if (!audioList.isNullOrEmpty() && audioList?.size!! > 1)
                     settingList.add(resources.getString(R.string.ep_settings_audio))
@@ -360,6 +348,7 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        callLangMethod()
         timer = SDKConfig.getInstance().timer
         userId = KsPreferenceKeys.getInstance().appPrefUserId
         val bundle = arguments
@@ -1001,5 +990,19 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
         mListener = null
     }
 
-
+    private fun callLangMethod() {
+        if (KsPreferenceKeys.getInstance().appLanguage.equals(
+                "spanish",
+                ignoreCase = true
+            )
+        ) {
+            activity?.let { AppCommonMethod.updateLanguage("es", it) }
+        } else if (KsPreferenceKeys.getInstance().appLanguage.equals(
+                "English",
+                ignoreCase = true
+            )
+        ) {
+            activity?.let { AppCommonMethod.updateLanguage("en", it) }
+        }
+    }
 }

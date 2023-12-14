@@ -409,7 +409,7 @@ class EnveuPlayerControlView : FrameLayout {
         if (videoTracks != null) {
             updateRecyclerViewVisibility()
             visibilityHandler.removeCallbacksAndMessages(null)
-            val adapter = CaptionAdapter(videoTracks, captionItemClick, selectedVideoTrack)
+            val adapter = CaptionAdapter(videoTracks, captionItemClick, selectedVideoTrack, context)
             binding.rvQuality.adapter = adapter
         }
     }

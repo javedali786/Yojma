@@ -72,7 +72,6 @@ import com.tv.uscreen.yojmatv.beanModel.userProfile.UserProfileResponse
 import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.beanModelV3.videoDetailsV2.EnveuVideoDetails
 import com.tv.uscreen.yojmatv.beanModelV3.videoDetailsV2.EnveuVideoDetailsBean
-import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.bean_model_v1_0.videoDetailBean.Data
 import com.tv.uscreen.yojmatv.bean_model_v1_0.videoDetailBean.EnvVideoDetailsBean
 import com.tv.uscreen.yojmatv.databinding.ActivityPaymentDetailPagePlanBinding

@@ -13,6 +13,7 @@ import com.tv.uscreen.yojmatv.beanModelV3.uiConnectorModelV2.EnveuVideoItemBean
 import com.tv.uscreen.yojmatv.bean_model_v1_0.listAll.AudioTrackListItem
 import com.tv.uscreen.yojmatv.databinding.ActivityPlayerBinding
 import com.tv.uscreen.yojmatv.jwplayer.utils.Logger
+import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod
 import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 import java.io.Serializable
@@ -43,6 +44,11 @@ class PlayerActivity : AppCompatActivity(), Serializable,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (KsPreferenceKeys.getInstance().appLanguage.equals("spanish", ignoreCase = true)) {
+            AppCommonMethod.updateLanguage("es", this)
+        } else if (KsPreferenceKeys.getInstance().appLanguage.equals("English", ignoreCase = true)) {
+            AppCommonMethod.updateLanguage("en", this)
+        }
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         window.setBackgroundDrawableResource(R.color.buy_now_pay_now_btn_text_color)
         window.setFlags(
@@ -143,6 +149,8 @@ class PlayerActivity : AppCompatActivity(), Serializable,
             .commit()
     }
 
+
+
     private fun fitPlayerToFullScreen() {
         val params: ViewGroup.LayoutParams = binding.containerPlayer.layoutParams
         params.width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -162,4 +170,8 @@ class PlayerActivity : AppCompatActivity(), Serializable,
             bookmarkingViewModel?.finishBookmark(token, assetId)
         }
     }
+
+
+
+
 }
