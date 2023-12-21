@@ -297,7 +297,7 @@
             android:launchMode="singleTop" />
 
         <service
-            android:name="com.tv.uscreen.yojmatv.OttMessagingService"
+            android:name=".OttMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

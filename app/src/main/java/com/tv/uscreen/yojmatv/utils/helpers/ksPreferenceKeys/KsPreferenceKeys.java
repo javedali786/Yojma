@@ -49,7 +49,7 @@ public class KsPreferenceKeys extends SharedPrefHelper {
     public static KsPreferenceKeys getInstance() {
 
         if (mInstance == null) {
-            mInstance = new KsPreferenceKeys(OttApplication.getInstance());
+            mInstance = new KsPreferenceKeys(OttApplication.Companion.getInstance());
         }
         return mInstance;
     }

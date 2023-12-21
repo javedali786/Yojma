@@ -22,6 +22,8 @@ import com.tv.uscreen.yojmatv.networking.intercepter.ErrorCodesIntercepter;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -100,7 +102,7 @@ public class PurchaseRepository {
                 PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                 purchaseResponseModel.setStatus(false);
                 purchaseResponseModel.setResponseCode(500);
-               // purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
+               // purchaseResponseModel.setDebugMessage(OttApplication.Companion.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
                 liveDataPurchaseResponse.postValue(purchaseResponseModel);
             }
         });
@@ -149,7 +151,7 @@ public class PurchaseRepository {
                 PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                 purchaseResponseModel.setStatus(false);
                 purchaseResponseModel.setResponseCode(500);
-                purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
+                purchaseResponseModel.setDebugMessage(Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.something_went_wrong_at_our_end));
                 liveDataPurchaseResponse.postValue(purchaseResponseModel);
             }
         });
@@ -338,7 +340,7 @@ public class PurchaseRepository {
                 PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                 purchaseResponseModel.setStatus(false);
                 purchaseResponseModel.setResponseCode(500);
-                purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
+                purchaseResponseModel.setDebugMessage(Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.something_went_wrong_at_our_end));
                 liveDataPurchaseResponse.postValue(purchaseResponseModel);
             }
         });

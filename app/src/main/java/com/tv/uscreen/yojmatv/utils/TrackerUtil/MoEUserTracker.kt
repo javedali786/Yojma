@@ -14,7 +14,7 @@ import java.util.Date
 object MoEUserTracker {
 
     private fun getNonNullContext(context: Context?): Context {
-        return context ?: OttApplication.getInstance()
+        return (context ?: OttApplication.instance)!!
     }
 
     private fun getMoEHelper(context: Context?): MoEHelper {

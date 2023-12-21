@@ -110,9 +110,9 @@ class AccountListAdapter(private val mContext: Activity, private val itemsList: 
         init {
             moreItemBinding.root.setOnClickListener { view1: View? ->
                 if (KsPreferenceKeys.getInstance().appLanguage.equals("spanish", ignoreCase = true)) {
-                    AppCommonMethod.updateLanguage("es", OttApplication.getInstance())
+                    AppCommonMethod.updateLanguage("es", OttApplication.instance!!)
                 } else if (KsPreferenceKeys.getInstance().appLanguage.equals("English", ignoreCase = true)) {
-                    AppCommonMethod.updateLanguage("en", OttApplication.getInstance())
+                    AppCommonMethod.updateLanguage("en", OttApplication.instance!!)
                 }
                 Logger.e("Caption", itemsList[layoutPosition])
                 if (SystemClock.elapsedRealtime() - mLastClickTime < 1200) {

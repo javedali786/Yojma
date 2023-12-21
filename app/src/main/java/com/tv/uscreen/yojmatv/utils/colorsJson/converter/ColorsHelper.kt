@@ -21,7 +21,7 @@ object ColorsHelper {
     fun loadDataFromJson(): ColorsModel? {
         var users: ColorsModel? = null
         val json: String = try {
-            val `is` = OttApplication.getContext().assets.open("ColorsData.json")
+            val `is` = OttApplication.context.assets.open("ColorsData.json")
             val size = `is`.available()
             val buffer = ByteArray(size)
             `is`.read(buffer)
@@ -56,10 +56,10 @@ object ColorsHelper {
             if (hexValidator(colorsHelper)) {
                 Color.parseColor(colorsHelper)
             }else{
-                Color.parseColor("#" + Integer.toHexString(ContextCompat.getColor(OttApplication.getInstance(), localStringColor)))
+                Color.parseColor("#" + Integer.toHexString(ContextCompat.getColor(OttApplication.instance!!, localStringColor)))
             }
         } else {
-            Color.parseColor("#" + Integer.toHexString(ContextCompat.getColor(OttApplication.getInstance(), localStringColor)))
+            Color.parseColor("#" + Integer.toHexString(ContextCompat.getColor(OttApplication.instance!!, localStringColor)))
         }
         return colorCode
     }

@@ -11,6 +11,8 @@ import com.tv.uscreen.yojmatv.utils.recoSense.bean.RecosenceResponse;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,10 +47,10 @@ public class RecoSenceManager {
             jsonObject1.put("language", SDKConfig.getInstance().getSpanishLangCode());
             jsonObject.put("context",jsonObject1);
 
-            jsonObject.put("device_id", AppCommonMethod.getDeviceId(OttApplication.getInstance().getContentResolver()));
+            jsonObject.put("device_id", AppCommonMethod.getDeviceId(Objects.requireNonNull(OttApplication.Companion.getInstance()).getContentResolver()));
             jsonObject.put("item_id", String.valueOf(id));
             jsonObject.put("timestamp", AppCommonMethod.getCurrentTimeStamp());
-            jsonObject.put("user_id", AppCommonMethod.getDeviceId(OttApplication.getInstance().getContentResolver()));
+            jsonObject.put("user_id", AppCommonMethod.getDeviceId(OttApplication.Companion.getInstance().getContentResolver()));
 
 
             /*DateFormat df = DateFormat.getTimeInstance();

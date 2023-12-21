@@ -18,9 +18,9 @@ object StringsHelper {
             var `is`:InputStream? = null
             Log.d("loadDataFromJson", "loadDataFromJson: " + KsPreferenceKeys.getInstance().appLanguage)
             `is` = if (KsPreferenceKeys.getInstance().appLanguage == "English") {
-                OttApplication.getContext().assets.open("StringsData.json")
+                OttApplication.context.assets.open("StringsData.json")
             } else {
-                OttApplication.getContext().assets.open("SpanishStringsData.json")
+                OttApplication.context.assets.open("SpanishStringsData.json")
             }
 
             val size = `is`.available()

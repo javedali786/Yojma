@@ -27,7 +27,7 @@ object MoEngageNotificationManager {
     private suspend fun getUnreadNotificationCount(coroutineContext: CoroutineContext) =
         withContext(coroutineContext) {
             val inboxData = MoEInboxHelper.getInstance()
-                .fetchAllMessages(OttApplication.getInstance())
+                .fetchAllMessages(OttApplication.instance!!)
             mUnreadNotificationCountLiveData.postValue(inboxData?.inboxMessages?.size)
         }
 
@@ -46,21 +46,21 @@ object MoEngageNotificationManager {
     private suspend fun getAllNotificationList(coroutineContext: CoroutineContext) =
         withContext(coroutineContext) {
             mNotificationsLiveData.postValue(
-                MoEInboxHelper.getInstance().fetchAllMessages(OttApplication.getInstance())
+                MoEInboxHelper.getInstance().fetchAllMessages(OttApplication.instance!!)
             )
 
         }
 
     fun markAsRead(inboxMessage: InboxMessage) {
         CoroutineScope(Dispatchers.IO).launch {
-            MoEInboxHelper.getInstance().trackMessageClicked(OttApplication.getInstance(), inboxMessage)
+            MoEInboxHelper.getInstance().trackMessageClicked(OttApplication.instance!!, inboxMessage)
             refreshNotificationCount()
         }
     }
 
     fun deleteNotification(inboxMessage: InboxMessage) {
         CoroutineScope(Dispatchers.IO).launch {
-            MoEInboxHelper.getInstance().deleteMessage(OttApplication.getInstance(), inboxMessage)
+            MoEInboxHelper.getInstance().deleteMessage(OttApplication.instance!!, inboxMessage)
             refreshNotificationCount()
         }
     }
@@ -68,7 +68,7 @@ object MoEngageNotificationManager {
     fun deleteAllNotifications(inboxMessages: List<InboxMessage>) {
         CoroutineScope(Dispatchers.IO).launch {
             for (message in inboxMessages) {
-                MoEInboxHelper.getInstance().deleteMessage(OttApplication.getInstance(), message)
+                MoEInboxHelper.getInstance().deleteMessage(OttApplication.instance!!, message)
             }
             refreshNotificationCount()
         }

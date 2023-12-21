@@ -34,7 +34,7 @@ public class SharedPrefHelper {
 
     public static SharedPrefHelper getInstance() {
         if (instance == null) {
-            instance = new SharedPrefHelper(OttApplication.getInstance());
+            instance = new SharedPrefHelper(OttApplication.Companion.getInstance());
         }
         return instance;
     }

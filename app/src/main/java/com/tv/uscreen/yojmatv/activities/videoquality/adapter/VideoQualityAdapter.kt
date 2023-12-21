@@ -29,9 +29,9 @@ class VideoQualityAdapter(activity: Activity?, private val inboxMessages: List<T
     init {
         pos = KsPreferenceKeys.getInstance().qualityPosition
         if (KsPreferenceKeys.getInstance().appLanguage.equals("spanish", ignoreCase = true)) {
-            updateLanguage("es", OttApplication.getInstance())
+            updateLanguage("es", OttApplication.instance!!)
         } else if (KsPreferenceKeys.getInstance().appLanguage.equals("English", ignoreCase = true)) {
-            updateLanguage("en", OttApplication.getInstance())
+            updateLanguage("en", OttApplication.instance!!)
         }
     }
 

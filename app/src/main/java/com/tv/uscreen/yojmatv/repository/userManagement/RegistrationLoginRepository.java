@@ -75,9 +75,9 @@ public class RegistrationLoginRepository {
             instance = new RegistrationLoginRepository();
         }
         if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("spanish") || KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("हिंदी")) {
-            AppCommonMethod.updateLanguage("es", OttApplication.getInstance());
+            AppCommonMethod.updateLanguage("es", OttApplication.Companion.getInstance());
         } else if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("English")) {
-            AppCommonMethod.updateLanguage("en", OttApplication.getInstance());
+            AppCommonMethod.updateLanguage("en", OttApplication.Companion.getInstance());
         }
         return (instance);
     }
@@ -243,7 +243,7 @@ public class RegistrationLoginRepository {
                     cl.setResponseCode(400);
                     SignupResponseAccessToken responseModel = new SignupResponseAccessToken();
                     responseModel.setResponseModel(cl);
-                    responseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.server_error));
+                    responseModel.setDebugMessage(OttApplication.Companion.getInstance().getResources().getString(R.string.server_error));
                     responseApi.postValue(responseModel);
                 }
             });
@@ -360,7 +360,7 @@ public class RegistrationLoginRepository {
                             debugMessage = jObjError.getString("debugMessage");
                             int errorcode = jObjError.getInt("responseCode");
                             if (errorcode==4401){
-                                commonResponse.setDebugMessage(OttApplication.getInstance().getString(R.string.popup_user_does_not_exists));
+                                commonResponse.setDebugMessage(OttApplication.Companion.getInstance().getString(R.string.popup_user_does_not_exists));
                                 commonResponse.setCode(response.code());
                             }else {
                                 commonResponse.setDebugMessage(debugMessage);
@@ -433,7 +433,7 @@ public class RegistrationLoginRepository {
                         } catch (Exception e) {
                             Logger.e("RegistrationLoginRepo", "" + e);
                         }
-                        cl.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.username_must_be_loggedin));
+                        cl.setDebugMessage(OttApplication.Companion.getInstance().getResources().getString(R.string.username_must_be_loggedin));
 
                         responseApi.postValue(cl);
                     } else if (response.body() != null ) {

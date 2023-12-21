@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,14 +62,14 @@ public class PurchaseHandler {
                         callGetPlansAPI(purchases,callback);
                     }
                 }else {
-                    callback.subscriptionStatus(false, OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+                    callback.subscriptionStatus(false, Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.we_could_not));
                 }
 
             } catch (Exception e) {
                 Logger.e(e);
             }
         }else {
-            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+            callback.subscriptionStatus(false, Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.we_could_not));
         }
     }
 
@@ -87,7 +88,7 @@ public class PurchaseHandler {
                         checkEntitlementState(purchaseResponseModel,purchases,callback);
                     } else {
                         purchaseResponseModel.setStatus(false);
-                        callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+                        callback.subscriptionStatus(false, Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.we_could_not));
                     }
 
                 }
@@ -140,7 +141,7 @@ public class PurchaseHandler {
                     }
                 }
                 if (!initiatePurchase){
-                    callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+                    callback.subscriptionStatus(false, Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.we_could_not));
                 }
             }else {
                 getPlans=false;
@@ -170,7 +171,7 @@ public class PurchaseHandler {
                             callCreateNewPurchase(purchaseModel,purchase,dataItem,callback);
                         }else {
                             getPlans=false;
-                            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+                            callback.subscriptionStatus(false,OttApplication.Companion.getInstance().getResources().getString(R.string.we_could_not));
                         }
                     });
 
@@ -227,7 +228,7 @@ public class PurchaseHandler {
 
                         PurchaseResponseModel purchaseResponseModel2 = ErrorCodesIntercepter.getInstance().createNewOrder(response);
                         getPlans=false;
-                        callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+                        callback.subscriptionStatus(false,OttApplication.Companion.getInstance().getResources().getString(R.string.we_could_not));
                     }
 
                 }
@@ -237,14 +238,14 @@ public class PurchaseHandler {
                     PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                     purchaseResponseModel.setStatus(false);
                     purchaseResponseModel.setResponseCode(500);
-                    purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
+                    purchaseResponseModel.setDebugMessage(OttApplication.Companion.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
                     getPlans=false;
-                    callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+                    callback.subscriptionStatus(false,OttApplication.Companion.getInstance().getResources().getString(R.string.we_could_not));
                 }
             });
         }catch (Exception ignored){
             getPlans=false;
-            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+            callback.subscriptionStatus(false,OttApplication.Companion.getInstance().getResources().getString(R.string.we_could_not));
         }
 
     }
@@ -273,13 +274,13 @@ public class PurchaseHandler {
                     PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                     if (response.code() == 200) {
                         purchaseResponseModel.setStatus(true);
-                        purchaseResponseModel.setData(response.body().getData());
+                        purchaseResponseModel.setData(Objects.requireNonNull(response.body()).getData());
                         String paymentId = purchaseResponseModel.getData().getPaymentId().toString();
                         updatePayment(purchase.getPurchaseToken(), paymentId,purchase.getOrderId(),purchase,model,orderID,callback);
                     } else {
-                        PurchaseResponseModel purchaseResponseModel2 = ErrorCodesIntercepter.getInstance().initiateOrder(response);
+                        PurchaseResponseModel purchaseResponseModel2 = Objects.requireNonNull(ErrorCodesIntercepter.getInstance()).initiateOrder(response);
                         getPlans=false;
-                        callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+                        callback.subscriptionStatus(false, Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.we_could_not));
                     }
 
                 }
@@ -289,14 +290,14 @@ public class PurchaseHandler {
                     PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                     purchaseResponseModel.setStatus(false);
                     purchaseResponseModel.setResponseCode(500);
-                    purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
+                    purchaseResponseModel.setDebugMessage(Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.something_went_wrong_at_our_end));
                     getPlans=false;
-                    callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+                    callback.subscriptionStatus(false,OttApplication.Companion.getInstance().getResources().getString(R.string.we_could_not));
                 }
             });
         }catch (Exception ignored){
             getPlans=false;
-            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+            callback.subscriptionStatus(false, Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.we_could_not));
         }
 
 
@@ -346,13 +347,13 @@ public class PurchaseHandler {
                     PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                     if (response.code() == 200) {
                         purchaseResponseModel.setStatus(true);
-                        purchaseResponseModel.setData(response.body().getData());
-                        callback.subscriptionStatus(true, OttApplication.getInstance().getResources().getString(R.string.we_have_found_an_active));
+                        purchaseResponseModel.setData(Objects.requireNonNull(response.body()).getData());
+                        callback.subscriptionStatus(true, Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.we_have_found_an_active));
                         getPlans=false;
                     } else {
-                        PurchaseResponseModel purchaseResponseModel2 = ErrorCodesIntercepter.getInstance().updateOrder(response);
+                        PurchaseResponseModel purchaseResponseModel2 = Objects.requireNonNull(ErrorCodesIntercepter.getInstance()).updateOrder(response);
                         getPlans=false;
-                        callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+                        callback.subscriptionStatus(false, Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.we_could_not));
                     }
 
 
@@ -363,14 +364,14 @@ public class PurchaseHandler {
                     PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                     purchaseResponseModel.setStatus(false);
                     purchaseResponseModel.setResponseCode(500);
-                    purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
+                    purchaseResponseModel.setDebugMessage(Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.something_went_wrong_at_our_end));
                     getPlans=false;
-                    callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+                    callback.subscriptionStatus(false,OttApplication.Companion.getInstance().getResources().getString(R.string.we_could_not));
                 }
             });
         }catch (Exception ignored){
             getPlans=false;
-            callback.subscriptionStatus(false,OttApplication.getInstance().getResources().getString(R.string.we_could_not));
+            callback.subscriptionStatus(false, Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.we_could_not));
         }
 
     }

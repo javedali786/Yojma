@@ -50,9 +50,9 @@ public class BaseFragment extends Fragment {
             KsPreferenceKeys.getInstance().setCurrentTheme(strCurrentTheme);
             KsPreferenceKeys.getInstance().setAppLanguage(strCurrentLanguage);
             if (strCurrentLanguage.equalsIgnoreCase("spanish") || KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("हिंदी")) {
-                AppCommonMethod.updateLanguage("es", OttApplication.getInstance());
+                AppCommonMethod.updateLanguage("es", Objects.requireNonNull(OttApplication.Companion.getInstance()));
             } else if (strCurrentLanguage.equalsIgnoreCase("English")) {
-                AppCommonMethod.updateLanguage("en", OttApplication.getInstance());
+                AppCommonMethod.updateLanguage("en", Objects.requireNonNull(OttApplication.Companion.getInstance()));
             }
             //AppCommonMethod.updateLanguage(strCurrentLanguage,getBaseActivity());
             // ActivityLauncher.getInstance()`.homeScreen(getBaseActivity(), HomeActivity.class);

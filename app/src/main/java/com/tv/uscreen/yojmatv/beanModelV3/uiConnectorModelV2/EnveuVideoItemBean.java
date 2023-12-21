@@ -1519,7 +1519,7 @@ public class EnveuVideoItemBean implements Serializable {
     }
 
     public Drawable getVipImageDrawable() {
-        OttApplication application = OttApplication.getInstance();
+        OttApplication application = OttApplication.Companion.getInstance();
         Drawable drawable = null;
         try {
             //  drawable = ContextCompat.getDrawable(application, R.drawable.vip_icon_120);
@@ -1530,7 +1530,7 @@ public class EnveuVideoItemBean implements Serializable {
     }
 
     public Drawable getNewSeriesImageDrawable() {
-        OttApplication application = OttApplication.getInstance();
+        OttApplication application = OttApplication.Companion.getInstance();
         try {
             if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("English")) {
                 return ContextCompat.getDrawable(application, R.drawable.series_icon_120);
@@ -1545,7 +1545,7 @@ public class EnveuVideoItemBean implements Serializable {
     }
 
     public Drawable getEpisodeImageDrawable() {
-        OttApplication application = OttApplication.getInstance();
+        OttApplication application = OttApplication.Companion.getInstance();
         try {
             if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("English")) {
                 return ContextCompat.getDrawable(application, R.drawable.episode_icon_120);
@@ -1560,7 +1560,7 @@ public class EnveuVideoItemBean implements Serializable {
     }
 
     public Drawable getNewMoviesDrawable() {
-        OttApplication application = OttApplication.getInstance();
+        OttApplication application = OttApplication.Companion.getInstance();
         try {
             if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("English")) {
                 return ContextCompat.getDrawable(application, R.drawable.new_movie_120);

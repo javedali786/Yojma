@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -255,7 +256,7 @@ public class PurchaseHandling {
                     PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                     purchaseResponseModel.setStatus(false);
                     purchaseResponseModel.setResponseCode(500);
-                    purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
+                    purchaseResponseModel.setDebugMessage(Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.something_went_wrong_at_our_end));
                     getPlans=false;
                 }
             });
@@ -311,7 +312,7 @@ public class PurchaseHandling {
                     PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                     purchaseResponseModel.setStatus(false);
                     purchaseResponseModel.setResponseCode(500);
-                    purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
+                    purchaseResponseModel.setDebugMessage(OttApplication.Companion.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
                     getPlans=false;
                 }
             });
@@ -371,10 +372,10 @@ public class PurchaseHandling {
                     if (response.code() == 200) {
                         Log.w("identifiers","in success");
                         purchaseResponseModel.setStatus(true);
-                        purchaseResponseModel.setData(response.body().getData());
+                        purchaseResponseModel.setData(Objects.requireNonNull(response.body()).getData());
                     } else {
                         Log.w("identifiers","in failed");
-                        PurchaseResponseModel purchaseResponseModel2 = ErrorCodesIntercepter.getInstance().updateOrder(response);
+                        PurchaseResponseModel purchaseResponseModel2 = Objects.requireNonNull(ErrorCodesIntercepter.getInstance()).updateOrder(response);
                     }
                     getPlans=false;
 
@@ -386,7 +387,7 @@ public class PurchaseHandling {
                     PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                     purchaseResponseModel.setStatus(false);
                     purchaseResponseModel.setResponseCode(500);
-                    purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
+                    purchaseResponseModel.setDebugMessage(Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.something_went_wrong_at_our_end));
                     getPlans=false;
                 }
             });

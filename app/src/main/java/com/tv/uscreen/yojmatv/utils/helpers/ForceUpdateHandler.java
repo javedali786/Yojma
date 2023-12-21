@@ -148,9 +148,9 @@ public class ForceUpdateHandler {
     public void typeHandle(String type,VersionUpdateCallBack callBack) {
         versionUpdateCallBack = callBack;
         if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("spanish") || KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("हिंदी") ){
-            AppCommonMethod.updateLanguage("es", OttApplication.getInstance());
+            AppCommonMethod.updateLanguage("es", OttApplication.Companion.getInstance());
         } else if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("English")){
-            AppCommonMethod.updateLanguage("en", OttApplication.getInstance());
+            AppCommonMethod.updateLanguage("en", OttApplication.Companion.getInstance());
         }
         materialDialog.showDialog(type, "", activity, new DialogInterface() {
             @Override

@@ -242,7 +242,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
                 int assetId = 0;
                 String contentType = jsonObject.getString("contentType");
                 String id = jsonObject.optString("id");
-                if (id != null && !id.equalsIgnoreCase("")) {
+                if (!id.equalsIgnoreCase("")) {
                     assetId = Integer.parseInt(id);
                     if (contentType.equalsIgnoreCase(
                             MediaTypeConstants.getInstance().getSeries())) {
@@ -320,7 +320,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
                        int assetId = 0;
                        String contentType = jsonObject.getString("mediaType");
                        String id = jsonObject.optString("id");
-                       if (id != null && !id.equalsIgnoreCase("")) {
+                       if (!id.equalsIgnoreCase("")) {
                            assetId = Integer.parseInt(id);
                            if (contentType.equalsIgnoreCase(
                                    MediaTypeConstants.getInstance().getSeries())) {

@@ -21,6 +21,8 @@ import com.tv.uscreen.yojmatv.networking.intercepter.ErrorCodesIntercepter;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -85,7 +87,7 @@ public class PaymentCallsLayer {
                 PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                 if (response.code() == 200) {
                     purchaseResponseModel.setStatus(true);
-                    purchaseResponseModel.setData(response.body().getData());
+                    purchaseResponseModel.setData(Objects.requireNonNull(response.body()).getData());
                     paymentCallBack.createOrderResponse(purchaseResponseModel,true);
 
                 } else {
@@ -103,7 +105,7 @@ public class PaymentCallsLayer {
                 PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                 purchaseResponseModel.setStatus(false);
                 purchaseResponseModel.setResponseCode(500);
-                purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
+                purchaseResponseModel.setDebugMessage(Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.something_went_wrong_at_our_end));
                 paymentCallBack.createOrderResponse(purchaseResponseModel,false);
             }
         });
@@ -135,10 +137,10 @@ public class PaymentCallsLayer {
                 PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                 if (response.code() == 200) {
                     purchaseResponseModel.setStatus(true);
-                    purchaseResponseModel.setData(response.body().getData());
+                    purchaseResponseModel.setData(Objects.requireNonNull(response.body()).getData());
                     callBack.initiateOrderResponse(purchaseResponseModel,true);
                 } else {
-                    PurchaseResponseModel purchaseResponseModel2 = ErrorCodesIntercepter.getInstance().initiateOrder(response);
+                    PurchaseResponseModel purchaseResponseModel2 = Objects.requireNonNull(ErrorCodesIntercepter.getInstance()).initiateOrder(response);
                     callBack.initiateOrderResponse(purchaseResponseModel2,false);
                 }
 
@@ -150,7 +152,7 @@ public class PaymentCallsLayer {
                 PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                 purchaseResponseModel.setStatus(false);
                 purchaseResponseModel.setResponseCode(500);
-                purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
+                purchaseResponseModel.setDebugMessage(Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.something_went_wrong_at_our_end));
                 callBack.initiateOrderResponse(purchaseResponseModel,false);
             }
         });
@@ -202,10 +204,10 @@ public class PaymentCallsLayer {
                 PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                 if (response.code() == 200) {
                     purchaseResponseModel.setStatus(true);
-                    purchaseResponseModel.setData(response.body().getData());
+                    purchaseResponseModel.setData(Objects.requireNonNull(response.body()).getData());
                     callBack.updateOrderResponse(purchaseResponseModel,true);
                 } else {
-                    PurchaseResponseModel purchaseResponseModel2 = ErrorCodesIntercepter.getInstance().updateOrder(response);
+                    PurchaseResponseModel purchaseResponseModel2 = Objects.requireNonNull(ErrorCodesIntercepter.getInstance()).updateOrder(response);
                     callBack.updateOrderResponse(purchaseResponseModel2,false);
                 }
 
@@ -217,7 +219,7 @@ public class PaymentCallsLayer {
                 PurchaseResponseModel purchaseResponseModel = new PurchaseResponseModel();
                 purchaseResponseModel.setStatus(false);
                 purchaseResponseModel.setResponseCode(500);
-                purchaseResponseModel.setDebugMessage(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
+                purchaseResponseModel.setDebugMessage(Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.something_went_wrong_at_our_end));
                 callBack.updateOrderResponse(purchaseResponseModel,false);
             }
         });

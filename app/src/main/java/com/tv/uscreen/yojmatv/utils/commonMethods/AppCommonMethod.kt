@@ -791,7 +791,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         @JvmStatic
         fun getDeviceType(): String? {
             val isTablet: Boolean =
-                OttApplication.getContext().getResources().getBoolean(R.bool.isTablet)
+                OttApplication.context.getResources().getBoolean(R.bool.isTablet)
             return if (isTablet) {
                 "TABLET"
             } else {

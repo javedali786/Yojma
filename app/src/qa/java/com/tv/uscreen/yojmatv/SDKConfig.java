@@ -8,11 +8,12 @@ import com.tv.uscreen.yojmatv.utils.config.bean.dmsResponse.ConfigBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SDKConfig {
 
     private static SDKConfig sdkConfigInstance;
-    boolean isTablet = OttApplication.getInstance().getResources().getBoolean(R.bool.isTablet);
+    boolean isTablet = Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getBoolean(R.bool.isTablet);
     ConfigBean configBean;
 
     private SDKConfig() {

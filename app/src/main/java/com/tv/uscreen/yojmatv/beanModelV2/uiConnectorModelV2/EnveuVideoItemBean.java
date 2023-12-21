@@ -20,6 +20,7 @@ import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class EnveuVideoItemBean implements Serializable {
     private String description;
@@ -953,10 +954,10 @@ public class EnveuVideoItemBean implements Serializable {
     }
 
     public Drawable getNewSeriesImageDrawable() {
-        OttApplication application = OttApplication.getInstance();
+        OttApplication application = OttApplication.Companion.getInstance();
         try {
             if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("English")) {
-                return ContextCompat.getDrawable(application, R.drawable.series_icon_120);
+                return ContextCompat.getDrawable(Objects.requireNonNull(application), R.drawable.series_icon_120);
             } else if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("Thai")) {
                 return ContextCompat.getDrawable(application, R.drawable.series_thai_icon);
             } else {
@@ -968,7 +969,7 @@ public class EnveuVideoItemBean implements Serializable {
     }
 
     public Drawable getEpisodeImageDrawable() {
-        OttApplication application = OttApplication.getInstance();
+        OttApplication application = OttApplication.Companion.getInstance();
         try {
             if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("English")) {
                 return ContextCompat.getDrawable(application, R.drawable.episode_icon_120);
@@ -983,7 +984,7 @@ public class EnveuVideoItemBean implements Serializable {
     }
 
     public Drawable getNewMoviesDrawable() {
-        OttApplication application = OttApplication.getInstance();
+        OttApplication application = OttApplication.Companion.getInstance();
         try {
             if (KsPreferenceKeys.getInstance().getAppLanguage().equalsIgnoreCase("English")) {
                 return ContextCompat.getDrawable(application, R.drawable.new_movie_120);

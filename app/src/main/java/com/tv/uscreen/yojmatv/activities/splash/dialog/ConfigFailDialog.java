@@ -49,9 +49,9 @@ public class ConfigFailDialog {
             TextView positive=view.findViewById(R.id.positive_txt);
             TextView negative=view.findViewById(R.id.negative_txt);
 
-            desc.setText(OttApplication.getInstance().getResources().getString(R.string.something_went_wrong_at_our_end));
-            positive.setText(OttApplication.getInstance().getResources().getString(R.string.retry_dms));
-            negative.setText(OttApplication.getInstance().getResources().getString(R.string.cancel));
+            desc.setText(Objects.requireNonNull(OttApplication.Companion.getInstance()).getResources().getString(R.string.something_went_wrong_at_our_end));
+            positive.setText(OttApplication.Companion.getInstance().getResources().getString(R.string.retry_dms));
+            negative.setText(OttApplication.Companion.getInstance().getResources().getString(R.string.cancel));
 
             LinearLayout negative_button = view.findViewById(R.id.negative_button);
             LinearLayout positive_button = view.findViewById(R.id.positive_button);

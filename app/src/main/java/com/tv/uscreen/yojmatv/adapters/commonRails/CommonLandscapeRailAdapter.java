@@ -117,13 +117,7 @@ public class CommonLandscapeRailAdapter extends RecyclerView.Adapter<RecyclerVie
             itemClick(i);
 
         });
-        try {
-            AppCommonMethod.handleTags(videos.get(i).getIsVIP(),videos.get(i).getIsNewS(),
-                    itemBinding.flExclusive,itemBinding.flNew,itemBinding.flEpisode,itemBinding.flNewMovie,videos.get(i).getAssetType());
 
-        }catch (Exception e){
-            Logger.w(e);
-        }
 
         try {
             AppCommonMethod.handleTitleDesc(itemBinding.titleLayout,itemBinding.tvTitle,itemBinding.tvDescription,baseCategory);
