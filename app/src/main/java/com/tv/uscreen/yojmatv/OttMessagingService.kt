@@ -58,7 +58,7 @@ class OttMessagingService : FirebaseMessagingService() {
                 val jsonData = (remoteMessage.data as Map<*, *>?)?.let { JSONObject(it) }
                 Logger.d("FCM_Payload_final: $jsonData")
                 if (jsonData!!.has("id")) {
-                    assetId = jsonData.getString("id")
+                    assetId = jsonData.getString("mediaContentId")
                     if (jsonData.has("mediaType")) {
                         assetType = jsonData.getString("mediaType")
                     }

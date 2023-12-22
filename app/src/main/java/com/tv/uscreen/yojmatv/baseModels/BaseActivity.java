@@ -244,24 +244,19 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
                 String id = jsonObject.optString("id");
                 if (!id.equalsIgnoreCase("")) {
                     assetId = Integer.parseInt(id);
-                    if (contentType.equalsIgnoreCase(
-                            MediaTypeConstants.getInstance().getSeries())) {
+                    if (contentType.equalsIgnoreCase(MediaTypeConstants.getInstance().getSeries())) {
                         if (ClickHandler.disallowClick()) {
                             return;
                         }
                         ActivityLauncher.getInstance().homeScreen(this, HomeActivity.class);
-                        ActivityLauncher.getInstance().seriesDetailScreen(
-                                BaseActivity.this, SeriesDetailActivity.class, assetId);
+                        ActivityLauncher.getInstance().seriesDetailScreen(BaseActivity.this, SeriesDetailActivity.class, assetId);
                         finish();
-                    } else if (contentType.equalsIgnoreCase(AppConstants.ContentType.VIDEO.name())
-                            || contentType.equalsIgnoreCase(
-                            MediaTypeConstants.getInstance().getMovie())) {
+                    } else if (contentType.equalsIgnoreCase(AppConstants.ContentType.VIDEO.name()) || contentType.equalsIgnoreCase(MediaTypeConstants.getInstance().getMovie())) {
                         if (ClickHandler.disallowClick()) {
                             return;
                         }
                         ActivityLauncher.getInstance().homeScreen(this, HomeActivity.class);
-                        ActivityLauncher.getInstance().detailScreen(BaseActivity.this,
-                                DetailActivity.class, assetId, "0", false);
+                        ActivityLauncher.getInstance().detailScreen(BaseActivity.this, DetailActivity.class, assetId, "0", false);
                         finish();
                     } else if (contentType.equalsIgnoreCase(
                             MediaTypeConstants.getInstance().getShow())) {
@@ -269,8 +264,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
                             return;
                         }
                         ActivityLauncher.getInstance().homeScreen(this, HomeActivity.class);
-                        ActivityLauncher.getInstance().detailScreen(BaseActivity.this,
-                                DetailActivity.class, assetId, "0", false);
+                        ActivityLauncher.getInstance().detailScreen(BaseActivity.this, DetailActivity.class, assetId, "0", false);
                         finish();
                     } else if (contentType.equalsIgnoreCase(
                             MediaTypeConstants.getInstance().getLive())) {
@@ -282,14 +276,6 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
                                 BaseActivity.this, LiveActivity.class, 0l, assetId, "0", false,
                                 SDKConfig.getInstance().getLiveDetailId());
                         finish();
-                    } else if (contentType.equalsIgnoreCase("CUSTOM") || contentType.equalsIgnoreCase("EXPEDITION")) {
-                        if (ClickHandler.disallowClick()) {
-                            return;
-                        }
-                        ActivityLauncher.getInstance().homeScreen(this, HomeActivity.class);
-//                        ActivityLauncher.getInstance().goToExpeditionDetail(
-//                                BaseActivity.this, ExpeditionDetail.class, assetId, true);
-//                        finish();
                     } else if (contentType.equalsIgnoreCase(
                             MediaTypeConstants.getInstance().getEpisode())) {
                         if (ClickHandler.disallowClick()) {
@@ -299,16 +285,6 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
                         ActivityLauncher.getInstance().episodeScreen(BaseActivity.this,
                                 EpisodeActivity.class, assetId, "0", false);
                         finish();
-                    } else if (contentType.equalsIgnoreCase(
-                            AppConstants.ContentType.ARTICLE.toString())) {
-                        if (ClickHandler.disallowClick()) {
-                            return;
-                        }
-                        ActivityLauncher.getInstance().homeScreen(this, HomeActivity.class);
-                        finish();
-                    }else {
-                        ActivityLauncher.getInstance().homeScreen(this, HomeActivity.class);
-                        finish();
                     }
                 } else {
                     ActivityLauncher.getInstance().homeScreen(this, HomeActivity.class);
@@ -316,10 +292,10 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
                 }
             }else {
                try {
-                   if (jsonObject != null && jsonObject.has("mediaType") && jsonObject.has("id")) {
+                   if (jsonObject != null && jsonObject.has("mediaType") && jsonObject.has("mediaContentId")) {
                        int assetId = 0;
                        String contentType = jsonObject.getString("mediaType");
-                       String id = jsonObject.optString("id");
+                       String id = jsonObject.optString("mediaContentId");
                        if (!id.equalsIgnoreCase("")) {
                            assetId = Integer.parseInt(id);
                            if (contentType.equalsIgnoreCase(
@@ -331,9 +307,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
                                ActivityLauncher.getInstance().seriesDetailScreen(
                                        BaseActivity.this, SeriesDetailActivity.class, assetId);
                                finish();
-                           } else if (contentType.equalsIgnoreCase(AppConstants.ContentType.VIDEO.name())
-                                   || contentType.equalsIgnoreCase(
-                                   MediaTypeConstants.getInstance().getMovie())) {
+                           } else if (contentType.equalsIgnoreCase(AppConstants.ContentType.VIDEO.name()) || contentType.equalsIgnoreCase(MediaTypeConstants.getInstance().getMovie())) {
                                if (ClickHandler.disallowClick()) {
                                    return;
                                }
@@ -360,14 +334,6 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
                                        BaseActivity.this, LiveActivity.class, 0l, assetId, "0", false,
                                        SDKConfig.getInstance().getLiveDetailId());
                                finish();
-                           } else if (contentType.equalsIgnoreCase("CUSTOM") || contentType.equalsIgnoreCase("EXPEDITION")) {
-                               if (ClickHandler.disallowClick()) {
-                                   return;
-                               }
-                               ActivityLauncher.getInstance().homeScreen(this, HomeActivity.class);
-//                               ActivityLauncher.getInstance().goToExpeditionDetail(
-//                                       BaseActivity.this, ExpeditionDetail.class, assetId, true);
-//                               finish();
                            } else if (contentType.equalsIgnoreCase(
                                    MediaTypeConstants.getInstance().getEpisode())) {
                                if (ClickHandler.disallowClick()) {
@@ -376,16 +342,6 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityAlert
                                ActivityLauncher.getInstance().homeScreen(this, HomeActivity.class);
                                ActivityLauncher.getInstance().episodeScreen(BaseActivity.this,
                                        EpisodeActivity.class, assetId, "0", false);
-                               finish();
-                           } else if (contentType.equalsIgnoreCase(
-                                   AppConstants.ContentType.ARTICLE.toString())) {
-                               if (ClickHandler.disallowClick()) {
-                                   return;
-                               }
-                               ActivityLauncher.getInstance().homeScreen(this, HomeActivity.class);
-                               finish();
-                           }else {
-                               ActivityLauncher.getInstance().homeScreen(this, HomeActivity.class);
                                finish();
                            }
                        } else {

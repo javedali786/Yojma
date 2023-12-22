@@ -21,8 +21,8 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.common.GooglePlayServicesUtil
 import com.google.android.gms.security.ProviderInstaller
-import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData
 import com.google.gson.Gson
 import com.moengage.core.analytics.MoEAnalyticsHelper
 import com.moengage.core.model.AppStatus
@@ -113,13 +113,15 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         updateAndroidSecurityProvider(this@ActivitySplash)
         AnalyticsController(this@ActivitySplash).callAnalytics("splash_screen", "Action", "Launch")
         currentLanguage = KsPreferenceKeys.getInstance().appLanguage
-        OttApplication.getApplicationContext(this).enveuComponent.inject(this)
+        OttApplication.getApplicationContext(this).enveuComponent?.inject(this)
         notificationCheck()
         connectionObserver()
         binding?.connection?.retryTxt?.setOnClickListener { connectionObserver() }
         // binding.noConnectionLayout.btnMyDownloads.setOnClickListener(view -> ActivityLauncher.getInstance().launchMyDownloads(ActivitySplash.this));
         Logger.d("IntentData: " + this.intent.data)
         printKeyHash()
+        dynamicLink
+
 
     }
 
@@ -133,19 +135,18 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         serviceIntent.setPackage("com.android.vending")
     }
 
+    var firebaseDynamicLink: JSONObject? = null
+
+
     private val dynamicLink: Unit
-        get() {
+        private get() {
             FirebaseDynamicLinks.getInstance()
                 .getDynamicLink(intent)
-                .addOnSuccessListener(this) { pendingDynamicLinkData ->
+                .addOnSuccessListener(this) { pendingDynamicLinkData: PendingDynamicLinkData? ->
                     try {
-                        var deepLink: Uri? = null
+                        val deepLink: Uri?
                         if (pendingDynamicLinkData != null) {
                             deepLink = pendingDynamicLinkData.link
-                            Log.e(
-                                "deepLink",
-                                "in2" + pendingDynamicLinkData.link + " " + deepLink?.query
-                            )
                             if (deepLink != null) {
                                 val uri = Uri.parse(deepLink.toString())
                                 var id: String? = null
@@ -154,7 +155,7 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
                                     id = uri.getQueryParameter("id")
                                     mediaType = uri.getQueryParameter(MEDIA_TYPE)
                                 } catch (e: Exception) {
-                                    Logger.w(e)
+                                    homeRedirection()
                                 }
                                 try {
                                     if (mediaType != null) {
@@ -167,33 +168,32 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
                                             KsPreferenceKeys.getInstance().appPrefBranchIo = true
                                             KsPreferenceKeys.getInstance().appPrefJumpBackId =
                                                 id!!.toInt()
-                                            deepLinkObject =
-                                                AppCommonMethod.createDynamicLinkObject(
-                                                    id,
-                                                    mediaType
-                                                )
-                                            redirections(deepLinkObject)
+                                            deepLinkObject = AppCommonMethod.createDynamicLinkObject(id, mediaType)
+                                            firebaseDynamicLink = AppCommonMethod.createDynamicLinkObject(id,mediaType)
+                                            callConfig(deepLinkObject, "firebase")
+                                            Log.w("shareFile", "success")
+                                            Log.w("redirectionss", "redirections")
                                         }
                                     } else {
-                                        redirectToHome()
+                                        homeRedirection()
                                     }
                                 } catch (e: Exception) {
-                                    redirectToHome()
+                                    homeRedirection()
                                 }
+                            } else {
+                                homeRedirection()
                             }
                         } else {
                             onNewIntent(intent)
                         }
                     } catch (e: Exception) {
-                        redirectToHome()
                         Logger.e("Catch", e.toString())
                     }
                 }
-                .addOnFailureListener(this, OnFailureListener { e ->
-                    redirectToHome()
+                .addOnFailureListener(this) { e: Exception? ->
                     Logger.w(e)
                     Log.w(TAG, "getDynamicLink:onFailure", e)
-                })
+                }
         }
 
     private fun printKeyHash(): String? {
@@ -227,20 +227,6 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         return key
     }
 
-    //        try {
-    //            PackageInfo info = getPackageManager().getPackageInfo(
-    //                    "com.terramedia.iberalia",
-    //                    PackageManager.GET_SIGNATURES);
-    //            for (Signature signature : info.signatures) {
-    //                MessageDigest md = MessageDigest.getInstance("SHA");
-    //                md.update(signature.toByteArray());
-    //                Logger.w("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-    //            }
-    //        } catch (PackageManager.NameNotFoundException e) {
-    //            Logger.w("Exception", "" + e);
-    //        } catch (NoSuchAlgorithmException e) {
-    //            Logger.w("Exception", "" + e);
-    //        }
     private fun callConfig(jsonObject: JSONObject?, updateType: String?) {
         ConfigManager.getInstance().getConfig(this@ActivitySplash, object : ApiResponseModel<Any> {
             override fun onStart() {}
@@ -306,7 +292,6 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
                 )
             ) {
                 Logger.d("branchRedirectors -->>config")
-                // homeRedirection();
                 Handler().postDelayed({
                     Logger.d("branchRedirectors -->>non")
                     //This logic is for now will update later
@@ -318,7 +303,6 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
                 val updateValue = getForceUpdateValue(null, 3)
                 if (!updateValue) {
                     Logger.d("branchRedirectors -->>config")
-                    // homeRedirection();
                     Handler().postDelayed({
                         Logger.d("branchRedirectors -->>non")
                                 ActivityLauncher.getInstance()
@@ -337,9 +321,9 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
                 Logger.w("notificationCheck", "extra")
                 val bundle: Bundle? = intent.extras
                 if (bundle != null) {
-                    notid = bundle.getString("id")
+                    notid = bundle.getString("mediaContentId")
                     if (notid != null && !notid.equals("", ignoreCase = true)) {
-                        notAssetType = bundle.getString("mediaContentId")
+                        notAssetType = bundle.getString("mediaType")
                         if (notAssetType != null && !notAssetType.equals("", ignoreCase = true)) {
                             parseNotification(notid, notAssetType)
                         } else {
@@ -374,73 +358,12 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         binding!!.videoView.requestFocus()
         binding!!.videoView.setOnCompletionListener(MediaPlayer.OnCompletionListener {
             callNextForRedirection()
-            getDynamicLink()
         })
         binding!!.videoView.setOnErrorListener { mp, what, extra -> false }
         binding!!.videoView.start()
     }
 
 
-    private fun getDynamicLink() {
-        FirebaseDynamicLinks.getInstance()
-            .getDynamicLink(intent)
-            .addOnSuccessListener(
-                this
-            ) { pendingDynamicLinkData ->
-                try {
-                    var deepLink: Uri? = null
-                    if (pendingDynamicLinkData != null) {
-                        deepLink = pendingDynamicLinkData.link
-                        Log.e(
-                            "deepLink",
-                            "in2" + pendingDynamicLinkData.link + " " + deepLink!!.query
-                        )
-                        if (deepLink != null) {
-                            val uri = Uri.parse(deepLink.toString())
-                            var id: String? = null
-                            var mediaType: String? = null
-                            try {
-                                id = uri.getQueryParameter("id")
-                                mediaType = uri.getQueryParameter(MEDIA_TYPE)
-                            } catch (e: java.lang.Exception) {
-                                Logger.w(e)
-                            }
-                            try {
-                                if (mediaType != null) {
-                                    if (!mediaType.equals("", ignoreCase = true) && !id.equals(
-                                            "",
-                                            ignoreCase = true
-                                        )
-                                    ) {
-                                        KsPreferenceKeys.getInstance().appPrefJumpTo = mediaType
-                                        KsPreferenceKeys.getInstance().appPrefBranchIo = true
-                                        KsPreferenceKeys.getInstance().appPrefJumpBackId =
-                                            id!!.toInt()
-                                        deepLinkObject =
-                                            AppCommonMethod.createDynamicLinkObject(id, mediaType)
-                                        redirections(deepLinkObject)
-                                    }
-                                } else {
-                                    redirectToHome()
-                                }
-                            } catch (e: java.lang.Exception) {
-                                redirectToHome()
-                            }
-                        }
-                    } else {
-                        onNewIntent(intent)
-                    }
-                } catch (e: java.lang.Exception) {
-                    redirectToHome()
-                    Logger.e("Catch", e.toString())
-                }
-            }
-            .addOnFailureListener(this) { e ->
-                redirectToHome()
-                Logger.w(e)
-                Log.w(TAG, "getDynamicLink:onFailure", e)
-            }
-    }
 
     private fun callNextForRedirection() {
         if (viaIntent) {
@@ -491,13 +414,6 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         }
     }
 
-    private fun redirectToHome() {
-        val updateValue = getForceUpdateValue(null, 2)
-        if (!updateValue) {
-            Logger.w("branchRedirectors homeRedirection")
-            homeRedirection()
-        }
-    }
 
     private fun homeRedirection() {
         Logger.w("branchRedirectors $configCall")
@@ -511,9 +427,9 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
     var configRetry = false
     private fun configFailPopup() {
         if (KsPreferenceKeys.getInstance().appLanguage.equals("spanish", ignoreCase = true)) {
-            AppCommonMethod.updateLanguage("es", OttApplication.getInstance())
+            AppCommonMethod.updateLanguage("es", OttApplication.instance!!)
         } else if (KsPreferenceKeys.getInstance().appLanguage.equals("English", ignoreCase = true)) {
-            AppCommonMethod.updateLanguage("en", OttApplication.getInstance())
+            AppCommonMethod.updateLanguage("en", OttApplication.instance!!)
         }
         ConfigFailDialog(this@ActivitySplash).showDialog(object : DialogInterface {
             override fun positiveAction() {
@@ -551,7 +467,6 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
             binding?.connection?.noConnectionLayout?.visibility = View.GONE
             loadAnimations()
           //  callNextForRedirection()
-            dynamicLink
         } else {
             binding?.connection?.noConnectionLayout?.visibility = View.VISIBLE
             binding?.connection?.noConnectionLayout?.bringToFront()
@@ -564,13 +479,11 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
         if (intent.extras != null) {
             try {
                 viaIntent = true
-                notid = intent.getStringExtra("id")
+                notid = intent.getStringExtra("mediaContentId")
                 notAssetType = intent.getStringExtra("mediaType")
                 if (notid == null && notAssetType == null) {
                     notid = intent.getStringExtra("assetId")
                     notAssetType = intent.getStringExtra("assetType")
-                } else {
-                    callConfig(null, null)
                 }
                 parseNotification(notid, notAssetType)
             } catch (e: Exception) {
@@ -587,6 +500,7 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
             notificationAssetId = notid.toInt()
             if (notificationAssetId > 0 && assetType != null && !assetType.equals("", ignoreCase = true)) {
                 Logger.w("FCM_Payload_final --", notificationAssetId.toString() + "")
+                Logger.w("FCM_Payload_final --", assetType+ "")
                 notificationObject = AppCommonMethod.createNotificationObject(notid, assetType)
                 viaIntent = true
             }
@@ -607,9 +521,9 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
     private fun getForceUpdateValue(jsonObject: JSONObject?, type: Int): Boolean {
         Logger.d("branchRedirectors er forceupdate")
         if (KsPreferenceKeys.getInstance().appLanguage.equals("spanish", ignoreCase = true) || KsPreferenceKeys.getInstance().appLanguage.equals("हिंदी", ignoreCase = true)) {
-            AppCommonMethod.updateLanguage("es", OttApplication.getInstance())
+            AppCommonMethod.updateLanguage("es", OttApplication.instance!!)
         } else if (KsPreferenceKeys.getInstance().appLanguage.equals("English", ignoreCase = true)) {
-            AppCommonMethod.updateLanguage("en", OttApplication.getInstance())
+            AppCommonMethod.updateLanguage("en", OttApplication.instance!!)
         }
         forceUpdateHandler = ForceUpdateHandler(this@ActivitySplash, configBean)
         forceUpdateHandler!!.checkCurrentVersion(object : VersionValidator {
