@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jwplayer.pub.api.media.audio.AudioTrack
+import com.tv.uscreen.yojmatv.OttApplication
 import com.tv.uscreen.yojmatv.R
+import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 
 
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
@@ -40,17 +42,23 @@ class AudioAdapter(
         Log.d("ListLanguageIs", "onBindViewHolder: " + mList[position].name)
 
         if (KsPreferenceKeys.getInstance().audioName != "" && KsPreferenceKeys.getInstance().audioName != null) {
-            if (mList.get(position).name.equals(
-                    KsPreferenceKeys.getInstance().audioName,
-                    ignoreCase = true
-                )
-            ) {
-                if (KsPreferenceKeys.getInstance().audioName.equals("Default", ignoreCase = true)
-                    || mList.get(position).name.equals("Undefined", ignoreCase = true)
-                ) {
-                    holder.titleText.text = primaryLanguage
+            if (mList[position].name.equals(KsPreferenceKeys.getInstance().audioName, ignoreCase = true)) {
+                if (KsPreferenceKeys.getInstance().audioName.equals("Default", ignoreCase = true) || mList[position].name.equals("Undefined", ignoreCase = true)) {
+                    if (primaryLanguage.equals(AppConstants.ENGLISH)) {
+                        holder.titleText.text = OttApplication.context.getString(R.string.language_english)
+                    } else if (primaryLanguage.equals(AppConstants.SPANISH)) {
+                        holder.titleText.text = OttApplication.context.getString(R.string.language_spanish)
+                    } else {
+                        holder.titleText.text =primaryLanguage
+                    }
                 } else {
-                    holder.titleText.text = mList[position].name
+                    if (mList[position].name?.equals(AppConstants.ENGLISH) == true) {
+                        holder.titleText.text = OttApplication.context.getString(R.string.language_english)
+                    } else if (mList[position].name?.equals(AppConstants.SPANISH) == true) {
+                        holder.titleText.text = OttApplication.context.getString(R.string.language_spanish)
+                    }else {
+                        holder.titleText.text = mList[position].name
+                    }
                 }
                 holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected_blue)
                 holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
@@ -58,31 +66,60 @@ class AudioAdapter(
                 if (mList[position].name.equals("Default", ignoreCase = true)
                     || (mList[position].name.equals("Undefined", ignoreCase = true))
                 ) {
-                    holder.titleText.text = primaryLanguage
+                    if (primaryLanguage.equals(AppConstants.ENGLISH)) {
+                        holder.titleText.text = OttApplication.context.getString(R.string.language_english)
+                    } else if (primaryLanguage.equals(AppConstants.SPANISH)) {
+                        holder.titleText.text = OttApplication.context.getString(R.string.language_spanish)
+                    } else {
+                        holder.titleText.text =primaryLanguage
+                    }
                 } else {
-                    holder.titleText.text = mList[position].name
+                    if (mList[position].name?.equals(AppConstants.ENGLISH) == true) {
+                        holder.titleText.text = OttApplication.context.getString(R.string.language_english)
+                    } else if (mList[position].name?.equals(AppConstants.SPANISH) == true) {
+                        holder.titleText.text = OttApplication.context.getString(R.string.language_spanish)
+                    }else {
+                        holder.titleText.text = mList[position].name
+                    }
                 }
                 holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected)
                 holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.buy_now_pay_now_btn_text_color));
             }
         } else {
-            if (mList[position].name.equals("Default", ignoreCase = true)
-                || mList[position].name.equals("Undefined", ignoreCase = true)
-            ) {
+            if (mList[position].name.equals("Default", ignoreCase = true) || mList[position].name.equals("Undefined", ignoreCase = true)) {
+
+                if (primaryLanguage.equals(AppConstants.ENGLISH)) {
+                    holder.titleText.text = OttApplication.context.getString(R.string.language_english)
+                } else if (primaryLanguage.equals(AppConstants.SPANISH)) {
+                    holder.titleText.text = OttApplication.context.getString(R.string.language_spanish)
+                } else {
+                    holder.titleText.text =primaryLanguage
+                }
                 if (!isDefaultLanguageEnable) {
                     holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected_blue)
                     holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
                 }
-                holder.titleText.text = primaryLanguage
                 //holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
             } else {
                 if (defaultLanguage.equals(mList[position].name, ignoreCase = true)) {
-                    holder.titleText.text = mList[position].name
+                    if (mList[position].name?.equals(AppConstants.ENGLISH) == true) {
+                        holder.titleText.text = OttApplication.context.getString(R.string.language_english)
+                    }else if (mList[position].name?.equals(AppConstants.SPANISH) == true) {
+                        holder.titleText.text = OttApplication.context.getString(R.string.language_spanish)
+                    }else {
+                        holder.titleText.text = mList[position].name
+                    }
                     itemClick?.initialAudioSelected(position)
                     holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected_blue)
-                    holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));
+                    holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white))
                 } else {
-                    holder.titleText.text = mList[position].name
+                    if (mList[position].name?.equals(AppConstants.ENGLISH) == true) {
+                        holder.titleText.text = OttApplication.context.getString(R.string.language_english)
+                    } else if (mList[position].name?.equals(AppConstants.SPANISH) == true) {
+                        holder.titleText.text = OttApplication.context.getString(R.string.language_spanish)
+                    }else {
+                        holder.titleText.text = mList[position].name
+                    }
                     holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected)
                     holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.buy_now_pay_now_btn_text_color));
                 }

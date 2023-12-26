@@ -48,6 +48,7 @@ import com.npaw.youbora.lib6.jwplayer.JWPlayerAdsAdapter
 import com.npaw.youbora.lib6.plugin.Options
 import com.npaw.youbora.lib6.plugin.Plugin
 import com.tv.uscreen.yojmatv.BuildConfig
+import com.tv.uscreen.yojmatv.OttApplication
 import com.tv.uscreen.yojmatv.R
 import com.tv.uscreen.yojmatv.SDKConfig
 import com.tv.uscreen.yojmatv.activities.detail.viewModel.DetailViewModel
@@ -214,6 +215,11 @@ class JWPlayerFragment : BasePlayerFragment(), PlayerListener, DialogPlayer.Dial
 
         override fun onSettingClicked() {
             try {
+                if (KsPreferenceKeys.getInstance().appLanguage.equals("spanish", ignoreCase = true)) {
+                    AppCommonMethod.updateLanguage("es", OttApplication.context)
+                } else if (KsPreferenceKeys.getInstance().appLanguage.equals("English", ignoreCase = true)) {
+                    AppCommonMethod.updateLanguage("en", OttApplication.context)
+                }
                 super.onSettingClicked()
                 callLangMethod()
                 var settingList = ArrayList<String>()

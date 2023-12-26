@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jwplayer.pub.api.media.captions.Caption
 import com.tv.uscreen.yojmatv.R
-import com.tv.uscreen.yojmatv.utils.constants.AppConstants
 import com.tv.uscreen.yojmatv.utils.helpers.ksPreferenceKeys.KsPreferenceKeys
 
 class CaptionAdapter(
@@ -35,12 +34,7 @@ class CaptionAdapter(
 
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (mList?.get(position)?.label?.equals(AppConstants.ENGLISH) == true) {
-            holder.titleText.text = context.getString(R.string.language_english)
-        } else {
-            holder.titleText.text = mList?.get(position)?.label
-        }
-
+        holder.titleText.text = mList?.get(position)?.label
         if (mList?.get(position)?.label.equals(KsPreferenceKeys.getInstance().caption, true)) {
             holder.titleText.setBackgroundResource(R.drawable.ic_rectangle_background_selected_blue)
             holder.titleText.setTextColor(holder.titleText.context.resources.getColor(R.color.moe_white));

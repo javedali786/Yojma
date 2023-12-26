@@ -432,8 +432,21 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
                         isGeoBlocking = true
                     }
                 } else {
-                    if (response!!.responseCode != null && response.responseCode == 4302) {
-
+                    if (response.responseCode == 4302) {
+                        commonDialog(
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_error.toString(),
+                                getString(R.string.popup_error)
+                            ),
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_something_went_wrong.toString(),
+                                getString(R.string.popup_something_went_wrong)
+                            ),
+                            stringsHelper.stringParse(
+                                stringsHelper.instance()?.data?.config?.popup_continue.toString(),
+                                getString(R.string.popup_continue)
+                            )
+                        )
                     } else {
                         commonDialog(
                             stringsHelper.stringParse(
@@ -757,7 +770,7 @@ class DetailActivity : BaseBindingActivity<DetailScreenBinding?>(),
                         )
                     ) {
                         val enveuCommonResponse = assetResponse.baseCategory as RailCommonData
-                        if (enveuCommonResponse != null && enveuCommonResponse.enveuVideoItemBeans.size > 0) {
+                        if (enveuCommonResponse.enveuVideoItemBeans.size > 0) {
                             if (!enveuCommonResponse.enveuVideoItemBeans[0].externalRefId.equals(
                                     "",
                                     ignoreCase = true

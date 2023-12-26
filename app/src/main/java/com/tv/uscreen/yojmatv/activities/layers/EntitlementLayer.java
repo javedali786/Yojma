@@ -1,7 +1,5 @@
 package com.tv.uscreen.yojmatv.activities.layers;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -132,8 +130,6 @@ public class EntitlementLayer {
 
                     response1.setResponseCode(response.code());
                     response1.setData(Objects.requireNonNull(response.body()).getData());
-                    Gson gson = new Gson();
-                    String json = gson.toJson(response.body().getData());
                     responseOutput.postValue(response1);
                 } else {
                     responseOutput.postValue(response.body());

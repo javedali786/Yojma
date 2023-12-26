@@ -12,7 +12,7 @@ import java.util.List;
 public class SDKConfig {
 
     private static SDKConfig sdkConfigInstance;
-    boolean isTablet = OttApplication.getInstance().getResources().getBoolean(R.bool.isTablet);
+    boolean isTablet = OttApplication.Companion.getContext().getResources().getBoolean(R.bool.isTablet);
     ConfigBean configBean;
 
     private SDKConfig() {

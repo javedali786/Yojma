@@ -203,7 +203,7 @@ class SeriesDetailActivity : BaseBindingActivity<ActivitySeriesDetailBinding?>()
                             isGeoBlocking = true
                         }
                     } else {
-                        if (response!!.responseCode != null && response.responseCode == 4302) {
+                        if (response.responseCode == 4302) {
                             commonDialog(
                                 stringsHelper.stringParse(
                                     stringsHelper.instance()?.data?.config?.popup_error.toString(),

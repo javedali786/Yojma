@@ -156,7 +156,26 @@
                     android:textSize="@dimen/search_desc_episode" />
 
             </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/flDeleteWatchlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="@dimen/NontonSize10"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:contentDescription="TODO"
+                    android:gravity="center"
+                    android:padding="@dimen/NontonSize5"
+                    android:src="@drawable/ic_delete" />
+            </FrameLayout>
+            
         </LinearLayout>
+
 
         <View
             android:layout_width="match_parent"

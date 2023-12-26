@@ -235,8 +235,9 @@ class SeasonTabFragment : BaseBindingFragment<SeasonFragmentLayoutBinding?>(), S
                         if (response.baseCategory != null) {
                             val enveuCommonResponse = response.baseCategory as RailCommonData
                             railCommonData = enveuCommonResponse
-                            audioTrackList = railCommonData!!.enveuVideoItemBeans[0].videoDetails.audioTracks
-                            Log.e("TAG16", ":railCommonData "+audioTrackList?.size)
+                            if (railCommonData!!.enveuVideoItemBeans[0].videoDetails.audioTracks!=null) {
+                                audioTrackList = railCommonData!!.enveuVideoItemBeans[0].videoDetails.audioTracks
+                            }
                             binding!!.comingSoon.visibility = View.GONE
                             binding!!.progressBar.visibility = View.GONE
                             if (!StringUtils.isNullOrEmptyOrZero(enveuCommonResponse.seasonName)) {
