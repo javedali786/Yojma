@@ -140,7 +140,7 @@
             android:id="@+id/apple_id"
             style="@style/TextView_Medium"
             android:layout_marginTop="@dimen/signUp_8dp_margin"
-            android:text="@string/apple_text"
+            android:text=""
             app:layout_constraintEnd_toEndOf="@+id/active_id"
             app:layout_constraintTop_toBottomOf="@+id/active_id" />
 

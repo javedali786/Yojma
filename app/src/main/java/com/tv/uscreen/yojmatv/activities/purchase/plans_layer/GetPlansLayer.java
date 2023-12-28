@@ -1,7 +1,10 @@
 package com.tv.uscreen.yojmatv.activities.purchase.plans_layer;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
+import com.google.gson.Gson;
 import com.tv.uscreen.yojmatv.activities.purchase.call_back.EntitlementStatus;
 import com.tv.uscreen.yojmatv.beanModel.membershipAndPlan.ResponseMembershipAndPlan;
 import com.tv.uscreen.yojmatv.networking.apiendpoints.RequestConfig;
@@ -35,7 +38,6 @@ public class GetPlansLayer {
             call.enqueue(new Callback<ResponseMembershipAndPlan>() {
                 @Override
                 public void onResponse(@NonNull Call<ResponseMembershipAndPlan> call, @NonNull Response<ResponseMembershipAndPlan> response) {
-
                     boolean entitlementState=false;
                     ResponseMembershipAndPlan purchaseResponseModel = new ResponseMembershipAndPlan();
                     if (response.code() == 200) {
@@ -105,7 +107,12 @@ public class GetPlansLayer {
                     ResponseMembershipAndPlan purchaseResponseModel = new ResponseMembershipAndPlan();
                     if (response.code() == 200) {
                         purchaseResponseModel.setStatus(true);
-                        purchaseResponseModel.setData(response.body().getData());
+                        if (response.body() != null) {
+                            Gson json = new Gson();
+                            String jsonStr = json.toJson(response.body().getData());
+                            Log.d("planResponse", "onResponse: "+jsonStr);
+                            purchaseResponseModel.setData(response.body().getData());
+                        }
                         if (!purchaseResponseModel.getData().isEmpty()){
                             callBack.getPlans(purchaseResponseModel,true);
                         }else {

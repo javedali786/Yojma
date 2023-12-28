@@ -15,7 +15,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tv.uscreen.yojmatv.activities.purchase.purchase_model.PurchaseModel;
-import com.tv.uscreen.yojmatv.activities.purchase.ui.VodOfferType;
 import com.tv.uscreen.yojmatv.databinding.ManageSubscriptionItemBinding;
 import com.tv.uscreen.yojmatv.utils.Logger;
 import com.tv.uscreen.yojmatv.utils.commonMethods.AppCommonMethod;
@@ -56,20 +55,6 @@ public class AdapterManageSubscription extends RecyclerView.Adapter<AdapterManag
             holder.binding.paymentId.setText(String.format("%s %s", model.getPrice(), model.getCurrency()));
         }
 
-        if (model.getOfferPeriod() != null && !model.getOfferPeriod().equalsIgnoreCase("") && model.getOfferPeriod().equalsIgnoreCase(VodOfferType.MONTHLY.name())) {
-
-            String duration = context.getString(string.one_month);
-           // holder.binding.annuallyId.setText(model.getOfferPeriod());
-            //holder.binding.duration.setText(duration);
-        } else if (model.getOfferPeriod() != null && !model.getOfferPeriod().equalsIgnoreCase("") && model.getOfferPeriod().equalsIgnoreCase(VodOfferType.ANNUAL.name())) {
-
-            String duration = " " + context.getString(string.one_year);
-            holder.binding.annuallyId.setText(model.getOfferPeriod());
-
-            //holder.binding.duration.setText(duration);
-        } else {
-            //holder.binding.duration.setVisibility(View.GONE);
-        }
 
         if (model.getCreatedDate() != null && model.getCreatedDate() > 0) {
             holder.binding.cbPurchase.setText(AppCommonMethod.getDateFromTimeStamp(model.getCreatedDate()));
@@ -110,6 +95,7 @@ public class AdapterManageSubscription extends RecyclerView.Adapter<AdapterManag
         if (model.getPaymentProvider() != null && !model.getPaymentProvider().equalsIgnoreCase("") && !model.getPaymentProvider().equalsIgnoreCase("null") ) {
             switch (model.getPaymentProvider()){
                 case AppConstants.APPLE:
+                case AppConstants.TWO_C_TWO_P:
                     setTextView("Apple",holder);
                     break;
                 case AppConstants.GOOGLE_IAP:
@@ -117,9 +103,6 @@ public class AdapterManageSubscription extends RecyclerView.Adapter<AdapterManag
                     if (!model.isCancelled()) {
                         holder.binding.cancelSubscriptionId.setVisibility(View.VISIBLE);
                     }
-                    break;
-                case AppConstants.TWO_C_TWO_P:
-                    setTextView("Apple",holder);
                     break;
                 case AppConstants.AMAZON_IAP:
                     setTextView("Amazon",holder);
@@ -139,9 +122,6 @@ public class AdapterManageSubscription extends RecyclerView.Adapter<AdapterManag
         }else {
             paymentMode = "NA";
         }
-//        paymentMode=paymentMode.replace("_"," ");
-//
-//        holder.binding.appleId.setText(paymentMode);
 
         if (model.getCreatedDate() != null && model.getCreatedDate() > 0) {
             holder.binding.cbPurchaseDate.setText(AppCommonMethod.getDateFromTimeStamp(model.getCreatedDate()));

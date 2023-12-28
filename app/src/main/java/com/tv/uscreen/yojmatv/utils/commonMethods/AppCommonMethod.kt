@@ -371,79 +371,79 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 val commonData = CommonRailData()
                 if (i == 0) {
                     val slides = ArrayList<Slide>()
-                    val slideSize = Math.min(commonRailData[i].getData().getContents().size, 5)
+                    val slideSize = Math.min(commonRailData[i].data.contents.size, 5)
                     for (j in 0 until slideSize) {
                         val slide = Slide()
-                        commonData.setType(0)
+                        commonData.type = 0
                         slide.type = 1
-                        if (commonRailData[i].getData().getContentType().equals(AppConstants.VOD, ignoreCase = true)) {
-                            slide.imageFromUrl = getImageUrl(AppConstants.VOD, "CROUSEL") + commonRailData[i].getData().getContents().get(j).getLandscapeImage()
-                        } else if (commonRailData[i].getData().getContentType().equals(AppConstants.SERIES, ignoreCase = true)) {
-                            slide.imageFromUrl = getImageUrl(AppConstants.SERIES, "CROUSEL") + commonRailData[i].getData().getContents().get(j).getPicture()
-                        } else if (commonRailData[i].getData().getContentType().equals(AppConstants.CAST_AND_CREW, ignoreCase = true)) {
-                            slide.imageFromUrl = getImageUrl(AppConstants.CAST_AND_CREW, "CROUSEL") + commonRailData[i].getData().getContents().get(j).getPicture()
-                        } else if (commonRailData[i].getData().getContentType().equals(AppConstants.GENRE, ignoreCase = true)) {
-                            slide.imageFromUrl = getImageUrl(AppConstants.GENRE, "CROUSEL") + commonRailData[i].getData().getContents().get(j).getPicture()
+                        if (commonRailData[i].data.contentType.equals(AppConstants.VOD, ignoreCase = true)) {
+                            slide.imageFromUrl = getImageUrl(AppConstants.VOD, "CROUSEL") + commonRailData[i].data.contents.get(j).landscapeImage
+                        } else if (commonRailData[i].data.contentType.equals(AppConstants.SERIES, ignoreCase = true)) {
+                            slide.imageFromUrl = getImageUrl(AppConstants.SERIES, "CROUSEL") + commonRailData[i].data.contents.get(j).picture
+                        } else if (commonRailData[i].data.contentType.equals(AppConstants.CAST_AND_CREW, ignoreCase = true)) {
+                            slide.imageFromUrl = getImageUrl(AppConstants.CAST_AND_CREW, "CROUSEL") + commonRailData[i].data.contents.get(j).picture
+                        } else if (commonRailData[i].data.contentType.equals(AppConstants.GENRE, ignoreCase = true)) {
+                            slide.imageFromUrl = getImageUrl(AppConstants.GENRE, "CROUSEL") + commonRailData[i].data.contents.get(j).picture
                         }
-                        slide.assetId = commonRailData[i].getData().getContents().get(j).getId()
-                        slide.title = commonRailData[i].getData().getContents().get(j).getTitle()
-                        slide.contents = commonRailData[i].getData().getContents().get(j)
+                        slide.assetId = commonRailData[i].data.contents.get(j).id
+                        slide.title = commonRailData[i].data.contents.get(j).title
+                        slide.contents = commonRailData[i].data.contents.get(j)
                         slides.add(slide)
                     }
-                    commonData.setSlides(slides)
-                    commonData.setProgressType(playlistsize)
-                    commonData.setRailData(commonRailData[i])
+                    commonData.slides = slides
+                    commonData.progressType = playlistsize
+                    commonData.railData = commonRailData[i]
                     commonRailDataList.add(commonData)
                     listCounter = listCounter + 1
                 } else {
                     if (i % 5 == 1) {
                         if (adsCounter < adsRail.size) {
-                            adsRail[adsCounter].setType(4)
+                            adsRail[adsCounter].type = 4
                             commonRailDataList.add(adsRail[adsCounter])
                             adsCounter = adsCounter + 1
                         } else {
                             if (listCounter < size) {
-                                if (commonRailData[listCounter].getData().getContentImageType().equals(AppConstants.SQUARE, ignoreCase = true)) {
-                                    commonData.setType(1)
-                                } else if (commonRailData[listCounter].getData().getContentImageType().equals(AppConstants.POTRAIT, ignoreCase = true)) {
-                                    commonData.setType(7) //default type common adapter
-                                } else if (commonRailData[listCounter].getData().getContentImageType().equals(AppConstants.CIRCLE, ignoreCase = true)) {
-                                    commonData.setType(2)
-                                } else if (commonRailData[listCounter].getData().getContentImageType().equals(AppConstants.LANDSCAPE, ignoreCase = true)) {
-                                    commonData.setType(3)
-                                } else if (commonRailData[listCounter].getData().getContentImageType().equals(AppConstants.POSTER_LANDSCAPE, ignoreCase = true)) {
-                                    commonData.setType(5)
-                                } else if (commonRailData[listCounter].getData().getContentImageType().equals(AppConstants.POSTER_POTRAIT, ignoreCase = true)) {
-                                    commonData.setType(6)
+                                if (commonRailData[listCounter].data.contentImageType.equals(AppConstants.SQUARE, ignoreCase = true)) {
+                                    commonData.type = 1
+                                } else if (commonRailData[listCounter].data.contentImageType.equals(AppConstants.POTRAIT, ignoreCase = true)) {
+                                    commonData.type = 7 //default type common adapter
+                                } else if (commonRailData[listCounter].data.contentImageType.equals(AppConstants.CIRCLE, ignoreCase = true)) {
+                                    commonData.type = 2
+                                } else if (commonRailData[listCounter].data.contentImageType.equals(AppConstants.LANDSCAPE, ignoreCase = true)) {
+                                    commonData.type = 3
+                                } else if (commonRailData[listCounter].data.contentImageType.equals(AppConstants.POSTER_LANDSCAPE, ignoreCase = true)) {
+                                    commonData.type = 5
+                                } else if (commonRailData[listCounter].data.contentImageType.equals(AppConstants.POSTER_POTRAIT, ignoreCase = true)) {
+                                    commonData.type = 6
                                 } else {
-                                    commonData.setType(3)
+                                    commonData.type = 3
                                 }
-                                commonData.setRailData(commonRailData[listCounter])
-                                commonData.setProgressType(playlistsize)
+                                commonData.railData = commonRailData[listCounter]
+                                commonData.progressType = playlistsize
                                 commonRailDataList.add(commonData)
                                 listCounter = listCounter + 1
                             }
                         }
                     } else {
                         if (listCounter < size) {
-                            if (commonRailData[listCounter].getData().getContentImageType().equals(AppConstants.SQUARE, ignoreCase = true)) {
-                                commonData.setType(1)
-                            } else if (commonRailData[listCounter].getData().getContentImageType().equals(AppConstants.POTRAIT, ignoreCase = true)) {
-                                commonData.setType(7) //default type
-                            } else if (commonRailData[listCounter].getData().getContentImageType().equals(AppConstants.CIRCLE, ignoreCase = true)) {
-                                commonData.setType(2)
-                            } else if (commonRailData[listCounter].getData().getContentImageType().equals(AppConstants.LANDSCAPE, ignoreCase = true)) {
-                                commonData.setType(3)
+                            if (commonRailData[listCounter].data.contentImageType.equals(AppConstants.SQUARE, ignoreCase = true)) {
+                                commonData.type = 1
+                            } else if (commonRailData[listCounter].data.contentImageType.equals(AppConstants.POTRAIT, ignoreCase = true)) {
+                                commonData.type = 7 //default type
+                            } else if (commonRailData[listCounter].data.contentImageType.equals(AppConstants.CIRCLE, ignoreCase = true)) {
+                                commonData.type = 2
+                            } else if (commonRailData[listCounter].data.contentImageType.equals(AppConstants.LANDSCAPE, ignoreCase = true)) {
+                                commonData.type = 3
                             } //change for digital type 2:3
-                            else if (commonRailData[listCounter].getData().getContentImageType().equals(AppConstants.POSTER_LANDSCAPE, ignoreCase = true)) {
-                                commonData.setType(5)
-                            } else if (commonRailData[listCounter].getData().getContentImageType().equals(AppConstants.POSTER_POTRAIT, ignoreCase = true)) {
-                                commonData.setType(6)
+                            else if (commonRailData[listCounter].data.contentImageType.equals(AppConstants.POSTER_LANDSCAPE, ignoreCase = true)) {
+                                commonData.type = 5
+                            } else if (commonRailData[listCounter].data.contentImageType.equals(AppConstants.POSTER_POTRAIT, ignoreCase = true)) {
+                                commonData.type = 6
                             } else {
-                                commonData.setType(3)
+                                commonData.type = 3
                             }
-                            commonData.setRailData(commonRailData[listCounter])
-                            commonData.setProgressType(playlistsize)
+                            commonData.railData = commonRailData[listCounter]
+                            commonData.progressType = playlistsize
                             commonRailDataList.add(commonData)
                             listCounter = listCounter + 1
                         }
@@ -536,7 +536,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
 
         fun callpreference(): ResponseConfig {
             val gson = Gson()
-            val json: String = KsPreferenceKeys.getInstance().getAppPrefConfigResponse()
+            val json: String = KsPreferenceKeys.getInstance().appPrefConfigResponse
             return gson.fromJson<ResponseConfig>(json, ResponseConfig::class.java)
         }
 
@@ -547,13 +547,13 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                         .loadImageToProfile(imageView, "")
                 } else {
                     val stringBuilder = StringBuilder()
-                    var url1: String = preference.getAppPrefCfep()
+                    var url1: String = preference.appPrefCfep
                     if (key.contains("http")) {
                         stringBuilder.append(url1).append("/").append(key)
                     } else {
                         if (StringUtils.isNullOrEmpty(url1)) {
                             url1 = urlPoints
-                            preference.setAppPrefCfep(url1)
+                            preference.appPrefCfep = url1
                         }
                         val url2: String = AppConstants.PROFILE_FOLDER
                         stringBuilder.append(url1).append(url2).append(key)
@@ -593,8 +593,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             get() {
                 var cast = ""
                 var speciesBuilder = StringBuilder()
-                for (i in KsPreferenceKeys.getInstance().getSpeciesList().indices) {
-                    speciesBuilder = speciesBuilder.append(KsPreferenceKeys.getInstance().getSpeciesList().get(i)).append(",")
+                for (i in KsPreferenceKeys.getInstance().speciesList.indices) {
+                    speciesBuilder = speciesBuilder.append(KsPreferenceKeys.getInstance().speciesList.get(i)).append(",")
                 }
                 if (speciesBuilder.length > 0) {
                     cast = speciesBuilder.toString()
@@ -611,19 +611,19 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             if (list.size > 0) {
                 var speciesBuilder = StringBuilder()
                 for (i in list.indices) {
-                    if (KsPreferenceKeys.getInstance().getPreferenceProfileId().equals("hunt01", ignoreCase = true)) {
+                    if (KsPreferenceKeys.getInstance().preferenceProfileId.equals("hunt01", ignoreCase = true)) {
                         cast = if (isType) {
                             getContentPreferenceForTypes(list[i], configResponse.data.appConfig.contentPreferences.hunting.types)
                         } else {
                             getContentPreferenceForSpecies(list[i], configResponse.data.appConfig.contentPreferences.hunting.species)
                         }
-                    } else if (KsPreferenceKeys.getInstance().getPreferenceProfileId().equals("fish01", ignoreCase = true)) {
+                    } else if (KsPreferenceKeys.getInstance().preferenceProfileId.equals("fish01", ignoreCase = true)) {
                         cast = if (isType) {
                             getContentPreferenceForTypes(list[i], configResponse.data.appConfig.contentPreferences.fishing.types)
                         } else {
                             getContentPreferenceForSpecies(list[i], configResponse.data.appConfig.contentPreferences.fishing.species)
                         }
-                    } else if (KsPreferenceKeys.getInstance().getPreferenceProfileId().equals("both01", ignoreCase = true)) {
+                    } else if (KsPreferenceKeys.getInstance().preferenceProfileId.equals("both01", ignoreCase = true)) {
                         cast = if (isType) {
                             getContentPreferenceForTypes(list[i], configResponse.data.appConfig.contentPreferences.both.types)
                         } else {
@@ -648,11 +648,11 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             try {
                 val locale: String = LanguageLayer.getCurrentLanguageCode()
                 for (i in species.indices) {
-                    if (speciesId.equals(species[i].getId(), ignoreCase = true)) {
+                    if (speciesId.equals(species[i].id, ignoreCase = true)) {
                         speciesList = if (locale.equals("en-US", ignoreCase = true)) {
-                            species[i].getEnUS()
+                            species[i].enUS
                         } else {
-                            species[i].getEsES()
+                            species[i].esES
                         }
                     }
                 }
@@ -667,11 +667,11 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             try {
                 val locale: String = LanguageLayer.getCurrentLanguageCode()
                 for (i in typesItems.indices) {
-                    if (typesId.equals(typesItems[i].getId(), ignoreCase = true)) {
+                    if (typesId.equals(typesItems[i].id, ignoreCase = true)) {
                         typeList = if (locale.equals("en-US", ignoreCase = true)) {
-                            typesItems[i].getEnUS()
+                            typesItems[i].enUS
                         } else {
-                            typesItems[i].getEsES()
+                            typesItems[i].esES
                         }
                     }
                 }
@@ -702,8 +702,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             get() {
                 var cast = ""
                 var speciesBuilder = StringBuilder()
-                for (i in KsPreferenceKeys.getInstance().getTypeList().indices) {
-                    speciesBuilder = speciesBuilder.append(KsPreferenceKeys.getInstance().getTypeList().get(i)).append(",")
+                for (i in KsPreferenceKeys.getInstance().typeList.indices) {
+                    speciesBuilder = speciesBuilder.append(KsPreferenceKeys.getInstance().typeList.get(i)).append(",")
                     Logger.e("dgdgdgddgdg", speciesBuilder.toString())
                 }
                 if (speciesBuilder.length > 0) {
@@ -789,9 +789,9 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             }
         }
         @JvmStatic
-        fun getDeviceType(): String? {
+        fun getDeviceType(): String {
             val isTablet: Boolean =
-                OttApplication.context.getResources().getBoolean(R.bool.isTablet)
+                OttApplication.context.resources.getBoolean(R.bool.isTablet)
             return if (isTablet) {
                 "TABLET"
             } else {
@@ -800,7 +800,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         }
 
 
-        private fun capitalize(s: String?): String? {
+        private fun capitalize(s: String?): String {
             if (s == null || s.length == 0) {
                 return ""
             }
@@ -929,7 +929,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             var isLoggedIn = false
             val preference: KsPreferenceKeys = KsPreferenceKeys.getInstance()
             val token: String = preference.appPrefAccessToken
-            if (preference.getAppPrefLoginStatus().equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
+            if (preference.appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
                 isLoggedIn = true
             }
             val isUserVerified: String = preference.isVerified
@@ -955,14 +955,14 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 } else {
                     if (sku != null) {
                         EntitlementLayer.getInstance().hitApiEntitlement(token, sku).observe(context as LifecycleOwner, Observer<ResponseEntitle> { responseEntitle: ResponseEntitle? ->
-                            if (responseEntitle?.getData() != null) {
+                            if (responseEntitle?.data != null) {
                                 var playback_url1 = ""
                                 resEntitle = responseEntitle
-                                if (responseEntitle.getData().getEntitled()) {
+                                if (responseEntitle.data.entitled) {
                                     if (isUserVerified.equals("true", ignoreCase = true)) {
-                                        if (null != responseEntitle.getData().getExternalRefId()) {
-                                            playback_url1 = SDKConfig.getInstance().getPLAYBACK_URL()+(responseEntitle.getData().getExternalRefId())+(".m3u8")
-                                            startPlayer(context, playback_url1, false, id, isIntentFromLive, tittle, assetType, posterUrl,responseEntitle.getData().getExternalRefId())
+                                        if (null != responseEntitle.data.externalRefId) {
+                                            playback_url1 = SDKConfig.getInstance().playbacK_URL +(responseEntitle.data.externalRefId)+(".m3u8")
+                                            startPlayer(context, playback_url1, false, id, isIntentFromLive, tittle, assetType, posterUrl,responseEntitle.data.externalRefId)
                                         }
                                     } else {
                                         isUserNotVerify = true
@@ -981,7 +981,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                     createShowDialog("", context.getString(R.string.select_plan), context.getString(R.string.purchase_option), context)
                                 }
                             } else {
-                                if (responseEntitle?.responseCode != null && responseEntitle.getResponseCode() == 4302) {
+                                if (responseEntitle?.responseCode != null && responseEntitle.responseCode == 4302) {
                                     clearCredientials(preference, context)
                                     ActivityLauncher.getInstance().loginActivity(context as BaseActivity, ActivityLogin::class.java)
                                 } else {
@@ -1022,7 +1022,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 if (StringUtils.isNullOrEmpty(preferenceProfileId)) {
                     KsPreferenceKeys.getInstance().preferenceProfileId = preferenceProfileId
                 } else {
-                    KsPreferenceKeys.getInstance().setPreferenceProfileId("both01")
+                    KsPreferenceKeys.getInstance().preferenceProfileId = "both01"
                 }
             } catch (e: Exception) {
                 Logger.w(e)
@@ -1136,7 +1136,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 if (java.lang.Boolean.TRUE == railCommonData.enveuVideoItemBeans[position].liveContent.isHosted) {
                     isHosted = true
                 } else {
-                    if (railCommonData.enveuVideoItemBeans[position].getLiveContent().externalUrl != null) {
+                    if (railCommonData.enveuVideoItemBeans[position].liveContent.externalUrl != null) {
                         externalUrl = railCommonData.enveuVideoItemBeans[position].liveContent.externalUrl!!
                     }
                 }
@@ -1165,8 +1165,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             val preference: KsPreferenceKeys
             preference = KsPreferenceKeys.getInstance()
             val token: String
-            token = preference.getAppPrefAccessToken()
-            if (preference.getAppPrefLoginStatus().equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
+            token = preference.appPrefAccessToken
+            if (preference.appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
                 isLoggedIn = true
             }
             val isUserVerified: String = preference.isVerified
@@ -1175,7 +1175,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                     if (isUserVerified.equals("true", ignoreCase = true)) {
                         if (isHosted) {
                             if (!StringUtils.isNullOrEmpty(externalRefId)) {
-                                playback_url = SDKConfig.getInstance().getLivePlayBackUrl()+(externalRefId)+(".m3u8")
+                                playback_url = SDKConfig.getInstance().livePlayBackUrl +(externalRefId)+(".m3u8")
                             }
                         } else {
                             playback_url = externalUrl
@@ -1196,21 +1196,21 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 } else {
                     if (sku != null) {
                         EntitlementLayer.getInstance().hitApiEntitlement(token, sku).observe(context as LifecycleOwner, Observer<ResponseEntitle> { responseEntitle: ResponseEntitle? ->
-                            if (null != responseEntitle && null != responseEntitle.getData()) {
+                            if (null != responseEntitle && null != responseEntitle.data) {
                                 var playback_url1 = ""
                                 resEntitle = responseEntitle
-                                if (responseEntitle.getData().getEntitled()) {
+                                if (responseEntitle.data.entitled) {
                                     if (isUserVerified.equals("true", ignoreCase = true)) {
                                         if (isHosted) {
-                                            if (!responseEntitle.getData().getExternalRefId().equals("", ignoreCase = true)) {
-                                                playback_url1 = SDKConfig.getInstance().getPLAYBACK_URL()+(responseEntitle.getData().getExternalRefId())+(".m3u8")
+                                            if (!responseEntitle.data.externalRefId.equals("", ignoreCase = true)) {
+                                                playback_url1 = SDKConfig.getInstance().playbacK_URL +(responseEntitle.data.externalRefId)+(".m3u8")
                                             }
                                         } else {
-                                            if (responseEntitle.getData().getExternalUrl() != null) {
-                                                playback_url1 = responseEntitle.getData().getExternalUrl()
+                                            if (responseEntitle.data.externalUrl != null) {
+                                                playback_url1 = responseEntitle.data.externalUrl
                                             }
                                         }
-                                        startPlayer(context, playback_url1, false, id, isIntentFromLive, tittle, assetType, "",responseEntitle.getData().getExternalRefId())
+                                        startPlayer(context, playback_url1, false, id, isIntentFromLive, tittle, assetType, "",responseEntitle.data.externalRefId)
                                     } else {
                                         isUserNotVerify = true
                                         createShowDialog(
@@ -1228,7 +1228,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                     createShowDialog("", context.getString(R.string.select_plan), context.getString(R.string.purchase_option), context)
                                 }
                             } else {
-                                if (responseEntitle?.getResponseCode() != null && responseEntitle.getResponseCode() == 4302) {
+                                if (responseEntitle?.responseCode != null && responseEntitle.responseCode == 4302) {
                                     clearCredientials(preference, context)
                                     ActivityLauncher.getInstance().loginActivity(context as BaseActivity, ActivityLogin::class.java)
                                 } else {
@@ -1249,13 +1249,13 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             try {
                 val requestParam = JsonObject()
                 requestParam.addProperty(EventConstant.Name, title)
-                if (assetType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().getMovie(), ignoreCase = true)) {
+                if (assetType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().movie, ignoreCase = true)) {
                     requestParam.addProperty(EventConstant.ContentType, assetType)
-                } else if (assetType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().getShow(), ignoreCase = true)) {
+                } else if (assetType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().show, ignoreCase = true)) {
                     requestParam.addProperty(EventConstant.ContentType, assetType)
-                } else if (assetType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().getEpisode(), ignoreCase = true)) {
+                } else if (assetType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().episode, ignoreCase = true)) {
                     requestParam.addProperty(EventConstant.ContentType, assetType)
-                } else if (assetType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().getSeries(), ignoreCase = true)) {
+                } else if (assetType.uppercase(Locale.getDefault()).equals(MediaTypeConstants.getInstance().series, ignoreCase = true)) {
                     requestParam.addProperty(EventConstant.ContentType, assetType)
                 } else {
                     requestParam.addProperty(EventConstant.ContentType, "")
@@ -1327,7 +1327,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
 
         fun getPushToken(activity: Activity) {
             mActivity = WeakReference<Activity>(activity)
-            FirebaseMessaging.getInstance().getToken()
+            FirebaseMessaging.getInstance().token
                 .addOnCompleteListener(OnCompleteListener<String?> { task: Task<String?> ->
                     if (!task.isSuccessful) {
                         //Could not get FirebaseMessagingToken
@@ -1336,8 +1336,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                     if (null != task.result) {
                         //Got FirebaseMessagingToken
                         val firebaseMessagingToken = Objects.requireNonNull(task.result)
-                        KsPreferenceKeys.getInstance().setAppPrefFcmToken(firebaseMessagingToken)
-                        Logger.w("FCM_TOKEN", KsPreferenceKeys.getInstance().getAppPrefFcmToken())
+                        KsPreferenceKeys.getInstance().appPrefFcmToken = firebaseMessagingToken
+                        Logger.w("FCM_TOKEN", KsPreferenceKeys.getInstance().appPrefFcmToken)
 
 
                         // Log and toast
@@ -1396,7 +1396,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         @JvmStatic
         fun heroAssetRedirections(railCommonData: RailCommonData, activity: Context?, videoId: Long?, parseInt: Int, s: String?, b: Boolean) {
             try {
-                var landingPageAssetId: String = railCommonData.getScreenWidget().landingPageAssetId.toString()
+                var landingPageAssetId: String = railCommonData.screenWidget.landingPageAssetId.toString()
                 if (ObjectHelper.isEmpty(landingPageAssetId)) {
                     landingPageAssetId = "0"
                 }
@@ -1430,8 +1430,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 val enveuVideoDetails = response.body()!!.data
                 enveuVideoDetailsBean.data = enveuVideoDetails
                 val enveuVideoItemBean = EnveuVideoItemBean(enveuVideoDetailsBean)
-                railCommonData.setEnveuVideoItemBeans(ArrayList<EnveuVideoItemBean>())
-                railCommonData.getEnveuVideoItemBeans().add(enveuVideoItemBean)
+                railCommonData.enveuVideoItemBeans = ArrayList<EnveuVideoItemBean>()
+                railCommonData.enveuVideoItemBeans.add(enveuVideoItemBean)
             } catch (ex: Exception) {
                 Logger.w(ex)
             }
@@ -1537,7 +1537,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 if (isVIPTag.equals("true", ignoreCase = true)) {
                     isVIP.visibility = View.VISIBLE
                 } else {
-                    isVIP.setVisibility(View.GONE)
+                    isVIP.visibility = View.GONE
                 }
                 if (assetType.equals(MediaTypeConstants.getInstance().series, ignoreCase = true)) {
                     if (isNewS.equals("true", ignoreCase = true)) {
@@ -1584,7 +1584,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
 
         fun openUrl(context: Context, url: String?) {
             val i = Intent(Intent.ACTION_VIEW)
-            i.setData(Uri.parse(url))
+            i.data = Uri.parse(url)
             if (i.resolveActivity(context.packageManager) != null) {
                 context.startActivity(i)
             }
@@ -1616,8 +1616,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 }
             } catch (ignored: Exception) {
                 titleLayout.visibility = View.GONE
-                tvTitle.setVisibility(View.GONE)
-                tvDescription.setVisibility(View.GONE)
+                tvTitle.visibility = View.GONE
+                tvDescription.visibility = View.GONE
             }
         }
 
@@ -1629,7 +1629,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             return name
         }
 
-        fun getProfileUserNumber(userProfileResponse: UserProfileResponse?): String? {
+        fun getProfileUserNumber(userProfileResponse: UserProfileResponse?): String {
             var number = ""
             if (userProfileResponse != null && userProfileResponse.data.phoneNumber != null && !(userProfileResponse.data.phoneNumber as String).equals("", ignoreCase = true)) {
                 number = userProfileResponse.data.phoneNumber as String
@@ -1637,7 +1637,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             return number
         }
 
-        fun getProfileUserGender(userProfileResponse: UserProfileResponse?): String? {
+        fun getProfileUserGender(userProfileResponse: UserProfileResponse?): String {
             var gender = ""
             if (userProfileResponse != null && userProfileResponse.data.gender != null && !(userProfileResponse.data.gender as String).equals("", ignoreCase = true)) {
                 gender = userProfileResponse.data.gender as String
@@ -1716,8 +1716,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             KsPreferenceKeys.getInstance().saveDataSortKeyValue(null)
             KsPreferenceKeys.getInstance().saveDataFeature(null)
             KsPreferenceKeys.getInstance().saveDataFeatureKeyValue(null)
-            KsPreferenceKeys.getInstance().setFilterApply("false")
-            KsPreferenceKeys.getInstance().setFilterGenre(0)
+            KsPreferenceKeys.getInstance().filterApply = "false"
+            KsPreferenceKeys.getInstance().filterGenre = 0
         }
 
         @JvmStatic
@@ -1750,7 +1750,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         val parentalRating: String
             get() {
                 val ratingValue = ""
-                val currentLanguage: String = KsPreferenceKeys.getInstance().getAppLanguage()
+                val currentLanguage: String = KsPreferenceKeys.getInstance().appLanguage
                 val configBean = configResponse
                 if (configBean != null) {
 //            if (configBean.getData().getAppConfig().getParentalControl().getRatings() != null) {
@@ -1845,6 +1845,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                     }
                                 }
                                 if(responseEntitlementModel.data[i].customData !=null){
+                                    model.paymentProvider = responseEntitlementModel.data[i].customData.paymentProvider
                                     model.title_en = responseEntitlementModel.data[i].customData.title_en
                                     model.title_es = responseEntitlementModel.data[i].customData.title_es
                                     model.description_en = responseEntitlementModel.data[i].customData.description_en
@@ -1858,7 +1859,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                 if (responseEntitlementModel.data[i].expiryDate != null) {
                                     model.expiryDate = responseEntitlementModel.data[i].expiryDate
                                 }
-                                model.entitlementState = responseEntitlementModel.getData().get(i).getEntitlementState() != null && responseEntitlementModel.getData().get(i).getEntitlementState()
+                                model.entitlementState = responseEntitlementModel.data[i].entitlementState != null && responseEntitlementModel.data[i].entitlementState
                                 if (responseEntitlementModel.data[i].customData != null) {
                                     model.customData = responseEntitlementModel.data[i].customData
                                 }
@@ -1872,25 +1873,25 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                 model.isOnTrial = responseEntitlementModel.data[i].isOnTrial
                                 modelList.add(model)
                             } else {
-                                val identifier: String = responseEntitlementModel.getData().get(i).getCustomData().getAndroidProductId()
+                                val identifier: String = responseEntitlementModel.data[i].customData.androidProductId
                                 model.subscriptionType = "PRODUCT"
                                 productSkuList.add(identifier)
-                                if (responseEntitlementModel.getData().get(i).getRecurringOffer() != null) {
-                                    if (responseEntitlementModel.getData().get(i).getRecurringOffer().getTrialPeriod() != null) {
-                                        if (responseEntitlementModel.getData().get(i).getRecurringOffer().getTrialPeriod().getTrialType() != null && !responseEntitlementModel.getData().get(i)
-                                                .getRecurringOffer().getTrialPeriod().getTrialType().equals("", ignoreCase = true)
+                                if (responseEntitlementModel.data[i].recurringOffer != null) {
+                                    if (responseEntitlementModel.data[i].recurringOffer.trialPeriod != null) {
+                                        if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType != null && !responseEntitlementModel.data.get(i)
+                                                .recurringOffer.trialPeriod.trialType.equals("", ignoreCase = true)
                                         ) {
-                                            model.trialType = responseEntitlementModel.getData().get(i).getRecurringOffer().getTrialPeriod().getTrialType()
+                                            model.trialType = responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType
                                         }
-                                        if (responseEntitlementModel.getData().get(i).getRecurringOffer().getTrialPeriod().getTrialDuration() > 0) {
-                                            model.setTrialDuration(responseEntitlementModel.getData().get(i).getRecurringOffer().getTrialPeriod().getTrialDuration())
+                                        if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration > 0) {
+                                            model.trialDuration = responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration
                                         }
                                     }
-                                    if (responseEntitlementModel.getData().get(i).getRecurringOffer().getOfferPeriod() != null) {
-                                        if (responseEntitlementModel.getData().get(i).getRecurringOffer().getOfferPeriod().equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
-                                            model.setOfferPeriod(VodOfferType.MONTHLY.name)
-                                        } else if (responseEntitlementModel.getData().get(i).getRecurringOffer().getOfferPeriod().equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
-                                            model.setOfferPeriod(VodOfferType.ANNUAL.name)
+                                    if (responseEntitlementModel.data[i].recurringOffer.offerPeriod != null) {
+                                        if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
+                                            model.offerPeriod = VodOfferType.MONTHLY.name
+                                        } else if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
+                                            model.offerPeriod = VodOfferType.ANNUAL.name
                                         }
                                     }
                                 }
@@ -1899,6 +1900,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                 model.identifier = responseEntitlementModel.data[i].identifier
 
                                 if(responseEntitlementModel.data[i].customData !=null){
+                                    model.paymentProvider = responseEntitlementModel.data[i].customData.paymentProvider
                                     model.title_en = responseEntitlementModel.data[i].customData.title_en
                                     model.title_es = responseEntitlementModel.data[i].customData.title_es
                                     model.description_en = responseEntitlementModel.data[i].customData.description_en
@@ -1909,26 +1911,26 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
 
                                 }
                                 model.entitlementState = responseEntitlementModel.data[i].entitlementState != null && responseEntitlementModel.data[i].entitlementState
-                                if (responseEntitlementModel.getData().get(i).getCustomData() != null) {
-                                    model.setCustomData(responseEntitlementModel.getData().get(i).getCustomData())
+                                if (responseEntitlementModel.data[i].customData != null) {
+                                    model.customData = responseEntitlementModel.data[i].customData
                                 }
-                                model.setSubscriptionList(productSkuList)
-                                if (responseEntitlementModel.getData().get(i).getExpiryDate() != null) {
-                                    model.setExpiryDate(responseEntitlementModel.getData().get(i).getExpiryDate())
+                                model.subscriptionList = productSkuList
+                                if (responseEntitlementModel.data[i].expiryDate != null) {
+                                    model.expiryDate = responseEntitlementModel.data[i].expiryDate
                                 }
-                                if (responseEntitlementModel.getData().get(i).getSubscriptionOrder() != null) {
-                                    model.setSubscriptionOrder(responseEntitlementModel.getData().get(i).getSubscriptionOrder())
+                                if (responseEntitlementModel.data.get(i).subscriptionOrder != null) {
+                                    model.subscriptionOrder = responseEntitlementModel.data[i].subscriptionOrder
                                 }
-                                if (responseEntitlementModel.data[i].getDescription() != null) {
-                                    model.description = responseEntitlementModel.getData().get(i).getDescription()
+                                if (responseEntitlementModel.data[i].description != null) {
+                                    model.description = responseEntitlementModel.data[i].description
                                 }
-                                if (responseEntitlementModel.data.get(i).getCurrentExpiry() != null && responseEntitlementModel.getData().get(i).getCurrentExpiry() > 0) {
-                                    model.currentExpiryDate = responseEntitlementModel.getData().get(i).getCurrentExpiry()
+                                if (responseEntitlementModel.data[i].currentExpiry != null && responseEntitlementModel.data[i].currentExpiry > 0) {
+                                    model.currentExpiryDate = responseEntitlementModel.data[i].currentExpiry
                                 }
-                                if (responseEntitlementModel.getData().get(i).getNextChargeDate() != null && responseEntitlementModel.getData().get(i).getNextChargeDate() > 0) {
-                                    model.nextChargeDate = responseEntitlementModel.getData().get(i).getNextChargeDate()
+                                if (responseEntitlementModel.data[i].nextChargeDate != null && responseEntitlementModel.data[i].nextChargeDate > 0) {
+                                    model.nextChargeDate = responseEntitlementModel.data[i].nextChargeDate
                                 }
-                                model.isOnTrial = responseEntitlementModel.getData().get(i).isOnTrial()
+                                model.isOnTrial = responseEntitlementModel.data[i].isOnTrial
                                 modelList.add(model)
                             }
                         }
@@ -1997,9 +1999,9 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         fun getEpisodeAssetDetail(railCommonData: RailCommonData, response: Response<EnvVideoDetailsBean>, isIntentFromExpedition: Boolean) {
             try {
                 val enveuVideoDetailsBean = EnvVideoDetailsBean()
-                val enveuVideoDetails: Data = response.body()!!.getData()
-                enveuVideoDetailsBean.setData(enveuVideoDetails)
-                val enveuVideoItemBean = EnveuVideoItemBean(enveuVideoDetailsBean.getData(), isIntentFromExpedition)
+                val enveuVideoDetails: Data = response.body()!!.data
+                enveuVideoDetailsBean.data = enveuVideoDetails
+                val enveuVideoItemBean = EnveuVideoItemBean(enveuVideoDetailsBean.data, isIntentFromExpedition)
                 railCommonData.enveuVideoItemBeans = ArrayList<EnveuVideoItemBean>()
                 railCommonData.enveuVideoItemBeans.add(enveuVideoItemBean)
             } catch (ex: Exception) {
@@ -2016,9 +2018,9 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             val btu = dialog.findViewById<Button>(R.id.personalizeBtn)
             val titleText: TextView = dialog.findViewById<TextView>(R.id.popup_title)
             btu.text = actnBtn
-            titleText.setText(title)
+            titleText.text = title
             val description: TextView = dialog.findViewById<TextView>(R.id.popup_discription)
-            description.setText(message)
+            description.text = message
             dialog.show()
             btu.setOnClickListener {
                 if (isUserNotVerify) {
@@ -2109,19 +2111,19 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
 
                                     model.subscriptionType = VodOfferType.RECURRING_SUBSCRIPTION.name
                                     if (responseEntitlementModel.data.purchaseAs[i].recurringOffer != null) {
-                                        if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod() != null) {
-                                            if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType() != null && !responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType().equals("", ignoreCase = true)) {
-                                                model.setTrialType(responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType())
+                                        if (responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.trialPeriod != null) {
+                                            if (responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.trialPeriod.trialType != null && !responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.trialPeriod.trialType.equals("", ignoreCase = true)) {
+                                                model.trialType = responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.trialPeriod.trialType
                                             }
-                                            if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialDuration() > 0) {
-                                                model.setTrialDuration(responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialDuration())
+                                            if (responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.trialPeriod.trialDuration > 0) {
+                                                model.trialDuration = responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.trialPeriod.trialDuration
                                             }
                                         }
-                                        if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getOfferPeriod() != null) {
-                                            if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getOfferPeriod().equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
-                                                model.setOfferPeriod(VodOfferType.MONTHLY.name)
-                                            } else if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getOfferPeriod().equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
-                                                model.setOfferPeriod(VodOfferType.ANNUAL.name)
+                                        if (responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.offerPeriod != null) {
+                                            if (responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.offerPeriod.equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
+                                                model.offerPeriod = VodOfferType.MONTHLY.name
+                                            } else if (responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.offerPeriod.equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
+                                                model.offerPeriod = VodOfferType.ANNUAL.name
                                             }
                                         }
                                     }
@@ -2138,29 +2140,27 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                     model.subscriptionList = subSkuList
                                     if (responseEntitlementModel.data.purchaseAs[i].expiryDate != null) {
                                         model.expiryDate =
-                                            responseEntitlementModel.getData().getPurchaseAs().get(i).getExpiryDate()
+                                            responseEntitlementModel.data.purchaseAs.get(i).expiryDate
                                     }
-                                    model.setEntitlementState(
-                                        responseEntitlementModel.getData().getPurchaseAs().get(i).getEntitlementState() != null && responseEntitlementModel.getData().getPurchaseAs().get(i)
-                                            .getEntitlementState()
-                                    )
-                                    if (responseEntitlementModel.getData().getPurchaseAs().get(i).getCustomData() != null) {
-                                        model.setCustomData(responseEntitlementModel.getData().getPurchaseAs().get(i).getCustomData())
+                                    model.entitlementState = responseEntitlementModel.data.purchaseAs.get(i).entitlementState != null && responseEntitlementModel.data.purchaseAs.get(i)
+                                        .entitlementState
+                                    if (responseEntitlementModel.data.purchaseAs.get(i).customData != null) {
+                                        model.customData = responseEntitlementModel.data.purchaseAs.get(i).customData
                                     }
-                                    if (responseEntitlementModel.getData().getPurchaseAs().get(i).getCurrentExpiry() != null && responseEntitlementModel.getData().getPurchaseAs().get(i)
-                                            .getCurrentExpiry() > 0
+                                    if (responseEntitlementModel.data.purchaseAs.get(i).currentExpiry != null && responseEntitlementModel.data.purchaseAs.get(i)
+                                            .currentExpiry > 0
                                     ) {
-                                        model.setCurrentExpiryDate(responseEntitlementModel.getData().getPurchaseAs().get(i).getCurrentExpiry())
+                                        model.currentExpiryDate = responseEntitlementModel.data.purchaseAs.get(i).currentExpiry
                                     }
-                                    if (responseEntitlementModel.getData().getPurchaseAs().get(i).getDescription() != null) {
-                                        model.setDescription(responseEntitlementModel.getData().getPurchaseAs().get(i).getDescription())
+                                    if (responseEntitlementModel.data.purchaseAs.get(i).description != null) {
+                                        model.description = responseEntitlementModel.data.purchaseAs.get(i).description
                                     }
-                                    if (responseEntitlementModel.getData().getPurchaseAs().get(i).getNextChargeDate() != null && responseEntitlementModel.getData().getPurchaseAs().get(i)
-                                            .getNextChargeDate() > 0
+                                    if (responseEntitlementModel.data.purchaseAs.get(i).nextChargeDate != null && responseEntitlementModel.data.purchaseAs.get(i)
+                                            .nextChargeDate > 0
                                     ) {
-                                        model.setNextChargeDate(responseEntitlementModel.getData().getPurchaseAs().get(i).getNextChargeDate())
+                                        model.nextChargeDate = responseEntitlementModel.data.purchaseAs.get(i).nextChargeDate
                                     }
-                                    model.setOnTrial(responseEntitlementModel.getData().getPurchaseAs().get(i).isOnTrial())
+                                    model.isOnTrial = responseEntitlementModel.data.purchaseAs.get(i).isOnTrial
                                     modelList.add(model)
                                 } else {
                                     if (null!=responseEntitlementModel.data.purchaseAs[i].customData) {
@@ -2170,22 +2170,22 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                         }
                                     }
                                     model.subscriptionType = "PRODUCT"
-                                    if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer() != null) {
-                                        if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod() != null) {
-                                            if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType() != null && !responseEntitlementModel.getData()
-                                                    .getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType().equals("", ignoreCase = true)
+                                    if (responseEntitlementModel.data.purchaseAs.get(i).recurringOffer != null) {
+                                        if (responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.trialPeriod != null) {
+                                            if (responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.trialPeriod.trialType != null && !responseEntitlementModel.data
+                                                    .purchaseAs.get(i).recurringOffer.trialPeriod.trialType.equals("", ignoreCase = true)
                                             ) {
-                                                model.setTrialType(responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialType())
+                                                model.trialType = responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.trialPeriod.trialType
                                             }
-                                            if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialDuration() > 0) {
-                                                model.setTrialDuration(responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getTrialPeriod().getTrialDuration())
+                                            if (responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.trialPeriod.trialDuration > 0) {
+                                                model.trialDuration = responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.trialPeriod.trialDuration
                                             }
                                         }
-                                        if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getOfferPeriod() != null) {
-                                            if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getOfferPeriod().equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
-                                                model.setOfferPeriod(VodOfferType.MONTHLY.name)
-                                            } else if (responseEntitlementModel.getData().getPurchaseAs().get(i).getRecurringOffer().getOfferPeriod().equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
-                                                model.setOfferPeriod(VodOfferType.ANNUAL.name)
+                                        if (responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.offerPeriod != null) {
+                                            if (responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.offerPeriod.equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
+                                                model.offerPeriod = VodOfferType.MONTHLY.name
+                                            } else if (responseEntitlementModel.data.purchaseAs.get(i).recurringOffer.offerPeriod.equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
+                                                model.offerPeriod = VodOfferType.ANNUAL.name
                                             }
                                         }
                                     }
@@ -2200,34 +2200,32 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                                         model.isCancelled = responseEntitlementModel.data.purchaseAs[i].customData.isCancelled
 
                                     }
-                                    model.setEntitlementState(
-                                        responseEntitlementModel.getData().getPurchaseAs().get(i).getEntitlementState() != null && responseEntitlementModel.getData().getPurchaseAs().get(i)
-                                            .getEntitlementState()
-                                    )
-                                    if (responseEntitlementModel.getData().getPurchaseAs().get(i).getCustomData() != null) {
-                                        model.setCustomData(responseEntitlementModel.getData().getPurchaseAs().get(i).getCustomData())
+                                    model.entitlementState = responseEntitlementModel.data.purchaseAs.get(i).entitlementState != null && responseEntitlementModel.data.purchaseAs.get(i)
+                                        .entitlementState
+                                    if (responseEntitlementModel.data.purchaseAs.get(i).customData != null) {
+                                        model.customData = responseEntitlementModel.data.purchaseAs.get(i).customData
                                     }
-                                    model.setSubscriptionList(productSkuList)
-                                    if (responseEntitlementModel.getData().getPurchaseAs().get(i).getExpiryDate() != null) {
-                                        model.setExpiryDate(responseEntitlementModel.getData().getPurchaseAs().get(i).getExpiryDate())
+                                    model.subscriptionList = productSkuList
+                                    if (responseEntitlementModel.data.purchaseAs.get(i).expiryDate != null) {
+                                        model.expiryDate = responseEntitlementModel.data.purchaseAs.get(i).expiryDate
                                     }
-                                    if (responseEntitlementModel.getData().getPurchaseAs().get(i).getSubscriptionOrder() != null) {
-                                        model.setSubscriptionOrder(responseEntitlementModel.getData().getPurchaseAs().get(i).getSubscriptionOrder())
+                                    if (responseEntitlementModel.data.purchaseAs.get(i).subscriptionOrder != null) {
+                                        model.subscriptionOrder = responseEntitlementModel.data.purchaseAs.get(i).subscriptionOrder
                                     }
-                                    if (responseEntitlementModel.getData().getPurchaseAs().get(i).getDescription() != null) {
-                                        model.setDescription(responseEntitlementModel.getData().getPurchaseAs().get(i).getDescription())
+                                    if (responseEntitlementModel.data.purchaseAs.get(i).description != null) {
+                                        model.description = responseEntitlementModel.data.purchaseAs.get(i).description
                                     }
-                                    if (responseEntitlementModel.getData().getPurchaseAs().get(i).getCurrentExpiry() != null && responseEntitlementModel.getData().getPurchaseAs().get(i)
-                                            .getCurrentExpiry() > 0
+                                    if (responseEntitlementModel.data.purchaseAs.get(i).currentExpiry != null && responseEntitlementModel.data.purchaseAs.get(i)
+                                            .currentExpiry > 0
                                     ) {
-                                        model.setCurrentExpiryDate(responseEntitlementModel.getData().getPurchaseAs().get(i).getCurrentExpiry())
+                                        model.currentExpiryDate = responseEntitlementModel.data.purchaseAs.get(i).currentExpiry
                                     }
-                                    if (responseEntitlementModel.getData().getPurchaseAs().get(i).getNextChargeDate() != null && responseEntitlementModel.getData().getPurchaseAs().get(i)
-                                            .getNextChargeDate() > 0
+                                    if (responseEntitlementModel.data.purchaseAs.get(i).nextChargeDate != null && responseEntitlementModel.data.purchaseAs.get(i)
+                                            .nextChargeDate > 0
                                     ) {
-                                        model.setNextChargeDate(responseEntitlementModel.getData().getPurchaseAs().get(i).getNextChargeDate())
+                                        model.nextChargeDate = responseEntitlementModel.data.purchaseAs.get(i).nextChargeDate
                                     }
-                                    model.setOnTrial(responseEntitlementModel.getData().getPurchaseAs().get(i).isOnTrial())
+                                    model.isOnTrial = responseEntitlementModel.data.purchaseAs.get(i).isOnTrial
                                     val allowedTrial : Boolean = responseEntitlementModel.data.purchaseAs[i].allowedTrial
                                     model.allowedTrial = allowedTrial
                                     modelList.add(model)
@@ -2251,10 +2249,8 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                         if (purchaseModelList[j].entitlementState != null && purchaseModelList[j].entitlementState == true) {
                             val purchaseModel = PurchaseModel()
                             purchaseModel.price = "" + plans?.data?.get(j)?.prices?.get(0)?.price
-                            purchaseModel.currency =
-                                "" + plans?.data?.get(j)?.prices?.get(0)?.currencyCode
-                            purchaseModel.paymentProvider =
-                                "" + plans?.data?.get(j)?.customData?.paymentProvider
+                            purchaseModel.currency = "" + plans?.data?.get(j)?.prices?.get(0)?.currencyCode
+                            purchaseModel.paymentProvider = "" + purchaseModelList[j].paymentProvider
                             purchaseModel.trialType = "" + purchaseModelList[j].trialType
                             purchaseModel.allowedTrial = purchaseModelList[j].allowedTrial
                             purchaseModel.trialDuration = purchaseModelList[j].trialDuration
@@ -2369,13 +2365,13 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             try {
                 val preference: KsPreferenceKeys = KsPreferenceKeys.getInstance()
                 val registrationLoginViewModel: RegistrationLoginViewModel = ViewModelProvider((context as BaseActivity?)!!).get<RegistrationLoginViewModel>(RegistrationLoginViewModel::class.java)
-                registrationLoginViewModel.hitUserProfile(context as BaseActivity?, preference.appPrefAccessToken)
+                registrationLoginViewModel.hitUserProfile(context, preference.appPrefAccessToken)
                     .observe(context as BaseActivity, Observer<UserProfileResponse?> { userProfileResponse ->
                         if (userProfileResponse != null) {
                             if (userProfileResponse.status) {
                             } else {
                                 if (userProfileResponse.responseCode == 4302) {
-                                    preference.setAppPrefRegisterStatus(AppConstants.UserStatus.Logout.toString())
+                                    preference.appPrefRegisterStatus = AppConstants.UserStatus.Logout.toString()
                                 }
                             }
                         }
@@ -2388,7 +2384,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             val preference: KsPreferenceKeys
             preference = KsPreferenceKeys.getInstance()
             var isLoggedIn = false
-            if (preference.getAppPrefLoginStatus().equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
+            if (preference.appPrefLoginStatus.equals(AppConstants.UserStatus.Login.toString(), ignoreCase = true)) {
                 isLoggedIn = true
             }
             if (isLoggedIn) {
@@ -2403,7 +2399,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
         }
 
         @JvmStatic
-        fun getHomeTabId(configBean: ConfigBean?, name: String?): String? {
+        fun getHomeTabId(configBean: ConfigBean?, name: String?): String {
             var screenId = ""
             if (configBean != null) {
                 for (i in configBean.data.appConfig.navScreens.indices) {
