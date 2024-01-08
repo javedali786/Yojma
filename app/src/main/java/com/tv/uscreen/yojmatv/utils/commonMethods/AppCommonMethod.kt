@@ -1807,136 +1807,269 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
             return result.toString()
         }
 
-        fun fetchRecSubscriptionModel(responseEntitlementModel: ResponseMembershipAndPlan, subSkuList: MutableList<String>, productSkuList: MutableList<String>): List<PurchaseModel> {
+        fun fetchRecSubscriptionModel(from :String,responseEntitlementModel: ResponseMembershipAndPlan, subSkuList: MutableList<String>, productSkuList: MutableList<String>): List<PurchaseModel> {
             val modelList: MutableList<PurchaseModel> = ArrayList<PurchaseModel>()
             try {
-                if (responseEntitlementModel.data != null && responseEntitlementModel.data.isNotEmpty()) {
-                    for (i in responseEntitlementModel.data.indices) {
-                        if (responseEntitlementModel.data[i].customData.androidProductId!=null) {
-                            val model = PurchaseModel()
-                            if (responseEntitlementModel.data != null && responseEntitlementModel.data[i].offerType != null && responseEntitlementModel.data[i].offerType.contains(VodOfferType.RECURRING_SUBSCRIPTION.name)) {
-                                model.title = responseEntitlementModel.data[i].title
-                                val identifier: String = responseEntitlementModel.data[i].customData.androidProductId
-                                val allowedTrial : Boolean = responseEntitlementModel.data[i].allowedTrial
-                                model.allowedTrial = allowedTrial
-                                model.identifier = responseEntitlementModel.data[i].identifier
-                                model.customIdentifier = identifier
-                                if (responseEntitlementModel.data[i].subscriptionOrder != null) {
-                                    model.subscriptionOrder = responseEntitlementModel.data[i].subscriptionOrder
-                                }
-                                model.subscriptionType = VodOfferType.RECURRING_SUBSCRIPTION.name
-                                subSkuList.add(identifier)
-                                if (responseEntitlementModel.data[i].recurringOffer != null) {
-                                    if (responseEntitlementModel.data[i].recurringOffer.trialPeriod != null) {
-                                        if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType != null && !responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType.equals("", ignoreCase = true)) {
-                                            model.trialType = responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType
+                if (from == AppConstants.SETTINGS) {
+                    if (responseEntitlementModel.data != null && responseEntitlementModel.data.isNotEmpty()) {
+                        for (i in responseEntitlementModel.data.indices) {
+                            if (responseEntitlementModel.data[i].customData.androidProductId!=null) {
+                                if (responseEntitlementModel.data[i].offerStatus.equals(AppConstants.PUBLISHED) || responseEntitlementModel.data[i].offerStatus.equals(AppConstants.NOT_FOR_SALE)) {
+                                    val model = PurchaseModel()
+                                    if (responseEntitlementModel.data != null && responseEntitlementModel.data[i].offerType != null && responseEntitlementModel.data[i].offerType.contains(VodOfferType.RECURRING_SUBSCRIPTION.name)) {
+                                        model.title = responseEntitlementModel.data[i].title
+                                        val identifier: String = responseEntitlementModel.data[i].customData.androidProductId
+                                        val allowedTrial : Boolean = responseEntitlementModel.data[i].allowedTrial
+                                        model.allowedTrial = allowedTrial
+                                        model.identifier = responseEntitlementModel.data[i].identifier
+                                        model.customIdentifier = identifier
+                                        if (responseEntitlementModel.data[i].subscriptionOrder != null) {
+                                            model.subscriptionOrder = responseEntitlementModel.data[i].subscriptionOrder
                                         }
-                                        if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration > 0) {
-                                            model.trialDuration =
-                                                responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration
+                                        model.subscriptionType = VodOfferType.RECURRING_SUBSCRIPTION.name
+                                        subSkuList.add(identifier)
+                                        if (responseEntitlementModel.data[i].recurringOffer != null) {
+                                            if (responseEntitlementModel.data[i].recurringOffer.trialPeriod != null) {
+                                                if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType != null && !responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType.equals("", ignoreCase = true)) {
+                                                    model.trialType = responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType
+                                                }
+                                                if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration > 0) {
+                                                    model.trialDuration =
+                                                        responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration
+                                                }
+                                            }
+                                            if (responseEntitlementModel.data[i].recurringOffer.offerPeriod != null) {
+                                                if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
+                                                    model.offerPeriod = VodOfferType.MONTHLY.name
+                                                } else if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
+                                                    model.offerPeriod = VodOfferType.ANNUAL.name
+                                                }
+                                            }
                                         }
-                                    }
-                                    if (responseEntitlementModel.data[i].recurringOffer.offerPeriod != null) {
-                                        if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
-                                            model.offerPeriod = VodOfferType.MONTHLY.name
-                                        } else if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
-                                            model.offerPeriod = VodOfferType.ANNUAL.name
+                                        if(responseEntitlementModel.data[i].customData !=null){
+                                            model.paymentProvider = responseEntitlementModel.data[i].customData.paymentProvider
+                                            model.title_en = responseEntitlementModel.data[i].customData.title_en
+                                            model.title_es = responseEntitlementModel.data[i].customData.title_es
+                                            model.description_en = responseEntitlementModel.data[i].customData.description_en
+                                            model.description_es = responseEntitlementModel.data[i].customData.description_es
+                                            model.trialType_en = responseEntitlementModel.data[i].customData.trialType_en
+                                            model.trialType_es = responseEntitlementModel.data[i].customData.trialType_es
+                                            model.isCancelled  = responseEntitlementModel.data[i].customData.isCancelled
                                         }
-                                    }
-                                }
-                                if(responseEntitlementModel.data[i].customData !=null){
-                                    model.paymentProvider = responseEntitlementModel.data[i].customData.paymentProvider
-                                    model.title_en = responseEntitlementModel.data[i].customData.title_en
-                                    model.title_es = responseEntitlementModel.data[i].customData.title_es
-                                    model.description_en = responseEntitlementModel.data[i].customData.description_en
-                                    model.description_es = responseEntitlementModel.data[i].customData.description_es
-                                    model.trialType_en = responseEntitlementModel.data[i].customData.trialType_en
-                                    model.trialType_es = responseEntitlementModel.data[i].customData.trialType_es
-                                    model.isCancelled  = responseEntitlementModel.data[i].customData.isCancelled
-                                }
 
-                                model.subscriptionList = subSkuList
-                                if (responseEntitlementModel.data[i].expiryDate != null) {
-                                    model.expiryDate = responseEntitlementModel.data[i].expiryDate
-                                }
-                                model.entitlementState = responseEntitlementModel.data[i].entitlementState != null && responseEntitlementModel.data[i].entitlementState
-                                if (responseEntitlementModel.data[i].customData != null) {
-                                    model.customData = responseEntitlementModel.data[i].customData
-                                }
-                                if (responseEntitlementModel.data[i].currentExpiry != null && responseEntitlementModel.data[i].currentExpiry > 0) {
-                                    model.currentExpiryDate = responseEntitlementModel.data[i].currentExpiry
-                                }
+                                        model.subscriptionList = subSkuList
+                                        if (responseEntitlementModel.data[i].expiryDate != null) {
+                                            model.expiryDate = responseEntitlementModel.data[i].expiryDate
+                                        }
+                                        model.entitlementState = responseEntitlementModel.data[i].entitlementState != null && responseEntitlementModel.data[i].entitlementState
+                                        if (responseEntitlementModel.data[i].customData != null) {
+                                            model.customData = responseEntitlementModel.data[i].customData
+                                        }
+                                        if (responseEntitlementModel.data[i].currentExpiry != null && responseEntitlementModel.data[i].currentExpiry > 0) {
+                                            model.currentExpiryDate = responseEntitlementModel.data[i].currentExpiry
+                                        }
 
-                                if (responseEntitlementModel.data[i].nextChargeDate != null && responseEntitlementModel.data[i].nextChargeDate > 0) {
-                                    model.nextChargeDate = responseEntitlementModel.data[i].nextChargeDate
-                                }
-                                model.isOnTrial = responseEntitlementModel.data[i].isOnTrial
-                                modelList.add(model)
-                            } else {
-                                val identifier: String = responseEntitlementModel.data[i].customData.androidProductId
-                                model.subscriptionType = "PRODUCT"
-                                productSkuList.add(identifier)
-                                if (responseEntitlementModel.data[i].recurringOffer != null) {
-                                    if (responseEntitlementModel.data[i].recurringOffer.trialPeriod != null) {
-                                        if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType != null && !responseEntitlementModel.data.get(i)
-                                                .recurringOffer.trialPeriod.trialType.equals("", ignoreCase = true)
-                                        ) {
-                                            model.trialType = responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType
+                                        if (responseEntitlementModel.data[i].nextChargeDate != null && responseEntitlementModel.data[i].nextChargeDate > 0) {
+                                            model.nextChargeDate = responseEntitlementModel.data[i].nextChargeDate
                                         }
-                                        if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration > 0) {
-                                            model.trialDuration = responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration
+                                        model.isOnTrial = responseEntitlementModel.data[i].isOnTrial
+                                        modelList.add(model)
+                                    } else {
+                                        val identifier: String = responseEntitlementModel.data[i].customData.androidProductId
+                                        model.subscriptionType = "PRODUCT"
+                                        productSkuList.add(identifier)
+                                        if (responseEntitlementModel.data[i].recurringOffer != null) {
+                                            if (responseEntitlementModel.data[i].recurringOffer.trialPeriod != null) {
+                                                if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType != null && !responseEntitlementModel.data.get(i)
+                                                        .recurringOffer.trialPeriod.trialType.equals("", ignoreCase = true)
+                                                ) {
+                                                    model.trialType = responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType
+                                                }
+                                                if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration > 0) {
+                                                    model.trialDuration = responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration
+                                                }
+                                            }
+                                            if (responseEntitlementModel.data[i].recurringOffer.offerPeriod != null) {
+                                                if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
+                                                    model.offerPeriod = VodOfferType.MONTHLY.name
+                                                } else if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
+                                                    model.offerPeriod = VodOfferType.ANNUAL.name
+                                                }
+                                            }
                                         }
+                                        val allowedTrial : Boolean = responseEntitlementModel.data[i].allowedTrial
+                                        model.allowedTrial = allowedTrial
+                                        model.identifier = responseEntitlementModel.data[i].identifier
+
+                                        if(responseEntitlementModel.data[i].customData !=null){
+                                            model.paymentProvider = responseEntitlementModel.data[i].customData.paymentProvider
+                                            model.title_en = responseEntitlementModel.data[i].customData.title_en
+                                            model.title_es = responseEntitlementModel.data[i].customData.title_es
+                                            model.description_en = responseEntitlementModel.data[i].customData.description_en
+                                            model.description_es = responseEntitlementModel.data[i].customData.description_es
+                                            model.trialType_en = responseEntitlementModel.data[i].customData.trialType_en
+                                            model.trialType_es = responseEntitlementModel.data[i].customData.trialType_es
+                                            model.isCancelled  = responseEntitlementModel.data[i].customData.isCancelled
+
+                                        }
+                                        model.entitlementState = responseEntitlementModel.data[i].entitlementState != null && responseEntitlementModel.data[i].entitlementState
+                                        if (responseEntitlementModel.data[i].customData != null) {
+                                            model.customData = responseEntitlementModel.data[i].customData
+                                        }
+                                        model.subscriptionList = productSkuList
+                                        if (responseEntitlementModel.data[i].expiryDate != null) {
+                                            model.expiryDate = responseEntitlementModel.data[i].expiryDate
+                                        }
+                                        if (responseEntitlementModel.data.get(i).subscriptionOrder != null) {
+                                            model.subscriptionOrder = responseEntitlementModel.data[i].subscriptionOrder
+                                        }
+                                        if (responseEntitlementModel.data[i].description != null) {
+                                            model.description = responseEntitlementModel.data[i].description
+                                        }
+                                        if (responseEntitlementModel.data[i].currentExpiry != null && responseEntitlementModel.data[i].currentExpiry > 0) {
+                                            model.currentExpiryDate = responseEntitlementModel.data[i].currentExpiry
+                                        }
+                                        if (responseEntitlementModel.data[i].nextChargeDate != null && responseEntitlementModel.data[i].nextChargeDate > 0) {
+                                            model.nextChargeDate = responseEntitlementModel.data[i].nextChargeDate
+                                        }
+                                        model.isOnTrial = responseEntitlementModel.data[i].isOnTrial
+                                        modelList.add(model)
                                     }
-                                    if (responseEntitlementModel.data[i].recurringOffer.offerPeriod != null) {
-                                        if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
-                                            model.offerPeriod = VodOfferType.MONTHLY.name
-                                        } else if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
-                                            model.offerPeriod = VodOfferType.ANNUAL.name
-                                        }
-                                    }
                                 }
-                                val allowedTrial : Boolean = responseEntitlementModel.data[i].allowedTrial
-                                model.allowedTrial = allowedTrial
-                                model.identifier = responseEntitlementModel.data[i].identifier
-
-                                if(responseEntitlementModel.data[i].customData !=null){
-                                    model.paymentProvider = responseEntitlementModel.data[i].customData.paymentProvider
-                                    model.title_en = responseEntitlementModel.data[i].customData.title_en
-                                    model.title_es = responseEntitlementModel.data[i].customData.title_es
-                                    model.description_en = responseEntitlementModel.data[i].customData.description_en
-                                    model.description_es = responseEntitlementModel.data[i].customData.description_es
-                                    model.trialType_en = responseEntitlementModel.data[i].customData.trialType_en
-                                    model.trialType_es = responseEntitlementModel.data[i].customData.trialType_es
-                                    model.isCancelled  = responseEntitlementModel.data[i].customData.isCancelled
-
-                                }
-                                model.entitlementState = responseEntitlementModel.data[i].entitlementState != null && responseEntitlementModel.data[i].entitlementState
-                                if (responseEntitlementModel.data[i].customData != null) {
-                                    model.customData = responseEntitlementModel.data[i].customData
-                                }
-                                model.subscriptionList = productSkuList
-                                if (responseEntitlementModel.data[i].expiryDate != null) {
-                                    model.expiryDate = responseEntitlementModel.data[i].expiryDate
-                                }
-                                if (responseEntitlementModel.data.get(i).subscriptionOrder != null) {
-                                    model.subscriptionOrder = responseEntitlementModel.data[i].subscriptionOrder
-                                }
-                                if (responseEntitlementModel.data[i].description != null) {
-                                    model.description = responseEntitlementModel.data[i].description
-                                }
-                                if (responseEntitlementModel.data[i].currentExpiry != null && responseEntitlementModel.data[i].currentExpiry > 0) {
-                                    model.currentExpiryDate = responseEntitlementModel.data[i].currentExpiry
-                                }
-                                if (responseEntitlementModel.data[i].nextChargeDate != null && responseEntitlementModel.data[i].nextChargeDate > 0) {
-                                    model.nextChargeDate = responseEntitlementModel.data[i].nextChargeDate
-                                }
-                                model.isOnTrial = responseEntitlementModel.data[i].isOnTrial
-                                modelList.add(model)
                             }
-                        }
 
+                        }
+                    }
+                } else {
+                    if (responseEntitlementModel.data != null && responseEntitlementModel.data.isNotEmpty()) {
+                        for (i in responseEntitlementModel.data.indices) {
+                            if (responseEntitlementModel.data[i].offerStatus.equals(AppConstants.PUBLISHED) && responseEntitlementModel.data[i].customData.androidProductId!=null) {
+                                val model = PurchaseModel()
+                                if (responseEntitlementModel.data != null && responseEntitlementModel.data[i].offerType != null && responseEntitlementModel.data[i].offerType.contains(VodOfferType.RECURRING_SUBSCRIPTION.name)) {
+                                    model.title = responseEntitlementModel.data[i].title
+                                    val identifier: String = responseEntitlementModel.data[i].customData.androidProductId
+                                    val allowedTrial : Boolean = responseEntitlementModel.data[i].allowedTrial
+                                    model.allowedTrial = allowedTrial
+                                    model.identifier = responseEntitlementModel.data[i].identifier
+                                    model.customIdentifier = identifier
+                                    if (responseEntitlementModel.data[i].subscriptionOrder != null) {
+                                        model.subscriptionOrder = responseEntitlementModel.data[i].subscriptionOrder
+                                    }
+                                    model.subscriptionType = VodOfferType.RECURRING_SUBSCRIPTION.name
+                                    subSkuList.add(identifier)
+                                    if (responseEntitlementModel.data[i].recurringOffer != null) {
+                                        if (responseEntitlementModel.data[i].recurringOffer.trialPeriod != null) {
+                                            if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType != null && !responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType.equals("", ignoreCase = true)) {
+                                                model.trialType = responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType
+                                            }
+                                            if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration > 0) {
+                                                model.trialDuration =
+                                                    responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration
+                                            }
+                                        }
+                                        if (responseEntitlementModel.data[i].recurringOffer.offerPeriod != null) {
+                                            if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
+                                                model.offerPeriod = VodOfferType.MONTHLY.name
+                                            } else if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
+                                                model.offerPeriod = VodOfferType.ANNUAL.name
+                                            }
+                                        }
+                                    }
+                                    if(responseEntitlementModel.data[i].customData !=null){
+                                        model.paymentProvider = responseEntitlementModel.data[i].customData.paymentProvider
+                                        model.title_en = responseEntitlementModel.data[i].customData.title_en
+                                        model.title_es = responseEntitlementModel.data[i].customData.title_es
+                                        model.description_en = responseEntitlementModel.data[i].customData.description_en
+                                        model.description_es = responseEntitlementModel.data[i].customData.description_es
+                                        model.trialType_en = responseEntitlementModel.data[i].customData.trialType_en
+                                        model.trialType_es = responseEntitlementModel.data[i].customData.trialType_es
+                                        model.isCancelled  = responseEntitlementModel.data[i].customData.isCancelled
+                                    }
+
+                                    model.subscriptionList = subSkuList
+                                    if (responseEntitlementModel.data[i].expiryDate != null) {
+                                        model.expiryDate = responseEntitlementModel.data[i].expiryDate
+                                    }
+                                    model.entitlementState = responseEntitlementModel.data[i].entitlementState != null && responseEntitlementModel.data[i].entitlementState
+                                    if (responseEntitlementModel.data[i].customData != null) {
+                                        model.customData = responseEntitlementModel.data[i].customData
+                                    }
+                                    if (responseEntitlementModel.data[i].currentExpiry != null && responseEntitlementModel.data[i].currentExpiry > 0) {
+                                        model.currentExpiryDate = responseEntitlementModel.data[i].currentExpiry
+                                    }
+
+                                    if (responseEntitlementModel.data[i].nextChargeDate != null && responseEntitlementModel.data[i].nextChargeDate > 0) {
+                                        model.nextChargeDate = responseEntitlementModel.data[i].nextChargeDate
+                                    }
+                                    model.isOnTrial = responseEntitlementModel.data[i].isOnTrial
+                                    modelList.add(model)
+                                } else {
+                                    val identifier: String = responseEntitlementModel.data[i].customData.androidProductId
+                                    model.subscriptionType = "PRODUCT"
+                                    productSkuList.add(identifier)
+                                    if (responseEntitlementModel.data[i].recurringOffer != null) {
+                                        if (responseEntitlementModel.data[i].recurringOffer.trialPeriod != null) {
+                                            if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType != null && !responseEntitlementModel.data.get(i)
+                                                    .recurringOffer.trialPeriod.trialType.equals("", ignoreCase = true)
+                                            ) {
+                                                model.trialType = responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialType
+                                            }
+                                            if (responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration > 0) {
+                                                model.trialDuration = responseEntitlementModel.data[i].recurringOffer.trialPeriod.trialDuration
+                                            }
+                                        }
+                                        if (responseEntitlementModel.data[i].recurringOffer.offerPeriod != null) {
+                                            if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.MONTHLY.name, ignoreCase = true)) {
+                                                model.offerPeriod = VodOfferType.MONTHLY.name
+                                            } else if (responseEntitlementModel.data[i].recurringOffer.offerPeriod.equals(VodOfferType.ANNUAL.name, ignoreCase = true)) {
+                                                model.offerPeriod = VodOfferType.ANNUAL.name
+                                            }
+                                        }
+                                    }
+                                    val allowedTrial : Boolean = responseEntitlementModel.data[i].allowedTrial
+                                    model.allowedTrial = allowedTrial
+                                    model.identifier = responseEntitlementModel.data[i].identifier
+
+                                    if(responseEntitlementModel.data[i].customData !=null){
+                                        model.paymentProvider = responseEntitlementModel.data[i].customData.paymentProvider
+                                        model.title_en = responseEntitlementModel.data[i].customData.title_en
+                                        model.title_es = responseEntitlementModel.data[i].customData.title_es
+                                        model.description_en = responseEntitlementModel.data[i].customData.description_en
+                                        model.description_es = responseEntitlementModel.data[i].customData.description_es
+                                        model.trialType_en = responseEntitlementModel.data[i].customData.trialType_en
+                                        model.trialType_es = responseEntitlementModel.data[i].customData.trialType_es
+                                        model.isCancelled  = responseEntitlementModel.data[i].customData.isCancelled
+
+                                    }
+                                    model.entitlementState = responseEntitlementModel.data[i].entitlementState != null && responseEntitlementModel.data[i].entitlementState
+                                    if (responseEntitlementModel.data[i].customData != null) {
+                                        model.customData = responseEntitlementModel.data[i].customData
+                                    }
+                                    model.subscriptionList = productSkuList
+                                    if (responseEntitlementModel.data[i].expiryDate != null) {
+                                        model.expiryDate = responseEntitlementModel.data[i].expiryDate
+                                    }
+                                    if (responseEntitlementModel.data.get(i).subscriptionOrder != null) {
+                                        model.subscriptionOrder = responseEntitlementModel.data[i].subscriptionOrder
+                                    }
+                                    if (responseEntitlementModel.data[i].description != null) {
+                                        model.description = responseEntitlementModel.data[i].description
+                                    }
+                                    if (responseEntitlementModel.data[i].currentExpiry != null && responseEntitlementModel.data[i].currentExpiry > 0) {
+                                        model.currentExpiryDate = responseEntitlementModel.data[i].currentExpiry
+                                    }
+                                    if (responseEntitlementModel.data[i].nextChargeDate != null && responseEntitlementModel.data[i].nextChargeDate > 0) {
+                                        model.nextChargeDate = responseEntitlementModel.data[i].nextChargeDate
+                                    }
+                                    model.isOnTrial = responseEntitlementModel.data[i].isOnTrial
+                                    modelList.add(model)
+                                }
+                            }
+
+                        }
                     }
                 }
+
             } catch (e: Exception) {
                 return modelList
             }
@@ -2091,7 +2224,7 @@ class AppCommonMethod private constructor() : AppCompatActivity(), DialogPlayer.
                 if (responseEntitlementModel.data != null) {
                     if (responseEntitlementModel.data.purchaseAs != null && responseEntitlementModel.data.purchaseAs.isNotEmpty()) {
                         for (i in responseEntitlementModel.data.purchaseAs.indices) {
-                            if (responseEntitlementModel.data.purchaseAs[i].offerStatus.equals("PUBLISHED") && responseEntitlementModel.data.purchaseAs[i].customData.androidProductId!=null) {
+                            if (responseEntitlementModel.data.purchaseAs[i].offerStatus.equals(AppConstants.PUBLISHED) && responseEntitlementModel.data.purchaseAs[i].customData.androidProductId!=null) {
                                 val model = PurchaseModel()
                                 if (responseEntitlementModel.data != null && responseEntitlementModel.data.purchaseAs[i].offerType != null && responseEntitlementModel.data.purchaseAs[i].offerType.contains(VodOfferType.RECURRING_SUBSCRIPTION.name)) {
                                     if(responseEntitlementModel.data.purchaseAs[i].customData!=null) {

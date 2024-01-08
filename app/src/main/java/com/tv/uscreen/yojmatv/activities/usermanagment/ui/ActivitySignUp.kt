@@ -584,7 +584,7 @@ class ActivitySignUp : BaseBindingActivity<ActivitySignupBinding?>(), CommonDial
         val token: String = KsPreferenceKeys.getInstance().appPrefAccessToken
         GetPlansLayer.getInstance().getEntitlementStatus(
             KsPreferenceKeys.getInstance(),token
-        ) { entitlementStatus, apiStatus, _ ->
+        ) { entitlementStatus, apiStatus, _,_ ->
             if (apiStatus) {
                 if (entitlementStatus) {
                     if (KsPreferenceKeys.getInstance().isVerified.equals("true",ignoreCase = true)){

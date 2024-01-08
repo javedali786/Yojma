@@ -454,12 +454,12 @@ class PaymentDetailPage : BaseBindingActivity<ActivityPaymentDetailPagePlanBindi
 
         }else{
             GetPlansLayer.getInstance().getPlansDetail(token, object : EntitlementStatus {
-                override fun entitlementStatus(entitlementStatus: Boolean, apiStatus: Boolean,responseCode:Int) {
+                override fun entitlementStatus(entitlementStatus: Boolean, apiStatus: Boolean,offerStatus:String,responseCode:Int) {
 
                 }
                 override fun getPlans(plans: ResponseMembershipAndPlan?, apiStatus: Boolean) {
                     if (apiStatus) {
-                        purchaseModel = AppCommonMethod.fetchRecSubscriptionModel(plans!!, subSkuList as java.util.ArrayList<String>, productSkuList as java.util.ArrayList<String>)
+                        purchaseModel = AppCommonMethod.fetchRecSubscriptionModel("",plans!!, subSkuList as java.util.ArrayList<String>, productSkuList as java.util.ArrayList<String>)
                         if (purchaseModel != null) {
                             bp.getAllSkuDetails(
                                 purchaseModel!![0].subscriptionList,

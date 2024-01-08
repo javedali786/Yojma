@@ -448,15 +448,15 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
             }
 
             if(from!!.equals("settings",ignoreCase = true)){
-                binding?.mainPaymentLayout!!.visibility=View.GONE;
+                binding?.mainPaymentLayout!!.visibility=View.GONE
                 binding?.bottomLay!!.visibility = View.GONE
-                binding?.mainManageSubscriptionLayout!!.visibility=View.VISIBLE;
+                binding?.mainManageSubscriptionLayout!!.visibility=View.VISIBLE
                 manageAdapter= AdapterManageSubscription(purchaseFinalList,this@ActivitySelectSubscriptionPlan,this@ActivitySelectSubscriptionPlan)
                 binding?.subscriptionRecycle?.adapter =  manageAdapter
             }else{
-                binding?.mainPaymentLayout!!.visibility=View.VISIBLE;
+                binding?.mainPaymentLayout!!.visibility=View.VISIBLE
                 binding?.bottomLay!!.visibility = View.VISIBLE
-                binding?.mainManageSubscriptionLayout!!.visibility=View.GONE;
+                binding?.mainManageSubscriptionLayout!!.visibility=View.GONE
                 adapter= AdapterPlan(purchaseFinalList,this@ActivitySelectSubscriptionPlan,this@ActivitySelectSubscriptionPlan)
                 binding?.planRecycleView?.adapter =  adapter
             }
@@ -475,14 +475,14 @@ class ActivitySelectSubscriptionPlan : BaseBindingActivity<ActivitySelectSubscri
         productSkuList = java.util.ArrayList<String>()
         val token: String = KsPreferenceKeys.getInstance().appPrefAccessToken
         GetPlansLayer.getInstance().getPlansDetail(token, object : EntitlementStatus {
-            override fun entitlementStatus(entitlementStatus: Boolean, apiStatus: Boolean,responseCode:Int) {
+            override fun entitlementStatus(entitlementStatus: Boolean, apiStatus: Boolean, offerStatus: String?, esponseCode: Int) {
 
             }
             override fun getPlans(plans: ResponseMembershipAndPlan?, apiStatus: Boolean) {
                 if(apiStatus) {
-                    purchaseModel = AppCommonMethod.fetchRecSubscriptionModel(plans!!, subSkuList as java.util.ArrayList<String>, productSkuList as java.util.ArrayList<String>)
+                    purchaseModel = AppCommonMethod.fetchRecSubscriptionModel(from!!,plans!!, subSkuList as java.util.ArrayList<String>, productSkuList as java.util.ArrayList<String>)
                     if (purchaseModel != null && purchaseModel!!.isNotEmpty()) {
-                        if(from!!.equals("settings",ignoreCase = true)) {
+                        if(from!!.equals(AppConstants.SETTINGS,ignoreCase = true)) {
                             callManageSubscriptionAdapter(purchaseModel!!,plans)
                         }else{
                             bp.getAllSkuDetails(

@@ -487,7 +487,7 @@ class ActivityLogin : BaseBindingActivity<ActivityLoginBinding?>(), CommonDialog
     private fun checkPlansForUser() {
         showLoading(binding?.progressBar, true)
         val token: String = KsPreferenceKeys.getInstance().appPrefAccessToken
-        GetPlansLayer.getInstance().getEntitlementStatus(KsPreferenceKeys.getInstance(), token) { entitlementStatus, apiStatus, _ ->
+        GetPlansLayer.getInstance().getEntitlementStatus(KsPreferenceKeys.getInstance(), token) { entitlementStatus, apiStatus, _,_ ->
             dismissLoading(binding?.progressBar)
             if (apiStatus) {
                 if (entitlementStatus) {

@@ -48,7 +48,7 @@ public class GetPlansLayer {
                                 if (purchaseResponseModel.getData().get(i).getEntitlementState()) {
                                     entitlementState=true;
                                     preferenceKeys.setEntitlementState(true);
-                                    callBack.entitlementStatus(true,true,0);
+                                    callBack.entitlementStatus(true,true,purchaseResponseModel.getData().get(i).getOfferStatus(),0);
                                     break;
                                 }else {
                                     entitlementState=false;
@@ -57,20 +57,20 @@ public class GetPlansLayer {
 
                             if (!entitlementState){
                                 preferenceKeys.setEntitlementState(false);
-                                callBack.entitlementStatus(false,true,100);
+                                callBack.entitlementStatus(false,true,"false",100);
 
                             }
                         }else {
                             preferenceKeys.setEntitlementState(false);
-                            callBack.entitlementStatus(false,false,0);
+                            callBack.entitlementStatus(false,false,"false",0);
                         }
                     } else if(response.code() == 403){
                         preferenceKeys.setEntitlementState(false);
-                        callBack.entitlementStatus(false,false,403);
+                        callBack.entitlementStatus(false,false,"false",403);
                     }else {
                         purchaseResponseModel.setStatus(false);
                         preferenceKeys.setEntitlementState(false);
-                        callBack.entitlementStatus(false,false,0);
+                        callBack.entitlementStatus(false,false,"false",0);
 
 
                     }
@@ -82,14 +82,14 @@ public class GetPlansLayer {
                     ResponseMembershipAndPlan purchaseResponseModel = new ResponseMembershipAndPlan();
                     purchaseResponseModel.setStatus(false);
                     preferenceKeys.setEntitlementState(false);
-                    callBack.entitlementStatus(false,false,0);
+                    callBack.entitlementStatus(false,false,"false",0);
 
 
                 }
             });
 
         }catch (Exception e){
-            callBack.entitlementStatus(false,false,0);
+            callBack.entitlementStatus(false,false,"false",0);
             preferenceKeys.setEntitlementState(false);
         }
 

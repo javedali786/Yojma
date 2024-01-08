@@ -142,11 +142,11 @@ class PurchaseActivity : BaseBindingActivity<ActivityPurchaseBinding>(), CommonD
         productSkuList = java.util.ArrayList<String>()
         val token: String = KsPreferenceKeys.getInstance().appPrefAccessToken
         GetPlansLayer.getInstance().getPlansDetail(token, object : EntitlementStatus {
-            override fun entitlementStatus(entitlementStatus: Boolean, apiStatus: Boolean,responseCode :Int) {
+            override fun entitlementStatus(entitlementStatus: Boolean, apiStatus: Boolean,offerStatus:String,responseCode :Int) {
 
             }
             override fun getPlans(plans: ResponseMembershipAndPlan?, apiStatus: Boolean) {
-                purchaseModel = AppCommonMethod.fetchRecSubscriptionModel(plans!!, subSkuList as ArrayList<String>, productSkuList as ArrayList<String>)
+                purchaseModel = AppCommonMethod.fetchRecSubscriptionModel("",plans!!, subSkuList as ArrayList<String>, productSkuList as ArrayList<String>)
                 if (purchaseModel != null) {
                     bp.getAllSkuDetails(
                         purchaseModel!![0].subscriptionList,

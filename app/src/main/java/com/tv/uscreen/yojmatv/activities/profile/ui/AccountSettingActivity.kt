@@ -100,7 +100,7 @@ class AccountSettingActivity : BaseBindingActivity<AccountSettingActivityBinding
 
     private fun callGetPlans() {
         binding!!.progressBar.visibility = View.VISIBLE
-        GetPlansLayer.getInstance().getEntitlementStatus(KsPreferenceKeys.getInstance(), token) { entitlementStatus: Boolean, apiStatus: Boolean, responseCode: Int ->
+        GetPlansLayer.getInstance().getEntitlementStatus(KsPreferenceKeys.getInstance(), token) { entitlementStatus: Boolean, apiStatus: Boolean, _:String, responseCode: Int ->
             hasEntitlement = if (apiStatus) {
                 entitlementStatus
             } else {

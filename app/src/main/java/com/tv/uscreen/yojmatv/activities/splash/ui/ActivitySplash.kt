@@ -566,7 +566,7 @@ class ActivitySplash : BaseBindingActivity<ActivitySplashBinding?>(), AlertDialo
                                 GetPlansLayer.getInstance().getEntitlementStatus(
                                     KsPreferenceKeys.getInstance(),
                                     KsPreferenceKeys.getInstance().appPrefAccessToken
-                                ) { entitlementStatus: Boolean, apiStatus: Boolean, responseCode: Int ->
+                                ) { entitlementStatus: Boolean, apiStatus: Boolean, offerStatus,responseCode: Int ->
                                     if (apiStatus) {
                                         if (entitlementStatus) {
                                         } else {

@@ -24,6 +24,8 @@ public interface AppConstants {
     String QUALITY = "quality";
     String VOD = "VIDEO";
     String SERIES = "SERIES";
+    String PUBLISHED = "PUBLISHED";
+    String NOT_FOR_SALE = "NOT_FOR_SALE";
     String CAST_AND_CREW = "CAST_AND_CREW";
     String GENRE = "GENRE";
     String SQUARE = "SQUARE";
@@ -357,6 +359,7 @@ public interface AppConstants {
     String SPANISH_SEARCH_RESULT= "Resultado de búsqueda";
     String QA_YOUBORA_ACCOUNT_CODE = "enveudev";
     String PROD_YOUBORA_ACCOUNT_CODE = "enveu";
+    String SETTINGS = "settings";
 
 
 

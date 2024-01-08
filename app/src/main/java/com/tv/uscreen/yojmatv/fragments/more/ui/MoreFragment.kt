@@ -50,6 +50,7 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
     private var mListLogin: MutableList<String>? = null
     private var viewModel: HomeViewModel? = null
     private var hasEntitlement = false
+    private var offerStatus = "false"
     private var token = ""
     private var userState = ""
     private var gaming= ""
@@ -114,7 +115,7 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
         }
     }
 
-    private fun modelCall(hasEntitlement: Boolean) {
+    private fun modelCall(hasEntitlement: Boolean, offerStatus: String) {
         binding!!.progressBar.visibility = View.GONE
         gaming = stringsHelper.stringParse(
         stringsHelper.instance()?.data?.config?.more_gaming.toString(),
@@ -132,7 +133,7 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
             stringsHelper.instance()?.data?.config?.more_settings.toString(),
             getString(R.string.more_settings)
         )
-        buyNow = if (hasEntitlement) {
+        buyNow = if (hasEntitlement && offerStatus == AppConstants.PUBLISHED || offerStatus == AppConstants.NOT_FOR_SALE) {
             stringsHelper.stringParse(
                 stringsHelper.instance()?.data?.config?.more_manage_subscription.toString(),
                 getString(R.string.more_manage_subscription)
@@ -176,7 +177,7 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
         (mListLogin as ArrayList<String>).addAll(listOf(*label3))
 
         if (isLogin.equals("Login", ignoreCase = true)) {
-            if (hasEntitlement) {
+            if (hasEntitlement && offerStatus == AppConstants.PUBLISHED || offerStatus == AppConstants.NOT_FOR_SALE) {
                 setUIComponets(mListLogin as ArrayList<String>)
             } else {
                 setUIComponets(mListWithSub)
@@ -216,8 +217,9 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
 
     private fun callGetPlans() {
         binding!!.progressBar.visibility = View.VISIBLE
-        GetPlansLayer.getInstance().getEntitlementStatus(KsPreferenceKeys.getInstance(), token) { entitlementStatus: Boolean, apiStatus: Boolean, responseCode: Int ->
+        GetPlansLayer.getInstance().getEntitlementStatus(KsPreferenceKeys.getInstance(), token) { entitlementStatus: Boolean, apiStatus: Boolean,offerStatus:String,responseCode: Int ->
             hasEntitlement = if (apiStatus) {
+                this.offerStatus = offerStatus
                 entitlementStatus
             } else {
                 if (responseCode == 403) {
@@ -227,7 +229,7 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
                 }
                 false
             }
-            modelCall(hasEntitlement)
+            modelCall(hasEntitlement,offerStatus)
         }
     }
 
@@ -317,7 +319,7 @@ class MoreFragment : BaseBindingFragment<FragmentMoreBinding?>(), CommonDialogFr
         }
        else if (caption == buyNow) {
             if (loginStatus) {
-                if (hasEntitlement) {
+                if (hasEntitlement && offerStatus == AppConstants.PUBLISHED || offerStatus == AppConstants.NOT_FOR_SALE) {
                     ActivityLauncher.getInstance().goToPlanScreen(requireActivity(), ActivitySelectSubscriptionPlan::class.java, "settings")
                 } else {
                     ActivityLauncher.getInstance().goToPlanScreen(requireActivity(), ActivitySelectSubscriptionPlan::class.java, "")
