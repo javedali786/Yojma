@@ -68,8 +68,8 @@ android {
         }
         prod {
             dimension 'default'
-            versionCode 18
-            versionName "4.10.0"
+            versionCode 19
+            versionName "4.11.0"
             applicationId "tv.uscreen.yojmatv"
             buildConfigField "String", "MOENGAGE_APP_ID", "\"RKRIA1W5XU7NWCY5X9935YBF\""
         }
