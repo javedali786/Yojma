@@ -220,7 +220,7 @@ public class ConfigManager {
         String temp = getDateTimeStamp(Long.parseLong(storedDate));
         verifyDms = !currentDate.equalsIgnoreCase(temp);
 
-        return verifyDms;
+        return true;
     }
 
     private String getDateTimeStamp(Long timeStamp) {
