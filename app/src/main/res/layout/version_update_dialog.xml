@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="?attr/bgColor"
+        android:background="@color/app_bg_color"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -29,7 +29,7 @@
                         android:layout_height="@dimen/toolbar_logo_icon_height"
                         android:visibility="gone"
                         android:layout_toRightOf="@+id/back_layout"
-                        android:background="?attr/app_logo"
+                        android:background="@mipmap/ic_launcher"
                         android:contentDescription="TODO" />
                 </LinearLayout>
 
@@ -47,7 +47,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:gravity="center_vertical"
-                        android:fontFamily="?attr/font_normal"
+                        android:fontFamily="@font/bebasneue_regular"
                         android:text="@string/new_version_available"
                         android:textColor="@color/series_detail_now_playing_title_color"
                         android:textSize="@dimen/_15sdp" />
@@ -67,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:fontFamily="?attr/font_normal"
+                        android:fontFamily="@font/bebasneue_regular"
                         android:lineSpacingExtra="@dimen/_2sdp"
                         android:text="@string/please_update_your_app"
                         android:textColor="@color/series_detail_now_playing_title_color"
@@ -121,7 +121,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:fontFamily="?attr/font_medium"
+                                android:fontFamily="@font/bebasneue_regular"
                                 android:text="@string/later"
                                 android:textAllCaps="true"
                                 android:textColor="@color/series_detail_now_playing_title_color"
@@ -144,7 +144,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:fontFamily="?attr/font_medium"
+                                android:fontFamily="@font/bebasneue_regular"
                                 android:text="@string/profile_update_btn"
                                 android:textAllCaps="true"
                                 android:textColor="@color/series_detail_now_playing_title_color"

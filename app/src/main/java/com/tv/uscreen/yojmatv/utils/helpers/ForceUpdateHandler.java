@@ -87,8 +87,6 @@ public class ForceUpdateHandler {
                    }else {
                        versionValidator.version(false, 0, 0, RECOMMENDED);
                    }
-
-
                }
                else {
 
